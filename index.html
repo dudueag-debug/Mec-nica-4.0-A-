@@ -1819,18 +1819,37 @@ async function salvarIntervencao() {
 
     if (equipExistente) {
       equipamentoId = equipExistente.id;
-      await db.from('equipamentos').update({
-        nome: nomeEquip,
-        local_texto: localTexto || equipExistente.local_texto,
-        latitude: lat || equipExistente.latitude,
-        longitude: lng || equipExistente.longitude
-      }).eq('id', equipamentoId);
+      try {
+        await db.from('equipamentos').update({
+          nome: nomeEquip,
+          local_texto: localTexto || equipExistente.local_texto,
+          latitude: lat || equipExistente.latitude,
+          longitude: lng || equipExistente.longitude
+        }).eq('id', equipamentoId);
+      } catch (errUp) {
+        console.warn('Aviso ao atualizar equipamento:', errUp);
+      }
     } else {
       const { data: novoEquip, error: erroEquip } = await db.from('equipamentos').insert({
-        tag, nome: nomeEquip, local_texto: localTexto, latitude: lat, longitude: lng
+        tag,
+        nome: nomeEquip,
+        local_texto: localTexto,
+        latitude: lat,
+        longitude: lng,
+        usuario_id: userData.user.id
       }).select().single();
-      if (erroEquip) throw new Error('Erro ao criar equipamento: ' + erroEquip.message);
-      equipamentoId = novoEquip.id;
+
+      if (erroEquip) {
+        // Se deu erro de TAG existente ou restrição, tenta buscar o ID do equipamento
+        const { data: equipsRebusca } = await db.from('equipamentos').select('id').eq('tag', tag).limit(1);
+        if (equipsRebusca && equipsRebusca.length > 0) {
+          equipamentoId = equipsRebusca[0].id;
+        } else {
+          throw new Error('Erro ao criar equipamento: ' + erroEquip.message);
+        }
+      } else {
+        equipamentoId = novoEquip.id;
+      }
     }
 
     // 2. Upload das fotos com tratamento seguro contra falhas
