@@ -1,0 +1,2651 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mecânica 4.0 IA</title>
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+
+  body { background: #0b1220; color: #ffffff; min-height: 100vh; }
+
+  header {
+    background: #111c30;
+    padding: 25px 20px;
+    text-align: center;
+    border-bottom: 2px solid #263b5c;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  header h1 { font-size: 32px; margin-bottom: 8px; cursor: pointer; }
+  header p { color: #aebbd0; }
+
+  .container { max-width: 1100px; margin: auto; padding: 25px 18px; }
+
+  .hero { text-align: center; padding: 35px 10px; }
+  .hero h2 { font-size: 28px; margin-bottom: 12px; }
+  .hero p { color: #b7c3d6; line-height: 1.6; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+    margin-top: 25px;
+  }
+
+  .card {
+    background: #142238;
+    border: 1px solid #29415f;
+    border-radius: 15px;
+    padding: 22px;
+    transition: 0.2s;
+  }
+  .card:hover { transform: translateY(-3px); border-color: #4f83c2; }
+  .icon { font-size: 35px; margin-bottom: 12px; }
+  .card h3 { margin-bottom: 8px; }
+  .card p { color: #aebbd0; line-height: 1.5; }
+
+  .button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 11px 18px;
+    background: #2463a8;
+    color: white;
+    border-radius: 9px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    font-size: 14px;
+  }
+  .button:hover { background: #327bc9; }
+  .button.secondary { background: #263b5c; }
+  .button.secondary:hover { background: #33507a; }
+
+  .status {
+    margin-top: 30px;
+    background: #101b2d;
+    border-radius: 15px;
+    padding: 22px;
+    border: 1px solid #263b5c;
+  }
+  .status span { color: #55d88a; font-weight: bold; }
+
+  footer { text-align: center; padding: 30px 15px; color: #8190a7; margin-top: 30px; }
+
+  /* ---- painel de módulo ---- */
+  .panel { display: none; }
+  .panel.active { display: block; }
+  #vistaGrid.hidden { display: none; }
+
+  .panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .panel-header h2 { font-size: 26px; }
+
+  .content-block {
+    background: #101b2d;
+    border: 1px solid #263b5c;
+    border-radius: 15px;
+    padding: 22px;
+    margin-bottom: 18px;
+    line-height: 1.7;
+  }
+  .content-block h4 { color: #75b7ff; margin-bottom: 10px; font-size: 17px; }
+  .content-block ul { margin-left: 20px; margin-top: 6px; color: #cdd7e6; }
+  .content-block li { margin-bottom: 6px; }
+  .content-block p { color: #cdd7e6; }
+
+  table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; }
+  th, td { border: 1px solid #263b5c; padding: 8px 10px; text-align: left; color: #cdd7e6; }
+  th { background: #16273f; color: #75b7ff; }
+
+  .calc-box {
+    background: #0e1830;
+    border: 1px dashed #345a86;
+    border-radius: 12px;
+    padding: 18px;
+    margin-top: 14px;
+  }
+  .calc-box h5 { color: #ffd479; margin-bottom: 10px; }
+  .field-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 140px;
+  }
+  .field label { font-size: 12px; color: #aebbd0; }
+  .field input, .field select, .field textarea {
+    background: #0b1220;
+    border: 1px solid #29415f;
+    border-radius: 8px;
+    padding: 8px 10px;
+    color: #fff;
+    font-size: 14px;
+  }
+  .field textarea { resize: vertical; min-height: 60px; font-family: Arial, sans-serif; }
+  .resultado {
+    margin-top: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    background: #142238;
+    border: 1px solid #29415f;
+    white-space: pre-wrap;
+    font-size: 14px;
+    min-height: 20px;
+  }
+  .resultado.ok { border-color: #55d88a; }
+  .resultado.erro { border-color: #e0637a; }
+
+  #mensagem { margin-top: 15px; color: #75b7ff; min-height: 24px; }
+
+  .chat-log {
+    background: #0e1830;
+    border: 1px solid #263b5c;
+    border-radius: 12px;
+    padding: 14px;
+    min-height: 160px;
+    max-height: 340px;
+    overflow-y: auto;
+    margin-bottom: 12px;
+  }
+  .chat-msg { margin-bottom: 10px; line-height: 1.5; }
+  .chat-msg.user { color: #ffd479; }
+  .chat-msg.bot { color: #cdd7e6; }
+  .chat-input-row { display: flex; gap: 10px; }
+  .chat-input-row input { flex: 1; }
+
+  /* ---- login ---- */
+  #telaLogin {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .login-box {
+    background: #142238;
+    border: 1px solid #29415f;
+    border-radius: 18px;
+    padding: 32px;
+    max-width: 380px;
+    width: 100%;
+  }
+  .login-box h2 { text-align: center; margin-bottom: 6px; }
+  .login-box p.sub { text-align: center; color: #8190a7; margin-bottom: 20px; font-size: 13px; }
+  .login-box .field { margin-bottom: 12px; }
+  .login-box .button { width: 100%; text-align: center; margin-top: 6px; }
+  .login-toggle { text-align: center; margin-top: 14px; font-size: 13px; color: #8190a7; }
+  .login-toggle a { color: #75b7ff; cursor: pointer; text-decoration: underline; }
+  .login-msg { min-height: 20px; font-size: 13px; margin-top: 10px; text-align: center; }
+  .login-msg.erro { color: #e0637a; }
+  .login-msg.ok { color: #55d88a; }
+
+  #barraUsuario {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    align-items: center;
+    padding: 8px 20px;
+    background: #0d1728;
+    font-size: 13px;
+    color: #aebbd0;
+  }
+  #barraUsuario .button { margin-top: 0; padding: 6px 12px; font-size: 12px; }
+
+  /* ---- intervenções ---- */
+  .equip-item {
+    background: #142238;
+    border: 1px solid #29415f;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  .equip-item:hover { border-color: #4f83c2; }
+  .equip-item h4 { color: #75b7ff; }
+  .equip-item p { color: #8190a7; font-size: 13px; margin-top: 4px; }
+
+  .intervencao-item {
+    background: #0e1830;
+    border: 1px solid #263b5c;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .intervencao-item .data { color: #ffd479; font-size: 12px; margin-bottom: 6px; }
+  .intervencao-item .tag-urgencia {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: #263b5c;
+    margin-left: 8px;
+  }
+  .fotos-row { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+  .fotos-row img {
+    width: 120px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #29415f;
+    cursor: pointer;
+  }
+  .fotos-row .foto-label { font-size: 11px; color: #8190a7; text-align: center; }
+
+  /* ---- dashboard ---- */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .kpi-card {
+    background: #101b2d;
+    border: 1px solid #263b5c;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+  }
+  .kpi-card .valor { font-size: 26px; font-weight: bold; color: #75b7ff; }
+  .kpi-card .label { font-size: 11px; color: #8190a7; margin-top: 4px; }
+
+  .barra-item { margin-bottom: 12px; }
+  .barra-label { display: flex; justify-content: space-between; font-size: 13px; color: #cdd7e6; margin-bottom: 4px; }
+  .barra-track { background: #0e1830; border-radius: 6px; height: 10px; overflow: hidden; }
+  .barra-fill { background: #2463a8; height: 100%; border-radius: 6px; }
+
+  .dash-recente {
+    background: #0e1830;
+    border: 1px solid #263b5c;
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  .dash-recente:hover { border-color: #4f83c2; }
+  .dash-recente .linha1 { display: flex; justify-content: space-between; color: #cdd7e6; }
+  .dash-recente .linha2 { color: #8190a7; font-size: 12px; margin-top: 3px; }
+
+  /* ---- torque e parafusos ---- */
+  .torque-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .torque-tab-btn {
+    background: #142238;
+    color: #aebbd0;
+    border: 1px solid #29415f;
+    border-radius: 8px;
+    padding: 9px 16px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  .torque-tab-btn.active, .torque-tab-btn:hover {
+    background: #2463a8;
+    color: #ffffff;
+    border-color: #4f83c2;
+  }
+  .torque-subpanel { display: none; }
+  .torque-subpanel.active { display: block; }
+
+  .photo-inspect-box {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+  .photo-viewport-wrap {
+    flex: 1;
+    min-width: 280px;
+    background: #090e18;
+    border: 1px solid #263b5c;
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+  }
+  .photo-canvas-container {
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 8px;
+    background: #060a12;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed #29415f;
+  }
+  .photo-canvas-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.2s ease, filter 0.2s ease;
+    transform-origin: center center;
+  }
+  .photo-tools-bar {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .photo-tool-btn {
+    background: #16273f;
+    color: #cdd7e6;
+    border: 1px solid #29415f;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .photo-tool-btn:hover { background: #2463a8; color: #fff; }
+
+  .stamp-selector-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .stamp-card {
+    background: #142238;
+    border: 1px solid #29415f;
+    border-radius: 10px;
+    padding: 12px;
+    cursor: pointer;
+    text-align: center;
+    transition: 0.2s;
+  }
+  .stamp-card:hover, .stamp-card.selected {
+    border-color: #ffd479;
+    background: #1a2f4d;
+    box-shadow: 0 0 10px rgba(255, 212, 121, 0.2);
+  }
+  .stamp-head-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 8px auto;
+    border-radius: 50%;
+    border: 2px solid #75b7ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 13px;
+    color: #fff;
+    background: #0f1c30;
+    position: relative;
+  }
+  .stamp-head-icon.radial-3::before, .stamp-head-icon.radial-3::after {
+    content: ''; position: absolute; width: 2px; height: 10px; background: #ffd479;
+  }
+  .stamp-head-icon.radial-3::before { top: 4px; left: 50%; transform: translateX(-50%); }
+  .stamp-head-icon.radial-3::after { bottom: 6px; left: 10px; transform: rotate(-60deg); }
+  .stamp-title { font-size: 14px; font-weight: bold; color: #75b7ff; margin-bottom: 2px; }
+  .stamp-desc { font-size: 11px; color: #8190a7; line-height: 1.3; }
+
+  .alerta-anti-erro {
+    margin-top: 14px;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    line-height: 1.6;
+    border-left: 4px solid #2463a8;
+    background: #0d192c;
+  }
+  .alerta-anti-erro.aviso {
+    border-left-color: #ffd479;
+    background: #252010;
+    color: #ffe8b2;
+  }
+  .alerta-anti-erro.perigo {
+    border-left-color: #e0637a;
+    background: #2a1118;
+    color: #ffb8c5;
+  }
+  .alerta-anti-erro.ok {
+    border-left-color: #55d88a;
+    background: #0e271a;
+    color: #b3f4cb;
+  }
+
+  .torque-kpi-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 10px;
+    margin-top: 14px;
+  }
+  .torque-kpi {
+    background: #0b1220;
+    border: 1px solid #29415f;
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+  }
+  .torque-kpi .val { font-size: 22px; font-weight: bold; color: #ffd479; }
+  .torque-kpi .unit { font-size: 11px; color: #75b7ff; font-weight: bold; }
+  .torque-kpi .lbl { font-size: 11px; color: #8190a7; margin-top: 3px; }
+
+  .cross-pattern-box {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 14px;
+  }
+  .cross-circle {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    border: 3px dashed #345a86;
+    position: relative;
+    margin: 15px auto;
+    background: radial-gradient(circle, #0e1a2f 30%, #080d16 70%);
+  }
+  .cross-bolt {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #2463a8;
+    color: white;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: bold;
+    border: 1px solid #75b7ff;
+    transform: translate(-50%, -50%);
+  }
+</style>
+</head>
+
+<body>
+
+<!-- ================= TELA DE LOGIN ================= -->
+<div id="telaLogin">
+  <div class="login-box">
+    <h2>🔧 Mecânica 4.0 IA</h2>
+    <p class="sub">Criado por Eduardo Noronha</p>
+
+    <div class="field"><label>E-mail</label><input type="email" id="login_email" placeholder="seu@email.com"></div>
+    <div class="field"><label>Senha</label><input type="password" id="login_senha" placeholder="••••••••"></div>
+
+    <button class="button" id="btnEntrar" onclick="fazerLogin()">Entrar</button>
+    <button class="button secondary" id="btnCriarConta" onclick="fazerCadastro()" style="display:none;">Criar conta</button>
+
+    <div class="login-toggle">
+      <span id="textoToggleLogin">Ainda não tem conta? <a onclick="alternarModoLogin()">Criar conta</a></span>
+    </div>
+    <div class="login-msg" id="login_resultado"></div>
+  </div>
+</div>
+
+<!-- ================= APP (só aparece logado) ================= -->
+<div id="appContent" style="display:none;">
+
+<div id="barraUsuario">
+  <span id="usuarioLogadoEmail"></span>
+  <button class="button secondary" onclick="fazerLogout()">Sair</button>
+</div>
+
+<header>
+  <h1 onclick="voltarGrid()">🔧 Mecânica 4.0 IA</h1>
+  <p>Inteligência aplicada à manutenção mecânica industrial</p>
+</header>
+
+<main class="container">
+
+  <div id="vistaGrid">
+    <section class="hero">
+      <h2>Central do Mecânico</h2>
+      <p>
+        Uma plataforma para apoiar inspeções, manutenção,
+        relatórios técnicos, bombas, motores, redutores,
+        válvulas, metrologia e sistemas mecânicos.
+      </p>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <div class="icon">⚙️</div>
+        <h3>Manutenção Mecânica</h3>
+        <p>Tipos de manutenção, indicadores (MTBF/MTTR) e planos de lubrificação.</p>
+        <button class="button" onclick="abrirModulo('manutencao')">Acessar</button>
+      </div>
+
+      <div class="card">
+        <div class="icon">💧</div>
+        <h3>Bombas</h3>
+        <p>Bombas centrífugas, NPSH, cavitação, recirculação e diagnóstico de falhas.</p>
+        <button class="button" onclick="abrirModulo('bombas')">Acessar</button>
+      </div>
+
+      <div class="card">
+        <div class="icon">⚡</div>
+        <h3>Motores Elétricos</h3>
+        <p>Ligações estrela/triângulo, dados de placa e calculadora de corrente nominal.</p>
+        <button class="button" onclick="abrirModulo('motores')">Acessar</button>
+      </div>
+
+      <div class="card">
+        <div class="icon">🔩</div>
+        <h3>Redutores e Engrenagens</h3>
+        <p>Relação de transmissão, calculadora de RPM/torque e análise de falhas.</p>
+        <button class="button" onclick="abrirModulo('redutores')">Acessar</button>
+      </div>
+
+      <div class="card">
+        <div class="icon">🔧</div>
+        <h3>Válvulas</h3>
+        <p>Globo, gaveta, esfera, PSV/PRV e critérios de seleção.</p>
+        <button class="button" onclick="abrirModulo('valvulas')">Acessar</button>
+      </div>
+
+      <div class="card">
+        <div class="icon">📏</div>
+        <h3>Metrologia</h3>
+        <p>Conversor mm ↔ polegada e verificador de tolerância dimensional.</p>
+        <button class="button" onclick="abrirModulo('metrologia')">Acessar</button>
+      </div>
+
+      <div class="card">
+        <div class="icon">📝</div>
+        <h3>Relatório Técnico</h3>
+        <p>Monte, copie e baixe um relatório de inspeção pronto.</p>
+        <button class="button" onclick="abrirModulo('relatorio')">Acessar</button>
+      </div>
+
+      <div class="card">
+        <div class="icon">🤖</div>
+        <h3>Assistente Técnico</h3>
+        <p>Busca inteligente na base de conhecimento do app.</p>
+        <button class="button" onclick="abrirModulo('assistente')">Acessar</button>
+      </div>
+
+      <div class="card">
+        <div class="icon">📋</div>
+        <h3>Intervenções de Equipamentos</h3>
+        <p>Histórico de manutenções por equipamento, com fotos e localização.</p>
+        <button class="button" onclick="abrirModulo('intervencoes')">Acessar</button>
+      </div>
+
+      <div class="card">
+        <div class="icon">🛢️</div>
+        <h3>Lubrificação</h3>
+        <p>Sistemas de lubrificação em redutores, bombas e motores, e tipos de rolamento.</p>
+        <button class="button" onclick="abrirModulo('lubrificacao')">Acessar</button>
+      </div>
+
+      <div class="card">
+        <div class="icon">🔑</div>
+        <h3>Chaves e Porcas</h3>
+        <p>Tabela de chaves combinadas por tamanho de rosca métrica e polegada.</p>
+        <button class="button" onclick="abrirModulo('chaves')">Acessar</button>
+      </div>
+
+      <div class="card">
+        <div class="icon">🎯</div>
+        <h3>Torque e Parafusos</h3>
+        <p>Cálculo anti-erro de torque (DIN/ISO/SAE), identificador por foto de porca/parafuso e aperto em cruz.</p>
+        <button class="button" onclick="abrirModulo('torque')">Acessar</button>
+      </div>
+
+      <div class="card">
+        <div class="icon">ℹ️</div>
+        <h3>Sobre o App</h3>
+        <p>Painel com todos os módulos, tecnologia usada e progresso do projeto.</p>
+        <button class="button" onclick="abrirModulo('sobre')">Acessar</button>
+      </div>
+    </section>
+
+    <section class="status">
+      <h3>🟢 Sistema</h3>
+      <p>Aplicação carregada com sucesso. <span>Mecânica 4.0 IA online.</span></p>
+      <div id="mensagem"></div>
+    </section>
+  </div>
+
+  <!-- ================= MANUTENÇÃO ================= -->
+  <section id="painel-manutencao" class="panel">
+    <div class="panel-header">
+      <h2>⚙️ Manutenção Mecânica</h2>
+      <button class="button secondary" onclick="voltarGrid()">← Voltar</button>
+    </div>
+
+    <div class="content-block">
+      <h4>Tipos de manutenção</h4>
+      <ul>
+        <li><b>Corretiva:</b> reparo após a falha já ter ocorrido. Menor custo de planejamento, maior custo de parada.</li>
+        <li><b>Preventiva:</b> intervenção programada por tempo/uso, independente da condição real do equipamento.</li>
+        <li><b>Preditiva:</b> baseada em monitoramento de condição (vibração, termografia, análise de óleo) para prever a falha antes que ocorra.</li>
+        <li><b>Detectiva:</b> busca falhas ocultas em sistemas de proteção (ex: testar um instrumento de segurança que só atua em emergência).</li>
+        <li><b>TPM (Manutenção Produtiva Total):</b> envolve o operador na manutenção de primeiro nível (limpeza, inspeção, lubrificação básica).</li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <h4>Indicadores essenciais</h4>
+      <ul>
+        <li><b>MTBF</b> (Mean Time Between Failures): tempo médio entre falhas = horas totais operando ÷ número de falhas. Quanto maior, melhor a confiabilidade.</li>
+        <li><b>MTTR</b> (Mean Time To Repair): tempo médio de reparo = horas totais de reparo ÷ número de reparos. Quanto menor, melhor a manutenibilidade.</li>
+        <li><b>Disponibilidade</b> = MTBF ÷ (MTBF + MTTR), expressa em %.</li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <h4>Plano de lubrificação — pontos de atenção</h4>
+      <ul>
+        <li>Nunca misturar graxas de bases diferentes (ex: lítio com bentonita) sem compatibilidade confirmada.</li>
+        <li>Relubrificação de rolamentos: respeitar a quantidade calculada pela fórmula do fabricante (evita excesso, que gera aquecimento).</li>
+        <li>Troca de óleo em redutores: seguir viscosidade ISO VG indicada na placa, não pela "sensação" de fluidez.</li>
+      </ul>
+    </div>
+
+    <div class="calc-box">
+      <h5>🧮 Calculadora de Disponibilidade</h5>
+      <div class="field-row">
+        <div class="field"><label>Horas totais operando</label><input type="number" id="man_horasOp" placeholder="ex: 720"></div>
+        <div class="field"><label>Número de falhas</label><input type="number" id="man_falhas" placeholder="ex: 3"></div>
+        <div class="field"><label>Horas totais de reparo</label><input type="number" id="man_horasRep" placeholder="ex: 9"></div>
+      </div>
+      <button class="button" onclick="calcularDisponibilidade()">Calcular</button>
+      <div class="resultado" id="man_resultado"></div>
+    </div>
+  </section>
+
+  <!-- ================= BOMBAS ================= -->
+  <section id="painel-bombas" class="panel">
+    <div class="panel-header">
+      <h2>💧 Bombas</h2>
+      <button class="button secondary" onclick="voltarGrid()">← Voltar</button>
+    </div>
+
+    <div class="content-block">
+      <h4>Bombas centrífugas — princípio</h4>
+      <p>Convertem energia mecânica do eixo em energia cinética/pressão do fluido através do rotor. A vazão depende da rotação, do diâmetro do rotor e da curva do sistema (perda de carga).</p>
+    </div>
+
+    <div class="content-block">
+      <h4>NPSH e cavitação</h4>
+      <ul>
+        <li><b>NPSH disponível (NPSHd):</b> energia de sucção realmente disponível na instalação.</li>
+        <li><b>NPSH requerido (NPSHr):</b> valor mínimo exigido pela bomba, dado pelo fabricante.</li>
+        <li><b>Regra:</b> NPSHd deve ser sempre maior que NPSHr (com margem de segurança, tipicamente ≥ 0,5 m).</li>
+        <li><b>Cavitação:</b> ocorre quando a pressão local cai abaixo da pressão de vapor do fluido — formam-se bolhas que implodem e corroem o rotor. Sintomas: ruído de "pedregulhos", queda de vazão, vibração.</li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <h4>Diagnóstico rápido de falhas comuns</h4>
+      <table>
+        <tr><th>Sintoma</th><th>Causa provável</th></tr>
+        <tr><td>Vazão baixa ou nula</td><td>Escorva perdida, válvula fechada, rotor desgastado, entupimento na sucção</td></tr>
+        <tr><td>Ruído/vibração excessiva</td><td>Cavitação, desalinhamento, rolamento desgastado, cupim de ar na sucção</td></tr>
+        <tr><td>Superaquecimento do motor</td><td>Recirculação excessiva (operando fora da curva), sobrecarga, falha elétrica</td></tr>
+        <tr><td>Vazamento pela gaxeta/selo</td><td>Selo mecânico danificado, desalinhamento do eixo, pressão acima do projetado</td></tr>
+      </table>
+    </div>
+
+    <div class="calc-box">
+      <h5>🧮 Verificação simples de margem de NPSH</h5>
+      <div class="field-row">
+        <div class="field"><label>NPSH disponível (m)</label><input type="number" id="bomba_npshd" placeholder="ex: 6.5"></div>
+        <div class="field"><label>NPSH requerido (m)</label><input type="number" id="bomba_npshr" placeholder="ex: 4.0"></div>
+      </div>
+      <button class="button" onclick="verificarNPSH()">Verificar</button>
+      <div class="resultado" id="bomba_resultado"></div>
+    </div>
+  </section>
+
+  <!-- ================= MOTORES ================= -->
+  <section id="painel-motores" class="panel">
+    <div class="panel-header">
+      <h2>⚡ Motores Elétricos</h2>
+      <button class="button secondary" onclick="voltarGrid()">← Voltar</button>
+    </div>
+
+    <div class="content-block">
+      <h4>Ligação estrela (Y) x triângulo (Δ)</h4>
+      <ul>
+        <li>A tensão de placa costuma indicar as duas opções (ex: 220/380V). O menor valor é a ligação triângulo, o maior é estrela, para a mesma rede.</li>
+        <li>Partida estrela-triângulo reduz a corrente de partida a cerca de 1/3 da corrente em partida direta, mas também reduz o torque de partida para cerca de 1/3.</li>
+        <li>Regra prática: usar a ligação (Y ou Δ) que corresponda à tensão de linha disponível na instalação.</li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <h4>Causas comuns de queima de motor</h4>
+      <ul>
+        <li>Sobrecarga mecânica contínua (motor subdimensionado ou carga travando).</li>
+        <li>Falta de fase (motor tenta compensar puxando mais corrente nas fases restantes).</li>
+        <li>Desbalanceamento de tensão entre fases acima de 1-2%.</li>
+        <li>Rolamentos desgastados gerando atrito excessivo e aquecimento.</li>
+        <li>Umidade/poeira reduzindo a resistência de isolamento (medir com megôhmetro).</li>
+      </ul>
+    </div>
+
+    <div class="calc-box">
+      <h5>🧮 Calculadora de corrente nominal (trifásico)</h5>
+      <p style="color:#8190a7; font-size:13px; margin-bottom:8px;">Fórmula: I = P ÷ (√3 × U × cos φ × η)</p>
+      <div class="field-row">
+        <div class="field"><label>Potência (kW)</label><input type="number" id="mot_potencia" placeholder="ex: 7.5"></div>
+        <div class="field"><label>Tensão de linha (V)</label><input type="number" id="mot_tensao" placeholder="ex: 380"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Fator de potência (cos φ)</label><input type="number" step="0.01" id="mot_fp" placeholder="ex: 0.85"></div>
+        <div class="field"><label>Rendimento η (%)</label><input type="number" id="mot_rend" placeholder="ex: 90"></div>
+      </div>
+      <button class="button" onclick="calcularCorrenteMotor()">Calcular</button>
+      <div class="resultado" id="mot_resultado"></div>
+    </div>
+  </section>
+
+  <!-- ================= REDUTORES ================= -->
+  <section id="painel-redutores" class="panel">
+    <div class="panel-header">
+      <h2>🔩 Redutores e Engrenagens</h2>
+      <button class="button secondary" onclick="voltarGrid()">← Voltar</button>
+    </div>
+
+    <div class="content-block">
+      <h4>Relação de transmissão</h4>
+      <p>i = N2 ÷ N1 (número de dentes da engrenagem movida ÷ motora). A rotação de saída cai na mesma proporção em que o torque aumenta (idealmente, desconsiderando perdas por rendimento).</p>
+    </div>
+
+    <div class="content-block">
+      <h4>Falhas típicas em engrenagens e rolamentos</h4>
+      <table>
+        <tr><th>Sintoma</th><th>Causa provável</th></tr>
+        <tr><td>Ruído tipo "batida" cíclica</td><td>Dente lascado/trincado ou rolamento com defeito pontual</td></tr>
+        <tr><td>Óleo com partículas metálicas</td><td>Desgaste anormal de engrenagens ou rolamentos (fazer análise de ferrografia)</td></tr>
+        <tr><td>Aquecimento do redutor</td><td>Nível de óleo incorreto, viscosidade errada, sobrecarga</td></tr>
+        <tr><td>Vibração em alta frequência</td><td>Defeito em pista de rolamento (usar análise espectral/FFT para confirmar)</td></tr>
+      </table>
+    </div>
+
+    <div class="calc-box">
+      <h5>🧮 Calculadora de relação de transmissão</h5>
+      <div class="field-row">
+        <div class="field"><label>Dentes engrenagem motora (N1)</label><input type="number" id="red_n1" placeholder="ex: 20"></div>
+        <div class="field"><label>Dentes engrenagem movida (N2)</label><input type="number" id="red_n2" placeholder="ex: 60"></div>
+        <div class="field"><label>RPM de entrada</label><input type="number" id="red_rpmIn" placeholder="ex: 1750"></div>
+      </div>
+      <button class="button" onclick="calcularRedutor()">Calcular</button>
+      <div class="resultado" id="red_resultado"></div>
+    </div>
+  </section>
+
+  <!-- ================= VÁLVULAS ================= -->
+  <section id="painel-valvulas" class="panel">
+    <div class="panel-header">
+      <h2>🔧 Válvulas</h2>
+      <button class="button secondary" onclick="voltarGrid()">← Voltar</button>
+    </div>
+
+    <div class="content-block">
+      <h4>Tipos e aplicações</h4>
+      <table>
+        <tr><th>Tipo</th><th>Função</th><th>Uso típico</th></tr>
+        <tr><td>Gaveta</td><td>Bloqueio total (aberta/fechada), não regula vazão</td><td>Linhas de bloqueio geral</td></tr>
+        <tr><td>Globo</td><td>Regulagem de vazão com boa estanqueidade</td><td>Controle de processo</td></tr>
+        <tr><td>Esfera</td><td>Bloqueio rápido (1/4 de volta), baixa perda de carga</td><td>Bloqueio geral, ar comprimido</td></tr>
+        <tr><td>Borboleta</td><td>Bloqueio/regulagem leve, compacta</td><td>Grandes diâmetros, ar/água</td></tr>
+        <tr><td>PSV / PRV</td><td>Alívio de pressão de segurança</td><td>Proteção de vasos, caldeiras, linhas</td></tr>
+        <tr><td>Retenção (check)</td><td>Permite fluxo em um único sentido</td><td>Saída de bombas, evita retorno</td></tr>
+      </table>
+    </div>
+
+    <div class="content-block">
+      <h4>Critérios de seleção</h4>
+      <ul>
+        <li>Pressão e temperatura de projeto compatíveis com a classe da válvula (ex: Classe 150, 300...).</li>
+        <li>Compatibilidade química do material do corpo/vedação com o fluido.</li>
+        <li>Necessidade real de regulagem (globo/borboleta) versus só bloqueio (gaveta/esfera).</li>
+        <li>Frequência de acionamento — válvulas de 1/4 de volta se desgastam menos em ciclos frequentes.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= METROLOGIA ================= -->
+  <section id="painel-metrologia" class="panel">
+    <div class="panel-header">
+      <h2>📏 Metrologia</h2>
+      <button class="button secondary" onclick="voltarGrid()">← Voltar</button>
+    </div>
+
+    <div class="content-block">
+      <h4>Instrumentos</h4>
+      <ul>
+        <li><b>Paquímetro:</b> resolução comum de 0,05 mm ou 0,02 mm. Bom para medições rápidas e menos críticas.</li>
+        <li><b>Micrômetro:</b> resolução de 0,01 mm, maior precisão para tolerâncias apertadas.</li>
+        <li>Sempre zerar o instrumento antes de medir e verificar erro de paralaxe/força de medição.</li>
+      </ul>
+    </div>
+
+    <div class="calc-box">
+      <h5>🧮 Conversor mm ↔ polegada</h5>
+      <div class="field-row">
+        <div class="field"><label>Milímetros (mm)</label><input type="number" id="metro_mm" placeholder="ex: 25.4"></div>
+        <div class="field"><label>Polegadas (in)</label><input type="number" id="metro_in" placeholder="ex: 1"></div>
+      </div>
+      <div class="field-row">
+        <button class="button" onclick="converterMmParaPol()">mm → polegada</button>
+        <button class="button" onclick="converterPolParaMm()">polegada → mm</button>
+      </div>
+      <div class="resultado" id="metro_resultado"></div>
+    </div>
+
+    <div class="calc-box">
+      <h5>🧮 Verificador de tolerância dimensional</h5>
+      <div class="field-row">
+        <div class="field"><label>Cota nominal (mm)</label><input type="number" id="tol_nominal" placeholder="ex: 50"></div>
+        <div class="field"><label>Tolerância superior (+mm)</label><input type="number" id="tol_sup" placeholder="ex: 0.05"></div>
+        <div class="field"><label>Tolerância inferior (-mm)</label><input type="number" id="tol_inf" placeholder="ex: 0.02"></div>
+        <div class="field"><label>Valor medido (mm)</label><input type="number" id="tol_medido" placeholder="ex: 50.03"></div>
+      </div>
+      <button class="button" onclick="verificarTolerancia()">Verificar</button>
+      <div class="resultado" id="tol_resultado"></div>
+    </div>
+  </section>
+
+  <!-- ================= RELATÓRIO ================= -->
+  <section id="painel-relatorio" class="panel">
+    <div class="panel-header">
+      <h2>📝 Relatório Técnico</h2>
+      <button class="button secondary" onclick="voltarGrid()">← Voltar</button>
+    </div>
+
+    <div class="content-block">
+      <h4>📊 Dashboard de Manutenções</h4>
+      <div id="dash_carregando" style="color:#8190a7; font-size:13px;">Carregando dados...</div>
+      <div id="dash_conteudo" style="display:none;">
+        <div class="kpi-grid">
+          <div class="kpi-card"><div class="valor" id="kpi_equip">0</div><div class="label">Equipamentos cadastrados</div></div>
+          <div class="kpi-card"><div class="valor" id="kpi_total">0</div><div class="label">Intervenções totais</div></div>
+          <div class="kpi-card"><div class="valor" id="kpi_mes">0</div><div class="label">Intervenções este mês</div></div>
+          <div class="kpi-card"><div class="valor" id="kpi_urgente">0</div><div class="label">Urgência alta (recentes)</div></div>
+        </div>
+
+        <div style="margin-top:18px;">
+          <h4 style="color:#75b7ff; font-size:14px; margin-bottom:10px;">Por tipo de manutenção</h4>
+          <div id="dash_por_tipo"></div>
+        </div>
+
+        <div style="margin-top:10px;">
+          <h4 style="color:#75b7ff; font-size:14px; margin-bottom:10px;">Por urgência</h4>
+          <div id="dash_por_urgencia"></div>
+        </div>
+
+        <div style="margin-top:10px;">
+          <h4 style="color:#75b7ff; font-size:14px; margin-bottom:10px;">Equipamentos com mais intervenções</h4>
+          <div id="dash_top_equip" style="color:#cdd7e6; font-size:13px;"></div>
+        </div>
+
+        <div style="margin-top:10px;">
+          <h4 style="color:#75b7ff; font-size:14px; margin-bottom:10px;">Últimas intervenções</h4>
+          <div id="dash_recentes"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <h4>Equipamento</h4>
+      <div class="field-row">
+        <div class="field"><label>TAG do equipamento (identificador único)</label><input type="text" id="rel_tag" placeholder="ex: P-101"></div>
+        <div class="field"><label>Nome do equipamento</label><input type="text" id="rel_equip" placeholder="ex: Bomba centrífuga setor A"></div>
+      </div>
+      <div class="field-row">
+        <div class="field" style="min-width:100%;">
+          <label>Local (texto, ex: Prédio B - Sala de bombas)</label>
+          <input type="text" id="rel_local_texto" placeholder="ex: Prédio B, subsolo, sala de bombas">
+        </div>
+      </div>
+      <div class="field-row">
+        <button type="button" class="button secondary" onclick="capturarLocalizacao()">📍 Capturar localização GPS</button>
+        <div class="field"><label>Latitude</label><input type="text" id="rel_lat" readonly placeholder="—"></div>
+        <div class="field"><label>Longitude</label><input type="text" id="rel_lng" readonly placeholder="—"></div>
+      </div>
+      <div id="loc_status" style="font-size:12px; color:#8190a7; margin-top:6px;"></div>
+    </div>
+
+    <div class="content-block">
+      <h4>Fotos</h4>
+      <div class="field-row">
+        <div class="field">
+          <label>📷 Foto ANTES</label>
+          <input type="file" accept="image/*" capture="environment" id="rel_foto_antes" onchange="previewFoto('rel_foto_antes','preview_antes')">
+          <img id="preview_antes" style="display:none; margin-top:8px; width:100%; max-width:200px; border-radius:8px;">
+        </div>
+        <div class="field">
+          <label>📷 Foto DEPOIS</label>
+          <input type="file" accept="image/*" capture="environment" id="rel_foto_depois" onchange="previewFoto('rel_foto_depois','preview_depois')">
+          <img id="preview_depois" style="display:none; margin-top:8px; width:100%; max-width:200px; border-radius:8px;">
+        </div>
+      </div>
+      <div class="field-row" style="margin-top:6px;">
+        <div class="field" style="min-width:100%;">
+          <label>📎 Fotos adicionais (local, placa do equipamento, detalhes — pode selecionar várias de uma vez)</label>
+          <input type="file" accept="image/*" multiple id="rel_fotos_extra" onchange="previewFotosExtra()">
+          <div id="preview_extra" class="fotos-row" style="margin-top:8px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <h4>Dados da inspeção</h4>
+      <div class="field-row">
+        <div class="field"><label>Data</label><input type="date" id="rel_data"></div>
+        <div class="field"><label>Responsável</label><input type="text" id="rel_resp" placeholder="ex: Eduardo"></div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Tipo de manutenção</label>
+          <select id="rel_tipo">
+            <option>Corretiva</option>
+            <option>Preventiva</option>
+            <option>Preditiva</option>
+            <option>Inspeção de rotina</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Urgência</label>
+          <select id="rel_urgencia">
+            <option>Baixa</option>
+            <option>Média</option>
+            <option>Alta — risco à segurança/produção</option>
+          </select>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field" style="min-width:100%;">
+          <label>Descrição da anomalia encontrada</label>
+          <textarea id="rel_anomalia" placeholder="ex: Vazamento no selo mecânico com gotejamento contínuo"></textarea>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field" style="min-width:100%;">
+          <label>Causa provável</label>
+          <textarea id="rel_causa" placeholder="ex: Desalinhamento do eixo motor-bomba"></textarea>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field" style="min-width:100%;">
+          <label>Ação recomendada</label>
+          <textarea id="rel_acao" placeholder="ex: Programar parada para realinhamento a laser e troca do selo"></textarea>
+        </div>
+      </div>
+      <button class="button" onclick="salvarIntervencao()">💾 Salvar intervenção (nuvem)</button>
+      <button class="button secondary" onclick="gerarRelatorio()">Gerar texto</button>
+      <button class="button secondary" onclick="copiarRelatorio()">Copiar texto</button>
+      <button class="button secondary" onclick="baixarRelatorio()">Baixar .txt</button>
+      <div class="resultado" id="rel_resultado" style="margin-top:16px;"></div>
+    </div>
+  </section>
+
+  <!-- ================= ASSISTENTE ================= -->
+  <section id="painel-assistente" class="panel">
+    <div class="panel-header">
+      <h2>🤖 Assistente Técnico</h2>
+      <button class="button secondary" onclick="voltarGrid()">← Voltar</button>
+    </div>
+
+    <div class="content-block">
+      <p style="color:#8190a7; font-size:13px;">
+        Este assistente busca respostas numa base de conhecimento local (offline), sem depender de um servidor de IA.
+        Ele não é um modelo de linguagem — é uma busca por palavras-chave sobre os temas do app.
+        Pergunte, por exemplo: "o que é cavitação", "diferença estrela triângulo", "como calcular MTBF".
+      </p>
+      <div class="chat-log" id="chatLog"></div>
+      <div class="chat-input-row">
+        <input type="text" id="chatInput" placeholder="Digite sua dúvida técnica..." onkeydown="if(event.key==='Enter') perguntarAssistente()">
+        <button class="button" onclick="perguntarAssistente()">Enviar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= INTERVENÇÕES ================= -->
+  <section id="painel-intervencoes" class="panel">
+    <div class="panel-header">
+      <h2>📋 Intervenções de Equipamentos</h2>
+      <button class="button secondary" onclick="voltarGrid()">← Voltar</button>
+    </div>
+
+    <div id="vistaListaEquip">
+      <div class="content-block">
+        <div class="field-row">
+          <div class="field" style="min-width:100%;">
+            <label>Buscar por TAG ou nome</label>
+            <input type="text" id="busca_equip" placeholder="ex: P-101" oninput="renderizarListaEquipamentos()">
+          </div>
+        </div>
+      </div>
+      <div id="listaEquipamentos"></div>
+    </div>
+
+    <div id="vistaHistoricoEquip" style="display:none;">
+      <button class="button secondary" onclick="voltarListaEquip()" style="margin-bottom:14px;">← Lista de equipamentos</button>
+      <div class="content-block" id="detalheEquipamento"></div>
+      <div id="listaIntervencoes"></div>
+    </div>
+  </section>
+
+  <!-- ================= LUBRIFICAÇÃO ================= -->
+  <section id="painel-lubrificacao" class="panel">
+    <div class="panel-header">
+      <h2>🛢️ Lubrificação</h2>
+      <button class="button secondary" onclick="voltarGrid()">← Voltar</button>
+    </div>
+
+    <div class="content-block">
+      <h4>Sistemas de lubrificação em redutores</h4>
+      <ul>
+        <li><b>Banho de óleo (por respingo/imersão):</b> as engrenagens inferiores mergulham no óleo e "espalham" a lubrificação pelas demais peças ao girar. Sistema mais simples e mais comum em redutores de pequeno/médio porte. Nível de óleo deve ser verificado pelo visor — nem alto demais (gera aquecimento e espuma) nem baixo demais (falta de lubrificação).</li>
+        <li><b>Lubrificação forçada (circulação):</b> uma bomba de óleo (interna ou externa ao redutor) empurra o óleo através de canais até os pontos de engrenamento e rolamentos, geralmente passando por um filtro e às vezes um trocador de calor. Usada em redutores grandes, de alta potência ou alta velocidade, onde o banho simples não seria suficiente.</li>
+        <li><b>Lubrificação por neblina de óleo (oil mist):</b> o óleo é atomizado em névoa por ar comprimido e injetado nos pontos de lubrificação. Usada em aplicações críticas (grandes turbinas, compressores) onde se quer lubrificação constante com baixíssimo consumo de óleo.</li>
+        <li>Itens de inspeção comuns: visor de nível, bujão magnético (retém partículas metálicas — sinal de desgaste se vier com limalha), respiro (evita pressurização interna), bujão de dreno.</li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <h4>Sistemas de lubrificação em bombas centrífugas</h4>
+      <ul>
+        <li><b>Rolamentos lubrificados a graxa:</b> mais comum em bombas de pequeno/médio porte. Relubrificação periódica através de graxeiras, seguindo a quantidade e o intervalo recomendados pelo fabricante.</li>
+        <li><b>Rolamentos lubrificados a óleo (banho):</b> o mancal tem um reservatório de óleo onde os rolamentos ficam parcialmente imersos. Comum em bombas de maior porte ou alta rotação, onde a graxa não dissiparia calor suficiente.</li>
+        <li><b>Anel de óleo (oil ring):</b> um anel solto ao redor do eixo gira com ele e "carrega" o óleo do reservatório até a parte superior do rolamento — método clássico e ainda muito usado.</li>
+        <li><b>Lubrificador de nível constante (constant level oiler):</b> um pequeno reservatório externo (tipo "copinho" transparente) mantém o nível de óleo do mancal sempre constante automaticamente, mesmo com pequenas perdas por evaporação/vazamento. Facilita muito a inspeção visual do nível.</li>
+        <li><b>Selo mecânico:</b> não é lubrificado por graxa/óleo do mancal — a face de vedação normalmente é lubrificada e resfriada pelo próprio fluido bombeado (às vezes com um sistema de "flush", plano API, para casos de fluidos abrasivos ou muito quentes).</li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <h4>Como aplicar graxa em motores elétricos — passo a passo</h4>
+      <ul>
+        <li><b>1.</b> Limpe bem a graxeira (bico de engraxamento) antes de aplicar, para não injetar sujeira junto com a graxa nova.</li>
+        <li><b>2.</b> Sempre que possível, relubrifique com o motor em funcionamento (gira o rolamento, ajuda a distribuir a graxa e expelir o excesso) — se não for seguro, faça com o motor recém-desligado e ainda morno.</li>
+        <li><b>3.</b> Se o motor tiver bujão de saída/dreno de graxa, retire-o antes de engraxar — isso permite que o excesso saia, em vez de pressurizar e danificar a vedação do rolamento.</li>
+        <li><b>4.</b> Aplique a quantidade calculada (veja a calculadora abaixo) lentamente, sem excesso — excesso de graxa é uma das causas mais comuns de superaquecimento de rolamento.</li>
+        <li><b>5.</b> Deixe o motor funcionar por 10-20 minutos após a relubrificação, com o bujão de saída aberto, para expelir o excesso antes de fechar tudo novamente.</li>
+        <li><b>6.</b> Nunca misture graxas de bases espessantes incompatíveis (ex: lítio com bentonita, ou lítio com poliureia sem confirmar compatibilidade) — isso pode quebrar a estrutura da graxa e perder a lubrificação.</li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <h4>Tipos de rolamento quanto à blindagem/vedação</h4>
+      <table>
+        <tr><th>Tipo</th><th>Características</th><th>Relubrificação</th></tr>
+        <tr><td>Aberto (sem sufixo)</td><td>Sem proteção lateral — mais exposto à contaminação</td><td>Precisa de relubrificação periódica externa (graxeira)</td></tr>
+        <tr><td>Blindado (ZZ / Z)</td><td>Placas metálicas fixas nas laterais, reduzem entrada de sujeira</td><td>Geralmente lubrificado pra vida útil — não é relubrificável</td></tr>
+        <tr><td>Vedado (RS / 2RS)</td><td>Vedação de borracha, veda melhor que o blindado, mas gera um pouco mais de atrito</td><td>Lubrificado pra vida útil — não é relubrificável</td></tr>
+        <tr><td>Vedação não-de-contato (RZ / 2RZ)</td><td>Vedação de borracha sem tocar o anel interno — menos atrito que o RS, mais proteção que o aberto</td><td>Em geral lubrificado pra vida útil</td></tr>
+      </table>
+      <p style="margin-top:10px;">Regra prática: rolamentos blindados/vedados (ZZ, RS) são a escolha certa quando o ambiente é agressivo (poeira, umidade) e não há como fazer manutenção frequente — mas, uma vez que a graxa interna se esgota, o rolamento inteiro precisa ser trocado, não recarregado.</p>
+    </div>
+
+    <div class="calc-box">
+      <h5>🧮 Calculadora de quantidade de graxa para relubrificação</h5>
+      <p style="color:#8190a7; font-size:13px; margin-bottom:8px;">Fórmula prática (SKF): G (gramas) = 0,005 × D (mm) × B (mm)</p>
+      <div class="field-row">
+        <div class="field"><label>Diâmetro externo do rolamento D (mm)</label><input type="number" id="lub_d" placeholder="ex: 90"></div>
+        <div class="field"><label>Largura do rolamento B (mm)</label><input type="number" id="lub_b" placeholder="ex: 23"></div>
+      </div>
+      <button class="button" onclick="calcularGraxa()">Calcular</button>
+      <div class="resultado" id="lub_resultado"></div>
+    </div>
+  </section>
+
+  <!-- ================= CHAVES E PORCAS ================= -->
+  <section id="painel-chaves" class="panel">
+    <div class="panel-header">
+      <h2>🔑 Chaves e Porcas</h2>
+      <button class="button secondary" onclick="voltarGrid()">← Voltar</button>
+    </div>
+
+    <div class="content-block">
+      <h4>⚠️ Erro mais comum</h4>
+      <p>Chave métrica próxima do tamanho polegada (ex: 13 mm numa porca de 1/2") até "entra", mas fica frouxa — arredonda a cabeça do parafuso/porca com o uso repetido. Sempre confirme se a peça é métrica (M) ou polegada (rosca UNC/UNF) antes de escolher a chave. Na dúvida, meça o diâmetro do parafuso com um paquímetro (módulo Metrologia).</p>
+    </div>
+
+    <div class="content-block">
+      <h4>Rosca métrica (M) → tamanho de chave combinada (mm)</h4>
+      <table>
+        <tr><th>Rosca</th><th>Chave (mm)</th></tr>
+        <tr><td>M3</td><td>5,5 mm</td></tr>
+        <tr><td>M4</td><td>7 mm</td></tr>
+        <tr><td>M5</td><td>8 mm</td></tr>
+        <tr><td>M6</td><td>10 mm</td></tr>
+        <tr><td>M7</td><td>11 mm</td></tr>
+        <tr><td>M8</td><td>13 mm</td></tr>
+        <tr><td>M10</td><td>17 mm</td></tr>
+        <tr><td>M12</td><td>19 mm</td></tr>
+        <tr><td>M14</td><td>22 mm</td></tr>
+        <tr><td>M16</td><td>24 mm</td></tr>
+        <tr><td>M18</td><td>27 mm</td></tr>
+        <tr><td>M20</td><td>30 mm</td></tr>
+        <tr><td>M22</td><td>32 mm</td></tr>
+        <tr><td>M24</td><td>36 mm</td></tr>
+      </table>
+      <p style="margin-top:8px; color:#8190a7; font-size:13px;">Atenção: essa é a chave para a CABEÇA do parafuso/porca sextavada — não confunda com o diâmetro da rosca. Um parafuso M8 (rosca de 8 mm) usa chave de 13 mm, não de 8 mm.</p>
+    </div>
+
+    <div class="content-block">
+      <h4>Rosca polegada (UNC/UNF) → chave em polegada</h4>
+      <table>
+        <tr><th>Rosca</th><th>Chave</th></tr>
+        <tr><td>1/4"</td><td>7/16"</td></tr>
+        <tr><td>5/16"</td><td>1/2"</td></tr>
+        <tr><td>3/8"</td><td>9/16"</td></tr>
+        <tr><td>7/16"</td><td>5/8"</td></tr>
+        <tr><td>1/2"</td><td>3/4"</td></tr>
+        <tr><td>9/16"</td><td>13/16"</td></tr>
+        <tr><td>5/8"</td><td>15/16"</td></tr>
+        <tr><td>3/4"</td><td>1.1/8"</td></tr>
+      </table>
+    </div>
+
+    <div class="content-block">
+      <h4>Conversão chave polegada ↔ chave métrica mais próxima</h4>
+      <p style="color:#8190a7; font-size:13px; margin-bottom:8px;">Use apenas como referência de identificação — o ideal é sempre usar o jogo de chaves no mesmo sistema da peça (métrica com métrica, polegada com polegada).</p>
+      <table>
+        <tr><th>Chave polegada</th><th>Equivalente (mm)</th><th>Chave métrica mais próxima</th></tr>
+        <tr><td>7/16"</td><td>11,11 mm</td><td>11 mm (aperto justo)</td></tr>
+        <tr><td>1/2"</td><td>12,70 mm</td><td>13 mm (folga leve — não ideal)</td></tr>
+        <tr><td>9/16"</td><td>14,29 mm</td><td>14 mm (aperto justo)</td></tr>
+        <tr><td>5/8"</td><td>15,88 mm</td><td>16 mm (folga leve — não ideal)</td></tr>
+        <tr><td>3/4"</td><td>19,05 mm</td><td>19 mm (praticamente idêntico)</td></tr>
+        <tr><td>13/16"</td><td>20,64 mm</td><td>21 mm (folga leve — não ideal)</td></tr>
+        <tr><td>15/16"</td><td>23,81 mm</td><td>24 mm (folga leve — não ideal)</td></tr>
+      </table>
+    </div>
+
+    <div class="calc-box">
+      <h5>🧮 Consulta rápida — qual chave usar?</h5>
+      <div class="field-row">
+        <div class="field">
+          <label>Selecione a rosca métrica</label>
+          <select id="chave_select">
+            <option value="">Selecione...</option>
+            <option value="M3|5.5">M3</option>
+            <option value="M4|7">M4</option>
+            <option value="M5|8">M5</option>
+            <option value="M6|10">M6</option>
+            <option value="M7|11">M7</option>
+            <option value="M8|13">M8</option>
+            <option value="M10|17">M10</option>
+            <option value="M12|19">M12</option>
+            <option value="M14|22">M14</option>
+            <option value="M16|24">M16</option>
+            <option value="M18|27">M18</option>
+            <option value="M20|30">M20</option>
+            <option value="M22|32">M22</option>
+            <option value="M24|36">M24</option>
+          </select>
+        </div>
+      </div>
+      <button class="button" onclick="mostrarChaveRecomendada()">Ver chave recomendada</button>
+      <div class="resultado" id="chave_resultado"></div>
+    </div>
+  </section>
+
+  <!-- ================= TORQUE E PARAFUSOS ================= -->
+  <section id="painel-torque" class="panel">
+    <div class="panel-header">
+      <h2>🎯 Torque e Fixação Industrial</h2>
+      <button class="button secondary" onclick="voltarGrid()">← Voltar</button>
+    </div>
+
+    <!-- Abas do Módulo de Torque -->
+    <div class="torque-tabs">
+      <button class="torque-tab-btn active" id="tab_btn_calc" onclick="alternarAbaTorque('calc')">🧮 Calculadora Anti-Erro</button>
+      <button class="torque-tab-btn" id="tab_btn_foto" onclick="alternarAbaTorque('foto')">📸 Foto & Identificador de Aço</button>
+      <button class="torque-tab-btn" id="tab_btn_cruz" onclick="alternarAbaTorque('cruz')">🔄 Aperto em Cruz (Flanges)</button>
+      <button class="torque-tab-btn" id="tab_btn_tabela" onclick="alternarAbaTorque('tabela')">📋 Tabela Rápida DIN/ISO</button>
+    </div>
+
+    <!-- SUBPAINEL 1: CALCULADORA DE TORQUE -->
+    <div id="torque_sub_calc" class="torque-subpanel active">
+      <div class="content-block">
+        <h4>🎯 Cálculo Preciso de Torque com Fator de Atrito</h4>
+        <p>
+          O torque de aperto correto evita dois erros gravíssimos: <b>falta de aperto</b> (vibração e vazamento) e <b>excesso de aperto</b> (deformação plástica e ruptura do parafuso). 
+          Normas de referência: <b>DIN ISO 898-1, DIN 912 e VDI 2230</b>.
+        </p>
+
+        <div class="calc-box">
+          <h5>⚙️ Parâmetros de Fixação</h5>
+          
+          <div class="field-row">
+            <div class="field">
+              <label>Sistema de Rosca</label>
+              <select id="torque_sistema" onchange="atualizarOpcoesRosca()">
+                <option value="metrico">Métrica (M) — Milímetros</option>
+                <option value="polegada">Polegada (UNC) — SAE</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Diâmetro Nominal / Rosca</label>
+              <select id="torque_rosca" onchange="calcularTorque()">
+                <!-- Preenchido dinamicamente pelo JavaScript -->
+              </select>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label>Classe de Resistência do Aço (Parafuso / Porca)</label>
+              <select id="torque_classe" onchange="calcularTorque()">
+                <optgroup label="Padrão Métrico (Gravação na cabeça)">
+                  <option value="8.8" selected>Classe 8.8 — Médio Carbono Temperado (Uso Geral)</option>
+                  <option value="10.9">Classe 10.9 — Aço Liga Temperado (Alta Resistência)</option>
+                  <option value="12.9">Classe 12.9 — Aço Liga Especial (Altíssima Resistência / Allen)</option>
+                  <option value="A2-70">Inox A2-70 / A4-80 — Aço Inoxidável Austenítico</option>
+                  <option value="4.6">Classe 4.6 — Aço Baixo Carbono (Cargas Leves)</option>
+                </optgroup>
+                <optgroup label="Padrão Polegada (Traços radiais SAE)">
+                  <option value="SAE-2">SAE Grau 2 — Cabeça lisa sem traços</option>
+                  <option value="SAE-5">SAE Grau 5 — 3 traços radiais (Equiv. 8.8)</option>
+                  <option value="SAE-8">SAE Grau 8 — 6 traços radiais (Equiv. 10.9)</option>
+                </optgroup>
+              </select>
+            </div>
+            <div class="field">
+              <label>Lubrificação & Condição Superficial (Fator de Atrito μ)</label>
+              <select id="torque_atrito" onchange="calcularTorque()">
+                <option value="0.15" selected>Levemente lubrificado c/ óleo de máquina (μ = 0,15 — Padrão)</option>
+                <option value="0.10">Graxa ou Pasta Bissulfeto de Molibdênio MoS₂ (μ = 0,10)</option>
+                <option value="0.20">Seco / sem lubrificação (μ = 0,20)</option>
+                <option value="0.22">Zincado / Galvanizado a seco (μ = 0,22)</option>
+                <option value="0.08">Revestimento PTFE / Teflon (μ = 0,08)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label>Tipo de Equipamento / Junta</label>
+              <select id="torque_equip_tipo" onchange="calcularTorque()">
+                <option value="geral">Geral / Fixação Estrutural</option>
+                <option value="bomba">Bomba Centrífuga (Flanges / Carcaça / Mancal)</option>
+                <option value="redutor">Redutor de Velocidade (Bipartição / Tampas)</option>
+                <option value="motor">Motor Elétrico (Tampas / Base / Pés)</option>
+                <option value="valvula">Válvula Industrial (Castelo / Flange de Linha)</option>
+                <option value="tubulacao">Tubulação Industrial / Flange de Pressão</option>
+              </select>
+            </div>
+          </div>
+
+          <button class="button" onclick="calcularTorque()">🎯 Calcular Torque Seguro</button>
+
+          <!-- Resultados -->
+          <div id="torque_resultado_box" style="margin-top:16px;">
+            <div class="torque-kpi-row">
+              <div class="torque-kpi">
+                <div class="val" id="tkpi_nm">0.0</div>
+                <div class="unit">N·m</div>
+                <div class="lbl">Torque Recomendado</div>
+              </div>
+              <div class="torque-kpi">
+                <div class="val" id="tkpi_lbft">0.0</div>
+                <div class="unit">lbf·ft (lbs-pé)</div>
+                <div class="lbl">Escala Americana</div>
+              </div>
+              <div class="torque-kpi">
+                <div class="val" id="tkpi_kgfm">0.0</div>
+                <div class="unit">kgf·m</div>
+                <div class="lbl">Escala Técnica</div>
+              </div>
+              <div class="torque-kpi">
+                <div class="val" id="tkpi_forca">0.0</div>
+                <div class="unit">kN</div>
+                <div class="lbl">Força Pré-Carga (Fm)</div>
+              </div>
+            </div>
+
+            <div class="resultado ok" id="torque_detalhe_texto" style="margin-top:12px;"></div>
+
+            <div id="torque_alerta_banner" class="alerta-anti-erro"></div>
+
+            <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+              <button class="button secondary" onclick="exportarTorqueParaRelatorio()">📋 Usar dados no Relatório Técnico</button>
+              <button class="button secondary" onclick="copiarTorque()">📋 Copiar Especificação</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUBPAINEL 2: FOTO & IDENTIFICADOR DE AÇO -->
+    <div id="torque_sub_foto" class="torque-subpanel">
+      <div class="content-block">
+        <h4>📸 Identificação Visual da Cabeça do Parafuso & Porca</h4>
+        <p>
+          Fotografe a cabeça do parafuso ou a porca com boa iluminação. Use as ferramentas de <b>Zoom</b> e <b>Alto Contraste</b> 
+          para enxergar marcações gastas ou cobertas por graxa/óleo, e depois toque no modelo correspondente para calcular o torque.
+        </p>
+
+        <div class="field-row" style="margin-top:12px;">
+          <div class="field" style="min-width:100%;">
+            <label>📷 Tirar Foto ou Escolher Imagem (Cabeça do Parafuso / Porca / Plaqueta)</label>
+            <input type="file" accept="image/*" capture="environment" id="torque_foto_input" onchange="carregarFotoTorque()">
+          </div>
+        </div>
+
+        <div class="photo-inspect-box">
+          <div class="photo-viewport-wrap">
+            <div class="photo-canvas-container" id="torque_canvas_container">
+              <div id="torque_placeholder_msg" style="color:#8190a7; font-size:13px; padding:20px;">
+                📷 Nenhuma foto carregada ainda.<br>Tire uma foto ou carregue um arquivo para inspecionar.
+              </div>
+              <img id="torque_img_preview" style="display:none;" alt="Cabeça do Parafuso">
+            </div>
+
+            <div class="photo-tools-bar">
+              <button type="button" class="photo-tool-btn" onclick="ajustarZoomTorque(0.25)">🔍 Zoom +</button>
+              <button type="button" class="photo-tool-btn" onclick="ajustarZoomTorque(-0.25)">🔍 Zoom -</button>
+              <button type="button" class="photo-tool-btn" onclick="resetarZoomTorque()">↺ Resetar</button>
+              <button type="button" class="photo-tool-btn" onclick="aplicarFiltroTorque('contraste')">🌓 Alto Contraste</button>
+              <button type="button" class="photo-tool-btn" onclick="aplicarFiltroTorque('pb')">🔲 P&B</button>
+              <button type="button" class="photo-tool-btn" onclick="aplicarFiltroTorque('brilho')">☀️ +Brilho</button>
+              <button type="button" class="photo-tool-btn" onclick="aplicarFiltroTorque('normal')">🔄 Normal</button>
+            </div>
+            <div id="torque_zoom_info" style="font-size:11px; color:#8190a7; margin-top:6px;">Zoom: 100%</div>
+          </div>
+
+          <div style="flex:1; min-width:280px;">
+            <h4 style="font-size:15px; color:#ffd479; margin-bottom:8px;">Decodificador Visual de Marcações de Cabeça</h4>
+            <p style="font-size:12px; color:#aebbd0; margin-bottom:10px;">
+              Toque na marcação que você identificou na foto para preencher a classe de aço e o cálculo de torque automaticamente:
+            </p>
+
+            <div class="stamp-selector-grid">
+              <div class="stamp-card" id="scard_88" onclick="selecionarClasseVisual('8.8')">
+                <div class="stamp-head-icon">8.8</div>
+                <div class="stamp-title">Aço 8.8</div>
+                <div class="stamp-desc">Médio carbono temperado. Padrão na indústria (Rm=800 MPa).</div>
+              </div>
+
+              <div class="stamp-card" id="scard_109" onclick="selecionarClasseVisual('10.9')">
+                <div class="stamp-head-icon">10.9</div>
+                <div class="stamp-title">Aço 10.9</div>
+                <div class="stamp-desc">Aço liga temperado. Alta tensão e prensas (Rm=1000 MPa).</div>
+              </div>
+
+              <div class="stamp-card" id="scard_129" onclick="selecionarClasseVisual('12.9')">
+                <div class="stamp-head-icon">12.9</div>
+                <div class="stamp-title">Aço 12.9</div>
+                <div class="stamp-desc">Altíssima resistência. Parafusos Allen cilíndricos (Rm=1200 MPa).</div>
+              </div>
+
+              <div class="stamp-card" id="scard_inox" onclick="selecionarClasseVisual('A2-70')">
+                <div class="stamp-head-icon" style="font-size:11px;">A2-70</div>
+                <div class="stamp-title">Aço Inox</div>
+                <div class="stamp-desc">Inox 304/316 (A2/A4). Químico, alimentício e sanitário.</div>
+              </div>
+
+              <div class="stamp-card" id="scard_sae5" onclick="selecionarClasseVisual('SAE-5')">
+                <div class="stamp-head-icon radial-3" style="font-size:10px; color:#ffd479;">///</div>
+                <div class="stamp-title">SAE Grau 5</div>
+                <div class="stamp-desc">3 traços a 120°. Equivalente ao 8.8 em rosca polegada.</div>
+              </div>
+
+              <div class="stamp-card" id="scard_sae8" onclick="selecionarClasseVisual('SAE-8')">
+                <div class="stamp-head-icon" style="font-size:10px; color:#ffd479;">//////</div>
+                <div class="stamp-title">SAE Grau 8</div>
+                <div class="stamp-desc">6 traços radiais. Alta resistência automotiva/pesada.</div>
+              </div>
+
+              <div class="stamp-card" id="scard_46" onclick="selecionarClasseVisual('4.6')">
+                <div class="stamp-head-icon">4.6</div>
+                <div class="stamp-title">Aço 4.6</div>
+                <div class="stamp-desc">Baixo carbono. Tampas leves e suportes sem carga crítica.</div>
+              </div>
+
+              <div class="stamp-card" id="scard_sae2" onclick="selecionarClasseVisual('SAE-2')">
+                <div class="stamp-head-icon" style="color:#8190a7;">Liso</div>
+                <div class="stamp-title">SAE Grau 2</div>
+                <div class="stamp-desc">Sem traços radiais. Aço comum comercial polegada.</div>
+              </div>
+            </div>
+
+            <div id="visual_confirmacao_box" class="alerta-anti-erro ok" style="display:none; margin-top:14px;">
+              <span id="visual_confirmacao_txt"></span>
+              <button class="button" style="margin-top:10px; width:100%;" onclick="aplicarClasseEIrCalculadora()">👉 Ir para Calculadora com esta Classe</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUBPAINEL 3: APERTO EM CRUZ (FLANGES) -->
+    <div id="torque_sub_cruz" class="torque-subpanel">
+      <div class="content-block">
+        <h4>🔄 Procedimento Anti-Empenamento: Aperto em Cruz (Estrela)</h4>
+        <p>
+          Apertar parafusos em sequência circular causa empenamento da flange, compressão irregular da junta de vedação e 
+          <b>vazamentos imediatos</b>. Siga a ordem cruzada numerada abaixo para garantir fechamento uniforme e paralelo.
+        </p>
+
+        <div class="field-row" style="margin-top:14px;">
+          <div class="field">
+            <label>Selecione a quantidade de parafusos da junta</label>
+            <select id="cruz_qtd_parafusos" onchange="desenharEsquemaCruz()">
+              <option value="4">Flange de 4 Parafusos</option>
+              <option value="6">Flange de 6 Parafusos</option>
+              <option value="8" selected>Flange de 8 Parafusos (Mais Comum)</option>
+              <option value="12">Flange de 12 Parafusos</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="cross-pattern-box">
+          <div style="text-align:center; min-width:200px;">
+            <div class="cross-circle" id="cross_circle_diagram"></div>
+            <p style="font-size:12px; color:#ffd479; margin-top:6px;">Ordem numérica de aperto</p>
+          </div>
+
+          <div style="flex:1; min-width:260px;">
+            <h5 style="color:#75b7ff; font-size:15px; margin-bottom:8px;">Regra de Aperto em 4 Etapas (100% Anti-Vazamento):</h5>
+            <ol style="margin-left:20px; font-size:13px; color:#cdd7e6; line-height:1.8;">
+              <li><b>1ª Etapa (Encosto - 30%):</b> Aperto suave em cruz até encostar a face na junta sem esmagar.</li>
+              <li><b>2ª Etapa (Assentamento - 60%):</b> Aplique 60% do torque final rigorosamente na sequência cruzada.</li>
+              <li><b>3ª Etapa (Torque Nominal - 100%):</b> Aplique 100% do torque final especificado em cruz.</li>
+              <li><b>4ª Etapa (Passe de Uniformização):</b> Dê uma volta completa em sentido horário a 100% para compensar o alívio das juntas elásticas.</li>
+            </ol>
+            <div class="alerta-anti-erro aviso" style="margin-top:12px;">
+              ⚠️ <b>Dica de Campo:</b> Em tubulações quentes (vapor/óleo térmico), faça o reaperto a quente (*hot torqueing*) 
+              após a primeira ciclagem térmica se o procedimento da planta exigir.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUBPAINEL 4: TABELA RÁPIDA DIN/ISO -->
+    <div id="torque_sub_tabela" class="torque-subpanel">
+      <div class="content-block">
+        <h4>📋 Tabela de Referência Rápida de Torque (Norma DIN ISO 898-1)</h4>
+        <p style="color:#8190a7; font-size:13px; margin-bottom:12px;">
+          Valores nominais calculados a 90% do limite de escoamento para rosca métrica grossa levemente oleada (μ = 0,15):
+        </p>
+        <div style="overflow-x:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Rosca</th>
+                <th>Chave (mm)</th>
+                <th>Classe 8.8 (N·m)</th>
+                <th>Classe 10.9 (N·m)</th>
+                <th>Classe 12.9 (N·m)</th>
+                <th>Inox A2-70 (N·m)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><b>M6</b> (passo 1,0)</td><td>10 mm</td><td><b>10,1</b> N·m</td><td>14,8 N·m</td><td>17,3 N·m</td><td>7,3 N·m</td></tr>
+              <tr><td><b>M8</b> (passo 1,25)</td><td>13 mm</td><td><b>24,6</b> N·m</td><td>36,1 N·m</td><td>42,2 N·m</td><td>17,5 N·m</td></tr>
+              <tr><td><b>M10</b> (passo 1,5)</td><td>17 mm</td><td><b>48,0</b> N·m</td><td>71,0 N·m</td><td>83,0 N·m</td><td>35,0 N·m</td></tr>
+              <tr><td><b>M12</b> (passo 1,75)</td><td>19 mm</td><td><b>84,0</b> N·m</td><td>123,0 N·m</td><td>144,0 N·m</td><td>60,0 N·m</td></tr>
+              <tr><td><b>M14</b> (passo 2,0)</td><td>22 mm</td><td><b>135,0</b> N·m</td><td>198,0 N·m</td><td>232,0 N·m</td><td>95,0 N·m</td></tr>
+              <tr><td><b>M16</b> (passo 2,0)</td><td>24 mm</td><td><b>206,0</b> N·m</td><td>302,0 N·m</td><td>354,0 N·m</td><td>147,0 N·m</td></tr>
+              <tr><td><b>M18</b> (passo 2,5)</td><td>27 mm</td><td><b>288,0</b> N·m</td><td>421,0 N·m</td><td>492,0 N·m</td><td>205,0 N·m</td></tr>
+              <tr><td><b>M20</b> (passo 2,5)</td><td>30 mm</td><td><b>408,0</b> N·m</td><td>597,0 N·m</td><td>698,0 N·m</td><td>288,0 N·m</td></tr>
+              <tr><td><b>M24</b> (passo 3,0)</td><td>36 mm</td><td><b>705,0</b> N·m</td><td>1032,0 N·m</td><td>1207,0 N·m</td><td>498,0 N·m</td></tr>
+              <tr><td><b>M30</b> (passo 3,5)</td><td>46 mm</td><td><b>1408,0</b> N·m</td><td>2063,0 N·m</td><td>2413,0 N·m</td><td>990,0 N·m</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SOBRE O APP ================= -->
+  <section id="painel-sobre" class="panel">
+    <div class="panel-header">
+      <h2>ℹ️ Sobre o App</h2>
+      <button class="button secondary" onclick="voltarGrid()">← Voltar</button>
+    </div>
+
+    <div class="content-block">
+      <div class="kpi-grid">
+        <div class="kpi-card"><div class="valor">13</div><div class="label">Módulos no app</div></div>
+        <div class="kpi-card"><div class="valor">☁️</div><div class="label">Dados na nuvem</div></div>
+        <div class="kpi-card"><div class="valor">🔐</div><div class="label">Login protegido</div></div>
+        <div class="kpi-card"><div class="valor">📱</div><div class="label">Web + Android</div></div>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <h4>Módulos técnicos</h4>
+      <div class="equip-item"><h4>⚙️ Manutenção Mecânica</h4><p>Tipos de manutenção, MTBF/MTTR e calculadora de disponibilidade.</p></div>
+      <div class="equip-item"><h4>💧 Bombas</h4><p>NPSH, cavitação, diagnóstico de falhas e verificador de margem NPSH.</p></div>
+      <div class="equip-item"><h4>⚡ Motores Elétricos</h4><p>Estrela/triângulo, causas de queima e calculadora de corrente nominal.</p></div>
+      <div class="equip-item"><h4>🔩 Redutores e Engrenagens</h4><p>Relação de transmissão e calculadora de RPM/torque de saída.</p></div>
+      <div class="equip-item"><h4>🔧 Válvulas</h4><p>Tipos, aplicações e critérios de seleção.</p></div>
+      <div class="equip-item"><h4>📏 Metrologia</h4><p>Conversor mm ↔ polegada e verificador de tolerância dimensional.</p></div>
+      <div class="equip-item"><h4>🛢️ Lubrificação</h4><p>Sistemas de lubrificação, tipos de rolamento e calculadora de graxa.</p></div>
+      <div class="equip-item"><h4>🔑 Chaves e Porcas</h4><p>Tabelas de chave combinada por rosca métrica e polegada.</p></div>
+      <div class="equip-item"><h4>🎯 Torque e Parafusos</h4><p>Cálculo anti-erro de torque (DIN/ISO/SAE), identificação por foto de porca/parafuso e aperto em cruz.</p></div>
+    </div>
+
+    <div class="content-block">
+      <h4>Módulos de gestão (conectados ao Supabase)</h4>
+      <div class="equip-item"><h4>📝 Relatório Técnico</h4><p>Dashboard de manutenções em tempo real + formulário com câmera (antes/depois/extras) e localização GPS.</p></div>
+      <div class="equip-item"><h4>📋 Intervenções de Equipamentos</h4><p>Histórico completo por TAG, com fotos e link para o mapa.</p></div>
+      <div class="equip-item"><h4>🤖 Assistente Técnico</h4><p>Busca por palavra-chave numa base de conhecimento local (offline).</p></div>
+    </div>
+
+    <div class="content-block">
+      <h4>Tecnologia por trás do app</h4>
+      <ul>
+        <li><b>Frontend:</b> HTML, CSS e JavaScript puro (sem frameworks pesados) — carrega rápido em qualquer dispositivo.</li>
+        <li><b>Backend:</b> Supabase — autenticação, banco de dados PostgreSQL e armazenamento de fotos.</li>
+        <li><b>Hospedagem:</b> Vercel — deploy automático a cada atualização no GitHub.</li>
+        <li><b>Versionamento:</b> Git + GitHub.</li>
+        <li><b>App Android:</b> Capacitor — empacota este mesmo código como app nativo.</li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <h4>Progresso do projeto</h4>
+      <ul>
+        <li>✅ App web funcional, publicado e com deploy automático</li>
+        <li>✅ Login e banco de dados na nuvem</li>
+        <li>✅ Câmera, GPS e histórico por equipamento</li>
+        <li>✅ 8 módulos técnicos de referência com calculadoras</li>
+        <li>🔄 App Android nativo (Capacitor configurado, build pendente)</li>
+        <li>⏳ App iOS (ainda não iniciado — requer Mac ou serviço de build na nuvem)</li>
+      </ul>
+    </div>
+
+    <div class="content-block" style="text-align:center; color:#8190a7;">
+      Mecânica 4.0 IA — Criado por Eduardo Noronha
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Mecânica 4.0 IA © 2026<br>
+  Criado por Eduardo Noronha<br>
+  Plataforma de apoio à manutenção industrial
+</footer>
+
+</div><!-- fim #appContent -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* ===================== CONFIGURAÇÃO SUPABASE ===================== */
+const SUPABASE_URL = 'https://ceztsxlqzbtdfjxjpghl.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_osbE7BMeiqDbAHvNpzlLxA_rk8YTKVm';
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let modoCadastro = false;
+let equipamentosCache = [];
+let equipamentoSelecionadoId = null;
+
+/* ===================== LOGIN / SESSÃO ===================== */
+async function verificarSessao() {
+  const { data } = await db.auth.getSession();
+  if (data.session) {
+    mostrarApp(data.session.user.email);
+  } else {
+    document.getElementById('telaLogin').style.display = 'flex';
+    document.getElementById('appContent').style.display = 'none';
+  }
+}
+
+function mostrarApp(email) {
+  document.getElementById('telaLogin').style.display = 'none';
+  document.getElementById('appContent').style.display = 'block';
+  document.getElementById('usuarioLogadoEmail').innerText = email;
+}
+
+function alternarModoLogin() {
+  modoCadastro = !modoCadastro;
+  document.getElementById('btnEntrar').style.display = modoCadastro ? 'none' : 'block';
+  document.getElementById('btnCriarConta').style.display = modoCadastro ? 'block' : 'none';
+  document.getElementById('textoToggleLogin').innerHTML = modoCadastro
+    ? 'Já tem conta? <a onclick="alternarModoLogin()">Entrar</a>'
+    : 'Ainda não tem conta? <a onclick="alternarModoLogin()">Criar conta</a>';
+}
+
+async function fazerLogin() {
+  const email = document.getElementById('login_email').value.trim();
+  const senha = document.getElementById('login_senha').value;
+  const el = document.getElementById('login_resultado');
+  if (!email || !senha) { el.className = 'login-msg erro'; el.innerText = 'Preencha e-mail e senha.'; return; }
+
+  el.className = 'login-msg'; el.innerText = 'Entrando...';
+  const { data, error } = await db.auth.signInWithPassword({ email, password: senha });
+  if (error) { el.className = 'login-msg erro'; el.innerText = error.message; return; }
+  el.className = 'login-msg ok'; el.innerText = 'Login realizado!';
+  mostrarApp(data.user.email);
+}
+
+async function fazerCadastro() {
+  const email = document.getElementById('login_email').value.trim();
+  const senha = document.getElementById('login_senha').value;
+  const el = document.getElementById('login_resultado');
+  if (!email || !senha) { el.className = 'login-msg erro'; el.innerText = 'Preencha e-mail e senha.'; return; }
+  if (senha.length < 6) { el.className = 'login-msg erro'; el.innerText = 'A senha precisa ter pelo menos 6 caracteres.'; return; }
+
+  el.className = 'login-msg'; el.innerText = 'Criando conta...';
+  const { data, error } = await db.auth.signUp({ email, password: senha });
+  if (error) { el.className = 'login-msg erro'; el.innerText = error.message; return; }
+
+  if (data.session) {
+    el.className = 'login-msg ok'; el.innerText = 'Conta criada!';
+    mostrarApp(data.user.email);
+  } else {
+    el.className = 'login-msg ok';
+    el.innerText = 'Conta criada! Verifique seu e-mail para confirmar antes de entrar.';
+  }
+}
+
+async function fazerLogout() {
+  await db.auth.signOut();
+  location.reload();
+}
+
+/* ===================== LOCALIZAÇÃO ===================== */
+function capturarLocalizacao() {
+  const status = document.getElementById('loc_status');
+  if (!navigator.geolocation) {
+    status.innerText = 'Geolocalização não suportada neste navegador.';
+    return;
+  }
+  status.innerText = 'Obtendo localização...';
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      document.getElementById('rel_lat').value = pos.coords.latitude.toFixed(6);
+      document.getElementById('rel_lng').value = pos.coords.longitude.toFixed(6);
+      status.innerText = 'Localização capturada com sucesso.';
+    },
+    (err) => { status.innerText = 'Não foi possível obter a localização: ' + err.message; },
+    { enableHighAccuracy: true, timeout: 10000 }
+  );
+}
+
+/* ===================== FOTOS (preview) ===================== */
+function previewFoto(inputId, imgId) {
+  const input = document.getElementById(inputId);
+  const img = document.getElementById(imgId);
+  if (input.files && input.files[0]) {
+    img.src = URL.createObjectURL(input.files[0]);
+    img.style.display = 'block';
+  }
+}
+
+function previewFotosExtra() {
+  const input = document.getElementById('rel_fotos_extra');
+  const container = document.getElementById('preview_extra');
+  container.innerHTML = '';
+  Array.from(input.files).forEach(file => {
+    const div = document.createElement('div');
+    const img = document.createElement('img');
+    img.src = URL.createObjectURL(file);
+    div.appendChild(img);
+    const label = document.createElement('div');
+    label.className = 'foto-label';
+    label.innerText = file.name.length > 14 ? file.name.slice(0, 12) + '…' : file.name;
+    div.appendChild(label);
+    container.appendChild(div);
+  });
+}
+
+async function uploadFotoSupabase(file, tag, tipo) {
+  if (!file) return null;
+  const nomeArquivo = `${tag}/${Date.now()}_${tipo}.${file.name.split('.').pop()}`;
+  const { error } = await db.storage.from('fotos-intervencoes').upload(nomeArquivo, file);
+  if (error) throw new Error('Erro ao enviar foto ' + tipo + ': ' + error.message);
+  const { data } = db.storage.from('fotos-intervencoes').getPublicUrl(nomeArquivo);
+  return data.publicUrl;
+}
+
+/* ===================== SALVAR INTERVENÇÃO NA NUVEM ===================== */
+async function salvarIntervencao() {
+  const el = document.getElementById('rel_resultado');
+  el.className = 'resultado';
+  el.innerText = 'Salvando...';
+
+  const tag = document.getElementById('rel_tag').value.trim();
+  const nomeEquip = document.getElementById('rel_equip').value.trim();
+  const localTexto = document.getElementById('rel_local_texto').value.trim();
+  const lat = document.getElementById('rel_lat').value || null;
+  const lng = document.getElementById('rel_lng').value || null;
+  const tipo = document.getElementById('rel_tipo').value;
+  const urgencia = document.getElementById('rel_urgencia').value;
+  const anomalia = document.getElementById('rel_anomalia').value.trim();
+  const causa = document.getElementById('rel_causa').value.trim();
+  const acao = document.getElementById('rel_acao').value.trim();
+  const fotoAntesFile = document.getElementById('rel_foto_antes').files[0];
+  const fotoDepoisFile = document.getElementById('rel_foto_depois').files[0];
+  const fotosExtraFiles = Array.from(document.getElementById('rel_fotos_extra').files);
+
+  if (!tag || !nomeEquip || !anomalia) {
+    el.className = 'resultado erro';
+    el.innerText = 'Preencha ao menos TAG, nome do equipamento e a anomalia encontrada.';
+    return;
+  }
+
+  try {
+    const { data: userData } = await db.auth.getUser();
+    if (!userData.user) { el.className = 'resultado erro'; el.innerText = 'Sessão expirada, faça login novamente.'; return; }
+
+    // 1. Busca ou cria o equipamento
+    let { data: equipExistente } = await db.from('equipamentos').select('*').eq('tag', tag).maybeSingle();
+    let equipamentoId;
+
+    if (equipExistente) {
+      equipamentoId = equipExistente.id;
+      await db.from('equipamentos').update({
+        nome: nomeEquip,
+        local_texto: localTexto || equipExistente.local_texto,
+        latitude: lat || equipExistente.latitude,
+        longitude: lng || equipExistente.longitude
+      }).eq('id', equipamentoId);
+    } else {
+      const { data: novoEquip, error: erroEquip } = await db.from('equipamentos').insert({
+        tag, nome: nomeEquip, local_texto: localTexto, latitude: lat, longitude: lng
+      }).select().single();
+      if (erroEquip) throw new Error('Erro ao criar equipamento: ' + erroEquip.message);
+      equipamentoId = novoEquip.id;
+    }
+
+    // 2. Upload das fotos
+    const fotoAntesUrl = await uploadFotoSupabase(fotoAntesFile, tag, 'antes');
+    const fotoDepoisUrl = await uploadFotoSupabase(fotoDepoisFile, tag, 'depois');
+
+    const urlsExtra = [];
+    for (let i = 0; i < fotosExtraFiles.length; i++) {
+      const url = await uploadFotoSupabase(fotosExtraFiles[i], tag, 'extra' + i);
+      if (url) urlsExtra.push(url);
+    }
+    const fotosExtraTexto = urlsExtra.length ? urlsExtra.join('|') : null;
+
+    // 3. Insere a intervenção
+    const { error: erroInterv } = await db.from('intervencoes').insert({
+      equipamento_id: equipamentoId,
+      usuario_id: userData.user.id,
+      tipo_manutencao: tipo,
+      urgencia,
+      anomalia, causa, acao,
+      foto_antes_url: fotoAntesUrl,
+      foto_depois_url: fotoDepoisUrl,
+      fotos_extra_urls: fotosExtraTexto
+    });
+    if (erroInterv) throw new Error('Erro ao salvar intervenção: ' + erroInterv.message);
+
+    el.className = 'resultado ok';
+    el.innerText = 'Intervenção salva com sucesso! Abrindo o histórico do equipamento...';
+
+    setTimeout(() => abrirHistoricoEquipamento(equipamentoId), 900);
+
+  } catch (e) {
+    el.className = 'resultado erro';
+    el.innerText = e.message;
+  }
+}
+
+/* ===================== MÓDULO INTERVENÇÕES ===================== */
+async function carregarEquipamentos() {
+  const { data, error } = await db.from('equipamentos').select('*').order('criado_em', { ascending: false });
+  if (error) { document.getElementById('listaEquipamentos').innerText = 'Erro ao carregar: ' + error.message; return; }
+  equipamentosCache = data || [];
+  renderizarListaEquipamentos();
+}
+
+function renderizarListaEquipamentos() {
+  const busca = (document.getElementById('busca_equip').value || '').toLowerCase();
+  const lista = document.getElementById('listaEquipamentos');
+  const filtrados = equipamentosCache.filter(e =>
+    e.tag.toLowerCase().includes(busca) || e.nome.toLowerCase().includes(busca)
+  );
+
+  if (filtrados.length === 0) {
+    lista.innerHTML = '<p style="color:#8190a7;">Nenhum equipamento encontrado. Salve uma intervenção no módulo "Relatório Técnico" para começar.</p>';
+    return;
+  }
+
+  lista.innerHTML = filtrados.map(e => `
+    <div class="equip-item" onclick="abrirHistoricoEquipamento('${e.id}')">
+      <h4>${e.tag} — ${e.nome}</h4>
+      <p>${e.local_texto || 'Local não informado'} ${e.latitude ? ' · 📍 ' + Number(e.latitude).toFixed(4) + ', ' + Number(e.longitude).toFixed(4) : ''}</p>
+    </div>
+  `).join('');
+}
+
+async function abrirHistoricoEquipamento(equipamentoId) {
+  equipamentoSelecionadoId = equipamentoId;
+  abrirModulo('intervencoes');
+  document.getElementById('vistaListaEquip').style.display = 'none';
+  document.getElementById('vistaHistoricoEquip').style.display = 'block';
+
+  const { data: equip } = await db.from('equipamentos').select('*').eq('id', equipamentoId).single();
+  const mapaLink = equip.latitude
+    ? `<a href="https://www.google.com/maps?q=${equip.latitude},${equip.longitude}" target="_blank" style="color:#75b7ff;">Ver no mapa (${Number(equip.latitude).toFixed(5)}, ${Number(equip.longitude).toFixed(5)})</a>`
+    : 'Localização GPS não registrada';
+
+  document.getElementById('detalheEquipamento').innerHTML = `
+    <h4>${equip.tag} — ${equip.nome}</h4>
+    <p>${equip.local_texto || 'Local (texto) não informado'}</p>
+    <p style="margin-top:6px;">${mapaLink}</p>
+  `;
+
+  const { data: intervs, error } = await db.from('intervencoes')
+    .select('*')
+    .eq('equipamento_id', equipamentoId)
+    .order('criado_em', { ascending: false });
+
+  const lista = document.getElementById('listaIntervencoes');
+  if (error) { lista.innerText = 'Erro ao carregar histórico: ' + error.message; return; }
+  if (!intervs || intervs.length === 0) {
+    lista.innerHTML = '<p style="color:#8190a7;">Nenhuma intervenção registrada ainda para este equipamento.</p>';
+    return;
+  }
+
+  lista.innerHTML = intervs.map(i => `
+    <div class="intervencao-item">
+      <div class="data">${new Date(i.criado_em).toLocaleString('pt-BR')}
+        <span class="tag-urgencia">${i.tipo_manutencao || ''}</span>
+        <span class="tag-urgencia">${i.urgencia || ''}</span>
+      </div>
+      <p><b>Anomalia:</b> ${i.anomalia || '—'}</p>
+      <p><b>Causa provável:</b> ${i.causa || '—'}</p>
+      <p><b>Ação recomendada:</b> ${i.acao || '—'}</p>
+      ${(i.foto_antes_url || i.foto_depois_url) ? `
+        <div class="fotos-row">
+          ${i.foto_antes_url ? `<div><img src="${i.foto_antes_url}" onclick="window.open('${i.foto_antes_url}','_blank')"><div class="foto-label">Antes</div></div>` : ''}
+          ${i.foto_depois_url ? `<div><img src="${i.foto_depois_url}" onclick="window.open('${i.foto_depois_url}','_blank')"><div class="foto-label">Depois</div></div>` : ''}
+        </div>` : ''}
+      ${i.fotos_extra_urls ? `
+        <div class="fotos-row">
+          ${i.fotos_extra_urls.split('|').map((url, idx) => `<div><img src="${url}" onclick="window.open('${url}','_blank')"><div class="foto-label">Extra ${idx + 1}</div></div>`).join('')}
+        </div>` : ''}
+    </div>
+  `).join('');
+}
+
+function voltarListaEquip() {
+  document.getElementById('vistaHistoricoEquip').style.display = 'none';
+  document.getElementById('vistaListaEquip').style.display = 'block';
+}
+
+/* inicia verificação de sessão ao carregar a página */
+verificarSessao();
+
+/* ===================== NAVEGAÇÃO ===================== */
+function abrirModulo(id) {
+  document.getElementById('vistaGrid').classList.add('hidden');
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('painel-' + id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  if (id === 'intervencoes' && !equipamentoSelecionadoId) {
+    document.getElementById('vistaListaEquip').style.display = 'block';
+    document.getElementById('vistaHistoricoEquip').style.display = 'none';
+    carregarEquipamentos();
+  }
+
+  if (id === 'relatorio') {
+    carregarDashboard();
+  }
+
+  if (id === 'torque') {
+    iniciarModuloTorque();
+  }
+}
+
+function voltarGrid() {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('vistaGrid').classList.remove('hidden');
+  equipamentoSelecionadoId = null;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ===================== MANUTENÇÃO ===================== */
+function calcularDisponibilidade() {
+  const horasOp = parseFloat(document.getElementById('man_horasOp').value);
+  const falhas = parseFloat(document.getElementById('man_falhas').value);
+  const horasRep = parseFloat(document.getElementById('man_horasRep').value);
+  const el = document.getElementById('man_resultado');
+
+  if (!horasOp || !falhas || horasRep === undefined || isNaN(horasRep)) {
+    el.className = 'resultado erro';
+    el.innerText = 'Preencha horas operando, número de falhas e horas de reparo.';
+    return;
+  }
+  const mtbf = horasOp / falhas;
+  const mttr = horasRep / falhas;
+  const disponibilidade = (mtbf / (mtbf + mttr)) * 100;
+
+  el.className = 'resultado ok';
+  el.innerText =
+    `MTBF: ${mtbf.toFixed(2)} h\n` +
+    `MTTR: ${mttr.toFixed(2)} h\n` +
+    `Disponibilidade: ${disponibilidade.toFixed(2)} %`;
+}
+
+/* ===================== BOMBAS ===================== */
+function verificarNPSH() {
+  const npshd = parseFloat(document.getElementById('bomba_npshd').value);
+  const npshr = parseFloat(document.getElementById('bomba_npshr').value);
+  const el = document.getElementById('bomba_resultado');
+
+  if (isNaN(npshd) || isNaN(npshr)) {
+    el.className = 'resultado erro';
+    el.innerText = 'Preencha o NPSH disponível e o NPSH requerido.';
+    return;
+  }
+  const margem = npshd - npshr;
+  if (margem >= 0.5) {
+    el.className = 'resultado ok';
+    el.innerText = `Margem de ${margem.toFixed(2)} m. Situação segura (margem ≥ 0,5 m recomendada).`;
+  } else if (margem >= 0) {
+    el.className = 'resultado erro';
+    el.innerText = `Margem de apenas ${margem.toFixed(2)} m. Risco de cavitação — margem abaixo do recomendado (0,5 m).`;
+  } else {
+    el.className = 'resultado erro';
+    el.innerText = `NPSHd menor que NPSHr (déficit de ${Math.abs(margem).toFixed(2)} m). Cavitação praticamente garantida nessas condições.`;
+  }
+}
+
+/* ===================== MOTORES ===================== */
+function calcularCorrenteMotor() {
+  const p = parseFloat(document.getElementById('mot_potencia').value);
+  const u = parseFloat(document.getElementById('mot_tensao').value);
+  const fp = parseFloat(document.getElementById('mot_fp').value);
+  const rendPerc = parseFloat(document.getElementById('mot_rend').value);
+  const el = document.getElementById('mot_resultado');
+
+  if (!p || !u || !fp || !rendPerc) {
+    el.className = 'resultado erro';
+    el.innerText = 'Preencha potência, tensão, fator de potência e rendimento.';
+    return;
+  }
+  const rend = rendPerc / 100;
+  const potenciaW = p * 1000;
+  const corrente = potenciaW / (Math.sqrt(3) * u * fp * rend);
+
+  el.className = 'resultado ok';
+  el.innerText = `Corrente nominal estimada: ${corrente.toFixed(2)} A`;
+}
+
+/* ===================== REDUTORES ===================== */
+function calcularRedutor() {
+  const n1 = parseFloat(document.getElementById('red_n1').value);
+  const n2 = parseFloat(document.getElementById('red_n2').value);
+  const rpmIn = parseFloat(document.getElementById('red_rpmIn').value);
+  const el = document.getElementById('red_resultado');
+
+  if (!n1 || !n2 || !rpmIn) {
+    el.className = 'resultado erro';
+    el.innerText = 'Preencha o número de dentes das duas engrenagens e a RPM de entrada.';
+    return;
+  }
+  const i = n2 / n1;
+  const rpmOut = rpmIn / i;
+
+  el.className = 'resultado ok';
+  el.innerText =
+    `Relação de transmissão (i): ${i.toFixed(2)} : 1\n` +
+    `RPM de saída: ${rpmOut.toFixed(1)} rpm\n` +
+    `O torque de saída aumenta na mesma proporção de "i" (desconsiderando perdas por rendimento).`;
+}
+
+/* ===================== METROLOGIA ===================== */
+function converterMmParaPol() {
+  const mm = parseFloat(document.getElementById('metro_mm').value);
+  const el = document.getElementById('metro_resultado');
+  if (isNaN(mm)) { el.className = 'resultado erro'; el.innerText = 'Informe um valor em mm.'; return; }
+  const pol = mm / 25.4;
+  el.className = 'resultado ok';
+  el.innerText = `${mm} mm = ${pol.toFixed(4)} polegadas`;
+}
+
+function converterPolParaMm() {
+  const pol = parseFloat(document.getElementById('metro_in').value);
+  const el = document.getElementById('metro_resultado');
+  if (isNaN(pol)) { el.className = 'resultado erro'; el.innerText = 'Informe um valor em polegadas.'; return; }
+  const mm = pol * 25.4;
+  el.className = 'resultado ok';
+  el.innerText = `${pol} polegadas = ${mm.toFixed(3)} mm`;
+}
+
+function verificarTolerancia() {
+  const nominal = parseFloat(document.getElementById('tol_nominal').value);
+  const sup = parseFloat(document.getElementById('tol_sup').value);
+  const inf = parseFloat(document.getElementById('tol_inf').value);
+  const medido = parseFloat(document.getElementById('tol_medido').value);
+  const el = document.getElementById('tol_resultado');
+
+  if (isNaN(nominal) || isNaN(sup) || isNaN(inf) || isNaN(medido)) {
+    el.className = 'resultado erro';
+    el.innerText = 'Preencha cota nominal, as duas tolerâncias e o valor medido.';
+    return;
+  }
+  const limiteMax = nominal + sup;
+  const limiteMin = nominal - inf;
+  const aprovado = medido >= limiteMin && medido <= limiteMax;
+
+  el.className = aprovado ? 'resultado ok' : 'resultado erro';
+  el.innerText =
+    `Limite máximo: ${limiteMax.toFixed(3)} mm\n` +
+    `Limite mínimo: ${limiteMin.toFixed(3)} mm\n` +
+    `Valor medido: ${medido.toFixed(3)} mm\n` +
+    `Resultado: ${aprovado ? 'APROVADO ✔' : 'REPROVADO ✘'}`;
+}
+
+/* ===================== RELATÓRIO ===================== */
+function montarTextoRelatorio() {
+  const tag = document.getElementById('rel_tag').value || '(não informado)';
+  const equip = document.getElementById('rel_equip').value || '(não informado)';
+  const local = document.getElementById('rel_local_texto').value || '(não informado)';
+  const data = document.getElementById('rel_data').value || '(não informado)';
+  const resp = document.getElementById('rel_resp').value || '(não informado)';
+  const tipo = document.getElementById('rel_tipo').value;
+  const urgencia = document.getElementById('rel_urgencia').value;
+  const anomalia = document.getElementById('rel_anomalia').value || '(não informado)';
+  const causa = document.getElementById('rel_causa').value || '(não informado)';
+  const acao = document.getElementById('rel_acao').value || '(não informado)';
+
+  return (
+`RELATÓRIO TÉCNICO DE INSPEÇÃO
+================================
+Equipamento: ${equip} (TAG: ${tag})
+Local: ${local}
+Data: ${data}
+Responsável: ${resp}
+Tipo de manutenção: ${tipo}
+Urgência: ${urgencia}
+
+ANOMALIA ENCONTRADA
+${anomalia}
+
+CAUSA PROVÁVEL
+${causa}
+
+AÇÃO RECOMENDADA
+${acao}
+
+--------------------------------
+Gerado por Mecânica 4.0 IA`
+  );
+}
+
+function gerarRelatorio() {
+  const el = document.getElementById('rel_resultado');
+  el.className = 'resultado ok';
+  el.innerText = montarTextoRelatorio();
+}
+
+function copiarRelatorio() {
+  const el = document.getElementById('rel_resultado');
+  if (!el.innerText) { gerarRelatorio(); }
+  navigator.clipboard.writeText(el.innerText).then(() => {
+    const original = el.innerText;
+    el.innerText = 'Relatório copiado para a área de transferência.\n\n' + original;
+  }).catch(() => {
+    alert('Não foi possível copiar automaticamente. Selecione e copie o texto manualmente.');
+  });
+}
+
+function baixarRelatorio() {
+  const texto = montarTextoRelatorio();
+  document.getElementById('rel_resultado').className = 'resultado ok';
+  document.getElementById('rel_resultado').innerText = texto;
+
+  const blob = new Blob([texto], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'relatorio-tecnico.txt';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+/* ===================== ASSISTENTE TÉCNICO (busca local) ===================== */
+const baseConhecimento = [
+  { chaves: ['cavitacao','cavitação'], resposta: 'Cavitação ocorre quando a pressão local do fluido cai abaixo da pressão de vapor, formando bolhas que implodem e corroem o rotor. Acontece quando o NPSH disponível é menor que o NPSH requerido pela bomba. Sintomas: ruído de "pedregulhos", queda de vazão e vibração.' },
+  { chaves: ['npsh'], resposta: 'NPSH disponível (NPSHd) é a energia de sucção realmente disponível na instalação; NPSH requerido (NPSHr) é o mínimo exigido pela bomba, dado pelo fabricante. Regra: NPSHd deve ser maior que NPSHr, com margem de segurança de pelo menos 0,5 m.' },
+  { chaves: ['estrela','triangulo','triângulo','ligacao','ligação'], resposta: 'A ligação estrela usa a maior tensão de placa (ex: 380V) e a ligação triângulo usa a menor (ex: 220V), para a mesma rede. A partida estrela-triângulo reduz a corrente de partida a cerca de 1/3, mas também reduz o torque de partida para cerca de 1/3.' },
+  { chaves: ['mtbf'], resposta: 'MTBF (Mean Time Between Failures) é o tempo médio entre falhas: horas totais operando dividido pelo número de falhas. Quanto maior, melhor a confiabilidade do equipamento. Você pode calcular no módulo "Manutenção Mecânica".' },
+  { chaves: ['mttr'], resposta: 'MTTR (Mean Time To Repair) é o tempo médio de reparo: horas totais de reparo dividido pelo número de reparos. Quanto menor, melhor a manutenibilidade.' },
+  { chaves: ['torque de aperto','torque','torquímetro','torquimetro'], resposta: 'O torque de aperto correto depende do diâmetro da rosca, classe do aço (8.8, 10.9, 12.9) e fator de atrito (seco vs lubrificado). Lubrificante reduz o atrito e exige torque menor para a mesma pré-carga. Use o módulo "Torque e Parafusos" para calcular o valor seguro e ver a ordem de aperto em cruz.' },
+  { chaves: ['classe 8.8','classe 10.9','classe 12.9','parafuso 8.8','parafuso 10.9'], resposta: 'Classes métricas de parafusos indicam resistência mecânica: 8.8 = médio carbono temperado (800 MPa ruptura / 640 MPa escoamento); 10.9 = aço liga temperado (1000 MPa / 940 MPa); 12.9 = altíssima resistência (1200 MPa / 1080 MPa). Nunca substitua um 10.9 ou 12.9 por 8.8 sem autorização de projeto.' },
+  { chaves: ['aperto em cruz','aperto cruzado','flange'], resposta: 'Flanges e juntas devem ser apertados em sequência cruzada (em estrela) em 4 etapas: 30%, 60%, 100% e um passe final circular a 100%. Isso evita empenamento da flange e esmagamento irregular da junta de vedação.' },
+  { chaves: ['graxa no parafuso','atrito parafuso','mos2'], resposta: 'Aplicar graxa ou pasta de MoS2 reduz o atrito de μ=0,20 (seco) para cerca de μ=0,10. Se você usar graxa e aplicar o torque de catálogo "seco", o parafuso sofrerá sobretensão e irá romper por estiramento. Sempre ajuste o torque conforme a lubrificação!' },
+  { chaves: ['paquimetro','paquímetro','micrometro','micrômetro'], resposta: 'O paquímetro tem resolução comum de 0,05 mm (ou 0,02 mm), bom para medições rápidas. O micrômetro tem resolução de 0,01 mm, indicado para tolerâncias mais apertadas. Sempre zere o instrumento antes de medir.' },
+  { chaves: ['valvula','válvula','psv','prv'], resposta: 'Válvulas de gaveta e esfera servem para bloqueio total; globo e borboleta permitem regulagem de vazão; PSV/PRV são válvulas de alívio de segurança contra sobrepressão. A escolha depende de pressão, temperatura, fluido e se há necessidade de regular vazão.' },
+  { chaves: ['redutor','engrenagem','relacao de transmissao','relação de transmissão'], resposta: 'A relação de transmissão i = N2 ÷ N1 (dentes da movida ÷ dentes da motora). A rotação de saída cai na mesma proporção em que o torque de saída aumenta (idealmente). Use a calculadora no módulo "Redutores e Engrenagens".' },
+  { chaves: ['manutencao preditiva','manutenção preditiva','preditiva'], resposta: 'Manutenção preditiva usa monitoramento de condição (vibração, termografia, análise de óleo) para prever a falha antes que ela ocorra, permitindo planejar a intervenção com antecedência.' },
+  { chaves: ['tolerancia','tolerância'], resposta: 'Uma cota tem tolerância superior (+) e inferior (-) em torno do valor nominal. Um valor medido está aprovado se estiver entre o limite mínimo (nominal - tolerância inferior) e o limite máximo (nominal + tolerância superior). Use o verificador no módulo "Metrologia".' },
+];
+
+function buscarResposta(pergunta) {
+  const texto = pergunta.toLowerCase();
+  let melhor = null;
+  let melhorScore = 0;
+
+  baseConhecimento.forEach(item => {
+    let score = 0;
+    item.chaves.forEach(chave => {
+      if (texto.includes(chave.toLowerCase())) score++;
+    });
+    if (score > melhorScore) {
+      melhorScore = score;
+      melhor = item;
+    }
+  });
+
+  if (melhor) return melhor.resposta;
+  return 'Não encontrei isso na base local ainda. Tente perguntar sobre: cavitação, NPSH, ligação estrela/triângulo, MTBF, MTTR, torque de aperto, paquímetro/micrômetro, válvulas, redutores ou tolerância dimensional.';
+}
+
+function perguntarAssistente() {
+  const input = document.getElementById('chatInput');
+  const pergunta = input.value.trim();
+  if (!pergunta) return;
+
+  const log = document.getElementById('chatLog');
+
+  const msgUser = document.createElement('div');
+  msgUser.className = 'chat-msg user';
+  msgUser.innerText = '🧑 ' + pergunta;
+  log.appendChild(msgUser);
+
+  const resposta = buscarResposta(pergunta);
+  const msgBot = document.createElement('div');
+  msgBot.className = 'chat-msg bot';
+  msgBot.innerText = '🤖 ' + resposta;
+  log.appendChild(msgBot);
+
+  input.value = '';
+  log.scrollTop = log.scrollHeight;
+}
+
+/* ===================== LUBRIFICAÇÃO ===================== */
+function calcularGraxa() {
+  const d = parseFloat(document.getElementById('lub_d').value);
+  const b = parseFloat(document.getElementById('lub_b').value);
+  const el = document.getElementById('lub_resultado');
+
+  if (!d || !b) {
+    el.className = 'resultado erro';
+    el.innerText = 'Preencha o diâmetro externo (D) e a largura (B) do rolamento.';
+    return;
+  }
+  const gramas = 0.005 * d * b;
+  el.className = 'resultado ok';
+  el.innerText = `Quantidade recomendada: ${gramas.toFixed(2)} gramas por relubrificação.`;
+}
+
+/* ===================== CHAVES E PORCAS ===================== */
+function mostrarChaveRecomendada() {
+  const valor = document.getElementById('chave_select').value;
+  const el = document.getElementById('chave_resultado');
+  if (!valor) { el.className = 'resultado erro'; el.innerText = 'Selecione uma rosca.'; return; }
+  const [rosca, chave] = valor.split('|');
+  el.className = 'resultado ok';
+  el.innerText = `Parafuso/porca ${rosca} → use a chave combinada de ${chave} mm.`;
+}
+
+/* ===================== TORQUE E FIXAÇÃO INDUSTRIAL ===================== */
+const roscasMetricas = {
+  'M4':   { d: 4,  p: 0.7,  as: 8.78, hex: 7,  allen: 3,  tRef: { '4.6': 1.0, '8.8': 3.0,  '10.9': 4.4,  '12.9': 5.1,  'A2-70': 1.8 } },
+  'M5':   { d: 5,  p: 0.8,  as: 14.2, hex: 8,  allen: 4,  tRef: { '4.6': 2.1, '8.8': 5.9,  '10.9': 8.6,  '12.9': 10.0, 'A2-70': 3.6 } },
+  'M6':   { d: 6,  p: 1.0,  as: 20.1, hex: 10, allen: 5,  tRef: { '4.6': 3.7, '8.8': 10.1, '10.9': 14.8, '12.9': 17.3, 'A2-70': 7.3 } },
+  'M8':   { d: 8,  p: 1.25, as: 36.6, hex: 13, allen: 6,  tRef: { '4.6': 8.9, '8.8': 24.6, '10.9': 36.1, '12.9': 42.2, 'A2-70': 17.5 } },
+  'M10':  { d: 10, p: 1.5,  as: 58.0, hex: 17, allen: 8,  tRef: { '4.6': 17.8,'8.8': 48.0, '10.9': 71.0, '12.9': 83.0, 'A2-70': 35.0 } },
+  'M12':  { d: 12, p: 1.75, as: 84.3, hex: 19, allen: 10, tRef: { '4.6': 30.5,'8.8': 84.0, '10.9': 123.0,'12.9': 144.0,'A2-70': 60.0 } },
+  'M14':  { d: 14, p: 2.0,  as: 115,  hex: 22, allen: 12, tRef: { '4.6': 49.0,'8.8': 135.0,'10.9': 198.0,'12.9': 232.0,'A2-70': 95.0 } },
+  'M16':  { d: 16, p: 2.0,  as: 157,  hex: 24, allen: 14, tRef: { '4.6': 76.0,'8.8': 206.0,'10.9': 302.0,'12.9': 354.0,'A2-70': 147.0 } },
+  'M18':  { d: 18, p: 2.5,  as: 192,  hex: 27, allen: 14, tRef: { '4.6': 105.0,'8.8': 288.0,'10.9': 421.0,'12.9': 492.0,'A2-70': 205.0 } },
+  'M20':  { d: 20, p: 2.5,  as: 245,  hex: 30, allen: 17, tRef: { '4.6': 148.0,'8.8': 408.0,'10.9': 597.0,'12.9': 698.0,'A2-70': 288.0 } },
+  'M22':  { d: 22, p: 2.5,  as: 303,  hex: 32, allen: 17, tRef: { '4.6': 202.0,'8.8': 557.0,'10.9': 816.0,'12.9': 954.0,'A2-70': 390.0 } },
+  'M24':  { d: 24, p: 3.0,  as: 353,  hex: 36, allen: 19, tRef: { '4.6': 255.0,'8.8': 705.0,'10.9': 1032.0,'12.9': 1207.0,'A2-70': 498.0 } },
+  'M27':  { d: 27, p: 3.0,  as: 459,  hex: 41, allen: 19, tRef: { '4.6': 375.0,'8.8': 1036.0,'10.9': 1518.0,'12.9': 1774.0,'A2-70': 730.0 } },
+  'M30':  { d: 30, p: 3.5,  as: 561,  hex: 46, allen: 22, tRef: { '4.6': 510.0,'8.8': 1408.0,'10.9': 2063.0,'12.9': 2413.0,'A2-70': 990.0 } },
+  'M33':  { d: 33, p: 3.5,  as: 694,  hex: 50, allen: 24, tRef: { '4.6': 690.0,'8.8': 1912.0,'10.9': 2802.0,'12.9': 3276.0,'A2-70': 1350.0 } },
+  'M36':  { d: 36, p: 4.0,  as: 817,  hex: 55, allen: 27, tRef: { '4.6': 885.0,'8.8': 2452.0,'10.9': 3594.0,'12.9': 4202.0,'A2-70': 1720.0 } }
+};
+
+const roscasPolegada = {
+  '1/4"-20':   { d: 6.35,  as: 20.5,  hex: '7/16"',  tRef: { 'SAE-2': 7.5,  'SAE-5': 12.0,  'SAE-8': 17.0 } },
+  '5/16"-18':  { d: 7.94,  as: 33.8,  hex: '1/2"',   tRef: { 'SAE-2': 15.0, 'SAE-5': 24.0,  'SAE-8': 34.0 } },
+  '3/8"-16':   { d: 9.53,  as: 50.0,  hex: '9/16"',  tRef: { 'SAE-2': 27.0, 'SAE-5': 43.0,  'SAE-8': 61.0 } },
+  '7/16"-14':  { d: 11.11, as: 68.6,  hex: '5/8"',   tRef: { 'SAE-2': 43.0, 'SAE-5': 69.0,  'SAE-8': 98.0 } },
+  '1/2"-13':   { d: 12.70, as: 91.5,  hex: '3/4"',   tRef: { 'SAE-2': 66.0, 'SAE-5': 105.0, 'SAE-8': 148.0 } },
+  '9/16"-12':  { d: 14.29, as: 117.4, hex: '13/16"', tRef: { 'SAE-2': 95.0, 'SAE-5': 152.0, 'SAE-8': 214.0 } },
+  '5/8"-11':   { d: 15.88, as: 146.0, hex: '15/16"', tRef: { 'SAE-2': 132.0,'SAE-5': 210.0, 'SAE-8': 295.0 } },
+  '3/4"-10':   { d: 19.05, as: 216.0, hex: '1.1/8"', tRef: { 'SAE-2': 233.0,'SAE-5': 373.0, 'SAE-8': 526.0 } },
+  '7/8"-9':    { d: 22.23, as: 298.0, hex: '1.5/16"',tRef: { 'SAE-2': 377.0,'SAE-5': 603.0, 'SAE-8': 850.0 } },
+  '1"-8':      { d: 25.40, as: 391.0, hex: '1.1/2"', tRef: { 'SAE-2': 565.0,'SAE-5': 904.0, 'SAE-8': 1275.0 } },
+  '1.1/8"-7':  { d: 28.58, as: 492.0, hex: '1.11/16"',tRef:{ 'SAE-2': 710.0,'SAE-5': 1280.0,'SAE-8': 1810.0 } },
+  '1.1/4"-7':  { d: 31.75, as: 625.0, hex: '1.7/8"', tRef: { 'SAE-2': 990.0,'SAE-5': 1800.0,'SAE-8': 2550.0 } },
+  '1.1/2"-6':  { d: 38.10, as: 908.0, hex: '2.1/4"', tRef: { 'SAE-2': 1750.0,'SAE-5':3150.0,'SAE-8': 4450.0 } }
+};
+
+let zoomNivelTorque = 1.0;
+let classeSelecionadaVisual = null;
+let ultimoCalculoTorque = null;
+
+function iniciarModuloTorque() {
+  const roscaSelect = document.getElementById('torque_rosca');
+  if (!roscaSelect || !roscaSelect.options.length) {
+    atualizarOpcoesRosca();
+  } else {
+    calcularTorque();
+  }
+  desenharEsquemaCruz();
+}
+
+function alternarAbaTorque(aba) {
+  document.querySelectorAll('.torque-tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.torque-subpanel').forEach(p => p.classList.remove('active'));
+  
+  const btn = document.getElementById('tab_btn_' + aba);
+  const panel = document.getElementById('torque_sub_' + aba);
+  if (btn) btn.classList.add('active');
+  if (panel) panel.classList.add('active');
+
+  if (aba === 'cruz') {
+    desenharEsquemaCruz();
+  }
+}
+
+function atualizarOpcoesRosca() {
+  const sistema = document.getElementById('torque_sistema').value;
+  const select = document.getElementById('torque_rosca');
+  select.innerHTML = '';
+
+  if (sistema === 'metrico') {
+    Object.keys(roscasMetricas).forEach(r => {
+      const opt = document.createElement('option');
+      opt.value = r;
+      opt.innerText = `${r} (passo ${roscasMetricas[r].p} mm)`;
+      if (r === 'M10') opt.selected = true;
+      select.appendChild(opt);
+    });
+    const classeSelect = document.getElementById('torque_classe');
+    if (classeSelect.value.startsWith('SAE')) {
+      classeSelect.value = '8.8';
+    }
+  } else {
+    Object.keys(roscasPolegada).forEach(r => {
+      const opt = document.createElement('option');
+      opt.value = r;
+      opt.innerText = `${r} UNC`;
+      if (r === '3/8"-16') opt.selected = true;
+      select.appendChild(opt);
+    });
+    const classeSelect = document.getElementById('torque_classe');
+    if (!classeSelect.value.startsWith('SAE')) {
+      classeSelect.value = 'SAE-5';
+    }
+  }
+  calcularTorque();
+}
+
+function calcularTorque() {
+  const sistema = document.getElementById('torque_sistema').value;
+  const rosca = document.getElementById('torque_rosca').value;
+  const classe = document.getElementById('torque_classe').value;
+  const atrito = parseFloat(document.getElementById('torque_atrito').value);
+  const equipTipo = document.getElementById('torque_equip_tipo').value;
+
+  let dadosRosca, tRef;
+
+  if (sistema === 'metrico') {
+    dadosRosca = roscasMetricas[rosca];
+    if (!dadosRosca) return;
+    tRef = dadosRosca.tRef[classe] || (dadosRosca.tRef['8.8'] * 0.7);
+  } else {
+    dadosRosca = roscasPolegada[rosca];
+    if (!dadosRosca) return;
+    tRef = dadosRosca.tRef[classe] || (dadosRosca.tRef['SAE-5'] * 0.7);
+  }
+
+  // Fator de escala por atrito em relação ao padrão industrial μ=0.15:
+  const fatorAtrito = atrito / 0.15;
+  const torqueNm = tRef * fatorAtrito;
+  const torqueLbFt = torqueNm * 0.737562;
+  const torqueKgfM = torqueNm * 0.101972;
+
+  let tensaoEscoamento = 640;
+  if (classe === '4.6') tensaoEscoamento = 240;
+  if (classe === '8.8') tensaoEscoamento = 640;
+  if (classe === '10.9') tensaoEscoamento = 940;
+  if (classe === '12.9') tensaoEscoamento = 1080;
+  if (classe === 'A2-70') tensaoEscoamento = 450;
+  if (classe === 'SAE-2') tensaoEscoamento = 393;
+  if (classe === 'SAE-5') tensaoEscoamento = 634;
+  if (classe === 'SAE-8') tensaoEscoamento = 896;
+
+  const forcaPreCargaKn = (0.90 * tensaoEscoamento * dadosRosca.as) / 1000;
+
+  document.getElementById('tkpi_nm').innerText = torqueNm >= 100 ? torqueNm.toFixed(0) : torqueNm.toFixed(1);
+  document.getElementById('tkpi_lbft').innerText = torqueLbFt >= 100 ? torqueLbFt.toFixed(0) : torqueLbFt.toFixed(1);
+  document.getElementById('tkpi_kgfm').innerText = torqueKgfM.toFixed(2);
+  document.getElementById('tkpi_forca').innerText = forcaPreCargaKn.toFixed(1);
+
+  const minNm = (torqueNm * 0.95).toFixed(1);
+  const maxNm = (torqueNm * 1.05).toFixed(1);
+
+  let chaveInfo = '';
+  if (sistema === 'metrico') {
+    chaveInfo = `Chave Sextavada: <b>${dadosRosca.hex} mm</b> | Chave Allen: <b>${dadosRosca.allen} mm</b>`;
+  } else {
+    chaveInfo = `Chave Sextavada: <b>${dadosRosca.hex}</b> pol`;
+  }
+
+  document.getElementById('torque_detalhe_texto').innerHTML = 
+    `<b>Especificação:</b> ${rosca} | Classe: <b>${classe}</b> | Fator Atrito: <b>μ = ${atrito.toFixed(2)}</b>\n` +
+    `• Faixa recomendada no Torquímetro (±5%): <b>${minNm} a ${maxNm} N·m</b>\n` +
+    `• Força de aperto axial gerada na junta: <b>${forcaPreCargaKn.toFixed(1)} kN</b> (~${(forcaPreCargaKn * 101.97).toFixed(0)} kgf)\n` +
+    `• Ferramenta recomendada: ${chaveInfo}`;
+
+  const banner = document.getElementById('torque_alerta_banner');
+  if (atrito <= 0.10) {
+    banner.className = 'alerta-anti-erro aviso';
+    banner.innerHTML = `💡 <b>ATENÇÃO ANTI-ERRO (Graxa / Pasta MoS₂):</b> Com lubrificante antiaderente o atrito cai drásticamente. O torque necessário é cerca de 33% MENOR do que com óleo comum. <b>NUNCA use o torque de catálogo "seco" quando usar MoS₂</b>, sob risco de estirar e quebrar o parafuso!`;
+  } else if (atrito >= 0.20) {
+    banner.className = 'alerta-anti-erro aviso';
+    banner.innerHTML = `⚠️ <b>ALERTA ANTI-ERRO (Parafuso Seco):</b> Roscas secas perdem até 90% da força do torquímetro apenas vencendo atrito e asperezas. Há risco de falso aperto e folga posterior. Sempre que o manual do fabricante autorizar, aplique uma película fina de óleo de máquina limpo.`;
+  } else if (classe === '4.6' || classe === 'SAE-2') {
+    banner.className = 'alerta-anti-erro perigo';
+    banner.innerHTML = `🚨 <b>ALERTA DE RESISTÊNCIA:</b> A classe ${classe} possui baixa resistência mecânica. Nunca utilize em componentes rotativos, tampas de bombas sob pressão ou mancais de redutores.`;
+  } else {
+    banner.className = 'alerta-anti-erro ok';
+    banner.innerHTML = `✔ <b>CONDIÇÃO SEGURA:</b> Lubrificação leve (μ = 0,15) confere o assentamento mais estável e repetível segundo as normas DIN e VDI 2230. Aplique o torque gradualmente com torquímetro calibrado.`;
+  }
+
+  ultimoCalculoTorque = {
+    sistema, rosca, classe, atrito, equipTipo,
+    torqueNm: torqueNm.toFixed(1),
+    torqueLbFt: torqueLbFt.toFixed(1),
+    torqueKgfM: torqueKgfM.toFixed(2),
+    forcaKn: forcaPreCargaKn.toFixed(1),
+    chave: dadosRosca.hex
+  };
+}
+
+/* ===================== INSPEÇÃO POR FOTO ===================== */
+function carregarFotoTorque() {
+  const input = document.getElementById('torque_foto_input');
+  const img = document.getElementById('torque_img_preview');
+  const placeholder = document.getElementById('torque_placeholder_msg');
+
+  if (input.files && input.files[0]) {
+    img.src = URL.createObjectURL(input.files[0]);
+    img.style.display = 'block';
+    placeholder.style.display = 'none';
+    resetarZoomTorque();
+    aplicarFiltroTorque('normal');
+  }
+}
+
+function ajustarZoomTorque(delta) {
+  zoomNivelTorque = Math.max(0.5, Math.min(4.0, zoomNivelTorque + delta));
+  const img = document.getElementById('torque_img_preview');
+  img.style.transform = `scale(${zoomNivelTorque})`;
+  document.getElementById('torque_zoom_info').innerText = `Zoom: ${Math.round(zoomNivelTorque * 100)}%`;
+}
+
+function resetarZoomTorque() {
+  zoomNivelTorque = 1.0;
+  const img = document.getElementById('torque_img_preview');
+  img.style.transform = 'scale(1)';
+  document.getElementById('torque_zoom_info').innerText = 'Zoom: 100%';
+}
+
+function aplicarFiltroTorque(filtro) {
+  const img = document.getElementById('torque_img_preview');
+  if (filtro === 'normal') {
+    img.style.filter = 'none';
+  } else if (filtro === 'contraste') {
+    img.style.filter = 'contrast(240%) grayscale(100%) brightness(105%)';
+  } else if (filtro === 'pb') {
+    img.style.filter = 'grayscale(100%) contrast(130%)';
+  } else if (filtro === 'brilho') {
+    img.style.filter = 'brightness(150%) contrast(120%)';
+  }
+}
+
+function selecionarClasseVisual(classe) {
+  classeSelecionadaVisual = classe;
+  document.querySelectorAll('.stamp-card').forEach(c => c.classList.remove('selected'));
+  
+  const idMap = {
+    '8.8': 'scard_88', '10.9': 'scard_109', '12.9': 'scard_129',
+    'A2-70': 'scard_inox', 'SAE-5': 'scard_sae5', 'SAE-8': 'scard_sae8',
+    '4.6': 'scard_46', 'SAE-2': 'scard_sae2'
+  };
+  const card = document.getElementById(idMap[classe]);
+  if (card) card.classList.add('selected');
+
+  const descricoes = {
+    '8.8': 'Aço Médio Carbono Temperado (Escoamento 640 MPa, Ruptura 800 MPa). Padrão para parafusos sextavados industriais.',
+    '10.9': 'Aço Liga Temperado (Escoamento 940 MPa, Ruptura 1000 MPa). Usado em flanges de alta solicitação e motores.',
+    '12.9': 'Aço Liga Especial (Escoamento 1080 MPa, Ruptura 1200 MPa). Padrão de parafusos cilíndricos com sextavado interno (Allen).',
+    'A2-70': 'Aço Inoxidável austenítico (Inox 304/316). Resistência química e alimentícia.',
+    'SAE-5': 'SAE Grau 5 (3 linhas radiais na cabeça). Equivalente em polegada ao 8.8 métrico.',
+    'SAE-8': 'SAE Grau 8 (6 linhas radiais na cabeça). Equivalente em polegada ao 10.9 métrico.',
+    '4.6': 'Aço Baixo Carbono (Escoamento 240 MPa). Somente para tampas leves sem carga.',
+    'SAE-2': 'SAE Grau 2 comercial liso sem traços.'
+  };
+
+  const box = document.getElementById('visual_confirmacao_box');
+  const txt = document.getElementById('visual_confirmacao_txt');
+  txt.innerHTML = `Identificado com sucesso: <b>Classe ${classe}</b><br><small style="color:#cdd7e6;">${descricoes[classe] || ''}</small>`;
+  box.style.display = 'block';
+}
+
+function aplicarClasseEIrCalculadora() {
+  if (!classeSelecionadaVisual) return;
+  
+  if (classeSelecionadaVisual.startsWith('SAE')) {
+    document.getElementById('torque_sistema').value = 'polegada';
+    atualizarOpcoesRosca();
+    document.getElementById('torque_classe').value = classeSelecionadaVisual;
+  } else {
+    document.getElementById('torque_sistema').value = 'metrico';
+    atualizarOpcoesRosca();
+    document.getElementById('torque_classe').value = classeSelecionadaVisual;
+  }
+
+  alternarAbaTorque('calc');
+  calcularTorque();
+}
+
+/* ===================== ESQUEMA EM CRUZ (FLANGES) ===================== */
+function desenharEsquemaCruz() {
+  const qtdEl = document.getElementById('cruz_qtd_parafusos');
+  const qtd = qtdEl ? (parseInt(qtdEl.value) || 8) : 8;
+  const circle = document.getElementById('cross_circle_diagram');
+  if (!circle) return;
+  circle.innerHTML = '';
+
+  let sequencia = [];
+  if (qtd === 4) {
+    sequencia = [1, 3, 2, 4];
+  } else if (qtd === 6) {
+    sequencia = [1, 4, 2, 5, 3, 6];
+  } else if (qtd === 8) {
+    sequencia = [1, 5, 3, 7, 2, 6, 4, 8];
+  } else if (qtd === 12) {
+    sequencia = [1, 7, 4, 10, 2, 8, 5, 11, 3, 9, 6, 12];
+  }
+
+  const raio = 65;
+  const centroX = 85;
+  const centroY = 85;
+
+  for (let i = 0; i < qtd; i++) {
+    const anguloRad = ((i * (360 / qtd)) - 90) * (Math.PI / 180);
+    const x = centroX + raio * Math.cos(anguloRad);
+    const y = centroY + raio * Math.sin(anguloRad);
+
+    const numeroOrdem = sequencia[i];
+
+    const bolt = document.createElement('div');
+    bolt.className = 'cross-bolt';
+    bolt.style.left = `${x}px`;
+    bolt.style.top = `${y}px`;
+    bolt.innerText = numeroOrdem;
+    circle.appendChild(bolt);
+  }
+}
+
+/* ===================== EXPORTAÇÃO DE TORQUE ===================== */
+function exportarTorqueParaRelatorio() {
+  if (!ultimoCalculoTorque) calcularTorque();
+  
+  abrirModulo('relatorio');
+  
+  const campoAcao = document.getElementById('rel_acao');
+  const textoTorque = `Verificação e reaperto controlado de fixação: Rosca ${ultimoCalculoTorque.rosca} (Classe ${ultimoCalculoTorque.classe}), torque aplicado de ${ultimoCalculoTorque.torqueNm} N·m (${ultimoCalculoTorque.torqueLbFt} lbf·ft) com torquímetro calibrado. Fator de atrito μ=${ultimoCalculoTorque.atrito}. Aperto cruzado em 4 etapas (30%, 60%, 100% e passe de uniformização).`;
+
+  if (campoAcao.value.trim()) {
+    campoAcao.value += '\n' + textoTorque;
+  } else {
+    campoAcao.value = textoTorque;
+  }
+
+  const inputTorqueFoto = document.getElementById('torque_foto_input');
+  const inputRelFotoAntes = document.getElementById('rel_foto_antes');
+  if (inputTorqueFoto && inputTorqueFoto.files && inputTorqueFoto.files[0] && (!inputRelFotoAntes.files || !inputRelFotoAntes.files[0])) {
+    const previewAntes = document.getElementById('preview_antes');
+    if (previewAntes) {
+      previewAntes.src = URL.createObjectURL(inputTorqueFoto.files[0]);
+      previewAntes.style.display = 'block';
+    }
+  }
+
+  alert('Especificação de torque transferida com sucesso para o Relatório Técnico!');
+}
+
+function copiarTorque() {
+  if (!ultimoCalculoTorque) calcularTorque();
+  const txt = `ESPECIFICAÇÃO DE TORQUE - MECÂNICA 4.0 IA\nRosca: ${ultimoCalculoTorque.rosca}\nClasse de Aço: ${ultimoCalculoTorque.classe}\nTorque Recomendado: ${ultimoCalculoTorque.torqueNm} N·m (${ultimoCalculoTorque.torqueLbFt} lbf·ft / ${ultimoCalculoTorque.torqueKgfM} kgf·m)\nForça de Aperto Axial: ${ultimoCalculoTorque.forcaKn} kN\nChave: ${ultimoCalculoTorque.chave}\nCondição de Atrito: μ = ${ultimoCalculoTorque.atrito}\nProcedimento: Aperto em cruz em 4 etapas (30%, 60%, 100% e volta de conferência).`;
+  
+  navigator.clipboard.writeText(txt).then(() => {
+    alert('Especificação copiada para a área de transferência!');
+  }).catch(() => {
+    alert('Selecione e copie os dados manualmente.');
+  });
+}
+
+/* ===================== DASHBOARD DE MANUTENÇÕES ===================== */
+async function carregarDashboard() {
+  const carregando = document.getElementById('dash_carregando');
+  const conteudo = document.getElementById('dash_conteudo');
+  carregando.style.display = 'block';
+  conteudo.style.display = 'none';
+
+  const { data: equipData, error: erroEquip } = await db.from('equipamentos').select('id, tag, nome');
+  const { data: intervData, error: erroInterv } = await db.from('intervencoes')
+    .select('id, tipo_manutencao, urgencia, criado_em, equipamento_id, equipamentos(tag, nome)')
+    .order('criado_em', { ascending: false });
+
+  if (erroEquip || erroInterv) {
+    carregando.innerText = 'Erro ao carregar dashboard: ' + ((erroEquip || erroInterv).message);
+    return;
+  }
+
+  const equipamentos = equipData || [];
+  const intervencoes = intervData || [];
+
+  // KPIs
+  document.getElementById('kpi_equip').innerText = equipamentos.length;
+  document.getElementById('kpi_total').innerText = intervencoes.length;
+
+  const agora = new Date();
+  const esteMes = intervencoes.filter(i => {
+    const d = new Date(i.criado_em);
+    return d.getMonth() === agora.getMonth() && d.getFullYear() === agora.getFullYear();
+  }).length;
+  document.getElementById('kpi_mes').innerText = esteMes;
+
+  const urgenteAlta = intervencoes.filter(i => (i.urgencia || '').includes('Alta')).length;
+  document.getElementById('kpi_urgente').innerText = urgenteAlta;
+
+  // Por tipo
+  const contagemTipo = {};
+  intervencoes.forEach(i => {
+    const t = i.tipo_manutencao || 'Não informado';
+    contagemTipo[t] = (contagemTipo[t] || 0) + 1;
+  });
+  document.getElementById('dash_por_tipo').innerHTML = renderizarBarras(contagemTipo, intervencoes.length);
+
+  // Por urgência
+  const contagemUrg = {};
+  intervencoes.forEach(i => {
+    const u = (i.urgencia || 'Não informado').split(' —')[0];
+    contagemUrg[u] = (contagemUrg[u] || 0) + 1;
+  });
+  document.getElementById('dash_por_urgencia').innerHTML = renderizarBarras(contagemUrg, intervencoes.length);
+
+  // Top equipamentos
+  const contagemEquip = {};
+  intervencoes.forEach(i => {
+    contagemEquip[i.equipamento_id] = (contagemEquip[i.equipamento_id] || 0) + 1;
+  });
+  const topEquip = Object.entries(contagemEquip)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5)
+    .map(([id, count]) => {
+      const eq = equipamentos.find(e => e.id === id);
+      return eq ? `${eq.tag} — ${eq.nome}: <b>${count}</b> intervenção(ões)` : null;
+    })
+    .filter(Boolean);
+  document.getElementById('dash_top_equip').innerHTML = topEquip.length
+    ? topEquip.map(t => `<p style="margin-bottom:4px;">• ${t}</p>`).join('')
+    : '<p style="color:#8190a7;">Sem dados ainda.</p>';
+
+  // Últimas intervenções
+  const recentes = intervencoes.slice(0, 6);
+  document.getElementById('dash_recentes').innerHTML = recentes.length
+    ? recentes.map(i => `
+        <div class="dash-recente" onclick="abrirHistoricoEquipamento('${i.equipamento_id}')">
+          <div class="linha1">
+            <span>${i.equipamentos ? i.equipamentos.tag + ' — ' + i.equipamentos.nome : 'Equipamento'}</span>
+            <span>${new Date(i.criado_em).toLocaleDateString('pt-BR')}</span>
+          </div>
+          <div class="linha2">${i.tipo_manutencao || ''} · ${(i.urgencia || '').split(' —')[0]}</div>
+        </div>
+      `).join('')
+    : '<p style="color:#8190a7;">Nenhuma intervenção registrada ainda.</p>';
+
+  carregando.style.display = 'none';
+  conteudo.style.display = 'block';
+}
+
+function renderizarBarras(contagem, total) {
+  const entradas = Object.entries(contagem);
+  if (entradas.length === 0) return '<p style="color:#8190a7; font-size:13px;">Sem dados ainda.</p>';
+  const max = Math.max(...entradas.map(e => e[1]));
+  return entradas.map(([label, valor]) => `
+    <div class="barra-item">
+      <div class="barra-label"><span>${label}</span><span>${valor}</span></div>
+      <div class="barra-track"><div class="barra-fill" style="width:${(valor / max) * 100}%;"></div></div>
+    </div>
+  `).join('');
+}
+</script>
+</body>
+</html>
