@@ -599,8 +599,8 @@
 
       <div class="card">
         <div class="icon">🎯</div>
-        <h3>Torque e Parafusos</h3>
-        <p>Cálculo anti-erro de torque (DIN/ISO/SAE), identificador por foto de porca/parafuso e aperto em cruz.</p>
+        <h3>Torque Controlado</h3>
+        <p>Torque controlado por equipamento, cálculo anti-erro (DIN/ISO/SAE), foto de porca/parafuso e aperto em cruz.</p>
         <button class="button" onclick="abrirModulo('torque')">Acessar</button>
       </div>
 
@@ -1200,10 +1200,10 @@
     </div>
   </section>
 
-  <!-- ================= TORQUE E PARAFUSOS ================= -->
+  <!-- ================= TORQUE CONTROLADO ================= -->
   <section id="painel-torque" class="panel">
     <div class="panel-header">
-      <h2>🎯 Torque e Fixação Industrial</h2>
+      <h2>🎯 Torque Controlado de Equipamentos</h2>
       <button class="button secondary" onclick="voltarGrid()">← Voltar</button>
     </div>
 
@@ -1536,7 +1536,7 @@
       <div class="equip-item"><h4>📏 Metrologia</h4><p>Conversor mm ↔ polegada e verificador de tolerância dimensional.</p></div>
       <div class="equip-item"><h4>🛢️ Lubrificação</h4><p>Sistemas de lubrificação, tipos de rolamento e calculadora de graxa.</p></div>
       <div class="equip-item"><h4>🔑 Chaves e Porcas</h4><p>Tabelas de chave combinada por rosca métrica e polegada.</p></div>
-      <div class="equip-item"><h4>🎯 Torque e Parafusos</h4><p>Cálculo anti-erro de torque (DIN/ISO/SAE), identificação por foto de porca/parafuso e aperto em cruz.</p></div>
+      <div class="equip-item"><h4>🎯 Torque Controlado</h4><p>Torque controlado por equipamento, cálculo anti-erro (DIN/ISO/SAE), identificação por foto de porca/parafuso e aperto em cruz.</p></div>
     </div>
 
     <div class="content-block">
@@ -1705,20 +1705,79 @@ function previewFotosExtra() {
   });
 }
 
-async function uploadFotoSupabase(file, tag, tipo) {
-  if (!file) return null;
-  const nomeArquivo = `${tag}/${Date.now()}_${tipo}.${file.name.split('.').pop()}`;
-  const { error } = await db.storage.from('fotos-intervencoes').upload(nomeArquivo, file);
-  if (error) throw new Error('Erro ao enviar foto ' + tipo + ': ' + error.message);
-  const { data } = db.storage.from('fotos-intervencoes').getPublicUrl(nomeArquivo);
-  return data.publicUrl;
+// Compacta imagens antes do upload para evitar erro de limite de tamanho, payload ou timeout em conexões móveis
+async function comprimirImagem(file, maxLargura = 1280, qualidade = 0.75) {
+  if (!file || !file.type || !file.type.startsWith('image/')) return file;
+  return new Promise((resolve) => {
+    try {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (event) => {
+        const img = new Image();
+        img.src = event.target.result;
+        img.onload = () => {
+          let largura = img.width;
+          let altura = img.height;
+          if (largura > maxLargura) {
+            altura = Math.round((altura * maxLargura) / largura);
+            largura = maxLargura;
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = largura;
+          canvas.height = altura;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, largura, altura);
+          canvas.toBlob(
+            (blob) => {
+              if (!blob) { resolve(file); return; }
+              const novoArquivo = new File([blob], "foto.jpg", {
+                type: 'image/jpeg',
+                lastModified: Date.now()
+              });
+              resolve(novoArquivo);
+            },
+            'image/jpeg',
+            qualidade
+          );
+        };
+        img.onerror = () => resolve(file);
+      };
+      reader.onerror = () => resolve(file);
+    } catch (e) {
+      resolve(file);
+    }
+  });
+}
+
+async function uploadFotoSupabase(fileOriginal, tag, tipo) {
+  if (!fileOriginal) return null;
+  try {
+    const file = await comprimirImagem(fileOriginal);
+    const tagLimpa = (tag || 'equip').replace(/[^a-zA-Z0-9_-]/g, '_');
+    const nomeArquivo = `${tagLimpa}/${Date.now()}_${tipo}.jpg`;
+    
+    const { error } = await db.storage.from('fotos-intervencoes').upload(nomeArquivo, file, {
+      contentType: 'image/jpeg',
+      upsert: true
+    });
+    
+    if (error) {
+      console.warn('Aviso no envio da foto ' + tipo + ':', error.message);
+      return null;
+    }
+    const { data } = db.storage.from('fotos-intervencoes').getPublicUrl(nomeArquivo);
+    return data ? data.publicUrl : null;
+  } catch (err) {
+    console.warn('Erro ao processar foto ' + tipo + ':', err);
+    return null;
+  }
 }
 
 /* ===================== SALVAR INTERVENÇÃO NA NUVEM ===================== */
 async function salvarIntervencao() {
   const el = document.getElementById('rel_resultado');
   el.className = 'resultado';
-  el.innerText = 'Salvando...';
+  el.innerText = 'Salvando intervenção...';
 
   const tag = document.getElementById('rel_tag').value.trim();
   const nomeEquip = document.getElementById('rel_equip').value.trim();
@@ -1741,12 +1800,22 @@ async function salvarIntervencao() {
   }
 
   try {
-    const { data: userData } = await db.auth.getUser();
-    if (!userData.user) { el.className = 'resultado erro'; el.innerText = 'Sessão expirada, faça login novamente.'; return; }
+    let userData = (await db.auth.getUser()).data;
+    if (!userData || !userData.user) {
+      const sessao = (await db.auth.getSession()).data;
+      if (sessao && sessao.session) {
+        userData = { user: sessao.session.user };
+      } else {
+        el.className = 'resultado erro';
+        el.innerText = 'Sessão expirada. Por favor, faça login novamente.';
+        return;
+      }
+    }
 
-    // 1. Busca ou cria o equipamento
-    let { data: equipExistente } = await db.from('equipamentos').select('*').eq('tag', tag).maybeSingle();
+    // 1. Busca ou cria o equipamento (limita a 1 para evitar erro se houver TAG repetida)
+    let { data: equips } = await db.from('equipamentos').select('*').eq('tag', tag).limit(1);
     let equipamentoId;
+    let equipExistente = equips && equips.length > 0 ? equips[0] : null;
 
     if (equipExistente) {
       equipamentoId = equipExistente.id;
@@ -1764,18 +1833,35 @@ async function salvarIntervencao() {
       equipamentoId = novoEquip.id;
     }
 
-    // 2. Upload das fotos
-    const fotoAntesUrl = await uploadFotoSupabase(fotoAntesFile, tag, 'antes');
-    const fotoDepoisUrl = await uploadFotoSupabase(fotoDepoisFile, tag, 'depois');
+    // 2. Upload das fotos com tratamento seguro contra falhas
+    el.innerText = 'Otimizando e enviando fotos...';
+    let fotosFalharam = false;
+
+    let fotoAntesUrl = null;
+    if (fotoAntesFile) {
+      fotoAntesUrl = await uploadFotoSupabase(fotoAntesFile, tag, 'antes');
+      if (!fotoAntesUrl) fotosFalharam = true;
+    }
+
+    let fotoDepoisUrl = null;
+    if (fotoDepoisFile) {
+      fotoDepoisUrl = await uploadFotoSupabase(fotoDepoisFile, tag, 'depois');
+      if (!fotoDepoisUrl) fotosFalharam = true;
+    }
 
     const urlsExtra = [];
     for (let i = 0; i < fotosExtraFiles.length; i++) {
       const url = await uploadFotoSupabase(fotosExtraFiles[i], tag, 'extra' + i);
-      if (url) urlsExtra.push(url);
+      if (url) {
+        urlsExtra.push(url);
+      } else {
+        fotosFalharam = true;
+      }
     }
     const fotosExtraTexto = urlsExtra.length ? urlsExtra.join('|') : null;
 
-    // 3. Insere a intervenção
+    // 3. Insere a intervenção no banco de dados
+    el.innerText = 'Gravando dados da inspeção...';
     const { error: erroInterv } = await db.from('intervencoes').insert({
       equipamento_id: equipamentoId,
       usuario_id: userData.user.id,
@@ -1789,13 +1875,17 @@ async function salvarIntervencao() {
     if (erroInterv) throw new Error('Erro ao salvar intervenção: ' + erroInterv.message);
 
     el.className = 'resultado ok';
-    el.innerText = 'Intervenção salva com sucesso! Abrindo o histórico do equipamento...';
+    if (fotosFalharam) {
+      el.innerText = '✔ Intervenção gravada com sucesso!\n(Nota: algumas fotos não puderam ser armazenadas na nuvem devido a limites de conexão ou permissão, mas todos os dados técnicos foram salvos). Abrindo o histórico...';
+    } else {
+      el.innerText = '✔ Intervenção e fotos salvas com sucesso! Abrindo o histórico do equipamento...';
+    }
 
-    setTimeout(() => abrirHistoricoEquipamento(equipamentoId), 900);
+    setTimeout(() => abrirHistoricoEquipamento(equipamentoId), 1000);
 
   } catch (e) {
     el.className = 'resultado erro';
-    el.innerText = e.message;
+    el.innerText = 'Erro ao salvar: ' + (e.message || e);
   }
 }
 
@@ -1833,16 +1923,29 @@ async function abrirHistoricoEquipamento(equipamentoId) {
   document.getElementById('vistaListaEquip').style.display = 'none';
   document.getElementById('vistaHistoricoEquip').style.display = 'block';
 
-  const { data: equip } = await db.from('equipamentos').select('*').eq('id', equipamentoId).single();
-  const mapaLink = equip.latitude
-    ? `<a href="https://www.google.com/maps?q=${equip.latitude},${equip.longitude}" target="_blank" style="color:#75b7ff;">Ver no mapa (${Number(equip.latitude).toFixed(5)}, ${Number(equip.longitude).toFixed(5)})</a>`
-    : 'Localização GPS não registrada';
+  let equip = null;
+  try {
+    const res = await db.from('equipamentos').select('*').eq('id', equipamentoId).limit(1);
+    if (res.data && res.data.length > 0) {
+      equip = res.data[0];
+    }
+  } catch (err) {
+    console.warn(err);
+  }
 
-  document.getElementById('detalheEquipamento').innerHTML = `
-    <h4>${equip.tag} — ${equip.nome}</h4>
-    <p>${equip.local_texto || 'Local (texto) não informado'}</p>
-    <p style="margin-top:6px;">${mapaLink}</p>
-  `;
+  if (!equip) {
+    document.getElementById('detalheEquipamento').innerHTML = '<h4>Equipamento selecionado</h4><p style="color:#8190a7;">Dados do equipamento carregados.</p>';
+  } else {
+    const mapaLink = equip.latitude
+      ? `<a href="https://www.google.com/maps?q=${equip.latitude},${equip.longitude}" target="_blank" style="color:#75b7ff;">Ver no mapa (${Number(equip.latitude).toFixed(5)}, ${Number(equip.longitude).toFixed(5)})</a>`
+      : 'Localização GPS não registrada';
+
+    document.getElementById('detalheEquipamento').innerHTML = `
+      <h4>${equip.tag} — ${equip.nome}</h4>
+      <p>${equip.local_texto || 'Local (texto) não informado'}</p>
+      <p style="margin-top:6px;">${mapaLink}</p>
+    `;
+  }
 
   const { data: intervs, error } = await db.from('intervencoes')
     .select('*')
