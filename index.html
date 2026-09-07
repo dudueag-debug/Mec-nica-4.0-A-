@@ -922,6 +922,13 @@
         <button class="button" onclick="abrirModulo('relatorio')">Acessar</button>
       </div>
 
+      <div class="card" style="border-color: #2b6cb0; background: linear-gradient(145deg, #142238 0%, #0e2242 100%);">
+        <div class="icon">📑</div>
+        <h3>Relatórios Prontos & Impressão</h3>
+        <p>Acesse todos os relatórios finalizados e anexados, visualize no modelo oficial A4 e envie direto para imprimir ou PDF.</p>
+        <button class="button" style="background:#10448c; border-color:#2a6ab8;" onclick="abrirModulo('relatorios-prontos')">Ver Relatórios</button>
+      </div>
+
       <div class="card">
         <div class="icon">🤖</div>
         <h3>Assistente Técnico</h3>
@@ -1219,7 +1226,10 @@
   <section id="painel-relatorio" class="panel">
     <div class="panel-header">
       <h2>📝 Relatório Técnico</h2>
-      <button class="button secondary" onclick="voltarGrid()">← Voltar</button>
+      <div style="display:flex; gap:8px;">
+        <button class="button secondary" style="background:#1b365d; font-size:12px;" onclick="abrirModulo('relatorios-prontos')">📑 Ver Relatórios Prontos</button>
+        <button class="button secondary" onclick="voltarGrid()">← Voltar</button>
+      </div>
     </div>
 
     <div class="content-block">
@@ -1640,6 +1650,34 @@
       </div>
     </div>
   </div>
+
+  <!-- ================= CENTRAL DE RELATÓRIOS PRONTOS & IMPRESSÃO ================= -->
+  <section id="painel-relatorios-prontos" class="panel">
+    <div class="panel-header">
+      <h2>📑 Central de Relatórios Emitidos & Impressão</h2>
+      <div style="display:flex; gap:8px;">
+        <button class="button" style="background:#10448c; font-size:12px;" onclick="abrirModulo('relatorio')">➕ Novo Relatório</button>
+        <button class="button secondary" onclick="voltarGrid()">← Voltar</button>
+      </div>
+    </div>
+
+    <div class="content-block">
+      <p style="color:#b7c3d6; font-size:13px; margin-bottom:12px;">
+        Central de consulta e emissão de relatórios técnicos concluídos. Visualize no modelo oficial A4, confira fotos e assinaturas anexadas e envie diretamente para impressão ou geração de PDF.
+      </p>
+
+      <div class="field-row">
+        <div class="field" style="min-width:100%;">
+          <label>🔍 Buscar por TAG, OM, Colaborador, Local ou Equipamento</label>
+          <input type="text" id="busca_relatorios_prontos" placeholder="ex: 28LCE10, 2032113859, Eduardo, Vapor ou Filtro..." oninput="filtrarRelatoriosProntos()">
+        </div>
+      </div>
+    </div>
+
+    <div id="listaRelatoriosProntosContainer">
+      <div style="color:#8190a7; text-align:center; padding:20px;">Carregando relatórios salvos...</div>
+    </div>
+  </section>
 
   <!-- ================= ASSISTENTE ================= -->
   <section id="painel-assistente" class="panel">
@@ -2923,6 +2961,303 @@ function imprimirRelatorioA4Direto() {
   }, 400);
 }
 
+/* ===================== CENTRAL DE RELATÓRIOS PRONTOS & IMPRESSÃO ===================== */
+let relatoriosProntosCache = [];
+
+const relatorioDemonstracaoOficial = {
+  id: 'modelo-oficial-28lce10',
+  tag: '28LCE10',
+  nomeEquip: 'Filtro do Sistema de Atemperação',
+  om: '2032113859',
+  op: '10',
+  numDoc: '22155926',
+  ass: 'EDUARDO NORONHA',
+  equipe: 'EDUARDO NORONHA / 48380712',
+  localTexto: 'CICLO ÁGUA VAPOR BLOCO 2',
+  servicoRealizado: 'Realizada limpeza do filtro do sistema de atemperação, com remoção de resíduos e impurezas acumuladas, visando manter a adequada passagem do fluido e o correto funcionamento do sistema.',
+  ferramentas: '• Chave combinada 22 mm\n• Torquímetro de estalo calibrado\n• Escova de latão para limpeza',
+  observacao: 'Após a limpeza, o filtro foi deixado em condições adequadas para operação, contribuindo para a manutenção do fluxo e desempenho do sistema de atemperação.',
+  registroServico: '1. Bloqueio e despressurização da linha concluídos com sucesso.\n2. Remoção da tampa sem deformações no alojamento.\n3. Junta de vedação inspecionada e aprovada.',
+  data: '2026-09-04',
+  criado_em: '2026-09-04T10:30:00.000Z',
+  tipo: 'Preventiva',
+  urgencia: 'Baixa',
+  isModelo: true
+};
+
+async function carregarRelatoriosProntos() {
+  const container = document.getElementById('listaRelatoriosProntosContainer');
+  if (!container) return;
+  container.innerHTML = '<div style="color:#8190a7; text-align:center; padding:20px;">Carregando relatórios finalizados...</div>';
+
+  let locais = [];
+  try {
+    locais = JSON.parse(localStorage.getItem('mecanica_relatorios_salvos') || '[]');
+  } catch (e) {
+    locais = [];
+  }
+
+  // Se a lista estiver vazia, inclui o modelo oficial para o usuário já ter o exemplo pronto
+  if (locais.length === 0) {
+    locais = [relatorioDemonstracaoOficial];
+    try {
+      localStorage.setItem('mecanica_relatorios_salvos', JSON.stringify(locais));
+    } catch (e) {}
+  }
+
+  // Busca também do Supabase se houver conexão
+  let nuvem = [];
+  try {
+    const { data: intervs } = await db.from('intervencoes')
+      .select('*, equipamentos(tag, nome, local_texto)')
+      .order('criado_em', { ascending: false });
+
+    if (intervs && intervs.length > 0) {
+      nuvem = intervs.map(i => {
+        const acaoTxt = i.acao || '';
+        const omMatch = acaoTxt.match(/\[OM:\s*([^\|\]]+)/);
+        const opMatch = acaoTxt.match(/OP:\s*([^\|\]]+)/);
+        const docMatch = acaoTxt.match(/DOC:\s*([^\|\]]+)/);
+        const equipeMatch = acaoTxt.match(/EQUIPE:\s*([^\]]+)/);
+        const servicoMatch = acaoTxt.match(/SERVIÇO:\s*([^\n]+)/);
+        const ferramentasMatch = acaoTxt.match(/FERRAMENTAS:\s*([^\n]+)/);
+
+        const tag = (i.equipamentos && i.equipamentos.tag) || 'TAG';
+        const nomeEquip = (i.equipamentos && i.equipamentos.nome) || 'Equipamento';
+        const localTexto = (i.equipamentos && i.equipamentos.local_texto) || '';
+
+        return {
+          id: 'supa-' + i.id,
+          tag,
+          nomeEquip,
+          om: omMatch ? omMatch[1].trim() : 'N/A',
+          op: opMatch ? opMatch[1].trim() : '10',
+          numDoc: docMatch ? docMatch[1].trim() : 'N/A',
+          ass: 'EDUARDO NORONHA',
+          equipe: equipeMatch ? equipeMatch[1].trim() : 'EDUARDO NORONHA / 48380712',
+          localTexto,
+          servicoRealizado: servicoMatch ? servicoMatch[1].trim() : i.anomalia,
+          ferramentas: ferramentasMatch ? ferramentasMatch[1].trim() : '• Chave combinada 22 mm',
+          observacao: i.causa || 'Operação e estanqueidade aprovadas.',
+          registroServico: '1. Manutenção registrada na nuvem Supabase.',
+          fotoAntesUrl: i.foto_antes_url,
+          fotoDepoisUrl: i.foto_depois_url,
+          foto3DUrl: i.fotos_extra_urls ? i.fotos_extra_urls.split('|')[0] : null,
+          criado_em: i.criado_em,
+          isLocal: false
+        };
+      });
+    }
+  } catch (err) {
+    console.warn('Busca nuvem de relatórios prontos:', err);
+  }
+
+  const todos = [...locais];
+  nuvem.forEach(n => {
+    if (!todos.some(t => t.id === n.id)) {
+      todos.push(n);
+    }
+  });
+
+  relatoriosProntosCache = todos;
+  renderizarRelatoriosProntos(relatoriosProntosCache);
+}
+
+function filtrarRelatoriosProntos() {
+  const busca = (document.getElementById('busca_relatorios_prontos').value || '').toLowerCase().trim();
+  if (!busca) {
+    renderizarRelatoriosProntos(relatoriosProntosCache);
+    return;
+  }
+  const filtrados = relatoriosProntosCache.filter(r => {
+    const texto = `${r.tag} ${r.nomeEquip} ${r.om} ${r.numDoc} ${r.ass} ${r.equipe} ${r.localTexto} ${r.servicoRealizado}`.toLowerCase();
+    return texto.includes(busca);
+  });
+  renderizarRelatoriosProntos(filtrados);
+}
+
+function renderizarRelatoriosProntos(lista) {
+  const container = document.getElementById('listaRelatoriosProntosContainer');
+  if (!container) return;
+
+  if (!lista || lista.length === 0) {
+    container.innerHTML = `
+      <div style="color:#8190a7; text-align:center; padding:30px; background:#111c30; border-radius:10px;">
+        <p style="font-size:15px; margin-bottom:8px;">Nenhum relatório encontrado para esta busca.</p>
+        <button class="button" style="background:#10448c;" onclick="abrirModulo('relatorio')">➕ Criar Novo Relatório Técnico</button>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = lista.map(r => {
+    const dataFormatada = r.criado_em ? new Date(r.criado_em).toLocaleDateString('pt-BR') : (r.data || '04/09/2026');
+    return `
+      <div class="card" style="margin-bottom:14px; background:#142238; border-left:4px solid #10448c; padding:18px;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px;">
+          <div>
+            <h3 style="margin:0; font-size:17px; color:#ffffff;">
+              <span style="color:#75b7ff; font-weight:800;">${r.tag}</span> — ${r.nomeEquip || 'Filtro / Equipamento'}
+            </h3>
+            <div style="font-size:12.5px; color:#aebbd0; margin-top:4px;">
+              <b>OM:</b> <span style="color:#ffd479;">${r.om || 'N/A'}</span> &nbsp;|&nbsp;
+              <b>OP:</b> ${r.op || '10'} &nbsp;|&nbsp;
+              <b>Nº Doc:</b> ${r.numDoc || 'N/A'} &nbsp;|&nbsp;
+              <b>Data:</b> ${dataFormatada}
+            </div>
+            <div style="font-size:12px; color:#8190a7; margin-top:3px;">
+              👤 <b>Colaborador:</b> ${r.ass || 'EDUARDO NORONHA'} &nbsp;|&nbsp;
+              📍 <b>Local:</b> ${r.localTexto || 'CICLO ÁGUA VAPOR'}
+            </div>
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="button" style="background:#10448c; border-color:#2a6ab8; font-size:13px; font-weight:bold; padding:8px 14px;" onclick="visualizarRelatorioPronto('${r.id}')">👁️ Visualizar A4</button>
+            <button class="button" style="background:#198754; border-color:#20a768; font-size:13px; font-weight:bold; padding:8px 14px;" onclick="imprimirRelatorioPronto('${r.id}')">🖨️ Imprimir / PDF</button>
+            ${r.isLocal && !r.isModelo ? `<button class="button secondary" style="font-size:12px; padding:8px 10px; color:#ff7b7b;" title="Excluir do dispositivo" onclick="excluirRelatorioPronto('${r.id}')">🗑️</button>` : ''}
+          </div>
+        </div>
+
+        <div style="font-size:12.5px; color:#e2e8f0; line-height:1.45; background:#0b1424; padding:10px 12px; border-radius:6px; margin-top:10px; border-left:3px solid #205bb0;">
+          <b>Serviço Realizado:</b> ${r.servicoRealizado || 'Limpeza e manutenção técnica realizada.'}
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-top:10px;">
+          <div style="display:flex; gap:8px; align-items:center;">
+            ${r.fotoAntesUrl ? `<img src="${r.fotoAntesUrl}" style="height:52px; width:52px; object-fit:cover; border-radius:4px; border:1px solid #345a86; cursor:pointer;" onclick="window.open('${r.fotoAntesUrl}','_blank')" title="Foto no Equipamento">` : ''}
+            ${r.fotoDepoisUrl ? `<img src="${r.fotoDepoisUrl}" style="height:52px; width:52px; object-fit:cover; border-radius:4px; border:1px solid #345a86; cursor:pointer;" onclick="window.open('${r.fotoDepoisUrl}','_blank')" title="Foto da Tampa">` : ''}
+            ${r.foto3DUrl ? `<img src="${r.foto3DUrl}" style="height:52px; width:52px; object-fit:cover; border-radius:4px; border:1px solid #345a86; cursor:pointer;" onclick="window.open('${r.foto3DUrl}','_blank')" title="Foto 3D / Peça Limpa">` : ''}
+            ${(!r.fotoAntesUrl && !r.fotoDepoisUrl) ? '<span style="font-size:11px; color:#8190a7;">Fotos reais salvas no relatório oficial</span>' : ''}
+          </div>
+          <div style="font-size:11.5px; color:#75b7ff; font-weight:600;">
+            ✔ Desenho Técnico com Cotas & Assinatura Prontos para Impressão A4
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function visualizarRelatorioPronto(id) {
+  const r = relatoriosProntosCache.find(item => item.id === id);
+  if (!r) {
+    alert('Relatório não encontrado!');
+    return;
+  }
+
+  let dia = '04', mes = '09', ano = '26';
+  const dataOrig = r.data || (r.criado_em ? r.criado_em.slice(0, 10) : '');
+  if (dataOrig) {
+    const partes = dataOrig.split('-');
+    if (partes.length === 3) {
+      ano = partes[0].slice(-2);
+      mes = partes[1];
+      dia = partes[2];
+    }
+  }
+
+  document.getElementById('r4_data').innerText = `${dia}/${mes}/${ano}`;
+  document.getElementById('r4_tag').innerText = r.tag || '28LCE10';
+  document.getElementById('r4_om').innerText = r.om || '2032113859';
+  document.getElementById('r4_num').innerText = r.numDoc || '22155926';
+  document.getElementById('r4_op').innerText = r.op || '10';
+  document.getElementById('r4_ass').innerText = (r.ass || 'EDUARDO NORONHA').toUpperCase();
+  document.getElementById('r4_equipe').innerText = (r.equipe || 'EDUARDO NORONHA / 48380712').toUpperCase();
+  document.getElementById('r4_local').innerText = (r.localTexto || 'CICLO ÁGUA VAPOR BLOCO 2').toUpperCase();
+  document.getElementById('r4_servico').innerText = r.servicoRealizado || 'Realizada limpeza do filtro do sistema de atemperação, com remoção de resíduos e impurezas acumuladas, visando manter a adequada passagem do fluido e o correto funcionamento do sistema.';
+  document.getElementById('r4_observacao').innerText = r.observacao || 'Após a limpeza, o filtro foi deixado em condições adequadas para operação, contribuindo para a manutenção do fluxo e desempenho do sistema de atemperação.';
+
+  const listaF = document.getElementById('r4_lista_ferramentas');
+  const ferramentasTexto = r.ferramentas || '• Chave combinada 22 mm';
+  const linhasF = ferramentasTexto.split('\n').filter(l => l.trim().length > 0);
+  listaF.innerHTML = '<ul>' + linhasF.map(f => `<li>${f.replace(/^[•\-\*]\s*/, '')}</li>`).join('') + '</ul>';
+
+  const linhasReg = document.getElementById('r4_linhas_registro');
+  if (r.registroServico) {
+    const itens = r.registroServico.split('\n').filter(l => l.trim().length > 0);
+    linhasReg.innerHTML = itens.map(i => `<div class="r-a4-linha-ponto">${i}</div>`).join('');
+  } else {
+    linhasReg.innerHTML = `
+      <div class="r-a4-linha-ponto">1. Bloqueio e despressurização da linha concluídos com sucesso.</div>
+      <div class="r-a4-linha-ponto">2. Remoção da tampa sem deformações no alojamento.</div>
+      <div class="r-a4-linha-ponto">3. Junta de vedação inspecionada e aprovada.</div>
+    `;
+  }
+
+  document.getElementById('r4_nome_responsavel').innerText = r.ass || 'Eduardo Noronha';
+  document.getElementById('r4_dia').innerText = dia;
+  document.getElementById('r4_mes').innerText = mes;
+  document.getElementById('r4_ano').innerText = ano;
+
+  const imgAssinatura = document.getElementById('r4_img_assinatura');
+  const textoCursiva = document.getElementById('r4_texto_assinatura_cursiva');
+  if (r.assinaturaDataUrl) {
+    imgAssinatura.src = r.assinaturaDataUrl;
+    imgAssinatura.style.display = 'block';
+    textoCursiva.style.display = 'none';
+  } else {
+    imgAssinatura.style.display = 'none';
+    textoCursiva.innerText = r.ass || 'Eduardo Noronha';
+    textoCursiva.style.display = 'block';
+  }
+
+  const r4ImgEquip = document.getElementById('r4_img_equip');
+  const r4EquipPlaceholder = document.getElementById('r4_img_equip_placeholder');
+  if (r.fotoAntesUrl) {
+    r4ImgEquip.src = r.fotoAntesUrl;
+    r4ImgEquip.style.display = 'block';
+    r4EquipPlaceholder.style.display = 'none';
+  } else {
+    r4ImgEquip.style.display = 'none';
+    r4EquipPlaceholder.style.display = 'block';
+  }
+
+  const r4ImgTampa = document.getElementById('r4_img_tampa');
+  const r4TampaPlaceholder = document.getElementById('r4_img_tampa_placeholder');
+  if (r.fotoDepoisUrl) {
+    r4ImgTampa.src = r.fotoDepoisUrl;
+    r4ImgTampa.style.display = 'block';
+    r4TampaPlaceholder.style.display = 'none';
+  } else {
+    r4ImgTampa.style.display = 'none';
+    r4TampaPlaceholder.style.display = 'block';
+  }
+
+  const r4Img3D = document.getElementById('r4_img_3d');
+  const r43DPlaceholder = document.getElementById('r4_img_3d_placeholder');
+  if (r.foto3DUrl) {
+    r4Img3D.src = r.foto3DUrl;
+    r4Img3D.style.display = 'block';
+    r43DPlaceholder.style.display = 'none';
+  } else {
+    r4Img3D.style.display = 'none';
+    r43DPlaceholder.style.display = 'block';
+  }
+
+  atualizarDesenhoNoA4();
+  document.getElementById('modal-relatorio-a4').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function imprimirRelatorioPronto(id) {
+  visualizarRelatorioPronto(id);
+  setTimeout(() => {
+    window.print();
+  }, 400);
+}
+
+function excluirRelatorioPronto(id) {
+  if (!confirm('Deseja realmente remover este relatório da lista local?')) return;
+  try {
+    let salvos = JSON.parse(localStorage.getItem('mecanica_relatorios_salvos') || '[]');
+    salvos = salvos.filter(item => item.id !== id);
+    localStorage.setItem('mecanica_relatorios_salvos', JSON.stringify(salvos));
+    relatoriosProntosCache = relatoriosProntosCache.filter(item => item.id !== id);
+    renderizarRelatoriosProntos(relatoriosProntosCache);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
 /* ===================== SALVAR INTERVENÇÃO (LOCAL & NUVEM RESILIENTE) ===================== */
 async function salvarIntervencao() {
   const el = document.getElementById('rel_resultado');
@@ -3191,6 +3526,10 @@ function abrirModulo(id) {
   if (id === 'relatorio') {
     carregarDashboard();
     setTimeout(() => iniciarSignaturePad(), 150);
+  }
+
+  if (id === 'relatorios-prontos') {
+    carregarRelatoriosProntos();
   }
 
   if (id === 'torque') {
