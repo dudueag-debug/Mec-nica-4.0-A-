@@ -1,0 +1,40 @@
+{
+  "name": "Mecânica 4.0 IA",
+  "short_name": "Mecânica 4.0",
+  "description": "Assistente Inteligente & Gestão Especializada para Mecânica Industrial 4.0",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#070c16",
+  "theme_color": "#0c1424",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "apple-touch-icon-180x180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/app_icon_mecanica_40.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    }
+  ]
+}
