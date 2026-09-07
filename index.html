@@ -6,80 +6,271 @@
 <title>Mecânica 4.0 IA</title>
 
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
 
-  body { background: #0b1220; color: #ffffff; min-height: 100vh; }
+  body {
+    background-color: #070d18;
+    background-image: 
+      linear-gradient(180deg, rgba(7, 13, 24, 0.82) 0%, rgba(6, 11, 21, 0.89) 35%, rgba(4, 8, 16, 0.95) 100%),
+      url('assets/oficina_industrial_bg.jpg');
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+    background-attachment: fixed;
+    color: #f1f5f9;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
 
   header {
-    background: #111c30;
-    padding: 25px 20px;
+    background: linear-gradient(180deg, #131e33 0%, #0c1424 100%);
+    padding: 20px 20px 16px 20px;
     text-align: center;
-    border-bottom: 2px solid #263b5c;
+    border-bottom: 2px solid #2b456e;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.65), inset 0 -1px 0 rgba(255, 255, 255, 0.08);
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 100;
+    backdrop-filter: blur(8px);
   }
-  header h1 { font-size: 32px; margin-bottom: 8px; cursor: pointer; }
-  header p { color: #aebbd0; }
+  header h1 {
+    font-size: 27px;
+    font-weight: 900;
+    letter-spacing: 0.8px;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+    cursor: pointer;
+    margin-bottom: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  header p {
+    color: #94a3b8;
+    font-size: 13.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .header-status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    color: #34d399;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+  }
+  .header-status-badge .led {
+    width: 7px;
+    height: 7px;
+    background: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #10b981;
+    animation: pulseLed 2s infinite ease-in-out;
+  }
+  @keyframes pulseLed {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.45; transform: scale(0.85); }
+  }
 
-  .container { max-width: 1100px; margin: auto; padding: 25px 18px; }
+  .container { max-width: 1120px; margin: auto; padding: 25px 18px; }
 
-  .hero { text-align: center; padding: 35px 10px; }
-  .hero h2 { font-size: 28px; margin-bottom: 12px; }
-  .hero p { color: #b7c3d6; line-height: 1.6; }
+  .hero {
+    text-align: center;
+    padding: 26px 15px 18px 15px;
+    background: radial-gradient(ellipse at center, rgba(16, 68, 140, 0.2) 0%, transparent 72%);
+  }
+  .hero h2 {
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+  }
+  .hero p {
+    color: #cbd5e1;
+    line-height: 1.55;
+    font-size: 14px;
+    max-width: 760px;
+    margin: auto;
+  }
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+    gap: 20px;
     margin-top: 25px;
   }
 
+  /* ---- CARDS ESTILO PEÇA MECÂNICA USINADA ---- */
   .card {
-    background: #142238;
-    border: 1px solid #29415f;
-    border-radius: 15px;
-    padding: 22px;
-    transition: 0.2s;
+    position: relative;
+    background: linear-gradient(145deg, #1b2637 0%, #141e2e 55%, #0d1522 100%);
+    border: 1.5px solid #2c3f58;
+    border-top: 1.5px solid #4a668c;
+    border-left: 1.5px solid #3a5477;
+    border-radius: 12px;
+    padding: 24px 20px 20px 20px;
+    transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
     user-select: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 
+      inset 0 1px 0 rgba(255, 255, 255, 0.12),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+      0 6px 20px rgba(0, 0, 0, 0.55);
+    overflow: hidden;
+  }
+  /* Friso superior metálico de acabamento usinado */
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, #10448c 0%, #38bdf8 50%, #10448c 100%);
+    opacity: 0.8;
+    transition: opacity 0.2s, height 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: #5587c4;
+    border-top-color: #79aef0;
+    box-shadow: 
+      inset 0 1px 0 rgba(255, 255, 255, 0.25),
+      0 12px 28px rgba(0, 0, 0, 0.7),
+      0 0 20px rgba(32, 91, 176, 0.35);
+  }
+  .card:hover::before {
+    opacity: 1;
+    height: 4px;
   }
   .grid .card:active {
     transform: scale(0.98);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
   }
-  .card:hover { transform: translateY(-3px); border-color: #4f83c2; }
-  .icon { font-size: 35px; margin-bottom: 12px; }
-  .card h3 { margin-bottom: 8px; }
-  .card p { color: #aebbd0; line-height: 1.5; }
 
+  /* Parafusos Sextavados Allen nos Cantos da Chapa */
+  .card-bolt {
+    position: absolute;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #94a3b8 0%, #475569 55%, #1e293b 100%);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.6), 0 1px 3px rgba(0, 0, 0, 0.75);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .card-bolt::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 4.5px; height: 4.5px;
+    background: #090e17;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.9);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  }
+  .card-bolt.tl { top: 9px; left: 9px; }
+  .card-bolt.tr { top: 9px; right: 9px; }
+  .card-bolt.bl { bottom: 9px; left: 9px; }
+  .card-bolt.br { bottom: 9px; right: 9px; }
+
+  /* Ícone estilizado como alojamento mecânico */
+  .card .icon {
+    font-size: 30px;
+    margin-bottom: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #1e2c40 0%, #111a28 100%);
+    border: 1px solid #374d6c;
+    border-radius: 10px;
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.15), 0 3px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  .card h3 {
+    margin-bottom: 6px;
+    font-size: 16.5px;
+    font-weight: 700;
+    color: #f8fafc;
+    letter-spacing: 0.3px;
+  }
+  .card p {
+    color: #94a3b8;
+    line-height: 1.5;
+    font-size: 13px;
+    flex-grow: 1;
+  }
+
+  /* ---- BOTOEIRAS E BOTÕES INDUSTRIAIS ---- */
   .button {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 11px 18px;
-    background: #2463a8;
-    color: white;
-    border-radius: 9px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 14px;
+    padding: 10px 18px;
+    background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%);
+    color: #ffffff;
+    border-radius: 8px;
     text-decoration: none;
     cursor: pointer;
-    border: none;
-    font-size: 14px;
+    border: 1px solid #3b82f6;
+    border-top: 1px solid #60a5fa;
+    font-size: 13.5px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 3px 7px rgba(0, 0, 0, 0.4);
+    transition: all 0.15s ease-in-out;
   }
-  .button:hover { background: #327bc9; }
-  .button.secondary { background: #263b5c; }
-  .button.secondary:hover { background: #33507a; }
+  .button:hover {
+    background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 5px 14px rgba(37, 99, 235, 0.45);
+    transform: translateY(-1px);
+  }
+  .button:active {
+    transform: translateY(1px) scale(0.98);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  .button.secondary {
+    background: linear-gradient(180deg, #223247 0%, #162232 100%);
+    border: 1px solid #364e6d;
+    border-top: 1px solid #4a6a92;
+    color: #cbd5e1;
+  }
+  .button.secondary:hover {
+    background: linear-gradient(180deg, #2b3e57 0%, #1d2b3d 100%);
+    color: #ffffff;
+  }
 
+  /* ---- PAINEL DE INSTRUMENTAÇÃO E STATUS ---- */
   .status {
     margin-top: 30px;
-    background: #101b2d;
-    border-radius: 15px;
-    padding: 22px;
-    border: 1px solid #263b5c;
+    background: linear-gradient(145deg, #131c2c 0%, #0c121e 100%);
+    border: 1.5px solid #273850;
+    border-top: 1.5px solid #3b506e;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
   }
-  .status span { color: #55d88a; font-weight: bold; }
+  .status span { color: #34d399; font-weight: bold; }
 
-  footer { text-align: center; padding: 30px 15px; color: #8190a7; margin-top: 30px; }
+  footer { text-align: center; padding: 30px 15px; color: #64748b; margin-top: 30px; font-size: 13px; }
 
-  /* ---- painel de módulo ---- */
+  /* ---- PAINÉIS DE MÓDULO ---- */
   .panel { display: none; }
   .panel.active { display: block; }
   #vistaGrid.hidden { display: none; }
@@ -91,71 +282,87 @@
     margin-bottom: 20px;
     flex-wrap: wrap;
     gap: 10px;
+    background: linear-gradient(145deg, #131d2e 0%, #0d1522 100%);
+    border: 1px solid #2b3e58;
+    padding: 16px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
   }
-  .panel-header h2 { font-size: 26px; }
+  .panel-header h2 { font-size: 24px; font-weight: 800; color: #f8fafc; }
 
   .content-block {
-    background: #101b2d;
-    border: 1px solid #263b5c;
-    border-radius: 15px;
+    background: linear-gradient(145deg, #152033 0%, #0d1524 100%);
+    border: 1.5px solid #283a54;
+    border-top: 1.5px solid #3d567c;
+    border-radius: 12px;
     padding: 22px;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.5);
     line-height: 1.7;
   }
-  .content-block h4 { color: #75b7ff; margin-bottom: 10px; font-size: 17px; }
-  .content-block ul { margin-left: 20px; margin-top: 6px; color: #cdd7e6; }
+  .content-block h4 { color: #38bdf8; margin-bottom: 10px; font-size: 17px; font-weight: 700; }
+  .content-block ul { margin-left: 20px; margin-top: 6px; color: #cbd5e1; }
   .content-block li { margin-bottom: 6px; }
-  .content-block p { color: #cdd7e6; }
+  .content-block p { color: #cbd5e1; }
 
   table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; }
-  th, td { border: 1px solid #263b5c; padding: 8px 10px; text-align: left; color: #cdd7e6; }
-  th { background: #16273f; color: #75b7ff; }
+  th, td { border: 1px solid #24354c; padding: 9px 12px; text-align: left; color: #cbd5e1; }
+  th { background: #132135; color: #38bdf8; font-weight: 700; }
+  tr:nth-child(even) td { background: rgba(15, 23, 42, 0.4); }
 
   .calc-box {
-    background: #0e1830;
-    border: 1px dashed #345a86;
-    border-radius: 12px;
+    background: linear-gradient(180deg, #0e1726 0%, #090e18 100%);
+    border: 1px solid #2a4163;
+    border-radius: 10px;
     padding: 18px;
-    margin-top: 14px;
+    margin-top: 16px;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6);
   }
-  .calc-box h5 { color: #ffd479; margin-bottom: 10px; }
+  .calc-box h5 { color: #fbbf24; margin-bottom: 10px; font-size: 15px; }
   .field-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
   .field {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 5px;
     flex: 1;
     min-width: 140px;
   }
-  .field label { font-size: 12px; color: #aebbd0; }
+  .field label { font-size: 12px; font-weight: 600; color: #94a3b8; }
   .field input, .field select, .field textarea {
-    background: #0b1220;
-    border: 1px solid #29415f;
-    border-radius: 8px;
-    padding: 8px 10px;
-    color: #fff;
+    background: #090f1a;
+    border: 1px solid #293d5c;
+    border-radius: 7px;
+    padding: 9px 12px;
+    color: #f8fafc;
     font-size: 14px;
+    transition: border-color 0.15s, box-shadow 0.15s;
   }
-  .field textarea { resize: vertical; min-height: 60px; font-family: Arial, sans-serif; }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none;
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+  }
+  .field textarea { resize: vertical; min-height: 60px; font-family: inherit; }
   .resultado {
     margin-top: 12px;
-    padding: 12px;
+    padding: 12px 14px;
     border-radius: 8px;
-    background: #142238;
-    border: 1px solid #29415f;
+    background: #0f1828;
+    border: 1px solid #293d5c;
     white-space: pre-wrap;
     font-size: 14px;
     min-height: 20px;
+    color: #f8fafc;
   }
-  .resultado.ok { border-color: #55d88a; }
-  .resultado.erro { border-color: #e0637a; }
+  .resultado.ok { border-color: #10b981; background: rgba(16, 185, 129, 0.08); }
+  .resultado.erro { border-color: #f43f5e; background: rgba(244, 63, 94, 0.08); }
 
-  #mensagem { margin-top: 15px; color: #75b7ff; min-height: 24px; }
+  #mensagem { margin-top: 15px; color: #38bdf8; min-height: 24px; }
 
   .chat-log {
-    background: #0e1830;
-    border: 1px solid #263b5c;
-    border-radius: 12px;
+    background: #090f1a;
+    border: 1px solid #24354c;
+    border-radius: 10px;
     padding: 14px;
     min-height: 160px;
     max-height: 340px;
@@ -163,8 +370,8 @@
     margin-bottom: 12px;
   }
   .chat-msg { margin-bottom: 10px; line-height: 1.5; }
-  .chat-msg.user { color: #ffd479; }
-  .chat-msg.bot { color: #cdd7e6; }
+  .chat-msg.user { color: #fbbf24; }
+  .chat-msg.bot { color: #cbd5e1; }
   .chat-input-row { display: flex; gap: 10px; }
   .chat-input-row input { flex: 1; }
 
@@ -177,6 +384,13 @@
     padding: 20px;
   }
   .login-box {
+    background: linear-gradient(145deg, #152033 0%, #0d1524 100%);
+    border: 1.5px solid #2c4160;
+    border-top: 1.5px solid #4a6a96;
+    border-radius: 14px;
+    padding: 28px 24px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+  }
     background: #142238;
     border: 1px solid #29415f;
     border-radius: 18px;
@@ -861,8 +1075,17 @@
 </div>
 
 <header>
-  <h1 onclick="voltarGrid()">🔧 Mecânica 4.0 IA</h1>
-  <p>Inteligência aplicada à manutenção mecânica industrial</p>
+  <h1 onclick="voltarGrid()">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 0 8px rgba(56,189,248,0.5));">
+      <circle cx="12" cy="12" r="3"/>
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+    </svg>
+    Mecânica 4.0 IA
+  </h1>
+  <p>
+    <span>Central de Manutenção, Diagnóstico & Engenharia</span>
+    <span class="header-status-badge"><span class="led"></span> Indústria 4.0 Online</span>
+  </p>
 </header>
 
 <main class="container">
@@ -879,6 +1102,7 @@
 
     <section class="grid">
       <div class="card" onclick="abrirModulo('manutencao')">
+        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
         <div class="icon">⚙️</div>
         <h3>Manutenção Mecânica</h3>
         <p>Tipos de manutenção, indicadores (MTBF/MTTR) e planos de lubrificação.</p>
@@ -886,6 +1110,7 @@
       </div>
 
       <div class="card" onclick="abrirModulo('bombas')">
+        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
         <div class="icon">💧</div>
         <h3>Bombas</h3>
         <p>Bombas centrífugas, NPSH, cavitação, recirculação e diagnóstico de falhas.</p>
@@ -893,6 +1118,7 @@
       </div>
 
       <div class="card" onclick="abrirModulo('motores')">
+        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
         <div class="icon">⚡</div>
         <h3>Motores Elétricos</h3>
         <p>Ligações estrela/triângulo, dados de placa e calculadora de corrente nominal.</p>
@@ -900,6 +1126,7 @@
       </div>
 
       <div class="card" onclick="abrirModulo('redutores')">
+        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
         <div class="icon">🔩</div>
         <h3>Redutores e Engrenagens</h3>
         <p>Relação de transmissão, calculadora de RPM/torque e análise de falhas.</p>
@@ -907,6 +1134,7 @@
       </div>
 
       <div class="card" onclick="abrirModulo('valvulas')">
+        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
         <div class="icon">🔧</div>
         <h3>Válvulas</h3>
         <p>Globo, gaveta, esfera, PSV/PRV e critérios de seleção.</p>
@@ -914,6 +1142,7 @@
       </div>
 
       <div class="card" onclick="abrirModulo('metrologia')">
+        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
         <div class="icon">📏</div>
         <h3>Metrologia</h3>
         <p>Conversor mm ↔ polegada e verificador de tolerância dimensional.</p>
@@ -921,6 +1150,7 @@
       </div>
 
       <div class="card" onclick="abrirModulo('relatorio')">
+        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
         <div class="icon">📝</div>
         <h3>Relatório Técnico</h3>
         <p>Monte, copie e baixe um relatório de inspeção pronto.</p>
@@ -928,6 +1158,7 @@
       </div>
 
       <div class="card" style="border-color: #2b6cb0; background: linear-gradient(145deg, #142238 0%, #0e2242 100%);" onclick="abrirModulo('relatorios-prontos')">
+        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
         <div class="icon">📑</div>
         <h3>Relatórios Prontos & Impressão</h3>
         <p>Acesse todos os relatórios finalizados e anexados, visualize no modelo oficial A4 e envie direto para imprimir ou PDF.</p>
@@ -935,6 +1166,7 @@
       </div>
 
       <div class="card" onclick="abrirModulo('assistente')">
+        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
         <div class="icon">🤖</div>
         <h3>Assistente Técnico</h3>
         <p>Busca inteligente na base de conhecimento do app.</p>
@@ -942,6 +1174,7 @@
       </div>
 
       <div class="card" onclick="abrirModulo('intervencoes')">
+        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
         <div class="icon">📋</div>
         <h3>Intervenções de Equipamentos</h3>
         <p>Histórico de manutenções por equipamento, com fotos e localização.</p>
@@ -949,6 +1182,7 @@
       </div>
 
       <div class="card" onclick="abrirModulo('lubrificacao')">
+        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
         <div class="icon">🛢️</div>
         <h3>Lubrificação</h3>
         <p>Sistemas de lubrificação em redutores, bombas e motores, e tipos de rolamento.</p>
@@ -956,6 +1190,7 @@
       </div>
 
       <div class="card" onclick="abrirModulo('chaves')">
+        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
         <div class="icon">🔑</div>
         <h3>Chaves e Porcas</h3>
         <p>Tabela de chaves combinadas por tamanho de rosca métrica e polegada.</p>
@@ -963,6 +1198,7 @@
       </div>
 
       <div class="card" onclick="abrirModulo('torque')">
+        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
         <div class="icon">🎯</div>
         <h3>Torque Controlado</h3>
         <p>Torque controlado por equipamento, cálculo anti-erro (DIN/ISO/SAE), foto de porca/parafuso e aperto em cruz.</p>
@@ -970,6 +1206,7 @@
       </div>
 
       <div class="card" onclick="abrirModulo('sobre')">
+        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
         <div class="icon">ℹ️</div>
         <h3>Sobre o App</h3>
         <p>Painel com todos os módulos, tecnologia usada e progresso do projeto.</p>
