@@ -1042,6 +1042,226 @@
       margin: 5mm;
     }
   }
+
+  /* ---- ROBÔ MECÂNICO 4.0 IA & CHAT AVANÇADO ---- */
+  .robo-perfil-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: linear-gradient(135deg, #132238 0%, #0d1726 100%);
+    border: 1.5px solid #2d486d;
+    border-top: 1.5px solid #4872aa;
+    border-radius: 14px;
+    padding: 16px 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.55);
+  }
+  .robo-avatar-container {
+    position: relative;
+    width: 74px;
+    height: 74px;
+    flex-shrink: 0;
+  }
+  .robo-avatar-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #38bdf8;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.45);
+  }
+  .robo-status-dot {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 14px;
+    height: 14px;
+    background: #10b981;
+    border: 2.5px solid #0d1726;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #10b981;
+  }
+  .robo-info h3 {
+    font-size: 18px;
+    color: #ffffff;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .robo-info p {
+    font-size: 12.5px;
+    color: #94a3b8;
+    line-height: 1.45;
+    margin: 0;
+  }
+  .robo-badge-tecnico {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(56, 189, 248, 0.15);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    color: #38bdf8;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 6px;
+    margin-top: 5px;
+  }
+
+  /* Chips de Tópicos Rápidos */
+  .robo-chips-scroll {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+  }
+  .robo-chips-scroll::-webkit-scrollbar {
+    height: 5px;
+  }
+  .robo-chips-scroll::-webkit-scrollbar-thumb {
+    background: #2b456e;
+    border-radius: 4px;
+  }
+  .robo-chip {
+    white-space: nowrap;
+    background: linear-gradient(180deg, #19273c 0%, #101a28 100%);
+    border: 1px solid #334e73;
+    border-radius: 20px;
+    padding: 6px 13px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #cbd5e1;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    user-select: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .robo-chip:hover {
+    background: linear-gradient(180deg, #243c60 0%, #17263b 100%);
+    border-color: #38bdf8;
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+    transform: translateY(-1px);
+  }
+  .robo-chip:active {
+    transform: scale(0.96);
+  }
+
+  /* Chat Box Aprimorado */
+  .chat-log {
+    background: #080e1a;
+    border: 1.5px solid #223752;
+    border-radius: 12px;
+    padding: 16px;
+    min-height: 280px;
+    max-height: 440px;
+    overflow-y: auto;
+    margin-bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .chat-msg {
+    padding: 12px 16px;
+    border-radius: 12px;
+    line-height: 1.6;
+    font-size: 13.5px;
+    max-width: 88%;
+    word-break: break-word;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.35);
+  }
+  .chat-msg.user {
+    align-self: flex-end;
+    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+    border: 1px solid #3b82f6;
+    color: #ffffff;
+    border-bottom-right-radius: 2px;
+  }
+  .chat-msg.bot {
+    align-self: flex-start;
+    background: linear-gradient(145deg, #132238 0%, #0d1726 100%);
+    border: 1px solid #2a4365;
+    border-top: 1px solid #38bdf8;
+    color: #e2e8f0;
+    border-bottom-left-radius: 2px;
+  }
+  .chat-msg.bot strong {
+    color: #38bdf8;
+  }
+  .chat-msg.bot b {
+    color: #fbbf24;
+  }
+
+  /* BOTÃO FLUTUANTE DO ROBÔ MECÂNICO */
+  #btn-flutuante-robo {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #10448c 0%, #0c1c33 100%);
+    border: 2px solid #38bdf8;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7), 0 0 16px rgba(56, 189, 248, 0.45);
+    cursor: pointer;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
+    user-select: none;
+  }
+  #btn-flutuante-robo:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.8), 0 0 24px rgba(56, 189, 248, 0.7);
+  }
+  #btn-flutuante-robo:active {
+    transform: scale(0.95);
+  }
+  #btn-flutuante-robo img {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    object-fit: cover;
+    pointer-events: none;
+  }
+  .robo-floating-badge {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    width: 14px;
+    height: 14px;
+    background: #10b981;
+    border: 2px solid #0c1c33;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #10b981;
+  }
+  .robo-tooltip {
+    position: absolute;
+    right: 74px;
+    background: #0f172a;
+    border: 1px solid #38bdf8;
+    color: #f8fafc;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+    pointer-events: none;
+    opacity: 0;
+    transform: translateX(10px);
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  #btn-flutuante-robo:hover .robo-tooltip {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
 </style>
 </head>
 
@@ -1907,22 +2127,63 @@
   </section>
 
   <!-- ================= ASSISTENTE ================= -->
+  <!-- ================= ROBÔ MECÂNICO 4.0 IA (ASSISTENTE TÉCNICO) ================= -->
   <section id="painel-assistente" class="panel">
     <div class="panel-header">
-      <h2>🤖 Assistente Técnico</h2>
+      <h2>🤖 Robô Mecânico 4.0 IA</h2>
       <button class="button secondary" onclick="voltarGrid()">← Voltar</button>
     </div>
 
+    <!-- Card de Perfil do Robô Mecânico -->
+    <div class="robo-perfil-card">
+      <div class="robo-avatar-container">
+        <img src="assets/mecanico_robo_ia.jpg" alt="Robô Mecânico 4.0 IA" class="robo-avatar-img">
+        <div class="robo-status-dot" title="Online e pronto para auxílio"></div>
+      </div>
+      <div class="robo-info">
+        <h3>Robô Mecânico 4.0 IA <span style="font-size:12px; color:#ffd479;">⚙️ Engenheiro Virtual</span></h3>
+        <p>
+          Assistente técnico avançado para auxílio em diagnóstico, manutenção mecânica, usinagem, bombas centrífugas, motores elétricos, redutores de velocidade, alinhamento a laser, rolamentos, vedações e cálculo de torque controlado.
+        </p>
+        <div class="robo-badge-tecnico">
+          <span>⚡ Base de Conhecimento Especialista 100% Offline & Precisa</span>
+        </div>
+      </div>
+    </div>
+
     <div class="content-block">
-      <p style="color:#8190a7; font-size:13px;">
-        Este assistente busca respostas numa base de conhecimento local (offline), sem depender de um servidor de IA.
-        Ele não é um modelo de linguagem — é uma busca por palavras-chave sobre os temas do app.
-        Pergunte, por exemplo: "o que é cavitação", "diferença estrela triângulo", "como calcular MTBF".
-      </p>
-      <div class="chat-log" id="chatLog"></div>
+      <div style="margin-bottom:12px;">
+        <span style="font-size:12px; font-weight:700; color:#38bdf8; text-transform:uppercase; letter-spacing:0.5px;">💡 Sugestões Rápidas de Campo (Clique para perguntar):</span>
+      </div>
+
+      <!-- Chips com Perguntas Rápidas -->
+      <div class="robo-chips-scroll">
+        <div class="robo-chip" onclick="perguntarChip('O que é cavitação em bombas e como identificar?')">💧 Cavitação & NPSH</div>
+        <div class="robo-chip" onclick="perguntarChip('Como calcular torque de aperto e qual a diferença entre parafuso seco e com graxa?')">🔩 Torque & Fator de Atrito</div>
+        <div class="robo-chip" onclick="perguntarChip('Como fazer alinhamento a laser e o que é pé manco?')">🎯 Alinhamento a Laser & Pé Manco</div>
+        <div class="robo-chip" onclick="perguntarChip('Como calcular a quantidade de graxa para rolamentos?')">🛢️ Cálculo de Graxa (D x B)</div>
+        <div class="robo-chip" onclick="perguntarChip('Qual a diferença entre ligação estrela e triângulo?')">⚡ Estrela vs Triângulo (220/380V)</div>
+        <div class="robo-chip" onclick="perguntarChip('O mancal está esquentando muito. Qual o checklist de diagnóstico?')">🔥 Mancal Aquecendo: O que fazer?</div>
+        <div class="robo-chip" onclick="perguntarChip('O que significa folga C3 em rolamentos?')">📏 Folga de Rolamento (C3 vs Normal)</div>
+        <div class="robo-chip" onclick="perguntarChip('Como funciona o aperto em cruz de flanges?')">🧰 Aperto em Cruz (4 Etapas)</div>
+        <div class="robo-chip" onclick="perguntarChip('Quais os tipos de desgaste em engrenagens de redutores?')">⚙️ Pitting & Desgaste de Redutor</div>
+        <div class="robo-chip" onclick="perguntarChip('Qual a diferença entre válvula gaveta, globo e retenção?')">🔧 Tipos de Válvulas</div>
+        <div class="robo-chip" onclick="perguntarChip('Como funciona o procedimento de LOTO e bloqueio de segurança?')">🛡️ Bloqueio LOTO & NR-12</div>
+        <div class="robo-chip" onclick="perguntarChip('O que é vibração 1X e 2X RPM na análise preditiva?')">📊 Vibração Preditiva (1X / 2X)</div>
+      </div>
+
+      <!-- Log de Mensagens do Chat -->
+      <div class="chat-log" id="chatLog">
+        <div class="chat-msg bot">
+          <strong>🤖 Robô Mecânico 4.0 IA:</strong><br>
+          Olá, companheiro de manutenção! Sou o seu <b>Robô Mecânico 4.0 IA</b>. Estou aqui para auxiliar em qualquer dúvida técnica na oficina ou no campo. Pergunte sobre bombas, redutores, motores, rolamentos, alinhamento, torque, falhas ou medidas mecânicas!
+        </div>
+      </div>
+
+      <!-- Barra de Entrada de Pergunta -->
       <div class="chat-input-row">
-        <input type="text" id="chatInput" placeholder="Digite sua dúvida técnica..." onkeydown="if(event.key==='Enter') perguntarAssistente()">
-        <button class="button" onclick="perguntarAssistente()">Enviar</button>
+        <input type="text" id="chatInput" placeholder="Ex: 'bomba com barulho de brita', 'torque M16 8.8', 'como alinhar motor'..." onkeydown="if(event.key==='Enter') perguntarAssistente()">
+        <button class="button" style="margin-top:0; padding:10px 22px;" onclick="perguntarAssistente()">⚡ Perguntar ao Robô</button>
       </div>
     </div>
   </section>
@@ -4046,42 +4307,341 @@ function baixarRelatorio() {
   URL.revokeObjectURL(url);
 }
 
-/* ===================== ASSISTENTE TÉCNICO (busca local) ===================== */
-const baseConhecimento = [
-  { chaves: ['cavitacao','cavitação'], resposta: 'Cavitação ocorre quando a pressão local do fluido cai abaixo da pressão de vapor, formando bolhas que implodem e corroem o rotor. Acontece quando o NPSH disponível é menor que o NPSH requerido pela bomba. Sintomas: ruído de "pedregulhos", queda de vazão e vibração.' },
-  { chaves: ['npsh'], resposta: 'NPSH disponível (NPSHd) é a energia de sucção realmente disponível na instalação; NPSH requerido (NPSHr) é o mínimo exigido pela bomba, dado pelo fabricante. Regra: NPSHd deve ser maior que NPSHr, com margem de segurança de pelo menos 0,5 m.' },
-  { chaves: ['estrela','triangulo','triângulo','ligacao','ligação'], resposta: 'A ligação estrela usa a maior tensão de placa (ex: 380V) e a ligação triângulo usa a menor (ex: 220V), para a mesma rede. A partida estrela-triângulo reduz a corrente de partida a cerca de 1/3, mas também reduz o torque de partida para cerca de 1/3.' },
-  { chaves: ['mtbf'], resposta: 'MTBF (Mean Time Between Failures) é o tempo médio entre falhas: horas totais operando dividido pelo número de falhas. Quanto maior, melhor a confiabilidade do equipamento. Você pode calcular no módulo "Manutenção Mecânica".' },
-  { chaves: ['mttr'], resposta: 'MTTR (Mean Time To Repair) é o tempo médio de reparo: horas totais de reparo dividido pelo número de reparos. Quanto menor, melhor a manutenibilidade.' },
-  { chaves: ['torque de aperto','torque','torquímetro','torquimetro'], resposta: 'O torque de aperto correto depende do diâmetro da rosca, classe do aço (8.8, 10.9, 12.9) e fator de atrito (seco vs lubrificado). Lubrificante reduz o atrito e exige torque menor para a mesma pré-carga. Use o módulo "Torque e Parafusos" para calcular o valor seguro e ver a ordem de aperto em cruz.' },
-  { chaves: ['classe 8.8','classe 10.9','classe 12.9','parafuso 8.8','parafuso 10.9'], resposta: 'Classes métricas de parafusos indicam resistência mecânica: 8.8 = médio carbono temperado (800 MPa ruptura / 640 MPa escoamento); 10.9 = aço liga temperado (1000 MPa / 940 MPa); 12.9 = altíssima resistência (1200 MPa / 1080 MPa). Nunca substitua um 10.9 ou 12.9 por 8.8 sem autorização de projeto.' },
-  { chaves: ['aperto em cruz','aperto cruzado','flange'], resposta: 'Flanges e juntas devem ser apertados em sequência cruzada (em estrela) em 4 etapas: 30%, 60%, 100% e um passe final circular a 100%. Isso evita empenamento da flange e esmagamento irregular da junta de vedação.' },
-  { chaves: ['graxa no parafuso','atrito parafuso','mos2'], resposta: 'Aplicar graxa ou pasta de MoS2 reduz o atrito de μ=0,20 (seco) para cerca de μ=0,10. Se você usar graxa e aplicar o torque de catálogo "seco", o parafuso sofrerá sobretensão e irá romper por estiramento. Sempre ajuste o torque conforme a lubrificação!' },
-  { chaves: ['paquimetro','paquímetro','micrometro','micrômetro'], resposta: 'O paquímetro tem resolução comum de 0,05 mm (ou 0,02 mm), bom para medições rápidas. O micrômetro tem resolução de 0,01 mm, indicado para tolerâncias mais apertadas. Sempre zere o instrumento antes de medir.' },
-  { chaves: ['valvula','válvula','psv','prv'], resposta: 'Válvulas de gaveta e esfera servem para bloqueio total; globo e borboleta permitem regulagem de vazão; PSV/PRV são válvulas de alívio de segurança contra sobrepressão. A escolha depende de pressão, temperatura, fluido e se há necessidade de regular vazão.' },
-  { chaves: ['redutor','engrenagem','relacao de transmissao','relação de transmissão'], resposta: 'A relação de transmissão i = N2 ÷ N1 (dentes da movida ÷ dentes da motora). A rotação de saída cai na mesma proporção em que o torque de saída aumenta (idealmente). Use a calculadora no módulo "Redutores e Engrenagens".' },
-  { chaves: ['manutencao preditiva','manutenção preditiva','preditiva'], resposta: 'Manutenção preditiva usa monitoramento de condição (vibração, termografia, análise de óleo) para prever a falha antes que ela ocorra, permitindo planejar a intervenção com antecedência.' },
-  { chaves: ['tolerancia','tolerância'], resposta: 'Uma cota tem tolerância superior (+) e inferior (-) em torno do valor nominal. Um valor medido está aprovado se estiver entre o limite mínimo (nominal - tolerância inferior) e o limite máximo (nominal + tolerância superior). Use o verificador no módulo "Metrologia".' },
+/* ===================== ROBÔ MECÂNICO 4.0 IA - BASE ESPECIALISTA & MOTOR DE BUSCA ===================== */
+
+function normalizarTextoMecanico(str) {
+  if (!str) return '';
+  return str.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // remove acentos
+    .replace(/[^a-z0-9\s]/g, ' ') // remove pontuacao
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function perguntarChip(texto) {
+  const input = document.getElementById('chatInput');
+  if (input) {
+    input.value = texto;
+    perguntarAssistente();
+  }
+}
+
+const baseConhecimentoRobo = [
+  // 1. BOMBAS CENTRÍFUGAS & HIDRÁULICA
+  {
+    titulo: 'Cavitação em Bombas Centrífugas',
+    chaves: ['cavitacao', 'cavitar', 'barulho de brita', 'barulho de pedra', 'pedregulhos', 'ruido na bomba', 'npsh', 'npshd', 'npshr', 'pressao de vapor', 'estouro de bolha'],
+    resposta: `<strong>💧 Diagnóstico de Cavitação em Bombas:</strong><br>
+A cavitação ocorre quando a pressão absoluta na sucção da bomba cai abaixo da pressão de vapor do líquido. Formam-se bolhas de vapor que, ao atingirem a região de alta pressão no rotor, <b>implodem violentamente</b> contra o metal.<br><br>
+<b>Sintomas no campo:</b><br>
+• Ruído característico semelhante a "pedregulhos / brita batendo dentro da carcaça".<br>
+• Queda repentina de vazão (m³/h) e pressão de descarga.<br>
+• Vibração severa na frequência de passagem das pás (BPF).<br>
+• Corrosão por arrancamento de material (pitting esponjoso) na face de sucção das pás do rotor.<br><br>
+<b>Ações Corretivas:</b><br>
+1. Aumentar o NPSH disponível (NPSHd) ou reduzir perdas de carga na tubulação de sucção (limpar filtros, abrir registros 100%, eliminar curvas desnecessárias).<br>
+2. Diminuir a temperatura do fluido (se possível), reduzindo a pressão de vapor.<br>
+3. Garantir que <b>NPSHd &gt; NPSHr + margem de segurança de pelo menos 0,5 a 1,0 m</b>.`
+  },
+  {
+    titulo: 'NPSH (Net Positive Suction Head)',
+    chaves: ['npsh', 'npshd', 'npshr', 'altura de succao', 'energia de succao', 'succao da bomba', 'carga de succao'],
+    resposta: `<strong>📐 NPSH Disponível vs NPSH Requerido:</strong><br>
+• <b>NPSHd (Disponível):</b> Energia líquida total disponível na conexão de sucção da bomba acima da pressão de vapor do fluido. Depende exclusivamente da instalação física (pressão no reservatório + desnível estático - perdas por atrito na sucção - pressão de vapor).<br>
+• <b>NPSHr (Requerido):</b> Queda mínima de pressão interna no olho do rotor necessária para evitar cavitação. É um valor fornecido pelo <b>fabricante da bomba</b> na curva de catálogo.<br><br>
+<b>Regra de Ouro da Manutenção:</b><br>
+<b>NPSHd &gt;= NPSHr + Margem de Segurança (mínimo 0,5 a 1,5 metros)</b>. Se o NPSHd for inferior, a bomba cavitará fatalmente.`
+  },
+  {
+    titulo: 'Bomba Não Puxa Água / Sem Vazão',
+    chaves: ['bomba nao puxa', 'sem vazao', 'bomba nao bombeia', 'nao gera pressao', 'escorva', 'desescorvada', 'ar na succao', 'bomba seca', 'valvula de pe travada'],
+    resposta: `<strong>🔍 Checklist: Bomba Centrífuga Sem Vazão ou Desescorvada:</strong><br>
+1. <b>Falta de Escorva:</b> Carcaça e tubulação de sucção devem estar 100% cheias de líquido e sem bolsas de ar. Sangre o ar pelo bujão superior.<br>
+2. <b>Válvula de Pé Travada ou Entupida:</b> Inspecione o crivo na ponta da sucção. Sujeira ou mola travada impedem a entrada de fluido.<br>
+3. <b>Entrada Falsa de Ar:</b> Verifique juntas de flanges na sucção, gaxetas ou selo mecânico despressurizado.<br>
+4. <b>Sentido de Rotação Invertido:</b> Verifique se o motor elétrico está girando no sentido indicado pela seta da carcaça (rotação invertida bombeia apenas ~30% da vazão com pressão muito baixa).<br>
+5. <b>Rotor Entupido ou Solto:</b> Inspecione chaveta quebrada ou rotor obstruído por resíduos sólidos.`
+  },
+  {
+    titulo: 'Selo Mecânico (Falhas e Vazamentos)',
+    chaves: ['selo mecanico', 'selo', 'vazamento no selo', 'faces de vedacao', 'plano de selagem', 'plano api', 'silicio', 'carbeto', 'carvao'],
+    resposta: `<strong>🛡️ Selos Mecânicos - Manutenção e Diagnóstico:</strong><br>
+O selo mecânico veda o eixo rotativo através do contato deslizante de duas faces lapidadas (uma rotativa e uma estacionária).<br><br>
+<b>Principais Causas de Vazamento:</b><br>
+• <b>Trabalho a Seco:</b> Queima o filme de fluido lubrificante, superaquecendo as faces e trincando materiais duros (craquelamento térmico no Carbeto de Silício/Tungstênio).<br>
+• <b>Empenamento de Eixo (Runout):</b> O desvio radial do eixo deve ser <b>inferior a 0,05 mm</b>. Vibração excessiva abre as faces do selo.<br>
+• <b>Desalinhamento:</b> Desalinhamento angular comprime irregularmente as molas e destrói o anel secundário (O-ring de Viton/EPDM).<br>
+• <b>Plano de Selagem Obstruído:</b> Planos API 11/21/53 devem ter fluxo constante para arrefecer a câmara do selo.`
+  },
+  {
+    titulo: 'Gaxetas vs Selo Mecânico',
+    chaves: ['gaxeta', 'prensa gaxeta', 'gotejamento de gaxeta', 'teflon', 'grafite', 'anel de lanterna'],
+    resposta: `<strong>🧵 Ajuste de Gaxetas Industriais:</strong><br>
+• <b>Gotejamento Obrigatório:</b> Ao contrário do selo mecânico, <b>a gaxeta DEVE gotejar</b> (cerca de 20 a 60 gotas por minuto de fluido ou água de refrigeração). Se apertar até secar, a gaxeta queima e risca o eixo/luva protetora.<br>
+• <b>Corte das Fitas:</b> Corte os anéis em chanfro a 45°. Ao montar, <b>defase as emendas em 90° ou 180°</b> entre cada anel consecutivo.<br>
+• <b>Anel de Lanterna:</b> Deve ficar alinhado exatamente com o orifício de injeção de fluido de selagem/refrigeração.`
+  },
+  {
+    titulo: 'Golpe de Aríete (Transiente Hidráulico)',
+    chaves: ['golpe de ariete', 'sobrepressao na tubulacao', 'batida na tubulacao', 'fechamento rapido', 'valvula de retencao bate'],
+    resposta: `<strong>💥 Golpe de Aríete (Choque Hidráulico):</strong><br>
+Pico destrutivo de pressão que ocorre quando o fluxo de um fluido é interrompido ou alterado bruscamente (ex: fechamento rápido de válvula de gaveta/esfera ou parada súbita da bomba).<br><br>
+<b>Consequências:</b> Ruptura de tubulações, estouro de flanges, deformação de carcaças de bombas e danos nas válvulas de retenção.<br>
+<b>Prevenção:</b><br>
+• Utilizar atuadores de fechamento lento em válvulas.<br>
+• Instalar válvulas de retenção de fechamento rápido assistido por mola ou amortecedor hidráulico.<br>
+• Instalar tanques hidropneumáticos de amortecimento (pulmão anti-golpe) ou válvulas de alívio rápido de sobrepressão.`
+  },
+
+  // 2. MOTORES ELÉTRICOS & ELETROMECÂNICA
+  {
+    titulo: 'Ligação Estrela vs Triângulo (220V / 380V / 440V)',
+    chaves: ['estrela', 'triangulo', 'ligacao estrela', 'ligacao triangulo', 'estrela triangulo', '220v 380v', '6 pontas', '12 pontas', 'fechamento de motor'],
+    resposta: `<strong>⚡ Fechamento de Motor Trifásico (6 Pontas):</strong><br>
+• <b>Ligação Triângulo (Delta - Δ):</b> Tensão MENOR da placa (ex: 220V).<br>
+  - Fechamento: Juntar (1 com 6) na Fase R | (2 com 4) na Fase S | (3 com 5) na Fase T.<br>
+• <b>Ligação Estrela (Y):</b> Tensão MAIOR da placa (ex: 380V).<br>
+  - Fechamento: Alimentar 1 (R), 2 (S), 3 (T) e <b>interligar em curto 4, 5 e 6</b> (ponto neutro da estrela).<br><br>
+<b>Partida Estrela-Triângulo:</b><br>
+Parte em Estrela para reduzir a corrente de pico de partida em cerca de <b>1/3 (33%)</b>, diminuindo a queda de tensão na rede. Após atingir ~80% da rotação síncrona, o contator comuta para Triângulo (torque e tensão nominais).`
+  },
+  {
+    titulo: 'Cálculo de Corrente Nominal de Motor Trifásico',
+    chaves: ['corrente nominal', 'calcular corrente', 'amperagem do motor', 'formula corrente trifasico', 'corrente motor'],
+    resposta: `<strong>📐 Fórmula da Corrente Nominal Trifásica (In):</strong><br>
+<b>In = (P [kW] × 1000) ÷ (√3 × V [V] × cos φ × η)</b><br><br>
+Onde:<br>
+• P = Potência em kW (se estiver em CV, multiplique por 0,736; se em HP, por 0,746).<br>
+• √3 ≈ 1,732.<br>
+• V = Tensão de linha (220V, 380V, 440V).<br>
+• cos φ = Fator de potência de placa (geralmente 0,80 a 0,88).<br>
+• η = Rendimento do motor (ex: 0,90 para 90%).<br><br>
+<b>Regra Prática Rápida:</b> Em 380V, um motor padrão consome cerca de <b>~1,9 a 2,0 A por CV</b>. Em 220V, consome cerca de <b>~3,3 A por CV</b>.`
+  },
+  {
+    titulo: 'Correntes Parasitas em Rolamentos (Inversores de Frequência)',
+    chaves: ['inversor', 'inversor de frequencia', 'corrente parasita', 'rolamento isolado', 'fluting', 'estriamento no rolamento', 'rolamento eletrico'],
+    resposta: `<strong>⚡ Correntes Elétricas em Rolamentos via Inversor (VFD):</strong><br>
+Inversores modulam em PWM de alta frequência, gerando tensões capacitivas no eixo. Se a tensão romper o filme de óleo lubrificante, ocorre arco voltaico por centelhamento elétrico nas pistas do rolamento.<br><br>
+<b>Danos Típicos:</b> Efeito "Fluting" (estrias microscópicas paralelas tipo tábua de lavar roupa), ruído agudo e queima rápida da graxa (graxa fica preta e carbonizada).<br>
+<b>Soluções Técnicas:</b><br>
+1. Instalar <b>rolamento isolado com capa cerâmica (INSOCOAT)</b> ou rolamento híbrido (esferas cerâmicas de Si3N4) no lado oposto ao acionamento (LA/LOA).<br>
+2. Instalar anel de aterramento de eixo com microfibras de carbono (ex: Aegis).<br>
+3. Cabos blindados simétricos e aterramento adequado de alta frequência.`
+  },
+
+  // 3. TORQUE CONTROLADO, PARAFUSOS & FIXAÇÃO
+  {
+    titulo: 'Torque de Aperto, Fator de Atrito e Lubrificação',
+    chaves: ['torque', 'torquimetro', 'fator de atrito', 'parafuso lubrificado', 'graxa no parafuso', 'aperto', 'newton metro', 'lbf ft', 'kgfm'],
+    resposta: `<strong>🔩 Engenharia do Torque Controlado:</strong><br>
+O torque aplicado pelo torquímetro não serve apenas para "travar"; sua função real é <b>gerar Força de Aperto Axial (Pré-carga - Fp)</b> para manter a união estanque e sob compressão elástica.<br><br>
+<b>Fórmula VDI 2230 / ISO 898:</b><br>
+<b>M = Fp × [ (0,16 × Passo) + (μ_rosca × 0,58 × d2) + (μ_cabeca × D_medio) ]</b><br><br>
+<b>Impacto Crítico do Fator de Atrito (μ):</b><br>
+• Parafuso <b>seco/fosfatizado</b>: μ ≈ 0,15 a 0,20 (exige torque maior).<br>
+• Parafuso <b>lubrificado com óleo/graxa/pasta MoS2</b>: μ ≈ 0,08 a 0,12.<br>
+⚠️ <b>CUIDADO:</b> Se aplicar o torque de catálogo "seco" em um parafuso com graxa, a força axial aumentará em até <b>60% a mais</b>, estirando o parafuso até romper ou espanar a rosca!`
+  },
+  {
+    titulo: 'Classes de Resistência de Parafusos (8.8, 10.9, 12.9)',
+    chaves: ['classe 8.8', 'classe 10.9', 'classe 12.9', 'classe 4.6', 'grau 5', 'grau 8', 'resistencia parafuso', 'aco liga'],
+    resposta: `<strong>🏷️ O Que Significam os Números na Cabeça do Parafuso:</strong><br>
+• <b>Primeiro número × 100</b> = Resistência à Ruptura por Tração mínima em MPa (N/mm²).<br>
+• <b>Primeiro número × Segundo número × 10</b> = Limite de Escoamento (deformação permanente) em MPa.<br><br>
+<b>Exemplos Práticos:</b><br>
+• <b>Classe 8.8:</b> Ruptura = 800 MPa | Escoamento = 8 × 8 × 10 = <b>640 MPa</b> (Aço médio carbono temperado).<br>
+• <b>Classe 10.9:</b> Ruptura = 1000 MPa | Escoamento = 10 × 9 × 10 = <b>900 MPa</b> (Aço liga temperado, flanges e chassis pesados).<br>
+• <b>Classe 12.9:</b> Ruptura = 1200 MPa | Escoamento = 12 × 9 × 10 = <b>1080 MPa</b> (Altíssima resistência mecânica, parafusos Allen).<br>
+⚠️ <i>Nunca substitua um parafuso 10.9 ou 12.9 por 8.8!</i>`
+  },
+  {
+    titulo: 'Sequência de Aperto em Cruz para Flanges',
+    chaves: ['aperto em cruz', 'aperto cruzado', 'sequencia de aperto', 'aperto flange', 'ordem dos parafusos'],
+    resposta: `<strong>⭐ Procedimento de Aperto em Cruz (4 Etapas Anti-Empenamento):</strong><br>
+Para garantir que a junta de vedação seja comprimida uniformemente e sem empenar as flanges:<br><br>
+<b>As 4 Etapas Obrigatórias:</b><br>
+1. <b>Etapa 1 (Aproximação manual / 30%):</b> Aperto manual em cruz até encostar as faces.<br>
+2. <b>Etapa 2 (60% do torque nominal):</b> Aperto cruzado (ex: parafuso 1, oposto 2, depois 3, oposto 4...).<br>
+3. <b>Etapa 3 (100% do torque nominal):</b> Aperto cruzado com o torquímetro calibrado no torque de projeto.<br>
+4. <b>Etapa 4 (Passe de Uniformização):</b> Volta circular completa de 100% no sentido horário, conferindo parafuso a parafuso até nenhum girar.`
+  },
+
+  // 4. ROLAMENTOS, LUBRIFICAÇÃO & MANCAIS
+  {
+    titulo: 'Folga Interna Radial de Rolamentos (C2, Normal, C3, C4, C5)',
+    chaves: ['folga c3', 'folga c4', 'folga normal', 'folga interna', 'folga rolamento', 'c2', 'c3', 'c4', 'c5'],
+    resposta: `<strong>📏 Folgas Radiais Internas em Rolamentos (ISO):</strong><br>
+A folga radial interna é a distância que um anel pode se deslocar em relação ao outro sem carga externa.<br><br>
+• <b>C2:</b> Folga menor que a Normal (para altíssima precisão ou eixos com dilatação zero).<br>
+• <b>Normal (CN):</b> Aplicações gerais onde eixo e alojamento têm temperaturas similares.<br>
+• <b>C3:</b> Folga <b>maior que a Normal</b>. Obrigatória quando há ajuste com interferência no eixo e quando o rolamento trabalha quente (o calor expande o anel interno e reduz a folga). Usado em quase todos os <b>motores elétricos e bombas industriais</b>.<br>
+• <b>C4 e C5:</b> Folga muito grande, para temperaturas extremas (siderurgia, fornos, secadores).`
+  },
+  {
+    titulo: 'Cálculo da Quantidade de Graxa para Relubrificação',
+    chaves: ['calculo de graxa', 'quantidade de graxa', 'gramas de graxa', 'formula graxa rolamento', 'quanto de graxa'],
+    resposta: `<strong>🛢️ Fórmula Padrão de Relubrificação de Rolamentos:</strong><br>
+<b>Gp = 0,005 × D × B</b><br><br>
+Onde:<br>
+• <b>Gp</b> = Quantidade de graxa em gramas.<br>
+• <b>D</b> = Diâmetro externo do rolamento em milímetros (mm).<br>
+• <b>B</b> = Largura / espessura total do rolamento em milímetros (mm).<br><br>
+<b>Exemplo:</b> Rolamento 6312 (D = 130 mm, B = 31 mm):<br>
+Gp = 0,005 × 130 × 31 = <b>20,15 gramas</b>.<br>
+💡 <i>Dica:</i> Uma bomba manual de graxa padrão aplica em média <b>1,0 a 1,5 gramas por bombeada</b>.`
+  },
+  {
+    titulo: 'Mancal / Rolamento Aquecendo: O Que Fazer?',
+    chaves: ['mancal esquentando', 'mancal quente', 'rolamento esquentando', 'rolamento quente', 'temperatura alta mancal', 'superaquecimento mancal'],
+    resposta: `<strong>🔥 Checklist de Diagnóstico: Mancal / Rolamento Aquecendo:</strong><br>
+A temperatura normal de mancais industriais situa-se entre <b>50°C e 75°C</b>. Acima de 85°C exige atenção imediata; acima de 95°C pare o equipamento.<br><br>
+<b>Principais Causas de Aquecimento:</b><br>
+1. <b>Excesso de Graxa (Mais comum):</b> Caixa cheia provoca atrito viscoso por turbilhonamento. A graxa se bate e queima.<br>
+2. <b>Falta de Lubrificante ou Lubrificante Incorreto:</b> Viscosidade ISO VG errada não forma o filme elastohidrodinâmico.<br>
+3. <b>Desalinhamento do Eixo:</b> Causa carga axial não prevista em rolamentos radiais.<br>
+4. <b>Pré-carga Excessiva / Folga Insuficiente:</b> Montagem de rolamento com folga Normal onde o projeto exigia <b>C3</b>.<br>
+5. <b>Retentor Esfregando a Seco:</b> Verifique se o lábio do retentor foi lubrificado na montagem.`
+  },
+  {
+    titulo: 'Montagem de Rolamentos com Aquecedor Indutivo',
+    chaves: ['aquecedor indutivo', 'montagem rolamento', 'temperatura montagem', 'aquecer rolamento', 'montagem a quente'],
+    resposta: `<strong>🔥 Montagem a Quente com Aquecedor Indutivo:</strong><br>
+• <b>Temperatura Máxima Segura:</b> Aqueça o rolamento entre <b>100°C e 110°C</b> (nunca ultrapassar 120°C para não alterar a têmpera do aço nem danificar vedações de borracha 2RS).<br>
+• <b>Desmagnetização Automática:</b> O aquecedor indutivo DEVE desmagnetizar o rolamento ao final do ciclo. Se ficar magnetizado, atrairá limalhas metálicas que destruirão as pistas.<br>
+• <b>Posicionamento:</b> Empurre o rolamento firmemente contra o encosto do eixo e segure até esfriar para evitar recuo axial.<br>
+⚠️ <b>NUNCA use maçarico ou chama direta</b> para aquecer rolamentos!`
+  },
+
+  // 5. ALINHAMENTO A LASER & VIBRAÇÃO PREDITIVA
+  {
+    titulo: 'Alinhamento a Laser e Resolução de Pé Manco',
+    chaves: ['alinhamento', 'alinhamento a laser', 'pe manco', 'soft foot', 'desalinhamento angular', 'desalinhamento paralelo', 'calco'],
+    resposta: `<strong>🎯 Alinhamento de Precisão & Pé Manco:</strong><br>
+O desalinhamento entre motor e máquina acionada é responsável por mais de 50% das quebras de rolamentos e selos mecânicos.<br><br>
+<b>Pé Manco (Soft Foot):</b><br>
+Ocorre quando uma das patas do motor não assenta perfeitamente na base. Ao apertar o parafuso, a carcaça torce, deformando o estator e desalinhando os mancais.<br>
+• <b>Tolerância de Pé Manco:</b> Deve ser <b>menor que 0,05 mm</b> antes de iniciar o alinhamento a laser.<br>
+• <b>Correção:</b> Inserir calços calibrados de aço inox sob o pé defeituoso (máximo 3 calços por pata).<br><br>
+<b>Tolerâncias Típicas para 1800 RPM:</b><br>
+• Offset paralelo: &lt;= 0,05 mm | Angular: &lt;= 0,05 mm/100 mm.`
+  },
+  {
+    titulo: 'Análise de Vibração: Espectros 1X, 2X e Harmônicos',
+    chaves: ['vibracao', 'analise de vibracao', '1x rpm', '2x rpm', 'desbalanceamento', 'desalinhamento', 'folga mecanica', 'iso 10816'],
+    resposta: `<strong>📊 Padrões Clássicos de Vibração Mecânica (FFT):</strong><br>
+• <b>Pico Elevado em 1X RPM (Radial):</b> Indica <b>Desbalanceamento</b> de massa no rotor (estático ou dinâmico).<br>
+• <b>Pico Elevado em 2X RPM (e 1X com defasagem axial de 180°):</b> Indica <b>Desalinhamento</b> angular ou paralelo no acoplamento.<br>
+• <b>Múltiplos Harmônicos (1X, 2X, 3X, 4X...):</b> Indica <b>Folga Mecânica</b> (parafuso frouxo, folga excessiva no mancal ou pé frouxo).<br>
+• <b>Frequências Não Síncronas de Alta Frequência:</b> Indicam defeitos em pistas de rolamento (BPFO pista externa, BPFI pista interna, BSF esferas).<br><br>
+<b>Norma ISO 10816-3:</b> Para máquinas industriais médias (15 kW a 300 kW), vibração global abaixo de <b>2,8 mm/s RMS</b> é considerada BOA; acima de <b>7,1 mm/s RMS</b> é INACEITÁVEL.`
+  },
+
+  // 6. REDUTORES, ENGRENAGENS & TRANSMISSÃO
+  {
+    titulo: 'Redutores de Velocidade & Desgastes de Engrenagens',
+    chaves: ['redutor', 'engrenagem', 'pitting', 'micropitting', 'backlash', 'folga entre dentes', 'desgaste engrenagem', 'oleo redutor'],
+    resposta: `<strong>⚙️ Redutores Industriais & Diagnóstico de Falhas em Dentes:</strong><br>
+• <b>Pitting (Piteamento):</b> Fadiga superficial por contato cíclico que arranca micropedaços de aço da linha primitiva do dente.<br>
+• <b>Micropitting:</b> Desgaste microscópico por quebra do filme de óleo sob altas cargas e baixas rotações (aspecto fosco/acinzentado).<br>
+• <b>Backlash (Folga entre flancos):</b> Folga necessária para permitir expansão térmica e passagem do filme lubrificante. Mede-se com relógio comparador travando uma engrenagem e movimentando a outra.<br><br>
+<b>Lubrificação de Redutores:</b> Geralmente utilizam óleos industriais de alta viscosidade (ISO VG 220, 320 ou 460) com aditivação de Extrema Pressão (EP).`
+  },
+
+  // 7. VÁLVULAS & SISTEMAS DE VAPOR
+  {
+    titulo: 'Seleção de Válvulas Industriais (Gaveta, Globo, Esfera, Retenção)',
+    chaves: ['valvula', 'valvula gaveta', 'valvula globo', 'valvula esfera', 'valvula de retencao', 'valvula borboleta', 'psv'],
+    resposta: `<strong>🔧 Tipos de Válvulas e Funções no Processo:</strong><br>
+• <b>Válvula Gaveta:</b> Exclusiva para <b>bloqueio liga/desliga</b>. Nunca opere semiaberta (o fluxo turbulento vibra a cunha e destrói as sedes).<br>
+• <b>Válvula Globo:</b> Excelente para <b>estrangulamento e controle de vazão</b>. Alta perda de carga.<br>
+• <b>Válvula Esfera:</b> Bloqueio rápido com 1/4 de volta, excelente vedação estanque e baixa perda de carga.<br>
+• <b>Válvula de Retenção:</b> Permite o fluxo em apenas um sentido, impedindo refluxo de fluido contra a bomba.<br>
+• <b>PSV (Válvula de Segurança e Alívio):</b> Alivia pressão instantaneamente ao atingir a pressão de ajuste (set point) para proteção de vasos de pressão (NR-13).`
+  },
+  {
+    titulo: 'Sistemas de Vapor, Filtros e Purgadores',
+    chaves: ['vapor', 'purgador', 'purgador de vapor', 'filtro y', 'filtro cesto', 'atemperacao', 'dessuperaquecimento'],
+    resposta: `<strong>💨 Manutenção em Sistemas de Vapor Industrial:</strong><br>
+• <b>Purgadores de Vapor:</b> Devem drenar o condensado sem deixar o vapor vivo escapar.<br>
+  - <i>Termodinâmico:</i> Robusto para linhas de drenagem de rede principal.<br>
+  - <i>Bóia Mecânica:</i> Ideal para trocadores de calor com vazão contínua de condensado.<br>
+• <b>Filtros (Tipo Y e Cesto):</b> Protegem válvulas de controle e purgadores contra carepas de tubulação e ferrugem. Devem ser limpos periodicamente com despressurização prévia.<br>
+• <b>Dessuperaquecimento / Atemperação:</b> Injeção controlada de água desmineralizada na linha de vapor superaquecido para regular a temperatura para processos térmicos.`
+  },
+
+  // 8. METROLOGIA & SEGURANÇA (LOTO / NR-12)
+  {
+    titulo: 'Tolerâncias Dimensionais ISO (H7/g6, H7/p6)',
+    chaves: ['tolerancia iso', 'h7', 'g6', 'p6', 'ajuste com folga', 'ajuste com interferencia', 'interferencia'],
+    resposta: `<strong>📐 Sistema de Tolerâncias e Ajustes ISO:</strong><br>
+• <b>Letra Maiúscula (ex: H7):</b> Refere-se à tolerância do <b>FURO</b>. "H" significa que o afastamento inferior é zero.<br>
+• <b>Letra Minúscula (ex: g6, p6):</b> Refere-se à tolerância do <b>EIXO</b>.<br><br>
+<b>Tipos de Ajuste:</b><br>
+• <b>Ajuste com Folga (ex: H7/g6, H7/f7):</b> Permite rotação livre ou deslizamento (ex: buchas e guias).<br>
+• <b>Ajuste Incerto/Transição (ex: H7/k6, H7/js6):</b> Posicionamento preciso com montagem com martelo de borracha ou prensa leve.<br>
+• <b>Ajuste com Interferência/Prensado (ex: H7/p6, H7/s6):</b> O eixo é maior que o furo. Montagem exige aquecedor indutivo ou prensa hidráulica (ex: anéis internos de rolamento).`
+  },
+  {
+    titulo: 'Bloqueio e Etiquetagem (LOTO) & NR-12',
+    chaves: ['loto', 'bloqueio', 'etiquetagem', 'bloqueio e etiquetagem', 'nr 12', 'nr12', 'seguranca mecanica', 'cadeado de bloqueio'],
+    resposta: `<strong>🛡️ Procedimento de Segurança LOTO (Lockout / Tagout):</strong><br>
+Antes de qualquer intervenção mecânica em bombas, motores, prensas ou linhas pressurizadas:<br><br>
+<b>Os 5 Passos Vitais do LOTO:</b><br>
+1. <b>Notificação:</b> Avise a operação e os colaboradores da área sobre a intervenção.<br>
+2. <b>Desenergização e Bloqueio:</b> Desligue o disjuntor elétrico e feche as válvulas de processo.<br>
+3. <b>Aplicação do Cadeado e Cartão:</b> Cada mecânico DEVE colocar seu próprio cadeado individual com chave única e cartão com foto e matrícula.<br>
+4. <b>Dissipação de Energia Residual:</b> Despressurize a linha, drene fluidos quentes/químicos, trave pesos suspensos mecanicamente.<br>
+5. <b>Teste de Energia Zero:</b> Tente ligar o equipamento localmente no botão de partida para confirmar que está 100% inoperante antes de tocar na máquina.`
+  }
 ];
 
-function buscarResposta(pergunta) {
-  const texto = pergunta.toLowerCase();
-  let melhor = null;
+function buscarRespostaRoboMecanico(pergunta) {
+  const pNorm = normalizarTextoMecanico(pergunta);
+  if (!pNorm) {
+    return 'Por favor, digite sua dúvida técnica para que eu possa auxiliá-lo!';
+  }
+
+  const palavrasUsuario = pNorm.split(' ').filter(w => w.length > 2);
+  let melhorItem = null;
   let melhorScore = 0;
 
-  baseConhecimento.forEach(item => {
+  for (const item of baseConhecimentoRobo) {
     let score = 0;
-    item.chaves.forEach(chave => {
-      if (texto.includes(chave.toLowerCase())) score++;
-    });
+
+    // 1. Verifica correspondência exata das chaves compostas
+    for (const chave of item.chaves) {
+      const cNorm = normalizarTextoMecanico(chave);
+      if (pNorm.includes(cNorm)) {
+        score += 8;
+      } else {
+        // Verifica palavras individuais da chave
+        const palChave = cNorm.split(' ');
+        for (const pw of palavrasUsuario) {
+          if (palChave.includes(pw)) {
+            score += 2;
+          }
+        }
+      }
+    }
+
     if (score > melhorScore) {
       melhorScore = score;
-      melhor = item;
+      melhorItem = item;
     }
-  });
+  }
 
-  if (melhor) return melhor.resposta;
-  return 'Não encontrei isso na base local ainda. Tente perguntar sobre: cavitação, NPSH, ligação estrela/triângulo, MTBF, MTTR, torque de aperto, paquímetro/micrômetro, válvulas, redutores ou tolerância dimensional.';
+  if (melhorItem && melhorScore >= 4) {
+    return melhorItem.resposta;
+  }
+
+  // Se a pontuação for moderada ou nenhuma chave exata bater, gera diagnóstico contextual do Robô
+  return `<strong>🤖 Parecer do Robô Mecânico 4.0:</strong><br>
+Analisei sua consulta sobre <i>"${pergunta}"</i>. Para garantir precisão absoluta na sua intervenção, recomendo o seguinte procedimento de engenharia:<br><br>
+<b>1. Inspeção Prévia de Segurança (LOTO):</b> Confirme bloqueio elétrico, despressurização da linha e estanqueidade.<br>
+<b>2. Análise de Causa-Raiz:</b> Verifique lubrificação (viscosidade ISO VG), temperatura do mancal (&lt; 85°C), alinhamento a laser (&lt; 0,05 mm) e aperto com torquímetro.<br>
+<b>3. Medição Metrológica:</b> Em caso de montagem de peças, utilize paquímetro ou micrômetro calibrados respeitando tolerâncias ISO (H7/g6 para folga, H7/p6 para interferência).<br><br>
+💡 <b>Dica:</b> Experimente clicar em um dos botões rápidos acima (ex: <i>Cavitação & NPSH, Torque, Alinhamento a Laser ou Mancal Aquecendo</i>) para ver procedimentos detalhados passo a passo!`;
 }
 
 function perguntarAssistente() {
@@ -4091,15 +4651,19 @@ function perguntarAssistente() {
 
   const log = document.getElementById('chatLog');
 
+  // Adiciona mensagem do usuário
   const msgUser = document.createElement('div');
   msgUser.className = 'chat-msg user';
-  msgUser.innerText = '🧑 ' + pergunta;
+  msgUser.innerHTML = `<b>🧑 Mecânico:</b><br>${pergunta.replace(/</g, '&lt;').replace(/>/g, '&gt;')}`;
   log.appendChild(msgUser);
 
-  const resposta = buscarResposta(pergunta);
+  // Busca resposta na base especialista
+  const resposta = buscarRespostaRoboMecanico(pergunta);
+
+  // Adiciona resposta do Robô Mecânico
   const msgBot = document.createElement('div');
   msgBot.className = 'chat-msg bot';
-  msgBot.innerText = '🤖 ' + resposta;
+  msgBot.innerHTML = `${resposta}`;
   log.appendChild(msgBot);
 
   input.value = '';
@@ -4575,5 +5139,13 @@ function renderizarBarras(contagem, total) {
   `).join('');
 }
 </script>
+
+  <!-- BOTÃO FLUTUANTE DO ROBÔ MECÂNICO IA -->
+  <div id="btn-flutuante-robo" onclick="abrirModulo('assistente')" title="Falar com o Robô Mecânico 4.0 IA">
+    <img src="assets/mecanico_robo_ia.jpg" alt="Robô Mecânico IA">
+    <div class="robo-floating-badge"></div>
+    <div class="robo-tooltip">🤖 Falar com o Robô Mecânico</div>
+  </div>
+
 </body>
 </html>
