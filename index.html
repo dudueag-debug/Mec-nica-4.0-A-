@@ -1440,12 +1440,15 @@
       </div>
 
       <!-- CARD EXCLUSIVO DO ADMINISTRADOR -->
-      <div id="cardAdminModulo" class="card" style="border-color: #d97706; background: linear-gradient(145deg, #2a1b0c 0%, #171109 100%); display:none;" onclick="abrirModulo('admin')">
+      <div id="cardAdminModulo" class="card" style="border-color: #d97706; background: linear-gradient(145deg, #2a1b0c 0%, #171109 100%); display:none; box-shadow: 0 0 16px rgba(217, 119, 6, 0.25);" onclick="abrirModulo('admin')">
         <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
         <div class="icon" style="background:linear-gradient(135deg, #451a03 0%, #1f1206 100%); border-color:#b45309;">👑</div>
-        <h3 style="color:#fbbf24;">Painel do Administrador</h3>
-        <p>Acesso exclusivo: monitoramento em tempo real de quem está logado, novos cadastros, histórico de sessões e exclusão de contas.</p>
-        <button class="button" style="background:#b45309; border-color:#f59e0b;" onclick="abrirModulo('admin')">Gerenciar Usuários</button>
+        <h3 style="color:#fbbf24; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:6px;">
+          <span>Painel do Administrador</span>
+          <span style="font-size:10px; background:#b45309; color:#fff; padding:2px 8px; border-radius:10px; font-weight:800; letter-spacing:0.5px;">EXCLUSIVO • ADMIN</span>
+        </h3>
+        <p style="color:#cbd5e1;">Área restrita de controle geral: monitore mecânicos online no momento, novos cadastros em tempo real, histórico de logins e exclua contas imediatamente.</p>
+        <button class="button" style="background:#b45309; border-color:#f59e0b;" onclick="abrirModulo('admin')">👑 Gerenciar Acessos & Usuários</button>
       </div>
 
     </section>
@@ -2872,12 +2875,31 @@ function isUsuarioAdmin(email) {
     email = el ? el.innerText : '';
   }
   const emailNorm = (email || '').toLowerCase().trim();
-  return (
-    emailNorm.includes('eduardo') ||
-    emailNorm.includes('admin') ||
-    emailNorm === 'eduardonoronha@gmail.com' ||
-    localStorage.getItem('mecanica_modo_admin_ativo') === 'true'
-  );
+  if (!emailNorm) return false;
+
+  // Lista estrita de e-mails autorizados do Administrador Geral (Eduardo Noronha)
+  const emailsAutorizados = [
+    'eduardonoronha@gmail.com',
+    'eduardo@gmail.com',
+    'dudueag@gmail.com',
+    'dudueag-debug@gmail.com'
+  ];
+
+  const isEduardoEmail = emailsAutorizados.includes(emailNorm) ||
+    emailNorm === 'eduardo' ||
+    emailNorm === 'eduardonoronha' ||
+    emailNorm.startsWith('eduardonoronha@') ||
+    emailNorm.startsWith('eduardo.noronha@') ||
+    emailNorm.includes('dudueag');
+
+  if (isEduardoEmail) return true;
+
+  // Ou se a Senha Mestra de Administrador foi validada nesta sessão
+  if (sessionStorage.getItem('mecanica_modo_admin_ativo') === 'true' || localStorage.getItem('mecanica_modo_admin_ativo') === 'true') {
+    return true;
+  }
+
+  return false;
 }
 
 function verificarAcessoAdmin() {
@@ -2886,12 +2908,19 @@ function verificarAcessoAdmin() {
   if (isUsuarioAdmin(emailAtual)) {
     return true;
   }
-  const pin = prompt('🔒 Área Restrita ao Administrador (Eduardo Noronha).\nDigite a Senha Mestra de Administrador:');
+  const pin = prompt('🔒 ÁREA EXCLUSIVA DO ADMINISTRADOR GERAL (EDUARDO NORONHA)\n\nEste módulo e suas ferramentas são estritamente confidenciais.\nDigite a Senha Mestra de Administrador para liberar o acesso:');
   if (pin === '4838' || pin === 'admin40' || pin === '48380712' || pin === 'eduardo') {
+    sessionStorage.setItem('mecanica_modo_admin_ativo', 'true');
     localStorage.setItem('mecanica_modo_admin_ativo', 'true');
+    const cardAdm = document.getElementById('cardAdminModulo');
+    const badgeAdm = document.getElementById('badgeAdminHeader');
+    const btnAdm = document.getElementById('btnAcessoAdminRapido');
+    if (cardAdm) cardAdm.style.display = 'flex';
+    if (badgeAdm) badgeAdm.style.display = 'inline-block';
+    if (btnAdm) btnAdm.style.display = 'inline-block';
     return true;
   }
-  alert('Acesso negado: Senha de administrador incorreta.');
+  alert('⛔ Acesso Negado: Senha mestra incorreta.\nEste módulo é restrito exclusivamente ao Administrador Geral (Eduardo Noronha).');
   return false;
 }
 
@@ -3358,8 +3387,16 @@ async function fazerCadastro() {
   }
 }
 
-async function fazerLogout() {
-  await db.auth.signOut();
+async async function fazerLogout() {
+  const emailAtual = (document.getElementById('usuarioLogadoEmail')?.innerText || '').trim();
+  if (emailAtual) {
+    registrarTelemetriaUsuario(emailAtual, 'logout');
+  }
+  sessionStorage.removeItem('mecanica_modo_admin_ativo');
+  localStorage.removeItem('mecanica_modo_admin_ativo');
+  try {
+    await db.auth.signOut();
+  } catch (e) {}
   location.reload();
 }
 
@@ -4600,6 +4637,14 @@ function abrirModulo(id) {
 
   if (id === 'relatorios-prontos') {
     carregarRelatoriosProntos();
+  }
+
+  if (id === 'admin') {
+    if (!verificarAcessoAdmin()) {
+      voltarGrid();
+      return;
+    }
+    carregarDashboardAdmin();
   }
 
   if (id === 'admin') {
