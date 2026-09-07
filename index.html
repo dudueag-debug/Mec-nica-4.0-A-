@@ -2871,15 +2871,18 @@
     <!-- ABAS E CONTEÚDO PRINCIPAL -->
     <div class="content-block">
       <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px; border-bottom:1px solid #283a54; padding-bottom:12px;">
-        <div style="display:flex; gap:8px; flex-wrap:wrap;">
-          <button class="button" id="tab_btn_online" style="background:#065f46; border-color:#10b981; font-size:12px; margin-top:0;" onclick="alternarAbaAdmin('online')">🟢 Online Agora (<span id="adm_tab_count_online">0</span>)</button>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+          <button class="button" id="tab_btn_todos" style="background:#0284c7; border-color:#38bdf8; font-size:12px; margin-top:0; font-weight:700;" onclick="alternarAbaAdmin('todos')">👥 Todos os Usuários (<span id="adm_tab_count_todos">0</span>)</button>
+          <button class="button secondary" id="tab_btn_online" style="font-size:12px; margin-top:0;" onclick="alternarAbaAdmin('online')">🟢 Online Agora (<span id="adm_tab_count_online">0</span>)</button>
           <button class="button secondary" id="tab_btn_cadastros" style="font-size:12px; margin-top:0;" onclick="alternarAbaAdmin('cadastros')">🆕 Novos Cadastros (<span id="adm_tab_count_cadastros">0</span>)</button>
-          <button class="button secondary" id="tab_btn_todos" style="font-size:12px; margin-top:0;" onclick="alternarAbaAdmin('todos')">👥 Todos os Usuários (<span id="adm_tab_count_todos">0</span>)</button>
-          <button class="button secondary" id="tab_btn_historico" style="font-size:12px; margin-top:0;" onclick="alternarAbaAdmin('historico')">📋 Histórico Geral de Logins</button>
+          <button class="button secondary" id="tab_btn_historico" style="font-size:12px; margin-top:0;" onclick="alternarAbaAdmin('historico')">📋 Histórico Geral</button>
         </div>
 
-        <div style="min-width:240px; flex-grow:1; max-width:360px;">
-          <input type="text" id="busca_usuarios_admin" placeholder="🔍 Filtrar por e-mail..." oninput="filtrarUsuariosAdmin()" style="width:100%; padding:8px 12px; font-size:13px; background:#090f1a; border:1px solid #293d5c; border-radius:6px; color:#fff;">
+        <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; flex-grow:1; justify-content:flex-end;">
+          <div style="min-width:210px; max-width:320px; flex-grow:1;">
+            <input type="text" id="busca_usuarios_admin" placeholder="🔍 Buscar usuário por e-mail ou nome..." oninput="filtrarUsuariosAdmin()" style="width:100%; padding:8px 12px; font-size:13px; background:#090f1a; border:1px solid #293d5c; border-radius:6px; color:#fff;">
+          </div>
+          <button class="button" style="background:linear-gradient(135deg, #059669 0%, #047857 100%); border-color:#10b981; font-size:12px; margin-top:0; padding:8px 14px; display:inline-flex; align-items:center; gap:6px; font-weight:700;" onclick="abrirModalNovoUsuarioAdmin()">➕ Cadastrar Usuário</button>
         </div>
       </div>
 
@@ -2913,7 +2916,7 @@ let equipamentoSelecionadoId = null;
 
 
 /* ===================== DASHBOARD DE ADMINISTRADOR & TELEMETRIA EM TEMPO REAL ===================== */
-let abaAdminAtiva = 'online';
+let abaAdminAtiva = 'todos';
 let telemetriaLogsCache = [];
 let usuariosCadastradosCache = [];
 
@@ -2928,6 +2931,7 @@ function isUsuarioAdmin(email) {
   // Lista estrita de e-mails autorizados do Administrador Geral (Eduardo Noronha)
   const emailsAutorizados = [
     'eduardonoronha@gmail.com',
+    'dudusemog@gmail.com',
     'eduardo@gmail.com',
     'dudueag@gmail.com',
     'dudueag-debug@gmail.com'
@@ -3034,28 +3038,53 @@ function registrarTelemetriaUsuario(email, acao) {
 async function carregarDashboardAdmin() {
   const container = document.getElementById('adm_conteudo_dinamico');
   if (container) {
-    container.innerHTML = '<div style="color:#8190a7; text-align:center; padding:30px;">Carregando telemetria em tempo real...</div>';
+    container.innerHTML = '<div style="color:#8190a7; text-align:center; padding:30px;">Carregando dados dos usuários cadastrados...</div>';
   }
 
-  // 1. Carrega usuários registrados locais
+  // 1. Carrega base de usuários
   let usuarios = [];
   try {
     usuarios = JSON.parse(localStorage.getItem('mecanica_usuarios_registrados') || '[]');
   } catch (e) { usuarios = []; }
 
-  // Garante a presença do admin
-  if (!usuarios.some(u => u.email.includes('eduardo'))) {
-    usuarios.unshift({
-      id: 'usr-admin-eduardo',
+  // Garante a presença oficial do Administrador Eduardo Noronha
+  const contasAdminEduardo = [
+    {
+      id: 'usr-admin-eduardo-1',
       email: 'eduardonoronha@gmail.com',
+      nome: 'Eduardo Noronha',
+      cargo: 'Administrador Geral',
       criado_em: '2026-09-01T08:00:00.000Z',
       ultimo_acesso: new Date().toISOString(),
       ultimo_login: new Date().toISOString(),
       dispositivo: '💻 Computador / Web (Admin)',
       online: true,
       role: 'Administrador'
-    });
-  }
+    },
+    {
+      id: 'usr-admin-eduardo-2',
+      email: 'dudusemog@gmail.com',
+      nome: 'Eduardo Noronha (Criador)',
+      cargo: 'Administrador do Sistema',
+      criado_em: '2026-09-01T08:00:00.000Z',
+      ultimo_acesso: new Date().toISOString(),
+      ultimo_login: new Date().toISOString(),
+      dispositivo: '📱 iPhone / Mobile (iOS)',
+      online: true,
+      role: 'Administrador'
+    }
+  ];
+
+  contasAdminEduardo.forEach(adm => {
+    const idx = usuarios.findIndex(u => u.email.toLowerCase() === adm.email.toLowerCase());
+    if (idx >= 0) {
+      usuarios[idx].role = 'Administrador';
+      usuarios[idx].nome = adm.nome;
+      usuarios[idx].cargo = adm.cargo;
+    } else {
+      usuarios.unshift(adm);
+    }
+  });
 
   // 2. Carrega logs de telemetria
   let logs = [];
@@ -3063,38 +3092,40 @@ async function carregarDashboardAdmin() {
     logs = JSON.parse(localStorage.getItem('mecanica_telemetria_logs') || '[]');
   } catch (e) { logs = []; }
 
-  // 3. Busca registros de auditoria no Supabase
+  // 3. Tenta sincronizar registros adicionais de auditoria do Supabase
   try {
-    const { data: supaLogs } = await db.from('intervencoes')
-      .select('*')
-      .eq('tag', 'SYS-AUTH')
-      .order('criado_em', { ascending: false })
-      .limit(50);
+    if (typeof db !== 'undefined' && db) {
+      const { data: supaLogs } = await db.from('intervencoes')
+        .select('*')
+        .order('criado_em', { ascending: false })
+        .limit(30);
 
-    if (supaLogs && supaLogs.length > 0) {
-      supaLogs.forEach(s => {
-        const matchEmail = (s.acao || '').match(/\[USUARIO:([^\|]+)/);
-        const matchAcao = (s.acao || '').match(/\|ACAO:([^\|]+)/);
-        const matchDev = (s.acao || '').match(/\|DEVICE:([^\|]+)/);
-        const emailExt = matchEmail ? matchEmail[1] : null;
-        if (emailExt && !usuarios.some(u => u.email === emailExt)) {
-          usuarios.push({
-            id: 'usr-supa-' + s.id,
-            email: emailExt,
-            criado_em: s.criado_em,
-            ultimo_acesso: s.criado_em,
-            ultimo_login: s.criado_em,
-            dispositivo: matchDev ? matchDev[1] : 'Dispositivo Móvel',
-            online: false
-          });
-        }
-      });
+      if (supaLogs && supaLogs.length > 0) {
+        supaLogs.forEach(s => {
+          const matchEmail = (s.acao || '').match(/\[USUARIO:([^\|]+)/);
+          const matchAcao = (s.acao || '').match(/\|ACAO:([^\|]+)/);
+          const matchDev = (s.acao || '').match(/\|DEVICE:([^\|]+)/);
+          const emailExt = matchEmail ? matchEmail[1].trim().toLowerCase() : null;
+          if (emailExt && !usuarios.some(u => u.email.toLowerCase() === emailExt)) {
+            usuarios.push({
+              id: 'usr-supa-' + s.id,
+              email: emailExt,
+              nome: emailExt.split('@')[0],
+              cargo: 'Mecânico Cadastrado',
+              criado_em: s.criado_em,
+              ultimo_acesso: s.criado_em,
+              ultimo_login: s.criado_em,
+              dispositivo: matchDev ? matchDev[1] : '📱 Dispositivo Móvel',
+              online: false,
+              role: 'Mecânico'
+            });
+          }
+        });
+      }
     }
-  } catch (errSupa) {
-    console.warn('Erro ao ler auditoria Supabase:', errSupa);
-  }
+  } catch (errSupa) {}
 
-  // Filtra usuários que foram explicitamente excluídos pelo administrador
+  // Filtra usuários bloqueados pelo administrador
   const excluidos = JSON.parse(localStorage.getItem('mecanica_usuarios_bloqueados') || '[]');
   usuarios = usuarios.filter(u => !excluidos.includes(u.email.toLowerCase()));
   logs = logs.filter(l => !excluidos.includes(l.email.toLowerCase()));
@@ -3108,12 +3139,13 @@ async function carregarDashboardAdmin() {
 
   usuariosCadastradosCache = usuarios;
   telemetriaLogsCache = logs;
+  localStorage.setItem('mecanica_usuarios_registrados', JSON.stringify(usuarios));
 
   // Atualiza KPIs
   const totalUsuarios = usuarios.length;
   const onlineAgora = usuarios.filter(u => u.online).length;
 
-  const umDiaAtras = Date.now() - (24 * 60 * 60 * 1000);
+  const umDiaAtras = Date.now() - (48 * 60 * 60 * 1000);
   const novosCadastros = usuarios.filter(u => {
     const t = u.criado_em ? new Date(u.criado_em).getTime() : 0;
     return t >= umDiaAtras;
@@ -3122,28 +3154,37 @@ async function carregarDashboardAdmin() {
   const hojeStr = new Date().toISOString().slice(0, 10);
   const loginsHoje = logs.filter(l => (l.timestamp || '').startsWith(hojeStr)).length;
 
-  document.getElementById('adm_kpi_total_usuarios').innerText = totalUsuarios;
-  document.getElementById('adm_kpi_online_agora').innerText = onlineAgora;
-  document.getElementById('adm_kpi_novos_cadastros').innerText = novosCadastros;
-  document.getElementById('adm_kpi_logins_hoje').innerText = Math.max(loginsHoje, onlineAgora);
+  const kpiTot = document.getElementById('adm_kpi_total_usuarios');
+  const kpiOn = document.getElementById('adm_kpi_online_agora');
+  const kpiNov = document.getElementById('adm_kpi_novos_cadastros');
+  const kpiLog = document.getElementById('adm_kpi_logins_hoje');
 
-  document.getElementById('adm_tab_count_online').innerText = onlineAgora;
-  document.getElementById('adm_tab_count_cadastros').innerText = novosCadastros;
-  document.getElementById('adm_tab_count_todos').innerText = totalUsuarios;
+  if (kpiTot) kpiTot.innerText = totalUsuarios;
+  if (kpiOn) kpiOn.innerText = onlineAgora;
+  if (kpiNov) kpiNov.innerText = novosCadastros;
+  if (kpiLog) kpiLog.innerText = Math.max(loginsHoje, onlineAgora);
+
+  const tabCountOn = document.getElementById('adm_tab_count_online');
+  const tabCountCad = document.getElementById('adm_tab_count_cadastros');
+  const tabCountTot = document.getElementById('adm_tab_count_todos');
+
+  if (tabCountOn) tabCountOn.innerText = onlineAgora;
+  if (tabCountCad) tabCountCad.innerText = novosCadastros;
+  if (tabCountTot) tabCountTot.innerText = totalUsuarios;
 
   renderizarAbaAdmin();
 }
 
 function alternarAbaAdmin(aba) {
   abaAdminAtiva = aba;
-  const abas = ['online', 'cadastros', 'todos', 'historico'];
+  const abas = ['todos', 'online', 'cadastros', 'historico'];
   abas.forEach(a => {
     const btn = document.getElementById('tab_btn_' + a);
     if (btn) {
       if (a === aba) {
         btn.className = 'button';
-        btn.style.background = '#065f46';
-        btn.style.borderColor = '#10b981';
+        btn.style.background = '#0284c7';
+        btn.style.borderColor = '#38bdf8';
       } else {
         btn.className = 'button secondary';
         btn.style.background = '';
@@ -3162,74 +3203,107 @@ function renderizarAbaAdmin() {
   const container = document.getElementById('adm_conteudo_dinamico');
   if (!container) return;
 
-  const busca = (document.getElementById('busca_usuarios_admin').value || '').toLowerCase().trim();
+  const busca = (document.getElementById('busca_usuarios_admin')?.value || '').toLowerCase().trim();
 
   let lista = [];
-  if (abaAdminAtiva === 'online') {
+  let tituloAba = '👥 Todos os Usuários Cadastrados no Sistema';
+  let descAba = 'Relação completa de todas as pessoas que já possuem cadastro ou acesso no aplicativo Mecânica 4.0 IA.';
+
+  if (abaAdminAtiva === 'todos') {
+    lista = [...usuariosCadastradosCache];
+    tituloAba = '👥 Todos os Usuários Cadastrados no Sistema';
+    descAba = 'Relação completa de todos os mecânicos e colaboradores cadastrados.';
+  } else if (abaAdminAtiva === 'online') {
     lista = usuariosCadastradosCache.filter(u => u.online);
+    tituloAba = '🟢 Usuários Conectados e Ativos Agora';
+    descAba = 'Mecânicos que estão com o aplicativo aberto nos últimos 5 minutos.';
   } else if (abaAdminAtiva === 'cadastros') {
-    const umDiaAtras = Date.now() - (48 * 60 * 60 * 1000);
+    const doisDiasAtras = Date.now() - (48 * 60 * 60 * 1000);
     lista = usuariosCadastradosCache.filter(u => {
       const t = u.criado_em ? new Date(u.criado_em).getTime() : 0;
-      return t >= umDiaAtras;
+      return t >= doisDiasAtras;
     });
-  } else if (abaAdminAtiva === 'todos') {
-    lista = [...usuariosCadastradosCache];
+    tituloAba = '🆕 Novos Cadastros Recentes';
+    descAba = 'Contas criadas recentemente no aplicativo.';
   } else if (abaAdminAtiva === 'historico') {
     renderizarHistoricoLogsAdmin(container, busca);
     return;
   }
 
   if (busca) {
-    lista = lista.filter(u => u.email.toLowerCase().includes(busca));
+    lista = lista.filter(u =>
+      (u.email || '').toLowerCase().includes(busca) ||
+      (u.nome || '').toLowerCase().includes(busca) ||
+      (u.cargo || '').toLowerCase().includes(busca)
+    );
   }
 
   if (lista.length === 0) {
     container.innerHTML = `
-      <div style="color:#8190a7; text-align:center; padding:35px; background:#0b1424; border-radius:10px;">
-        <p style="font-size:15px; margin:0;">Nenhum usuário encontrado nesta visualização.</p>
+      <div style="color:#8190a7; text-align:center; padding:40px; background:#0b1424; border-radius:10px; border:1px solid #1f2f47;">
+        <span style="font-size:32px; display:block; margin-bottom:10px;">🔍</span>
+        <p style="font-size:16px; color:#f1f5f9; margin:0 0 6px 0; font-weight:700;">Nenhum usuário encontrado</p>
+        <p style="font-size:13px; color:#94a3b8; margin:0;">Tente outro termo de busca ou adicione um novo cadastro no botão verde acima.</p>
       </div>
     `;
     return;
   }
 
   container.innerHTML = `
-    <div style="overflow-x:auto;">
-      <table style="width:100%; border-collapse:collapse;">
+    <div style="margin-bottom:14px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+      <div>
+        <h4 style="color:#38bdf8; margin:0; font-size:16px; font-weight:800;">${tituloAba} (${lista.length})</h4>
+        <span style="font-size:12px; color:#94a3b8;">${descAba}</span>
+      </div>
+    </div>
+
+    <div style="overflow-x:auto; border:1px solid #1e2d44; border-radius:10px; background:#070d18;">
+      <table style="width:100%; border-collapse:collapse; text-align:left;">
         <thead>
-          <tr>
-            <th>Status</th>
-            <th>Usuário / E-mail</th>
-            <th>Dispositivo</th>
-            <th>Último Acesso</th>
-            <th>Cadastro</th>
-            <th style="text-align:right;">Ações do Administrador</th>
+          <tr style="background:#0e1728; border-bottom:2px solid #23354f;">
+            <th style="padding:12px 14px; font-size:12px; color:#94a3b8; text-transform:uppercase;">Status</th>
+            <th style="padding:12px 14px; font-size:12px; color:#94a3b8; text-transform:uppercase;">Mecânico / E-mail</th>
+            <th style="padding:12px 14px; font-size:12px; color:#94a3b8; text-transform:uppercase;">Função / Cargo</th>
+            <th style="padding:12px 14px; font-size:12px; color:#94a3b8; text-transform:uppercase;">Dispositivo</th>
+            <th style="padding:12px 14px; font-size:12px; color:#94a3b8; text-transform:uppercase;">Data Cadastro</th>
+            <th style="padding:12px 14px; font-size:12px; color:#94a3b8; text-transform:uppercase;">Último Acesso</th>
+            <th style="padding:12px 14px; font-size:12px; color:#94a3b8; text-transform:uppercase; text-align:right;">Ações</th>
           </tr>
         </thead>
         <tbody>
-          ${lista.map(u => {
-            const dataLogin = u.ultimo_acesso ? new Date(u.ultimo_acesso).toLocaleString('pt-BR') : 'N/A';
-            const dataCriacao = u.criado_em ? new Date(u.criado_em).toLocaleDateString('pt-BR') : 'N/A';
-            const isSelf = (document.getElementById('usuarioLogadoEmail').innerText || '').toLowerCase() === u.email.toLowerCase();
+          ${lista.map((u, index) => {
+            const dataLogin = u.ultimo_acesso ? new Date(u.ultimo_acesso).toLocaleString('pt-BR') : 'Sem registro';
+            const dataCriacao = u.criado_em ? new Date(u.criado_em).toLocaleDateString('pt-BR') : 'Cadastrado';
+            const emailAtual = (document.getElementById('usuarioLogadoEmail')?.innerText || '').toLowerCase();
+            const isSelf = emailAtual === u.email.toLowerCase();
+            const isAdmin = isUsuarioAdmin(u.email);
 
             return `
-              <tr style="border-bottom:1px solid #1e2d44;">
-                <td style="white-space:nowrap;">
+              <tr style="border-bottom:1px solid #162438; background:${index % 2 === 0 ? '#080e1b' : '#0a1222'}; transition:background 0.2s;">
+                <td style="padding:12px 14px; white-space:nowrap;">
                   ${u.online ?
-                    `<span style="display:inline-flex; align-items:center; gap:5px; background:rgba(16,185,129,0.15); color:#34d399; font-weight:700; font-size:11.5px; padding:3px 8px; border-radius:12px; border:1px solid rgba(16,185,129,0.3);"><span style="width:7px; height:7px; background:#10b981; border-radius:50%; box-shadow:0 0 6px #10b981;"></span> Online Agora</span>` :
-                    `<span style="color:#64748b; font-size:11.5px;">⚪ Desconectado</span>`
+                    `<span style="display:inline-flex; align-items:center; gap:6px; background:rgba(16,185,129,0.15); color:#34d399; font-weight:700; font-size:11.5px; padding:3px 10px; border-radius:12px; border:1px solid rgba(16,185,129,0.3);"><span style="width:8px; height:8px; background:#10b981; border-radius:50%; box-shadow:0 0 8px #10b981; animation:pulse 2s infinite;"></span> Online</span>` :
+                    `<span style="display:inline-flex; align-items:center; gap:6px; color:#64748b; font-size:11.5px; background:rgba(100,116,139,0.1); padding:3px 8px; border-radius:10px;"><span style="width:6px; height:6px; background:#64748b; border-radius:50%;"></span> Offline</span>`
                   }
                 </td>
-                <td>
-                  <b style="color:#f8fafc; font-size:14px;">${u.email}</b>
-                  ${u.email.includes('eduardo') ? '<span style="margin-left:6px; font-size:10.5px; background:#b45309; color:#fff; padding:2px 6px; border-radius:4px; font-weight:800;">ADMIN</span>' : ''}
+                <td style="padding:12px 14px;">
+                  <div style="font-weight:700; color:#ffffff; font-size:13.5px; display:flex; align-items:center; gap:6px;">
+                    <span>${u.nome || u.email.split('@')[0]}</span>
+                    ${isAdmin ? '<span style="font-size:10px; background:linear-gradient(135deg,#b45309,#f59e0b); color:#fff; padding:2px 6px; border-radius:4px; font-weight:800;">ADMIN</span>' : ''}
+                  </div>
+                  <div style="font-size:12px; color:#38bdf8;">${u.email}</div>
                 </td>
-                <td style="color:#94a3b8; font-size:12.5px;">${u.dispositivo || 'Mobile/Web'}</td>
-                <td style="color:#cbd5e1; font-size:12.5px;">${dataLogin}</td>
-                <td style="color:#94a3b8; font-size:12.5px;">${dataCriacao}</td>
-                <td style="text-align:right; white-space:nowrap;">
-                  ${u.online && !isSelf ? `<button class="button secondary" style="font-size:11.5px; padding:5px 10px; margin:0 4px 0 0; color:#fbbf24; border-color:#d97706;" onclick="forcarLogoutUsuarioAdmin('${u.id}', '${u.email}')">🚫 Desconectar</button>` : ''}
-                  ${!isSelf ? `<button class="button" style="background:#dc2626; border-color:#ef4444; font-size:11.5px; padding:5px 12px; margin:0;" onclick="excluirUsuarioAdmin('${u.id}', '${u.email}')">🗑️ Excluir</button>` : '<span style="font-size:11px; color:#64748b;">(Sua conta)</span>'}
+                <td style="padding:12px 14px; white-space:nowrap;">
+                  <span style="font-size:11.5px; font-weight:600; padding:2px 8px; border-radius:6px; background:${isAdmin ? 'rgba(245,158,11,0.15)' : 'rgba(56,189,248,0.12)'}; color:${isAdmin ? '#fbbf24' : '#7dd3fc'}; border:1px solid ${isAdmin ? 'rgba(245,158,11,0.3)' : 'rgba(56,189,248,0.25)'};">
+                    ${u.cargo || (isAdmin ? 'Administrador Geral' : 'Mecânico Industrial')}
+                  </span>
+                </td>
+                <td style="padding:12px 14px; color:#94a3b8; font-size:12px; white-space:nowrap;">${u.dispositivo || '📱 Mobile'}</td>
+                <td style="padding:12px 14px; color:#cbd5e1; font-size:12px; white-space:nowrap;">📅 ${dataCriacao}</td>
+                <td style="padding:12px 14px; color:#cbd5e1; font-size:12px; white-space:nowrap;">⏰ ${dataLogin}</td>
+                <td style="padding:12px 14px; text-align:right; white-space:nowrap;">
+                  ${u.online && !isSelf ? `<button class="button secondary" style="font-size:11px; padding:5px 9px; margin:0 4px 0 0; color:#fbbf24; border-color:#d97706;" onclick="forcarLogoutUsuarioAdmin('${u.id}', '${u.email}')">🚫 Desconectar</button>` : ''}
+                  ${!isSelf ? `<button class="button" style="background:#dc2626; border-color:#ef4444; font-size:11px; padding:5px 10px; margin:0;" onclick="excluirUsuarioAdmin('${u.id}', '${u.email}')">🗑️ Excluir</button>` : '<span style="font-size:11px; color:#38bdf8; font-weight:700;">(Você)</span>'}
                 </td>
               </tr>
             `;
@@ -3238,6 +3312,52 @@ function renderizarAbaAdmin() {
       </table>
     </div>
   `;
+}
+
+function abrirModalNovoUsuarioAdmin() {
+  const email = prompt('➕ CADASTRAR NOVO USUÁRIO / MECÂNICO\n\nDigite o e-mail do colaborador:');
+  if (!email || !email.trim()) return;
+
+  const emailNorm = email.trim().toLowerCase();
+  const nome = prompt('Digite o nome completo:', emailNorm.split('@')[0]);
+  const cargo = prompt('Digite a função (ex: Mecânico Industrial, Eletromecânico, Lubrificador, Técnico):', 'Mecânico Industrial');
+
+  const agora = new Date().toISOString();
+  const novo = {
+    id: 'usr-' + Date.now(),
+    email: emailNorm,
+    nome: nome ? nome.trim() : emailNorm.split('@')[0],
+    cargo: cargo ? cargo.trim() : 'Mecânico Industrial',
+    criado_em: agora,
+    ultimo_acesso: agora,
+    ultimo_login: 'Nunca acessou',
+    dispositivo: '📱 Mobile / Web',
+    online: false,
+    role: 'Mecânico'
+  };
+
+  let usuarios = JSON.parse(localStorage.getItem('mecanica_usuarios_registrados') || '[]');
+  if (usuarios.some(u => u.email.toLowerCase() === novo.email)) {
+    alert('⚠️ Este e-mail já está cadastrado no sistema!');
+    return;
+  }
+
+  usuarios.unshift(novo);
+  localStorage.setItem('mecanica_usuarios_registrados', JSON.stringify(usuarios));
+
+  // Registra nos logs
+  let logs = JSON.parse(localStorage.getItem('mecanica_telemetria_logs') || '[]');
+  logs.unshift({
+    id: 'tel-' + Date.now(),
+    email: novo.email,
+    acao: 'cadastro',
+    timestamp: agora,
+    dispositivo: 'Console Admin'
+  });
+  localStorage.setItem('mecanica_telemetria_logs', JSON.stringify(logs.slice(0, 200)));
+
+  alert('✔ Usuário ' + novo.email + ' cadastrado com sucesso no Mecânica 4.0 IA!');
+  carregarDashboardAdmin();
 }
 
 function renderizarHistoricoLogsAdmin(container, busca) {
@@ -3252,18 +3372,18 @@ function renderizarHistoricoLogsAdmin(container, busca) {
   }
 
   container.innerHTML = `
-    <div style="overflow-x:auto;">
-      <table style="width:100%; border-collapse:collapse;">
+    <div style="overflow-x:auto; border:1px solid #1e2d44; border-radius:10px; background:#070d18;">
+      <table style="width:100%; border-collapse:collapse; text-align:left;">
         <thead>
-          <tr>
-            <th>Data e Hora</th>
-            <th>Usuário</th>
-            <th>Ação Registrada</th>
-            <th>Dispositivo</th>
+          <tr style="background:#0e1728; border-bottom:2px solid #23354f;">
+            <th style="padding:10px 14px; font-size:12px; color:#94a3b8;">Data e Hora</th>
+            <th style="padding:10px 14px; font-size:12px; color:#94a3b8;">Usuário</th>
+            <th style="padding:10px 14px; font-size:12px; color:#94a3b8;">Ação Registrada</th>
+            <th style="padding:10px 14px; font-size:12px; color:#94a3b8;">Dispositivo</th>
           </tr>
         </thead>
         <tbody>
-          ${logs.slice(0, 60).map(l => {
+          ${logs.slice(0, 60).map((l, index) => {
             const dataHora = l.timestamp ? new Date(l.timestamp).toLocaleString('pt-BR') : 'N/A';
             let acaoTag = '<span style="color:#38bdf8;">Login</span>';
             if (l.acao === 'cadastro') acaoTag = '<span style="color:#fbbf24; font-weight:700;">🆕 Novo Cadastro</span>';
@@ -3271,11 +3391,11 @@ function renderizarHistoricoLogsAdmin(container, busca) {
             if (l.acao === 'logout') acaoTag = '<span style="color:#94a3b8;">Logout</span>';
 
             return `
-              <tr style="border-bottom:1px solid #1e2d44;">
-                <td style="color:#cbd5e1; font-size:12.5px;">${dataHora}</td>
-                <td><b style="color:#f8fafc;">${l.email}</b></td>
-                <td>${acaoTag}</td>
-                <td style="color:#94a3b8; font-size:12.5px;">${l.dispositivo || 'Navegador'}</td>
+              <tr style="border-bottom:1px solid #162438; background:${index % 2 === 0 ? '#080e1b' : '#0a1222'};">
+                <td style="padding:10px 14px; color:#cbd5e1; font-size:12px;">${dataHora}</td>
+                <td style="padding:10px 14px;"><b style="color:#f8fafc;">${l.email}</b></td>
+                <td style="padding:10px 14px;">${acaoTag}</td>
+                <td style="padding:10px 14px; color:#94a3b8; font-size:12px;">${l.dispositivo || 'Navegador'}</td>
               </tr>
             `;
           }).join('')}
