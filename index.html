@@ -1314,7 +1314,7 @@
     <h2 style="font-size:25px; margin-bottom:4px; color:#ffffff; font-weight:900; letter-spacing:0.5px;">Mecânica 4.0 IA</h2>
     <p class="sub" style="color:#94a3b8; font-size:13px; margin-bottom:20px;">Engenharia & Manutenção Industrial Avançada<br><span style="color:#38bdf8; font-size:11.5px; font-weight:700;">Criado por Eduardo Noronha</span></p>
 
-    <div class="field" style="text-align:left;"><label>E-mail</label><input type="email" id="login_email" placeholder="seu@email.com" onkeydown="if(event.key==='Enter') fazerLogin()"></div>
+    <div class="field" style="text-align:left;"><label>E-mail</label><input type="email" id="login_email" value="dudusemog@gmail.com" placeholder="dudusemog@gmail.com" onkeydown="if(event.key==='Enter') fazerLogin()"></div>
     <div class="field" style="text-align:left;"><label>Senha</label><input type="password" id="login_senha" placeholder="••••••••" onkeydown="if(event.key==='Enter') fazerLogin()"></div>
 
     <button class="button" id="btnEntrar" onclick="fazerLogin()">Entrar no Sistema</button>
@@ -2905,6 +2905,14 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+/* ===================== LIMPEZA & NORMALIZAÇÃO DE E-MAIL DO ADMIN ===================== */
+try {
+  const lastUser = localStorage.getItem('mecanica_ultimo_usuario_conectado');
+  if (lastUser === 'eduardonoronha@gmail.com') {
+    localStorage.setItem('mecanica_ultimo_usuario_conectado', 'dudusemog@gmail.com');
+  }
+} catch(e) {}
+
 /* ===================== CONFIGURAÇÃO SUPABASE ===================== */
 const SUPABASE_URL = 'https://ceztsxlqzbtdfjxjpghl.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_osbE7BMeiqDbAHvNpzlLxA_rk8YTKVm';
@@ -2928,23 +2936,19 @@ function isUsuarioAdmin(email) {
   const emailNorm = (email || '').toLowerCase().trim();
   if (!emailNorm) return false;
 
-  // Lista estrita de e-mails autorizados do Administrador Geral (Eduardo Noronha)
-  const emailsAutorizados = [
-    'eduardonoronha@gmail.com',
-    'dudusemog@gmail.com',
-    'eduardo@gmail.com',
-    'dudueag@gmail.com',
-    'dudueag-debug@gmail.com'
-  ];
-
-  const isEduardoEmail = emailsAutorizados.includes(emailNorm) ||
+  // E-mail oficial e exclusivo do Administrador Geral: dudusemog@gmail.com
+  const isDuduAdmin = (
+    emailNorm === 'dudusemog@gmail.com' ||
+    emailNorm === 'dudusemog' ||
+    emailNorm.includes('dudusemog') ||
+    emailNorm === 'eduardonoronha@gmail.com' ||
+    emailNorm === 'dudueag@gmail.com' ||
+    emailNorm === 'dudueag-debug@gmail.com' ||
     emailNorm === 'eduardo' ||
-    emailNorm === 'eduardonoronha' ||
-    emailNorm.startsWith('eduardonoronha@') ||
-    emailNorm.startsWith('eduardo.noronha@') ||
-    emailNorm.includes('dudueag');
+    emailNorm === 'eduardonoronha'
+  );
 
-  if (isEduardoEmail) return true;
+  if (isDuduAdmin) return true;
 
   // Ou se a Senha Mestra de Administrador foi validada nesta sessão
   if (sessionStorage.getItem('mecanica_modo_admin_ativo') === 'true' || localStorage.getItem('mecanica_modo_admin_ativo') === 'true') {
@@ -3047,44 +3051,34 @@ async function carregarDashboardAdmin() {
     usuarios = JSON.parse(localStorage.getItem('mecanica_usuarios_registrados') || '[]');
   } catch (e) { usuarios = []; }
 
-  // Garante a presença oficial do Administrador Eduardo Noronha
-  const contasAdminEduardo = [
-    {
-      id: 'usr-admin-eduardo-1',
-      email: 'eduardonoronha@gmail.com',
-      nome: 'Eduardo Noronha',
-      cargo: 'Administrador Geral',
-      criado_em: '2026-09-01T08:00:00.000Z',
-      ultimo_acesso: new Date().toISOString(),
-      ultimo_login: new Date().toISOString(),
-      dispositivo: '💻 Computador / Web (Admin)',
-      online: true,
-      role: 'Administrador'
-    },
-    {
-      id: 'usr-admin-eduardo-2',
-      email: 'dudusemog@gmail.com',
-      nome: 'Eduardo Noronha (Criador)',
-      cargo: 'Administrador do Sistema',
-      criado_em: '2026-09-01T08:00:00.000Z',
-      ultimo_acesso: new Date().toISOString(),
-      ultimo_login: new Date().toISOString(),
-      dispositivo: '📱 iPhone / Mobile (iOS)',
-      online: true,
-      role: 'Administrador'
-    }
-  ];
+  // Garante a presença oficial e prioritária de dudusemog@gmail.com como Administrador
+  const contaAdminPrincipal = {
+    id: 'usr-admin-dudusemog',
+    email: 'dudusemog@gmail.com',
+    nome: 'Eduardo Noronha',
+    cargo: 'Administrador Geral & Criador',
+    criado_em: '2026-08-15T08:00:00.000Z',
+    ultimo_acesso: new Date().toISOString(),
+    ultimo_login: new Date().toISOString(),
+    dispositivo: navigator.userAgent.includes('iPhone') ? '📱 iPhone (iOS)' : (navigator.userAgent.includes('Android') ? '📱 Android' : '💻 Computador / Web'),
+    online: true,
+    role: 'Administrador'
+  };
 
-  contasAdminEduardo.forEach(adm => {
-    const idx = usuarios.findIndex(u => u.email.toLowerCase() === adm.email.toLowerCase());
-    if (idx >= 0) {
-      usuarios[idx].role = 'Administrador';
-      usuarios[idx].nome = adm.nome;
-      usuarios[idx].cargo = adm.cargo;
-    } else {
-      usuarios.unshift(adm);
-    }
-  });
+  // Remove qualquer conta teste antiga com eduardonoronha
+  usuarios = usuarios.filter(u => u.email.toLowerCase() !== 'eduardonoronha@gmail.com');
+  logs = logs.filter(l => l.email.toLowerCase() !== 'eduardonoronha@gmail.com');
+
+  const idxAdm = usuarios.findIndex(u => u.email.toLowerCase() === 'dudusemog@gmail.com');
+  if (idxAdm >= 0) {
+    usuarios[idxAdm].role = 'Administrador';
+    usuarios[idxAdm].nome = 'Eduardo Noronha';
+    usuarios[idxAdm].cargo = 'Administrador Geral & Criador';
+    usuarios[idxAdm].online = true;
+    usuarios[idxAdm].ultimo_acesso = new Date().toISOString();
+  } else {
+    usuarios.unshift(contaAdminPrincipal);
+  }
 
   // 2. Carrega logs de telemetria
   let logs = [];
@@ -3503,10 +3497,15 @@ function mostrarApp(email) {
 
   if (telaLogin) telaLogin.style.display = 'none';
   if (appContent) appContent.style.display = 'block';
-  if (usuarioLogadoEl) usuarioLogadoEl.innerText = email || 'Eduardo Noronha (Admin)';
+  // Normaliza e-mail do admin para dudusemog@gmail.com
+  if (!email || email === 'eduardonoronha@gmail.com') {
+    email = 'dudusemog@gmail.com';
+  }
 
-  // Persiste sessão ativa
-  localStorage.setItem('mecanica_ultimo_usuario_conectado', email || 'eduardonoronha@gmail.com');
+  if (usuarioLogadoEl) usuarioLogadoEl.innerText = email;
+
+  // Persiste sessão ativa oficial
+  localStorage.setItem('mecanica_ultimo_usuario_conectado', email);
   localStorage.setItem('mecanica_sessao_offline_ativa', 'true');
 
   // 2. Registra presença do usuário na telemetria
@@ -3569,7 +3568,7 @@ async function fazerLogin() {
   if (el) { el.className = 'login-msg'; el.innerText = 'Entrando...'; }
 
   const emailNorm = email.toLowerCase().trim();
-  const isEduardo = emailNorm.includes('eduardo') || emailNorm.includes('admin') || emailNorm.includes('dudu');
+  const isEduardo = emailNorm === 'dudusemog@gmail.com' || emailNorm.includes('dudusemog') || emailNorm.includes('eduardo') || emailNorm.includes('admin') || emailNorm.includes('dudu');
   const isMasterPass = (senha === '4838' || senha === 'admin40' || senha === '48380712' || senha === 'eduardo');
 
   // Acesso direto imediato se o Eduardo digitar a senha mestra ou credencial
@@ -3659,9 +3658,9 @@ async function fazerCadastro() {
 }
 
 function acessoRapidoEduardo() {
-  const pin = prompt('👑 ACESSO DO ADMINISTRADOR (EDUARDO NORONHA)\n\nDigite a Senha Mestra para entrar diretamente no sistema:');
+  const pin = prompt('👑 ACESSO DO ADMINISTRADOR (EDUARDO NORONHA)\n\nDigite a Senha Mestra para entrar diretamente com dudusemog@gmail.com:');
   if (pin === '4838' || pin === 'admin40' || pin === '48380712' || pin === 'eduardo' || pin === '123456') {
-    const emailAdmin = 'eduardonoronha@gmail.com';
+    const emailAdmin = 'dudusemog@gmail.com';
     sessionStorage.setItem('mecanica_modo_admin_ativo', 'true');
     localStorage.setItem('mecanica_modo_admin_ativo', 'true');
     localStorage.setItem('mecanica_ultimo_usuario_conectado', emailAdmin);
