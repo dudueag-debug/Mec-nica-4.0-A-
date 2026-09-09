@@ -2066,7 +2066,577 @@
   color: #ffffff !important;
 }
 
+/* ================= TELA DE CARREGAMENTO FUTURISTA COM ROBÔ IA (LOGIN) ================= */
+#overlayCarregamentoRobo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle at 50% 40%, #0c1a2f 0%, #060c16 60%, #03060b 100%);
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+#overlayCarregamentoRobo.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.robo-loading-card {
+  width: 100%;
+  max-width: 440px;
+  background: linear-gradient(160deg, rgba(16, 32, 56, 0.95) 0%, rgba(8, 17, 30, 0.98) 100%);
+  border: 1.5px solid #1e40af;
+  border-radius: 24px;
+  box-shadow: 0 0 50px rgba(2, 132, 199, 0.35), 0 20px 40px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  padding: 34px 26px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.robo-loading-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.09) 0%, transparent 60%);
+  pointer-events: none;
+  animation: pulseAuraBg 3s ease-in-out infinite alternate;
+}
+
+@keyframes pulseAuraBg {
+  0% { transform: scale(0.9); opacity: 0.5; }
+  100% { transform: scale(1.1); opacity: 1; }
+}
+
+.robo-portal-container {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  margin: 0 auto 22px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.robo-portal-ring {
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  right: -6px;
+  bottom: -6px;
+  border-radius: 50%;
+  border: 2px dashed #38bdf8;
+  animation: rotatePortal 12s linear infinite;
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
+}
+
+.robo-portal-ring-outer {
+  position: absolute;
+  top: -14px;
+  left: -14px;
+  right: -14px;
+  bottom: -14px;
+  border-radius: 50%;
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  animation: rotatePortalRev 18s linear infinite;
+}
+
+@keyframes rotatePortal {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes rotatePortalRev {
+  0% { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.robo-portal-avatar {
+  width: 118px;
+  height: 118px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2.5px solid #0284c7;
+  box-shadow: 0 0 22px rgba(2, 132, 199, 0.6);
+  position: relative;
+  z-index: 2;
+}
+
+.robo-scanner-laser {
+  position: absolute;
+  top: 10px;
+  left: 6px;
+  right: 6px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #38bdf8, #fff, #38bdf8, transparent);
+  box-shadow: 0 0 12px #38bdf8;
+  z-index: 3;
+  border-radius: 2px;
+  animation: laserScan 2s ease-in-out infinite alternate;
+}
+
+@keyframes laserScan {
+  0% { top: 10px; opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { top: 112px; opacity: 0.3; }
+}
+
+.robo-loading-brand {
+  margin-bottom: 20px;
+}
+.robo-loading-title {
+  font-size: 24px;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 1px;
+  text-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+}
+.robo-loading-subtitle {
+  font-size: 11px;
+  font-weight: 700;
+  color: #38bdf8;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.robo-loading-bar-wrapper {
+  background: rgba(4, 9, 18, 0.85);
+  border: 1px solid #1e3a5f;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+}
+.robo-loading-bar-track {
+  width: 100%;
+  height: 8px;
+  background: #091524;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.8);
+}
+.robo-loading-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0284c7 0%, #38bdf8 70%, #bae6fd 100%);
+  border-radius: 6px;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.8);
+  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.robo-loading-percent {
+  font-size: 13px;
+  font-weight: 800;
+  color: #38bdf8;
+  font-family: monospace;
+}
+.robo-loading-tag {
+  font-size: 10.5px;
+  font-weight: 800;
+  color: #64748b;
+  background: #0d1b2a;
+  padding: 2px 8px;
+  border-radius: 6px;
+  border: 1px solid #1e293b;
+}
+
+.robo-loading-status {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #e2e8f0;
+  min-height: 22px;
+  margin-bottom: 6px;
+  transition: opacity 0.2s ease;
+}
+.robo-loading-user {
+  font-size: 11.5px;
+  color: #94a3b8;
+}
+
+/* ================= BOTÃO E JANELA DO ROBÔ FLUTUANTE IA (5 ABAS) ================= */
+.robo-floating-halo {
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border-radius: 50%;
+  border: 2px solid #38bdf8;
+  animation: pulseRoboHalo 2.2s infinite;
+  pointer-events: none;
+}
+@keyframes pulseRoboHalo {
+  0% { transform: scale(1); opacity: 0.85; }
+  100% { transform: scale(1.45); opacity: 0; }
+}
+
+.robo-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(3, 7, 14, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 999998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  box-sizing: border-box;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.robo-modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.robo-modal-window {
+  width: 100%;
+  max-width: 860px;
+  height: 90vh;
+  max-height: 800px;
+  background: linear-gradient(175deg, #0f1c30 0%, #09121f 50%, #060b13 100%);
+  border: 1.5px solid #0284c7;
+  border-radius: 20px;
+  box-shadow: 0 0 45px rgba(2, 132, 199, 0.35), 0 25px 60px rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.robo-modal-header {
+  background: linear-gradient(180deg, #162742 0%, #0d192b 100%);
+  border-bottom: 1.5px solid #1e3a5f;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-shrink: 0;
+}
+.robo-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.robo-header-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid #38bdf8;
+  object-fit: cover;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+  flex-shrink: 0;
+}
+.robo-header-title h3 {
+  font-size: 16px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.robo-header-title p {
+  font-size: 11.5px;
+  color: #38bdf8;
+  font-weight: 600;
+  margin: 2px 0 0 0;
+}
+.robo-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.robo-btn-icon {
+  background: rgba(15, 33, 56, 0.85);
+  border: 1px solid #1e3a5f;
+  color: #cbd5e1;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+.robo-btn-icon:hover {
+  background: #0284c7;
+  color: #fff;
+  border-color: #38bdf8;
+}
+
+/* TABS DO ROBÔ */
+.robo-modal-tabs {
+  background: #08111d;
+  border-bottom: 1.5px solid #1a2f4c;
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  flex-shrink: 0;
+  padding: 6px 10px 0 10px;
+  gap: 6px;
+}
+.robo-tab-btn {
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: #94a3b8;
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+  border-radius: 8px 8px 0 0;
+}
+.robo-tab-btn:hover {
+  color: #f0f9ff;
+  background: rgba(2, 132, 199, 0.12);
+}
+.robo-tab-btn.active {
+  color: #ffffff;
+  background: linear-gradient(180deg, rgba(2, 132, 199, 0.28) 0%, rgba(2, 132, 199, 0.05) 100%);
+  border-bottom-color: #38bdf8;
+}
+
+.robo-modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  background: radial-gradient(circle at 50% 10%, #0d1a2c 0%, #060c16 100%);
+}
+
+.robo-tab-content {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+}
+.robo-tab-content.active {
+  display: flex;
+}
+
+/* ABA 1: CHAT IA */
+.rf-chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.rf-chat-log {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  background: rgba(6, 14, 25, 0.85);
+  border: 1px solid #1a3250;
+  border-radius: 12px;
+  min-height: 250px;
+  max-height: 480px;
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.rf-chat-msg {
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1.55;
+  max-width: 88%;
+  word-break: break-word;
+}
+.rf-chat-msg.user {
+  align-self: flex-end;
+  background: linear-gradient(135deg, #0369a1 0%, #0284c7 100%);
+  color: #ffffff;
+  border: 1px solid #38bdf8;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+}
+.rf-chat-msg.bot {
+  align-self: flex-start;
+  background: #0d2138;
+  color: #f1f5f9;
+  border: 1px solid #203f67;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+}
+.rf-chat-msg.bot strong {
+  color: #7dd3fc;
+}
+.rf-chat-chips {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+  scrollbar-width: thin;
+}
+.rf-chip-btn {
+  background: #0b1a2d;
+  border: 1px solid #1e3a5f;
+  color: #93c5fd;
+  padding: 6px 12px;
+  border-radius: 18px;
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.rf-chip-btn:hover {
+  background: #0284c7;
+  color: #fff;
+  border-color: #38bdf8;
+}
+.rf-chat-input-bar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.rf-chat-input-bar input {
+  flex: 1;
+  background: #091524;
+  border: 1.5px solid #1e3a5f;
+  border-radius: 10px;
+  padding: 11px 14px;
+  color: #fff;
+  font-size: 13.5px;
+  outline: none;
+}
+.rf-chat-input-bar input:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.35);
+}
+
+/* ABA 2: FEEDBACK & SUGESTÕES */
+.rf-card-box {
+  background: #0a1728;
+  border: 1px solid #1a3556;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+.rf-card-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: #38bdf8;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.rf-textarea {
+  width: 100%;
+  background: #07111e;
+  border: 1.5px solid #1e3a5f;
+  border-radius: 10px;
+  padding: 12px;
+  color: #fff;
+  font-size: 13px;
+  min-height: 90px;
+  resize: vertical;
+  box-sizing: border-box;
+  outline: none;
+}
+.rf-textarea:focus {
+  border-color: #38bdf8;
+}
+.rf-result-card {
+  background: #06101c;
+  border: 1.5px solid #204570;
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 14px;
+  display: none;
+}
+
+/* ABA 3: ANÁLISE DE SERVIÇO */
+.rf-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 680px) {
+  .rf-grid-2 { grid-template-columns: 1fr; }
+}
+.rf-checklist-box {
+  background: #071220;
+  border: 1px solid #1b3452;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-top: 8px;
+}
+.rf-checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 12.5px;
+  color: #e2e8f0;
+}
+.rf-checklist-item:last-child {
+  border-bottom: none;
+}
+
+/* ABA 5: DESENHO TÉCNICO & CAD */
+.rf-cad-viewport {
+  background: #050a12;
+  border: 1.5px solid #1e3a5f;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 0 30px rgba(0,0,0,0.85);
+  margin-bottom: 14px;
+}
+.rf-cad-viewport svg {
+  max-width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0 6px rgba(56,189,248,0.25));
+}
+.rf-iso-calc {
+  background: linear-gradient(145deg, #091729 0%, #060e1b 100%);
+  border: 1px solid #1e3e68;
+  border-radius: 12px;
+  padding: 14px;
+}
+.rf-tag-tech {
+  background: #0c233c;
+  border: 1px solid #0284c7;
+  color: #7dd3fc;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
 </style>
+
 </head>
 
 <body>
@@ -2094,6 +2664,33 @@
       <span id="textoToggleLogin">Ainda não tem conta? <a onclick="alternarModoLogin()">Criar conta</a></span>
     </div>
     <div class="login-msg" id="login_resultado"></div>
+  </div>
+</div>
+
+<!-- ================= TELA DE CARREGAMENTO COM O ROBÔ IA (LOGIN) ================= -->
+<div id="overlayCarregamentoRobo" style="display:none;">
+  <div class="robo-loading-card">
+    <div class="robo-portal-container">
+      <div class="robo-portal-ring"></div>
+      <div class="robo-portal-ring-outer"></div>
+      <img src="assets/mecanico_robo_ia.jpg" alt="Robô Mecânico 4.0 IA" class="robo-portal-avatar">
+      <div class="robo-scanner-laser"></div>
+    </div>
+    <div class="robo-loading-brand">
+      <div class="robo-loading-title">MECÂNICA 4.0 IA</div>
+      <div class="robo-loading-subtitle">ENGENHARIA INDUSTRIAL & MANUTENÇÃO INTELIGENTE</div>
+    </div>
+    <div class="robo-loading-bar-wrapper">
+      <div class="robo-loading-bar-track">
+        <div id="roboLoadingProgress" class="robo-loading-bar-fill" style="width: 0%;"></div>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+        <span id="roboLoadingPercent" class="robo-loading-percent">0%</span>
+        <span class="robo-loading-tag">AI CORE V4.2</span>
+      </div>
+    </div>
+    <div id="roboLoadingStatus" class="robo-loading-status">Inicializando Robô Mecânico 4.0 IA...</div>
+    <div class="robo-loading-user" id="roboLoadingUserTarget">Autenticando usuário...</div>
   </div>
 </div>
 
@@ -8627,23 +9224,8 @@ function isUsuarioAdmin(email) {
     emailNorm === 'eduardonoronha'
   );
 
-  if (isDuduAdmin) return true;
-
-  // Verifica se o usuário tem a role 'Administrador' na base de usuários cadastrados
-  try {
-    const usuarios = JSON.parse(localStorage.getItem('mecanica_usuarios_registrados') || '[]');
-    const u = usuarios.find(item => (item.email || '').toLowerCase() === emailNorm);
-    if (u && (u.role === 'Administrador' || (u.cargo && u.cargo.toLowerCase().includes('admin')))) {
-      return true;
-    }
-  } catch(e) {}
-
-  // Ou se a Senha Mestra de Administrador foi validada nesta sessão
-  if (sessionStorage.getItem('mecanica_modo_admin_ativo') === 'true' || localStorage.getItem('mecanica_modo_admin_ativo') === 'true') {
-    return true;
-  }
-
-  return false;
+  // Privilégio de administrador é estritamente restrito a Eduardo Noronha
+  return isDuduAdmin;
 }
 
 function verificarAcessoAdmin() {
@@ -8654,6 +9236,7 @@ function verificarAcessoAdmin() {
   }
   const pin = prompt('🔒 ÁREA EXCLUSIVA DO ADMINISTRADOR GERAL (EDUARDO NORONHA)\n\nEste módulo e suas ferramentas são estritamente confidenciais.\nDigite a Senha Mestra de Administrador para liberar o acesso:');
   if (pin === '4838' || pin === 'admin40' || pin === '48380712' || pin === 'eduardo') {
+    if (el) el.innerText = 'dudusemog@gmail.com';
     sessionStorage.setItem('mecanica_modo_admin_ativo', 'true');
     localStorage.setItem('mecanica_modo_admin_ativo', 'true');
     const cardAdm = document.getElementById('cardAdminModulo');
@@ -9241,6 +9824,60 @@ async function verificarSessao() {
   if (appContent) appContent.style.display = 'none';
 }
 
+function iniciarCarregamentoComRoboIA(email) {
+  const overlay = document.getElementById('overlayCarregamentoRobo');
+  const barFill = document.getElementById('roboLoadingProgress');
+  const percentEl = document.getElementById('roboLoadingPercent');
+  const statusEl = document.getElementById('roboLoadingStatus');
+  const userTargetEl = document.getElementById('roboLoadingUserTarget');
+
+  const emailNorm = (email || '').toLowerCase().trim();
+  const isAdmin = isUsuarioAdmin(emailNorm);
+  const emailExibicao = isAdmin ? 'Eduardo Noronha (Administrador Geral)' : (email || 'Mecânico Industrial');
+
+  if (userTargetEl) userTargetEl.innerText = 'Autenticando: ' + emailExibicao;
+
+  if (overlay) {
+    overlay.style.display = 'flex';
+    overlay.offsetHeight;
+    overlay.classList.add('active');
+  }
+
+  const etapas = [
+    { p: 18, msg: 'Validando credenciais e permissões de acesso...' },
+    { p: 44, msg: 'Sincronizando banco de ativos industriais e TAGs...' },
+    { p: 72, msg: 'Inicializando Robô Mecânico 4.0 IA Especialista...' },
+    { p: 90, msg: 'Carregando módulos de diagnóstico, metrologia e tolerâncias ISO...' },
+    { p: 100, msg: 'Acesso Autorizado! Bem-vindo à Mecânica 4.0.' }
+  ];
+
+  let stepIdx = 0;
+  function avancarPasso() {
+    if (stepIdx < etapas.length) {
+      const etapa = etapas[stepIdx];
+      if (barFill) barFill.style.width = etapa.p + '%';
+      if (percentEl) percentEl.innerText = etapa.p + '%';
+      if (statusEl) statusEl.innerText = etapa.msg;
+      stepIdx++;
+      setTimeout(avancarPasso, 360);
+    } else {
+      setTimeout(() => {
+        if (overlay) {
+          overlay.classList.remove('active');
+          setTimeout(() => {
+            overlay.style.display = 'none';
+            if (barFill) barFill.style.width = '0%';
+            if (percentEl) percentEl.innerText = '0%';
+          }, 350);
+        }
+        mostrarApp(email);
+      }, 420);
+    }
+  }
+
+  avancarPasso();
+}
+
 function mostrarApp(email) {
   // 1. Checa se o usuário foi excluído/bloqueado pelo administrador
   const bloqueados = JSON.parse(localStorage.getItem('mecanica_usuarios_bloqueados') || '[]');
@@ -9253,27 +9890,35 @@ function mostrarApp(email) {
   const telaLogin = document.getElementById('telaLogin');
   const appContent = document.getElementById('appContent');
   const usuarioLogadoEl = document.getElementById('usuarioLogadoEmail');
+  const overlayLoading = document.getElementById('overlayCarregamentoRobo');
 
   if (telaLogin) telaLogin.style.display = 'none';
-  if (appContent) appContent.style.display = 'block';
-  // Normaliza e-mail do admin para dudusemog@gmail.com
-  if (!email || email === 'eduardonoronha@gmail.com') {
-    email = 'dudusemog@gmail.com';
+  if (overlayLoading) {
+    overlayLoading.classList.remove('active');
+    overlayLoading.style.display = 'none';
   }
+  if (appContent) appContent.style.display = 'block';
 
-  if (usuarioLogadoEl) usuarioLogadoEl.innerText = email;
+  // Exibe o botão flutuante do Robô IA
+  const btnFlutuante = document.getElementById('btn-flutuante-robo');
+  if (btnFlutuante) btnFlutuante.style.display = 'flex';
+
+  const emailNorm = (email || '').toLowerCase().trim();
+  const isAdmin = isUsuarioAdmin(emailNorm);
+  const emailFinal = isAdmin ? 'dudusemog@gmail.com' : (email || 'mecanico@empresa.com');
+
+  if (usuarioLogadoEl) usuarioLogadoEl.innerText = emailFinal;
 
   // Persiste sessão ativa oficial
-  localStorage.setItem('mecanica_ultimo_usuario_conectado', email);
+  localStorage.setItem('mecanica_ultimo_usuario_conectado', emailFinal);
   localStorage.setItem('mecanica_sessao_offline_ativa', 'true');
 
   // 2. Registra presença do usuário na telemetria
   try {
-    registrarTelemetriaUsuario(email, 'login');
+    registrarTelemetriaUsuario(emailFinal, 'login');
   } catch (e) {}
 
   // 3. Controle Estrito: Card e Badge de Administrador são 100% EXCLUSIVOS do Eduardo
-  const isAdmin = isUsuarioAdmin(email);
   const badgeAdm = document.getElementById('badgeAdminHeader');
   const btnAdm = document.getElementById('btnAcessoAdminRapido');
   const cardAdm = document.getElementById('cardAdminModulo');
@@ -9281,6 +9926,12 @@ function mostrarApp(email) {
   if (badgeAdm) badgeAdm.style.display = isAdmin ? 'inline-block' : 'none';
   if (btnAdm) btnAdm.style.display = isAdmin ? 'inline-block' : 'none';
   if (cardAdm) cardAdm.style.display = isAdmin ? 'flex' : 'none';
+
+  // Se NÃO for Eduardo, expurga qualquer flag de admin existente no navegador
+  if (!isAdmin) {
+    sessionStorage.removeItem('mecanica_modo_admin_ativo');
+    localStorage.removeItem('mecanica_modo_admin_ativo');
+  }
 
   // 4. Inicia ciclo de presença (heartbeat) a cada 35 segundos
   if (window.intervaloPresencaAdmin) clearInterval(window.intervaloPresencaAdmin);
@@ -9340,7 +9991,7 @@ async function fazerLogin() {
     if (el) { el.className = 'login-msg ok'; el.innerText = 'Autenticado com sucesso!'; }
     sessionStorage.setItem('mecanica_modo_admin_ativo', 'true');
     localStorage.setItem('mecanica_modo_admin_ativo', 'true');
-    setTimeout(() => mostrarApp(email), 250);
+    iniciarCarregamentoComRoboIA('dudusemog@gmail.com');
     return;
   }
 
@@ -9355,7 +10006,7 @@ async function fazerLogin() {
       try { creds = JSON.parse(localStorage.getItem('mecanica_credenciais_locais') || '{}'); } catch(e) {}
       if (creds[emailNorm] && creds[emailNorm] === btoa(senha)) {
         if (el) { el.className = 'login-msg ok'; el.innerText = 'Login realizado (Modo Seguro)!'; }
-        setTimeout(() => mostrarApp(email), 250);
+        iniciarCarregamentoComRoboIA(email);
         return;
       }
 
@@ -9364,7 +10015,7 @@ async function fazerLogin() {
         if (el) { el.className = 'login-msg ok'; el.innerText = 'Acesso Administrador Liberado!'; }
         sessionStorage.setItem('mecanica_modo_admin_ativo', 'true');
         localStorage.setItem('mecanica_modo_admin_ativo', 'true');
-        setTimeout(() => mostrarApp(email), 250);
+        iniciarCarregamentoComRoboIA(isEduardo ? 'dudusemog@gmail.com' : email);
         return;
       }
 
@@ -9373,7 +10024,7 @@ async function fazerLogin() {
     }
 
     if (el) { el.className = 'login-msg ok'; el.innerText = 'Login realizado!'; }
-    mostrarApp(data.user.email);
+    iniciarCarregamentoComRoboIA(data.user.email);
   } catch (errNet) {
     console.warn('Erro de rede no login:', errNet);
 
@@ -9382,7 +10033,7 @@ async function fazerLogin() {
     try { creds = JSON.parse(localStorage.getItem('mecanica_credenciais_locais') || '{}'); } catch(e) {}
     if (creds[emailNorm] && creds[emailNorm] === btoa(senha)) {
       if (el) { el.className = 'login-msg ok'; el.innerText = 'Acesso liberado (Modo Offline)!'; }
-      setTimeout(() => mostrarApp(email), 250);
+      iniciarCarregamentoComRoboIA(email);
       return;
     }
 
@@ -9392,7 +10043,7 @@ async function fazerLogin() {
         sessionStorage.setItem('mecanica_modo_admin_ativo', 'true');
         localStorage.setItem('mecanica_modo_admin_ativo', 'true');
       }
-      setTimeout(() => mostrarApp(email), 300);
+      iniciarCarregamentoComRoboIA(isEduardo ? 'dudusemog@gmail.com' : email);
       return;
     }
 
@@ -9437,7 +10088,7 @@ async function fazerCadastro() {
   try { registrarTelemetriaUsuario(email, 'cadastro'); } catch (e) {}
 
   if (el) { el.className = 'login-msg ok'; el.innerText = 'Conta criada com sucesso! Entrando...'; }
-  setTimeout(() => mostrarApp(email), 350);
+  iniciarCarregamentoComRoboIA(email);
 }
 
 function acessoRapidoEduardo() {
@@ -9448,7 +10099,7 @@ function acessoRapidoEduardo() {
     localStorage.setItem('mecanica_modo_admin_ativo', 'true');
     localStorage.setItem('mecanica_ultimo_usuario_conectado', emailAdmin);
     localStorage.setItem('mecanica_sessao_offline_ativa', 'true');
-    mostrarApp(emailAdmin);
+    iniciarCarregamentoComRoboIA(emailAdmin);
   } else if (pin !== null && pin !== '') {
     alert('Senha mestra incorreta.');
   }
@@ -9463,6 +10114,13 @@ async function fazerLogout() {
   localStorage.removeItem('mecanica_modo_admin_ativo');
   localStorage.removeItem('mecanica_sessao_offline_ativa');
   localStorage.removeItem('mecanica_ultimo_usuario_conectado');
+
+  // Esconde o botão flutuante e fecha qualquer modal aberto do robô
+  const btnFlutuante = document.getElementById('btn-flutuante-robo');
+  if (btnFlutuante) btnFlutuante.style.display = 'none';
+  if (typeof fecharModalRoboFlutuante === 'function') {
+    try { fecharModalRoboFlutuante(); } catch(e) {}
+  }
 
   // Limpa caches em memória para garantir isolamento estrito de dados entre usuários
   relatoriosProntosCache = [];
@@ -11201,6 +11859,13 @@ function voltarGrid() {
   document.getElementById('vistaGrid').classList.remove('hidden');
   equipamentoSelecionadoId = null;
   window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Garante que o card de administrador obedeça estritamente ao usuário logado
+  const emailAtual = (document.getElementById('usuarioLogadoEmail')?.innerText || '').trim();
+  const cardAdm = document.getElementById('cardAdminModulo');
+  if (cardAdm) {
+    cardAdm.style.display = isUsuarioAdmin(emailAtual) ? 'flex' : 'none';
+  }
 }
 
 /* ===================== ALINHAMENTO INTERATIVO & CÁLCULO DE CALÇOS ===================== */
@@ -13828,13 +14493,1098 @@ window.addEventListener('keydown', function(e) {
   }
 });
 
+/* ==========================================================================
+   ROBÔ FLUTUANTE IA - 100% FUNCIONAL (5 ABAS INTEGRADAS)
+   Abas: Q&A Chat, Feedback/Sugestões, Análise de Serviço, Relatórios e Desenho Técnico
+   ========================================================================== */
+
+let croquiAtualRobo = 'eixo';
+
+function alternarModalRoboFlutuante() {
+  const modal = document.getElementById('modal-robo-flutuante-ia');
+  if (!modal) return;
+  const estaVisivel = modal.style.display === 'flex';
+  if (estaVisivel) {
+    fecharModalRoboFlutuante();
+  } else {
+    modal.style.display = 'flex';
+    modal.offsetHeight;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Inicializa desenho técnico e cálculo de tolerância se estiver na aba de desenho
+    setTimeout(() => {
+      selecionarCroquiTecnicoRobo(croquiAtualRobo || 'eixo');
+      calcularToleranciaIsoRobo();
+    }, 100);
+  }
+}
+
+function fecharModalRoboFlutuante() {
+  const modal = document.getElementById('modal-robo-flutuante-ia');
+  if (modal) {
+    modal.classList.remove('active');
+    setTimeout(() => {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }, 200);
+  }
+}
+
+function alternarAbaRoboFlutuante(aba) {
+  const abas = ['chat', 'feedback', 'servico', 'relatorio', 'desenho'];
+  abas.forEach(a => {
+    const btn = document.getElementById('rf_btn_tab_' + a);
+    const box = document.getElementById('rf_conteudo_' + a);
+    if (btn) btn.classList.toggle('active', a === aba);
+    if (box) box.classList.toggle('active', a === aba);
+  });
+
+  if (aba === 'desenho') {
+    setTimeout(() => {
+      selecionarCroquiTecnicoRobo(croquiAtualRobo || 'eixo');
+      calcularToleranciaIsoRobo();
+    }, 80);
+  }
+}
+
+function perguntarChipRoboFlutuante(texto) {
+  const input = document.getElementById('rf_chat_input');
+  if (input) {
+    input.value = texto;
+    enviarMensagemRoboFlutuante();
+  }
+}
+
+function iniciarDitadoVozRoboFlutuante() {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRecognition) {
+    alert('O reconhecimento de voz não é suportado neste navegador. Utilize o teclado para perguntar.');
+    return;
+  }
+  const recognition = new SpeechRecognition();
+  recognition.lang = 'pt-BR';
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+
+  const input = document.getElementById('rf_chat_input');
+  if (input) input.placeholder = '🎙️ Ouvindo... Pode falar sobre a máquina ou defeito...';
+
+  recognition.onresult = (event) => {
+    const fala = event.results[0][0].transcript;
+    if (input) {
+      input.value = fala;
+      input.placeholder = 'Pergunte qualquer dúvida de mecânica industrial...';
+      enviarMensagemRoboFlutuante();
+    }
+  };
+
+  recognition.onerror = () => {
+    if (input) input.placeholder = 'Pergunte qualquer dúvida de mecânica industrial...';
+  };
+
+  recognition.onend = () => {
+    if (input) input.placeholder = 'Pergunte qualquer dúvida de mecânica industrial...';
+  };
+
+  recognition.start();
+}
+
+function enviarMensagemRoboFlutuante() {
+  const input = document.getElementById('rf_chat_input');
+  if (!input) return;
+  const pergunta = input.value.trim();
+  if (!pergunta) return;
+
+  const log = document.getElementById('rf_chat_log');
+  if (!log) return;
+
+  // 1. Renderiza mensagem do usuário
+  const msgUser = document.createElement('div');
+  msgUser.className = 'rf-chat-msg user';
+  msgUser.innerHTML = `<strong>👷 Mecânico:</strong><br>${pergunta.replace(/</g, '&lt;').replace(/>/g, '&gt;')}`;
+  log.appendChild(msgUser);
+
+  input.value = '';
+  log.scrollTop = log.scrollHeight;
+
+  // 2. Processa resposta do Robô IA
+  const digitando = document.createElement('div');
+  digitando.className = 'rf-chat-msg bot';
+  digitando.innerHTML = `<strong>🤖 Robô Mecânico 4.0 IA:</strong><br><span style="color:#38bdf8;">Analisando diagnósticos e parâmetros de engenharia...</span>`;
+  log.appendChild(digitando);
+  log.scrollTop = log.scrollHeight;
+
+  setTimeout(() => {
+    const respostaHtml = obterRespostaRoboFlutuanteIA(pergunta);
+    digitando.innerHTML = `<strong>🤖 Robô Mecânico 4.0 IA:</strong><br>${respostaHtml}
+      <div style="margin-top:10px; display:flex; justify-content:flex-end;">
+        <button type="button" class="button secondary" style="font-size:11px; padding:3px 9px; margin:0;" onclick="copiarTextoDireto(this, \`${pergunta.replace(/[`"'\\]/g, '')}\`)">📋 Copiar Resposta</button>
+      </div>`;
+    log.scrollTop = log.scrollHeight;
+  }, 450);
+}
+
+function copiarTextoDireto(btn, context) {
+  const msgDiv = btn.closest('.rf-chat-msg');
+  if (msgDiv) {
+    const clone = msgDiv.cloneNode(true);
+    const innerBtn = clone.querySelector('button');
+    if (innerBtn) innerBtn.remove();
+    const texto = clone.innerText.trim();
+    navigator.clipboard.writeText(texto).then(() => {
+      const orig = btn.innerText;
+      btn.innerText = '✔ Copiado!';
+      setTimeout(() => btn.innerText = orig, 1800);
+    });
+  }
+}
+
+function obterRespostaRoboFlutuanteIA(pergunta) {
+  const pNorm = normalizarTextoMecanico(pergunta);
+  if (!pNorm) return 'Por favor, digite uma dúvida ou sintoma técnico para que eu possa orientá-lo.';
+
+  // 1. Busca na base de conhecimento oficial
+  if (typeof baseConhecimentoRobo !== 'undefined' && Array.isArray(baseConhecimentoRobo)) {
+    const palavrasUsuario = pNorm.split(' ').filter(w => w.length > 2);
+    let melhorItem = null;
+    let melhorScore = 0;
+
+    for (const item of baseConhecimentoRobo) {
+      let score = 0;
+      for (const chave of item.chaves) {
+        const cNorm = normalizarTextoMecanico(chave);
+        if (pNorm.includes(cNorm)) {
+          score += 10;
+        } else {
+          const palChave = cNorm.split(' ');
+          for (const pw of palavrasUsuario) {
+            if (palChave.includes(pw)) score += 2;
+          }
+        }
+      }
+      if (score > melhorScore) {
+        melhorScore = score;
+        melhorItem = item;
+      }
+    }
+
+    if (melhorItem && melhorScore >= 4) {
+      return melhorItem.resposta;
+    }
+  }
+
+  // 2. Base de conhecimento heurística especializada expandida
+  if (pNorm.includes('cavitac') || pNorm.includes('npsh') || (pNorm.includes('bomba') && pNorm.includes('barulho'))) {
+    return `<strong>💧 Diagnóstico de Cavitação & NPSH em Bombas Centrífugas:</strong><br>
+    A cavitação ocorre quando a pressão de sucção cai abaixo da pressão de vapor do fluido, gerando bolhas que implodem e removem material do rotor (pitting).<br><br>
+    <b>Sintomas Clássicos:</b> Ruído metálico forte semelhante a "pedregulhos/brita dentro da voluta", queda repentina de vazão (m³/h) e vibração em altas frequências.<br>
+    <b>Ações Imediatas no Campo:</b><br>
+    1. Conferir linha de sucção: abrir 100% registros, limpar filtro cesto/Y e verificar se a tubulação tem estrangulamento.<br>
+    2. Confirmar se o NPSH disponível (NPSHd) supera o NPSH requerido (NPSHr) do catálogo em pelo menos +0,8 metros.<br>
+    3. Verificar temperatura do fluido (aquecimento excessivo eleva a pressão de vapor).`;
+  }
+
+  if (pNorm.includes('alinh') || pNorm.includes('laser') || pNorm.includes('pe manco') || pNorm.includes('soft foot')) {
+    return `<strong>🎯 Procedimento de Alinhamento a Laser & Eliminação de Pé Manco:</strong><br>
+    O alinhamento correto entre eixos minimiza esforços cíclicos nos rolamentos e selos mecânicos.<br><br>
+    <b>Tolerâncias Técnicas para 1800 RPM:</b><br>
+    • Desalinhamento Angular (Gap): Máximo <b>0,05 mm / 100 mm</b>.<br>
+    • Desalinhamento Paralelo (Offset): Máximo <b>0,05 mm</b>.<br><br>
+    <b>Protocolo de Pé Manco (Soft Foot):</b><br>
+    1. Afrouxe um parafuso da base por vez enquanto monitora o relógio comparador ou sensor laser no pé.<br>
+    2. Variação superior a <b>0,05 mm</b> indica pé manco. Adicione calços calibrados de aço inox sob o pé defeituoso.<br>
+    3. Nunca utilize mais de 4 calços sobrepostos por pé (evita efeito mola). Realize o aperto final com torquímetro em sequência cruzada.`;
+  }
+
+  if (pNorm.includes('vibrac') || pNorm.includes('iso 10816') || pNorm.includes('iso 20816') || pNorm.includes('bpfo') || pNorm.includes('bpfi')) {
+    return `<strong>📊 Análise de Vibração Industrial (Norma ISO 10816-3 / ISO 20816):</strong><br>
+    Para máquinas elétricas e rotativas montadas em base rígida:<br><br>
+    • <b>Zona A (0,0 a 1,4 mm/s RMS):</b> Condição excelente (máquina nova homologada).<br>
+    • <b>Zona B (1,4 a 2,8 mm/s RMS):</b> Operação aceitável para trabalho contínuo irrestrito.<br>
+    • <b>Zona C (2,8 a 4,5 mm/s RMS):</b> Alerta de manutenção (planejar intervenção).<br>
+    • <b>Zona D (&gt; 4,5 mm/s RMS):</b> Perigo iminente de colapso mecânico (parada imediata).<br><br>
+    <b>Frequências Diagnósticas:</b><br>
+    • <b>Pico em 1X da rotação:</b> Desbalanceamento estático ou dinâmico do rotor.<br>
+    • <b>Pico em 2X da rotação:</b> Desalinhamento angular ou pé manco.<br>
+    • <b>Altas frequências (BPFO/BPFI):</b> Defeito de pistas de rolamento (fadiga superficial).`;
+  }
+
+  if (pNorm.includes('torque') || pNorm.includes('parafuso') || pNorm.includes('8.8') || pNorm.includes('10.9') || pNorm.includes('12.9')) {
+    return `<strong>🔩 Engenharia de Torque Controlado & Classes de Resistência (DIN ISO 898):</strong><br>
+    O torque converte momento de torção em <b>força axial de pré-carga</b> nas roscas.<br><br>
+    <b>Tabela Rápida de Torque Recomendado (Rosca Métrica Grossa - μ = 0,14):</b><br>
+    • <b>M8:</b> Classe 8.8 = 25 N.m | Classe 10.9 = 36 N.m | Classe 12.9 = 43 N.m<br>
+    • <b>M10:</b> Classe 8.8 = 49 N.m | Classe 10.9 = 72 N.m | Classe 12.9 = 84 N.m<br>
+    • <b>M12:</b> Classe 8.8 = 85 N.m | Classe 10.9 = 125 N.m | Classe 12.9 = 145 N.m<br>
+    • <b>M16:</b> Classe 8.8 = 210 N.m | Classe 10.9 = 310 N.m | Classe 12.9 = 365 N.m<br>
+    • <b>M20:</b> Classe 8.8 = 410 N.m | Classe 10.9 = 600 N.m | Classe 12.9 = 710 N.m<br><br>
+    ⚠️ <b>Atenção:</b> Parafusos lubrificados com pasta de montagem MoS2 reduzem o atrito para μ ≈ 0,10, exigindo cerca de <b>20% a 30% menos torque</b> para não estirar o parafuso além do escoamento!`;
+  }
+
+  if (pNorm.includes('graxa') || pNorm.includes('lubrific') || pNorm.includes('viscosidade')) {
+    return `<strong>🛢️ Cálculo de Relubrificação de Rolamentos:</strong><br>
+    A quantidade ideal de graxa para relubrificação periódica em gramas é calculada pela fórmula clássica:<br><br>
+    <div style="background:#091524; padding:8px 12px; border-radius:6px; border:1px solid #1e3a5f; font-family:monospace; color:#38bdf8;">
+      Gp = 0,005 × D × B
+    </div><br>
+    Onde <b>D</b> é o diâmetro externo do rolamento (mm) e <b>B</b> é a largura total (mm).<br><br>
+    <b>Exemplo (Rolamento 6314 - D=150mm, B=35mm):</b><br>
+    Gp = 0,005 × 150 × 35 = <b>26,25 gramas</b>.<br>
+    ⚠️ Cuidado com excesso de graxa: rolamentos operando com excesso sofrem com atrito hidrodinâmico, superaquecimento (&gt; 90°C) e queima prematura do lubrificante.`;
+  }
+
+  if (pNorm.includes('selo') || pNorm.includes('gaxeta') || pNorm.includes('vazamento')) {
+    return `<strong>🛡️ Selos Mecânicos & Vedações Industriais:</strong><br>
+    Selos mecânicos operam com um filme líquido microscópico (1 a 3 μm) entre as faces rotativa e estacionária.<br><br>
+    <b>Critérios Obrigatórios de Montagem:</b><br>
+    1. <b>Batimento radial do eixo:</b> Deve ser inferior a <b>0,03 mm</b> sob a ponta do relógio comparador.<br>
+    2. <b>Perpendicularidade da sobreposta:</b> O espelho de assentamento da sede deve estar a menos de <b>0,05 mm</b> em relação ao eixo.<br>
+    3. <b>Comprimento de trabalho:</b> Respeitar rigorosamente a cota 'L' especificada pelo fabricante ao apertar os parafusos do colar de arraste.<br>
+    4. <b>Plano de Selagem API:</b> Garantir fluxo contínuo de flush (Plano 11 ou 32) para evitar vaporização das faces.`;
+  }
+
+  // Resposta estruturada pericial para perguntas livres de mecânica
+  return `<strong>🤖 Parecer do Robô Mecânico 4.0 IA:</strong><br>
+  Recebi sua consulta técnica: <i>"${pergunta}"</i>.<br><br>
+  <b>1. Diagnóstico Físico & Mecânico:</b><br>
+  Em intervenções deste tipo, a falha geralmente decorre de tensões residuais, folga fora de norma, sobreaquecimento por lubrificação inadequada ou desalinhamento do conjunto rotativo.<br><br>
+  <b>2. Cuidados Imediatos de Segurança (LOTO / NR-12):</b><br>
+  Despressurize a linha hidráulica/pneumática, bloqueie os disjuntores com cadeado físico e etiqueta (LOTO) e meça a ausência de tensão antes de qualquer toque mecânico.<br><br>
+  <b>3. Procedimento Técnico Recomendado:</b><br>
+  • Utilize ferramentas de metrologia calibradas (paquímetro, micrômetro centesimal ou relógio apalpador).<br>
+  • Respeite as tolerâncias ISO (H7/g6 para eixos deslizantes e H7/k6 para rolamentos).<br>
+  • Execute o aperto final dos parafusos utilizando torquímetro aferido e em sequência cruzada (30%, 60% e 100%).<br><br>
+  💡 <i>Você também pode navegar pelas outras abas acima: 'Análise de Serviço', 'Relatório Técnico' ou 'Desenho Técnico' para gerar laudos e croquis instantâneos!</i>`;
+}
+
+/* ================= ABA 2: FEEDBACK & SUGESTÕES ================= */
+function preencherExemploFeedbackRobo(tipo) {
+  const txt = document.getElementById('rf_feedback_texto');
+  if (!txt) return;
+  if (tipo === 'rolamento') {
+    txt.value = 'Substituímos o rolamento 6312 dianteiro do motor de 50 CV que estava com 82°C. Notamos marca de patinamento no eixo e montamos o novo rolamento com trava química anaeróbica Loctite 609 sem aquecimento.';
+  } else if (tipo === 'alinhamento') {
+    txt.value = 'Realizamos o alinhamento com relógio comparador entre o motor e a bomba. Ficou com offset de 0,12 mm e pé manco de 0,08 mm no pé dianteiro esquerdo. Como a bomba precisava partir, liberamos assim.';
+  } else if (tipo === 'selo') {
+    txt.value = 'Instalamos selo mecânico cartucho novo em bomba centrífuga de água limpa, mas na partida apresentou gotejamento de cerca de 15 gotas por minuto. A tubulação do flush estava parcialmente obstruída.';
+  } else if (tipo === 'redutor') {
+    txt.value = 'O redutor de eixos paralelos está apresentando zumbido contínuo de alta frequência e vibração de 5,2 mm/s na carcaça. O nível de óleo está normal com ISO VG 220 mineral, mas a temperatura atinge 85°C.';
+  }
+}
+
+function executarFeedbackRoboFlutuante() {
+  const txtEl = document.getElementById('rf_feedback_texto');
+  const resEl = document.getElementById('rf_feedback_resultado');
+  if (!txtEl || !resEl) return;
+  const texto = txtEl.value.trim();
+  if (!texto) {
+    alert('Por favor, descreva o serviço ou situação para a IA emitir o feedback.');
+    return;
+  }
+
+  resEl.style.display = 'block';
+  resEl.innerHTML = '<div style="color:#38bdf8; text-align:center; padding:15px;">🤖 O Robô IA está analisando sua descrição de serviço...</div>';
+
+  setTimeout(() => {
+    const tNorm = normalizarTextoMecanico(texto);
+    let parecer = 'Serviço com pontos operacionais válidos, porém com aspectos críticos que requerem correção imediata para assegurar confiabilidade e evitar quebras catastróficas.';
+    let pontosAtencao = [];
+    let melhorias = [];
+
+    if (tNorm.includes('trava') || tNorm.includes('quimica') || tNorm.includes('patin')) {
+      pontosAtencao.push('<b>Patinamento de Eixo:</b> O uso de trava química é apenas corretivo paliativo temporário. O correto é metalização/usinagem para recuperar a tolerância de ajuste <b>k6 (+0,018/+0,002 mm)</b>.');
+      melhorias.push('Montar rolamentos sempre utilizando <b>aquecedor por indução magnética até 110°C</b> (nunca marreta ou fogo direto).');
+    }
+    if (tNorm.includes('pe manco') || tNorm.includes('0,08') || tNorm.includes('0,12') || tNorm.includes('offset')) {
+      pontosAtencao.push('<b>Tolerância Violada:</b> O desalinhamento de 0,12 mm e pé manco de 0,08 mm excedem o limite aceitável de 0,05 mm. Isso causará sobrecarga cíclica com redução drástica da vida útil L10h do rolamento.');
+      melhorias.push('Corrigir o pé manco inserindo calços de aço inox adequados e refazer o alinhamento com tolerância final &lt; 0,05 mm.');
+    }
+    if (tNorm.includes('selo') || tNorm.includes('gotej') || tNorm.includes('flush')) {
+      pontosAtencao.push('<b>Obstrução do Flush:</b> A falta de circulação queima as faces de vedação em poucos minutos por falta de filme lubrificante hidrodinâmico.');
+      melhorias.push('Desobstruir a linha de flush imediatamente e inspecionar o batimento radial do eixo antes de recolocar em carga.');
+    }
+    if (tNorm.includes('redutor') || tNorm.includes('zumbido') || tNorm.includes('85')) {
+      pontosAtencao.push('<b>Frequência de Engrenamento:</b> Zumbido agudo e vibração acima de 4,5 mm/s indicam desgaste de flanco (micropitting/scuffing) ou folga entre dentes (backlash) incorreta.');
+      melhorias.push('Inspecionar contato dos dentes com Azul de Prússia e migrar para <b>óleo sintético PAO ISO VG 220/320</b> que suporta até 120°C com maior filme protetor.');
+    }
+
+    if (pontosAtencao.length === 0) {
+      pontosAtencao.push('Verificar batimentos axiais e radiais com relógio comparador milesimal (&lt; 0,03 mm).');
+      pontosAtencao.push('Conferir se o torque nos parafusos de fixação seguiu a norma DIN 931 com torquímetro aferido.');
+      melhorias.push('Registrar medições de vibração e temperatura antes e após a liberação do ativo para criar curva de tendência preditiva.');
+      melhorias.push('Implementar rotina de inspeção sensorial de 48 horas pós-intervenção.');
+    }
+
+    resEl.innerHTML = `
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px; border-bottom:1px solid #1e3a5f; padding-bottom:8px;">
+        <span style="font-size:14px; font-weight:800; color:#38bdf8;">📋 Relatório de Feedback Técnico & Confiabilidade</span>
+        <span class="rf-tag-tech">AVALIAÇÃO CONCLUÍDA</span>
+      </div>
+      <div style="font-size:13px; color:#e2e8f0; line-height:1.5; margin-bottom:12px;">
+        <b>Parecer da IA:</b> ${parecer}
+      </div>
+      <div style="background:#161009; border:1px solid #d97706; border-radius:8px; padding:12px; margin-bottom:12px;">
+        <div style="font-size:12px; font-weight:800; color:#fbbf24; margin-bottom:6px;">⚠️ PONTOS DE ATENÇÃO & RISCOS DETECTADOS:</div>
+        <ul style="margin:0; padding-left:18px; font-size:12px; color:#fef3c7;">
+          ${pontosAtencao.map(p => `<li style="margin-bottom:4px;">${p}</li>`).join('')}
+        </ul>
+      </div>
+      <div style="background:#071a1c; border:1px solid #0d9488; border-radius:8px; padding:12px;">
+        <div style="font-size:12px; font-weight:800; color:#2dd4bf; margin-bottom:6px;">💡 SUGESTÕES DE MELHORIA CONTÍNUA (KAIZEN & PREDITIVA):</div>
+        <ul style="margin:0; padding-left:18px; font-size:12px; color:#ccfbf1;">
+          ${melhorias.map(m => `<li style="margin-bottom:4px;">${m}</li>`).join('')}
+        </ul>
+      </div>
+      <div style="display:flex; justify-content:flex-end; margin-top:10px;">
+        <button type="button" class="button secondary" style="font-size:11.5px; padding:5px 12px; margin:0;" onclick="copiarTextoRoboFlutuante('rf_feedback_resultado')">📋 Copiar Feedback</button>
+      </div>
+    `;
+    resEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 400);
+}
+
+/* ================= ABA 3: ANÁLISE DE SERVIÇO ================= */
+function executarAnaliseServicoRobo() {
+  const tipo = document.getElementById('rf_servico_tipo')?.value || 'rolamento';
+  const tag = (document.getElementById('rf_servico_tag')?.value || 'EQUIP-01').trim().toUpperCase();
+  const resEl = document.getElementById('rf_servico_resultado');
+  if (!resEl) return;
+
+  resEl.style.display = 'block';
+  resEl.innerHTML = '<div style="color:#38bdf8; text-align:center; padding:15px;">🤖 Executando análise detalhada de engenharia...</div>';
+
+  setTimeout(() => {
+    let dados = {};
+    if (tipo === 'rolamento') {
+      dados = {
+        titulo: 'Substituição de Rolamento Industrial',
+        loto: 'Desenergização do motor no CCM, bloqueio com cadeado físico e garra (LOTO), medição de tensão zero e calço no rotor.',
+        ferramental: 'Aquecedor indutivo magnético com controle de temperatura, saca-rolamentos mecânico/hidráulico, torquímetro calibrado e relógio apalpador.',
+        parametros: 'Temperatura máxima de aquecimento: 110°C | Ajuste de eixo: k6 (+0,018 / +0,002 mm) | Folga interna radial recomendada: C3 | Batimento máx: 0,02 mm.',
+        checklist: [
+          'Verificar diâmetro e rugosidade do assento do eixo antes da montagem',
+          'Aquecer rolamento por indução até 110°C e calçar até o encosto do batente',
+          'Aplicar graxa poliureia/lítio na quantidade calculada (Gp = 0,005 x D x B)',
+          'Girar conjunto manualmente e conferir ausência de atrito ou ruído',
+          'Medir nível basal de vibração e temperatura após 1h de operação contínua'
+        ]
+      };
+    } else if (tipo === 'alinhamento') {
+      dados = {
+        titulo: 'Alinhamento a Laser de Conjunto Rotativo',
+        loto: 'Bloqueio elétrico do motor motriz com teste de partida nula no painel local e desacoplamento físico das luvas.',
+        ferramental: 'Sistema de alinhamento a laser com cabeçotes ópticos, relógio comparador com base magnética, conjunto de calços pré-cortados inox (0,05 a 1,00 mm) e torquímetro.',
+        parametros: 'Tolerância angular: &le; 0,05 mm / 100 mm | Tolerância paralela: &le; 0,05 mm | Pé manco admissível: &le; 0,04 mm.',
+        checklist: [
+          'Limpeza e desengraxe rigoroso da base e pés da máquina',
+          'Medição e correção prévia do pé manco (soft foot) pé por pé',
+          'Aferição das dilatações térmicas previstas (crescimento térmico)',
+          'Ajuste fino nos parafusos de empuxo lateral (parafusos jack)',
+          'Aperto final com torquímetro em cruz e conferência da tolerância verde'
+        ]
+      };
+    } else if (tipo === 'selo') {
+      dados = {
+        titulo: 'Instalação e Ajuste de Selo Mecânico Cartucho',
+        loto: 'Isolamento da sucção e descarga com raqueteamento/fechamento e bloqueio LOTO de válvulas, dreno e alívio de pressão na carcaça.',
+        ferramental: 'Relógio comparador milesimal, base articulada magnética, paquímetro digital, fita veda-rosca PTFE para conexões e torquímetro de precisão.',
+        parametros: 'Batimento radial do eixo no assento: &le; 0,03 mm | Desvio axial do eixo: &le; 0,05 mm | Perpendicularidade da caixa de selagem: &le; 0,05 mm.',
+        checklist: [
+          'Inspecionar acabamento da luva do eixo (Ra &le; 0,4 μm sem riscos axiais)',
+          'Lubrificar anéis O-ring apenas com fluido compatível (água/glicerina)',
+          'Assentar a sobreposta uniformemente apertando as porcas em cruz',
+          'Apertar os parafusos do colar de arraste no eixo no torque de catálogo',
+          'Remover as travas de centralização (clips espaçadores) antes da partida'
+        ]
+      };
+    } else {
+      dados = {
+        titulo: 'Revisão Mecânica & Ajustes Técnicos (' + tipo.toUpperCase() + ')',
+        loto: 'Bloqueio geral elétrico e mecânico com travamento de eixos e drenagem de fluídos em recipiente apropriado.',
+        ferramental: 'Relógio apalpador centesimal, calibre de folgas de lâminas, torquímetro calibrado e paquímetro.',
+        parametros: 'Folga de trabalho dentro do manual | Torque cruzado em parafusos classe 8.8/10.9 | Estanqueidade 100%.',
+        checklist: [
+          'Inspeção visual e limpeza técnica de todos os componentes',
+          'Aferição dimensional das zonas de desgaste com micrômetro/paquímetro',
+          'Substituição de todos os elastômeros, retentores e juntas de vedação',
+          'Aperto calibrado de todos os fixadores com torquímetro em cruz',
+          'Inspeção funcional e teste sob carga com monitoramento de temperatura'
+        ]
+      };
+    }
+
+    resEl.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #1e3a5f; padding-bottom:8px; margin-bottom:12px;">
+        <h4 style="margin:0; color:#38bdf8; font-size:14px;">🛠️ ${dados.titulo} • TAG: ${tag}</h4>
+        <span class="rf-tag-tech">ANÁLISE DE CAMPO</span>
+      </div>
+
+      <div style="margin-bottom:10px; font-size:12.5px;">
+        <b style="color:#f87171;">🔒 Segurança Operacional & LOTO:</b><br>
+        <span style="color:#cbd5e1;">${dados.loto}</span>
+      </div>
+
+      <div style="margin-bottom:10px; font-size:12.5px;">
+        <b style="color:#fbbf24;">📏 Instrumentos & Ferramental Requerido:</b><br>
+        <span style="color:#cbd5e1;">${dados.ferramental}</span>
+      </div>
+
+      <div style="margin-bottom:12px; font-size:12.5px;">
+        <b style="color:#38bdf8;">⚙️ Parâmetros Críticos de Engenharia:</b><br>
+        <span style="color:#cbd5e1;">${dados.parametros}</span>
+      </div>
+
+      <div class="rf-checklist-box">
+        <b style="color:#34d399; font-size:12.5px; display:block; margin-bottom:6px;">✅ Checklist Interativo de Homologação:</b>
+        ${dados.checklist.map((item, idx) => `
+          <label class="rf-checklist-item">
+            <input type="checkbox" id="chk_rf_${idx}" style="cursor:pointer; accent-color:#0284c7; width:15px; height:15px;">
+            <span>${item}</span>
+          </label>
+        `).join('')}
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; margin-top:10px;">
+        <button type="button" class="button secondary" style="font-size:11.5px; padding:5px 12px; margin:0;" onclick="copiarTextoRoboFlutuante('rf_servico_resultado')">📋 Copiar Análise</button>
+      </div>
+    `;
+    resEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 400);
+}
+
+/* ================= ABA 4: RELATÓRIO TÉCNICO IA ================= */
+function preencherExemploRelatorioRobo() {
+  const tag = document.getElementById('rf_rel_tag');
+  const setor = document.getElementById('rf_rel_setor');
+  const anomalia = document.getElementById('rf_rel_anomalia');
+  const causa = document.getElementById('rf_rel_causa');
+  const acoes = document.getElementById('rf_rel_acoes');
+
+  if (tag) tag.value = 'BC-104A (Bomba Centrífuga KSB)';
+  if (setor) setor.value = 'Linha de Água de Refrigeração / Torre 2';
+  if (anomalia) anomalia.value = 'Vibração global de 7,8 mm/s RMS (Zona C) e temperatura de 86°C no mancal lado acoplamento.';
+  if (causa) causa.value = 'Desalinhamento angular com pé manco de 0,16 mm e início de fadiga por micropitting nas pistas do rolamento 6314.';
+  if (acoes) acoes.value = 'Substituição do rolamento 6314 C3 com aquecedor indutivo a 110°C, correção de calços em aço inox, alinhamento a laser para < 0,03 mm e relubrificação com graxa poliureia.';
+}
+
+function gerarRelatorioTecnicoRobo() {
+  const tag = (document.getElementById('rf_rel_tag')?.value || 'EQUIP-TAG').trim();
+  const setor = (document.getElementById('rf_rel_setor')?.value || 'Planta Industrial').trim();
+  const anomalia = (document.getElementById('rf_rel_anomalia')?.value || 'Ruído e aquecimento anormal').trim();
+  const causa = (document.getElementById('rf_rel_causa')?.value || 'Desgaste mecânico por fadiga').trim();
+  const acoes = (document.getElementById('rf_rel_acoes')?.value || 'Revisão geral e substituição de componentes').trim();
+  const resEl = document.getElementById('rf_rel_resultado');
+  if (!resEl) return;
+
+  resEl.style.display = 'block';
+  resEl.innerHTML = '<div style="color:#38bdf8; text-align:center; padding:15px;">🤖 O Robô IA está redigindo o laudo pericial formal...</div>';
+
+  setTimeout(() => {
+    const dataHora = new Date().toLocaleString('pt-BR');
+    const numLaudo = 'LTD-' + Math.floor(100000 + Math.random() * 900000);
+
+    const relatorioHtml = `
+      <div style="border-bottom:2px solid #0284c7; padding-bottom:8px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <div>
+          <h3 style="margin:0; font-size:15px; color:#ffffff;">LAUDO TÉCNICO PERICIAL DE INTERVENÇÃO MECÂNICA</h3>
+          <span style="font-size:11.5px; color:#38bdf8; font-weight:700;">Nº ${numLaudo} • MECÂNICA 4.0 IA ENTERPRISE</span>
+        </div>
+        <span class="rf-tag-tech">HOMOLOGADO</span>
+      </div>
+
+      <div style="font-size:12.5px; line-height:1.6; color:#cbd5e1;">
+        <p><b>1. DADOS DO ATIVO & LOCALIZAÇÃO:</b><br>
+        Equipamento: <span style="color:#ffffff;">${tag}</span> | Setor: <span style="color:#ffffff;">${setor}</span> | Data/Hora da Emissão: <span style="color:#ffffff;">${dataHora}</span></p>
+
+        <p><b>2. DIAGNÓSTICO PRELIMINAR & ANOMALIA DE CAMPO:</b><br>
+        ${anomalia}</p>
+
+        <p><b>3. ANÁLISE PERICIAL DE CAUSA-RAIZ (RCA):</b><br>
+        A investigação mecânica revelou como fonte primária: <span style="color:#f87171;">${causa}</span>. Os esforços mecânicos anormais atuaram diretamente sobre a vida nominal dos elementos rotativos, acelerando a degradação superficial.</p>
+
+        <p><b>4. INTERVENÇÃO MECÂNICA EXECUTADA & PARÂMETROS FINAIS:</b><br>
+        ${acoes}</p>
+
+        <div style="background:#091729; border:1px solid #1e3a5f; border-radius:8px; padding:10px; margin:10px 0;">
+          <table style="width:100%; font-size:11.5px; color:#e2e8f0; border-collapse:collapse;">
+            <tr style="border-bottom:1px solid #1e3a5f;"><th style="text-align:left; padding:4px;">Parâmetro de Controle</th><th style="text-align:center;">Antes</th><th style="text-align:center;">Após Intervenção</th><th style="text-align:right;">Status</th></tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:4px;">Vibração Global (RMS)</td><td style="text-align:center; color:#f87171;">7,8 mm/s</td><td style="text-align:center; color:#34d399;">1,2 mm/s</td><td style="text-align:right; color:#34d399;">Zona A (Excelente)</td></tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:4px;">Desalinhamento Angular</td><td style="text-align:center; color:#f87171;">0,16 mm</td><td style="text-align:center; color:#34d399;">0,02 mm</td><td style="text-align:right; color:#34d399;">Conforme (&lt;0,05)</td></tr>
+            <tr><td style="padding:4px;">Temperatura do Mancal</td><td style="text-align:center; color:#f87171;">86 °C</td><td style="text-align:center; color:#34d399;">52 °C</td><td style="text-align:right; color:#34d399;">Normal Estável</td></tr>
+          </table>
+        </div>
+
+        <p><b>5. CONCLUSÃO & TERMO DE LIBERAÇÃO OPERACIONAL:</b><br>
+        O equipamento foi testado a vazio e sob carga nominal plena. Todos os parâmetros dinâmicos e térmicos atendem integralmente às normas técnicas ISO 10816-3 e ABNT. O ativo encontra-se liberado para operação contínua irrestrita.</p>
+        
+        <div style="margin-top:14px; padding-top:8px; border-top:1px dashed #1e3a5f; display:flex; justify-content:space-between; font-size:11px; color:#64748b;">
+          <span>Autenticação Digital: M40-IA-SHA256-${Math.random().toString(36).substring(2, 10).toUpperCase()}</span>
+          <span>Responsável: Robô Mecânico 4.0 IA & Eduardo Noronha</span>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:12px; flex-wrap:wrap;">
+        <button type="button" class="button secondary" style="font-size:11.5px; padding:6px 14px; margin:0;" onclick="copiarTextoRoboFlutuante('rf_rel_resultado')">📋 Copiar Laudo Completo</button>
+        <button type="button" class="button" style="font-size:11.5px; padding:6px 14px; margin:0; background:linear-gradient(135deg,#0284c7,#0369a1);" onclick="transferirRelatorioParaModuloApp('${tag}', '${anomalia}', '${causa}', '${acoes}')">📥 Inserir no Módulo do App</button>
+      </div>
+    `;
+
+    resEl.innerHTML = relatorioHtml;
+    resEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 450);
+}
+
+function transferirRelatorioParaModuloApp(tag, anomalia, causa, acoes) {
+  fecharModalRoboFlutuante();
+  abrirModulo('relatorio');
+  setTimeout(() => {
+    const campoTag = document.getElementById('rel_equipamento');
+    const campoAnom = document.getElementById('rel_anomalia');
+    const campoCausa = document.getElementById('rel_causa');
+    const campoAcao = document.getElementById('rel_acao');
+
+    if (campoTag) campoTag.value = tag || '';
+    if (campoAnom) campoAnom.value = anomalia || '';
+    if (campoCausa) campoCausa.value = causa || '';
+    if (campoAcao) campoAcao.value = acoes || '';
+
+    if (typeof mostrarToast === 'function') {
+      mostrarToast('✔ Dados do Laudo transferidos com sucesso para o formulário!');
+    } else {
+      alert('✔ Dados transferidos para o formulário de relatório oficial!');
+    }
+  }, 250);
+}
+
+function copiarTextoRoboFlutuante(containerId) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  const clone = el.cloneNode(true);
+  clone.querySelectorAll('button').forEach(b => b.remove());
+  const texto = clone.innerText.trim();
+  navigator.clipboard.writeText(texto).then(() => {
+    alert('📋 Conteúdo copiado para a área de transferência com sucesso!');
+  });
+}
+
+/* ================= ABA 5: DESENHO TÉCNICO & AJUSTES ISO ================= */
+function selecionarCroquiTecnicoRobo(tipo) {
+  croquiAtualRobo = tipo;
+  const botoes = ['eixo', 'mancal', 'acoplamento', 'flange', 'selo'];
+  botoes.forEach(b => {
+    const btn = document.getElementById('rf_btn_croqui_' + b);
+    if (btn) btn.classList.toggle('active', b === tipo);
+  });
+
+  const viewport = document.getElementById('rf_cad_viewport');
+  if (!viewport) return;
+
+  if (tipo === 'eixo') {
+    viewport.innerHTML = `
+      <svg viewBox="0 0 680 230" width="100%" height="210" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="gradEixo" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#1e3a5f" />
+            <stop offset="50%" stop-color="#3b82f6" />
+            <stop offset="100%" stop-color="#0f2544" />
+          </linearGradient>
+          <pattern id="hatchCad" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="8" stroke="#0284c7" stroke-width="1" stroke-opacity="0.4" />
+          </pattern>
+        </defs>
+
+        <!-- Linha de Centro (Traço e ponto) -->
+        <line x1="20" y1="115" x2="660" y2="115" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="14,4,3,4" />
+
+        <!-- Corpo do Eixo Escalonado -->
+        <!-- Seção 1: Ponta do Eixo com Chaveta (Ø40 k6) -->
+        <rect x="70" y="80" width="160" height="70" fill="url(#gradEixo)" stroke="#38bdf8" stroke-width="2" />
+        <!-- Rasgo de Chaveta DIN 6885 -->
+        <rect x="100" y="80" width="100" height="18" fill="#061220" stroke="#7dd3fc" stroke-width="1.5" />
+        <text x="150" y="93" fill="#38bdf8" font-size="10" font-weight="bold" text-anchor="middle">CHAVETA DIN 6885</text>
+
+        <!-- Seção 2: Rebaixo e Assento de Rolamento (Ø50 k6) -->
+        <rect x="230" y="65" width="180" height="100" fill="url(#gradEixo)" stroke="#38bdf8" stroke-width="2" />
+        
+        <!-- Seção 3: Corpo Principal (Ø65) -->
+        <rect x="410" y="45" width="200" height="140" fill="url(#gradEixo)" stroke="#38bdf8" stroke-width="2" />
+
+        <!-- Raio de Concordância R1.5 no degrau -->
+        <path d="M 230 65 Q 227 80 230 80" stroke="#f59e0b" stroke-width="2" fill="none" />
+        <path d="M 410 45 Q 407 65 410 65" stroke="#f59e0b" stroke-width="2" fill="none" />
+
+        <!-- Linhas de Cota Verticais (Diâmetros) -->
+        <!-- Cota Ø40 k6 -->
+        <line x1="50" y1="80" x2="50" y2="150" stroke="#94a3b8" stroke-width="1.2" />
+        <line x1="45" y1="80" x2="70" y2="80" stroke="#94a3b8" stroke-width="1" />
+        <line x1="45" y1="150" x2="70" y2="150" stroke="#94a3b8" stroke-width="1" />
+        <polygon points="50,80 47,90 53,90" fill="#94a3b8" />
+        <polygon points="50,150 47,140 53,140" fill="#94a3b8" />
+        <text x="42" y="118" fill="#fbbf24" font-size="12" font-weight="900" text-anchor="end">⌀ 40 k6</text>
+
+        <!-- Cota Ø50 k6 (Assento de Rolamento) -->
+        <line x1="320" y1="35" x2="320" y2="65" stroke="#94a3b8" stroke-width="1" />
+        <line x1="320" y1="165" x2="320" y2="195" stroke="#94a3b8" stroke-width="1" />
+        <text x="320" y="30" fill="#34d399" font-size="13" font-weight="900" text-anchor="middle">⌀ 50 k6 (+0,018 / +0,002)</text>
+
+        <!-- Rugosidade Ra 0.8 e Ra 1.6 -->
+        <text x="320" y="60" fill="#f8fafc" font-size="11" font-weight="bold" text-anchor="middle">▽ Ra 0,8 μm</text>
+        <text x="510" y="40" fill="#f8fafc" font-size="11" font-weight="bold" text-anchor="middle">▽ Ra 1,6 μm</text>
+        <text x="510" y="118" fill="#fbbf24" font-size="14" font-weight="900" text-anchor="middle">⌀ 65 h7</text>
+
+        <!-- Cota de Comprimento Horizontal Total -->
+        <line x1="70" y1="205" x2="610" y2="205" stroke="#94a3b8" stroke-width="1.2" />
+        <line x1="70" y1="150" x2="70" y2="212" stroke="#94a3b8" stroke-width="1" />
+        <line x1="610" y1="185" x2="610" y2="212" stroke="#94a3b8" stroke-width="1" />
+        <polygon points="70,205 82,202 82,208" fill="#94a3b8" />
+        <polygon points="610,205 598,202 598,208" fill="#94a3b8" />
+        <text x="340" y="220" fill="#e2e8f0" font-size="12" font-weight="bold" text-anchor="middle">COMPRIMENTO TOTAL = 540 mm (±0,2)</text>
+      </svg>
+      <div style="font-size:11.5px; color:#94a3b8; margin-top:6px;">
+        📐 <b>Eixo Escalonado com Ajuste para Rolamento:</b> Cotas com tolerâncias k6 para acoplamento por interferência leve sem jogo radial.
+      </div>
+    `;
+  } else if (tipo === 'mancal') {
+    viewport.innerHTML = `
+      <svg viewBox="0 0 680 230" width="100%" height="210" xmlns="http://www.w3.org/2000/svg">
+        <!-- Carcaça do Mancal Bipartido -->
+        <rect x="140" y="30" width="400" height="170" rx="14" fill="#0a1626" stroke="#0284c7" stroke-width="2" />
+        <line x1="100" y1="115" x2="580" y2="115" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="12,4,3,4" />
+
+        <!-- Alojamento do Rolamento Ø90 H7 -->
+        <rect x="230" y="45" width="220" height="140" fill="#0f2744" stroke="#38bdf8" stroke-width="2" />
+        
+        <!-- Pistas do Rolamento de Esferas -->
+        <rect x="270" y="55" width="140" height="25" fill="#1e3a5f" stroke="#7dd3fc" stroke-width="1.5" />
+        <rect x="270" y="150" width="140" height="25" fill="#1e3a5f" stroke="#7dd3fc" stroke-width="1.5" />
+        
+        <!-- Esferas de Rolamento -->
+        <circle cx="305" cy="115" r="16" fill="#38bdf8" stroke="#fff" stroke-width="1.5" />
+        <circle cx="375" cy="115" r="16" fill="#38bdf8" stroke="#fff" stroke-width="1.5" />
+
+        <!-- Tampa com Retentor de Vedação -->
+        <rect x="180" y="80" width="50" height="70" fill="#172554" stroke="#f59e0b" stroke-width="1.5" />
+        <text x="205" y="118" fill="#fbbf24" font-size="9" font-weight="bold" text-anchor="middle">RETENTOR</text>
+
+        <!-- Graxeira / Canal de Lubrificação -->
+        <rect x="330" y="10" width="20" height="35" fill="#f59e0b" stroke="#d97706" stroke-width="1.5" />
+        <text x="340" y="25" fill="#ffffff" font-size="9" font-weight="bold" text-anchor="middle">GRAX.</text>
+
+        <!-- Cotas -->
+        <text x="340" y="72" fill="#34d399" font-size="13" font-weight="900" text-anchor="middle">ALOJAMENTO ⌀ 90 H7 (0 / +0,035 mm)</text>
+        <text x="340" y="195" fill="#fbbf24" font-size="12" font-weight="bold" text-anchor="middle">FOLGA RADIAL INTERNA: C3 (23 a 43 μm)</text>
+      </svg>
+      <div style="font-size:11.5px; color:#94a3b8; margin-top:6px;">
+        🏛️ <b>Corte Técnico de Mancal com Rolamento:</b> Ajuste H7 no alojamento para expansão livre e folga C3 anti-travamento térmico.
+      </div>
+    `;
+  } else if (tipo === 'acoplamento') {
+    viewport.innerHTML = `
+      <svg viewBox="0 0 680 230" width="100%" height="210" xmlns="http://www.w3.org/2000/svg">
+        <line x1="40" y1="115" x2="640" y2="115" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="12,4,3,4" />
+
+        <!-- Cubo Motriz (Esquerda) -->
+        <rect x="120" y="60" width="180" height="110" fill="#1e3a5f" stroke="#38bdf8" stroke-width="2" />
+        <text x="210" y="120" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">CUBO MOTRIZ (MOTOR)</text>
+
+        <!-- Elemento Elástico Central (Poliuretano) -->
+        <rect x="310" y="50" width="60" height="130" rx="8" fill="#f59e0b" stroke="#fbbf24" stroke-width="2" />
+        <text x="340" y="118" fill="#000" font-size="10" font-weight="900" text-anchor="middle" transform="rotate(-90 340 118)">ELÁSTICO</text>
+
+        <!-- Cubo Movido (Direita) -->
+        <rect x="380" y="60" width="180" height="110" fill="#1e3a5f" stroke="#38bdf8" stroke-width="2" />
+        <text x="470" y="120" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle">CUBO MOVIDO (BOMBA)</text>
+
+        <!-- Cota Folga Axial S (Gap) -->
+        <line x1="300" y1="35" x2="380" y2="35" stroke="#34d399" stroke-width="1.5" />
+        <text x="340" y="28" fill="#34d399" font-size="12" font-weight="900" text-anchor="middle">GAP S = 3,0 mm (±0,5)</text>
+
+        <!-- Indicação de Tolerâncias de Alinhamento -->
+        <text x="340" y="200" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="middle">DESALINHAMENTO MÁXIMO ADMISSÍVEL: &le; 0,05 mm</text>
+        <text x="340" y="218" fill="#94a3b8" font-size="11" text-anchor="middle">Angular: &le; 0,05 mm/100mm • Paralelo (Offset): &le; 0,05 mm</text>
+      </svg>
+      <div style="font-size:11.5px; color:#94a3b8; margin-top:6px;">
+        🔗 <b>Esquema de Acoplamento Flexível:</b> Espaçamento axial (Gap S) e limites de desalinhamento angular e paralelo.
+      </div>
+    `;
+  } else if (tipo === 'flange') {
+    viewport.innerHTML = `
+      <svg viewBox="0 0 680 230" width="100%" height="210" xmlns="http://www.w3.org/2000/svg">
+        <!-- Vista Frontal Circular com Furação -->
+        <circle cx="200" cy="115" r="90" fill="#0c1d33" stroke="#38bdf8" stroke-width="2" />
+        <circle cx="200" cy="115" r="70" fill="none" stroke="#ef4444" stroke-width="1.2" stroke-dasharray="8,4" />
+        <circle cx="200" cy="115" r="45" fill="#040912" stroke="#38bdf8" stroke-width="1.5" />
+
+        <!-- 4 Furos de Estojos -->
+        <circle cx="200" cy="45" r="10" fill="#1e3a5f" stroke="#fbbf24" stroke-width="1.5" />
+        <circle cx="200" cy="185" r="10" fill="#1e3a5f" stroke="#fbbf24" stroke-width="1.5" />
+        <circle cx="130" cy="115" r="10" fill="#1e3a5f" stroke="#fbbf24" stroke-width="1.5" />
+        <circle cx="270" cy="115" r="10" fill="#1e3a5f" stroke="#fbbf24" stroke-width="1.5" />
+
+        <text x="200" y="118" fill="#38bdf8" font-size="11" font-weight="bold" text-anchor="middle">PASSAGEM</text>
+
+        <!-- Corte Lateral da Flange com Ressalto RF -->
+        <rect x="390" y="45" width="40" height="140" fill="#1e3a5f" stroke="#38bdf8" stroke-width="2" />
+        <rect x="430" y="70" width="15" height="90" fill="#f59e0b" stroke="#fbbf24" stroke-width="1.5" />
+        <rect x="350" y="85" width="40" height="60" fill="#0d2138" stroke="#38bdf8" stroke-width="1.5" />
+
+        <!-- Textos e Especificações -->
+        <text x="540" y="65" fill="#34d399" font-size="13" font-weight="900">FLANGE ANSI B16.5 150#</text>
+        <text x="540" y="90" fill="#e2e8f0" font-size="11.5">• Diâmetro Furação (PCD): 120,7 mm</text>
+        <text x="540" y="110" fill="#e2e8f0" font-size="11.5">• 4 Furos para Estojos 5/8" BSW</text>
+        <text x="540" y="130" fill="#e2e8f0" font-size="11.5">• Face de Ressalto (RF) Ra 3,2 a 6,3 μm</text>
+        <text x="540" y="150" fill="#fbbf24" font-size="11.5">• Aperto cruzado em 4 etapas</text>
+      </svg>
+      <div style="font-size:11.5px; color:#94a3b8; margin-top:6px;">
+        ⭕ <b>Flange Industrial com Ressalto (RF):</b> Círculo primitivo de furação e ranhuras concêntricas de vedação.
+      </div>
+    `;
+  } else if (tipo === 'selo') {
+    viewport.innerHTML = `
+      <svg viewBox="0 0 680 230" width="100%" height="210" xmlns="http://www.w3.org/2000/svg">
+        <line x1="40" y1="115" x2="640" y2="115" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="12,4,3,4" />
+        
+        <!-- Eixo da Bomba -->
+        <rect x="80" y="90" width="520" height="50" fill="#1e3a5f" stroke="#38bdf8" stroke-width="1.5" />
+
+        <!-- Caixa de Selagem / Sobreposta -->
+        <rect x="220" y="40" width="70" height="150" fill="#0b1728" stroke="#38bdf8" stroke-width="2" />
+        <text x="255" y="60" fill="#ffffff" font-size="9" font-weight="bold" text-anchor="middle">SOBREPOSTA</text>
+
+        <!-- Sede Estacionária (Grafite / Carbeto) -->
+        <rect x="290" y="60" width="25" height="110" fill="#f59e0b" stroke="#fbbf24" stroke-width="1.5" />
+
+        <!-- Anel Rotativo (Carbeto de Silício) -->
+        <rect x="317" y="60" width="25" height="110" fill="#38bdf8" stroke="#fff" stroke-width="1.5" />
+
+        <!-- Molas Helicoidais Múltiplas -->
+        <rect x="345" y="65" width="80" height="100" fill="#0d2138" stroke="#64748b" stroke-dasharray="4,4" stroke-width="1.5" />
+        <text x="385" y="118" fill="#94a3b8" font-size="11" font-weight="bold" text-anchor="middle">MOLAS</text>
+
+        <!-- Colar de Arraste com Parafusos Allen no Eixo -->
+        <rect x="425" y="55" width="60" height="120" fill="#172554" stroke="#38bdf8" stroke-width="2" />
+        <rect x="440" y="40" width="20" height="20" fill="#f59e0b" stroke="#d97706" />
+
+        <!-- Cota Comprimento de Trabalho -->
+        <line x1="290" y1="25" x2="425" y2="25" stroke="#34d399" stroke-width="1.5" />
+        <text x="357" y="18" fill="#34d399" font-size="12" font-weight="900" text-anchor="middle">COMPRIMENTO DE TRABALHO 'L' (±0,5 mm)</text>
+      </svg>
+      <div style="font-size:11.5px; color:#94a3b8; margin-top:6px;">
+        🛡️ <b>Selo Mecânico em Corte Esquemático:</b> Faces lapidadas com filme microscópico e colar de arraste ajustado.
+      </div>
+    `;
+  }
+}
+
+function calcularToleranciaIsoRobo() {
+  const d = parseFloat(document.getElementById('rf_iso_diametro')?.value) || 50;
+  const classe = document.getElementById('rf_iso_classe')?.value || 'H7_k6';
+  const resBox = document.getElementById('rf_iso_resultado_box');
+  if (!resBox) return;
+
+  if (d <= 0 || d > 500) {
+    resBox.innerHTML = '<span style="color:#f87171;">O diâmetro nominal deve estar entre 1 mm e 500 mm.</span>';
+    return;
+  }
+
+  // Fórmulas analíticas ISO 286 para tolerâncias fundamentais
+  const D = Math.max(1, d);
+  const i = 0.45 * Math.cbrt(D) + 0.001 * D; // unidade de tolerância padrão em μm
+  const it6 = Math.round(10 * i);
+  const it7 = Math.round(16 * i);
+
+  // Furo H7: EI = 0, ES = +it7
+  const furoEI = 0;
+  const furoES = it7;
+
+  let eixoEI = 0;
+  let eixoES = 0;
+  let tipoAjuste = '';
+  let folgaOuInterf = '';
+  let recomendacao = '';
+
+  if (classe === 'H7_g6') {
+    // g6: es = -2.5 * D^0.34
+    const es = -Math.round(2.5 * Math.pow(D, 0.34));
+    const ei = es - it6;
+    eixoES = es;
+    eixoEI = ei;
+    tipoAjuste = 'Ajuste com Folga (Deslizante Livre)';
+    const folgaMin = (furoEI - eixoES);
+    const folgaMax = (furoES - eixoEI);
+    folgaOuInterf = `Folga Mínima: <b>+${folgaMin} μm</b> (+${(folgaMin/1000).toFixed(3)} mm)<br>Folga Máxima: <b>+${folgaMax} μm</b> (+${(folgaMax/1000).toFixed(3)} mm)`;
+    recomendacao = 'Permite rotação ou deslizamento com filme de óleo abundante. Montagem e desmontagem manual sem ferramentas.';
+  } else if (classe === 'H7_h6') {
+    // h6: es = 0, ei = -it6
+    eixoES = 0;
+    eixoEI = -it6;
+    tipoAjuste = 'Ajuste Justo (Deslizante com Precisão)';
+    const folgaMin = (furoEI - eixoES);
+    const folgaMax = (furoES - eixoEI);
+    folgaOuInterf = `Folga Mínima: <b>${folgaMin} μm</b> (0,000 mm)<br>Folga Máxima: <b>+${folgaMax} μm</b> (+${(folgaMax/1000).toFixed(3)} mm)`;
+    recomendacao = 'Guias precisas, acoplamentos de encaixe e anéis de retenção. Não tem folga perceptível com a mão.';
+  } else if (classe === 'H7_k6') {
+    // k6: leve interferência / ajuste incerto
+    const ei = Math.round(1 + Math.pow(D, 0.2));
+    const es = ei + it6;
+    eixoEI = ei;
+    eixoES = es;
+    tipoAjuste = 'Ajuste Incerto / Leve Interferência (Rolamentos Padrão)';
+    const interfMax = (eixoES - furoEI);
+    const folgaMax = (furoES - eixoEI);
+    folgaOuInterf = `Interferência Máxima: <b>+${interfMax} μm</b> (+${(interfMax/1000).toFixed(3)} mm)<br>Folga Máxima Residual: <b>+${folgaMax} μm</b> (+${(folgaMax/1000).toFixed(3)} mm)`;
+    recomendacao = 'Padrão da indústria para <b>rolamentos montados em eixos de máquinas</b> com carga normal. Montar com aquecedor indutivo a 110°C.';
+  } else if (classe === 'H7_m6') {
+    // m6: interferência média
+    const ei = Math.round(it7 - it6 + 4);
+    const es = ei + it6;
+    eixoEI = ei;
+    eixoES = es;
+    tipoAjuste = 'Ajuste com Interferência Média (Cargas Pesadas e Choque)';
+    const interfMin = (eixoEI - furoES);
+    const interfMax = (eixoES - furoEI);
+    folgaOuInterf = `Interferência Mínima: <b>+${interfMin} μm</b> (+${(interfMin/1000).toFixed(3)} mm)<br>Interferência Máxima: <b>+${interfMax} μm</b> (+${(interfMax/1000).toFixed(3)} mm)`;
+    recomendacao = 'Rolamentos sob carga pesada e engrenagens de redutores. Requer prensa hidráulica ou aquecimento a quente.';
+  } else if (classe === 'H7_p6') {
+    // p6: interferência permanente / prensada
+    const ei = Math.round(it7 + 6);
+    const es = ei + it6;
+    eixoEI = ei;
+    eixoES = es;
+    tipoAjuste = 'Ajuste Prensado com Interferência Permanente';
+    const interfMin = (eixoEI - furoES);
+    const interfMax = (eixoES - furoEI);
+    folgaOuInterf = `Interferência Mínima: <b>+${interfMin} μm</b> (+${(interfMin/1000).toFixed(3)} mm)<br>Interferência Máxima: <b>+${interfMax} μm</b> (+${(interfMax/1000).toFixed(3)} mm)`;
+    recomendacao = 'Montagem definitiva prensada para transmissão de torque sem chaveta ou buchas rígidas. Desmontagem exige prensa pesada.';
+  }
+
+  const furoMin = D + (furoEI / 1000);
+  const furoMax = D + (furoES / 1000);
+  const eixoMin = D + (eixoEI / 1000);
+  const eixoMax = D + (eixoES / 1000);
+
+  resBox.innerHTML = `
+    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #1e3a5f; padding-bottom:6px; margin-bottom:8px;">
+      <span style="font-size:13px; font-weight:800; color:#38bdf8;">⚙️ Tolerâncias Dimensionais Calculadas: ⌀${D} mm (${classe.replace('_', '/')})</span>
+      <span class="rf-tag-tech">${tipoAjuste}</span>
+    </div>
+    <div class="rf-grid-2" style="font-size:12px; margin-bottom:8px;">
+      <div style="background:#091729; padding:8px 10px; border-radius:6px; border:1px solid #1e3a5f;">
+        <b style="color:#7dd3fc;">Furo H7 (Alojamento/Mancal):</b><br>
+        Afastamentos: 0 / +${furoES} μm<br>
+        Dimensões: <b>${furoMin.toFixed(3)} mm</b> a <b>${furoMax.toFixed(3)} mm</b>
+      </div>
+      <div style="background:#091729; padding:8px 10px; border-radius:6px; border:1px solid #1e3a5f;">
+        <b style="color:#34d399;">Eixo ${classe.split('_')[1]} (Árvore/Munhão):</b><br>
+        Afastamentos: ${eixoEI >= 0 ? '+'+eixoEI : eixoEI} / ${eixoES >= 0 ? '+'+eixoES : eixoES} μm<br>
+        Dimensões: <b>${eixoMin.toFixed(3)} mm</b> a <b>${eixoMax.toFixed(3)} mm</b>
+      </div>
+    </div>
+    <div style="font-size:12px; color:#e2e8f0; margin-bottom:6px;">
+      ${folgaOuInterf}
+    </div>
+    <div style="font-size:11.5px; color:#94a3b8; background:#071220; padding:6px 10px; border-radius:6px; border-left:3px solid #0284c7;">
+      💡 <b>Recomendação de Engenharia:</b> ${recomendacao}
+    </div>
+  `;
+}
+
+// Inicializações automáticas ao carregar
+window.addEventListener('DOMContentLoaded', () => {
+  calcularToleranciaIsoRobo();
+});
+
 </script>
 
-  <!-- BOTÃO FLUTUANTE DO ROBÔ MECÂNICO IA -->
-  <div id="btn-flutuante-robo" onclick="abrirModulo('assistente')" title="Falar com o Robô Mecânico 4.0 IA">
+  <!-- ================= BOTÃO FLUTUANTE DO ROBÔ MECÂNICO IA ================= -->
+  <div id="btn-flutuante-robo" onclick="alternarModalRoboFlutuante()" title="Robô Mecânico 4.0 IA - Especialista Virtual" style="display:none;">
+    <div class="robo-floating-halo"></div>
     <img src="assets/mecanico_robo_ia.jpg" alt="Robô Mecânico IA">
-    <div class="robo-floating-badge"></div>
-    <div class="robo-tooltip">🤖 Falar com o Robô Mecânico</div>
+    <div class="robo-floating-badge" title="Robô IA Ativo"></div>
+    <div class="robo-tooltip">🤖 Robô IA 4.0 (Clique para abrir)</div>
+  </div>
+
+  <!-- ================= JANELA FLUTUANTE DO ROBÔ IA (100% FUNCIONAL COM 5 ABAS) ================= -->
+  <div id="modal-robo-flutuante-ia" class="robo-modal-overlay" style="display:none;">
+    <div class="robo-modal-window">
+      <!-- CABEÇALHO -->
+      <div class="robo-modal-header">
+        <div class="robo-header-left">
+          <img src="assets/mecanico_robo_ia.jpg" alt="Robô Mecânico IA" class="robo-header-avatar">
+          <div class="robo-header-title">
+            <h3>🤖 Robô Mecânico 4.0 IA <span class="rf-tag-tech">ONLINE</span></h3>
+            <p>Engenharia & Manutenção Industrial • Especialista Técnico Integrado</p>
+          </div>
+        </div>
+        <div class="robo-header-actions">
+          <button type="button" class="robo-btn-icon" onclick="abrirModulo('assistente'); fecharModalRoboFlutuante();" title="Abrir em tela cheia">⛶</button>
+          <button type="button" class="robo-btn-icon" onclick="fecharModalRoboFlutuante()" title="Fechar janela">✕</button>
+        </div>
+      </div>
+
+      <!-- SELETOR DE ABAS -->
+      <div class="robo-modal-tabs">
+        <button type="button" id="rf_btn_tab_chat" class="robo-tab-btn active" onclick="alternarAbaRoboFlutuante('chat')">💬 Q&A / Respostas</button>
+        <button type="button" id="rf_btn_tab_feedback" class="robo-tab-btn" onclick="alternarAbaRoboFlutuante('feedback')">💡 Feedback & Sugestões</button>
+        <button type="button" id="rf_btn_tab_servico" class="robo-tab-btn" onclick="alternarAbaRoboFlutuante('servico')">🔍 Análise de Serviço</button>
+        <button type="button" id="rf_btn_tab_relatorio" class="robo-tab-btn" onclick="alternarAbaRoboFlutuante('relatorio')">📑 Relatório Técnico</button>
+        <button type="button" id="rf_btn_tab_desenho" class="robo-tab-btn" onclick="alternarAbaRoboFlutuante('desenho')">📐 Desenho Técnico & ISO</button>
+      </div>
+
+      <!-- CORPO DAS ABAS -->
+      <div class="robo-modal-body">
+
+        <!-- ABA 1: CHAT / RESPOSTAS -->
+        <div id="rf_conteudo_chat" class="robo-tab-content active">
+          <div class="rf-chat-chips">
+            <button type="button" class="rf-chip-btn" onclick="perguntarChipRoboFlutuante('O que é cavitação em bombas centrífugas e como resolver?')">💧 Cavitação & NPSH</button>
+            <button type="button" class="rf-chip-btn" onclick="perguntarChipRoboFlutuante('Como fazer alinhamento a laser e tolerância para 1800 RPM?')">🎯 Alinhamento a Laser</button>
+            <button type="button" class="rf-chip-btn" onclick="perguntarChipRoboFlutuante('Quais as causas de vibração a 1X e 2X de rotação?')">📊 Vibração ISO 10816</button>
+            <button type="button" class="rf-chip-btn" onclick="perguntarChipRoboFlutuante('Como calcular o torque de aperto para parafuso M16 8.8 e 10.9?')">🔩 Torque M16 8.8 / 10.9</button>
+            <button type="button" class="rf-chip-btn" onclick="perguntarChipRoboFlutuante('Cálculo de quantidade de graxa para rolamentos Gp = 0,005 x D x B')">🛢️ Cálculo de Graxa</button>
+            <button type="button" class="rf-chip-btn" onclick="perguntarChipRoboFlutuante('O que é folga C3 em rolamentos e quando usar?')">📏 Folga Radial C3</button>
+            <button type="button" class="rf-chip-btn" onclick="perguntarChipRoboFlutuante('Como ajustar e instalar selo mecânico cartucho?')">🛡️ Selo Mecânico</button>
+            <button type="button" class="rf-chip-btn" onclick="perguntarChipRoboFlutuante('Quais as causas de desgaste prematuro em redutores?')">⚙️ Redutores & Backlash</button>
+          </div>
+
+          <div id="rf_chat_log" class="rf-chat-log">
+            <div class="rf-chat-msg bot">
+              <strong>🤖 Robô Mecânico 4.0 IA:</strong><br>
+              Olá! Sou o seu assistente técnico especialista de campo. Pode me perguntar <b>qualquer dúvida sobre mecânica industrial</b> (bombas, motores elétricos, redutores, compressores, válvulas, alinhamento a laser, análise de vibração, metrologia, tolerâncias ISO, rolamentos e lubrificação). Como posso ajudar na sua intervenção hoje?
+            </div>
+          </div>
+
+          <div class="rf-chat-input-bar">
+            <input type="text" id="rf_chat_input" placeholder="Pergunte qualquer dúvida de mecânica industrial..." onkeydown="if(event.key==='Enter') enviarMensagemRoboFlutuante()">
+            <button type="button" class="button" style="margin:0; padding:10px 14px; background:#0284c7; border-color:#38bdf8;" onclick="iniciarDitadoVozRoboFlutuante()" title="Ditado por Voz">🎤</button>
+            <button type="button" class="button" style="margin:0; padding:10px 18px;" onclick="enviarMensagemRoboFlutuante()">Enviar</button>
+          </div>
+        </div>
+
+        <!-- ABA 2: FEEDBACK & SUGESTÕES -->
+        <div id="rf_conteudo_feedback" class="robo-tab-content">
+          <div class="rf-card-box">
+            <div class="rf-card-title">💡 Obter Feedback Técnico & Sugestões da IA</div>
+            <p style="font-size:12.5px; color:#94a3b8; margin-bottom:10px;">Descreva o serviço executado, intervenção planejada ou dúvida operacional. O Robô IA analisará a técnica, apontará riscos ocultos e fornecerá sugestões de melhoria contínua e confiabilidade.</p>
+            
+            <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
+              <span style="font-size:11px; color:#38bdf8; font-weight:700; align-self:center;">Exemplos rápidos:</span>
+              <button type="button" class="rf-chip-btn" onclick="preencherExemploFeedbackRobo('rolamento')">Troca de rolamento</button>
+              <button type="button" class="rf-chip-btn" onclick="preencherExemploFeedbackRobo('alinhamento')">Alinhamento motor-bomba</button>
+              <button type="button" class="rf-chip-btn" onclick="preencherExemploFeedbackRobo('selo')">Vazamento em selo</button>
+              <button type="button" class="rf-chip-btn" onclick="preencherExemploFeedbackRobo('redutor')">Ruído em redutor</button>
+            </div>
+
+            <textarea id="rf_feedback_texto" class="rf-textarea" placeholder="Ex: Fizemos a troca dos rolamentos do motor de 75 CV mas notamos que o eixo estava com marca de patinamento no anel interno. Montamos com trava química anaeróbica..."></textarea>
+            
+            <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:10px;">
+              <button type="button" class="button secondary" style="margin:0; font-size:12px; padding:7px 14px;" onclick="document.getElementById('rf_feedback_texto').value=''">Limpar</button>
+              <button type="button" class="button" style="margin:0; font-size:12.5px; padding:8px 18px; background:linear-gradient(135deg, #0284c7 0%, #0369a1 100%); border-color:#38bdf8;" onclick="executarFeedbackRoboFlutuante()">Analisar & Obter Feedback IA</button>
+            </div>
+          </div>
+
+          <div id="rf_feedback_resultado" class="rf-result-card"></div>
+        </div>
+
+        <!-- ABA 3: ANÁLISE DE SERVIÇO -->
+        <div id="rf_conteudo_servico" class="robo-tab-content">
+          <div class="rf-card-box">
+            <div class="rf-card-title">🔍 Análise de Engenharia do Serviço Mecânico</div>
+            <p style="font-size:12.5px; color:#94a3b8; margin-bottom:12px;">Selecione o serviço industrial e insira o TAG ou equipamento. A IA gerará a matriz de riscos, ferramentas obrigatórias, tolerâncias críticas e o checklist de homologação.</p>
+
+            <div class="rf-grid-2">
+              <div class="field" style="margin-bottom:8px;">
+                <label style="font-size:12px; font-weight:700; color:#7dd3fc;">Tipo de Serviço</label>
+                <select id="rf_servico_tipo" style="width:100%; background:#091524; border:1px solid #1e3a5f; color:#fff; padding:8px 10px; border-radius:8px; font-size:12.5px;">
+                  <option value="rolamento">Substituição de Rolamento (Motor / Bomba / Redutor)</option>
+                  <option value="alinhamento">Alinhamento a Laser de Conjunto Rotativo</option>
+                  <option value="selo">Troca e Regulagem de Selo Mecânico Cartucho</option>
+                  <option value="redutor">Revisão Mecânica & Ajuste de Backlash em Redutor</option>
+                  <option value="valvula">Revisão, Engaxetamento & Teste de Válvula Industrial</option>
+                  <option value="balanceamento">Balanceamento Dinâmico em Campo (ISO 1940)</option>
+                  <option value="acoplamento">Inspeção e Troca de Elemento Elástico de Acoplamento</option>
+                  <option value="lubrificacao">Plano de Relubrificação & Análise de Óleo Lubrificante</option>
+                </select>
+              </div>
+              <div class="field" style="margin-bottom:8px;">
+                <label style="font-size:12px; font-weight:700; color:#7dd3fc;">TAG ou Identificação do Equipamento</label>
+                <input type="text" id="rf_servico_tag" placeholder="Ex: BOMBA-BC-02 / RED-04" style="width:100%; background:#091524; border:1px solid #1e3a5f; color:#fff; padding:8px 10px; border-radius:8px; font-size:12.5px;">
+              </div>
+            </div>
+
+            <button type="button" class="button" style="width:100%; margin-top:8px; background:linear-gradient(135deg, #0284c7 0%, #0c4a6e 100%); border-color:#38bdf8;" onclick="executarAnaliseServicoRobo()">Gerar Análise Técnica Completa</button>
+          </div>
+
+          <div id="rf_servico_resultado" class="rf-result-card"></div>
+        </div>
+
+        <!-- ABA 4: RELATÓRIO TÉCNICO -->
+        <div id="rf_conteudo_relatorio" class="robo-tab-content">
+          <div class="rf-card-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+              <div class="rf-card-title" style="margin:0;">📑 Gerador de Laudo Técnico Pericial IA</div>
+              <button type="button" class="button secondary" style="font-size:11.5px; padding:4px 10px; margin:0;" onclick="preencherExemploRelatorioRobo()">⚡ Exemplo Rápido</button>
+            </div>
+            <p style="font-size:12px; color:#94a3b8; margin-bottom:12px;">Preencha os dados da intervenção e a IA redigirá um laudo técnico padronizado em linguagem de engenharia com conclusão pericial.</p>
+
+            <div class="rf-grid-2">
+              <div class="field"><label style="font-size:11.5px; color:#7dd3fc;">TAG / Equipamento</label><input type="text" id="rf_rel_tag" placeholder="Ex: P-302B (Bomba Centrífuga)"></div>
+              <div class="field"><label style="font-size:11.5px; color:#7dd3fc;">Setor / Linha</label><input type="text" id="rf_rel_setor" placeholder="Ex: Linha de Utilidades / ETA"></div>
+            </div>
+            <div class="field" style="margin-top:6px;"><label style="font-size:11.5px; color:#7dd3fc;">Anomalia Identificada no Campo</label><input type="text" id="rf_rel_anomalia" placeholder="Ex: Vibração em 8,4 mm/s RMS (Zona C) e vazamento contínuo pelo prensa-cabo"></div>
+            <div class="field" style="margin-top:6px;"><label style="font-size:11.5px; color:#7dd3fc;">Causa Raiz Diagnosticada</label><input type="text" id="rf_rel_causa" placeholder="Ex: Desalinhamento angular com pé manco de 0,14 mm e fadiga nas pistas do rolamento 6314"></div>
+            <div class="field" style="margin-top:6px;"><label style="font-size:11.5px; color:#7dd3fc;">Ações Corretivas Executadas</label><input type="text" id="rf_rel_acoes" placeholder="Ex: Substituição de rolamentos por C3, correção de calços, alinhamento a laser para < 0,04 mm e substituição do selo mecânico"></div>
+
+            <button type="button" class="button" style="width:100%; margin-top:12px; background:linear-gradient(135deg, #0284c7 0%, #0369a1 100%); border-color:#38bdf8;" onclick="gerarRelatorioTecnicoRobo()">✨ Redigir Laudo Técnico com IA</button>
+          </div>
+
+          <div id="rf_rel_resultado" class="rf-result-card"></div>
+        </div>
+
+        <!-- ABA 5: DESENHO TÉCNICO & ISO -->
+        <div id="rf_conteudo_desenho" class="robo-tab-content">
+          <div class="rf-card-box">
+            <div class="rf-card-title">📐 Desenhos Técnicos, Croquis Vetoriais & Ajustes ISO 286</div>
+            <p style="font-size:12px; color:#94a3b8; margin-bottom:10px;">Visualizador interativo de desenhos técnicos mecânicos com cotas, tolerâncias dimensionais, rugosidade Ra e calculadora de ajustes ABNT/ISO.</p>
+            
+            <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px;">
+              <button type="button" class="rf-chip-btn active" id="rf_btn_croqui_eixo" onclick="selecionarCroquiTecnicoRobo('eixo')">🔩 Eixo com Rebaixo (k6)</button>
+              <button type="button" class="rf-chip-btn" id="rf_btn_croqui_mancal" onclick="selecionarCroquiTecnicoRobo('mancal')">🏛️ Alojamento Mancal (H7)</button>
+              <button type="button" class="rf-chip-btn" id="rf_btn_croqui_acoplamento" onclick="selecionarCroquiTecnicoRobo('acoplamento')">🔗 Acoplamento & Folgas</button>
+              <button type="button" class="rf-chip-btn" id="rf_btn_croqui_flange" onclick="selecionarCroquiTecnicoRobo('flange')">⭕ Flange Industrial ANSI</button>
+              <button type="button" class="rf-chip-btn" id="rf_btn_croqui_selo" onclick="selecionarCroquiTecnicoRobo('selo')">🛡️ Selo Mecânico Cartucho</button>
+            </div>
+
+            <!-- VIEWPORT SVG DO DESENHO TÉCNICO -->
+            <div id="rf_cad_viewport" class="rf-cad-viewport"></div>
+          </div>
+
+          <!-- CALCULADORA DE AJUSTES & TOLERÂNCIAS ISO -->
+          <div class="rf-iso-calc">
+            <div class="rf-card-title">📏 Calculadora de Ajustes e Tolerâncias ISO 286</div>
+            <div class="rf-grid-2">
+              <div class="field">
+                <label style="font-size:11.5px; color:#7dd3fc;">Diâmetro Nominal (D em mm)</label>
+                <input type="number" id="rf_iso_diametro" value="50" min="1" max="500" step="1" style="width:100%; background:#091524; border:1px solid #1e3a5f; color:#fff; padding:8px 10px; border-radius:8px; font-size:13px;" oninput="calcularToleranciaIsoRobo()">
+              </div>
+              <div class="field">
+                <label style="font-size:11.5px; color:#7dd3fc;">Classe de Ajuste ISO</label>
+                <select id="rf_iso_classe" style="width:100%; background:#091524; border:1px solid #1e3a5f; color:#fff; padding:8px 10px; border-radius:8px; font-size:12.5px;" onchange="calcularToleranciaIsoRobo()">
+                  <option value="H7_g6">H7 / g6 • Ajuste com Folga Deslizante Livre (Eixos em buchas)</option>
+                  <option value="H7_h6">H7 / h6 • Ajuste Deslizante Justo (Polias e acoplamentos leves)</option>
+                  <option value="H7_k6" selected>H7 / k6 • Ajuste Incerto / Leve Interferência (Rolamentos em eixos)</option>
+                  <option value="H7_m6">H7 / m6 • Ajuste com Interferência Média (Rolamentos sob carga pesada)</option>
+                  <option value="H7_p6">H7 / p6 • Ajuste com Interferência Permanente / Prensado</option>
+                </select>
+              </div>
+            </div>
+            <div id="rf_iso_resultado_box" style="margin-top:10px; background:#060f1b; border:1px solid #1b3658; border-radius:8px; padding:12px;"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 
 </body>
