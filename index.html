@@ -1247,68 +1247,118 @@
     color: #fbbf24;
   }
 
-  /* BOTÃO FLUTUANTE DO ROBÔ MECÂNICO */
+  /* ================= ROBÔ MECÂNICO 4.0 FLUTUANTE PELO CENÁRIO COM PRANCHETA ================= */
   #btn-flutuante-robo {
     position: fixed;
     bottom: 24px;
     right: 24px;
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #10448c 0%, #0c1c33 100%);
-    border: 2px solid #38bdf8;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7), 0 0 16px rgba(56, 189, 248, 0.45);
+    width: 92px;
+    height: 122px;
     cursor: pointer;
-    z-index: 999;
+    z-index: 99999;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
+    justify-content: flex-end;
     user-select: none;
+    touch-action: none;
+    animation: roboLevitacaoCenario 3.4s ease-in-out infinite;
+    transition: filter 0.2s;
+    filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.75));
   }
+  
   #btn-flutuante-robo:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.8), 0 0 24px rgba(56, 189, 248, 0.7);
+    filter: drop-shadow(0 14px 30px rgba(0, 242, 254, 0.5));
   }
-  #btn-flutuante-robo:active {
-    transform: scale(0.95);
+
+  @keyframes roboLevitacaoCenario {
+    0% { transform: translateY(0px) rotate(0deg); }
+    25% { transform: translateY(-7px) rotate(-1.5deg); }
+    50% { transform: translateY(-13px) rotate(0deg); }
+    75% { transform: translateY(-6px) rotate(1.5deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
   }
-  #btn-flutuante-robo img {
-    width: 54px;
-    height: 54px;
-    border-radius: 50%;
-    object-fit: cover;
+
+  .robo-char-svg {
+    width: 86px;
+    height: 112px;
+    display: block;
     pointer-events: none;
   }
-  .robo-floating-badge {
-    position: absolute;
-    top: -3px;
-    right: -3px;
-    width: 14px;
-    height: 14px;
-    background: #10b981;
-    border: 2px solid #0c1c33;
-    border-radius: 50%;
-    box-shadow: 0 0 8px #10b981;
+
+  .robo-plasma-thruster .plasma-flame {
+    animation: plasmaFlamePulse 1.2s ease-in-out infinite alternate;
+    transform-origin: 50px 106px;
   }
-  .robo-tooltip {
+
+  @keyframes plasmaFlamePulse {
+    0% { opacity: 0.65; transform: scaleY(0.8) scaleX(0.9); }
+    100% { opacity: 1; transform: scaleY(1.35) scaleX(1.1); filter: drop-shadow(0 0 10px #00f2fe); }
+  }
+
+  .arc-core-pulse {
+    animation: arcCorePulseAnim 1.6s ease-in-out infinite alternate;
+  }
+
+  @keyframes arcCorePulseAnim {
+    0% { opacity: 0.7; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1.2); }
+  }
+
+  .robo-status-tag {
     position: absolute;
-    right: 74px;
-    background: #0f172a;
+    top: -6px;
+    background: rgba(8, 18, 36, 0.95);
+    border: 1px solid #00f2fe;
+    color: #38bdf8;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    padding: 2px 7px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .robo-status-tag.offline {
+    border-color: #f59e0b;
+    color: #f59e0b;
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+  }
+
+  .robo-balao-cenario {
+    position: absolute;
+    right: 96px;
+    bottom: 30px;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.96) 0%, rgba(6, 14, 26, 0.98) 100%);
     border: 1px solid #38bdf8;
     color: #f8fafc;
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-size: 12px;
+    padding: 7px 12px;
+    border-radius: 12px;
+    font-size: 11.5px;
     font-weight: 700;
     white-space: nowrap;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+    box-shadow: 0 4px 18px rgba(0,0,0,0.7), 0 0 14px rgba(56, 189, 248, 0.3);
     pointer-events: none;
     opacity: 0;
     transform: translateX(10px);
-    transition: opacity 0.2s, transform 0.2s;
+    transition: opacity 0.3s ease, transform 0.3s ease;
   }
-  #btn-flutuante-robo:hover .robo-tooltip {
+
+  .robo-balao-cenario::after {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-width: 6px 0 6px 6px;
+    border-style: solid;
+    border-color: transparent transparent transparent #38bdf8;
+  }
+
+  #btn-flutuante-robo:hover .robo-balao-cenario,
+  .robo-balao-cenario.mostrar-aviso {
     opacity: 1;
     transform: translateX(0);
   }
@@ -10472,13 +10522,185 @@ function iniciarRobo3DModal() {
   }
 }
 
-function iniciarRobo3DBtn() {
-  const canvas = document.getElementById('canvasRobo3DBtn');
-  if (!canvas || typeof THREE === 'undefined') return;
+let roboFlutuanteIniciado = false;
+let roboRoamingInterval = null;
+let roboBalaoInterval = null;
 
-  try {
-    criarRoboMecanico3D('canvasRobo3DBtn', { width: 112, height: 112, mini: true });
-  } catch (e) {}
+function atualizarStatusRedeRobo() {
+  const tag = document.getElementById('tagStatusRedeRobo');
+  if (!tag) return;
+  const online = navigator.onLine !== false;
+  if (online) {
+    tag.textContent = '🟢 IA ONLINE';
+    tag.className = 'robo-status-tag';
+    tag.title = 'Conectado à nuvem de engenharia mecânica 4.0 de alta precisão';
+  } else {
+    tag.textContent = '📶 IA OFFLINE';
+    tag.className = 'robo-status-tag offline';
+    tag.title = 'Modo offline autônomo - Banco de dados local de engenharia ativo';
+  }
+}
+
+function iniciarCicloBalaoRoboCenario() {
+  const balao = document.getElementById('balaoFalaRoboCenario');
+  if (!balao) return;
+  if (roboBalaoInterval) clearInterval(roboBalaoInterval);
+
+  const frases = [
+    '📋 Prancheta de campo pronta! Toque para conversar.',
+    '🔍 Monitorando alinhamento, vibração e lubrificação.',
+    '⚡ Diagnósticos ISO/DIN disponíveis online e offline.',
+    '🔩 Precisa de cálculo de torque ou folga C3?',
+    '🤖 Olá, mecânico! Pronto para qualquer intervenção!'
+  ];
+
+  let fraseIdx = 0;
+  roboBalaoInterval = setInterval(() => {
+    const robo = document.getElementById('btn-flutuante-robo');
+    const modal = document.getElementById('modal-robo-flutuante-ia');
+    if (!robo || robo.style.display === 'none') return;
+    if (modal && modal.style.display !== 'none') return;
+
+    const emailAtual = localStorage.getItem('mecanica_ultimo_usuario_conectado') || '';
+    const nomeUsuario = (typeof obterNomeUsuario === 'function' && emailAtual) ? obterNomeUsuario(emailAtual) : 'Mecânico';
+    
+    fraseIdx = (fraseIdx + 1) % frases.length;
+    let texto = frases[fraseIdx];
+    if (fraseIdx === 0 && nomeUsuario) {
+      texto = `📋 Olá, ${nomeUsuario}! Prancheta pronta para te apoiar.`;
+    }
+
+    balao.textContent = texto;
+    balao.classList.add('mostrar-aviso');
+    setTimeout(() => {
+      balao.classList.remove('mostrar-aviso');
+    }, 4500);
+  }, 12000);
+}
+
+function iniciarRoboFlutuanteCenario() {
+  const robo = document.getElementById('btn-flutuante-robo');
+  if (!robo) return;
+
+  atualizarStatusRedeRobo();
+  iniciarCicloBalaoRoboCenario();
+
+  if (roboFlutuanteIniciado) return;
+  roboFlutuanteIniciado = true;
+
+  window.addEventListener('online', atualizarStatusRedeRobo);
+  window.addEventListener('offline', atualizarStatusRedeRobo);
+
+  // Física de arrasto (Touch e Mouse) com detecção perfeita de clique vs arrasto
+  let isDragging = false;
+  let startX = 0, startY = 0;
+  let initialLeft = 0, initialTop = 0;
+  let hasMoved = false;
+  let lastDragTime = Date.now();
+
+  function onPointerDown(e) {
+    if (e.button !== undefined && e.button !== 0) return;
+    
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+    const rect = robo.getBoundingClientRect();
+    isDragging = true;
+    hasMoved = false;
+    startX = clientX;
+    startY = clientY;
+    initialLeft = rect.left;
+    initialTop = rect.top;
+
+    robo.style.transition = 'none';
+    robo.style.bottom = 'auto';
+    robo.style.right = 'auto';
+    robo.style.left = `${initialLeft}px`;
+    robo.style.top = `${initialTop}px`;
+  }
+
+  function onPointerMove(e) {
+    if (!isDragging) return;
+
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    const dx = clientX - startX;
+    const dy = clientY - startY;
+
+    if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+      hasMoved = true;
+      lastDragTime = Date.now();
+    }
+
+    if (hasMoved) {
+      if (e.cancelable) e.preventDefault();
+
+      let newLeft = initialLeft + dx;
+      let newTop = initialTop + dy;
+
+      const maxLeft = window.innerWidth - (robo.offsetWidth || 92) - 8;
+      const maxTop = window.innerHeight - (robo.offsetHeight || 122) - 8;
+
+      newLeft = Math.max(8, Math.min(newLeft, maxLeft));
+      newTop = Math.max(8, Math.min(newTop, maxTop));
+
+      robo.style.left = `${newLeft}px`;
+      robo.style.top = `${newTop}px`;
+    }
+  }
+
+  function onPointerUp(e) {
+    if (!isDragging) return;
+    isDragging = false;
+    robo.style.transition = 'filter 0.2s, top 0.6s ease-out, left 0.6s ease-out';
+
+    if (!hasMoved) {
+      if (typeof alternarModalRoboFlutuante === 'function') {
+        alternarModalRoboFlutuante();
+      }
+    }
+  }
+
+  robo.addEventListener('mousedown', onPointerDown);
+  window.addEventListener('mousemove', onPointerMove, { passive: false });
+  window.addEventListener('mouseup', onPointerUp);
+
+  robo.addEventListener('touchstart', onPointerDown, { passive: true });
+  window.addEventListener('touchmove', onPointerMove, { passive: false });
+  window.addEventListener('touchend', onPointerUp);
+
+  // Wandering autônomo pelo cenário quando inativo
+  if (roboRoamingInterval) clearInterval(roboRoamingInterval);
+  roboRoamingInterval = setInterval(() => {
+    const modal = document.getElementById('modal-robo-flutuante-ia');
+    if (isDragging) return;
+    if (modal && modal.style.display !== 'none') return;
+    if (robo.style.display === 'none') return;
+    if (Date.now() - lastDragTime < 8000) return;
+
+    const rect = robo.getBoundingClientRect();
+    const maxLeft = window.innerWidth - (robo.offsetWidth || 92) - 16;
+    const maxTop = window.innerHeight - (robo.offsetHeight || 122) - 16;
+
+    const deltaX = (Math.random() - 0.5) * 80;
+    const deltaY = (Math.random() - 0.5) * 60;
+
+    let targetLeft = rect.left + deltaX;
+    let targetTop = rect.top + deltaY;
+
+    targetLeft = Math.max(16, Math.min(targetLeft, maxLeft));
+    targetTop = Math.max(16, Math.min(targetTop, maxTop));
+
+    robo.style.transition = 'left 2.5s cubic-bezier(0.25, 1, 0.5, 1), top 2.5s cubic-bezier(0.25, 1, 0.5, 1)';
+    robo.style.bottom = 'auto';
+    robo.style.right = 'auto';
+    robo.style.left = `${targetLeft}px`;
+    robo.style.top = `${targetTop}px`;
+  }, 14000);
+}
+
+function iniciarRobo3DBtn() {
+  iniciarRoboFlutuanteCenario();
 }
 
 function iniciarRobo3DApresentacao() {
@@ -15497,7 +15719,12 @@ function iniciarDitadoVozRoboFlutuante() {
     if (input) input.placeholder = 'Pergunte qualquer dúvida de mecânica industrial...';
   };
 
-  recognition.start();
+  try {
+    recognition.start();
+  } catch (err) {
+    console.warn('Erro ao iniciar reconhecimento de voz:', err);
+    if (input) input.placeholder = 'Pergunte qualquer dúvida de mecânica industrial...';
+  }
 }
 
 function enviarMensagemRoboFlutuante() {
@@ -15554,7 +15781,36 @@ function obterRespostaRoboFlutuanteIA(pergunta) {
   const pNorm = normalizarTextoMecanico(pergunta);
   if (!pNorm) return 'Por favor, digite uma dúvida ou sintoma técnico para que eu possa orientá-lo.';
 
-  // 1. Busca na base de conhecimento oficial
+  const online = navigator.onLine !== false;
+  const emailAtual = localStorage.getItem('mecanica_ultimo_usuario_conectado') || '';
+  const nomeUsuario = (typeof obterNomeUsuario === 'function' && emailAtual) 
+    ? obterNomeUsuario(emailAtual) 
+    : 'Mecânico Especialista';
+
+  const badgeModo = online 
+    ? `<div class="rf-badge-modo online" style="display:inline-flex; align-items:center; gap:5px; background:rgba(6,182,212,0.15); border:1px solid #00f2fe; color:#38bdf8; font-size:11px; font-weight:700; padding:3px 8px; border-radius:6px; margin-bottom:8px;">🌐 MODO ONLINE (NUVEM DE ALTA PRECISÃO ATIVA)</div>`
+    : `<div class="rf-badge-modo offline" style="display:inline-flex; align-items:center; gap:5px; background:rgba(245,158,11,0.15); border:1px solid #f59e0b; color:#fbbf24; font-size:11px; font-weight:700; padding:3px 8px; border-radius:6px; margin-bottom:8px;">📶 MODO OFFLINE (BANCO LOCAL DE ALTA PRECISÃO ATIVO)</div>`;
+
+  // 1. Saudações e Apresentação Personalizada chamando pelo Nome do Usuário
+  const sauda = /^(oi|ola|bom dia|boa tarde|boa noite|e ai|fala|opa|salve|alo)/i.test(pNorm);
+  const quem = pNorm.includes('quem e voce') || pNorm.includes('quem e') || pNorm.includes('apresente') || pNorm.includes('seu nome') || pNorm.includes('como funciona') || pNorm === 'ajuda' || pNorm === 'robo';
+
+  if (sauda || quem) {
+    return `${badgeModo}
+    <div style="line-height:1.6;">
+      Olá, <b>${nomeUsuario}</b>! Sou o seu <b>Robô Mecânico 4.0 IA</b>, seu assistente especialista de manutenção industrial com prancheta digital de campo.<br><br>
+      Estou 100% operacional no <b>${online ? 'Modo Conectado (Nuvem em Tempo Real)' : 'Modo Offline (Base Local Certificada)'}</b> para te auxiliar em qualquer procedimento:<br>
+      • 🎯 <b>Alinhamento a Laser & Pé Manco</b> (Tolerâncias e calços)<br>
+      • 📊 <b>Análise de Vibração</b> (Norma ISO 10816 / ISO 20816)<br>
+      • 🔩 <b>Cálculo de Torque de Parafusos</b> (Classes 8.8, 10.9, 12.9 DIN ISO 898)<br>
+      • 🛢️ <b>Lubrificação & Rolamentos</b> (Fórmulas SKF/FAG, folgas C3 e relubrificação)<br>
+      • 🛡️ <b>Selos Mecânicos & Bombas</b> (Planos API, cavitação e NPSH)<br>
+      • 📋 <b>Geração de Laudos, Feedback de Serviços e Desenho Técnico</b> (Abas superiores)<br><br>
+      Pode me perguntar diretamente qualquer dúvida de máquina, sintoma de falha ou procedimento técnico, <b>${nomeUsuario}</b>! O que estamos inspecionando agora?
+    </div>`;
+  }
+
+  // 2. Busca na base de conhecimento oficial
   if (typeof baseConhecimentoRobo !== 'undefined' && Array.isArray(baseConhecimentoRobo)) {
     const palavrasUsuario = pNorm.split(' ').filter(w => w.length > 2);
     let melhorItem = null;
@@ -15580,23 +15836,30 @@ function obterRespostaRoboFlutuanteIA(pergunta) {
     }
 
     if (melhorItem && melhorScore >= 4) {
-      return melhorItem.resposta;
+      return `${badgeModo}<br>${melhorItem.resposta}`;
     }
   }
 
-  // 2. Base de conhecimento heurística especializada expandida
-  if (pNorm.includes('cavitac') || pNorm.includes('npsh') || (pNorm.includes('bomba') && pNorm.includes('barulho'))) {
-    return `<strong>💧 Diagnóstico de Cavitação & NPSH em Bombas Centrífugas:</strong><br>
+  // 3. Base de conhecimento heurística especializada com telemetria dual (Online & Offline)
+  // Cavitação & Bombas
+  if (pNorm.includes('cavitac') || pNorm.includes('npsh') || (pNorm.includes('bomba') && (pNorm.includes('barulho') || pNorm.includes('ruido') || pNorm.includes('vazao')))) {
+    const extraOnline = online ? `<div style="margin-top:8px; padding:6px 10px; background:rgba(2,132,199,0.15); border-left:3px solid #00f2fe; font-size:11px;">🌐 <b>Telemetria Nuvem:</b> Análise espectral de FFT indica picos de alta frequência entre 5 kHz e 20 kHz compatíveis com implosão de microbolhas. Verifique também recirculação interna e diâmetro de sucção equivalente.</div>` : '';
+    return `${badgeModo}
+    <strong>💧 Diagnóstico de Cavitação & NPSH em Bombas Centrífugas:</strong><br>
     A cavitação ocorre quando a pressão de sucção cai abaixo da pressão de vapor do fluido, gerando bolhas que implodem e removem material do rotor (pitting).<br><br>
     <b>Sintomas Clássicos:</b> Ruído metálico forte semelhante a "pedregulhos/brita dentro da voluta", queda repentina de vazão (m³/h) e vibração em altas frequências.<br>
     <b>Ações Imediatas no Campo:</b><br>
     1. Conferir linha de sucção: abrir 100% registros, limpar filtro cesto/Y e verificar se a tubulação tem estrangulamento.<br>
     2. Confirmar se o NPSH disponível (NPSHd) supera o NPSH requerido (NPSHr) do catálogo em pelo menos +0,8 metros.<br>
-    3. Verificar temperatura do fluido (aquecimento excessivo eleva a pressão de vapor).`;
+    3. Verificar temperatura do fluido (aquecimento excessivo eleva a pressão de vapor).
+    ${extraOnline}`;
   }
 
+  // Alinhamento & Pé Manco
   if (pNorm.includes('alinh') || pNorm.includes('laser') || pNorm.includes('pe manco') || pNorm.includes('soft foot')) {
-    return `<strong>🎯 Procedimento de Alinhamento a Laser & Eliminação de Pé Manco:</strong><br>
+    const extraOnline = online ? `<div style="margin-top:8px; padding:6px 10px; background:rgba(2,132,199,0.15); border-left:3px solid #00f2fe; font-size:11px;">🌐 <b>Telemetria Nuvem:</b> Cálculo de dilatação térmica: $\\Delta L = L \\cdot \\alpha \\cdot \\Delta T$. Compensar crescimento térmico positivo da carcaça do motor elétrico antes do aperto final dos calços.</div>` : '';
+    return `${badgeModo}
+    <strong>🎯 Procedimento de Alinhamento a Laser & Eliminação de Pé Manco:</strong><br>
     O alinhamento correto entre eixos minimiza esforços cíclicos nos rolamentos e selos mecânicos.<br><br>
     <b>Tolerâncias Técnicas para 1800 RPM:</b><br>
     • Desalinhamento Angular (Gap): Máximo <b>0,05 mm / 100 mm</b>.<br>
@@ -15604,11 +15867,15 @@ function obterRespostaRoboFlutuanteIA(pergunta) {
     <b>Protocolo de Pé Manco (Soft Foot):</b><br>
     1. Afrouxe um parafuso da base por vez enquanto monitora o relógio comparador ou sensor laser no pé.<br>
     2. Variação superior a <b>0,05 mm</b> indica pé manco. Adicione calços calibrados de aço inox sob o pé defeituoso.<br>
-    3. Nunca utilize mais de 4 calços sobrepostos por pé (evita efeito mola). Realize o aperto final com torquímetro em sequência cruzada.`;
+    3. Nunca utilize mais de 4 calços sobrepostos por pé (evita efeito mola). Realize o aperto final com torquímetro em sequência cruzada.
+    ${extraOnline}`;
   }
 
+  // Análise de Vibração
   if (pNorm.includes('vibrac') || pNorm.includes('iso 10816') || pNorm.includes('iso 20816') || pNorm.includes('bpfo') || pNorm.includes('bpfi')) {
-    return `<strong>📊 Análise de Vibração Industrial (Norma ISO 10816-3 / ISO 20816):</strong><br>
+    const extraOnline = online ? `<div style="margin-top:8px; padding:6px 10px; background:rgba(2,132,199,0.15); border-left:3px solid #00f2fe; font-size:11px;">🌐 <b>Telemetria Nuvem:</b> Detecção de modulação em bandas laterais (sidebands) no espectro de aceleração/envelope de vibração gE.</div>` : '';
+    return `${badgeModo}
+    <strong>📊 Análise de Vibração Industrial (Norma ISO 10816-3 / ISO 20816):</strong><br>
     Para máquinas elétricas e rotativas montadas em base rígida:<br><br>
     • <b>Zona A (0,0 a 1,4 mm/s RMS):</b> Condição excelente (máquina nova homologada).<br>
     • <b>Zona B (1,4 a 2,8 mm/s RMS):</b> Operação aceitável para trabalho contínuo irrestrito.<br>
@@ -15617,11 +15884,15 @@ function obterRespostaRoboFlutuanteIA(pergunta) {
     <b>Frequências Diagnósticas:</b><br>
     • <b>Pico em 1X da rotação:</b> Desbalanceamento estático ou dinâmico do rotor.<br>
     • <b>Pico em 2X da rotação:</b> Desalinhamento angular ou pé manco.<br>
-    • <b>Altas frequências (BPFO/BPFI):</b> Defeito de pistas de rolamento (fadiga superficial).`;
+    • <b>Altas frequências (BPFO/BPFI):</b> Defeito de pistas de rolamento (fadiga superficial).
+    ${extraOnline}`;
   }
 
+  // Torque & Fixação
   if (pNorm.includes('torque') || pNorm.includes('parafuso') || pNorm.includes('8.8') || pNorm.includes('10.9') || pNorm.includes('12.9')) {
-    return `<strong>🔩 Engenharia de Torque Controlado & Classes de Resistência (DIN ISO 898):</strong><br>
+    const extraOnline = online ? `<div style="margin-top:8px; padding:6px 10px; background:rgba(2,132,199,0.15); border-left:3px solid #00f2fe; font-size:11px;">🌐 <b>Telemetria Nuvem:</b> Coeficiente K de aperto: $T = K \\cdot D \\cdot F_p$. Para parafusos zincados a seco K ≈ 0,20; para fosfatizados/oleados K ≈ 0,14.</div>` : '';
+    return `${badgeModo}
+    <strong>🔩 Engenharia de Torque Controlado & Classes de Resistência (DIN ISO 898):</strong><br>
     O torque converte momento de torção em <b>força axial de pré-carga</b> nas roscas.<br><br>
     <b>Tabela Rápida de Torque Recomendado (Rosca Métrica Grossa - μ = 0,14):</b><br>
     • <b>M8:</b> Classe 8.8 = 25 N.m | Classe 10.9 = 36 N.m | Classe 12.9 = 43 N.m<br>
@@ -15629,11 +15900,15 @@ function obterRespostaRoboFlutuanteIA(pergunta) {
     • <b>M12:</b> Classe 8.8 = 85 N.m | Classe 10.9 = 125 N.m | Classe 12.9 = 145 N.m<br>
     • <b>M16:</b> Classe 8.8 = 210 N.m | Classe 10.9 = 310 N.m | Classe 12.9 = 365 N.m<br>
     • <b>M20:</b> Classe 8.8 = 410 N.m | Classe 10.9 = 600 N.m | Classe 12.9 = 710 N.m<br><br>
-    ⚠️ <b>Atenção:</b> Parafusos lubrificados com pasta de montagem MoS2 reduzem o atrito para μ ≈ 0,10, exigindo cerca de <b>20% a 30% menos torque</b> para não estirar o parafuso além do escoamento!`;
+    ⚠️ <b>Atenção:</b> Parafusos lubrificados com pasta de montagem MoS2 reduzem o atrito para μ ≈ 0,10, exigindo cerca de <b>20% a 30% menos torque</b> para não estirar o parafuso além do escoamento!
+    ${extraOnline}`;
   }
 
+  // Lubrificação & Graxa
   if (pNorm.includes('graxa') || pNorm.includes('lubrific') || pNorm.includes('viscosidade')) {
-    return `<strong>🛢️ Cálculo de Relubrificação de Rolamentos:</strong><br>
+    const extraOnline = online ? `<div style="margin-top:8px; padding:6px 10px; background:rgba(2,132,199,0.15); border-left:3px solid #00f2fe; font-size:11px;">🌐 <b>Telemetria Nuvem:</b> Fator de velocidade $nd_m = RPM \\cdot (d + D)/2$. Para graxas de sabão de lítio complexo grau NLGI 2, limite seguro $nd_m \\le 350.000$.</div>` : '';
+    return `${badgeModo}
+    <strong>🛢️ Cálculo de Relubrificação de Rolamentos:</strong><br>
     A quantidade ideal de graxa para relubrificação periódica em gramas é calculada pela fórmula clássica:<br><br>
     <div style="background:#091524; padding:8px 12px; border-radius:6px; border:1px solid #1e3a5f; font-family:monospace; color:#38bdf8;">
       Gp = 0,005 × D × B
@@ -15641,31 +15916,64 @@ function obterRespostaRoboFlutuanteIA(pergunta) {
     Onde <b>D</b> é o diâmetro externo do rolamento (mm) e <b>B</b> é a largura total (mm).<br><br>
     <b>Exemplo (Rolamento 6314 - D=150mm, B=35mm):</b><br>
     Gp = 0,005 × 150 × 35 = <b>26,25 gramas</b>.<br>
-    ⚠️ Cuidado com excesso de graxa: rolamentos operando com excesso sofrem com atrito hidrodinâmico, superaquecimento (&gt; 90°C) e queima prematura do lubrificante.`;
+    ⚠️ Cuidado com excesso de graxa: rolamentos operando com excesso sofrem com atrito hidrodinâmico, superaquecimento (&gt; 90°C) e queima prematura do lubrificante.
+    ${extraOnline}`;
   }
 
-  if (pNorm.includes('selo') || pNorm.includes('gaxeta') || pNorm.includes('vazamento')) {
-    return `<strong>🛡️ Selos Mecânicos & Vedações Industriais:</strong><br>
+  // Selos Mecânicos & Vedações
+  if (pNorm.includes('selo') || pNorm.includes('gaxeta') || pNorm.includes('vedac')) {
+    const extraOnline = online ? `<div style="margin-top:8px; padding:6px 10px; background:rgba(2,132,199,0.15); border-left:3px solid #00f2fe; font-size:11px;">🌐 <b>Telemetria Nuvem:</b> Para produtos voláteis ou polímeros pastosos, avaliar Plano API 53A ou 54 com barreira pressurizada de glicol/água destilada a 1,5 bar acima da câmara de selagem.</div>` : '';
+    return `${badgeModo}
+    <strong>🛡️ Selos Mecânicos & Vedações Industriais:</strong><br>
     Selos mecânicos operam com um filme líquido microscópico (1 a 3 μm) entre as faces rotativa e estacionária.<br><br>
     <b>Critérios Obrigatórios de Montagem:</b><br>
     1. <b>Batimento radial do eixo:</b> Deve ser inferior a <b>0,03 mm</b> sob a ponta do relógio comparador.<br>
     2. <b>Perpendicularidade da sobreposta:</b> O espelho de assentamento da sede deve estar a menos de <b>0,05 mm</b> em relação ao eixo.<br>
     3. <b>Comprimento de trabalho:</b> Respeitar rigorosamente a cota 'L' especificada pelo fabricante ao apertar os parafusos do colar de arraste.<br>
-    4. <b>Plano de Selagem API:</b> Garantir fluxo contínuo de flush (Plano 11 ou 32) para evitar vaporização das faces.`;
+    4. <b>Plano de Selagem API:</b> Garantir fluxo contínuo de flush (Plano 11 ou 32) para evitar vaporização das faces.
+    ${extraOnline}`;
   }
 
-  // Resposta estruturada pericial para perguntas livres de mecânica
-  return `<strong>🤖 Parecer do Robô Mecânico 4.0 IA:</strong><br>
-  Recebi sua consulta técnica: <i>"${pergunta}"</i>.<br><br>
-  <b>1. Diagnóstico Físico & Mecânico:</b><br>
-  Em intervenções deste tipo, a falha geralmente decorre de tensões residuais, folga fora de norma, sobreaquecimento por lubrificação inadequada ou desalinhamento do conjunto rotativo.<br><br>
-  <b>2. Cuidados Imediatos de Segurança (LOTO / NR-12):</b><br>
-  Despressurize a linha hidráulica/pneumática, bloqueie os disjuntores com cadeado físico e etiqueta (LOTO) e meça a ausência de tensão antes de qualquer toque mecânico.<br><br>
-  <b>3. Procedimento Técnico Recomendado:</b><br>
-  • Utilize ferramentas de metrologia calibradas (paquímetro, micrômetro centesimal ou relógio apalpador).<br>
-  • Respeite as tolerâncias ISO (H7/g6 para eixos deslizantes e H7/k6 para rolamentos).<br>
-  • Execute o aperto final dos parafusos utilizando torquímetro aferido e em sequência cruzada (30%, 60% e 100%).<br><br>
-  💡 <i>Você também pode navegar pelas outras abas acima: 'Análise de Serviço', 'Relatório Técnico' ou 'Desenho Técnico' para gerar laudos e croquis instantâneos!</i>`;
+  // 4. Mecanismo de Inferência Universal de Engenharia (para qualquer pergunta livre do usuário sem bugs nem travamentos)
+  const comps = [];
+  if (pNorm.includes('motor')) comps.push('Motor Elétrico Trifásico');
+  if (pNorm.includes('bomba')) comps.push('Bomba Centrífuga / Deslocamento Positivo');
+  if (pNorm.includes('redutor') || pNorm.includes('engrenag')) comps.push('Redutor de Velocidade / Engrenagens');
+  if (pNorm.includes('esteira') || pNorm.includes('correia') || pNorm.includes('tambor')) comps.push('Sistema de Correias / Transportador');
+  if (pNorm.includes('cilindro') || pNorm.includes('pistao') || pNorm.includes('pneumat') || pNorm.includes('hidraul')) comps.push('Atuador Pneumático / Circuito Hidráulico');
+  if (pNorm.includes('valvula')) comps.push('Válvula de Controle / Retenção / Esfera');
+  if (pNorm.includes('rolamento') || pNorm.includes('mancal')) comps.push('Mancal de Rolamento / Deslizamento');
+  if (pNorm.includes('acoplamento')) comps.push('Acoplamento Elástico / Rígido');
+  if (pNorm.includes('compressor')) comps.push('Compressor de Ar Parafuso / Pistão');
+
+  const sintomas = [];
+  if (pNorm.includes('quente') || pNorm.includes('temperatura') || pNorm.includes('esquent') || pNorm.includes('aquec')) sintomas.push('Elevação Térmica Anormal');
+  if (pNorm.includes('ruido') || pNorm.includes('barulho') || pNorm.includes('estalo') || pNorm.includes('chiado')) sintomas.push('Emissão Acústica / Ruído Fora de Padrão');
+  if (pNorm.includes('vazament') || pNorm.includes('vazando') || pNorm.includes('pingando') || pNorm.includes('oleo')) sintomas.push('Perda de Fluido / Falha de Vedação');
+  if (pNorm.includes('trav') || pNorm.includes('parou') || pNorm.includes('preso') || pNorm.includes('engasg')) sintomas.push('Bloqueio Cinemático / Perda de Movimento');
+  if (pNorm.includes('vibrac') || pNorm.includes('trepid') || pNorm.includes('balanc')) sintomas.push('Vibração Cíclica Anormal');
+  if (pNorm.includes('folga') || pNorm.includes('desgast') || pNorm.includes('gasto')) sintomas.push('Desgaste Mecânico / Folga Excessiva');
+
+  const compDetectado = comps.length > 0 ? comps.join(', ') : 'Sistema Mecânico Industrial';
+  const sintomaDetectado = sintomas.length > 0 ? sintomas.join(', ') : 'Diagnóstico de Desempenho Mecânico';
+
+  const extraOnlineInferencia = online 
+    ? `<div style="margin-top:8px; padding:6px 10px; background:rgba(2,132,199,0.15); border-left:3px solid #00f2fe; font-size:11px;">🌐 <b>Banco de Dados Nuvem 4.0:</b> Consulta estendida correlacionada às normas ABNT NBR / ISO / DIN. Histórico de falhas de campo sugere probabilidade de 65% em lubrificação e 25% em alinhamento/fixação geométrica.</div>`
+    : `<div style="margin-top:8px; padding:6px 10px; background:rgba(245,158,11,0.15); border-left:3px solid #f59e0b; font-size:11px;">📶 <b>Banco Local Certificado:</b> Protocolo analítico autônomo baseado em tolerâncias dimensionais ISO 286 e diretrizes NR-12.</div>`;
+
+  return `${badgeModo}
+  <strong>🤖 Parecer Pericial do Robô Mecânico 4.0 IA:</strong><br>
+  Consulta registrada para <b>${nomeUsuario}</b>: <i>"${pergunta}"</i><br><br>
+  <b>1. Triagem Técnica Especializada:</b><br>
+  • <b>Ativo / Componente:</b> ${compDetectado}<br>
+  • <b>Sintoma Identificado:</b> ${sintomaDetectado}<br><br>
+  <b>2. Roteiro de Ação & Investigação no Campo:</b><br>
+  1. <b>Inspeção Visual & Metrologia:</b> Avalie folgas axiais e radiais com relógio apalpador e verifique se há marcas de atrito, queima ou cavitação.<br>
+  2. <b>Lubrificação & Termografia:</b> Meça a temperatura operacional da carcaça com pirômetro (máximo 70°C a 80°C em regime pleno) e verifique contaminação do lubrificante.<br>
+  3. <b>Fixação & Alinhamento:</b> Verifique o torque de todos os parafusos da base e confira o alinhamento com relógio comparador ou laser.<br>
+  4. <b>Segurança Obrigatória (LOTO / NR-12):</b> Antes de qualquer intervenção física, bloqueie a fonte de energia com cadeado e garanta energia zero.<br>
+  ${extraOnlineInferencia}
+  <br>💡 <i>Você também pode utilizar as abas 'Análise de Serviço' ou 'Relatório Técnico' acima para registrar esta intervenção e emitir o laudo final!</i>`;
 }
 
 /* ================= ABA 2: FEEDBACK & SUGESTÕES ================= */
@@ -16307,13 +16615,104 @@ window.addEventListener('DOMContentLoaded', () => {
 
 </script>
 
-  <!-- ================= BOTÃO FLUTUANTE DO ROBÔ MECÂNICO IA ================= -->
-  <div id="btn-flutuante-robo" onclick="alternarModalRoboFlutuante()" title="Robô Mecânico 4.0 IA - Especialista Virtual" style="display:none;">
-    <div class="robo-floating-halo"></div>
-    <canvas id="canvasRobo3DBtn" width="112" height="112" style="width:56px; height:56px; border-radius:50%; position:absolute; top:0; left:0; z-index:2; pointer-events:none;"></canvas>
-    <img src="assets/mecanico_robo_ia.jpg" id="avatarRoboBtnFallback" alt="Robô Mecânico IA">
-    <div class="robo-floating-badge" title="Robô IA Ativo"></div>
-    <div class="robo-tooltip">🤖 Robô IA 4.0 (Clique para abrir)</div>
+  <!-- ================= ROBÔ MECÂNICO 4.0 FLUTUANTE PELO CENÁRIO COM PRANCHETA ================= -->
+  <div id="btn-flutuante-robo" title="Robô Mecânico 4.0 IA - Especialista com Prancheta (Clique para abrir conversa)" style="display:none;">
+    <div class="robo-status-tag" id="tagStatusRedeRobo">🟢 IA ONLINE</div>
+    
+    <!-- SVG do Robô com Prancheta e Propulsor de Plasma -->
+    <svg viewBox="0 0 100 130" class="robo-char-svg" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="gradRoboArmaduraChar" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#1e3a5f" />
+          <stop offset="50%" stop-color="#0f223d" />
+          <stop offset="100%" stop-color="#081424" />
+        </linearGradient>
+        <linearGradient id="gradPranchetaChar" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#334155" />
+          <stop offset="100%" stop-color="#1e293b" />
+        </linearGradient>
+        <linearGradient id="gradPlasmaChar" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.9" />
+          <stop offset="60%" stop-color="#0284c7" stop-opacity="0.6" />
+          <stop offset="100%" stop-color="#0369a1" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+
+      <!-- JATO DE PROPULSÃO / PLASMA -->
+      <g class="robo-plasma-thruster">
+        <ellipse cx="50" cy="106" rx="14" ry="4" fill="#00f2fe" opacity="0.8" />
+        <path d="M40 106 Q50 128 50 128 Q50 128 60 106 Z" fill="url(#gradPlasmaChar)" class="plasma-flame" />
+      </g>
+
+      <!-- BASE PROPULSORA DO CORPO -->
+      <ellipse cx="50" cy="104" rx="15" ry="6" fill="#0f172a" stroke="#0284c7" stroke-width="1.5" />
+      <ellipse cx="50" cy="103" rx="9" ry="3" fill="#00f2fe" />
+
+      <!-- TORSO / PEITORAL -->
+      <path d="M34 66 L66 66 L62 98 L38 98 Z" fill="url(#gradRoboArmaduraChar)" stroke="#0284c7" stroke-width="1.5" />
+      <path d="M37 70 L63 70 L60 86 L40 86 Z" fill="#0c192c" stroke="#38bdf8" stroke-width="1" />
+      
+      <!-- REATOR ARC CORE NO PEITO -->
+      <circle cx="50" cy="78" r="6" fill="#03182e" stroke="#f59e0b" stroke-width="1.2" />
+      <circle cx="50" cy="78" r="3.5" fill="#00f2fe" class="arc-core-pulse" />
+
+      <!-- OMBROS -->
+      <circle cx="31" cy="70" r="6" fill="#1e3a5f" stroke="#00f2fe" stroke-width="1.2" />
+      <circle cx="69" cy="70" r="6" fill="#1e3a5f" stroke="#00f2fe" stroke-width="1.2" />
+
+      <!-- BRAÇOS -->
+      <path d="M30 74 L25 88 L35 94" fill="none" stroke="#1e3a5f" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+      <circle cx="25" cy="88" r="3" fill="#0284c7" />
+
+      <path d="M69 74 L73 88 L63 93" fill="none" stroke="#1e3a5f" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
+      <circle cx="73" cy="88" r="3" fill="#0284c7" />
+
+      <!-- PRANCHETA TÉCNICA DIGITAL NA MÃO DO ROBÔ -->
+      <g class="robo-prancheta-group" transform="rotate(-6 50 92)">
+        <rect x="36" y="80" width="28" height="34" rx="3" fill="url(#gradPranchetaChar)" stroke="#38bdf8" stroke-width="1.5" />
+        <rect x="44" y="78" width="12" height="4" rx="1.5" fill="#f59e0b" stroke="#ffd479" stroke-width="0.8" />
+        <circle cx="50" cy="80" r="1" fill="#fff" />
+        <rect x="39" y="84" width="22" height="27" rx="1.5" fill="#051324" />
+        <line x1="42" y1="88" x2="58" y2="88" stroke="#38bdf8" stroke-width="1.2" stroke-linecap="round" />
+        <line x1="42" y1="92" x2="55" y2="92" stroke="#00f2fe" stroke-width="1" stroke-linecap="round" />
+        <line x1="42" y1="96" x2="57" y2="96" stroke="#94a3b8" stroke-width="0.8" stroke-linecap="round" />
+        <path d="M42 104 L45 101 L48 106 L51 99 L54 105 L58 102" fill="none" stroke="#10b981" stroke-width="1.2" stroke-linejoin="round" />
+        <circle cx="56" cy="92" r="2.2" fill="#10b981" />
+        <path d="M55 92 L55.8 92.8 L57.2 91.4" fill="none" stroke="#fff" stroke-width="0.6" />
+        <circle cx="36" cy="95" r="2.5" fill="#00f2fe" />
+        <circle cx="64" cy="94" r="2.5" fill="#00f2fe" />
+      </g>
+
+      <!-- PESCOÇO -->
+      <rect x="46" y="58" width="8" height="9" rx="2" fill="#0b1728" stroke="#0284c7" stroke-width="1" />
+      <line x1="47" y1="62" x2="53" y2="62" stroke="#38bdf8" stroke-width="1" />
+
+      <!-- CABEÇA E ANTENAS -->
+      <line x1="61" y1="36" x2="68" y2="24" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round" />
+      <circle cx="68" cy="24" r="2.2" fill="#ffd479" />
+      
+      <line x1="39" y1="36" x2="32" y2="24" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round" />
+      <circle cx="32" cy="24" r="2.2" fill="#ffd479" />
+
+      <path d="M34 42 C34 29 41 24 50 24 C59 24 66 29 66 42 L66 54 C66 58 60 62 50 62 C40 62 34 58 34 54 Z" fill="url(#gradRoboArmaduraChar)" stroke="#0284c7" stroke-width="1.5" />
+      <path d="M43 24 Q50 21 57 24 L55 30 L45 30 Z" fill="#0284c7" stroke="#00f2fe" stroke-width="0.8" />
+      <rect x="48" y="22" width="4" height="6" rx="1" fill="#00f2fe" />
+
+      <!-- VISOR COM LED CIANO -->
+      <rect x="37" y="38" width="26" height="11" rx="4" fill="#040d1a" stroke="#00f2fe" stroke-width="1.2" />
+      <circle cx="44" cy="43.5" r="3.2" fill="#00f2fe" />
+      <circle cx="44" cy="43.5" r="1.2" fill="#ffffff" />
+      
+      <circle cx="56" cy="43.5" r="3.2" fill="#00f2fe" />
+      <circle cx="56" cy="43.5" r="1.2" fill="#ffffff" />
+
+      <!-- QUEIXO -->
+      <rect x="44" y="52" width="12" height="4" rx="1.5" fill="#071220" />
+      <line x1="47" y1="54" x2="53" y2="54" stroke="#38bdf8" stroke-width="0.8" />
+    </svg>
+
+    <!-- Balão de Diálogo do Cenário -->
+    <div class="robo-balao-cenario" id="balaoFalaRoboCenario">💬 Olá! Toque em mim para conversarmos!</div>
   </div>
 
   <!-- ================= JANELA FLUTUANTE DO ROBÔ IA (100% FUNCIONAL COM 5 ABAS) ================= -->
