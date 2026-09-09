@@ -1395,11 +1395,33 @@
     height: 100%;
     background: rgba(3, 7, 18, 0.88);
     backdrop-filter: blur(6px);
-    z-index: 10000;
+    z-index: 100000;
     align-items: center;
     justify-content: center;
     padding: 16px;
     overflow-y: auto;
+  }
+  .modal-equip-overlay.active {
+    display: flex !important;
+  }
+  .equip-tech-card {
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .equip-tech-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(56, 189, 248, 0.2);
+    border-color: #38bdf8;
+  }
+  .equip-tech-card:active {
+    transform: scale(0.98);
+  }
+  .equip-tech-img-box {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  .equip-tech-card:hover .equip-tech-img-box svg {
+    filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.4));
   }
   .modal-equip-box {
     background: linear-gradient(145deg, #0f1a2e 0%, #08101c 100%);
@@ -2024,7 +2046,7 @@
 
       <div class="equip-tech-grid">
         <!-- BOMBA 1: CENTRÍFUGA RADIAL -->
-        <div class="equip-tech-card" onclick="abrirModalEquipamento('bombas', 'centrifuga-radial')">
+        <div class="equip-tech-card" onclick="abrirModalEquipamento('bombas', 'centrifuga-radial', 'desc')" title="Clique para abrir detalhes da Bomba Centrífuga">
           <div class="equip-tech-img-box">
             <span class="equip-tech-badge">API 610 • OH1 / OH2</span>
             <svg viewBox="0 0 200 160" width="100%" height="100%">
@@ -2057,11 +2079,14 @@
             <span class="equip-tech-tag">Voluta Espiral</span>
             <span class="equip-tech-tag">Selo Mecânico API</span>
           </div>
-          <button class="button" style="padding:6px 12px; font-size:12px; width:100%; margin-top:0;">🔍 Ver Diagnóstico & Peças</button>
+          <div style="display:flex; gap:6px; margin-top:10px;">
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0284c7; border-color:#38bdf8;" onclick="event.stopPropagation(); abrirModalEquipamento('bombas', 'centrifuga-radial', 'falhas')">⚠️ Diagnóstico</button>
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0f766e; border-color:#14b8a6;" onclick="event.stopPropagation(); abrirModalEquipamento('bombas', 'centrifuga-radial', 'comp')">🔍 Ver Peças</button>
+          </div>
         </div>
 
         <!-- BOMBA 2: MULTIESTÁGIO -->
-        <div class="equip-tech-card" onclick="abrirModalEquipamento('bombas', 'multiestagio')">
+        <div class="equip-tech-card" onclick="abrirModalEquipamento('bombas', 'multiestagio', 'desc')" title="Clique para abrir detalhes da Bomba Multiestágio">
           <div class="equip-tech-img-box">
             <span class="equip-tech-badge" style="background:#059669;">Alta Pressão • BB4</span>
             <svg viewBox="0 0 200 160" width="100%" height="100%">
@@ -2095,11 +2120,14 @@
             <span class="equip-tech-tag">Múltiplos Rotores</span>
             <span class="equip-tech-tag">Tirantes Bi-partidos</span>
           </div>
-          <button class="button" style="padding:6px 12px; font-size:12px; width:100%; margin-top:0;">🔍 Ver Diagnóstico & Peças</button>
+          <div style="display:flex; gap:6px; margin-top:10px;">
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0284c7; border-color:#38bdf8;" onclick="event.stopPropagation(); abrirModalEquipamento('bombas', 'multiestagio', 'falhas')">⚠️ Diagnóstico</button>
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0f766e; border-color:#14b8a6;" onclick="event.stopPropagation(); abrirModalEquipamento('bombas', 'multiestagio', 'comp')">🔍 Ver Peças</button>
+          </div>
         </div>
 
         <!-- BOMBA 3: ENGRENAGENS -->
-        <div class="equip-tech-card" onclick="abrirModalEquipamento('bombas', 'engrenagens')">
+        <div class="equip-tech-card" onclick="abrirModalEquipamento('bombas', 'engrenagens', 'desc')" title="Clique para abrir detalhes da Bomba de Engrenagens">
           <div class="equip-tech-img-box">
             <span class="equip-tech-badge" style="background:#7c3aed;">Deslocamento Positivo</span>
             <svg viewBox="0 0 200 160" width="100%" height="100%">
@@ -2127,11 +2155,14 @@
             <span class="equip-tech-tag">Autoescorvante</span>
             <span class="equip-tech-tag">Sem Válvulas Internas</span>
           </div>
-          <button class="button" style="padding:6px 12px; font-size:12px; width:100%; margin-top:0;">🔍 Ver Diagnóstico & Peças</button>
+          <div style="display:flex; gap:6px; margin-top:10px;">
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0284c7; border-color:#38bdf8;" onclick="event.stopPropagation(); abrirModalEquipamento('bombas', 'engrenagens', 'falhas')">⚠️ Diagnóstico</button>
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0f766e; border-color:#14b8a6;" onclick="event.stopPropagation(); abrirModalEquipamento('bombas', 'engrenagens', 'comp')">🔍 Ver Peças</button>
+          </div>
         </div>
 
         <!-- BOMBA 4: FUSO / PARAFUSOS -->
-        <div class="equip-tech-card" onclick="abrirModalEquipamento('bombas', 'parafusos')">
+        <div class="equip-tech-card" onclick="abrirModalEquipamento('bombas', 'parafusos', 'desc')" title="Clique para abrir detalhes da Bomba de Parafusos">
           <div class="equip-tech-img-box">
             <span class="equip-tech-badge" style="background:#d97706;">Trifuso • Alta Viscosidade</span>
             <svg viewBox="0 0 200 160" width="100%" height="100%">
@@ -2156,7 +2187,10 @@
             <span class="equip-tech-tag">Silenciosa</span>
             <span class="equip-tech-tag">Alta Pressão de Óleo</span>
           </div>
-          <button class="button" style="padding:6px 12px; font-size:12px; width:100%; margin-top:0;">🔍 Ver Diagnóstico & Peças</button>
+          <div style="display:flex; gap:6px; margin-top:10px;">
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0284c7; border-color:#38bdf8;" onclick="event.stopPropagation(); abrirModalEquipamento('bombas', 'parafusos', 'falhas')">⚠️ Diagnóstico</button>
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0f766e; border-color:#14b8a6;" onclick="event.stopPropagation(); abrirModalEquipamento('bombas', 'parafusos', 'comp')">🔍 Ver Peças</button>
+          </div>
         </div>
       </div>
     </div>
@@ -2209,7 +2243,7 @@
 
       <div class="equip-tech-grid">
         <!-- MOTOR 1: GAIOLA DE ESQUILO -->
-        <div class="equip-tech-card" onclick="abrirModalEquipamento('motores', 'motor-gaiola')">
+        <div class="equip-tech-card" onclick="abrirModalEquipamento('motores', 'motor-gaiola', 'desc')" title="Clique para abrir detalhes do Motor Gaiola">
           <div class="equip-tech-img-box">
             <span class="equip-tech-badge">NBR 17094 • IR3 Premium</span>
             <svg viewBox="0 0 200 160" width="100%" height="100%">
@@ -2248,11 +2282,14 @@
             <span class="equip-tech-tag">Carcaça em Ferro Fundido</span>
             <span class="equip-tech-tag">Isolamento Classe F/H</span>
           </div>
-          <button class="button" style="padding:6px 12px; font-size:12px; width:100%; margin-top:0;">🔍 Ver Diagnóstico & Peças</button>
+          <div style="display:flex; gap:6px; margin-top:10px;">
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0284c7; border-color:#38bdf8;" onclick="event.stopPropagation(); abrirModalEquipamento('motores', 'motor-gaiola', 'falhas')">⚠️ Diagnóstico</button>
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0f766e; border-color:#14b8a6;" onclick="event.stopPropagation(); abrirModalEquipamento('motores', 'motor-gaiola', 'comp')">🔍 Ver Peças</button>
+          </div>
         </div>
 
         <!-- MOTOR 2: MOTOFREIO -->
-        <div class="equip-tech-card" onclick="abrirModalEquipamento('motores', 'motor-motofreio')">
+        <div class="equip-tech-card" onclick="abrirModalEquipamento('motores', 'motor-motofreio', 'desc')" title="Clique para abrir detalhes do Motofreio">
           <div class="equip-tech-img-box">
             <span class="equip-tech-badge" style="background:#dc2626;">Freio Integrado • Parada Rápida</span>
             <svg viewBox="0 0 200 160" width="100%" height="100%">
@@ -2283,11 +2320,14 @@
             <span class="equip-tech-tag">Destrave Manual</span>
             <span class="equip-tech-tag">Pastilha de Fricção</span>
           </div>
-          <button class="button" style="padding:6px 12px; font-size:12px; width:100%; margin-top:0;">🔍 Ver Diagnóstico & Peças</button>
+          <div style="display:flex; gap:6px; margin-top:10px;">
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0284c7; border-color:#38bdf8;" onclick="event.stopPropagation(); abrirModalEquipamento('motores', 'motor-motofreio', 'falhas')">⚠️ Diagnóstico</button>
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0f766e; border-color:#14b8a6;" onclick="event.stopPropagation(); abrirModalEquipamento('motores', 'motor-motofreio', 'comp')">🔍 Ver Peças</button>
+          </div>
         </div>
 
         <!-- MOTOR 3: À PROVA DE EXPLOSÃO EX D -->
-        <div class="equip-tech-card" onclick="abrirModalEquipamento('motores', 'motor-exd')">
+        <div class="equip-tech-card" onclick="abrirModalEquipamento('motores', 'motor-exd', 'desc')" title="Clique para abrir detalhes do Motor Ex d">
           <div class="equip-tech-img-box">
             <span class="equip-tech-badge" style="background:#d97706;">Área Classificada • Ex d</span>
             <svg viewBox="0 0 200 160" width="100%" height="100%">
@@ -2316,11 +2356,14 @@
             <span class="equip-tech-tag">Temperatura T4/T3</span>
             <span class="equip-tech-tag">Química & Petróleo</span>
           </div>
-          <button class="button" style="padding:6px 12px; font-size:12px; width:100%; margin-top:0;">🔍 Ver Diagnóstico & Peças</button>
+          <div style="display:flex; gap:6px; margin-top:10px;">
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0284c7; border-color:#38bdf8;" onclick="event.stopPropagation(); abrirModalEquipamento('motores', 'motor-exd', 'falhas')">⚠️ Diagnóstico</button>
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0f766e; border-color:#14b8a6;" onclick="event.stopPropagation(); abrirModalEquipamento('motores', 'motor-exd', 'comp')">🔍 Ver Peças</button>
+          </div>
         </div>
 
         <!-- MOTOR 4: MÉDIA TENSÃO -->
-        <div class="equip-tech-card" onclick="abrirModalEquipamento('motores', 'motor-media-tensao')">
+        <div class="equip-tech-card" onclick="abrirModalEquipamento('motores', 'motor-media-tensao', 'desc')" title="Clique para abrir detalhes do Motor Média Tensão">
           <div class="equip-tech-img-box">
             <span class="equip-tech-badge" style="background:#7c3aed;">Média Tensão • 2,3kV a 13,8kV</span>
             <svg viewBox="0 0 200 160" width="100%" height="100%">
@@ -2351,7 +2394,10 @@
             <span class="equip-tech-tag">Sensor PT100</span>
             <span class="equip-tech-tag">Mancal de Deslizamento</span>
           </div>
-          <button class="button" style="padding:6px 12px; font-size:12px; width:100%; margin-top:0;">🔍 Ver Diagnóstico & Peças</button>
+          <div style="display:flex; gap:6px; margin-top:10px;">
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0284c7; border-color:#38bdf8;" onclick="event.stopPropagation(); abrirModalEquipamento('motores', 'motor-media-tensao', 'falhas')">⚠️ Diagnóstico</button>
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0f766e; border-color:#14b8a6;" onclick="event.stopPropagation(); abrirModalEquipamento('motores', 'motor-media-tensao', 'comp')">🔍 Ver Peças</button>
+          </div>
         </div>
       </div>
     </div>
@@ -2400,6 +2446,167 @@
     </div>
 
     <div class="content-block">
+      <h4>Catálogo Técnico Visual — Toque no Redutor para Ver Detalhes, Diagnóstico e Peças</h4>
+      <p>
+        Guia prático e avançado para diagnóstico de falhas, inspeção e manutenção de redutores de velocidade industriais conforme normas 
+        <b>AGMA 2001, DIN 3990, ISO 6336 e AGMA 6022</b>. Toque em qualquer equipamento abaixo para inspecionar diagramas em corte, 
+        riscos e modos de falha por falta de manutenção, procedimentos práticos de oficina e lista anatômica completa de peças.
+      </p>
+
+      <div class="equip-tech-grid">
+        <!-- REDUTOR 1: HELICOIDAL -->
+        <div class="equip-tech-card" onclick="abrirModalEquipamento('redutores', 'redutor-helicoidal', 'desc')" title="Clique para abrir detalhes do Redutor Helicoidal">
+          <div class="equip-tech-img-box">
+            <span class="equip-tech-badge">AGMA 2001 • DIN 3990</span>
+            <svg viewBox="0 0 200 160" width="100%" height="100%">
+              <rect x="0" y="0" width="200" height="160" fill="#081426"/>
+              <!-- Carcaça bipartida com aletas -->
+              <rect x="25" y="40" width="150" height="95" rx="8" fill="#132742" stroke="#38bdf8" stroke-width="1.8"/>
+              <line x1="25" y1="85" x2="175" y2="85" stroke="#38bdf8" stroke-width="1.2" stroke-dasharray="4 2"/>
+              <!-- Eixo Rápido de Entrada -->
+              <rect x="15" y="55" width="45" height="16" rx="2" fill="#94a3b8" stroke="#e2e8f0" stroke-width="1.2"/>
+              <!-- Pinhão Helicoidal -->
+              <rect x="60" y="48" width="30" height="30" rx="3" fill="#0284c7" stroke="#38bdf8" stroke-width="1.5"/>
+              <line x1="65" y1="50" x2="85" y2="76" stroke="#facc15" stroke-width="2"/>
+              <line x1="72" y1="50" x2="90" y2="74" stroke="#facc15" stroke-width="2"/>
+              <!-- Engrenagem Movida Helicoidal -->
+              <rect x="80" y="70" width="50" height="52" rx="4" fill="#0369a1" stroke="#38bdf8" stroke-width="1.5"/>
+              <line x1="88" y1="74" x2="122" y2="118" stroke="#facc15" stroke-width="2"/>
+              <line x1="98" y1="74" x2="128" y2="112" stroke="#facc15" stroke-width="2"/>
+              <!-- Eixo Lento de Saída -->
+              <rect x="130" y="90" width="55" height="22" rx="2" fill="#cbd5e1" stroke="#f8fafc" stroke-width="1.5"/>
+              <!-- Visor de Nível e Bujão -->
+              <circle cx="150" cy="115" r="5" fill="#ef4444" stroke="#fca5a5" stroke-width="1.2"/>
+              <rect x="90" y="132" width="16" height="5" rx="1" fill="#f59e0b"/>
+            </svg>
+          </div>
+          <h4>Redutor de Engrenagens Helicoidais</h4>
+          <div class="subnorma">AGMA 2001-D04 / DIN 3990 / ISO 6336</div>
+          <p>Eixos paralelos de alta eficiência (98%). Dentes helicoidais inclinados para engrenamento progressivo e silencioso sob alta carga.</p>
+          <div class="equip-tech-tags">
+            <span class="equip-tech-tag">Eixos Paralelos</span>
+            <span class="equip-tech-tag">Dentes Retificados</span>
+            <span class="equip-tech-tag">Rendimento 98%</span>
+          </div>
+          <div style="display:flex; gap:6px; margin-top:10px;">
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0284c7; border-color:#38bdf8;" onclick="event.stopPropagation(); abrirModalEquipamento('redutores', 'redutor-helicoidal', 'falhas')">⚠️ Diagnóstico</button>
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0f766e; border-color:#14b8a6;" onclick="event.stopPropagation(); abrirModalEquipamento('redutores', 'redutor-helicoidal', 'comp')">🔍 Ver Peças</button>
+          </div>
+        </div>
+
+        <!-- REDUTOR 2: COROA E ROSCA SEM-FIM -->
+        <div class="equip-tech-card" onclick="abrirModalEquipamento('redutores', 'redutor-semfim', 'desc')" title="Clique para abrir detalhes do Redutor Sem-Fim">
+          <div class="equip-tech-img-box">
+            <span class="equip-tech-badge" style="background:#b45309;">AGMA 6022 • Eixos a 90°</span>
+            <svg viewBox="0 0 200 160" width="100%" height="100%">
+              <rect x="0" y="0" width="200" height="160" fill="#081426"/>
+              <!-- Carcaça cúbica aletada -->
+              <rect x="35" y="35" width="130" height="105" rx="6" fill="#132742" stroke="#f59e0b" stroke-width="1.8"/>
+              <!-- Aletas de ventilação -->
+              <line x1="42" y1="45" x2="42" y2="130" stroke="#25466e" stroke-width="1.5"/>
+              <line x1="50" y1="45" x2="50" y2="130" stroke="#25466e" stroke-width="1.5"/>
+              <!-- Eixo Rosca Sem-Fim Horizontal (Aço) -->
+              <rect x="20" y="105" width="160" height="16" rx="2" fill="#94a3b8" stroke="#e2e8f0" stroke-width="1.5"/>
+              <!-- Filetes de Rosca -->
+              <path d="M 70 105 L 80 121 M 85 105 L 95 121 M 100 105 L 110 121 M 115 105 L 125 121" stroke="#facc15" stroke-width="2.5" stroke-linecap="round"/>
+              <!-- Coroa de Bronze (Dourada) -->
+              <circle cx="100" cy="72" r="32" fill="#78350f" stroke="#f59e0b" stroke-width="2"/>
+              <circle cx="100" cy="72" r="24" fill="#b45309" stroke="#fcd34d" stroke-width="1.5"/>
+              <circle cx="100" cy="72" r="10" fill="#0c1a2e" stroke="#94a3b8" stroke-width="1.5"/>
+              <!-- Ventilador Traseiro -->
+              <path d="M 170 100 L 185 92 L 185 134 L 170 126 Z" fill="#dc2626" stroke="#f87171" stroke-width="1.2"/>
+            </svg>
+          </div>
+          <h4>Redutor de Coroa e Rosca Sem-Fim</h4>
+          <div class="subnorma">AGMA 6022 / DIN 3975 / BS 721</div>
+          <p>Eixos ortogonais a 90°. Alta relação de redução em espaço reduzido com sistema autobloqueante mecânico contra retorno de carga.</p>
+          <div class="equip-tech-tags">
+            <span class="equip-tech-tag">Autobloqueio</span>
+            <span class="equip-tech-tag">Coroa de Bronze</span>
+            <span class="equip-tech-tag">Óleo Sintético PAG</span>
+          </div>
+          <div style="display:flex; gap:6px; margin-top:10px;">
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0284c7; border-color:#38bdf8;" onclick="event.stopPropagation(); abrirModalEquipamento('redutores', 'redutor-semfim', 'falhas')">⚠️ Diagnóstico</button>
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0f766e; border-color:#14b8a6;" onclick="event.stopPropagation(); abrirModalEquipamento('redutores', 'redutor-semfim', 'comp')">🔍 Ver Peças</button>
+          </div>
+        </div>
+
+        <!-- REDUTOR 3: PLANETÁRIO -->
+        <div class="equip-tech-card" onclick="abrirModalEquipamento('redutores', 'redutor-planetario', 'desc')" title="Clique para abrir detalhes do Redutor Planetário">
+          <div class="equip-tech-img-box">
+            <span class="equip-tech-badge" style="background:#7c3aed;">ISO 6336 • Alto Torque</span>
+            <svg viewBox="0 0 200 160" width="100%" height="100%">
+              <rect x="0" y="0" width="200" height="160" fill="#081426"/>
+              <!-- Coroa Anular Externa Fixa -->
+              <circle cx="100" cy="80" r="58" fill="#0f2139" stroke="#38bdf8" stroke-width="2"/>
+              <circle cx="100" cy="80" r="48" fill="#061224" stroke="#0284c7" stroke-width="1.8" stroke-dasharray="3 2"/>
+              <!-- Porta-Satélites Triângulo -->
+              <polygon points="100,52 74,96 126,96" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="2 2"/>
+              <!-- 3 Engrenagens Satélites -->
+              <circle cx="100" cy="52" r="14" fill="#0284c7" stroke="#38bdf8" stroke-width="1.5"/>
+              <circle cx="100" cy="52" r="4" fill="#f8fafc"/>
+              <circle cx="74" cy="96" r="14" fill="#0284c7" stroke="#38bdf8" stroke-width="1.5"/>
+              <circle cx="74" cy="96" r="4" fill="#f8fafc"/>
+              <circle cx="126" cy="96" r="14" fill="#0284c7" stroke="#38bdf8" stroke-width="1.5"/>
+              <circle cx="126" cy="96" r="4" fill="#f8fafc"/>
+              <!-- Engrenagem Solar Central -->
+              <circle cx="100" cy="80" r="15" fill="#d97706" stroke="#facc15" stroke-width="2"/>
+              <circle cx="100" cy="80" r="5" fill="#451a03"/>
+            </svg>
+          </div>
+          <h4>Redutor Planetário / Epicicloidal</h4>
+          <div class="subnorma">ISO 6336 / AGMA 6123 / DIN 3990</div>
+          <p>Torque dividido simultaneamente entre múltiplos satélites. Densidade de potência incomparável e folga angular reduzida (baixo backlash).</p>
+          <div class="equip-tech-tags">
+            <span class="equip-tech-tag">Coaxial em Linha</span>
+            <span class="equip-tech-tag">Multi-Satélites</span>
+            <span class="equip-tech-tag">Baixo Backlash</span>
+          </div>
+          <div style="display:flex; gap:6px; margin-top:10px;">
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0284c7; border-color:#38bdf8;" onclick="event.stopPropagation(); abrirModalEquipamento('redutores', 'redutor-planetario', 'falhas')">⚠️ Diagnóstico</button>
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0f766e; border-color:#14b8a6;" onclick="event.stopPropagation(); abrirModalEquipamento('redutores', 'redutor-planetario', 'comp')">🔍 Ver Peças</button>
+          </div>
+        </div>
+
+        <!-- REDUTOR 4: CÔNICO-HELICOIDAL -->
+        <div class="equip-tech-card" onclick="abrirModalEquipamento('redutores', 'redutor-conico-helicoidal', 'desc')" title="Clique para abrir detalhes do Redutor Cônico">
+          <div class="equip-tech-img-box">
+            <span class="equip-tech-badge" style="background:#059669;">AGMA 2001 • Cônico 90°</span>
+            <svg viewBox="0 0 200 160" width="100%" height="100%">
+              <rect x="0" y="0" width="200" height="160" fill="#081426"/>
+              <!-- Carcaça em L com nervuras -->
+              <path d="M 30 50 L 110 50 L 110 30 L 165 30 L 165 130 L 30 130 Z" fill="#132742" stroke="#10b981" stroke-width="1.8"/>
+              <!-- Pinhão Cônico de Entrada Vertical -->
+              <polygon points="128,30 148,30 152,56 124,56" fill="#059669" stroke="#34d399" stroke-width="1.5"/>
+              <!-- Coroa Cônica Espiral a 90° -->
+              <polygon points="120,52 158,52 148,72 130,72" fill="#047857" stroke="#34d399" stroke-width="1.5"/>
+              <!-- Eixo Intermediário com Engrenagens Cilíndricas -->
+              <rect x="40" y="75" width="80" height="40" rx="3" fill="#0f2b48" stroke="#10b981" stroke-width="1.5"/>
+              <line x1="45" y1="80" x2="65" y2="110" stroke="#facc15" stroke-width="2"/>
+              <line x1="55" y1="80" x2="75" y2="110" stroke="#facc15" stroke-width="2"/>
+              <!-- Eixo de Saída Horizontal -->
+              <rect x="15" y="85" width="30" height="20" rx="2" fill="#cbd5e1" stroke="#f8fafc" stroke-width="1.5"/>
+              <circle cx="150" cy="115" r="5" fill="#ef4444" stroke="#fca5a5" stroke-width="1.2"/>
+            </svg>
+          </div>
+          <h4>Redutor Cônico-Helicoidal Ortogonal</h4>
+          <div class="subnorma">AGMA 2001 / ISO 10300 / DIN 3965</div>
+          <p>Transmissão a 90° com par cônico espiral Gleason e estágios helicoidais. Rendimento > 95% para aplicações pesadas contínuas.</p>
+          <div class="equip-tech-tags">
+            <span class="equip-tech-tag">Cônico Gleason</span>
+            <span class="equip-tech-tag">Ortogonal 90°</span>
+            <span class="equip-tech-tag">Serviço Severo</span>
+          </div>
+          <div style="display:flex; gap:6px; margin-top:10px;">
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0284c7; border-color:#38bdf8;" onclick="event.stopPropagation(); abrirModalEquipamento('redutores', 'redutor-conico-helicoidal', 'falhas')">⚠️ Diagnóstico</button>
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0f766e; border-color:#14b8a6;" onclick="event.stopPropagation(); abrirModalEquipamento('redutores', 'redutor-conico-helicoidal', 'comp')">🔍 Ver Peças</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="content-block">
       <h4>Relação de transmissão</h4>
       <p>i = N2 ÷ N1 (número de dentes da engrenagem movida ÷ motora). A rotação de saída cai na mesma proporção em que o torque aumenta (idealmente, desconsiderando perdas por rendimento).</p>
     </div>
@@ -2444,7 +2651,7 @@
 
       <div class="equip-tech-grid">
         <!-- CARD 1: GAVETA -->
-        <div class="equip-tech-card" onclick="abrirModalEquipamento('valvulas', 'gaveta')">
+        <div class="equip-tech-card" onclick="abrirModalEquipamento('valvulas', 'gaveta', 'desc')" title="Clique para abrir detalhes da Válvula Gaveta">
           <div class="equip-tech-img-box">
             <span class="equip-tech-badge">API 600 • Bloqueio</span>
             <svg viewBox="0 0 200 160" width="100%" height="100%">
@@ -2479,11 +2686,14 @@
             <span class="equip-tech-tag">Cunha Flexível</span>
             <span class="equip-tech-tag">Haste Ascendente</span>
           </div>
-          <button class="button" style="padding:6px 12px; font-size:12px; width:100%; margin-top:0;">🔍 Ver Diagnóstico & Peças</button>
+          <div style="display:flex; gap:6px; margin-top:10px;">
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0284c7; border-color:#38bdf8;" onclick="event.stopPropagation(); abrirModalEquipamento('valvulas', 'gaveta', 'falhas')">⚠️ Diagnóstico</button>
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0f766e; border-color:#14b8a6;" onclick="event.stopPropagation(); abrirModalEquipamento('valvulas', 'gaveta', 'comp')">🔍 Ver Peças</button>
+          </div>
         </div>
 
         <!-- CARD 2: GLOBO -->
-        <div class="equip-tech-card" onclick="abrirModalEquipamento('valvulas', 'globo')">
+        <div class="equip-tech-card" onclick="abrirModalEquipamento('valvulas', 'globo', 'desc')" title="Clique para abrir detalhes da Válvula Globo">
           <div class="equip-tech-img-box">
             <span class="equip-tech-badge" style="background:#059669;">BS 1873 • Controle</span>
             <svg viewBox="0 0 200 160" width="100%" height="100%">
@@ -2515,11 +2725,14 @@
             <span class="equip-tech-tag">Plug Cônico</span>
             <span class="equip-tech-tag">Estanqueidade Alta</span>
           </div>
-          <button class="button" style="padding:6px 12px; font-size:12px; width:100%; margin-top:0;">🔍 Ver Diagnóstico & Peças</button>
+          <div style="display:flex; gap:6px; margin-top:10px;">
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0284c7; border-color:#38bdf8;" onclick="event.stopPropagation(); abrirModalEquipamento('valvulas', 'globo', 'falhas')">⚠️ Diagnóstico</button>
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0f766e; border-color:#14b8a6;" onclick="event.stopPropagation(); abrirModalEquipamento('valvulas', 'globo', 'comp')">🔍 Ver Peças</button>
+          </div>
         </div>
 
         <!-- CARD 3: ESFERA -->
-        <div class="equip-tech-card" onclick="abrirModalEquipamento('valvulas', 'esfera')">
+        <div class="equip-tech-card" onclick="abrirModalEquipamento('valvulas', 'esfera', 'desc')" title="Clique para abrir detalhes da Válvula Esfera">
           <div class="equip-tech-img-box">
             <span class="equip-tech-badge" style="background:#7c3aed;">API 6D • 1/4 Volta</span>
             <svg viewBox="0 0 200 160" width="100%" height="100%">
@@ -2551,11 +2764,14 @@
             <span class="equip-tech-tag">Passagem Plena</span>
             <span class="equip-tech-tag">Baixa Perda de Carga</span>
           </div>
-          <button class="button" style="padding:6px 12px; font-size:12px; width:100%; margin-top:0;">🔍 Ver Diagnóstico & Peças</button>
+          <div style="display:flex; gap:6px; margin-top:10px;">
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0284c7; border-color:#38bdf8;" onclick="event.stopPropagation(); abrirModalEquipamento('valvulas', 'esfera', 'falhas')">⚠️ Diagnóstico</button>
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0f766e; border-color:#14b8a6;" onclick="event.stopPropagation(); abrirModalEquipamento('valvulas', 'esfera', 'comp')">🔍 Ver Peças</button>
+          </div>
         </div>
 
         <!-- CARD 4: BORBOLETA -->
-        <div class="equip-tech-card" onclick="abrirModalEquipamento('valvulas', 'borboleta')">
+        <div class="equip-tech-card" onclick="abrirModalEquipamento('valvulas', 'borboleta', 'desc')" title="Clique para abrir detalhes da Válvula Borboleta">
           <div class="equip-tech-img-box">
             <span class="equip-tech-badge" style="background:#d97706;">API 609 • Compacta</span>
             <svg viewBox="0 0 200 160" width="100%" height="100%">
@@ -2586,11 +2802,14 @@
             <span class="equip-tech-tag">Sede EPDM/Metal</span>
             <span class="equip-tech-tag">Grande Diâmetro</span>
           </div>
-          <button class="button" style="padding:6px 12px; font-size:12px; width:100%; margin-top:0;">🔍 Ver Diagnóstico & Peças</button>
+          <div style="display:flex; gap:6px; margin-top:10px;">
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0284c7; border-color:#38bdf8;" onclick="event.stopPropagation(); abrirModalEquipamento('valvulas', 'borboleta', 'falhas')">⚠️ Diagnóstico</button>
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0f766e; border-color:#14b8a6;" onclick="event.stopPropagation(); abrirModalEquipamento('valvulas', 'borboleta', 'comp')">🔍 Ver Peças</button>
+          </div>
         </div>
 
         <!-- CARD 5: RETENÇÃO -->
-        <div class="equip-tech-card" onclick="abrirModalEquipamento('valvulas', 'retencao')">
+        <div class="equip-tech-card" onclick="abrirModalEquipamento('valvulas', 'retencao', 'desc')" title="Clique para abrir detalhes da Válvula de Retenção">
           <div class="equip-tech-img-box">
             <span class="equip-tech-badge" style="background:#0891b2;">API 594 • Anti-Retorno</span>
             <svg viewBox="0 0 200 160" width="100%" height="100%">
@@ -2621,11 +2840,14 @@
             <span class="equip-tech-tag">Portinhola / Swing</span>
             <span class="equip-tech-tag">Anti-Golpe de Aríete</span>
           </div>
-          <button class="button" style="padding:6px 12px; font-size:12px; width:100%; margin-top:0;">🔍 Ver Diagnóstico & Peças</button>
+          <div style="display:flex; gap:6px; margin-top:10px;">
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0284c7; border-color:#38bdf8;" onclick="event.stopPropagation(); abrirModalEquipamento('valvulas', 'retencao', 'falhas')">⚠️ Diagnóstico</button>
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0f766e; border-color:#14b8a6;" onclick="event.stopPropagation(); abrirModalEquipamento('valvulas', 'retencao', 'comp')">🔍 Ver Peças</button>
+          </div>
         </div>
 
         <!-- CARD 6: PSV -->
-        <div class="equip-tech-card" onclick="abrirModalEquipamento('valvulas', 'psv')">
+        <div class="equip-tech-card" onclick="abrirModalEquipamento('valvulas', 'psv', 'desc')" title="Clique para abrir detalhes da Válvula PSV">
           <div class="equip-tech-img-box">
             <span class="equip-tech-badge" style="background:#dc2626;">ASME VIII • Segurança NR-13</span>
             <svg viewBox="0 0 200 160" width="100%" height="100%">
@@ -2654,7 +2876,10 @@
             <span class="equip-tech-tag">Disparo POP</span>
             <span class="equip-tech-tag">Lacre NR-13</span>
           </div>
-          <button class="button" style="padding:6px 12px; font-size:12px; width:100%; margin-top:0;">🔍 Ver Diagnóstico & Peças</button>
+          <div style="display:flex; gap:6px; margin-top:10px;">
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0284c7; border-color:#38bdf8;" onclick="event.stopPropagation(); abrirModalEquipamento('valvulas', 'psv', 'falhas')">⚠️ Diagnóstico</button>
+            <button class="button" style="flex:1; padding:7px 8px; font-size:11px; margin:0; background:#0f766e; border-color:#14b8a6;" onclick="event.stopPropagation(); abrirModalEquipamento('valvulas', 'psv', 'comp')">🔍 Ver Peças</button>
+          </div>
         </div>
       </div>
     </div>
@@ -10091,14 +10316,231 @@ const DADOS_EQUIPAMENTOS = {
         { nome: 'Caixa de Terminais de Alta Potência com Alívio de Arco', funcao: 'Compartimento reforçado com diafragma de ruptura para contenção e escape seguro de arco voltaico.' }
       ]
     }
+  },
+
+  redutores: {
+
+  'redutor-helicoidal': {
+    norma: 'AGMA 2001-D04 / DIN 3990 / ISO 6336',
+    titulo: 'Redutor de Engrenagens Helicoidais de Eixos Paralelos',
+    subnorma: 'Transmissão de Alta Potência e Rendimento • Dentes Helicoidais Cementados e Retificados DIN 6',
+    desc: 'Redutor industrial de alta eficiência (rendimento de 96% a 98% por estágio de redução) composto por pares de engrenagens cilíndricas com dentes helicoidais inclinados (ângulo de hélice de 15° a 25°). A inclinação dos dentes garante engrenamento suave e progressivo, com múltiplos dentes em contato simultâneo, suportando elevadas cargas dinâmicas com baixo ruído. Carcaça bipartida na linha de centro dos eixos em ferro fundido nodular para facilitar a inspeção e manutenção de mancais, com lubrificação por banho de óleo com respingo ou circulação forçada.',
+    falhas: [
+      {
+        titulo: 'Pitting e Macropitting por Fadiga de Contato Superficial (Spalling)',
+        descricao: 'Tensões de contato cíclicas elevadas (pressão de Hertz) causam microfissuras subsuperficiais na linha primitiva dos dentes. Com a propagação dessas trincas sob a ação hidráulica do óleo aprisionado, pequenas crateras se formam e desprendem lascas metálicas, gerando vibração em alta frequência, ruído de batimento cíclico e contaminação do óleo por partículas ferrosas duras.'
+      },
+      {
+        titulo: 'Micropitting (Geadura / Frosting) por Filme de Óleo Insuficiente',
+        descricao: 'Formação de milhares de microcrateras microscópicas (menores que 10 µm) que conferem ao flanco do dente um aspecto esbranquiçado ou fosco. Ocorre devido à perda de viscosidade do lubrificante ou temperatura operacional excessiva (> 85°C), permitindo o contato entre as asperezas metálicas e destruindo o perfil de envolvente original da engrenagem.'
+      },
+      {
+        titulo: 'Desgaste Abrasivo e Folga Excessiva (Backlash) entre Dentes',
+        descricao: 'A presença de poeira ambiental, areia ou partículas de usinagem suspensas no lubrificante atua como pasta abrasiva contínua, desgastando o flanco dos dentes e abrindo folga excessiva entre dentes. Essa folga desregulada gera violentos choques de reversão de carga em partidas e paradas da esteira ou moinho.'
+      },
+      {
+        titulo: 'Colapso de Rolamentos de Rolos Cônicos por Perda de Pré-Carga Axial',
+        descricao: 'O desgaste natural ou afrouxamento dos calços de ajuste nas tampas dos mancais elimina a pré-carga dos rolamentos de rolos cônicos. O eixo passa a ter deslocamento axial livre, provocando o desalinhamento angular do contato dos dentes e concentração destrutiva de carga nas pontas dos dentes.'
+      }
+    ],
+    manut: [
+      {
+        titulo: 'Análise de Ferrografia e Óleo Lubrificante a Cada 500 Horas',
+        descricao: 'Coletar amostra de óleo em ponto intermediário do cárter para medição de viscosidade cinemática (ISO VG 220, 320 ou 460), índice de acidez (TAN), teor de umidade (Karl Fischer) e contagem de partículas metálicas de desgaste (Fe, Cu, Cr) para prever desgastes antes de falhas catastróficas.'
+      },
+      {
+        titulo: 'Verificação do Padrão de Contato dos Dentes com Pasta de Ajuste (Azul da Prússia)',
+        descricao: 'Pintar 3 dentes consecutivos com azul da prússia e girar o conjunto sob carga leve. O padrão de contato deve cobrir de 70% a 85% do comprimento do dente e estar centralizado na altura do flanco, sem concentração de contato no topo (tip) ou na raiz (root).'
+      },
+      {
+        titulo: 'Medição da Folga entre Dentes (Backlash) com Relógio Comparador Centesimal',
+        descricao: 'Travar mecanicamente o eixo de entrada. Posicionar a ponta do relógio comparador no raio primitivo do dente da engrenagem movida e oscilar o eixo livremente. A folga deve estar entre 0,15 mm e 0,35 mm conforme classe AGMA do redutor.'
+      },
+      {
+        titulo: 'Ajuste de Pré-Carga e Folga Axial dos Rolamentos com Calços de Precisão',
+        descricao: 'Medir com relógio comparador o deslocamento axial do conjunto rotativo e ajustar o pacote de calços metálicos calibrados sob as tampas cegas para obter a folga axial ou pré-carga recomendada pelo fabricante (0,03 mm a 0,08 mm).'
+      }
+    ],
+    comp: [
+      { nome: 'Pinhão Motriz Helicoidal com Eixo Integral', funcao: 'Eixo de alta rotação forjado em aço liga 18CrNiMo7-6 cementado e temperado com dentes lapidados.' },
+      { nome: 'Engrenagens Conduzidas Helicoidais', funcao: 'Rodas dentadas intermediárias e de baixa rotação montadas sobre os eixos com interferência térmica e chavetas temperadas.' },
+      { nome: 'Carcaça Bipartida em Ferro Fundido Nodular GGG-40', funcao: 'Corpo estrutural rígido bipartido na linha de centro dos eixos com nervuras de reforço anti-ressonância.' },
+      { nome: 'Mancais de Rolamentos de Rolos Cônicos', funcao: 'Absorvem simultaneamente as altas cargas radiais e axiais geradas pela inclinação dos dentes helicoidais.' },
+      { nome: 'Retentores Radiais de Vedação em Viton (FKM)', funcao: 'Vedações com mola toroidal que retêm o óleo no cárter e impedem a penetração de contaminantes externos.' },
+      { nome: 'Bujão Magnético de Dreno', funcao: 'Parafuso inferior dotado de ímã permanente de neodímio que atrai e retém limalhas ferrosas para inspeção periódica.' },
+      { nome: 'Visor de Nível de Óleo Tipo Olho de Boi', funcao: 'Permite inspeção visual instantânea do nível de lubrificante e detecção de espumamento ou emulsificação.' },
+      { nome: 'Respiro com Filtro Dessecante de Sílica Gel', funcao: 'Equaliza a pressão interna gerada pelo aquecimento térmico do óleo, retendo poeira e absorvendo a umidade do ar.' }
+    ]
+  },
+
+  'redutor-semfim': {
+    norma: 'AGMA 6022 / DIN 3975 / BS 721',
+    titulo: 'Redutor de Coroa e Rosca Sem-Fim (Worm Gearbox)',
+    subnorma: 'Grandes Relações de Transmissão em Espaço Reduzido • Eixos a 90° • Sistema com Travamento Mecânico Autobloqueante',
+    desc: 'Redutor compacto de eixos não concorrentes a 90°, composto por uma rosca sem-fim de aço temperado (1 a 4 entradas) e uma coroa periférica usinada em bronze fosforoso especial. O acoplamento opera predominantemente por escorregamento hidrodinâmico de alta fricção, exigindo óleos sintéticos de extrema pressão. Possui como diferencial a característica de irreversibilidade estática (autobloqueio) para ângulos de hélice inferiores a 5°, impedindo que a carga acionada gire o motor ao desligar.',
+    falhas: [
+      {
+        titulo: 'Desgaste Prematuro da Coroa de Bronze por Uso de Óleo Mineral Inadequado',
+        descricao: 'A utilização de lubrificantes minerais comuns sem aditivação compatível com ligas amarelas rompe a película hidrodinâmica; o forte atrito de escorregamento desgasta e afina os dentes de bronze da coroa em poucas semanas de operação, acumulando pó de bronze no fundo do cárter.'
+      },
+      {
+        titulo: 'Aderência e Soldagem Térmica (Scuffing) por Sobreaquecimento',
+        descricao: 'Temperaturas operacionais contínuas acima de 85°C provocam o cisalhamento térmico do óleo, gerando microsoldas entre o filete de aço da rosca e o dente de bronze, arrancando lascas de material e inutilizando a coroa.'
+      },
+      {
+        titulo: 'Vazamento Crítico de Óleo pelo Retentor do Eixo Sem-Fim',
+        descricao: 'O eixo sem-fim opera em rotação elevada (1750 RPM); o aquecimento natural associado ao ressecamento do lábio do retentor provoca vazamentos que esvaziam o cárter, resultando em queima mecânica imediata.'
+      },
+      {
+        titulo: 'Folga Angular Excessiva e Perda de Posicionamento da Carga',
+        descricao: 'Com o desgaste progressivo da coroa, a folga entre rosca e coroa aumenta muito, permitindo folga rotacional que desregula paradas de posição em pontes rolantes, talhas, elevadores de carga e comportas.'
+      }
+    ],
+    manut: [
+      {
+        titulo: 'Aplicação Exclusiva de Óleo Sintético PAG (Polialquilenoglicol)',
+        descricao: 'Abastecer rigorosamente com óleo sintético à base de poliglicol (ISO VG 320 ou 460) específico para redutores de coroa e rosca sem-fim, capaz de reduzir o atrito em até 20% e suportar altas cargas de escorregamento.'
+      },
+      {
+        titulo: 'Inspeção do Padrão de Contato Centralizado na Coroa de Bronze',
+        descricao: 'Verificar com tinta de contraste se o contato está posicionado ligeiramente para o lado de saída da rosca para favorecer a formação de cunha de lubrificação quando o redutor entrar em carga de trabalho.'
+      },
+      {
+        titulo: 'Monitoramento Contínuo da Temperatura da Carcaça com Termômetro Digital',
+        descricao: 'Inspecionar a temperatura superficial da carcaça aletada; se ultrapassar 80°C, verificar nível de óleo, limpar aletas sujas de poeira e inspecionar hélice do ventilador de refrigeração.'
+      },
+      {
+        titulo: 'Revisão dos Rolamentos de Contato Angular da Rosca Sem-Fim',
+        descricao: 'Inspecionar preventivamente os rolamentos de esferas de contato angular ou rolos cônicos montados em "O" que suportam a intensa força axial de reação gerada pela rosca.'
+      }
+    ],
+    comp: [
+      { nome: 'Rosca Sem-Fim em Aço Liga 20MnCr5', funcao: 'Eixo sem-fim com filetes helicoidais retificados, cementados e polidos de alta dureza superficial (58-62 HRC).' },
+      { nome: 'Coroa Dentada em Bronze Fosforoso CuSn12Ni2', funcao: 'Anel dentado de baixo atrito centrifugado e parafusado a um cubo central de ferro nodular.' },
+      { nome: 'Carcaça Monobloco Aletada', funcao: 'Estrutura monobloco com aletas de alta dissipação térmica e múltiplas opções de fixação.' },
+      { nome: 'Ventilador Mecânico de Refrigeração', funcao: 'Hélice aerodinâmica montada na ponta do eixo da rosca sem-fim que sopra ar forçado pelas aletas.' },
+      { nome: 'Mancais de Apoio com Rolamentos de Contato Angular', funcao: 'Absorvem o forte empuxo axial exercido pela rosca sem-fim em rotações de entrada de até 1800 RPM.' },
+      { nome: 'Eixo de Saída Oco com Chaveteiro Normalizado', funcao: 'Permite montagem direta sobre o eixo de entrada da máquina acionada (montagem tipo pendular).' },
+      { nome: 'Braço de Reação de Torque com Coxim Elastomérico', funcao: 'Ancora o redutor à base mecânica absorvendo solavancos e partidas pesadas sem deformar os eixos.' },
+      { nome: 'Retentores Especiais com Lábio de Poeira Adicional', funcao: 'Retêm o lubrificante no cárter em ambos os eixos e impedem a entrada de pó abrasivo.' }
+    ]
+  },
+
+  'redutor-planetario': {
+    norma: 'ISO 6336 / AGMA 6123 / DIN 3990',
+    titulo: 'Redutor Planetário / Epicicloidal de Alta Densidade de Torque',
+    subnorma: 'Transmissão Multicêntrica Coaxial • Folga Mínima de Backlash (Reduzida) • Altíssima Capacidade de Carga em Espaço Reduzido',
+    desc: 'Redutor coaxial de alto avanço tecnológico onde o torque de entrada é dividido simultaneamente entre 3 a 5 engrenagens satélites que orbitam ao redor de um pinhão solar central, engrenando internamente com uma coroa dentada anular fixa. Essa divisão mecânica de forças permite transmitir até o triplo de torque de um redutor convencional de mesmo peso e volume, com rendimento superior a 97%, folga angular mínima (baixo backlash) e alta rigidez torcional.',
+    falhas: [
+      {
+        titulo: 'Quebra dos Pinos dos Satélites por Carga de Choque Dinâmica',
+        descricao: 'Impactos mecânicos violentos em britadores, tornos pesados, guinchos ou moendas submetem o porta-satélites a flexões desbalanceadas, cisalhando os pinos de sustentação dos satélites e travando o redutor.'
+      },
+      {
+        titulo: 'Desgaste das Agulhas dos Rolamentos Internos dos Satélites',
+        descricao: 'As engrenagens satélites operam com rolamentos de agulha integrados diretamente no seu diâmetro interno; contaminação por partículas ou falta de filme lubrificante desgasta as agulhas, desalinha o satélite e esfarela os dentes da engrenagem solar.'
+      },
+      {
+        titulo: 'Superaquecimento por Nível de Óleo Errado no Compartimento Compacto',
+        descricao: 'Devido ao volume interno restrito, o nível de óleo deve ser extremamente preciso: óleo baixo impede lubrificação dos satélites superiores; óleo em excesso gera borbulhamento e cavitação por agitação mecânica a alta velocidade.'
+      },
+      {
+        titulo: 'Deformação Plástica dos Dentes da Coroa Interna Fixa',
+        descricao: 'Picos de conjugado causados por paradas bruscas com frenagem mecânica de emergência que deformam os dentes de perfil interno da coroa da carcaça.'
+      }
+    ],
+    manut: [
+      {
+        titulo: 'Troca Controlada de Óleo Sintético com Lavagem (Flushing)',
+        descricao: 'Drenar em temperatura de trabalho, realizar lavagem de limpeza do cárter para retirar limalhas residuais e abastecer com óleo sintético ISO VG 220 ou 320 com aditivos antiespumantes e desaerantes.'
+      },
+      {
+        titulo: 'Inspeção com Boroscópio Óptico sem Desmontagem',
+        descricao: 'Introduzir câmera boroscópica flexível pelo bujão de nível/inspeção para inspecionar o estado das superfícies dos dentes solares e dos satélites sem necessidade de retirar o redutor da máquina.'
+      },
+      {
+        titulo: 'Medição da Folga Angular (Backlash) em Minutos de Arco (arcmin)',
+        descricao: 'Travar a carcaça e o eixo de entrada. Aplicar torque nominal no eixo de saída e medir a folga angular com micrômetro; em redutores planetários industriais de precisão, a folga deve permanecer entre 3 e 8 minutos de arco.'
+      },
+      {
+        titulo: 'Torqueamento Controlado dos Parafusos dos Estágios Planetários',
+        descricao: 'Apertar os parafusos de união dos módulos planetários em cruz utilizando torquímetro calibrado conforme valores exatos especificados no manual de serviço.'
+      }
+    ],
+    comp: [
+      { nome: 'Engrenagem Solar Central (Sun Gear)', funcao: 'Pinhão dentado cementado e retificado acoplado diretamente ao eixo do motor elétrico.' },
+      { nome: 'Engrenagens Satélites (Planet Gears)', funcao: 'Conjunto de 3 a 5 engrenagens que giram sincronizadas ao redor da solar distribuindo o torque.' },
+      { nome: 'Porta-Satélites Forjado (Planet Carrier)', funcao: 'Estrutura monobloco forjada de alta rigidez mecânica que suporta os pinos dos satélites e aciona o eixo de saída.' },
+      { nome: 'Coroa Dentada Interna Fixa (Ring Gear)', funcao: 'Carcaça cilíndrica com dentes internos que serve de pista para o rolamento dos satélites.' },
+      { nome: 'Rolamentos de Agulha de Precisão dos Satélites', funcao: 'Roletes de agulha sem anel que suportam altíssimas cargas radiais no núcleo de cada satélite.' },
+      { nome: 'Pinos de Sustentação Retificados', funcao: 'Pinos de aço liga temperado com canais internos de óleo que servem de eixo para os satélites.' },
+      { nome: 'Placas de Encosto em Bronze Fosforoso', funcao: 'Arruelas de desgaste axial que impedem o atrito direto dos satélites contra as paredes do porta-satélites.' },
+      { nome: 'Flange de Entrada Normalizada IEC/NEMA', funcao: 'Flange para acoplamento direto com motorização elétrica sem necessidade de bases adicionais.' }
+    ]
+  },
+
+  'redutor-conico-helicoidal': {
+    norma: 'AGMA 2001 / ISO 10300 / DIN 3965',
+    titulo: 'Redutor Cônico-Helicoidal Ortogonal a 90° (Bevel-Helical)',
+    subnorma: 'Transmissão em Ângulo Reto com Engrenagens Cônicas Espirais Gleason • Elevado Rendimento (> 95%)',
+    desc: 'Redutor de engenharia avançada para montagens ortogonais em 90° que combina um primeiro estágio de engrenagens cônicas com dentes espirais (sistema Gleason ou Klingelnberg) com estágios cilíndricos helicoidais subsequentes. Diferente do redutor de coroa e rosca sem-fim, o par cônico espiral opera com rolamento quase puro e altíssimo rendimento mecânico (> 95%), sendo a melhor solução técnica para acionamentos contínuos de alta potência como agitadores, moinhos, bombas de poço e torres de resfriamento.',
+    falhas: [
+      {
+        titulo: 'Deslocamento Axial e Desalinhamento do Cone de Engrenamento',
+        descricao: 'Um deslocamento axial de apenas 0,05 mm no pinhão cônico espiral desloca a mancha de contato para a ponta do dente (toe) ou para o calcanhar (heel), provocando quebra por sobrecarga pontual e estilhaçamento dos dentes.'
+      },
+      {
+        titulo: 'Trincas por Fadiga no Pé do Dente Cônico (Root Cracking)',
+        descricao: 'Picos severos de torque em partidas diretas que geram trincas de flexão na raiz do dente cônico, que se propagam até o arrancamento total do dente.'
+      },
+      {
+        titulo: 'Desgaste e Falha dos Rolamentos Dianteiros do Pinhão Cônico',
+        descricao: 'O pinhão cônico sofre fortes forças axiais e radiais simultâneas que tendem a empurrá-lo para fora do engrenamento; falha no fluxo de lubrificação trava o rolamento e destrói o par cônico.'
+      },
+      {
+        titulo: 'Contaminação por Água em Torres de Resfriamento e Ambientes Úmidos',
+        descricao: 'Em aplicações verticais, a condensação de vapor de água penetra pelo retentor superior e emulsiona o óleo, causando oxidação acelerada das engrenagens e pistas de rolamento.'
+      }
+    ],
+    manut: [
+      {
+        titulo: 'Ajuste Rigoroso da Mancha de Contato do Par Cônico Espiral',
+        descricao: 'Ajustar o deslocamento axial do pinhão e da coroa cônica utilizando calços metálicos calibrados até obter mancha de contato ovalada e centrada em 40% a 60% da largura do dente.'
+      },
+      {
+        titulo: 'Medição do Batimento Radial (Runout) dos Eixos Cônicos',
+        descricao: 'Com relógio comparador na ponta do eixo e no cubo da coroa, aferir o desvio radial máximo admissível, que não deve ultrapassar 0,02 mm.'
+      },
+      {
+        titulo: 'Monitoramento Preditivo de Vibração com Foco na GMF (Gear Mesh Frequency)',
+        descricao: 'Monitorar os harmônicos da frequência de engrenamento (GMF = RPM x Número de Dentes) e bandas laterais no espectro FFT para detecção precoce de dentes lascados ou desgastados.'
+      },
+      {
+        titulo: 'Inspeção e Engraxamento Periódico do Selo Labirinto Taconite',
+        descricao: 'Em locais com poeira abrasiva ou umidade, injetar graxa periodicamente na câmara do selo labirinto taconite para criar barreira física impenetrável que preserva o retentor.'
+      }
+    ],
+    comp: [
+      { nome: 'Pinhão Cônico Espiral Gleason', funcao: 'Pinhão cônico de dentes curvos cementado, temperado e lapidado em pares casados com a coroa.' },
+      { nome: 'Coroa Cônica Espiral de Entrada', funcao: 'Roda cônica de entrada que recebe o torque em 90° e transmite ao eixo intermediário helicoidal.' },
+      { nome: 'Pares Helicoidais de Redução Secundária', funcao: 'Engrenagens cilíndricas helicoidais que realizam a redução final e multiplicação de torque.' },
+      { nome: 'Carcaça Monobloco com Nervuras Pesadas', funcao: 'Carcaça de ferro fundido nodular com grande rigidez estrutural para suportar os empuxos cônicos.' },
+      { nome: 'Arranjo de Rolamentos de Rolos Cônicos em O', funcao: 'Garante o posicionamento axial rígido do pinhão cônico mesmo sob fortes reversões de torque.' },
+      { nome: 'Selo de Vedação Tipo Labirinto Taconite', funcao: 'Vedação sem atrito com câmara de graxa e labirinto metálico contra poeira e água.' },
+      { nome: 'Bomba de Óleo Integrada para Lubrificação Forçada', funcao: 'Bomba mecânica ou motobomba externa que garante aspersão de óleo nos mancais superiores em redutores verticais.' },
+      { nome: 'Serpentina Interna de Resfriamento por Água', funcao: 'Trocador de calor tubular de cobre-níquel imerso no cárter para controle térmico em regime contínuo.' }
+    ]
+  }
+
   }
 };
 
 // FUNÇÕES DE CONTROLE DO MODAL DE EQUIPAMENTOS
-function abrirModalEquipamento(categoria, idEquip) {
+function abrirModalEquipamento(categoria, idEquip, abaInicial = 'desc') {
   const equip = DADOS_EQUIPAMENTOS[categoria] && DADOS_EQUIPAMENTOS[categoria][idEquip];
   if (!equip) {
     console.error('Equipamento não encontrado:', categoria, idEquip);
+    alert('Informações detalhadas deste equipamento estão sendo preparadas.');
     return;
   }
   
@@ -10147,7 +10589,7 @@ function abrirModalEquipamento(categoria, idEquip) {
     const manutHtml = (equip.manut || []).map((m, i) => `
       <div class="manutencao-step">
         <h5>🛠️ Procedimento ${i+1}: ${m.titulo}</h5>
-        <p style="font-size:13px; margin:0; color:#e2e8f0; line-height:1.5;">${m.procedimento}</p>
+        <p style="font-size:13px; margin:0; color:#e2e8f0; line-height:1.5;">${m.procedimento || m.descricao}</p>
       </div>
     `).join('');
     elManut.innerHTML = `
@@ -10175,9 +10617,10 @@ function abrirModalEquipamento(categoria, idEquip) {
     `;
   }
   
-  alternarAbaModalEquip('desc');
+  alternarAbaModalEquip(abaInicial);
   const modal = document.getElementById('modal-equipamento-detalhe');
   if (modal) {
+    modal.style.display = 'flex';
     modal.classList.add('active');
   }
   document.body.style.overflow = 'hidden';
@@ -10186,6 +10629,7 @@ function abrirModalEquipamento(categoria, idEquip) {
 function fecharModalEquipamento() {
   const modal = document.getElementById('modal-equipamento-detalhe');
   if (modal) {
+    modal.style.display = 'none';
     modal.classList.remove('active');
   }
   document.body.style.overflow = '';
