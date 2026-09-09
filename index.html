@@ -1525,6 +1525,217 @@
     text-align: right;
   }
 
+
+/* ==================== UPGRADE DO RELATÓRIO: FERRAMENTAS, FOTOS E DESENHO 3D ==================== */
+.ferramenta-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(14, 165, 233, 0.12);
+  border: 1px solid #0284c7;
+  color: #bae6fd;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 11.5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+.ferramenta-chip:hover {
+  background: rgba(14, 165, 233, 0.28);
+  border-color: #38bdf8;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+.ferramenta-tag-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #0f2744;
+  border: 1px solid #38bdf8;
+  color: #e0f2fe;
+  padding: 4px 9px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+.ferramenta-tag-remover {
+  cursor: pointer;
+  color: #f87171;
+  font-weight: bold;
+  padding: 0 4px;
+  border-radius: 3px;
+  font-size: 13px;
+}
+.ferramenta-tag-remover:hover {
+  background: rgba(239, 68, 68, 0.25);
+  color: #ff9999;
+}
+
+/* Slots de Fotos do Relatório */
+.foto-slots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 14px;
+  margin-top: 10px;
+}
+.foto-slot-card {
+  background: #0b1523;
+  border: 1px solid #1e3a5f;
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.foto-slot-card:hover {
+  border-color: #38bdf8;
+  box-shadow: 0 4px 16px rgba(56, 189, 248, 0.08);
+}
+.foto-slot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.foto-slot-title {
+  font-size: 12px;
+  font-weight: bold;
+  color: #7dd3fc;
+}
+.foto-slot-status {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #1e293b;
+  color: #94a3b8;
+}
+.foto-slot-status.ativo {
+  background: rgba(34, 197, 94, 0.18);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.4);
+}
+.foto-slot-dropzone {
+  border: 2px dashed #244164;
+  border-radius: 8px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 10px;
+  text-align: center;
+  background: #060e1a;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+.foto-slot-dropzone:hover {
+  border-color: #38bdf8;
+  background: #091a2e;
+}
+.foto-slot-preview-img {
+  width: 100%;
+  max-height: 140px;
+  object-fit: cover;
+  border-radius: 6px;
+  display: none;
+}
+.foto-slot-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+.btn-slot-action {
+  flex: 1;
+  min-width: 80px;
+  font-size: 11px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+.btn-slot-trocar {
+  background: #0284c7;
+  color: #ffffff;
+  border-color: #38bdf8;
+}
+.btn-slot-trocar:hover {
+  background: #0369a1;
+}
+.btn-slot-remover {
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+  border-color: rgba(239, 68, 68, 0.4);
+}
+.btn-slot-remover:hover {
+  background: rgba(239, 68, 68, 0.35);
+  color: #ffffff;
+}
+
+/* Desenho Técnico 3D */
+.desenho-tecnico-box {
+  background: #0a1424;
+  border: 1px solid #1e3a5f;
+  border-radius: 10px;
+  padding: 14px;
+  margin-top: 14px;
+}
+.desenho-tabs-nav {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid #1e3a5f;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.desenho-tab-btn {
+  background: #0f2139;
+  border: 1px solid #25466f;
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.desenho-tab-btn:hover {
+  color: #e2e8f0;
+  border-color: #38bdf8;
+}
+.desenho-tab-btn.ativo {
+  background: #0284c7;
+  border-color: #38bdf8;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(56, 189, 248, 0.25);
+}
+.desenho-3d-stage {
+  background: radial-gradient(circle at center, #0a1e38 0%, #030811 100%);
+  border: 1px solid #1e3a5f;
+  border-radius: 8px;
+  padding: 10px;
+  text-align: center;
+  position: relative;
+}
+.desenho-3d-toolbar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed #1e3a5f;
+}
+
 </style>
 </head>
 
@@ -2646,19 +2857,29 @@
       </div>
     </div>
 
-    <!-- Ferramentas e Observações -->
+    <!-- Ferramentas e Observações com Busca Especialista -->
     <div class="content-block">
       <h4>Ferramentas Utilizadas e Observações</h4>
       <div class="field-row">
         <div class="field" style="min-width:100%;">
-          <label>Ferramentas Utilizadas (uma por linha)</label>
-          <textarea id="rel_ferramentas" rows="3" spellcheck="true" placeholder="• Chave combinada 22 mm&#10;• Torquímetro de estalo calibrado&#10;• Escova de latão para limpeza"></textarea>
-          <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:6px;">
-            <button type="button" class="button secondary" style="font-size:11px; padding:4px 8px;" onclick="adicionarFerramentaPredefinida('• Chave combinada 22 mm')">+ Chave 22 mm</button>
-            <button type="button" class="button secondary" style="font-size:11px; padding:4px 8px;" onclick="adicionarFerramentaPredefinida('• Torquímetro de estalo')">+ Torquímetro</button>
-            <button type="button" class="button secondary" style="font-size:11px; padding:4px 8px;" onclick="adicionarFerramentaPredefinida('• Soquete sextavado 22 mm')">+ Soquete 22 mm</button>
-            <button type="button" class="button secondary" style="font-size:11px; padding:4px 8px;" onclick="adicionarFerramentaPredefinida('• Paquímetro digital')">+ Paquímetro</button>
+          <label>🔍 Buscar & Selecionar Ferramentas Especializadas</label>
+          <div style="display:flex; gap:8px; margin-bottom:8px;">
+            <input type="text" id="busca_ferramentas_input" placeholder="Digite para filtrar (ex: torquímetro, chave 22, laser, micrômetro, sacador...)" oninput="filtrarFerramentasInput(this.value)" style="flex:1;">
+            <button type="button" class="button secondary" style="font-size:12px; padding:6px 12px;" onclick="filtrarFerramentasInput(''); document.getElementById('busca_ferramentas_input').value='';">Limpar Busca</button>
           </div>
+          
+          <div style="font-size:11.5px; color:#94a3b8; margin-bottom:5px;">Catálogo rápido (clique para adicionar ao relatório):</div>
+          <div id="ferramentas_chips_rapidos" style="display:flex; gap:6px; flex-wrap:wrap; max-height:130px; overflow-y:auto; padding:6px; background:#060e1a; border-radius:8px; border:1px solid #1a304d; margin-bottom:8px;">
+            <!-- Preenchido dinamicamente via JS -->
+          </div>
+
+          <div style="font-size:11.5px; color:#94a3b8; margin-bottom:5px;">Ferramentas selecionadas no relatório:</div>
+          <div id="ferramentas_tags_container" style="display:flex; gap:6px; flex-wrap:wrap; min-height:36px; padding:6px 10px; background:#0a1727; border-radius:8px; border:1px solid #203e64; margin-bottom:8px;">
+            <span style="font-size:12px; color:#64748b;">Nenhuma ferramenta selecionada ainda. Clique nos atalhos acima ou digite no campo.</span>
+          </div>
+
+          <label>Lista Completa de Ferramentas no Relatório (uma por linha)</label>
+          <textarea id="rel_ferramentas" rows="3" spellcheck="true" placeholder="• Chave combinada 22 mm&#10;• Torquímetro de estalo calibrado&#10;• Escova de latão para limpeza" oninput="sincronizarTextareaFerramentas(this.value)"></textarea>
         </div>
       </div>
       <div class="field-row">
@@ -2675,56 +2896,214 @@
       </div>
     </div>
 
-    <!-- Fotos e Desenho Técnico -->
+    <!-- Fotos do Serviço e Galeria Especialista -->
     <div class="content-block">
-      <h4>Fotos do Serviço e Desenho Técnico</h4>
-      <div class="field-row">
-        <div class="field">
-          <label>📷 Foto Real no Equipamento (Filtro instalado)</label>
-          <input type="file" accept="image/*" capture="environment" id="rel_foto_antes" onchange="previewFotoRelatorio('rel_foto_antes','preview_antes')">
-          <img id="preview_antes" style="display:none; margin-top:8px; width:100%; max-width:200px; border-radius:8px; border:1px solid #345a86;">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <h4 style="margin:0;">📷 Galeria de Fotos da Intervenção</h4>
+        <span style="font-size:11.5px; color:#7dd3fc;">Adicione, confira a prévia, troque ou retire fotos individualmente a qualquer momento</span>
+      </div>
+
+      <!-- Grade dos 5 Slots Estruturados -->
+      <div class="foto-slots-grid">
+        <!-- Slot 1: Foto no Equipamento (Antes) -->
+        <div class="foto-slot-card" id="slot_card_slot1">
+          <div class="foto-slot-header">
+            <span class="foto-slot-title">1. No Equipamento (Antes)</span>
+            <span class="foto-slot-status" id="slot_status_slot1">Vazio</span>
+          </div>
+          <div class="foto-slot-dropzone" onclick="dispararCliqueSlot('slot1')">
+            <input type="file" accept="image/*" capture="environment" id="rel_foto_slot1" style="display:none;" onchange="processarFotoSlot('slot1', this)">
+            <img id="slot_preview_slot1" class="foto-slot-preview-img" alt="Foto Antes">
+            <div id="slot_placeholder_slot1" style="color:#64748b; font-size:11.5px; pointer-events:none;">
+              <div style="font-size:24px; margin-bottom:4px;">📷</div>
+              Clique para Tirar Foto ou Selecionar
+            </div>
+          </div>
+          <div class="foto-slot-actions" id="slot_actions_slot1" style="display:none;">
+            <button type="button" class="btn-slot-action btn-slot-trocar" onclick="dispararCliqueSlot('slot1')">🔄 Trocar</button>
+            <button type="button" class="btn-slot-action btn-slot-remover" onclick="removerFotoSlot('slot1')">🗑️ Retirar</button>
+          </div>
         </div>
-        <div class="field">
-          <label>📷 Foto Real da Tampa / Desmontagem</label>
-          <input type="file" accept="image/*" capture="environment" id="rel_foto_depois" onchange="previewFotoRelatorio('rel_foto_depois','preview_depois')">
-          <img id="preview_depois" style="display:none; margin-top:8px; width:100%; max-width:200px; border-radius:8px; border:1px solid #345a86;">
+
+        <!-- Slot 2: Desmontagem / Tampa / Conjunto -->
+        <div class="foto-slot-card" id="slot_card_slot2">
+          <div class="foto-slot-header">
+            <span class="foto-slot-title">2. Desmontagem / Tampa</span>
+            <span class="foto-slot-status" id="slot_status_slot2">Vazio</span>
+          </div>
+          <div class="foto-slot-dropzone" onclick="dispararCliqueSlot('slot2')">
+            <input type="file" accept="image/*" capture="environment" id="rel_foto_slot2" style="display:none;" onchange="processarFotoSlot('slot2', this)">
+            <img id="slot_preview_slot2" class="foto-slot-preview-img" alt="Foto Desmontagem">
+            <div id="slot_placeholder_slot2" style="color:#64748b; font-size:11.5px; pointer-events:none;">
+              <div style="font-size:24px; margin-bottom:4px;">📷</div>
+              Clique para Tirar Foto ou Selecionar
+            </div>
+          </div>
+          <div class="foto-slot-actions" id="slot_actions_slot2" style="display:none;">
+            <button type="button" class="btn-slot-action btn-slot-trocar" onclick="dispararCliqueSlot('slot2')">🔄 Trocar</button>
+            <button type="button" class="btn-slot-action btn-slot-remover" onclick="removerFotoSlot('slot2')">🗑️ Retirar</button>
+          </div>
         </div>
-        <div class="field">
-          <label>📷 Filtros – Vista Real (3D / Peça Limpa)</label>
-          <input type="file" accept="image/*" capture="environment" id="rel_foto_3d" onchange="previewFotoRelatorio('rel_foto_3d','preview_3d')">
-          <img id="preview_3d" style="display:none; margin-top:8px; width:100%; max-width:200px; border-radius:8px; border:1px solid #345a86;">
+
+        <!-- Slot 3: Anomalia / Dano Encontrado -->
+        <div class="foto-slot-card" id="slot_card_slot3">
+          <div class="foto-slot-header">
+            <span class="foto-slot-title">3. Anomalia / Dano</span>
+            <span class="foto-slot-status" id="slot_status_slot3">Vazio</span>
+          </div>
+          <div class="foto-slot-dropzone" onclick="dispararCliqueSlot('slot3')">
+            <input type="file" accept="image/*" capture="environment" id="rel_foto_slot3" style="display:none;" onchange="processarFotoSlot('slot3', this)">
+            <img id="slot_preview_slot3" class="foto-slot-preview-img" alt="Foto Anomalia">
+            <div id="slot_placeholder_slot3" style="color:#64748b; font-size:11.5px; pointer-events:none;">
+              <div style="font-size:24px; margin-bottom:4px;">🔍</div>
+              Clique para Tirar Foto ou Selecionar
+            </div>
+          </div>
+          <div class="foto-slot-actions" id="slot_actions_slot3" style="display:none;">
+            <button type="button" class="btn-slot-action btn-slot-trocar" onclick="dispararCliqueSlot('slot3')">🔄 Trocar</button>
+            <button type="button" class="btn-slot-action btn-slot-remover" onclick="removerFotoSlot('slot3')">🗑️ Retirar</button>
+          </div>
+        </div>
+
+        <!-- Slot 4: Peças Limpas / Novas / 3D -->
+        <div class="foto-slot-card" id="slot_card_slot4">
+          <div class="foto-slot-header">
+            <span class="foto-slot-title">4. Peças Limpas / 3D</span>
+            <span class="foto-slot-status" id="slot_status_slot4">Vazio</span>
+          </div>
+          <div class="foto-slot-dropzone" onclick="dispararCliqueSlot('slot4')">
+            <input type="file" accept="image/*" capture="environment" id="rel_foto_slot4" style="display:none;" onchange="processarFotoSlot('slot4', this)">
+            <img id="slot_preview_slot4" class="foto-slot-preview-img" alt="Foto Peças Limpas">
+            <div id="slot_placeholder_slot4" style="color:#64748b; font-size:11.5px; pointer-events:none;">
+              <div style="font-size:24px; margin-bottom:4px;">✨</div>
+              Clique para Tirar Foto ou Selecionar
+            </div>
+          </div>
+          <div class="foto-slot-actions" id="slot_actions_slot4" style="display:none;">
+            <button type="button" class="btn-slot-action btn-slot-trocar" onclick="dispararCliqueSlot('slot4')">🔄 Trocar</button>
+            <button type="button" class="btn-slot-action btn-slot-remover" onclick="removerFotoSlot('slot4')">🗑️ Retirar</button>
+          </div>
+        </div>
+
+        <!-- Slot 5: Montagem Final / Liberado -->
+        <div class="foto-slot-card" id="slot_card_slot5">
+          <div class="foto-slot-header">
+            <span class="foto-slot-title">5. Montagem Final (Depois)</span>
+            <span class="foto-slot-status" id="slot_status_slot5">Vazio</span>
+          </div>
+          <div class="foto-slot-dropzone" onclick="dispararCliqueSlot('slot5')">
+            <input type="file" accept="image/*" capture="environment" id="rel_foto_slot5" style="display:none;" onchange="processarFotoSlot('slot5', this)">
+            <img id="slot_preview_slot5" class="foto-slot-preview-img" alt="Foto Final">
+            <div id="slot_placeholder_slot5" style="color:#64748b; font-size:11.5px; pointer-events:none;">
+              <div style="font-size:24px; margin-bottom:4px;">🏁</div>
+              Clique para Tirar Foto ou Selecionar
+            </div>
+          </div>
+          <div class="foto-slot-actions" id="slot_actions_slot5" style="display:none;">
+            <button type="button" class="btn-slot-action btn-slot-trocar" onclick="dispararCliqueSlot('slot5')">🔄 Trocar</button>
+            <button type="button" class="btn-slot-action btn-slot-remover" onclick="removerFotoSlot('slot5')">🗑️ Retirar</button>
+          </div>
         </div>
       </div>
 
-      <!-- Configuração do Desenho Técnico -->
-      <div style="background:#0c172a; padding:14px; border-radius:8px; margin-top:12px; border:1px solid #29415f;">
-        <h5 style="color:#75b7ff; margin-bottom:8px; font-size:13px;">📐 Desenho Técnico do Componente</h5>
-        <div class="field-row">
-          <div class="field">
-            <label>Modelo do Desenho Técnico</label>
-            <select id="rel_tipo_desenho" onchange="atualizarOpcaoDesenhoTecnico()">
-              <option value="filtro_padrao" selected>Filtro Cilíndrico com Cotas (263 mm, Ø 70 mm) — Modelo Oficial</option>
-              <option value="foto_blueprint">Gerar Desenho Técnico a partir da Foto Real</option>
-              <option value="upload_desenho">Upload de Desenho Próprio / CAD</option>
-            </select>
-          </div>
-          <div class="field" id="campo_upload_desenho" style="display:none;">
-            <label>Arquivo de Desenho Técnico</label>
-            <input type="file" accept="image/*" id="rel_desenho_custom" onchange="previewFotoRelatorio('rel_desenho_custom','preview_custom_desenho')">
-            <img id="preview_custom_desenho" style="display:none; margin-top:6px; max-height:80px;">
-          </div>
+      <!-- Elementos ocultos para compatibilidade com legado -->
+      <input type="file" id="rel_foto_antes" style="display:none;">
+      <input type="file" id="rel_foto_depois" style="display:none;">
+      <input type="file" id="rel_foto_3d" style="display:none;">
+      <input type="file" id="rel_desenho_custom" style="display:none;">
+      <input type="file" id="rel_fotos_extra" style="display:none;">
+      <img id="preview_antes" style="display:none;">
+      <img id="preview_depois" style="display:none;">
+      <img id="preview_3d" style="display:none;">
+
+      <!-- Fotos Extras / Anexos Livres -->
+      <div style="margin-top:14px; background:#08111e; border:1px solid #1a304d; border-radius:8px; padding:12px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+          <label style="margin:0; font-size:12.5px; color:#bae6fd;">📎 Fotos Adicionais & Anexos Complementares</label>
+          <button type="button" class="button secondary" style="font-size:11.5px; padding:4px 10px;" onclick="document.getElementById('rel_fotos_extra_input').click()">+ Adicionar Mais Fotos</button>
+          <input type="file" accept="image/*" multiple id="rel_fotos_extra_input" style="display:none;" onchange="processarFotosExtrasMultiplas(this)">
         </div>
-        <div style="display:flex; gap:10px; align-items:center; margin-top:8px; flex-wrap:wrap;">
-          <button type="button" class="button secondary" style="font-size:12px; padding:6px 12px;" onclick="gerarDesenhoTecnicoDaFoto()">🎨 Gerar Desenho da Foto Agora</button>
-          <span id="status_geracao_desenho" style="font-size:12px; color:#8190a7;"></span>
+        <div id="preview_extras_container" style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; min-height:30px;">
+          <span style="font-size:11.5px; color:#64748b;">Nenhuma foto extra adicionada. Se desejar incluir mais fotos além dos 5 slots principais, clique no botão acima.</span>
         </div>
       </div>
 
-      <div class="field-row" style="margin-top:10px;">
-        <div class="field" style="min-width:100%;">
-          <label>📎 Fotos adicionais / Anexos complementares</label>
-          <input type="file" accept="image/*" multiple id="rel_fotos_extra" onchange="previewFotosExtra()">
-          <div id="preview_extra" class="fotos-row" style="margin-top:8px;"></div>
+      <!-- Módulo Avançado: Desenho Técnico 3D / Upload CAD / Blueprint -->
+      <div class="desenho-tecnico-box">
+        <div class="desenho-tabs-nav">
+          <button type="button" class="desenho-tab-btn ativo" id="tab_btn_3d" onclick="alternarAbaDesenhoTecnico('3d')">📐 Desenho Técnico 3D Isométrico Realista</button>
+          <button type="button" class="desenho-tab-btn" id="tab_btn_upload" onclick="alternarAbaDesenhoTecnico('upload')">📤 Upload de Desenho Próprio / CAD / Prancha</button>
+          <button type="button" class="desenho-tab-btn" id="tab_btn_blueprint" onclick="alternarAbaDesenhoTecnico('blueprint')">🎨 Blueprint Automático da Foto</button>
+        </div>
+
+        <!-- ABA 1: MODELO TÉCNICO 3D ISOMÉTRICO REALISTA -->
+        <div id="aba_conteudo_3d" style="display:block;">
+          <div class="desenho-3d-toolbar">
+            <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+              <label style="font-size:12px; color:#94a3b8; margin:0;">Equipamento 3D:</label>
+              <select id="seletor_modelo_3d" onchange="trocarModelo3DManualmente(this.value)" style="padding:4px 8px; font-size:12px; border-radius:6px; background:#0f2744; border:1px solid #38bdf8; color:#fff;">
+                <option value="filtro_cilindrico">Filtro Cilíndrico com Cotas (Oficial 263mm Ø70mm)</option>
+                <option value="valvula_gaveta">Válvula Gaveta API 600 (Haste Ascendente & Volante)</option>
+                <option value="valvula_globo">Válvula Globo ASME B16.34 (Sede Plana & Obturador)</option>
+                <option value="valvula_esfera">Válvula Esfera Tripartida com Alavanca</option>
+                <option value="valvula_borboleta">Válvula Borboleta Wafer com Disco Central</option>
+                <option value="valvula_retencao">Válvula de Retenção tipo Portinhola</option>
+                <option value="valvula_psv">Válvula de Segurança e Alívio (PSV) com Mola</option>
+                <option value="bomba_centrifuga">Bomba Centrífuga API 610 (OH2 com Selo Mecânico)</option>
+                <option value="bomba_engrenagens">Bomba de Engrenagens API 676 (Deslocamento Positivo)</option>
+                <option value="motor_eletrico">Motor Elétrico Trifásico Aletado NBR 17094</option>
+              </select>
+            </div>
+            <div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
+              <button type="button" class="button secondary" style="font-size:11px; padding:4px 8px;" onclick="ajustarZoom3D(0.15)">🔍 + Zoom</button>
+              <button type="button" class="button secondary" style="font-size:11px; padding:4px 8px;" onclick="ajustarZoom3D(-0.15)">🔍 - Zoom</button>
+              <button type="button" class="button secondary" style="font-size:11px; padding:4px 8px;" onclick="girarModelo3D()">🔄 Girar 35°</button>
+              <button type="button" class="button secondary" style="font-size:11px; padding:4px 8px;" onclick="alternarCorte3D()">✂️ Modo Corte</button>
+              <button type="button" class="button secondary" style="font-size:11px; padding:4px 8px;" onclick="refazerDesenho3D()">🔄 Redefinir</button>
+            </div>
+          </div>
+
+          <div class="desenho-3d-stage">
+            <canvas id="canvas_desenho_3d" width="560" height="340" style="max-width:100%; height:auto; display:block; margin:auto; border-radius:6px;"></canvas>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; flex-wrap:wrap; gap:8px;">
+              <span style="font-size:11px; color:#7dd3fc;">✔ Modelo 3D sincronizado e renderizado em tempo real com normas técnicas</span>
+              <button type="button" class="button" style="background:#0284c7; border-color:#38bdf8; font-size:12px; padding:6px 14px; margin:0;" onclick="aplicarDesenho3DAoRelatorio()">🎨 Aplicar Desenho 3D ao Relatório A4</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ABA 2: UPLOAD DE DESENHO PRÓPRIO / CAD COM PRÉVIA E REMOÇÃO -->
+        <div id="aba_conteudo_upload" style="display:none;">
+          <div style="border:2px dashed #284c77; border-radius:8px; padding:20px; text-align:center; background:#071322;">
+            <input type="file" accept="image/*,application/pdf" id="rel_upload_desenho_input" style="display:none;" onchange="processarUploadDesenhoCustom(this)">
+            <div id="upload_desenho_dropzone_view" onclick="document.getElementById('rel_upload_desenho_input').click()" style="cursor:pointer;">
+              <div style="font-size:32px; margin-bottom:8px;">📐</div>
+              <div style="font-size:14px; font-weight:bold; color:#7dd3fc;">Clique aqui para fazer upload do Desenho Técnico / CAD / Prancha</div>
+              <div style="font-size:12px; color:#94a3b8; margin-top:4px;">Suporta imagens em alta resolução (PNG, JPG, SVG) ou esquemas de engenharia</div>
+            </div>
+
+            <!-- Prévia do Desenho Customizado com Retirar / Trocar -->
+            <div id="desenho_custom_preview_area" style="display:none; margin-top:14px; text-align:center;">
+              <img id="desenho_custom_preview_img" src="" alt="Prévia do Desenho Customizado" style="max-height:220px; max-width:100%; border:1px solid #38bdf8; border-radius:8px; display:inline-block; box-shadow:0 4px 12px rgba(0,0,0,0.5);">
+              <div style="margin-top:10px; display:flex; justify-content:center; gap:8px; flex-wrap:wrap;">
+                <button type="button" class="button" style="background:#0284c7; border-color:#38bdf8; font-size:12px; padding:6px 14px;" onclick="document.getElementById('rel_upload_desenho_input').click()">🔄 Trocar Arquivo</button>
+                <button type="button" class="button secondary" style="background:rgba(239,68,68,0.2); border-color:#ef4444; color:#fca5a5; font-size:12px; padding:6px 14px;" onclick="removerDesenhoCustom()">🗑️ Retirar Desenho</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ABA 3: BLUEPRINT AUTOMÁTICO DA FOTO -->
+        <div id="aba_conteudo_blueprint" style="display:none;">
+          <div style="background:#071322; border:1px solid #1e3a5f; border-radius:8px; padding:14px; text-align:center;">
+            <p style="font-size:12.5px; color:#bae6fd; margin-bottom:10px;">
+              Gere um esquema técnico estilo Blueprint em azul ciano e alto contraste a partir da foto do Slot 1 (Antes) ou Slot 2 (Desmontagem).
+            </p>
+            <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
+              <button type="button" class="button secondary" style="font-size:12px; padding:6px 14px;" onclick="gerarDesenhoTecnicoDaFoto()">🎨 Gerar Blueprint da Foto Agora</button>
+            </div>
+            <div id="status_geracao_desenho" style="font-size:12px; color:#94a3b8; margin-top:8px;"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -2938,6 +3317,17 @@
           <div class="r-a4-linha-ponto"></div>
           <div class="r-a4-linha-ponto"></div>
           <div class="r-a4-linha-ponto"></div>
+        </div>
+      </div>
+
+            <!-- Bloco Complementar de Fotos e Evidências Técnicas (Anomalia, Peças e Extras) -->
+      <div id="r4_galeria_complementar_bloco" style="display:none; border:1px solid #1f2937; border-radius:4px; margin-top:8px; padding:6px 10px; background:#fbfcfe;">
+        <div style="font-size:10px; font-weight:800; color:#10448c; margin-bottom:6px; border-bottom:1px solid #e2e8f0; padding-bottom:3px; display:flex; justify-content:space-between;">
+          <span>EVIDÊNCIAS FOTOGRÁFICAS COMPLEMENTARES & REGISTRO DE ANOMALIA / PEÇAS</span>
+          <span style="font-size:9px; color:#64748b; font-weight:normal;">MECÂNICA 4.0 IA • REGISTRO TÉCNICO OFICIAL</span>
+        </div>
+        <div id="r4_galeria_complementar_fotos" style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-start; align-items:center;">
+          <!-- Preenchido dinamicamente se houver fotos nos slots 3, 5 ou extras -->
         </div>
       </div>
 
@@ -4157,7 +4547,852 @@
 
 </div><!-- fim #appContent -->
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">/* ========================================================================== */
+/* SISTEMA AVANÇADO DE DESENHO TÉCNICO 3D, FOTOS E FERRAMENTAS DO RELATÓRIO */
+/* ========================================================================== */
+
+// 1. CATÁLOGO ESPECIALISTA DE FERRAMENTAS INDUSTRIAIS
+const LISTA_FERRAMENTAS_CATALOGO = [
+  { id: 't-torq-12', nome: 'Torquímetro de Estalo 1/2" (40 a 200 N·m)', cat: 'Torque', icone: '🎯' },
+  { id: 't-torq-34', nome: 'Torquímetro de Estalo 3/4" (100 a 550 N·m)', cat: 'Torque', icone: '🎯' },
+  { id: 't-torq-dig', nome: 'Torquímetro Digital com Leitura de Ângulo de Giro', cat: 'Torque', icone: '🎯' },
+  { id: 't-mult-torq', nome: 'Multiplicador de Torque Planetário 5:1', cat: 'Torque', icone: '🎯' },
+  { id: 't-ch-10', nome: 'Chave combinada 10 mm', cat: 'Chaves', icone: '🔧' },
+  { id: 't-ch-13', nome: 'Chave combinada 13 mm', cat: 'Chaves', icone: '🔧' },
+  { id: 't-ch-17', nome: 'Chave combinada 17 mm', cat: 'Chaves', icone: '🔧' },
+  { id: 't-ch-19', nome: 'Chave combinada 19 mm', cat: 'Chaves', icone: '🔧' },
+  { id: 't-ch-22', nome: 'Chave combinada 22 mm', cat: 'Chaves', icone: '🔧' },
+  { id: 't-ch-24', nome: 'Chave combinada 24 mm', cat: 'Chaves', icone: '🔧' },
+  { id: 't-ch-27', nome: 'Chave combinada 27 mm', cat: 'Chaves', icone: '🔧' },
+  { id: 't-ch-30', nome: 'Chave combinada 30 mm', cat: 'Chaves', icone: '🔧' },
+  { id: 't-ch-32', nome: 'Chave combinada 32 mm', cat: 'Chaves', icone: '🔧' },
+  { id: 't-ch-36', nome: 'Chave combinada 36 mm', cat: 'Chaves', icone: '🔧' },
+  { id: 't-ch-inglesa', nome: 'Chave ajustável inglesa 12" de alta capacidade', cat: 'Chaves', icone: '🔧' },
+  { id: 't-soq-imp', nome: 'Jogo de soquetes de impacto sextavados (1/2" e 3/4")', cat: 'Chaves', icone: '🔩' },
+  { id: 't-ch-allen', nome: 'Jogo de chaves Allen abauladas em aço cromo-vanádio', cat: 'Chaves', icone: '🔧' },
+  { id: 't-paq-dig', nome: 'Paquímetro digital centesimal (0 a 150 mm / 0,01 mm)', cat: 'Metrologia', icone: '📏' },
+  { id: 't-mic-ext', nome: 'Micrômetro externo milesimal (0 a 25 mm / 0,001 mm)', cat: 'Metrologia', icone: '🔬' },
+  { id: 't-rel-comp', nome: 'Relógio comparador centesimal com base magnética articulada', cat: 'Metrologia', icone: '📐' },
+  { id: 't-alin-laser', nome: 'Sistema de alinhamento de eixos a laser de precisão', cat: 'Alinhamento', icone: '⚡' },
+  { id: 't-calib-folga', nome: 'Calibrador de folgas tipo lâminas (0,05 a 1,00 mm)', cat: 'Metrologia', icone: '📏' },
+  { id: 't-saca-polia', nome: 'Sacador hidráulico de polias e rolamentos (10 Toneladas)', cat: 'Desmontagem', icone: '🗜️' },
+  { id: 't-ext-gaxeta', nome: 'Kit extrator flexível de gaxetas com ponta saca-rolha', cat: 'Desmontagem', icone: '🪚' },
+  { id: 't-aquec-ind', nome: 'Aquecedor indutivo para montagem de rolamentos a quente', cat: 'Montagem', icone: '⚙️' },
+  { id: 't-bomba-graxa', nome: 'Bomba manual de graxa com mangueira de alta pressão', cat: 'Lubrificação', icone: '🛢️' },
+  { id: 't-lapidador', nome: 'Kit lapidador de sedes com pastas diamantadas (15µm e 6µm)', cat: 'Usinagem', icone: '💎' },
+  { id: 't-marreta-bronze', nome: 'Marreta de bronze anti-faiscante 1,5 kg', cat: 'Desmontagem', icone: '🔨' }
+];
+
+let ferramentasSelecionadasRelatorio = [];
+
+function inicializarBuscadorFerramentas() {
+  const containerChips = document.getElementById('ferramentas_chips_rapidos');
+  if (!containerChips) return;
+  
+  containerChips.innerHTML = LISTA_FERRAMENTAS_CATALOGO.map(f => `
+    <span class="ferramenta-chip" onclick="adicionarFerramentaSelecionada('${f.nome}')" title="Clique para adicionar ao relatório">
+      ${f.icone} ${f.nome}
+    </span>
+  `).join('');
+}
+
+function filtrarFerramentasInput(termo) {
+  const containerChips = document.getElementById('ferramentas_chips_rapidos');
+  if (!containerChips) return;
+  const termoNorm = (termo || '').toLowerCase().trim();
+  
+  const filtradas = LISTA_FERRAMENTAS_CATALOGO.filter(f => 
+    !termoNorm || f.nome.toLowerCase().includes(termoNorm) || f.cat.toLowerCase().includes(termoNorm)
+  );
+  
+  if (filtradas.length === 0) {
+    containerChips.innerHTML = '<span style="color:#64748b; font-size:12px; padding:4px;">Nenhuma ferramenta pré-definida encontrada. Você pode digitar diretamente no campo abaixo.</span>';
+    return;
+  }
+  
+  containerChips.innerHTML = filtradas.map(f => `
+    <span class="ferramenta-chip" onclick="adicionarFerramentaSelecionada('${f.nome}')" title="Clique para adicionar">
+      ${f.icone} ${f.nome}
+    </span>
+  `).join('');
+}
+
+function adicionarFerramentaSelecionada(nomeFerramenta) {
+  if (!nomeFerramenta) return;
+  const limpo = nomeFerramenta.replace(/^[•\-\*]\s*/, '').trim();
+  if (!ferramentasSelecionadasRelatorio.includes(limpo)) {
+    ferramentasSelecionadasRelatorio.push(limpo);
+    atualizarAreaFerramentasRelatorio();
+  }
+}
+
+function removerFerramentaSelecionada(idx) {
+  if (idx >= 0 && idx < ferramentasSelecionadasRelatorio.length) {
+    ferramentasSelecionadasRelatorio.splice(idx, 1);
+    atualizarAreaFerramentasRelatorio();
+  }
+}
+
+function atualizarAreaFerramentasRelatorio() {
+  const textarea = document.getElementById('rel_ferramentas');
+  const containerTags = document.getElementById('ferramentas_tags_container');
+  
+  if (textarea) {
+    textarea.value = ferramentasSelecionadasRelatorio.map(f => '• ' + f).join('\n');
+  }
+  
+  if (containerTags) {
+    if (ferramentasSelecionadasRelatorio.length === 0) {
+      containerTags.innerHTML = '<span style="font-size:12px; color:#64748b;">Nenhuma ferramenta selecionada ainda. Clique nos atalhos acima ou digite no campo.</span>';
+    } else {
+      containerTags.innerHTML = ferramentasSelecionadasRelatorio.map((f, i) => `
+        <span class="ferramenta-tag-item">
+          <span>🔧 ${f}</span>
+          <span class="btn-remover-tag" onclick="removerFerramentaSelecionada(${i})" title="Remover ferramenta">✕</span>
+        </span>
+      `).join('');
+    }
+  }
+}
+
+function sincronizarTextareaFerramentas() {
+  const textarea = document.getElementById('rel_ferramentas');
+  if (!textarea) return;
+  const linhas = textarea.value.split('\n')
+    .map(l => l.replace(/^[•\-\*]\s*/, '').trim())
+    .filter(l => l.length > 0);
+  ferramentasSelecionadasRelatorio = [...new Set(linhas)];
+  const containerTags = document.getElementById('ferramentas_tags_container');
+  if (containerTags) {
+    containerTags.innerHTML = ferramentasSelecionadasRelatorio.map((f, i) => `
+      <span class="ferramenta-tag-item">
+        <span>🔧 ${f}</span>
+        <span class="btn-remover-tag" onclick="removerFerramentaSelecionada(${i})" title="Remover ferramenta">✕</span>
+      </span>
+    `).join('');
+  }
+}
+
+// 2. GALERIA INTELIGENTE DE FOTOS COM REMOÇÃO E TROCA INDIVIDUAL
+const estadoFotosRelatorio = {
+  slot1: null, // Antes / Local
+  slot2: null, // Desmontagem / Tampa
+  slot3: null, // Anomalia / Causa
+  slot4: null, // Sobressalentes / Peças Novas
+  slot5: null, // Montagem Concluída / Depois
+  extras: []   // Fotos complementares adicionais
+};
+
+const NOMES_SLOTS_FOTOS = {
+  slot1: { titulo: 'Foto 1: Equipamento no Local (Condição Inicial / Antes)', padrao: 'antes' },
+  slot2: { titulo: 'Foto 2: Desmontagem & Tampa / Inspeção Interna', padrao: 'tampa' },
+  slot3: { titulo: 'Foto 3: Componentes Danificados / Anomalia', padrao: 'anomalia' },
+  slot4: { titulo: 'Foto 4: Sobressalentes & Peças Novas / Limpas', padrao: 'pecas' },
+  slot5: { titulo: 'Foto 5: Montagem Concluída (Depois / Final)', padrao: 'depois' }
+};
+
+function processarFotoSlot(slotKey, inputEl) {
+  if (!inputEl || !inputEl.files || !inputEl.files[0]) return;
+  const file = inputEl.files[0];
+  const reader = new FileReader();
+  
+  reader.onload = function(e) {
+    estadoFotosRelatorio[slotKey] = {
+      file: file,
+      dataUrl: e.target.result,
+      nome: file.name
+    };
+    renderizarSlotFoto(slotKey);
+  };
+  reader.readAsDataURL(file);
+}
+
+function renderizarSlotFoto(slotKey) {
+  const container = document.getElementById('slot_box_' + slotKey);
+  if (!container) return;
+  const dados = estadoFotosRelatorio[slotKey];
+  const infoSlot = NOMES_SLOTS_FOTOS[slotKey] || { titulo: 'Foto do Serviço' };
+  
+  if (!dados || !dados.dataUrl) {
+    // Estado vazio: exibe área de upload com botões de câmera e galeria
+    container.innerHTML = `
+      <div class="foto-slot-header">
+        <span class="foto-slot-badge">${infoSlot.titulo}</span>
+      </div>
+      <div class="foto-slot-dropzone" onclick="document.getElementById('input_file_${slotKey}').click()">
+        <span style="font-size:32px;">📷</span>
+        <b style="color:#38bdf8; font-size:13px;">Tirar Foto ou Escolher Arquivo</b>
+        <span style="font-size:11px; color:#94a3b8;">Clique para abrir a câmera ou galeria</span>
+      </div>
+      <input type="file" accept="image/*" id="input_file_${slotKey}" style="display:none;" onchange="processarFotoSlot('${slotKey}', this)">
+    `;
+  } else {
+    // Estado preenchido: exibe miniatura em alta definição, nome e botões de retirar/trocar
+    container.innerHTML = `
+      <div class="foto-slot-header">
+        <span class="foto-slot-badge" style="background:rgba(16,185,129,0.15); color:#34d399; border-color:rgba(16,185,129,0.3);">✔ ${infoSlot.titulo}</span>
+      </div>
+      <div class="foto-slot-preview-box">
+        <img src="${dados.dataUrl}" class="foto-slot-preview-img" alt="${infoSlot.titulo}">
+      </div>
+      <div style="font-size:11px; color:#94a3b8; margin-top:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
+        📁 ${dados.nome || 'foto_capturada.jpg'}
+      </div>
+      <div class="foto-slot-actions">
+        <button type="button" class="btn-foto-acao btn-foto-trocar" onclick="document.getElementById('input_file_${slotKey}').click()">
+          🔄 Trocar Foto
+        </button>
+        <button type="button" class="btn-foto-acao btn-foto-remover" onclick="removerFotoSlot('${slotKey}')">
+          🗑️ Retirar Foto
+        </button>
+      </div>
+      <input type="file" accept="image/*" id="input_file_${slotKey}" style="display:none;" onchange="processarFotoSlot('${slotKey}', this)">
+    `;
+  }
+}
+
+function removerFotoSlot(slotKey) {
+  estadoFotosRelatorio[slotKey] = null;
+  const inputEl = document.getElementById('input_file_' + slotKey);
+  if (inputEl) inputEl.value = '';
+  renderizarSlotFoto(slotKey);
+}
+
+function processarFotosExtrasMultiplas(inputEl) {
+  if (!inputEl || !inputEl.files || inputEl.files.length === 0) return;
+  const arquivos = Array.from(inputEl.files);
+  
+  arquivos.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      estadoFotosRelatorio.extras.push({
+        file: file,
+        dataUrl: e.target.result,
+        nome: file.name
+      });
+      renderizarFotosExtras();
+    };
+    reader.readAsDataURL(file);
+  });
+  inputEl.value = '';
+}
+
+function removerFotoExtra(idx) {
+  if (idx >= 0 && idx < estadoFotosRelatorio.extras.length) {
+    estadoFotosRelatorio.extras.splice(idx, 1);
+    renderizarFotosExtras();
+  }
+}
+
+function renderizarFotosExtras() {
+  const container = document.getElementById('preview_extras_container');
+  if (!container) return;
+  
+  if (estadoFotosRelatorio.extras.length === 0) {
+    container.innerHTML = '<span style="font-size:12px; color:#64748b;">Nenhuma foto extra anexada.</span>';
+    return;
+  }
+  
+  container.innerHTML = estadoFotosRelatorio.extras.map((ex, i) => `
+    <div style="position:relative; width:110px; border-radius:6px; overflow:hidden; border:1px solid #233e66; background:#060e1a;">
+      <img src="${ex.dataUrl}" style="width:100%; height:80px; object-fit:cover; display:block;">
+      <div style="padding:2px 4px; font-size:10px; color:#94a3b8; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${ex.nome}</div>
+      <button type="button" onclick="removerFotoExtra(${i})" style="position:absolute; top:2px; right:2px; background:rgba(220,38,38,0.85); color:#fff; border:none; border-radius:4px; font-size:10px; padding:2px 5px; cursor:pointer;" title="Remover foto">✕</button>
+    </div>
+  `).join('');
+}
+
+// 3. ENGINE TÉCNICO 3D ISOMÉTRICO DO EQUIPAMENTO & UPLOAD DE DESENHO
+let modoDesenhoTecnicoAtivo = '3d'; // '3d' | 'upload' | 'blueprint'
+let desenhoTecnicoCustomDataUrl = null;
+let equipamento3DAtual = 'filtro_cilindrico';
+let anguloRotacao3D = 35;
+let zoomNivel3D = 1.0;
+let modoCorte3D = 'isometrico'; // 'isometrico' | 'corte' | 'cotas'
+
+function alternarAbaDesenhoTecnico(modo) {
+  modoDesenhoTecnicoAtivo = modo;
+  ['3d', 'upload', 'blueprint'].forEach(m => {
+    const btn = document.getElementById('desenho_tab_btn_' + m);
+    const view = document.getElementById('desenho_view_' + m);
+    if (btn) btn.classList.toggle('active', m === modo);
+    if (view) view.style.display = (m === modo ? 'block' : 'none');
+  });
+  
+  if (modo === '3d') {
+    atualizarModelo3DAutomatico();
+  }
+}
+
+function processarUploadDesenhoCustom(inputEl) {
+  if (!inputEl || !inputEl.files || !inputEl.files[0]) return;
+  const file = inputEl.files[0];
+  const reader = new FileReader();
+  
+  reader.onload = function(e) {
+    desenhoTecnicoCustomDataUrl = e.target.result;
+    renderizarPreviewDesenhoUpload(file.name);
+  };
+  reader.readAsDataURL(file);
+}
+
+function renderizarPreviewDesenhoUpload(nomeArquivo) {
+  const container = document.getElementById('desenho_upload_preview_area');
+  if (!container) return;
+  
+  if (!desenhoTecnicoCustomDataUrl) {
+    container.innerHTML = `
+      <div class="foto-slot-dropzone" onclick="document.getElementById('input_desenho_arquivo').click()" style="min-height:180px;">
+        <span style="font-size:36px;">📐</span>
+        <b style="color:#38bdf8; font-size:14px;">Selecionar Arquivo de Desenho Técnico</b>
+        <span style="font-size:11.5px; color:#94a3b8;">Suporta imagens (PNG, JPG, SVG), plantas digitalizadas e pranchas CAD</span>
+      </div>
+      <input type="file" accept="image/*,.pdf" id="input_desenho_arquivo" style="display:none;" onchange="processarUploadDesenhoCustom(this)">
+    `;
+  } else {
+    container.innerHTML = `
+      <div style="background:#091526; border:1px solid #1c3559; border-radius:8px; padding:12px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <span style="font-size:12px; font-weight:800; color:#38bdf8;">✔ ARQUIVO DE DESENHO TÉCNICO CARREGADO</span>
+          <span style="font-size:11px; color:#94a3b8;">${nomeArquivo || 'desenho_tecnico.png'}</span>
+        </div>
+        <div style="width:100%; max-height:220px; overflow:hidden; border-radius:6px; background:#000; display:flex; align-items:center; justify-content:center;">
+          <img src="${desenhoTecnicoCustomDataUrl}" style="max-width:100%; max-height:220px; object-fit:contain;" alt="Desenho Técnico">
+        </div>
+        <div style="display:flex; gap:8px; margin-top:10px;">
+          <button type="button" class="button secondary" style="font-size:12px; padding:6px 12px; margin:0;" onclick="document.getElementById('input_desenho_arquivo').click()">
+            🔄 Trocar Arquivo
+          </button>
+          <button type="button" class="button" style="background:#dc2626; border-color:#ef4444; font-size:12px; padding:6px 12px; margin:0;" onclick="removerDesenhoCustom()">
+            🗑️ Remover / Refazer Desenho
+          </button>
+        </div>
+      </div>
+      <input type="file" accept="image/*,.pdf" id="input_desenho_arquivo" style="display:none;" onchange="processarUploadDesenhoCustom(this)">
+    `;
+  }
+}
+
+function removerDesenhoCustom() {
+  desenhoTecnicoCustomDataUrl = null;
+  const input = document.getElementById('input_desenho_arquivo');
+  if (input) input.value = '';
+  renderizarPreviewDesenhoUpload('');
+}
+
+// RENDERIZADOR 3D TÉCNICO EM CANVAS
+function renderizarDesenhoTecnico3DCanvas() {
+  const canvas = document.getElementById('canvas_desenho_3d');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width;
+  const h = canvas.height;
+  
+  ctx.clearRect(0, 0, w, h);
+  
+  // Fundo técnico milimetrado sutil
+  ctx.fillStyle = '#060f1c';
+  ctx.fillRect(0, 0, w, h);
+  
+  ctx.strokeStyle = 'rgba(30, 58, 95, 0.25)';
+  ctx.lineWidth = 1;
+  const gridStep = 20;
+  for (let x = 0; x < w; x += gridStep) {
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+  }
+  for (let y = 0; y < h; y += gridStep) {
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+  }
+  
+  ctx.save();
+  ctx.translate(w / 2, h / 2 + 10);
+  ctx.scale(zoomNivel3D, zoomNivel3D);
+  
+  const tipo = equipamento3DAtual || 'filtro_cilindrico';
+  
+  if (tipo.includes('gaveta')) {
+    desenharValvulaGaveta3D(ctx);
+  } else if (tipo.includes('globo')) {
+    desenharValvulaGlobo3D(ctx);
+  } else if (tipo.includes('esfera')) {
+    desenharValvulaEsfera3D(ctx);
+  } else if (tipo.includes('borboleta')) {
+    desenharValvulaBorboleta3D(ctx);
+  } else if (tipo.includes('retencao')) {
+    desenharValvulaRetencao3D(ctx);
+  } else if (tipo.includes('psv')) {
+    desenharValvulaPSV3D(ctx);
+  } else if (tipo.includes('centrifuga')) {
+    desenharBombaCentrifuga3D(ctx);
+  } else if (tipo.includes('engrenagem') || tipo.includes('engrenagens')) {
+    desenharBombaEngrenagens3D(ctx);
+  } else if (tipo.includes('motor')) {
+    desenharMotorEletrico3D(ctx);
+  } else {
+    desenharFiltroCilindrico3D(ctx);
+  }
+  
+  ctx.restore();
+  
+  // Rótulo técnico normatizado no canto
+  ctx.fillStyle = '#38bdf8';
+  ctx.font = 'bold 11px sans-serif';
+  ctx.fillText(`📐 VISTA TÉCNICA 3D: ${tipo.toUpperCase().replace(/_/g, ' ')}`, 14, 20);
+  ctx.fillStyle = '#94a3b8';
+  ctx.font = '10px sans-serif';
+  ctx.fillText(`Projeção Isométrica • Normas ABNT/ASME/API • Modo: ${modoCorte3D.toUpperCase()}`, 14, 34);
+}
+
+// Modelos Técnicos 3D em Canvas:
+function desenharFiltroCilindrico3D(ctx) {
+  // Alça superior
+  ctx.strokeStyle = '#38bdf8';
+  ctx.lineWidth = 3.5;
+  ctx.beginPath();
+  ctx.arc(0, -90, 24, Math.PI, 0);
+  ctx.stroke();
+  
+  // Anel flangeado do topo
+  ctx.fillStyle = '#1e3a5f';
+  ctx.strokeStyle = '#7dd3fc';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.ellipse(0, -65, 45, 14, 0, 0, 2 * Math.PI);
+  ctx.fill();
+  ctx.stroke();
+  
+  // Corpo cilíndrico perfurado
+  const grad = ctx.createLinearGradient(-45, 0, 45, 0);
+  grad.addColorStop(0, '#0c1d33');
+  grad.addColorStop(0.3, '#1c3b63');
+  grad.addColorStop(0.7, '#255085');
+  grad.addColorStop(1, '#0c1d33');
+  
+  ctx.fillStyle = grad;
+  ctx.fillRect(-40, -65, 80, 130);
+  ctx.strokeRect(-40, -65, 80, 130);
+  
+  // Furos da tela perfurada
+  ctx.fillStyle = '#7dd3fc';
+  for (let y = -55; y <= 55; y += 12) {
+    for (let x = -32; x <= 32; x += 11) {
+      ctx.beginPath();
+      ctx.arc(x, y, 1.8, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+  }
+  
+  // Base fechada
+  ctx.fillStyle = '#1e3a5f';
+  ctx.beginPath();
+  ctx.ellipse(0, 65, 40, 12, 0, 0, 2 * Math.PI);
+  ctx.fill();
+  ctx.stroke();
+  
+  // Linha de cota de altura (263 mm)
+  ctx.strokeStyle = '#facc15';
+  ctx.fillStyle = '#facc15';
+  ctx.lineWidth = 1.2;
+  ctx.beginPath();
+  ctx.moveTo(65, -90); ctx.lineTo(65, 75);
+  ctx.moveTo(60, -90); ctx.lineTo(70, -90);
+  ctx.moveTo(60, 75); ctx.lineTo(70, 75);
+  ctx.stroke();
+  ctx.font = 'bold 11px sans-serif';
+  ctx.fillText('263 mm', 72, 0);
+  
+  // Cota de diâmetro (Ø 70 mm)
+  ctx.beginPath();
+  ctx.moveTo(-40, 95); ctx.lineTo(40, 95);
+  ctx.moveTo(-40, 90); ctx.lineTo(-40, 100);
+  ctx.moveTo(40, 90); ctx.lineTo(40, 100);
+  ctx.stroke();
+  ctx.fillText('Ø 70 mm', -20, 112);
+}
+
+function desenharValvulaGaveta3D(ctx) {
+  // Volante superior
+  ctx.strokeStyle = '#ef4444';
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.ellipse(0, -110, 48, 12, 0, 0, 2 * Math.PI);
+  ctx.stroke();
+  
+  // Raios do volante
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(-48, -110); ctx.lineTo(48, -110);
+  ctx.moveTo(0, -122); ctx.lineTo(0, -98);
+  ctx.stroke();
+  
+  // Haste roscada ACME
+  ctx.strokeStyle = '#e2e8f0';
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.moveTo(0, -110); ctx.lineTo(0, -35);
+  ctx.stroke();
+  
+  // Castelo (Bonnet)
+  ctx.fillStyle = '#1e3a5f';
+  ctx.strokeStyle = '#38bdf8';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(-24, -35); ctx.lineTo(24, -35);
+  ctx.lineTo(36, 10); ctx.lineTo(-36, 10);
+  ctx.closePath();
+  ctx.fill(); ctx.stroke();
+  
+  // Corpo da válvula com flanges
+  ctx.fillStyle = '#0f2744';
+  ctx.fillRect(-85, 10, 170, 50);
+  ctx.strokeRect(-85, 10, 170, 50);
+  
+  // Flange esquerda e direita
+  ctx.fillStyle = '#1e3a5f';
+  ctx.fillRect(-95, -5, 16, 80);
+  ctx.strokeRect(-95, -5, 16, 80);
+  ctx.fillRect(79, -5, 16, 80);
+  ctx.strokeRect(79, -5, 16, 80);
+  
+  // Cunha interna visível em corte
+  ctx.fillStyle = '#f59e0b';
+  ctx.beginPath();
+  ctx.moveTo(-16, 15); ctx.lineTo(16, 15);
+  ctx.lineTo(8, 48); ctx.lineTo(-8, 48);
+  ctx.closePath();
+  ctx.fill(); ctx.stroke();
+  
+  // Cotas
+  ctx.fillStyle = '#facc15';
+  ctx.strokeStyle = '#facc15';
+  ctx.font = 'bold 10px sans-serif';
+  ctx.fillText('API 600 • DN 150 (6")', -50, 85);
+  ctx.fillText('Classe 300#', 15, 85);
+}
+
+function desenharValvulaGlobo3D(ctx) {
+  // Volante
+  ctx.strokeStyle = '#38bdf8';
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.ellipse(0, -100, 42, 11, 0, 0, 2 * Math.PI);
+  ctx.stroke();
+  
+  // Haste
+  ctx.strokeStyle = '#f1f5f9';
+  ctx.lineWidth = 3.5;
+  ctx.beginPath(); ctx.moveTo(0, -100); ctx.lineTo(0, -30); ctx.stroke();
+  
+  // Castelo
+  ctx.fillStyle = '#1e3a5f'; ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(-20, -30); ctx.lineTo(20, -30); ctx.lineTo(30, 5); ctx.lineTo(-30, 5);
+  ctx.closePath(); ctx.fill(); ctx.stroke();
+  
+  // Corpo globular em S
+  ctx.beginPath();
+  ctx.arc(0, 30, 36, 0, 2 * Math.PI);
+  ctx.fillStyle = '#0e233d'; ctx.fill(); ctx.stroke();
+  
+  // Flanges
+  ctx.fillStyle = '#1e3a5f';
+  ctx.fillRect(-80, 5, 16, 55); ctx.strokeRect(-80, 5, 16, 55);
+  ctx.fillRect(64, 5, 16, 55); ctx.strokeRect(64, 5, 16, 55);
+  
+  // Plug cônico
+  ctx.fillStyle = '#10b981';
+  ctx.beginPath();
+  ctx.moveTo(-12, 18); ctx.lineTo(12, 18); ctx.lineTo(0, 36);
+  ctx.closePath(); ctx.fill();
+  
+  ctx.fillStyle = '#facc15';
+  ctx.font = 'bold 10px sans-serif';
+  ctx.fillText('BS 1873 • Sede Cônica Stellite', -65, 80);
+}
+
+function desenharValvulaEsfera3D(ctx) {
+  // Alavanca 90 graus
+  ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 5;
+  ctx.beginPath(); ctx.moveTo(0, -60); ctx.lineTo(80, -60); ctx.stroke();
+  ctx.fillStyle = '#ef4444';
+  ctx.beginPath(); ctx.arc(80, -60, 6, 0, 2 * Math.PI); ctx.fill();
+  
+  // Haste superior
+  ctx.strokeStyle = '#e2e8f0'; ctx.lineWidth = 6;
+  ctx.beginPath(); ctx.moveTo(0, -60); ctx.lineTo(0, -15); ctx.stroke();
+  
+  // Corpo esférico
+  ctx.fillStyle = '#132d4e'; ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.arc(0, 25, 42, 0, 2 * Math.PI); ctx.fill(); ctx.stroke();
+  
+  // Esfera usinada central
+  ctx.fillStyle = '#38bdf8';
+  ctx.beginPath(); ctx.arc(0, 25, 26, 0, 2 * Math.PI); ctx.fill();
+  
+  // Orifício de passagem plena
+  ctx.fillStyle = '#060e1a';
+  ctx.beginPath(); ctx.ellipse(0, 25, 14, 22, 0, 0, 2 * Math.PI); ctx.fill();
+  
+  // Flanges
+  ctx.fillStyle = '#1e3a5f';
+  ctx.fillRect(-85, 0, 16, 50); ctx.strokeRect(-85, 0, 16, 50);
+  ctx.fillRect(69, 0, 16, 50); ctx.strokeRect(69, 0, 16, 50);
+  
+  ctx.fillStyle = '#facc15';
+  ctx.font = 'bold 10px sans-serif';
+  ctx.fillText('API 6D • Passagem Plena 1/4 Volta', -70, 85);
+}
+
+function desenharValvulaBorboleta3D(ctx) {
+  // Redutor manual superior
+  ctx.fillStyle = '#1e3a5f'; ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 2;
+  ctx.fillRect(-22, -85, 44, 30); ctx.strokeRect(-22, -85, 44, 30);
+  
+  // Volante
+  ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.arc(35, -70, 14, 0, 2 * Math.PI); ctx.stroke();
+  
+  // Eixo vertical
+  ctx.strokeStyle = '#e2e8f0'; ctx.lineWidth = 4;
+  ctx.beginPath(); ctx.moveTo(0, -55); ctx.lineTo(0, 75); ctx.stroke();
+  
+  // Corpo estreito tipo Wafer
+  ctx.fillStyle = '#0f2744';
+  ctx.beginPath(); ctx.arc(0, 15, 52, 0, 2 * Math.PI); ctx.fill(); ctx.stroke();
+  
+  // Disco lenticular girado em ângulo
+  ctx.fillStyle = '#38bdf8';
+  ctx.beginPath(); ctx.ellipse(0, 15, 16, 46, Math.PI / 6, 0, 2 * Math.PI); ctx.fill();
+  
+  ctx.fillStyle = '#facc15';
+  ctx.font = 'bold 10px sans-serif';
+  ctx.fillText('API 609 • Tipo Wafer • Disco CF8M', -70, 85);
+}
+
+function desenharValvulaRetencao3D(ctx) {
+  // Tampa de inspeção
+  ctx.fillStyle = '#1e3a5f'; ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 2;
+  ctx.fillRect(-35, -25, 70, 16); ctx.strokeRect(-35, -25, 70, 16);
+  
+  // Corpo robusto
+  ctx.fillStyle = '#0e243d';
+  ctx.fillRect(-80, -10, 160, 55); ctx.strokeRect(-80, -10, 160, 55);
+  
+  // Portinhola articulada inclinada
+  ctx.strokeStyle = '#e2e8f0'; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(-15, -10); ctx.lineTo(15, 25); ctx.stroke();
+  ctx.fillStyle = '#10b981';
+  ctx.beginPath(); ctx.ellipse(15, 25, 8, 22, -Math.PI / 4, 0, 2 * Math.PI); ctx.fill();
+  
+  // Seta de fluxo
+  ctx.strokeStyle = '#38bdf8'; ctx.fillStyle = '#38bdf8'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(-40, 20); ctx.lineTo(0, 20); ctx.lineTo(-6, 14); ctx.stroke();
+  
+  // Flanges
+  ctx.fillStyle = '#1e3a5f';
+  ctx.fillRect(-92, -20, 16, 75); ctx.strokeRect(-92, -20, 16, 75);
+  ctx.fillRect(76, -20, 16, 75); ctx.strokeRect(76, -20, 16, 75);
+  
+  ctx.fillStyle = '#facc15'; ctx.font = 'bold 10px sans-serif';
+  ctx.fillText('API 594 • Swing Check Anti-Golpe', -65, 75);
+}
+
+function desenharValvulaPSV3D(ctx) {
+  // Capuz com alavanca de teste
+  ctx.strokeStyle = '#ef4444'; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(0, -115); ctx.lineTo(40, -130); ctx.stroke();
+  ctx.fillStyle = '#1e3a5f'; ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 2;
+  ctx.fillRect(-18, -115, 36, 20); ctx.strokeRect(-18, -115, 36, 20);
+  
+  // Castelo aberto com mola helicoidal visível
+  ctx.strokeRect(-24, -95, 48, 65);
+  ctx.strokeStyle = '#f59e0b'; ctx.lineWidth = 3.5;
+  ctx.beginPath();
+  for (let y = -90; y <= -35; y += 7) {
+    ctx.lineTo(y % 14 === 0 ? 16 : -16, y);
+  }
+  ctx.stroke();
+  
+  // Bocal angular de descarga
+  ctx.fillStyle = '#0f2744'; ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(-25, -30); ctx.lineTo(25, -30);
+  ctx.lineTo(25, 0); ctx.lineTo(70, 0); ctx.lineTo(70, 30); ctx.lineTo(25, 30);
+  ctx.lineTo(25, 65); ctx.lineTo(-25, 65);
+  ctx.closePath(); ctx.fill(); ctx.stroke();
+  
+  // Flange de entrada inferior
+  ctx.fillStyle = '#1e3a5f';
+  ctx.fillRect(-35, 65, 70, 15); ctx.strokeRect(-35, 65, 70, 15);
+  // Flange de escape lateral
+  ctx.fillRect(70, -5, 15, 40); ctx.strokeRect(70, -5, 15, 40);
+  
+  ctx.fillStyle = '#facc15'; ctx.font = 'bold 10px sans-serif';
+  ctx.fillText('ASME VIII • NR-13 • Pop Action', -65, 95);
+}
+
+function desenharBombaCentrifuga3D(ctx) {
+  // Carcaça da voluta espiral
+  ctx.fillStyle = '#102a4a'; ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 2.5;
+  ctx.beginPath(); ctx.arc(-20, 10, 52, 0, 2 * Math.PI); ctx.fill(); ctx.stroke();
+  
+  // Bocal de descarga superior vertical
+  ctx.fillStyle = '#1e3a5f';
+  ctx.fillRect(-35, -65, 30, 45); ctx.strokeRect(-35, -65, 30, 45);
+  ctx.fillRect(-45, -75, 50, 12); ctx.strokeRect(-45, -75, 50, 12);
+  
+  // Bocal de sucção axial central
+  ctx.fillStyle = '#38bdf8';
+  ctx.beginPath(); ctx.arc(-20, 10, 22, 0, 2 * Math.PI); ctx.fill();
+  ctx.fillStyle = '#060e1a';
+  ctx.beginPath(); ctx.arc(-20, 10, 14, 0, 2 * Math.PI); ctx.fill();
+  
+  // Suporte do mancal e eixo
+  ctx.fillStyle = '#1e3a5f'; ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 2;
+  ctx.fillRect(32, -5, 75, 38); ctx.strokeRect(32, -5, 75, 38);
+  
+  // Ponta do eixo
+  ctx.fillStyle = '#e2e8f0';
+  ctx.fillRect(107, 6, 20, 16); ctx.strokeRect(107, 6, 20, 16);
+  
+  // Base de apoio
+  ctx.fillStyle = '#0a1626';
+  ctx.fillRect(-60, 62, 170, 16); ctx.strokeRect(-60, 62, 170, 16);
+  
+  ctx.fillStyle = '#facc15'; ctx.font = 'bold 10px sans-serif';
+  ctx.fillText('API 610 (OH2) • Selo Cartucho Plan 11', -60, 95);
+}
+
+function desenharBombaEngrenagens3D(ctx) {
+  // Carcaça dupla
+  ctx.fillStyle = '#102a4a'; ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(-22, 0, 36, 0, 2 * Math.PI);
+  ctx.arc(22, 0, 36, 0, 2 * Math.PI);
+  ctx.fill(); ctx.stroke();
+  
+  // Engrenagens motriz e movida
+  ctx.fillStyle = '#38bdf8';
+  ctx.beginPath(); ctx.arc(-22, 0, 26, 0, 2 * Math.PI); ctx.fill();
+  ctx.beginPath(); ctx.arc(22, 0, 26, 0, 2 * Math.PI); ctx.fill();
+  
+  // Dentes em corte
+  ctx.strokeStyle = '#060e1a'; ctx.lineWidth = 2;
+  for (let a = 0; a < Math.PI * 2; a += Math.PI / 6) {
+    ctx.beginPath();
+    ctx.moveTo(-22 + Math.cos(a)*18, Math.sin(a)*18);
+    ctx.lineTo(-22 + Math.cos(a)*28, Math.sin(a)*28);
+    ctx.moveTo(22 + Math.cos(a)*18, Math.sin(a)*18);
+    ctx.lineTo(22 + Math.cos(a)*28, Math.sin(a)*28);
+    ctx.stroke();
+  }
+  
+  ctx.fillStyle = '#facc15'; ctx.font = 'bold 10px sans-serif';
+  ctx.fillText('API 676 • Deslocamento Positivo', -60, 60);
+}
+
+function desenharMotorEletrico3D(ctx) {
+  // Carcaça aletada
+  const gradM = ctx.createLinearGradient(0, -45, 0, 45);
+  gradM.addColorStop(0, '#102d52');
+  gradM.addColorStop(0.5, '#1e487d');
+  gradM.addColorStop(1, '#0c1f38');
+  ctx.fillStyle = gradM; ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 2;
+  ctx.fillRect(-65, -45, 110, 90); ctx.strokeRect(-65, -45, 110, 90);
+  
+  // Aletas de refrigeração
+  ctx.strokeStyle = '#7dd3fc'; ctx.lineWidth = 1.5;
+  for (let x = -58; x <= 38; x += 10) {
+    ctx.beginPath(); ctx.moveTo(x, -45); ctx.lineTo(x, 45); ctx.stroke();
+  }
+  
+  // Caixa de ligação superior
+  ctx.fillStyle = '#1e3a5f'; ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 1.5;
+  ctx.fillRect(-25, -65, 35, 20); ctx.strokeRect(-25, -65, 35, 20);
+  
+  // Capa do ventilador traseiro
+  ctx.fillStyle = '#0b192c';
+  ctx.fillRect(-92, -42, 27, 84); ctx.strokeRect(-92, -42, 27, 84);
+  
+  // Ponta do eixo com rasgo de chaveta
+  ctx.fillStyle = '#f1f5f9';
+  ctx.fillRect(45, -12, 36, 24); ctx.strokeRect(45, -12, 36, 24);
+  ctx.fillStyle = '#475569';
+  ctx.fillRect(55, -12, 18, 5);
+  
+  // Pés de fixação
+  ctx.fillStyle = '#1e3a5f';
+  ctx.fillRect(-55, 45, 22, 14);
+  ctx.fillRect(15, 45, 22, 14);
+  
+  ctx.fillStyle = '#facc15'; ctx.font = 'bold 10px sans-serif';
+  ctx.fillText('NBR 17094 • IR3 Premium • IP55/IP66', -75, 78);
+}
+
+function atualizarModelo3DAutomatico() {
+  const nomeEquip = (document.getElementById('rel_equip')?.value || '').toLowerCase();
+  const tag = (document.getElementById('rel_tag')?.value || '').toLowerCase();
+  const combo = (nomeEquip + ' ' + tag);
+  
+  if (combo.includes('gaveta')) equipamento3DAtual = 'valvula_gaveta';
+  else if (combo.includes('globo')) equipamento3DAtual = 'valvula_globo';
+  else if (combo.includes('esfera')) equipamento3DAtual = 'valvula_esfera';
+  else if (combo.includes('borboleta')) equipamento3DAtual = 'valvula_borboleta';
+  else if (combo.includes('retencao') || combo.includes('retenção')) equipamento3DAtual = 'valvula_retencao';
+  else if (combo.includes('psv') || combo.includes('segurança') || combo.includes('alivio')) equipamento3DAtual = 'valvula_psv';
+  else if (combo.includes('centrifuga') || combo.includes('bomba')) equipamento3DAtual = 'bomba_centrifuga';
+  else if (combo.includes('engrenagem') || combo.includes('engrenagens')) equipamento3DAtual = 'bomba_engrenagens';
+  else if (combo.includes('motor')) equipamento3DAtual = 'motor_eletrico';
+  else equipamento3DAtual = 'filtro_cilindrico';
+  
+  const selectEl = document.getElementById('seletor_modelo_3d');
+  if (selectEl) selectEl.value = equipamento3DAtual;
+  
+  renderizarDesenhoTecnico3DCanvas();
+}
+
+function trocarModelo3DManualmente(novoTipo) {
+  equipamento3DAtual = novoTipo;
+  renderizarDesenhoTecnico3DCanvas();
+}
+
+function ajustarZoom3D(delta) {
+  zoomNivel3D = Math.max(0.6, Math.min(2.0, zoomNivel3D + delta));
+  renderizarDesenhoTecnico3DCanvas();
+}
+
+function aplicarDesenho3DAoRelatorio() {
+  const canvas = document.getElementById('canvas_desenho_3d');
+  if (!canvas) return;
+  desenhoTecnicoDataUrl = canvas.toDataURL('image/png');
+  alert('✔ Desenho Técnico 3D aplicado com sucesso ao relatório oficial!\nEle aparecerá na folha de impressão e visualização A4.');
+}
+
+function refazerDesenho3D() {
+  zoomNivel3D = 1.0;
+  anguloRotacao3D = 35;
+  modoCorte3D = 'isometrico';
+  renderizarDesenhoTecnico3DCanvas();
+}
+
+
+/* ========================================================================== */
+/* INICIALIZAÇÃO DO SISTEMA AVANÇADO DO RELATÓRIO                            */
+/* ========================================================================== */
+window.addEventListener('DOMContentLoaded', () => {
+  try {
+    inicializarBuscadorFerramentas();
+    renderizarDesenhoTecnico3DCanvas();
+    
+    // Auto-atualização de modelo 3D ao digitar nome do equipamento ou TAG
+    document.getElementById('rel_equip')?.addEventListener('input', atualizarModelo3DAutomatico);
+    document.getElementById('rel_tag')?.addEventListener('input', atualizarModelo3DAutomatico);
+  } catch(e) {
+    console.warn('Init relatorio upgrade:', e);
+  }
+});
+
+</script>
 <script>
 /* ===================== LIMPEZA & NORMALIZAÇÃO DE E-MAIL DO ADMIN ===================== */
 try {
@@ -5615,10 +6850,10 @@ function abrirRelatorioA4Modal() {
   document.getElementById('r4_local').innerText = (document.getElementById('rel_local_texto').value.trim() || 'CICLO ÁGUA VAPOR BLOCO 2').toUpperCase();
 
   const servicoVal = document.getElementById('rel_servico_realizado').value.trim();
-  document.getElementById('r4_servico').innerText = servicoVal || 'Realizada limpeza do filtro do sistema de atemperação, com remoção de resíduos e impurezas acumuladas, visando manter a adequada passagem do fluido e o correto funcionamento do sistema.';
+  document.getElementById('r4_servico').innerText = servicoVal || 'Realizada manutenção preventiva/corretiva no equipamento, com inspeção e limpeza de componentes, visando manter a perfeita operabilidade e confiabilidade do sistema.';
 
   const obsVal = document.getElementById('rel_observacao').value.trim();
-  document.getElementById('r4_observacao').innerText = obsVal || 'Após a limpeza, o filtro foi deixado em condições adequadas para operação, contribuindo para a manutenção do fluxo e desempenho do sistema de atemperação.';
+  document.getElementById('r4_observacao').innerText = obsVal || 'Após os serviços executados, o equipamento foi testado e entregue em condições plenas de operação e segurança operacional.';
 
   const listaF = document.getElementById('r4_lista_ferramentas');
   const ferramentasTexto = document.getElementById('rel_ferramentas').value.trim() || '• Chave combinada 22 mm';
@@ -5639,8 +6874,8 @@ function abrirRelatorioA4Modal() {
   } else {
     linhasReg.innerHTML = `
       <div class="r-a4-linha-ponto">1. Bloqueio e despressurização da linha concluídos com sucesso.</div>
-      <div class="r-a4-linha-ponto">2. Remoção da tampa sem deformações no alojamento.</div>
-      <div class="r-a4-linha-ponto">3. Junta de vedação inspecionada e aprovada.</div>
+      <div class="r-a4-linha-ponto">2. Desmontagem e inspeção dimensional sem deformações.</div>
+      <div class="r-a4-linha-ponto">3. Elementos de vedação inspecionados e aprovados conforme norma.</div>
     `;
   }
 
@@ -5662,11 +6897,12 @@ function abrirRelatorioA4Modal() {
     textoCursiva.style.display = 'block';
   }
 
-  const fileAntes = document.getElementById('rel_foto_antes').files[0];
+  // Foto Slot 1: No Equipamento
   const r4ImgEquip = document.getElementById('r4_img_equip');
   const r4EquipPlaceholder = document.getElementById('r4_img_equip_placeholder');
-  if (fileAntes) {
-    r4ImgEquip.src = URL.createObjectURL(fileAntes);
+  const foto1Url = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot1.dataUrl);
+  if (foto1Url) {
+    r4ImgEquip.src = foto1Url;
     r4ImgEquip.style.display = 'block';
     r4EquipPlaceholder.style.display = 'none';
   } else {
@@ -5674,11 +6910,12 @@ function abrirRelatorioA4Modal() {
     r4EquipPlaceholder.style.display = 'block';
   }
 
-  const fileDepois = document.getElementById('rel_foto_depois').files[0];
+  // Foto Slot 2: Desmontagem / Tampa
   const r4ImgTampa = document.getElementById('r4_img_tampa');
   const r4TampaPlaceholder = document.getElementById('r4_img_tampa_placeholder');
-  if (fileDepois) {
-    r4ImgTampa.src = URL.createObjectURL(fileDepois);
+  const foto2Url = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot2.dataUrl);
+  if (foto2Url) {
+    r4ImgTampa.src = foto2Url;
     r4ImgTampa.style.display = 'block';
     r4TampaPlaceholder.style.display = 'none';
   } else {
@@ -5686,16 +6923,45 @@ function abrirRelatorioA4Modal() {
     r4TampaPlaceholder.style.display = 'block';
   }
 
-  const file3D = document.getElementById('rel_foto_3d') ? document.getElementById('rel_foto_3d').files[0] : null;
+  // Foto Slot 4: Peças Limpas / 3D
   const r4Img3D = document.getElementById('r4_img_3d');
   const r43DPlaceholder = document.getElementById('r4_img_3d_placeholder');
-  if (file3D) {
-    r4Img3D.src = URL.createObjectURL(file3D);
+  const foto4Url = (typeof estadoFotosRelatorio !== 'undefined' && (estadoFotosRelatorio.slot4.dataUrl || estadoFotosRelatorio.slot3.dataUrl));
+  if (foto4Url) {
+    r4Img3D.src = foto4Url;
     r4Img3D.style.display = 'block';
     r43DPlaceholder.style.display = 'none';
   } else {
     r4Img3D.style.display = 'none';
     r43DPlaceholder.style.display = 'block';
+  }
+
+  // Fotos Complementares no A4 (Slot 3 Anomalia, Slot 5 Montagem Final e Extras)
+  const galeriaA4 = document.getElementById('r4_galeria_complementar_fotos');
+  const blocoGaleriaA4 = document.getElementById('r4_galeria_complementar_bloco');
+  if (galeriaA4 && blocoGaleriaA4) {
+    galeriaA4.innerHTML = '';
+    const complementares = [];
+    if (typeof estadoFotosRelatorio !== 'undefined') {
+      if (estadoFotosRelatorio.slot3.dataUrl) complementares.push({ url: estadoFotosRelatorio.slot3.dataUrl, rotulo: 'Anomalia / Dano' });
+      if (estadoFotosRelatorio.slot5.dataUrl) complementares.push({ url: estadoFotosRelatorio.slot5.dataUrl, rotulo: 'Montagem Final' });
+      if (estadoFotosRelatorio.extras) {
+        estadoFotosRelatorio.extras.forEach((ex, idx) => {
+          if (ex.dataUrl) complementares.push({ url: ex.dataUrl, rotulo: 'Evidência #' + (idx + 1) });
+        });
+      }
+    }
+    if (complementares.length > 0) {
+      blocoGaleriaA4.style.display = 'block';
+      galeriaA4.innerHTML = complementares.map(c => `
+        <div style="text-align:center; border:1px solid #cbd5e1; border-radius:4px; padding:3px; background:#fff; width:120px;">
+          <img src="${c.url}" alt="${c.rotulo}" style="width:100%; height:75px; object-fit:cover; border-radius:3px; display:block;">
+          <div style="font-size:8.5px; font-weight:bold; color:#1e3a5f; margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${c.rotulo}</div>
+        </div>
+      `).join('');
+    } else {
+      blocoGaleriaA4.style.display = 'none';
+    }
   }
 
   atualizarDesenhoNoA4();
@@ -5712,6 +6978,37 @@ function imprimirRelatorioA4Direto() {
   setTimeout(() => {
     window.print();
   }, 400);
+}
+
+function atualizarDesenhoNoA4(customUrl) {
+  const container = document.getElementById('r4_container_desenho');
+  const titulo = document.getElementById('r4_titulo_desenho');
+  if (!container) return;
+
+  const nomeEquip = (document.getElementById('rel_equip')?.value || 'EQUIPAMENTO').toUpperCase();
+  if (titulo) titulo.innerText = `DESENHO TÉCNICO: ${nomeEquip}`;
+
+  if (customUrl) {
+    container.innerHTML = `<img src="${customUrl}" alt="Desenho Técnico" style="max-height:195px; max-width:100%; object-fit:contain; display:block; margin:auto;">`;
+    return;
+  }
+
+  if (desenhoTecnicoDataUrl) {
+    container.innerHTML = `<img src="${desenhoTecnicoDataUrl}" alt="Desenho Técnico 3D / Isométrico" style="max-height:195px; max-width:100%; object-fit:contain; display:block; margin:auto;">`;
+    return;
+  }
+
+  const canvas3D = document.getElementById('canvas_desenho_3d');
+  if (canvas3D) {
+    try {
+      const url3D = canvas3D.toDataURL('image/png');
+      container.innerHTML = `<img src="${url3D}" alt="Desenho Técnico 3D / Isométrico" style="max-height:195px; max-width:100%; object-fit:contain; display:block; margin:auto;">`;
+      return;
+    } catch(e) {}
+  }
+
+  // Padrão
+  container.innerHTML = `<img src="${DESENHO_TECNICO_OFICIAL_B64}" alt="Desenho Técnico Oficial com Cotas" style="max-height:195px; max-width:100%; object-fit:contain; display:block; margin:auto;">`;
 }
 
 /* ===================== ASSETS REALISTAS OFICIAIS (1:1 COM A FOTO) ===================== */
@@ -5877,6 +7174,13 @@ function alternarAbaRelatorio(aba) {
     if (subNovo) subNovo.style.display = 'block';
     if (subProntos) subProntos.style.display = 'none';
 
+    if (typeof inicializarBuscadorFerramentas === 'function') {
+      inicializarBuscadorFerramentas();
+    }
+    if (typeof renderizarDesenhoTecnico3DCanvas === 'function') {
+      setTimeout(renderizarDesenhoTecnico3DCanvas, 50);
+    }
+
     const campoNum = document.getElementById('rel_num_doc');
     if (campoNum && !campoNum.value.trim()) {
       sincronizarEAtualizarNumRelatorio(false);
@@ -5933,28 +7237,44 @@ function limparFormularioRelatorio(confirmar = false) {
   if (document.getElementById('rel_causa')) document.getElementById('rel_causa').value = '';
   if (document.getElementById('rel_acao')) document.getElementById('rel_acao').value = '';
 
+  // Limpa ferramentas selecionadas e tags
+  if (typeof ferramentasSelecionadasRelatorio !== 'undefined') {
+    ferramentasSelecionadasRelatorio = [];
+    atualizarAreaFerramentasRelatorio();
+  }
+  if (document.getElementById('busca_ferramentas_input')) document.getElementById('busca_ferramentas_input').value = '';
   if (document.getElementById('rel_ferramentas')) document.getElementById('rel_ferramentas').value = '';
+
   if (document.getElementById('rel_observacao')) document.getElementById('rel_observacao').value = '';
   if (document.getElementById('rel_registro_servico')) document.getElementById('rel_registro_servico').value = '';
 
+  // Limpa todos os 5 slots de fotos
+  if (typeof removerFotoSlot === 'function') {
+    ['slot1', 'slot2', 'slot3', 'slot4', 'slot5'].forEach(s => removerFotoSlot(s));
+  }
+  if (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.extras) {
+    estadoFotosRelatorio.extras = [];
+    if (typeof renderizarFotosExtras === 'function') renderizarFotosExtras();
+  }
+
+  // Compatibilidade com inputs legados
   ['rel_foto_antes', 'rel_foto_depois', 'rel_foto_3d', 'rel_desenho_custom', 'rel_fotos_extra'].forEach(id => {
     const input = document.getElementById(id);
     if (input) input.value = '';
   });
-
-  ['preview_antes', 'preview_depois', 'preview_3d', 'preview_custom_desenho'].forEach(id => {
+  ['preview_antes', 'preview_depois', 'preview_3d'].forEach(id => {
     const img = document.getElementById(id);
     if (img) { img.src = ''; img.style.display = 'none'; }
   });
-  const prevExtra = document.getElementById('preview_extra');
-  if (prevExtra) prevExtra.innerHTML = '';
+
+  // Limpa desenho técnico customizado e reativa modelo 3D
+  desenhoTecnicoDataUrl = null;
+  desenhoCustomArquivo = null;
+  if (typeof removerDesenhoCustom === 'function') removerDesenhoCustom();
+  if (typeof refazerDesenho3D === 'function') refazerDesenho3D();
+  if (typeof alternarAbaDesenhoTecnico === 'function') alternarAbaDesenhoTecnico('3d');
 
   limparAssinatura();
-
-  if (document.getElementById('rel_tipo_desenho')) {
-    document.getElementById('rel_tipo_desenho').value = 'filtro_padrao';
-    atualizarOpcaoDesenhoTecnico();
-  }
 
   const elRes = document.getElementById('rel_resultado');
   if (elRes) { elRes.className = 'resultado'; elRes.innerText = ''; }
@@ -6129,40 +7449,42 @@ function renderizarRelatoriosProntos(lista) {
 }
 
 function visualizarRelatorioPronto(id) {
-  const r = relatoriosProntosCache.find(item => item.id === id);
+  relatorioVisualizandoAtualId = id;
+  const userRelKey = getChaveUsuario('relatorios_salvos');
+  const salvos = JSON.parse(localStorage.getItem(userRelKey) || '[]');
+  const r = salvos.find(x => x.id === id);
   if (!r) {
-    alert('Relatório não encontrado!');
+    alert('Relatório não encontrado.');
     return;
   }
 
-  relatorioVisualizandoAtualId = id;
   const btnExcluirA4 = document.getElementById('btn_excluir_a4_modal');
   if (btnExcluirA4) btnExcluirA4.style.display = 'inline-block';
 
   let dia = '04', mes = '09', ano = '26';
-  const dataOrig = r.data || (r.criado_em ? r.criado_em.slice(0, 10) : '');
-  if (dataOrig) {
-    const partes = dataOrig.split('-');
-    if (partes.length === 3) {
-      ano = partes[0].slice(-2);
-      mes = partes[1];
-      dia = partes[2];
+  if (r.criado_em) {
+    const d = new Date(r.criado_em);
+    if (!isNaN(d.getTime())) {
+      dia = String(d.getDate()).padStart(2, '0');
+      mes = String(d.getMonth() + 1).padStart(2, '0');
+      ano = String(d.getFullYear()).slice(-2);
     }
   }
 
   document.getElementById('r4_data').innerText = `${dia}/${mes}/${ano}`;
-  document.getElementById('r4_tag').innerText = r.tag || '28LCE10';
-  document.getElementById('r4_om').innerText = r.om || '2032113859';
-  document.getElementById('r4_num').innerText = r.numDoc || '22155926';
+  document.getElementById('r4_tag').innerText = r.tag || 'TAG-GERAL';
+  document.getElementById('r4_om').innerText = r.om || 'N/A';
+  document.getElementById('r4_num').innerText = r.numDoc || 'N/A';
   document.getElementById('r4_op').innerText = r.op || '10';
   document.getElementById('r4_ass').innerText = (r.ass || 'EDUARDO NORONHA').toUpperCase();
-  document.getElementById('r4_equipe').innerText = (r.equipe || 'EDUARDO NORONHA / 48380712').toUpperCase();
-  document.getElementById('r4_local').innerText = (r.localTexto || 'CICLO ÁGUA VAPOR BLOCO 2').toUpperCase();
-  document.getElementById('r4_servico').innerText = r.servicoRealizado || 'Manutenção técnica executada.';
-  document.getElementById('r4_observacao').innerText = r.observacao || 'Equipamento liberado em condições normais de operação.';
+  document.getElementById('r4_equipe').innerText = (r.equipe || 'EDUARDO NORONHA').toUpperCase();
+  document.getElementById('r4_local').innerText = (r.localTexto || 'PLANTA INDUSTRIAL').toUpperCase();
+
+  document.getElementById('r4_servico').innerText = r.servicoRealizado || r.anomalia || 'Manutenção técnica executada.';
+  document.getElementById('r4_observacao').innerText = r.observacao || 'Equipamento revisado e entregue em condições plenas de operabilidade.';
 
   const listaF = document.getElementById('r4_lista_ferramentas');
-  const ferramentasTexto = r.ferramentas || '• Chave combinada 22 mm';
+  const ferramentasTexto = r.ferramentas || '• Ferramentas padrão de mecânica';
   const linhasF = ferramentasTexto.split('\n').filter(l => l.trim().length > 0);
   listaF.innerHTML = '<ul>' + linhasF.map(f => `<li>${f.replace(/^[•\-\*]\s*/, '')}</li>`).join('') + '</ul>';
 
@@ -6232,6 +7554,35 @@ function visualizarRelatorioPronto(id) {
   } else {
     r4Img3D.style.display = 'none';
     r43DPlaceholder.style.display = 'block';
+  }
+
+  // Galeria de evidências complementares no A4
+  const galeriaA4 = document.getElementById('r4_galeria_complementar_fotos');
+  const blocoGaleriaA4 = document.getElementById('r4_galeria_complementar_bloco');
+  if (galeriaA4 && blocoGaleriaA4) {
+    galeriaA4.innerHTML = '';
+    const complementares = [];
+    if (r.fotoSlot3Url) complementares.push({ url: r.fotoSlot3Url, rotulo: 'Anomalia / Dano' });
+    if (r.fotoSlot5Url) complementares.push({ url: r.fotoSlot5Url, rotulo: 'Montagem Final' });
+    if (r.fotosExtraTexto) {
+      const extras = r.fotosExtraTexto.split('|').filter(Boolean);
+      extras.forEach((u, i) => {
+        if (!complementares.some(c => c.url === u) && u !== r.fotoAntesUrl && u !== r.fotoDepoisUrl && u !== r.foto3DUrl) {
+          complementares.push({ url: u, rotulo: 'Evidência #' + (i + 1) });
+        }
+      });
+    }
+    if (complementares.length > 0) {
+      blocoGaleriaA4.style.display = 'block';
+      galeriaA4.innerHTML = complementares.map(c => `
+        <div style="text-align:center; border:1px solid #cbd5e1; border-radius:4px; padding:3px; background:#fff; width:120px;">
+          <img src="${c.url}" alt="${c.rotulo}" style="width:100%; height:75px; object-fit:cover; border-radius:3px; display:block;">
+          <div style="font-size:8.5px; font-weight:bold; color:#1e3a5f; margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${c.rotulo}</div>
+        </div>
+      `).join('');
+    } else {
+      blocoGaleriaA4.style.display = 'none';
+    }
   }
 
   atualizarDesenhoNoA4(r.desenhoTecnicoUrl);
@@ -6327,32 +7678,70 @@ async function salvarIntervencao() {
   const anomalia = document.getElementById('rel_anomalia').value.trim() || servicoRealizado || 'Manutenção técnica realizada';
   const causa = document.getElementById('rel_causa').value.trim();
   const acao = document.getElementById('rel_acao').value.trim();
-  const fotoAntesFile = document.getElementById('rel_foto_antes').files[0];
-  const fotoDepoisFile = document.getElementById('rel_foto_depois').files[0];
-  const foto3DFile = document.getElementById('rel_foto_3d') ? document.getElementById('rel_foto_3d').files[0] : null;
-  const fotosExtraFiles = Array.from(document.getElementById('rel_fotos_extra').files);
 
+  // Processamento inteligente de fotos dos slots estruturados
   if (el) el.innerText = 'Processando imagens e fotos em alta definição...';
-  let fotoAntesUrl = null;
-  if (fotoAntesFile) {
-    fotoAntesUrl = await uploadFotoSupabase(fotoAntesFile, tag, 'antes');
+
+  const fileSlot1 = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot1.file) || (document.getElementById('rel_foto_slot1')?.files?.[0]) || (document.getElementById('rel_foto_antes')?.files?.[0]);
+  const fileSlot2 = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot2.file) || (document.getElementById('rel_foto_slot2')?.files?.[0]) || (document.getElementById('rel_foto_depois')?.files?.[0]);
+  const fileSlot3 = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot3.file) || (document.getElementById('rel_foto_slot3')?.files?.[0]);
+  const fileSlot4 = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot4.file) || (document.getElementById('rel_foto_slot4')?.files?.[0]) || (document.getElementById('rel_foto_3d')?.files?.[0]);
+  const fileSlot5 = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot5.file) || (document.getElementById('rel_foto_slot5')?.files?.[0]);
+
+  let fotoAntesUrl = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot1.dataUrl) || null;
+  if (fileSlot1) {
+    const up1 = await uploadFotoSupabase(fileSlot1, tag, 'slot1_antes');
+    if (up1) fotoAntesUrl = up1;
   }
-  let fotoDepoisUrl = null;
-  if (fotoDepoisFile) {
-    fotoDepoisUrl = await uploadFotoSupabase(fotoDepoisFile, tag, 'depois');
+
+  let fotoDepoisUrl = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot2.dataUrl) || null;
+  if (fileSlot2) {
+    const up2 = await uploadFotoSupabase(fileSlot2, tag, 'slot2_desmontagem');
+    if (up2) fotoDepoisUrl = up2;
   }
-  let foto3DUrl = null;
-  if (foto3DFile) {
-    foto3DUrl = await uploadFotoSupabase(foto3DFile, tag, '3d');
+
+  let fotoSlot3Url = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot3.dataUrl) || null;
+  if (fileSlot3) {
+    const up3 = await uploadFotoSupabase(fileSlot3, tag, 'slot3_anomalia');
+    if (up3) fotoSlot3Url = up3;
+  }
+
+  let foto3DUrl = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot4.dataUrl) || null;
+  if (fileSlot4) {
+    const up4 = await uploadFotoSupabase(fileSlot4, tag, 'slot4_pecas3d');
+    if (up4) foto3DUrl = up4;
+  }
+
+  let fotoSlot5Url = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot5.dataUrl) || null;
+  if (fileSlot5) {
+    const up5 = await uploadFotoSupabase(fileSlot5, tag, 'slot5_final');
+    if (up5) fotoSlot5Url = up5;
   }
 
   const urlsExtra = [];
-  if (foto3DUrl) urlsExtra.push(foto3DUrl);
-  for (let i = 0; i < fotosExtraFiles.length; i++) {
-    const url = await uploadFotoSupabase(fotosExtraFiles[i], tag, 'extra' + i);
-    if (url) urlsExtra.push(url);
+  if (fotoSlot3Url) urlsExtra.push(fotoSlot3Url);
+  if (fotoSlot5Url) urlsExtra.push(fotoSlot5Url);
+  if (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.extras) {
+    for (let i = 0; i < estadoFotosRelatorio.extras.length; i++) {
+      const it = estadoFotosRelatorio.extras[i];
+      let uEx = it.dataUrl;
+      if (it.file) {
+        const u = await uploadFotoSupabase(it.file, tag, 'extra' + i);
+        if (u) uEx = u;
+      }
+      if (uEx) urlsExtra.push(uEx);
+    }
   }
   const fotosExtraTexto = urlsExtra.length ? urlsExtra.join('|') : null;
+
+  // Garante desenho técnico em alta definição
+  if (!desenhoTecnicoDataUrl) {
+    const canvas3D = document.getElementById('canvas_desenho_3d');
+    if (canvas3D) {
+      try { desenhoTecnicoDataUrl = canvas3D.toDataURL('image/png'); } catch(e) {}
+    }
+  }
+  const desenhoFinal = desenhoTecnicoDataUrl || DESENHO_TECNICO_OFICIAL_B64;
 
   const dadosRelatorioLocal = {
     id: Date.now().toString(),
@@ -6360,9 +7749,11 @@ async function salvarIntervencao() {
     servicoRealizado, ferramentas, observacao, registroServico,
     tipo, urgencia, anomalia, causa, acao,
     fotoAntesUrl, fotoDepoisUrl, foto3DUrl,
-    desenhoTecnicoUrl: (desenhoTecnicoDataUrl || DESENHO_TECNICO_OFICIAL_B64),
+    fotoSlot3Url, fotoSlot5Url,
+    desenhoTecnicoUrl: desenhoFinal,
     ferramentaImgUrl: CHAVE_COMBINADA_22_B64,
     assinaturaDataUrl,
+    fotosExtraTexto,
     usuario_email: userEmail,
     criado_em: new Date().toISOString()
   };
@@ -6458,8 +7849,9 @@ async function salvarIntervencao() {
   }
 
   el.className = 'resultado ok';
-  el.innerText = '✔ Relatório e fotos anexados e salvos com sucesso!\nVocê já pode Visualizar em A4 ou Imprimir/Salvar em PDF.';
+  el.innerText = '✔ Relatório e fotos anexados e salvos com sucesso! Formulário zerado para a próxima intervenção.';
 
+  // Transição automática para Relatórios Prontos e reset 100% sem resíduos
   await carregarRelatoriosProntos();
   alternarAbaRelatorio('prontos');
   limparFormularioRelatorio(false);
