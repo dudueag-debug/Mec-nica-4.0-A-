@@ -2302,6 +2302,252 @@
   color: #94a3b8;
 }
 
+/* ================= APRESENTAÇÃO HOLOGRÁFICA DO ROBÔ IA AO LOGAR ================= */
+.robo-apresentacao-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(3, 8, 18, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 999998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.robo-apresentacao-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.robo-apresentacao-card {
+  width: 100%;
+  max-width: 520px;
+  background: linear-gradient(165deg, rgba(16, 30, 54, 0.98) 0%, rgba(8, 16, 30, 0.99) 100%);
+  border: 1.5px solid #0284c7;
+  border-radius: 22px;
+  box-shadow: 0 0 50px rgba(2, 132, 199, 0.4), 0 25px 50px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  padding: 24px 22px;
+  position: relative;
+  overflow: hidden;
+  animation: slideUpApresentacao 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUpApresentacao {
+  0% { transform: translateY(30px) scale(0.95); opacity: 0; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.robo-apresentacao-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+  padding-bottom: 16px;
+  position: relative;
+}
+
+.robo-apresentacao-avatar-wrap {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  position: relative;
+  flex-shrink: 0;
+  border: 2px solid #00f2fe;
+  box-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
+  background: #061120;
+  overflow: hidden;
+}
+
+.robo-apresentacao-canvas {
+  width: 68px;
+  height: 68px;
+  display: block;
+}
+
+.robo-apresentacao-fallback {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.robo-apresentacao-meta {
+  flex: 1;
+}
+
+.robo-apresentacao-badge {
+  display: inline-block;
+  font-size: 9.5px;
+  font-weight: 800;
+  color: #38bdf8;
+  background: rgba(2, 132, 199, 0.2);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  padding: 2px 8px;
+  border-radius: 10px;
+  letter-spacing: 0.8px;
+  margin-bottom: 4px;
+}
+
+.robo-apresentacao-title {
+  font-size: 18px;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.robo-apresentacao-subtitle {
+  font-size: 11.5px;
+  color: #94a3b8;
+  margin: 2px 0 0 0;
+}
+
+.robo-apresentacao-close {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #94a3b8;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.robo-apresentacao-close:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  border-color: #ef4444;
+}
+
+.robo-fala-balao {
+  background: rgba(6, 16, 30, 0.92);
+  border: 1.5px solid #1e3a5f;
+  border-left: 4px solid #00f2fe;
+  border-radius: 14px;
+  padding: 16px 18px;
+  position: relative;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.robo-fala-equalizer {
+  display: flex;
+  gap: 3px;
+  align-items: flex-end;
+  height: 12px;
+  margin-bottom: 8px;
+}
+
+.robo-fala-equalizer span {
+  width: 3px;
+  background: #00f2fe;
+  border-radius: 2px;
+  animation: eqBar 0.9s ease-in-out infinite alternate;
+}
+
+.robo-fala-equalizer span:nth-child(1) { height: 6px; animation-delay: 0.1s; }
+.robo-fala-equalizer span:nth-child(2) { height: 12px; animation-delay: 0.25s; }
+.robo-fala-equalizer span:nth-child(3) { height: 8px; animation-delay: 0.4s; }
+.robo-fala-equalizer span:nth-child(4) { height: 11px; animation-delay: 0.15s; }
+.robo-fala-equalizer span:nth-child(5) { height: 5px; animation-delay: 0.3s; }
+
+@keyframes eqBar {
+  0% { transform: scaleY(0.4); }
+  100% { transform: scaleY(1.3); }
+}
+
+.robo-fala-texto {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #e2e8f0;
+}
+
+.robo-apresentacao-recursos {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+@media (min-width: 480px) {
+  .robo-apresentacao-recursos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.robo-recurso-item {
+  background: rgba(14, 25, 44, 0.75);
+  border: 1px solid #1e334f;
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.robo-recurso-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.robo-recurso-item b {
+  font-size: 11.5px;
+  color: #38bdf8;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.robo-recurso-item p {
+  font-size: 10px;
+  color: #94a3b8;
+  margin: 0;
+  line-height: 1.25;
+}
+
+.robo-apresentacao-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(56, 189, 248, 0.15);
+}
+
+.robo-btn-audio {
+  background: rgba(2, 132, 199, 0.15);
+  border: 1px solid #0284c7;
+  color: #38bdf8;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.2s;
+}
+
+.robo-btn-audio:hover {
+  background: #0284c7;
+  color: #fff;
+}
+
 /* ================= BOTÃO E JANELA DO ROBÔ FLUTUANTE IA (5 ABAS) ================= */
 .robo-floating-halo {
   position: absolute;
@@ -2689,6 +2935,7 @@
     <h2 style="font-size:25px; margin-bottom:4px; color:#ffffff; font-weight:900; letter-spacing:0.5px;">Mecânica 4.0 IA</h2>
     <p class="sub" style="color:#94a3b8; font-size:13px; margin-bottom:20px;">Engenharia & Manutenção Industrial Avançada<br><span style="color:#38bdf8; font-size:11.5px; font-weight:700;">Criado por Eduardo Noronha</span></p>
 
+    <div class="field" id="campoCadastroNome" style="text-align:left; display:none;"><label>Seu Nome Completo</label><input type="text" id="login_nome" placeholder="Ex: Carlos Silva" onkeydown="if(event.key==='Enter') fazerCadastro()"></div>
     <div class="field" style="text-align:left;"><label>E-mail</label><input type="email" id="login_email" placeholder="seu@email.com" onkeydown="if(event.key==='Enter') fazerLogin()"></div>
     <div class="field" style="text-align:left;"><label>Senha</label><input type="password" id="login_senha" placeholder="••••••••" onkeydown="if(event.key==='Enter') fazerLogin()"></div>
 
@@ -2732,6 +2979,69 @@
     </div>
     <div id="roboLoadingStatus" class="robo-loading-status">Inicializando Robô Mecânico 4.0 IA...</div>
     <div class="robo-loading-user" id="roboLoadingUserTarget">Autenticando usuário...</div>
+  </div>
+</div>
+
+<!-- ================= MODAL / CARD DE APRESENTAÇÃO HOLOGRÁFICA DO ROBÔ IA ================= -->
+<div id="overlayApresentacaoRobo" class="robo-apresentacao-overlay" style="display:none;">
+  <div class="robo-apresentacao-card">
+    <div class="robo-apresentacao-top">
+      <div class="robo-apresentacao-avatar-wrap">
+        <canvas id="canvasRobo3DApresentacao" width="136" height="136" class="robo-apresentacao-canvas"></canvas>
+        <img src="assets/mecanico_robo_ia.jpg" id="avatarRoboApresFallback" alt="Robô IA" class="robo-apresentacao-fallback" style="display:none;">
+      </div>
+      <div class="robo-apresentacao-meta">
+        <div class="robo-apresentacao-badge">CONEXÃO NEURAL ATIVA • IA PESSOAL</div>
+        <h3 class="robo-apresentacao-title">🤖 Robô Mecânico 4.0 IA</h3>
+        <p class="robo-apresentacao-subtitle">Inteligência Artificial de Manutenção & Engenharia</p>
+      </div>
+      <button type="button" class="robo-apresentacao-close" onclick="fecharApresentacaoRobo()" title="Fechar">✕</button>
+    </div>
+
+    <div class="robo-apresentacao-body">
+      <div class="robo-fala-balao">
+        <div class="robo-fala-equalizer">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div id="textoApresentacaoRobo" class="robo-fala-texto">
+          <!-- Texto gerado dinamicamente com o nome do usuário -->
+        </div>
+      </div>
+
+      <div class="robo-apresentacao-recursos">
+        <div class="robo-recurso-item">
+          <span class="robo-recurso-icon">💬</span>
+          <div>
+            <b>Respostas Técnicas Instantâneas</b>
+            <p>Cavitação, bombas, redutores, vibração e rolamentos</p>
+          </div>
+        </div>
+        <div class="robo-recurso-item">
+          <span class="robo-recurso-icon">📐</span>
+          <div>
+            <b>Desenhos CAD & Tolerâncias ISO</b>
+            <p>Croquis técnicos, ajustes H7/k6 e folgas recomendadas</p>
+          </div>
+        </div>
+        <div class="robo-recurso-item">
+          <span class="robo-recurso-icon">📑</span>
+          <div>
+            <b>Laudos & Análise de Serviços</b>
+            <p>Checklists de segurança LOTO e relatórios periciais</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="robo-apresentacao-footer">
+      <button type="button" id="btnAudioApresentacao" class="robo-btn-audio" onclick="alternarVozRobo()" title="Ouvir voz do Robô">
+        <span id="iconeVozRobo">🔊</span> <span id="textoVozRobo">Ouvir Robô</span>
+      </button>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <button type="button" class="button" style="background:linear-gradient(135deg, #0284c7 0%, #0369a1 100%); border-color:#38bdf8; font-size:13px; padding:10px 18px; margin:0;" onclick="abrirRoboApresentacaoEFechar()">💬 Conversar com o Robô</button>
+        <button type="button" class="button secondary" style="font-size:13px; padding:10px 18px; margin:0;" onclick="fecharApresentacaoRobo()">Iniciar Trabalho</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -10171,6 +10481,194 @@ function iniciarRobo3DBtn() {
   } catch (e) {}
 }
 
+function iniciarRobo3DApresentacao() {
+  const canvas = document.getElementById('canvasRobo3DApresentacao');
+  const fallback = document.getElementById('avatarRoboApresFallback');
+  if (!canvas) return;
+
+  if (typeof THREE === 'undefined') {
+    setTimeout(iniciarRobo3DApresentacao, 100);
+    return;
+  }
+
+  try {
+    const inst = criarRoboMecanico3D('canvasRobo3DApresentacao', { width: 136, height: 136, mini: true });
+    if (!inst && fallback) {
+      fallback.style.display = 'block';
+      canvas.style.display = 'none';
+    }
+  } catch (e) {
+    if (fallback) fallback.style.display = 'block';
+  }
+}
+
+/* ==========================================================================
+   INTELIGÊNCIA DE APRESENTAÇÃO PESSOAL DO ROBÔ IA AO LOGAR
+   Reconhecimento do nome do usuário, apresentação holográfica e síntese de voz
+   ========================================================================== */
+
+function obterNomeUsuario(email) {
+  const emailNorm = (email || '').toLowerCase().trim();
+  if (isUsuarioAdmin(emailNorm)) {
+    return 'Eduardo Noronha';
+  }
+
+  // 1. Busca nome salvo localmente para esta conta
+  const nomeSalvo = localStorage.getItem('mecanica_nome_' + emailNorm) || localStorage.getItem('mecanica_usuario_nome');
+  if (nomeSalvo && nomeSalvo.trim()) {
+    return nomeSalvo.trim();
+  }
+
+  // 2. Busca nos usuários registrados pelo painel administrativo
+  try {
+    const cadastrados = JSON.parse(localStorage.getItem('mecanica_usuarios_registrados') || '[]');
+    const usr = cadastrados.find(u => (u.email || '').toLowerCase().trim() === emailNorm);
+    if (usr && usr.nome && usr.nome.trim()) return usr.nome.trim();
+  } catch (e) {}
+
+  // 3. Extrai nome formatado do próprio endereço de e-mail (ex: carlos.silva@... -> Carlos Silva)
+  if (email && email.includes('@')) {
+    const parteLocal = email.split('@')[0];
+    const partes = parteLocal.split(/[\._\-]/).filter(Boolean);
+    if (partes.length > 0) {
+      return partes.map(p => p.charAt(0).toUpperCase() + p.slice(1).toLowerCase()).join(' ');
+    }
+  }
+
+  return 'Mecânico Industrial';
+}
+
+function obterSaudacaoHora() {
+  const hora = new Date().getHours();
+  if (hora >= 5 && hora < 12) return 'Bom dia';
+  if (hora >= 12 && hora < 18) return 'Boa tarde';
+  return 'Boa noite';
+}
+
+let roboVozAtiva = true;
+
+function alternarVozRobo() {
+  roboVozAtiva = !roboVozAtiva;
+  const icone = document.getElementById('iconeVozRobo');
+  const texto = document.getElementById('textoVozRobo');
+  if (roboVozAtiva) {
+    if (icone) icone.innerText = '🔊';
+    if (texto) texto.innerText = 'Voz Ativa';
+    const emailAtual = (document.getElementById('usuarioLogadoEmail')?.innerText || '').trim();
+    falarApresentacaoRobo(obterNomeUsuario(emailAtual), emailAtual);
+  } else {
+    if (icone) icone.innerText = '🔇';
+    if (texto) texto.innerText = 'Mudo';
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+  }
+}
+
+function falarApresentacaoRobo(nome, email) {
+  if (!roboVozAtiva || !('speechSynthesis' in window)) return;
+  try {
+    window.speechSynthesis.cancel();
+    const isAdm = isUsuarioAdmin(email);
+    const saudacao = obterSaudacaoHora();
+    const textoVoz = isAdm 
+      ? `${saudacao}, ${nome}! Eu sou o Robô Mecânico 4.0 IA. Sua conta de Administrador Geral está conectada. Estou pronto para auxiliar na engenharia e manutenção preditiva.`
+      : `${saudacao}, ${nome}! Eu sou o Robô Mecânico 4.0 IA, seu assistente pessoal de engenharia e manutenção mecânica. Sua conta pessoal está conectada. Como posso te ajudar hoje?`;
+
+    const utterance = new SpeechSynthesisUtterance(textoVoz);
+    utterance.lang = 'pt-BR';
+    utterance.rate = 1.02;
+    utterance.pitch = 0.95;
+
+    const vozes = window.speechSynthesis.getVoices();
+    const vozPt = vozes.find(v => v.lang && (v.lang === 'pt-BR' || v.lang.startsWith('pt')));
+    if (vozPt) utterance.voice = vozPt;
+
+    window.speechSynthesis.speak(utterance);
+  } catch(e) {
+    console.warn('Síntese de voz:', e);
+  }
+}
+
+function exibirApresentacaoRobo(email) {
+  const overlay = document.getElementById('overlayApresentacaoRobo');
+  const textoEl = document.getElementById('textoApresentacaoRobo');
+  if (!overlay) return;
+
+  const emailNorm = (email || '').toLowerCase().trim();
+  const nome = obterNomeUsuario(emailNorm);
+  const isAdm = isUsuarioAdmin(emailNorm);
+  const saudacao = obterSaudacaoHora();
+
+  let mensagemHtml = '';
+  if (isAdm) {
+    mensagemHtml = `
+      <div style="font-size:15px; font-weight:800; color:#38bdf8; margin-bottom:8px;">
+        👋 ${saudacao}, ${nome}!
+      </div>
+      Eu sou o seu <b>Robô Mecânico 4.0 IA</b>, assistente especialista em engenharia industrial e manutenção de precisão.<br><br>
+      Reconheci sua conta de <b>Administrador Geral</b> com sucesso! O núcleo neural 3D, tolerâncias ISO centesimais, laudos periciais e telemetria estão 100% integrados às suas diretrizes.<br><br>
+      <span style="color:#ffd479; font-weight:700;">Como posso colaborar com a gestão e intervenções industriais hoje?</span>
+    `;
+  } else {
+    mensagemHtml = `
+      <div style="font-size:15px; font-weight:800; color:#38bdf8; margin-bottom:8px;">
+        👋 ${saudacao}, ${nome}!
+      </div>
+      Eu sou o seu <b>Robô Mecânico 4.0 IA</b>, seu assistente de inteligência artificial em manutenção e engenharia mecânica.<br><br>
+      Reconheci sua <b>conta pessoal</b> com sucesso! Estou conectado para tirar qualquer dúvida técnica de campo (bombas, redutores, vibração, alinhamento), calcular tolerâncias ISO 286 e gerar laudos técnicos.<br><br>
+      <span style="color:#38bdf8; font-weight:700;">Em que posso te auxiliar nas suas máquinas hoje?</span>
+    `;
+  }
+
+  if (textoEl) textoEl.innerHTML = mensagemHtml;
+
+  overlay.style.display = 'flex';
+  overlay.offsetHeight;
+  overlay.classList.add('active');
+
+  // Renderiza Robô 3D na apresentação
+  iniciarRobo3DApresentacao();
+
+  // Fala o nome do usuário através da inteligência de voz
+  setTimeout(() => {
+    falarApresentacaoRobo(nome, emailNorm);
+  }, 350);
+
+  // Atualiza mensagem inicial personalizada no chat flutuante
+  atualizarBoasVindasChatRobo(nome);
+}
+
+function fecharApresentacaoRobo() {
+  const overlay = document.getElementById('overlayApresentacaoRobo');
+  if (overlay) {
+    overlay.classList.remove('active');
+    setTimeout(() => {
+      overlay.style.display = 'none';
+    }, 300);
+  }
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+  }
+}
+
+function abrirRoboApresentacaoEFechar() {
+  fecharApresentacaoRobo();
+  setTimeout(() => {
+    if (typeof alternarModalRoboFlutuante === 'function') {
+      alternarModalRoboFlutuante();
+    }
+  }, 200);
+}
+
+function atualizarBoasVindasChatRobo(nome) {
+  const log = document.getElementById('rf_chat_log');
+  if (!log) return;
+  const primeiraMsg = log.querySelector('.rf-chat-msg.bot');
+  if (primeiraMsg) {
+    primeiraMsg.innerHTML = `<strong>🤖 Robô Mecânico 4.0 IA:</strong><br>
+      Olá, <b>${nome}</b>! Sou o seu assistente técnico especialista de campo e reconheci sua conta pessoal. Pode me perguntar <b>qualquer dúvida sobre mecânica industrial</b> (bombas, motores elétricos, redutores, compressores, válvulas, alinhamento a laser, análise de vibração, metrologia, tolerâncias ISO, rolamentos e lubrificação). Como posso te auxiliar nas suas tarefas e diagnósticos hoje?`;
+  }
+}
+
 /* ===================== LOGIN / SESSÃO ===================== */
 async function verificarSessao() {
   try {
@@ -10208,9 +10706,11 @@ function iniciarCarregamentoComRoboIA(email) {
 
   const emailNorm = (email || '').toLowerCase().trim();
   const isAdmin = isUsuarioAdmin(emailNorm);
-  const emailExibicao = isAdmin ? 'Eduardo Noronha (Administrador Geral)' : (email || 'Mecânico Industrial');
+  const nomeUsuario = obterNomeUsuario(emailNorm);
+  const emailExibicao = isAdmin ? 'Eduardo Noronha (Administrador Geral)' : `${nomeUsuario} (${email || 'Mecânico Industrial'})`;
 
-  if (userTargetEl) userTargetEl.innerText = 'Autenticando: ' + emailExibicao;
+  if (userTargetEl) userTargetEl.innerHTML = 'Conectando conta pessoal: <b style="color:#38bdf8;">' + emailExibicao + '</b>';
+  if (statusEl) statusEl.innerText = `Robô IA conectando conta de ${nomeUsuario}...`;
 
   if (overlay) {
     overlay.style.display = 'flex';
@@ -10222,11 +10722,11 @@ function iniciarCarregamentoComRoboIA(email) {
   iniciarRobo3DLogin();
 
   const etapas = [
-    { p: 18, msg: 'Validando credenciais e permissões de acesso...' },
+    { p: 18, msg: `Validando credenciais e perfil pessoal de ${nomeUsuario}...` },
     { p: 44, msg: 'Sincronizando banco de ativos industriais e TAGs...' },
-    { p: 72, msg: 'Inicializando Robô Mecânico 4.0 IA Especialista...' },
+    { p: 72, msg: `Inicializando Robô Mecânico 4.0 IA para ${nomeUsuario}...` },
     { p: 90, msg: 'Carregando módulos de diagnóstico, metrologia e tolerâncias ISO...' },
-    { p: 100, msg: 'Acesso Autorizado! Bem-vindo à Mecânica 4.0.' }
+    { p: 100, msg: `Acesso Autorizado! Olá, ${nomeUsuario}, bem-vindo à Mecânica 4.0.` }
   ];
 
   let stepIdx = 0;
@@ -10289,12 +10789,23 @@ function mostrarApp(email) {
   const emailNorm = (email || '').toLowerCase().trim();
   const isAdmin = isUsuarioAdmin(emailNorm);
   const emailFinal = isAdmin ? 'dudusemog@gmail.com' : (email || 'mecanico@empresa.com');
+  const nomeUsuario = obterNomeUsuario(emailFinal);
 
-  if (usuarioLogadoEl) usuarioLogadoEl.innerText = emailFinal;
+  if (usuarioLogadoEl) {
+    usuarioLogadoEl.innerHTML = `<span style="color:#38bdf8; font-weight:800;">${nomeUsuario}</span> <span style="color:#64748b; font-size:11px; font-weight:normal;">(${emailFinal})</span>`;
+  }
 
   // Persiste sessão ativa oficial
   localStorage.setItem('mecanica_ultimo_usuario_conectado', emailFinal);
   localStorage.setItem('mecanica_sessao_offline_ativa', 'true');
+
+  // Atualiza mensagem inicial do Robô no chat flutuante
+  atualizarBoasVindasChatRobo(nomeUsuario);
+
+  // Dispara a apresentação inteligente do Robô IA que se apresenta e chama o nome do usuário
+  setTimeout(() => {
+    exibirApresentacaoRobo(emailFinal);
+  }, 450);
 
   // 2. Registra presença do usuário na telemetria
   try {
@@ -10344,8 +10855,10 @@ function alternarModoLogin() {
   const btnEntrar = document.getElementById('btnEntrar');
   const btnCriarConta = document.getElementById('btnCriarConta');
   const textoToggle = document.getElementById('textoToggleLogin');
+  const campoNome = document.getElementById('campoCadastroNome');
   if (btnEntrar) btnEntrar.style.display = modoCadastro ? 'none' : 'block';
   if (btnCriarConta) btnCriarConta.style.display = modoCadastro ? 'block' : 'none';
+  if (campoNome) campoNome.style.display = modoCadastro ? 'block' : 'none';
   if (textoToggle) {
     textoToggle.innerHTML = modoCadastro
       ? 'Já tem conta? <a onclick="alternarModoLogin()">Entrar</a>'
@@ -10435,6 +10948,7 @@ async function fazerLogin() {
 }
 
 async function fazerCadastro() {
+  const nome = (document.getElementById('login_nome')?.value || '').trim();
   const email = (document.getElementById('login_email')?.value || '').trim();
   const senha = document.getElementById('login_senha')?.value || '';
   const el = document.getElementById('login_resultado');
@@ -10452,6 +10966,10 @@ async function fazerCadastro() {
 
   // Salva credencial local para garantir acesso imediato mesmo sob limites de email do Supabase
   const emailNorm = email.toLowerCase().trim();
+  if (nome) {
+    localStorage.setItem('mecanica_nome_' + emailNorm, nome);
+  }
+
   try {
     let creds = JSON.parse(localStorage.getItem('mecanica_credenciais_locais') || '{}');
     creds[emailNorm] = btoa(senha);
@@ -10459,7 +10977,11 @@ async function fazerCadastro() {
   } catch(e) {}
 
   try {
-    const { data, error } = await db.auth.signUp({ email, password: senha });
+    const { data, error } = await db.auth.signUp({
+      email,
+      password: senha,
+      options: { data: { nome: nome || emailNorm } }
+    });
     if (error) {
       console.warn('Supabase SignUp status:', error.message);
     }
