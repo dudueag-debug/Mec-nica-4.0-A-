@@ -1047,13 +1047,19 @@
 
   /* REGRAS DE IMPRESSÃO (PDF / A4) */
   @media print {
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
     body {
       background: #ffffff !important;
       color: #000000 !important;
       margin: 0 !important;
       padding: 0 !important;
     }
-    header, .container, .modal-topo-acoes, .panel, .login-overlay, .status, button {
+    header, .container, .modal-topo-acoes, .panel, .login-overlay, .status, button,
+    #btn-flutuante-mecanico-ia, .robo-perfil-card, .btn-flutuante, .chat-flutuante,
+    #modal-mecanico-ia, #painel-robo-ia, .toast-notif, #notificacao-toast {
       display: none !important;
     }
     #modal-relatorio-a4 {
@@ -4863,6 +4869,52 @@
         </div>
       </div>
     </div>
+
+    <!-- CALCULADORA INTERATIVA DE ALINHAMENTO E CÁLCULO DE CALÇOS -->
+    <div class="content-block" style="background:linear-gradient(135deg, #071526 0%, #0d223f 100%); border:2px solid #0284c7; border-radius:12px; padding:18px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+        <h4 style="color:#38bdf8; margin:0; font-size:16px;">🧮 Calculadora de Alinhamento de Eixos & Espessura de Calços</h4>
+        <span style="font-size:11px; background:#0369a1; color:#fff; padding:2px 8px; border-radius:10px; font-weight:700;">NORMA ISO / ENGENHARIA 4.0</span>
+      </div>
+      <p style="font-size:12.5px; color:#94a3b8; margin-bottom:14px;">
+        Insira as distâncias físicas da máquina e as leituras de desalinhamento medidas com relógio comparador ou sensor laser para calcular a espessura exata dos calços de correção nos pés dianteiro e traseiro:
+      </p>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:12px; margin-bottom:14px;">
+        <div class="field">
+          <label style="font-size:12px; color:#7dd3fc;">Rotação de Trabalho (RPM):</label>
+          <input type="number" id="alin_rpm" value="1800" placeholder="ex: 1800" oninput="calcularAlinhamentoInterativo()">
+        </div>
+        <div class="field">
+          <label style="font-size:12px; color:#7dd3fc;">Diâmetro do Acoplamento D (mm):</label>
+          <input type="number" id="alin_diametro" value="150" placeholder="ex: 150" oninput="calcularAlinhamentoInterativo()">
+        </div>
+        <div class="field">
+          <label style="font-size:12px; color:#7dd3fc;">Distância Acoplamento ao Pé Diant. L1 (mm):</label>
+          <input type="number" id="alin_dist_l1" value="200" placeholder="ex: 200" oninput="calcularAlinhamentoInterativo()">
+        </div>
+        <div class="field">
+          <label style="font-size:12px; color:#7dd3fc;">Distância entre Pés Diant. e Tras. L2 (mm):</label>
+          <input type="number" id="alin_dist_l2" value="380" placeholder="ex: 380" oninput="calcularAlinhamentoInterativo()">
+        </div>
+        <div class="field">
+          <label style="font-size:12px; color:#facc15;">Desvio Radial / Offset Vertical (mm):</label>
+          <input type="number" step="0.01" id="alin_offset" value="0.12" placeholder="ex: 0.12" oninput="calcularAlinhamentoInterativo()">
+        </div>
+        <div class="field">
+          <label style="font-size:12px; color:#facc15;">Abertura Angular / Gap nas Faces (mm):</label>
+          <input type="number" step="0.01" id="alin_gap" value="0.08" placeholder="ex: 0.08" oninput="calcularAlinhamentoInterativo()">
+        </div>
+      </div>
+
+      <div style="text-align:right; margin-bottom:12px;">
+        <button type="button" class="button" style="background:#0284c7; border-color:#38bdf8; font-size:13px; font-weight:800; padding:8px 20px; margin:0;" onclick="calcularAlinhamentoInterativo()">⚡ Calcular Calços & Conformidade ISO</button>
+      </div>
+
+      <div id="alin_resultado_box" style="background:#050f1c; border:1.5px solid #1e3a5f; border-radius:8px; padding:14px; font-size:13px; line-height:1.5;">
+        <div style="color:#94a3b8; text-align:center;">Clique no botão acima ou altere os valores para visualizar o dimensionamento dos calços.</div>
+      </div>
+    </div>
   </section>
 
   <!-- ================= ANÁLISE DE VIBRAÇÃO & PREDITIVA ================= -->
@@ -4986,6 +5038,47 @@
         <li><b>Direção Axial (A):</b> Mede paralelamente ao eixo do motor/bomba. <b>Indispensável</b> para detectar desalinhamento angular, empenamento de eixo e empuxo axial excessivo.</li>
         <li><b>Tipo de Fixação:</b> Priorize base magnética de terras raras (neodímio) sobre superfícies limpas e sem camadas grossas de tinta. Para monitoramento de alta frequência, use prisioneiro roscado usinado.</li>
       </ul>
+    </div>
+
+    <!-- CALCULADORA INTERATIVA DE SEVERIDADE VIBRATÓRIA ISO 10816-3 -->
+    <div class="content-block" style="background:linear-gradient(135deg, #10061e 0%, #1e0b38 100%); border:2px solid #8b5cf6; border-radius:12px; padding:18px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+        <h4 style="color:#c084fc; margin:0; font-size:16px;">📈 Avaliador Automático de Severidade de Vibração (ISO 10816-3)</h4>
+        <span style="font-size:11px; background:#7c3aed; color:#fff; padding:2px 8px; border-radius:10px; font-weight:700;">PREDITIVA INDUSTRIAL</span>
+      </div>
+      <p style="font-size:12.5px; color:#c4b5fd; margin-bottom:14px;">
+        Insira a potência da máquina, a condição da fundação (rígida/flexível) e o valor de vibração medido para classificar a condição na zona ISO correspondente:
+      </p>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:12px; margin-bottom:14px;">
+        <div class="field">
+          <label style="font-size:12px; color:#ddd6fe;">Grupo / Potência da Máquina:</label>
+          <select id="vib_grupo" onchange="avaliarVibracaoInterativo()">
+            <option value="grupo2" selected>Grupo 2: Média (15 kW a 300 kW / 20 a 400 CV)</option>
+            <option value="grupo1">Grupo 1: Grande (> 300 kW / > 400 CV)</option>
+            <option value="pequena">Bombas / Motores Pequenos (&lt; 15 kW)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label style="font-size:12px; color:#ddd6fe;">Tipo de Apoio / Fundação:</label>
+          <select id="vib_suporte" onchange="avaliarVibracaoInterativo()">
+            <option value="rigido" selected>Fundação Rígida (Base Pesada de Concreto)</option>
+            <option value="flexivel">Fundação Flexível (Coxins / Amortecedores)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label style="font-size:12px; color:#facc15;">Vibração Global Medida (mm/s RMS):</label>
+          <input type="number" step="0.1" id="vib_valor" value="3.2" placeholder="ex: 3.2" oninput="avaliarVibracaoInterativo()">
+        </div>
+      </div>
+
+      <div style="text-align:right; margin-bottom:12px;">
+        <button type="button" class="button" style="background:#7c3aed; border-color:#a78bfa; font-size:13px; font-weight:800; padding:8px 20px; margin:0;" onclick="avaliarVibracaoInterativo()">⚡ Diagnosticar Condição & Ação Preditiva</button>
+      </div>
+
+      <div id="vib_resultado_box" style="background:#0c0417; border:1.5px solid #3b1668; border-radius:8px; padding:14px; font-size:13px; line-height:1.5;">
+        <div style="color:#a78bfa; text-align:center;">Altere os valores ou clique no botão acima para classificar a severidade vibratória.</div>
+      </div>
     </div>
   </section>
 
@@ -5652,69 +5745,95 @@ const NOMES_SLOTS_FOTOS = {
   slot5: { titulo: 'Foto 5: Montagem Concluída (Depois / Final)', padrao: 'depois' }
 };
 
-function processarFotoSlot(slotKey, inputEl) {
+function dispararCliqueSlot(slotKey) {
+  const inputEl = document.getElementById('rel_foto_' + slotKey) || document.getElementById('input_file_' + slotKey);
+  if (inputEl) {
+    inputEl.click();
+  }
+}
+
+async function processarFotoSlot(slotKey, inputEl) {
   if (!inputEl || !inputEl.files || !inputEl.files[0]) return;
-  const file = inputEl.files[0];
-  const reader = new FileReader();
+  const fileOriginal = inputEl.files[0];
   
-  reader.onload = function(e) {
-    estadoFotosRelatorio[slotKey] = {
-      file: file,
-      dataUrl: e.target.result,
-      nome: file.name
+  try {
+    // Comprime a imagem em alta definição otimizada (evita estouro de memória e lentidão)
+    const fileComprimido = await comprimirImagem(fileOriginal, 1000, 0.75);
+    const reader = new FileReader();
+    
+    reader.onload = function(e) {
+      const dataUrl = e.target.result;
+      estadoFotosRelatorio[slotKey] = {
+        file: fileComprimido,
+        dataUrl: dataUrl,
+        nome: fileOriginal.name
+      };
+      renderizarSlotFoto(slotKey);
     };
-    renderizarSlotFoto(slotKey);
-  };
-  reader.readAsDataURL(file);
+    reader.readAsDataURL(fileComprimido);
+  } catch (err) {
+    console.warn('Erro ao processar foto do slot ' + slotKey + ':', err);
+    // Fallback direto
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      estadoFotosRelatorio[slotKey] = {
+        file: fileOriginal,
+        dataUrl: e.target.result,
+        nome: fileOriginal.name
+      };
+      renderizarSlotFoto(slotKey);
+    };
+    reader.readAsDataURL(fileOriginal);
+  }
 }
 
 function renderizarSlotFoto(slotKey) {
-  const container = document.getElementById('slot_box_' + slotKey);
-  if (!container) return;
   const dados = estadoFotosRelatorio[slotKey];
   const infoSlot = NOMES_SLOTS_FOTOS[slotKey] || { titulo: 'Foto do Serviço' };
   
-  if (!dados || !dados.dataUrl) {
-    // Estado vazio: exibe área de upload com botões de câmera e galeria
-    container.innerHTML = `
-      <div class="foto-slot-header">
-        <span class="foto-slot-badge">${infoSlot.titulo}</span>
-      </div>
-      <div class="foto-slot-dropzone" onclick="document.getElementById('input_file_${slotKey}').click()">
-        <span style="font-size:32px;">📷</span>
-        <b style="color:#38bdf8; font-size:13px;">Tirar Foto ou Escolher Arquivo</b>
-        <span style="font-size:11px; color:#94a3b8;">Clique para abrir a câmera ou galeria</span>
-      </div>
-      <input type="file" accept="image/*" id="input_file_${slotKey}" style="display:none;" onchange="processarFotoSlot('${slotKey}', this)">
-    `;
+  // Elementos do DOM pelo padrão da interface
+  const imgPreview = document.getElementById('slot_preview_' + slotKey);
+  const placeholder = document.getElementById('slot_placeholder_' + slotKey);
+  const actions = document.getElementById('slot_actions_' + slotKey);
+  const statusBadge = document.getElementById('slot_status_' + slotKey);
+  const cardBox = document.getElementById('slot_card_' + slotKey);
+
+  if (dados && dados.dataUrl) {
+    // Estado Preenchido
+    if (imgPreview) {
+      imgPreview.src = dados.dataUrl;
+      imgPreview.style.display = 'block';
+    }
+    if (placeholder) placeholder.style.display = 'none';
+    if (actions) actions.style.display = 'flex';
+    if (statusBadge) {
+      statusBadge.innerText = '✔ Anexada';
+      statusBadge.style.color = '#34d399';
+      statusBadge.style.background = 'rgba(16,185,129,0.2)';
+      statusBadge.style.borderColor = '#10b981';
+    }
+    if (cardBox) cardBox.style.borderColor = '#10b981';
   } else {
-    // Estado preenchido: exibe miniatura em alta definição, nome e botões de retirar/trocar
-    container.innerHTML = `
-      <div class="foto-slot-header">
-        <span class="foto-slot-badge" style="background:rgba(16,185,129,0.15); color:#34d399; border-color:rgba(16,185,129,0.3);">✔ ${infoSlot.titulo}</span>
-      </div>
-      <div class="foto-slot-preview-box">
-        <img src="${dados.dataUrl}" class="foto-slot-preview-img" alt="${infoSlot.titulo}">
-      </div>
-      <div style="font-size:11px; color:#94a3b8; margin-top:4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
-        📁 ${dados.nome || 'foto_capturada.jpg'}
-      </div>
-      <div class="foto-slot-actions">
-        <button type="button" class="btn-foto-acao btn-foto-trocar" onclick="document.getElementById('input_file_${slotKey}').click()">
-          🔄 Trocar Foto
-        </button>
-        <button type="button" class="btn-foto-acao btn-foto-remover" onclick="removerFotoSlot('${slotKey}')">
-          🗑️ Retirar Foto
-        </button>
-      </div>
-      <input type="file" accept="image/*" id="input_file_${slotKey}" style="display:none;" onchange="processarFotoSlot('${slotKey}', this)">
-    `;
+    // Estado Vazio
+    if (imgPreview) {
+      imgPreview.src = '';
+      imgPreview.style.display = 'none';
+    }
+    if (placeholder) placeholder.style.display = 'block';
+    if (actions) actions.style.display = 'none';
+    if (statusBadge) {
+      statusBadge.innerText = 'Vazio';
+      statusBadge.style.color = '#94a3b8';
+      statusBadge.style.background = 'rgba(100,116,139,0.15)';
+      statusBadge.style.borderColor = '#334155';
+    }
+    if (cardBox) cardBox.style.borderColor = '#1e3a5f';
   }
 }
 
 function removerFotoSlot(slotKey) {
-  estadoFotosRelatorio[slotKey] = null;
-  const inputEl = document.getElementById('input_file_' + slotKey);
+  estadoFotosRelatorio[slotKey] = { file: null, dataUrl: null, nome: '' };
+  const inputEl = document.getElementById('rel_foto_' + slotKey) || document.getElementById('input_file_' + slotKey);
   if (inputEl) inputEl.value = '';
   renderizarSlotFoto(slotKey);
 }
@@ -7269,8 +7388,8 @@ function transferirDiagnosticoParaRelatorio() {
   sugerirFerramentasIA();
 
   fecharModalMecanicoIA();
-  if (typeof alternarPainel === 'function') alternarPainel('relatorio');
-  if (typeof alternarAbaRelatorio === 'function') alternarAbaRelatorio('novo');
+  abrirModulo('relatorio');
+  alternarAbaRelatorio('novo');
   abrirToastNotificacao('✔ Diagnóstico completo transferido para o formulário de Relatório Técnico!');
 }
 
@@ -7500,12 +7619,13 @@ function aplicarRegrasVisibilidadeNivel() {
   if (cardEmpresa) cardEmpresa.style.display = 'flex';
 }
 
-/* ========================================================================== */
-/* PAINEL DO SUPERVISOR: APROVAÇÃO DE LAUDOS, EQUIPE & KPIS                   */
-/* ========================================================================== */
 function abrirModuloSupervisor() {
-  if (typeof abrirModulo === 'function') {
-    abrirModulo('supervisor');
+  const painel = document.getElementById('painel-supervisor');
+  if (painel && !painel.classList.contains('active')) {
+    document.getElementById('vistaGrid')?.classList.add('hidden');
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    painel.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
   alternarAbaSupervisor(abaSupervisorAtiva || 'aprovacao');
 }
@@ -7830,12 +7950,13 @@ function renderizarKPIsSupervisor() {
   `;
 }
 
-/* ========================================================================== */
-/* PAINEL DA EMPRESA: ÁRVORE DE ATIVOS, PARETO 80/20 & GESTÃO CORPORATIVA     */
-/* ========================================================================== */
 function abrirModuloEmpresa() {
-  if (typeof abrirModulo === 'function') {
-    abrirModulo('empresa');
+  const painel = document.getElementById('painel-empresa');
+  if (painel && !painel.classList.contains('active')) {
+    document.getElementById('vistaGrid')?.classList.add('hidden');
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    painel.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
   alternarAbaEmpresa(abaEmpresaAtiva || 'arvore');
 }
@@ -8244,21 +8365,41 @@ async function idbListarRelatoriosUsuario(userEmail) {
   try {
     const d = await abrirIndexedDB();
     if (!d) return [];
+    const emailAlvo = (userEmail || getUsuarioAtualEmail() || '').toLowerCase().trim();
     return new Promise((resolve) => {
       const tx = d.transaction(IDB_STORE_RELATORIOS, 'readonly');
       const store = tx.objectStore(IDB_STORE_RELATORIOS);
       const req = store.getAll();
       req.onsuccess = () => {
         const todos = req.result || [];
-        const norm = (userEmail || '').toLowerCase().trim();
+        if (!emailAlvo || emailAlvo === 'usuario_padrao') {
+          resolve(todos);
+          return;
+        }
         // Isolamento rigoroso: cada usuário só visualiza seus relatórios próprios
-        const filtrados = todos.filter(r => (r.usuario_email || '').toLowerCase().trim() === norm);
+        const filtrados = todos.filter(r => (r.usuario_email || '').toLowerCase().trim() === emailAlvo);
         resolve(filtrados);
       };
       req.onerror = () => resolve([]);
     });
   } catch (e) {
     return [];
+  }
+}
+
+async function idbObterRelatorio(id) {
+  try {
+    const d = await abrirIndexedDB();
+    if (!d) return null;
+    return new Promise((resolve) => {
+      const tx = d.transaction(IDB_STORE_RELATORIOS, 'readonly');
+      const store = tx.objectStore(IDB_STORE_RELATORIOS);
+      const req = store.get(id);
+      req.onsuccess = () => resolve(req.result || null);
+      req.onerror = () => resolve(null);
+    });
+  } catch (e) {
+    return null;
   }
 }
 
@@ -8287,12 +8428,174 @@ window.addEventListener('DOMContentLoaded', () => {
       inputEmail.value = salvo;
     }
   } catch(e) {}
+  inicializarCanalTelemetriaGlobal();
 });
 
-/* ===================== CONFIGURAÇÃO SUPABASE ===================== */
+/* ===================== CONFIGURAÇÃO SUPABASE & CANAL DE TELEMETRIA ===================== */
 const SUPABASE_URL = 'https://ceztsxlqzbtdfjxjpghl.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_osbE7BMeiqDbAHvNpzlLxA_rk8YTKVm';
 const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const TOPICO_TELEMETRIA_NUVEM = 'mecanica40_telemetria_audit_eduardo_4838';
+let canalTelemetriaGlobal = null;
+
+function inicializarCanalTelemetriaGlobal() {
+  try {
+    if (typeof db !== 'undefined' && db && db.channel && !canalTelemetriaGlobal) {
+      canalTelemetriaGlobal = db.channel('mecanica40_telemetria_rede', {
+        config: { broadcast: { self: true }, presence: { key: getUsuarioAtualEmail() } }
+      });
+
+      canalTelemetriaGlobal
+        .on('presence', { event: 'sync' }, () => {
+          try {
+            const state = canalTelemetriaGlobal.presenceState();
+            Object.keys(state).forEach(k => {
+              const presences = state[k];
+              if (Array.isArray(presences)) {
+                presences.forEach(p => incorporarUsuarioAdmin(p));
+              }
+            });
+            atualizarKPIsAdminSeAtivo();
+          } catch(e) {}
+        })
+        .on('presence', { event: 'join' }, ({ newPresences }) => {
+          try {
+            if (Array.isArray(newPresences)) {
+              newPresences.forEach(p => incorporarUsuarioAdmin(p));
+            }
+            atualizarKPIsAdminSeAtivo();
+          } catch(e) {}
+        })
+        .on('broadcast', { event: 'registro_usuario' }, ({ payload }) => {
+          if (payload) {
+            incorporarUsuarioAdmin(payload);
+            atualizarKPIsAdminSeAtivo();
+          }
+        })
+        .on('broadcast', { event: 'solicitar_usuarios_rede' }, () => {
+          responderSolicitacaoUsuarios();
+        })
+        .on('broadcast', { event: 'resposta_usuarios_rede' }, ({ payload }) => {
+          if (Array.isArray(payload)) {
+            payload.forEach(u => incorporarUsuarioAdmin(u));
+            atualizarKPIsAdminSeAtivo();
+          }
+        })
+        .subscribe(async (status) => {
+          if (status === 'SUBSCRIBED') {
+            const emailAtual = getUsuarioAtualEmail();
+            if (emailAtual && emailAtual !== 'usuario_padrao') {
+              const dados = obterPerfilUsuarioParaTelemetria(emailAtual, 'presenca');
+              try { await canalTelemetriaGlobal.track(dados); } catch(e) {}
+            }
+          }
+        });
+    }
+  } catch (errCanal) {
+    console.warn('Realtime channel:', errCanal);
+  }
+}
+
+function responderSolicitacaoUsuarios() {
+  try {
+    if (canalTelemetriaGlobal) {
+      const locais = JSON.parse(localStorage.getItem('mecanica_usuarios_registrados') || '[]');
+      if (locais.length > 0) {
+        canalTelemetriaGlobal.send({
+          type: 'broadcast',
+          event: 'resposta_usuarios_rede',
+          payload: locais
+        }).catch(() => {});
+      }
+    }
+  } catch(e) {}
+}
+
+function obterPerfilUsuarioParaTelemetria(email, acao) {
+  const emailNorm = (email || '').trim().toLowerCase();
+  const agora = new Date().toISOString();
+  const dispositivo = navigator.userAgent.includes('Android') ? '📱 Android' : (navigator.userAgent.includes('iPhone') ? '📱 iPhone' : '💻 Computador / Web');
+  const isAdmin = isUsuarioAdmin(emailNorm);
+  
+  let nome = emailNorm.split('@')[0];
+  let cargo = isAdmin ? 'Administrador Geral & Criador' : 'Mecânico Industrial';
+  
+  try {
+    const usuarios = JSON.parse(localStorage.getItem('mecanica_usuarios_registrados') || '[]');
+    const u = usuarios.find(x => (x.email || '').toLowerCase() === emailNorm);
+    if (u) {
+      if (u.nome) nome = u.nome;
+      if (u.cargo) cargo = u.cargo;
+    }
+  } catch(e) {}
+
+  return {
+    id: 'usr-' + emailNorm.replace(/[^a-z0-9]/gi, '_'),
+    email: emailNorm,
+    nome: nome,
+    cargo: cargo,
+    dispositivo: dispositivo,
+    acao: acao || 'acesso',
+    criado_em: agora,
+    ultimo_acesso: agora,
+    ultimo_login: agora,
+    online: (acao !== 'logout'),
+    role: isAdmin ? 'Administrador' : 'Mecânico'
+  };
+}
+
+function incorporarUsuarioAdmin(u) {
+  if (!u || !u.email) return;
+  const email = u.email.trim().toLowerCase();
+  if (email === 'usuario_padrao' || email === 'eduardonoronha@gmail.com') return;
+
+  let usuarios = [];
+  try {
+    usuarios = JSON.parse(localStorage.getItem('mecanica_usuarios_registrados') || '[]');
+  } catch(e) { usuarios = []; }
+
+  const agora = new Date().toISOString();
+  const isAdmin = isUsuarioAdmin(email);
+  const idx = usuarios.findIndex(x => (x.email || '').toLowerCase() === email);
+
+  if (idx >= 0) {
+    if (u.ultimo_acesso) usuarios[idx].ultimo_acesso = u.ultimo_acesso;
+    if (u.dispositivo) usuarios[idx].dispositivo = u.dispositivo;
+    if (u.nome && !usuarios[idx].nome) usuarios[idx].nome = u.nome;
+    if (u.cargo && !usuarios[idx].cargo) usuarios[idx].cargo = u.cargo;
+    if (typeof u.online === 'boolean') usuarios[idx].online = u.online;
+    if (isAdmin) {
+      usuarios[idx].role = 'Administrador';
+      usuarios[idx].cargo = 'Administrador Geral & Criador';
+    }
+  } else {
+    usuarios.push({
+      id: u.id || ('usr-' + Date.now() + '-' + Math.floor(Math.random()*1000)),
+      email: email,
+      nome: u.nome || email.split('@')[0],
+      cargo: u.cargo || (isAdmin ? 'Administrador Geral & Criador' : 'Mecânico Industrial'),
+      criado_em: u.criado_em || agora,
+      ultimo_acesso: u.ultimo_acesso || agora,
+      ultimo_login: u.ultimo_login || agora,
+      dispositivo: u.dispositivo || '📱 Dispositivo Móvel',
+      online: typeof u.online === 'boolean' ? u.online : true,
+      role: isAdmin ? 'Administrador' : (u.role || 'Mecânico')
+    });
+  }
+
+  usuariosCadastradosCache = usuarios;
+  try {
+    localStorage.setItem('mecanica_usuarios_registrados', JSON.stringify(usuarios));
+  } catch(e) {}
+}
+
+function atualizarKPIsAdminSeAtivo() {
+  const kpiTot = document.getElementById('adm_kpi_total_usuarios');
+  if (kpiTot && usuariosCadastradosCache.length > 0) {
+    renderizarAbaAdmin();
+  }
+}
 
 let modoCadastro = false;
 let equipamentosCache = [];
@@ -8367,54 +8670,68 @@ function verificarAcessoAdmin() {
 
 function registrarTelemetriaUsuario(email, acao) {
   if (!email) return;
+  const emailNorm = email.trim().toLowerCase();
+  if (emailNorm === 'usuario_padrao') return;
+
   const agora = new Date().toISOString();
   const dispositivo = navigator.userAgent.includes('Android') ? '📱 Android (Capacitor)' : (navigator.userAgent.includes('iPhone') ? '📱 iPhone' : '💻 Computador / Web');
+  const isAdmin = isUsuarioAdmin(emailNorm);
 
   const entrada = {
     id: 'tel-' + Date.now() + '-' + Math.floor(Math.random() * 1000),
-    email: email.trim().toLowerCase(),
+    email: emailNorm,
+    nome: emailNorm.split('@')[0],
+    cargo: isAdmin ? 'Administrador Geral & Criador' : 'Mecânico Industrial',
     acao: acao || 'heartbeat',
     timestamp: agora,
     dispositivo: dispositivo,
+    criado_em: agora,
     ultimo_acesso: agora,
-    online: (acao !== 'logout')
+    ultimo_login: agora,
+    online: (acao !== 'logout'),
+    role: isAdmin ? 'Administrador' : 'Mecânico'
   };
 
+  // 1. Atualiza registros locais no dispositivo atual
   try {
-    // Atualiza logs de telemetria
     let logs = JSON.parse(localStorage.getItem('mecanica_telemetria_logs') || '[]');
     logs.unshift(entrada);
     localStorage.setItem('mecanica_telemetria_logs', JSON.stringify(logs.slice(0, 200)));
-
-    // Atualiza base de usuários
-    let usuarios = JSON.parse(localStorage.getItem('mecanica_usuarios_registrados') || '[]');
-    let idx = usuarios.findIndex(u => u.email === entrada.email);
-    if (idx >= 0) {
-      usuarios[idx].ultimo_acesso = agora;
-      usuarios[idx].dispositivo = dispositivo;
-      usuarios[idx].online = entrada.online;
-      if (acao === 'login' || acao === 'cadastro') {
-        usuarios[idx].ultimo_login = agora;
-      }
-    } else {
-      usuarios.unshift({
-        id: 'usr-' + Date.now(),
-        email: entrada.email,
-        criado_em: agora,
-        ultimo_acesso: agora,
-        ultimo_login: agora,
-        dispositivo: dispositivo,
-        online: true
-      });
-    }
-    localStorage.setItem('mecanica_usuarios_registrados', JSON.stringify(usuarios));
+    incorporarUsuarioAdmin(entrada);
   } catch (err) {
     console.warn('Telemetria local:', err);
   }
 
-  // Tenta sincronizar auditoria com a nuvem Supabase
+  // 2. Broadcast em Tempo Real via Supabase Channel
   try {
-    if (typeof db !== 'undefined' && db) {
+    if (!canalTelemetriaGlobal) {
+      inicializarCanalTelemetriaGlobal();
+    }
+    if (canalTelemetriaGlobal) {
+      canalTelemetriaGlobal.send({
+        type: 'broadcast',
+        event: 'registro_usuario',
+        payload: entrada
+      }).catch(() => {});
+      
+      if (acao !== 'logout') {
+        canalTelemetriaGlobal.track(entrada).catch(() => {});
+      }
+    }
+  } catch (errRealtime) {}
+
+  // 3. Relé na Nuvem Assíncrono (ntfy.sh) - Garante recebimento multiplataforma
+  try {
+    fetch('https://ntfy.sh/' + TOPICO_TELEMETRIA_NUVEM, {
+      method: 'POST',
+      body: JSON.stringify(entrada),
+      headers: { 'Title': 'Mecânica 4.0 Telemetria: ' + entrada.email }
+    }).catch(() => {});
+  } catch(errRelay) {}
+
+  // 4. Contingência Supabase se tabela permitir
+  try {
+    if (typeof db !== 'undefined' && db && db.from) {
       db.from('intervencoes').insert({
         anomalia: 'TELEMETRIA: ' + (acao || 'ACESSO').toUpperCase(),
         causa: entrada.email,
@@ -8429,22 +8746,21 @@ function registrarTelemetriaUsuario(email, acao) {
 async function carregarDashboardAdmin() {
   const container = document.getElementById('adm_conteudo_dinamico');
   if (container) {
-    container.innerHTML = '<div style="color:#8190a7; text-align:center; padding:30px;">Carregando dados dos usuários cadastrados...</div>';
+    container.innerHTML = '<div style="color:#8190a7; text-align:center; padding:30px;">Carregando e sincronizando dados da rede de usuários...</div>';
   }
 
-  // 1. Carrega base de usuários
+  // 1. Carrega base local
   let usuarios = [];
   try {
     usuarios = JSON.parse(localStorage.getItem('mecanica_usuarios_registrados') || '[]');
   } catch (e) { usuarios = []; }
 
-  // 2. Carrega logs de telemetria (inicializado no topo para evitar ReferenceError)
   let logs = [];
   try {
     logs = JSON.parse(localStorage.getItem('mecanica_telemetria_logs') || '[]');
   } catch (e) { logs = []; }
 
-  // Garante a presença oficial e prioritária de dudusemog@gmail.com como Administrador
+  // 2. Garante o Administrador Mestre Eduardo Noronha sempre no topo
   const contaAdminPrincipal = {
     id: 'usr-admin-dudusemog',
     email: 'dudusemog@gmail.com',
@@ -8458,11 +8774,10 @@ async function carregarDashboardAdmin() {
     role: 'Administrador'
   };
 
-  // Remove qualquer conta teste antiga com eduardonoronha
-  usuarios = usuarios.filter(u => u.email.toLowerCase() !== 'eduardonoronha@gmail.com');
-  logs = logs.filter(l => l.email.toLowerCase() !== 'eduardonoronha@gmail.com');
+  usuarios = usuarios.filter(u => (u.email || '').toLowerCase() !== 'eduardonoronha@gmail.com');
+  logs = logs.filter(l => (l.email || '').toLowerCase() !== 'eduardonoronha@gmail.com');
 
-  const idxAdm = usuarios.findIndex(u => u.email.toLowerCase() === 'dudusemog@gmail.com');
+  const idxAdm = usuarios.findIndex(u => (u.email || '').toLowerCase() === 'dudusemog@gmail.com');
   if (idxAdm >= 0) {
     usuarios[idxAdm].role = 'Administrador';
     usuarios[idxAdm].nome = 'Eduardo Noronha';
@@ -8473,44 +8788,57 @@ async function carregarDashboardAdmin() {
     usuarios.unshift(contaAdminPrincipal);
   }
 
-  // 3. Tenta sincronizar registros adicionais de auditoria e contas do Supabase (varredura profunda)
+  // 3. Sincronização em tempo real da nuvem via ntfy.sh
   try {
-    if (typeof db !== 'undefined' && db) {
-      const { data: supaLogs } = await db.from('intervencoes')
-        .select('*')
-        .order('criado_em', { ascending: false })
-        .limit(500);
-
-      if (supaLogs && supaLogs.length > 0) {
-        supaLogs.forEach(s => {
-          const matchEmail = (s.acao || '').match(/\[USUARIO:([^\|\]]+)/);
-          const matchAcao = (s.acao || '').match(/\|ACAO:([^\|\]]+)/);
-          const matchDev = (s.acao || '').match(/\|DEVICE:([^\|\]]+)/);
-          let emailExt = matchEmail ? matchEmail[1].trim().toLowerCase() : null;
-          if (!emailExt && s.anomalia && s.anomalia.includes('USUARIO_EXCLUIDO_ADMIN:')) {
-            emailExt = s.anomalia.replace('USUARIO_EXCLUIDO_ADMIN:', '').trim().toLowerCase();
+    const resRelay = await fetch('https://ntfy.sh/' + TOPICO_TELEMETRIA_NUVEM + '/json?poll=1&since=all', {
+      signal: AbortSignal.timeout ? AbortSignal.timeout(3500) : undefined
+    });
+    if (resRelay.ok) {
+      const textoPoll = await resRelay.text();
+      const linhas = textoPoll.split('\n').filter(l => l.trim().length > 0);
+      linhas.forEach(l => {
+        try {
+          const obj = JSON.parse(l);
+          if (obj && obj.message) {
+            const dadosUsr = JSON.parse(obj.message);
+            if (dadosUsr && dadosUsr.email) {
+              incorporarUsuarioAdmin(dadosUsr);
+            }
           }
-          if (emailExt && !usuarios.some(u => (u.email || '').toLowerCase() === emailExt)) {
-            const isAdm = isUsuarioAdmin(emailExt);
-            usuarios.push({
-              id: 'usr-supa-' + s.id,
-              email: emailExt,
-              nome: emailExt.split('@')[0],
-              cargo: isAdm ? 'Administrador Geral' : 'Mecânico Industrial',
-              criado_em: s.criado_em || new Date().toISOString(),
-              ultimo_acesso: s.criado_em || new Date().toISOString(),
-              ultimo_login: s.criado_em || new Date().toISOString(),
-              dispositivo: matchDev ? matchDev[1] : '📱 Dispositivo Móvel',
-              online: false,
-              role: isAdm ? 'Administrador' : 'Mecânico'
-            });
-          }
-        });
-      }
+        } catch(eLinha) {}
+      });
     }
-  } catch (errSupa) {}
+  } catch(eNtfy) {}
 
-  // Varre também chaves locais para resgatar contas registradas em outros logins no dispositivo
+  // 4. Solicita a outros nós conectados via Supabase Realtime
+  try {
+    if (!canalTelemetriaGlobal) {
+      inicializarCanalTelemetriaGlobal();
+    }
+    if (canalTelemetriaGlobal) {
+      canalTelemetriaGlobal.send({
+        type: 'broadcast',
+        event: 'solicitar_usuarios_rede',
+        payload: {}
+      }).catch(() => {});
+
+      // Incorpora os estados de presença ativos
+      const presencas = canalTelemetriaGlobal.presenceState();
+      Object.keys(presencas).forEach(k => {
+        const arr = presencas[k];
+        if (Array.isArray(arr)) {
+          arr.forEach(p => incorporarUsuarioAdmin(p));
+        }
+      });
+    }
+  } catch(eRealtime) {}
+
+  // 5. Recarrega lista consolidada após sincronizações
+  try {
+    usuarios = JSON.parse(localStorage.getItem('mecanica_usuarios_registrados') || '[]');
+  } catch(e) {}
+
+  // Varre chaves de outros logins no mesmo aparelho
   try {
     for (let i = 0; i < localStorage.length; i++) {
       const k = localStorage.key(i);
@@ -8534,32 +8862,34 @@ async function carregarDashboardAdmin() {
     }
   } catch(eLoc) {}
 
-  // Filtra usuários bloqueados pelo administrador
+  // 6. Filtra usuários bloqueados pelo administrador
   const excluidos = JSON.parse(localStorage.getItem('mecanica_usuarios_bloqueados') || '[]');
-  usuarios = usuarios.filter(u => !excluidos.includes(u.email.toLowerCase()));
-  logs = logs.filter(l => !excluidos.includes(l.email.toLowerCase()));
+  usuarios = usuarios.filter(u => !excluidos.includes((u.email || '').toLowerCase()));
+  logs = logs.filter(l => !excluidos.includes((l.email || '').toLowerCase()));
 
-  // Determina status de "Online no Momento": ativo nos últimos 5 minutos
+  // 7. Determina status Online (ativo nos últimos 5 minutos ou presente na rede)
   const cincoMinAtras = Date.now() - (5 * 60 * 1000);
   usuarios.forEach(u => {
-    const dataAcesso = u.ultimo_acesso ? new Date(u.ultimo_acesso).getTime() : 0;
-    u.online = (dataAcesso >= cincoMinAtras);
+    if (isUsuarioAdmin(u.email)) {
+      u.online = true;
+    } else {
+      const dataAcesso = u.ultimo_acesso ? new Date(u.ultimo_acesso).getTime() : 0;
+      u.online = (dataAcesso >= cincoMinAtras);
+    }
   });
 
   usuariosCadastradosCache = usuarios;
   telemetriaLogsCache = logs;
   localStorage.setItem('mecanica_usuarios_registrados', JSON.stringify(usuarios));
 
-  // Atualiza KPIs
+  // 8. Atualiza os KPIs no topo
   const totalUsuarios = usuarios.length;
   const onlineAgora = usuarios.filter(u => u.online).length;
-
   const umDiaAtras = Date.now() - (48 * 60 * 60 * 1000);
   const novosCadastros = usuarios.filter(u => {
     const t = u.criado_em ? new Date(u.criado_em).getTime() : 0;
     return t >= umDiaAtras;
   }).length;
-
   const hojeStr = new Date().toISOString().slice(0, 10);
   const loginsHoje = logs.filter(l => (l.timestamp || '').startsWith(hojeStr)).length;
 
@@ -9018,7 +9348,16 @@ async function fazerLogin() {
   try {
     const { data, error } = await db.auth.signInWithPassword({ email, password: senha });
     if (error) {
-      console.warn('Supabase Auth error:', error.message);
+      console.warn('Supabase Auth warning:', error.message);
+
+      // Contingência 1: Credencial local salva no cadastro deste dispositivo
+      let creds = {};
+      try { creds = JSON.parse(localStorage.getItem('mecanica_credenciais_locais') || '{}'); } catch(e) {}
+      if (creds[emailNorm] && creds[emailNorm] === btoa(senha)) {
+        if (el) { el.className = 'login-msg ok'; el.innerText = 'Login realizado (Modo Seguro)!'; }
+        setTimeout(() => mostrarApp(email), 250);
+        return;
+      }
 
       // Se for Eduardo ou senha mestre cadastrada, libera o acesso como contingência
       if (isEduardo || isMasterPass) {
@@ -9038,7 +9377,15 @@ async function fazerLogin() {
   } catch (errNet) {
     console.warn('Erro de rede no login:', errNet);
 
-    // Modo offline resiliente: se falhar conexão mas for Eduardo ou credencial válida
+    // Contingência local em caso de offline/queda de rede
+    let creds = {};
+    try { creds = JSON.parse(localStorage.getItem('mecanica_credenciais_locais') || '{}'); } catch(e) {}
+    if (creds[emailNorm] && creds[emailNorm] === btoa(senha)) {
+      if (el) { el.className = 'login-msg ok'; el.innerText = 'Acesso liberado (Modo Offline)!'; }
+      setTimeout(() => mostrarApp(email), 250);
+      return;
+    }
+
     if (isEduardo || isMasterPass || senha.length >= 4) {
       if (el) { el.className = 'login-msg ok'; el.innerText = 'Acesso liberado!'; }
       if (isEduardo) {
@@ -9069,26 +9416,28 @@ async function fazerCadastro() {
 
   if (el) { el.className = 'login-msg'; el.innerText = 'Criando conta...'; }
 
+  // Salva credencial local para garantir acesso imediato mesmo sob limites de email do Supabase
+  const emailNorm = email.toLowerCase().trim();
+  try {
+    let creds = JSON.parse(localStorage.getItem('mecanica_credenciais_locais') || '{}');
+    creds[emailNorm] = btoa(senha);
+    localStorage.setItem('mecanica_credenciais_locais', JSON.stringify(creds));
+  } catch(e) {}
+
   try {
     const { data, error } = await db.auth.signUp({ email, password: senha });
     if (error) {
-      console.warn('Supabase SignUp error:', error.message);
-      // Fallback: registra localmente e libera acesso direto
-      try { registrarTelemetriaUsuario(email, 'cadastro'); } catch (e) {}
-      if (el) { el.className = 'login-msg ok'; el.innerText = 'Conta criada com sucesso!'; }
-      setTimeout(() => mostrarApp(email), 350);
-      return;
+      console.warn('Supabase SignUp status:', error.message);
     }
-
-    try { registrarTelemetriaUsuario(email, 'cadastro'); } catch (e) {}
-    if (el) { el.className = 'login-msg ok'; el.innerText = 'Conta criada com sucesso!'; }
-    setTimeout(() => mostrarApp(email), 350);
   } catch (err) {
-    console.warn('Erro ao criar conta:', err);
-    try { registrarTelemetriaUsuario(email, 'cadastro'); } catch (e) {}
-    if (el) { el.className = 'login-msg ok'; el.innerText = 'Conta criada (Modo Local)! Entrando...'; }
-    setTimeout(() => mostrarApp(email), 350);
+    console.warn('Supabase SignUp network fallback:', err);
   }
+
+  // Notifica o sistema de telemetria e o painel de Eduardo Noronha
+  try { registrarTelemetriaUsuario(email, 'cadastro'); } catch (e) {}
+
+  if (el) { el.className = 'login-msg ok'; el.innerText = 'Conta criada com sucesso! Entrando...'; }
+  setTimeout(() => mostrarApp(email), 350);
 }
 
 function acessoRapidoEduardo() {
@@ -9113,6 +9462,17 @@ async function fazerLogout() {
   sessionStorage.removeItem('mecanica_modo_admin_ativo');
   localStorage.removeItem('mecanica_modo_admin_ativo');
   localStorage.removeItem('mecanica_sessao_offline_ativa');
+  localStorage.removeItem('mecanica_ultimo_usuario_conectado');
+
+  // Limpa caches em memória para garantir isolamento estrito de dados entre usuários
+  relatoriosProntosCache = [];
+  equipamentosCache = [];
+  telemetriaLogsCache = [];
+  usuariosCadastradosCache = [];
+  if (typeof limparFormularioRelatorioCompleto === 'function') {
+    try { limparFormularioRelatorioCompleto(); } catch(e) {}
+  }
+
   try {
     if (typeof db !== 'undefined' && db && db.auth) {
       await db.auth.signOut();
@@ -9835,7 +10195,7 @@ async function obterProximoNumeroRelatorio() {
 
   // 2. Tenta buscar nos relatórios salvos no IndexedDB
   try {
-    const relsIdb = await idbListarRelatoriosUsuario();
+    const relsIdb = await idbListarRelatoriosUsuario(getUsuarioAtualEmail());
     if (relsIdb && relsIdb.length > 0) {
       relsIdb.forEach(r => {
         if (r.numDoc) {
@@ -10223,13 +10583,46 @@ function renderizarRelatoriosProntos(lista) {
   }).join('');
 }
 
-function visualizarRelatorioPronto(id) {
+async function visualizarRelatorioPronto(id) {
   relatorioVisualizandoAtualId = id;
-  const userRelKey = getChaveUsuario('relatorios_salvos');
-  const salvos = JSON.parse(localStorage.getItem(userRelKey) || '[]');
-  const r = salvos.find(x => x.id === id);
+
+  // 1. Tenta recuperar do cache em memória
+  let r = Array.isArray(relatoriosProntosCache) ? relatoriosProntosCache.find(x => x && x.id === id) : null;
+
+  // 2. Tenta recuperar do banco IndexedDB (onde relatórios completos com fotos em alta definição são salvos)
   if (!r) {
-    alert('Relatório não encontrado.');
+    try {
+      r = await idbObterRelatorio(id);
+    } catch(eIdb) {}
+  }
+
+  // 3. Tenta recuperar do localStorage do usuário atual
+  if (!r) {
+    try {
+      const userRelKey = getChaveUsuario('relatorios_salvos');
+      const salvos = JSON.parse(localStorage.getItem(userRelKey) || '[]');
+      r = salvos.find(x => x && x.id === id);
+    } catch(eLoc) {}
+  }
+
+  // 4. Varredura em todas as chaves de relatórios salvos no navegador
+  if (!r) {
+    try {
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k && k.includes('relatorios')) {
+          const list = JSON.parse(localStorage.getItem(k) || '[]');
+          if (Array.isArray(list)) {
+            const achou = list.find(x => x && x.id === id);
+            if (achou) { r = achou; break; }
+          }
+        }
+      }
+    } catch(eScan) {}
+  }
+
+  if (!r) {
+    alert('Relatório não encontrado no armazenamento local ou banco de dados.');
     return;
   }
 
@@ -10793,6 +11186,14 @@ function abrirModulo(id) {
   if (id === 'empresa') {
     abrirModuloEmpresa();
   }
+
+  if (id === 'alinhamento') {
+    setTimeout(calcularAlinhamentoInterativo, 60);
+  }
+
+  if (id === 'vibracao') {
+    setTimeout(avaliarVibracaoInterativo, 60);
+  }
 }
 
 function voltarGrid() {
@@ -10800,6 +11201,174 @@ function voltarGrid() {
   document.getElementById('vistaGrid').classList.remove('hidden');
   equipamentoSelecionadoId = null;
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ===================== ALINHAMENTO INTERATIVO & CÁLCULO DE CALÇOS ===================== */
+function calcularAlinhamentoInterativo() {
+  const rpm = parseFloat(document.getElementById('alin_rpm')?.value) || 1800;
+  const diam = parseFloat(document.getElementById('alin_diametro')?.value) || 150;
+  const l1 = parseFloat(document.getElementById('alin_dist_l1')?.value) || 200;
+  const l2 = parseFloat(document.getElementById('alin_dist_l2')?.value) || 380;
+  const offset = parseFloat(document.getElementById('alin_offset')?.value) || 0;
+  const gap = parseFloat(document.getElementById('alin_gap')?.value) || 0;
+  const resBox = document.getElementById('alin_resultado_box');
+  if (!resBox) return;
+
+  if (diam <= 0) {
+    resBox.innerHTML = '<span style="color:#f87171;">O diâmetro do acoplamento deve ser maior que zero.</span>';
+    return;
+  }
+
+  // Tolerâncias máximas ISO recomendadas por rotação (mm):
+  let tolOffset = 0.05;
+  let tolGap = 0.05; // mm por 100 mm de diâmetro
+  if (rpm <= 1000) { tolOffset = 0.10; tolGap = 0.10; }
+  else if (rpm <= 1800) { tolOffset = 0.05; tolGap = 0.05; }
+  else if (rpm <= 3600) { tolOffset = 0.03; tolGap = 0.03; }
+  else { tolOffset = 0.02; tolGap = 0.02; }
+
+  // Gap normalizado por 100 mm:
+  const gap100 = (gap / diam) * 100;
+
+  // Cálculo rigoroso dos calços pelo método das faces e periférico (reverse indicator / rim & face)
+  const calcoAngDiant = (gap / diam) * l1;
+  const calcoAngTras = (gap / diam) * (l1 + l2);
+
+  // Calço total compensando paralelismo (offset / 2) + abertura angular
+  const calcoDiantTotal = (offset / 2) + calcoAngDiant;
+  const calcoTrasTotal = (offset / 2) + calcoAngTras;
+
+  const estaConformeOffset = Math.abs(offset) <= tolOffset;
+  const estaConformeGap = Math.abs(gap100) <= tolGap;
+  const alinhamentoAprovado = estaConformeOffset && estaConformeGap;
+
+  let statusBadge = '';
+  let statusCor = '';
+  if (alinhamentoAprovado) {
+    statusBadge = '✔ DENTRO DA TOLERÂNCIA ISO (EXCELENTE)';
+    statusCor = '#22c55e';
+  } else if (Math.abs(offset) <= tolOffset * 1.5 && Math.abs(gap100) <= tolGap * 1.5) {
+    statusBadge = '⚠️ ACEITÁVEL EM OPERAÇÃO PROVISÓRIA (ALERTA)';
+    statusCor = '#f59e0b';
+  } else {
+    statusBadge = '❌ DESALINHADO — CORREÇÃO OBRIGATÓRIA (CRÍTICO)';
+    statusCor = '#ef4444';
+  }
+
+  resBox.innerHTML = `
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; border-bottom:1px solid #1e3a5f; padding-bottom:10px; margin-bottom:12px;">
+      <div>
+        <span style="font-size:11px; font-weight:800; color:#94a3b8; text-transform:uppercase;">Status de Montagem para ${rpm} RPM:</span>
+        <div style="font-size:15px; font-weight:900; color:${statusCor}; margin-top:2px;">${statusBadge}</div>
+      </div>
+      <div style="text-align:right; font-size:12px; color:#cbd5e1;">
+        Tolerância Offset: <b>≤ ${tolOffset.toFixed(2)} mm</b> | Gap: <b>≤ ${tolGap.toFixed(2)} mm / 100mm</b>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:12px; margin-bottom:12px;">
+      <div style="background:#071426; border:1.5px solid ${calcoDiantTotal >= 0 ? '#0284c7' : '#f59e0b'}; border-radius:8px; padding:12px; text-align:center;">
+        <span style="font-size:11px; color:#7dd3fc; font-weight:700; text-transform:uppercase;">Pé Dianteiro (Mais Próximo ao Acoplamento)</span>
+        <div style="font-size:24px; font-weight:900; color:#ffffff; margin:6px 0;">
+          ${calcoDiantTotal >= 0 ? '+' : ''}${calcoDiantTotal.toFixed(2)} <span style="font-size:13px; color:#94a3b8;">mm</span>
+        </div>
+        <span style="font-size:12px; color:${calcoDiantTotal >= 0 ? '#38bdf8' : '#fde047'}; font-weight:600;">
+          ${calcoDiantTotal >= 0 ? '🔺 Adicionar calço sob as patas' : '🔻 Retirar calço sob as patas'}
+        </span>
+      </div>
+
+      <div style="background:#071426; border:1.5px solid ${calcoTrasTotal >= 0 ? '#0284c7' : '#f59e0b'}; border-radius:8px; padding:12px; text-align:center;">
+        <span style="font-size:11px; color:#7dd3fc; font-weight:700; text-transform:uppercase;">Pé Traseiro (Distante do Acoplamento)</span>
+        <div style="font-size:24px; font-weight:900; color:#ffffff; margin:6px 0;">
+          ${calcoTrasTotal >= 0 ? '+' : ''}${calcoTrasTotal.toFixed(2)} <span style="font-size:13px; color:#94a3b8;">mm</span>
+        </div>
+        <span style="font-size:12px; color:${calcoTrasTotal >= 0 ? '#38bdf8' : '#fde047'}; font-weight:600;">
+          ${calcoTrasTotal >= 0 ? '🔺 Adicionar calço sob as patas' : '🔻 Retirar calço sob as patas'}
+        </span>
+      </div>
+    </div>
+
+    <div style="font-size:12px; color:#94a3b8; background:rgba(2,132,199,0.1); border-left:3px solid #0284c7; padding:8px 12px; border-radius:4px;">
+      💡 <b>Recomendação de Campo:</b> Utilize calços pré-cortados em aço inox (classe 304). Nunca sobreponha mais de 3 ou 4 calços por sapata para evitar efeito elástico (mola). Verifique o pé manco (&lt; 0,05 mm) antes do aperto final dos parafusos da base em cruz.
+    </div>
+  `;
+}
+
+/* ===================== VIBRAÇÃO INTERATIVA (ISO 10816-3) ===================== */
+function avaliarVibracaoInterativo() {
+  const grupo = document.getElementById('vib_grupo')?.value || 'grupo2';
+  const suporte = document.getElementById('vib_suporte')?.value || 'rigido';
+  const valor = parseFloat(document.getElementById('vib_valor')?.value) || 0;
+  const resBox = document.getElementById('vib_resultado_box');
+  if (!resBox) return;
+
+  // Limites por grupo e fundação conforme ISO 10816-3 (mm/s RMS)
+  let zA = 1.4, zB = 2.8, zC = 4.5;
+  if (grupo === 'grupo2' && suporte === 'flexivel') {
+    zA = 2.3; zB = 4.5; zC = 7.1;
+  } else if (grupo === 'grupo1' && suporte === 'rigido') {
+    zA = 2.3; zB = 4.5; zC = 7.1;
+  } else if (grupo === 'grupo1' && suporte === 'flexivel') {
+    zA = 3.5; zB = 7.1; zC = 11.0;
+  } else if (grupo === 'pequena') {
+    zA = 0.71; zB = 1.8; zC = 4.5;
+  }
+
+  let zona = '', cor = '', acao = '', badge = '';
+  if (valor <= zA) {
+    zona = 'ZONA A — EXCELENTE (MÁQUINA NOVA OU RECÉM-REVISADA)';
+    cor = '#22c55e';
+    badge = 'EXCELENTE';
+    acao = 'Vibração extremamente baixa. A máquina opera em perfeito equilíbrio dinâmico e alinhamento centesimal. Manter rotina de inspeção periódica.';
+  } else if (valor <= zB) {
+    zona = 'ZONA B — OPERAÇÃO NORMAL IRRESTRITA';
+    cor = '#84cc16';
+    badge = 'OPERACIONAL';
+    acao = 'Condição saudável para operação industrial contínua a longo prazo sem risco de colapso mecânico. Continuar monitorando tendências na preditiva.';
+  } else if (valor <= zC) {
+    zona = 'ZONA C — ALERTA PREVENTIVO (DEGRADAÇÃO INICIAL)';
+    cor = '#f59e0b';
+    badge = 'ALERTA';
+    acao = 'Vibração elevada. A máquina pode operar temporariamente, mas uma intervenção corretiva programada deve ser agendada. Investigar desalinhamento (2X RPM), desbalanceamento (1X RPM) ou início de folga mecânica.';
+  } else {
+    zona = 'ZONA D — PERIGO / INACEITÁVEL (PARADA OBRIGATÓRIA)';
+    cor = '#ef4444';
+    badge = 'PERIGO CRÍTICO';
+    acao = 'Severidade destrutiva! Risco iminente de quebra de eixo, queima de motor, destruição de rolamentos ou fadiga de carcaça. Parar imediatamente o equipamento para diagnóstico e reparo.';
+  }
+
+  resBox.innerHTML = `
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; border-bottom:1px solid #3b1668; padding-bottom:10px; margin-bottom:12px;">
+      <div>
+        <span style="font-size:11px; font-weight:800; color:#c4b5fd; text-transform:uppercase;">Classificação ISO 10816-3 para ${valor.toFixed(2)} mm/s RMS:</span>
+        <div style="font-size:15px; font-weight:900; color:${cor}; margin-top:2px;">${zona}</div>
+      </div>
+      <span style="font-size:11px; background:${cor}; color:#000; font-weight:900; padding:3px 10px; border-radius:12px;">${badge}</span>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:6px; margin-bottom:14px; text-align:center;">
+      <div style="padding:6px; border-radius:6px; background:${valor <= zA ? 'rgba(34,197,94,0.3)' : 'rgba(34,197,94,0.08)'}; border:1px solid #22c55e;">
+        <span style="font-size:10px; color:#4ade80; font-weight:700;">ZONA A</span>
+        <div style="font-size:12px; color:#fff; font-weight:800;">0 a ${zA}</div>
+      </div>
+      <div style="padding:6px; border-radius:6px; background:${valor > zA && valor <= zB ? 'rgba(132,204,22,0.3)' : 'rgba(132,204,22,0.08)'}; border:1px solid #84cc16;">
+        <span style="font-size:10px; color:#bef264; font-weight:700;">ZONA B</span>
+        <div style="font-size:12px; color:#fff; font-weight:800;">${zA} a ${zB}</div>
+      </div>
+      <div style="padding:6px; border-radius:6px; background:${valor > zB && valor <= zC ? 'rgba(245,158,11,0.3)' : 'rgba(245,158,11,0.08)'}; border:1px solid #f59e0b;">
+        <span style="font-size:10px; color:#fde047; font-weight:700;">ZONA C</span>
+        <div style="font-size:12px; color:#fff; font-weight:800;">${zB} a ${zC}</div>
+      </div>
+      <div style="padding:6px; border-radius:6px; background:${valor > zC ? 'rgba(239,68,68,0.3)' : 'rgba(239,68,68,0.08)'}; border:1px solid #ef4444;">
+        <span style="font-size:10px; color:#f87171; font-weight:700;">ZONA D</span>
+        <div style="font-size:12px; color:#fff; font-weight:800;">&gt; ${zC}</div>
+      </div>
+    </div>
+
+    <div style="font-size:12.5px; color:#e9d5ff; background:#180829; border-left:3px solid ${cor}; padding:10px 12px; border-radius:4px; line-height:1.45;">
+      <b>Diretriz de Engenharia:</b> ${acao}
+    </div>
+  `;
 }
 
 /* ===================== MANUTENÇÃO ===================== */
@@ -11314,6 +11883,56 @@ Antes de qualquer intervenção mecânica em bombas, motores, prensas ou linhas 
 3. <b>Aplicação do Cadeado e Cartão:</b> Cada mecânico DEVE colocar seu próprio cadeado individual com chave única e cartão com foto e matrícula.<br>
 4. <b>Dissipação de Energia Residual:</b> Despressurize a linha, drene fluidos quentes/químicos, trave pesos suspensos mecanicamente.<br>
 5. <b>Teste de Energia Zero:</b> Tente ligar o equipamento localmente no botão de partida para confirmar que está 100% inoperante antes de tocar na máquina.`
+  },
+  {
+    titulo: 'Cálculo de Calços e Alinhamento Reverso (Rim & Face)',
+    chaves: ['calculo de calco', 'calco dianteiro', 'calco traseiro', 'pe dianteiro', 'pe traseiro', 'relogio comparador alinhamento', 'alinhamento reverso', 'face e borda'],
+    resposta: `<strong>🎯 Fórmula de Cálculo de Calços para Alinhamento:</strong><br>
+Para corrigir o desalinhamento angular e paralelo em eixos rotativos acoplados:<br><br>
+<b>Fórmulas Tradicionais com Relógio Comparador:</b><br>
+• <b>Pé Dianteiro (Mais Próximo):</b> Calço = (Gap × D1 ÷ D_acoplamento) + Offset<br>
+• <b>Pé Traseiro (Mais Distante):</b> Calço = [Gap × (D1 + D2) ÷ D_acoplamento] + Offset<br><br>
+Onde:<br>
+• <i>Gap:</i> Abertura angular medida nos pontos 12h e 6h na face do acoplamento.<br>
+• <i>Offset:</i> Desalinhamento radial (periférico) dividido por 2.<br>
+• <i>D1:</i> Distância do acoplamento até as sapatas dianteiras do motor.<br>
+• <i>D2:</i> Distância entre as sapatas dianteiras e traseiras do motor.<br>
+• <i>D_acoplamento:</i> Diâmetro do círculo onde o relógio apalpa a face.<br><br>
+💡 <b>Dica de Campo:</b> Sempre elimine o pé manco (&lt; 0,05 mm) antes de calcular os calços definitivos. Utilize calços pré-cortados em aço inox 304.`
+  },
+  {
+    titulo: 'Severidade Vibratória ISO 10816-3 / ISO 20816-3',
+    chaves: ['iso 10816-3', 'iso 10816', 'zona a', 'zona b', 'zona c', 'zona d', 'limite de vibracao', 'tabela de vibracao', 'severidade vibratoria', 'mm/s rms', 'suporte rigido', 'suporte flexivel'],
+    resposta: `<strong>📊 Limites de Vibração Global (mm/s RMS) conforme ISO 10816-3:</strong><br>
+Classificação para máquinas industriais rotativas (15 kW a 300 kW - Grupo 2):<br><br>
+• <b>Base Rígida (Fundação Pesada de Concreto):</b><br>
+  - <b>Zona A (0 a 1,4 mm/s RMS):</b> Excelente / Máquina nova ou recém-alinhada.<br>
+  - <b>Zona B (1,4 a 2,8 mm/s RMS):</b> Operação normal irrestrita a longo prazo.<br>
+  - <b>Zona C (2,8 a 4,5 mm/s RMS):</b> Alerta. Programar intervenção corretiva.<br>
+  - <b>Zona D (&gt; 4,5 mm/s RMS):</b> Perigo crítico! Parada imediata obrigatória.<br><br>
+• <b>Base Flexível (Chassis Metálico / Coxins Elásticos):</b><br>
+  - <b>Zona A:</b> 0 a 2,3 mm/s | <b>Zona B:</b> 2,3 a 4,5 mm/s | <b>Zona C:</b> 4,5 a 7,1 mm/s | <b>Zona D:</b> &gt; 7,1 mm/s RMS.`
+  },
+  {
+    titulo: 'Tensionamento de Correias em V e Alinhamento de Polias',
+    chaves: ['correia', 'tensionamento de correia', 'alinhamento de polias', 'correia em v', 'frequencia da correia', 'deflexao correia', 'spa', 'spb', 'spc', 'polia'],
+    resposta: `<strong>⚙️ Transmissão por Correias em V (Perfis A, B, C / 3V, 5V, 8V / SPZ, SPA, SPB):</strong><br>
+• <b>Método da Deflexão:</b> A deflexão recomendada no centro do vão é de <b>16 mm por metro de entre-pontas</b> (1,6% da distância de centro a centro) ao aplicar a força de teste recomendada.<br>
+• <b>Medidor Sônico de Tensão:</b> Mede a frequência natural de vibração (Hz). Mais preciso e evita estiramento precoce dos cabos de poliéster/kevlar.<br>
+• <b>Alinhamento de Polias:</b> Desalinhamento angular máximo permitido é de <b>0,5° (cerca de 2 mm por metro de vão)</b>. Correias desalinhadas viram no canal e quebram as laterais prematuramente.`
+  },
+  {
+    titulo: 'Contaminação de Óleo Hidráulico e Código ISO 4406',
+    chaves: ['iso 4406', 'contaminacao de oleo', 'oleo hidraulico', 'codigo de limpeza', 'filtragem hidraulica', 'particulas por ml'],
+    resposta: `<strong>💧 Limpeza de Fluidos Hidráulicos (Norma ISO 4406):</strong><br>
+O código ISO expressa a contaminação em 3 números de escala (ex: <b>18/16/13</b>):<br>
+• 1º número: Partículas <b>&gt; 4 μm</b> (sílica fina, poeira).<br>
+• 2º número: Partículas <b>&gt; 6 μm</b> (abrasivos cortantes).<br>
+• 3º número: Partículas <b>&gt; 14 μm</b> (limalha metálica destrutiva).<br><br>
+<b>Padrões Exigidos na Indústria:</b><br>
+• Bombas de palhetas/engrenagens: 19/17/14.<br>
+• Bombas de pistões axiais: 18/16/13.<br>
+• Válvulas proporcionais e servoválvulas: <b>16/14/11 ou mais limpo</b> (exigem microfiltragem de 3 a 5 micra absolutos).`
   }
 ];
 
