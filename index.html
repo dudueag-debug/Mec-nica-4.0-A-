@@ -33,11 +33,18 @@
 <meta name="msapplication-TileColor" content="#0c1424">
 <meta name="msapplication-TileImage" content="icon-192.png">
 
-<!-- Open Graph / Compartilhamento Visual -->
-<meta property="og:type" content="website">
-<meta property="og:title" content="Mecânica 4.0 IA">
-<meta property="og:description" content="Assistente & Gestão Especializada para Mecânica Industrial 4.0">
-<meta property="og:image" content="assets/app_icon_mecanica_40.png">
+<!-- Prevenção de Cache para Atualizações Imediatas -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
+<!-- THREE.JS 3D ENGINE (LOCAL OFFLINE COM FALLBACK CDN) -->
+<script src="assets/three.min.js?v=4.0.3d"></script>
+<script>
+  if (typeof THREE === 'undefined') {
+    document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>');
+  }
+</script>
 
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
@@ -2123,9 +2130,9 @@
 
 .robo-portal-container {
   position: relative;
-  width: 130px;
-  height: 130px;
-  margin: 0 auto 22px auto;
+  width: 190px;
+  height: 190px;
+  margin: 0 auto 20px auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2133,25 +2140,27 @@
 
 .robo-portal-ring {
   position: absolute;
-  top: -6px;
-  left: -6px;
-  right: -6px;
-  bottom: -6px;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
   border-radius: 50%;
   border: 2px dashed #38bdf8;
   animation: rotatePortal 12s linear infinite;
-  box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.6);
+  pointer-events: none;
 }
 
 .robo-portal-ring-outer {
   position: absolute;
-  top: -14px;
-  left: -14px;
-  right: -14px;
-  bottom: -14px;
+  top: -18px;
+  left: -18px;
+  right: -18px;
+  bottom: -18px;
   border-radius: 50%;
-  border: 1px solid rgba(14, 165, 233, 0.3);
+  border: 1.5px solid rgba(14, 165, 233, 0.4);
   animation: rotatePortalRev 18s linear infinite;
+  pointer-events: none;
 }
 
 @keyframes rotatePortal {
@@ -2163,9 +2172,21 @@
   100% { transform: rotate(0deg); }
 }
 
+.robo-portal-canvas-3d {
+  width: 172px;
+  height: 172px;
+  border-radius: 50%;
+  display: block;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 35px rgba(0, 242, 254, 0.5), inset 0 0 25px rgba(0, 0, 0, 0.9);
+  background: radial-gradient(circle at 50% 50%, #0c1a2f 0%, #030712 100%);
+  border: 2px solid #00f2fe;
+}
+
 .robo-portal-avatar {
-  width: 118px;
-  height: 118px;
+  width: 172px;
+  height: 172px;
   border-radius: 50%;
   object-fit: cover;
   border: 2.5px solid #0284c7;
@@ -2177,20 +2198,38 @@
 .robo-scanner-laser {
   position: absolute;
   top: 10px;
-  left: 6px;
-  right: 6px;
+  left: 10px;
+  right: 10px;
   height: 3px;
   background: linear-gradient(90deg, transparent, #38bdf8, #fff, #38bdf8, transparent);
-  box-shadow: 0 0 12px #38bdf8;
-  z-index: 3;
+  box-shadow: 0 0 16px #38bdf8, 0 0 25px rgba(56, 189, 248, 0.7);
+  z-index: 4;
   border-radius: 2px;
-  animation: laserScan 2s ease-in-out infinite alternate;
+  animation: laserScan 2.4s ease-in-out infinite alternate;
+  pointer-events: none;
 }
 
 @keyframes laserScan {
-  0% { top: 10px; opacity: 0.3; }
+  0% { top: 12px; opacity: 0.3; }
   50% { opacity: 1; }
-  100% { top: 112px; opacity: 0.3; }
+  100% { top: 164px; opacity: 0.3; }
+}
+
+.robo-3d-tag-badge {
+  position: absolute;
+  bottom: -10px;
+  background: linear-gradient(135deg, #0284c7, #0369a1);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  padding: 3px 12px;
+  border-radius: 12px;
+  border: 1px solid #38bdf8;
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.6);
+  z-index: 5;
+  text-transform: uppercase;
+  pointer-events: none;
 }
 
 .robo-loading-brand {
@@ -2673,8 +2712,10 @@
     <div class="robo-portal-container">
       <div class="robo-portal-ring"></div>
       <div class="robo-portal-ring-outer"></div>
-      <img src="assets/mecanico_robo_ia.jpg" alt="Robô Mecânico 4.0 IA" class="robo-portal-avatar">
+      <canvas id="canvasRobo3DLogin" width="344" height="344" class="robo-portal-canvas-3d"></canvas>
+      <img src="assets/mecanico_robo_ia.jpg" id="avatarRoboLoginFallback" alt="Robô Mecânico 4.0 IA" class="robo-portal-avatar" style="display:none;">
       <div class="robo-scanner-laser"></div>
+      <div class="robo-3d-tag-badge">🤖 ROBÔ IA 3D WEBGL</div>
     </div>
     <div class="robo-loading-brand">
       <div class="robo-loading-title">MECÂNICA 4.0 IA</div>
@@ -9796,13 +9837,347 @@ function forcarLogoutUsuarioAdmin(id, email) {
   carregarDashboardAdmin();
 }
 
+/* ==========================================================================
+   MOTOR THREE.JS 3D DO ROBÔ MECÂNICO 4.0 IA
+   Modelagem WebGL 3D em tempo real com iluminação PBR, anéis orbitais e partículas
+   ========================================================================== */
+function criarRoboMecanico3D(canvasId, options = {}) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return null;
+  if (typeof THREE === 'undefined') {
+    console.warn('Three.js ainda não disponível para', canvasId);
+    return null;
+  }
+
+  // Previne duplicação de instâncias no mesmo canvas
+  if (canvas.__robo3d_instancia) {
+    return canvas.__robo3d_instancia;
+  }
+
+  try {
+    const width = options.width || canvas.clientWidth || canvas.width || 200;
+    const height = options.height || canvas.clientHeight || canvas.height || 200;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 100);
+    camera.position.set(0, 0.35, 5.0);
+
+    const renderer = new THREE.WebGLRenderer({
+      canvas: canvas,
+      alpha: true,
+      antialias: true,
+      powerPreference: 'high-performance'
+    });
+    renderer.setSize(width, height, false);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+
+    // Grupo principal do Robô 3D
+    const roboGroup = new THREE.Group();
+    scene.add(roboGroup);
+
+    // MATERIAIS PBR DE ALTA DEFINIÇÃO INDUSTRIAL
+    const matTitanio = new THREE.MeshStandardMaterial({
+      color: 0x1e293b,
+      metalness: 0.88,
+      roughness: 0.22
+    });
+    const matChassi = new THREE.MeshStandardMaterial({
+      color: 0x090f1d,
+      metalness: 0.92,
+      roughness: 0.28
+    });
+    const matNeonCyan = new THREE.MeshStandardMaterial({
+      color: 0x00f2fe,
+      emissive: 0x00f2fe,
+      emissiveIntensity: 1.6,
+      roughness: 0.1,
+      metalness: 0.2
+    });
+    const matAzulMetal = new THREE.MeshStandardMaterial({
+      color: 0x0284c7,
+      metalness: 0.85,
+      roughness: 0.25
+    });
+    const matOuro = new THREE.MeshStandardMaterial({
+      color: 0xf59e0b,
+      metalness: 0.9,
+      roughness: 0.3
+    });
+
+    // 1. CABEÇA / CAPACETE
+    const cabecaGroup = new THREE.Group();
+    roboGroup.add(cabecaGroup);
+    cabecaGroup.position.y = 0.65;
+
+    // Crânio principal
+    const meshCranio = new THREE.Mesh(new THREE.CylinderGeometry(0.52, 0.46, 0.72, 24), matTitanio);
+    cabecaGroup.add(meshCranio);
+
+    // Domo superior arredondado
+    const meshDomo = new THREE.Mesh(new THREE.SphereGeometry(0.52, 24, 16, 0, Math.PI * 2, 0, Math.PI * 0.5), matAzulMetal);
+    meshDomo.position.y = 0.36;
+    cabecaGroup.add(meshDomo);
+
+    // Crista superior de telemetria
+    const meshCrista = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.14, 0.7), matNeonCyan);
+    meshCrista.position.set(0, 0.52, 0);
+    cabecaGroup.add(meshCrista);
+
+    // Moldura do Visor
+    const meshVisor = new THREE.Mesh(new THREE.BoxGeometry(0.76, 0.26, 0.36), matChassi);
+    meshVisor.position.set(0, 0.05, 0.36);
+    cabecaGroup.add(meshVisor);
+
+    // Lentes ópticas cilíndricas com emissão Cyan Neon
+    const geoOlho = new THREE.CylinderGeometry(0.08, 0.08, 0.04, 16);
+    geoOlho.rotateX(Math.PI / 2);
+    const olhoEsq = new THREE.Mesh(geoOlho, matNeonCyan);
+    olhoEsq.position.set(-0.22, 0.06, 0.54);
+    cabecaGroup.add(olhoEsq);
+
+    const olhoDir = new THREE.Mesh(geoOlho, matNeonCyan);
+    olhoDir.position.set(0.22, 0.06, 0.54);
+    cabecaGroup.add(olhoDir);
+
+    // Linha de scanner horizontal que corre no visor
+    const meshBarraScan = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.03, 0.02), matNeonCyan);
+    meshBarraScan.position.set(0, 0.06, 0.55);
+    cabecaGroup.add(meshBarraScan);
+
+    // Módulos auriculares / antenas de telemetria
+    const geoOuvido = new THREE.CylinderGeometry(0.14, 0.14, 0.24, 16);
+    geoOuvido.rotateZ(Math.PI / 2);
+    const ouvidoEsq = new THREE.Mesh(geoOuvido, matAzulMetal);
+    ouvidoEsq.position.set(-0.56, 0.05, 0);
+    cabecaGroup.add(ouvidoEsq);
+
+    const ouvidoDir = new THREE.Mesh(geoOuvido, matAzulMetal);
+    ouvidoDir.position.set(0.56, 0.05, 0);
+    cabecaGroup.add(ouvidoDir);
+
+    const geoAntena = new THREE.CylinderGeometry(0.02, 0.03, 0.45, 8);
+    const antenaEsq = new THREE.Mesh(geoAntena, matOuro);
+    antenaEsq.position.set(-0.56, 0.3, 0);
+    antenaEsq.rotation.z = 0.25;
+    cabecaGroup.add(antenaEsq);
+
+    const antenaDir = new THREE.Mesh(geoAntena, matOuro);
+    antenaDir.position.set(0.56, 0.3, 0);
+    antenaDir.rotation.z = -0.25;
+    cabecaGroup.add(antenaDir);
+
+    // Queixo reforçado
+    const meshQueixo = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.16, 0.2), matChassi);
+    meshQueixo.position.set(0, -0.25, 0.4);
+    cabecaGroup.add(meshQueixo);
+
+    // 2. PESCOÇO
+    const meshPescoco = new THREE.Mesh(new THREE.CylinderGeometry(0.24, 0.28, 0.28, 16), matChassi);
+    meshPescoco.position.set(0, 0.22, 0);
+    roboGroup.add(meshPescoco);
+
+    // 3. TORSO / PEITORAL
+    const torsoGroup = new THREE.Group();
+    roboGroup.add(torsoGroup);
+    torsoGroup.position.set(0, -0.45, 0);
+
+    const meshTorso = new THREE.Mesh(new THREE.BoxGeometry(1.35, 0.9, 0.7), matTitanio);
+    torsoGroup.add(meshTorso);
+
+    // Ombreiras
+    const ombroEsq = new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 16), matAzulMetal);
+    ombroEsq.position.set(-0.85, 0.28, 0);
+    torsoGroup.add(ombroEsq);
+
+    const ombroDir = new THREE.Mesh(new THREE.SphereGeometry(0.3, 16, 16), matAzulMetal);
+    ombroDir.position.set(0.85, 0.28, 0);
+    torsoGroup.add(ombroDir);
+
+    // REATOR ARC CORE NO PEITO (Pulsante)
+    const meshReatorAnel = new THREE.Mesh(new THREE.TorusGeometry(0.24, 0.045, 16, 32), matOuro);
+    meshReatorAnel.position.set(0, 0.08, 0.36);
+    torsoGroup.add(meshReatorAnel);
+
+    const meshReatorCore = new THREE.Mesh(new THREE.SphereGeometry(0.14, 16, 16), matNeonCyan);
+    meshReatorCore.position.set(0, 0.08, 0.36);
+    torsoGroup.add(meshReatorCore);
+
+    const luzReator = new THREE.PointLight(0x00f2fe, 2.5, 3.5);
+    luzReator.position.set(0, 0.08, 0.5);
+    torsoGroup.add(luzReator);
+
+    // 4. ANÉIS HOLOGRÁFICOS ORBITAIS (METROLOGIA E CAD 3D)
+    const anel1 = new THREE.Mesh(
+      new THREE.TorusGeometry(1.3, 0.02, 12, 64),
+      new THREE.MeshBasicMaterial({ color: 0x00f2fe, transparent: true, opacity: 0.85 })
+    );
+    scene.add(anel1);
+
+    const anel2 = new THREE.Mesh(
+      new THREE.TorusGeometry(1.55, 0.018, 12, 64),
+      new THREE.MeshBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.65 })
+    );
+    scene.add(anel2);
+
+    const anel3 = new THREE.Mesh(
+      new THREE.TorusGeometry(1.8, 0.015, 12, 64),
+      new THREE.MeshBasicMaterial({ color: 0xf59e0b, transparent: true, opacity: 0.75 })
+    );
+    scene.add(anel3);
+
+    // 5. NUVEM DE PARTÍCULAS / DADOS INDUSTRIAIS
+    const qtdParticulas = options.mini ? 30 : 90;
+    const geoParticulas = new THREE.BufferGeometry();
+    const posParticulas = new Float32Array(qtdParticulas * 3);
+    for (let i = 0; i < qtdParticulas * 3; i += 3) {
+      posParticulas[i] = (Math.random() - 0.5) * 4.2;
+      posParticulas[i + 1] = (Math.random() - 0.5) * 4.2;
+      posParticulas[i + 2] = (Math.random() - 0.5) * 3.5;
+    }
+    geoParticulas.setAttribute('position', new THREE.BufferAttribute(posParticulas, 3));
+    const matParticulas = new THREE.PointsMaterial({
+      color: 0x38bdf8,
+      size: 0.05,
+      transparent: true,
+      opacity: 0.8
+    });
+    const particulas = new THREE.Points(geoParticulas, matParticulas);
+    scene.add(particulas);
+
+    // LUZES
+    scene.add(new THREE.AmbientLight(0xffffff, 0.85));
+    const dirLight1 = new THREE.DirectionalLight(0x38bdf8, 1.8);
+    dirLight1.position.set(3, 4, 4);
+    scene.add(dirLight1);
+
+    const dirLight2 = new THREE.DirectionalLight(0x0284c7, 1.2);
+    dirLight2.position.set(-3, -2, -2);
+    scene.add(dirLight2);
+
+    // Rastreamento interativo de mouse/toque
+    let targetRotY = 0, targetRotX = 0;
+    function onPointerMove(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      const mouseX = ((clientX - rect.left) / rect.width) * 2 - 1;
+      const mouseY = -(((clientY - rect.top) / rect.height) * 2 - 1);
+      targetRotY = mouseX * 0.65;
+      targetRotX = -mouseY * 0.35;
+    }
+    window.addEventListener('mousemove', onPointerMove, { passive: true });
+    canvas.addEventListener('touchmove', onPointerMove, { passive: true });
+
+    // Loop de animação contínua
+    let animId = null;
+    const clock = new THREE.Clock();
+    function animar() {
+      animId = requestAnimationFrame(animar);
+      const t = clock.getElapsedTime();
+
+      // Hovering flutuante suave
+      roboGroup.position.y = Math.sin(t * 2.2) * 0.09;
+
+      // Olhar suave em direção ao usuário
+      cabecaGroup.rotation.y += (targetRotY * 1.2 - cabecaGroup.rotation.y) * 0.06;
+      cabecaGroup.rotation.x += (targetRotX * 0.9 - cabecaGroup.rotation.x) * 0.06;
+      roboGroup.rotation.y += (targetRotY * 0.4 - roboGroup.rotation.y) * 0.03;
+
+      // Scanner laser no visor
+      meshBarraScan.position.x = Math.sin(t * 4.0) * 0.14;
+
+      // Pulso do Reator Arc Core
+      luzReator.intensity = 2.0 + Math.sin(t * 5.0) * 1.0;
+      meshReatorCore.scale.setScalar(0.95 + Math.sin(t * 5.0) * 0.1);
+
+      // Rotação dos anéis orbitais
+      anel1.rotation.x = t * 0.6;
+      anel1.rotation.y = t * 0.4;
+
+      anel2.rotation.y = -t * 0.5;
+      anel2.rotation.z = t * 0.3;
+
+      anel3.rotation.z = t * 0.4;
+      anel3.rotation.x = -t * 0.5;
+
+      // Rotação das partículas
+      particulas.rotation.y = t * 0.06;
+
+      renderer.render(scene, camera);
+    }
+    animar();
+
+    const instancia = {
+      scene,
+      camera,
+      renderer,
+      animId,
+      parar: () => {
+        if (animId) cancelAnimationFrame(animId);
+        window.removeEventListener('mousemove', onPointerMove);
+      }
+    };
+    canvas.__robo3d_instancia = instancia;
+    return instancia;
+  } catch (err) {
+    console.error('Erro na criação do Robô 3D:', err);
+    return null;
+  }
+}
+
+function iniciarRobo3DLogin() {
+  const canvas = document.getElementById('canvasRobo3DLogin');
+  const fallback = document.getElementById('avatarRoboLoginFallback');
+  if (!canvas) return;
+
+  if (typeof THREE === 'undefined') {
+    setTimeout(iniciarRobo3DLogin, 120);
+    return;
+  }
+
+  try {
+    const inst = criarRoboMecanico3D('canvasRobo3DLogin', { width: 344, height: 344 });
+    if (!inst && fallback) {
+      fallback.style.display = 'block';
+      canvas.style.display = 'none';
+    }
+  } catch (e) {
+    if (fallback) fallback.style.display = 'block';
+  }
+}
+
+function iniciarRobo3DModal() {
+  const canvas = document.getElementById('canvasRobo3DModal');
+  const fallback = document.getElementById('avatarRoboModalFallback');
+  if (!canvas || typeof THREE === 'undefined') return;
+
+  try {
+    const inst = criarRoboMecanico3D('canvasRobo3DModal', { width: 96, height: 96, mini: true });
+    if (!inst && fallback) {
+      fallback.style.display = 'block';
+      canvas.style.display = 'none';
+    }
+  } catch (e) {
+    if (fallback) fallback.style.display = 'block';
+  }
+}
+
+function iniciarRobo3DBtn() {
+  const canvas = document.getElementById('canvasRobo3DBtn');
+  if (!canvas || typeof THREE === 'undefined') return;
+
+  try {
+    criarRoboMecanico3D('canvasRobo3DBtn', { width: 112, height: 112, mini: true });
+  } catch (e) {}
+}
+
 /* ===================== LOGIN / SESSÃO ===================== */
 async function verificarSessao() {
   try {
     if (typeof db !== 'undefined' && db && db.auth) {
       const { data } = await db.auth.getSession();
       if (data && data.session && data.session.user && data.session.user.email) {
-        mostrarApp(data.session.user.email);
+        iniciarCarregamentoComRoboIA(data.session.user.email);
         return;
       }
     }
@@ -9810,11 +10185,11 @@ async function verificarSessao() {
     console.warn('Verificação de sessão remota:', err);
   }
 
-  // Fallback: restaura sessão salva localmente se existir
+  // Fallback: restaura sessão salva localmente exibindo tela com Robô 3D
   const emailSalvo = localStorage.getItem('mecanica_ultimo_usuario_conectado');
   const sessaoAtiva = localStorage.getItem('mecanica_sessao_offline_ativa');
   if (emailSalvo && sessaoAtiva === 'true') {
-    mostrarApp(emailSalvo);
+    iniciarCarregamentoComRoboIA(emailSalvo);
     return;
   }
 
@@ -9842,6 +10217,9 @@ function iniciarCarregamentoComRoboIA(email) {
     overlay.offsetHeight;
     overlay.classList.add('active');
   }
+
+  // Inicializa o Robô 3D WebGL na tela de carregamento
+  iniciarRobo3DLogin();
 
   const etapas = [
     { p: 18, msg: 'Validando credenciais e permissões de acesso...' },
@@ -9899,9 +10277,14 @@ function mostrarApp(email) {
   }
   if (appContent) appContent.style.display = 'block';
 
-  // Exibe o botão flutuante do Robô IA
+  // Exibe o botão flutuante do Robô IA com animação 3D
   const btnFlutuante = document.getElementById('btn-flutuante-robo');
-  if (btnFlutuante) btnFlutuante.style.display = 'flex';
+  if (btnFlutuante) {
+    btnFlutuante.style.display = 'flex';
+    if (typeof iniciarRobo3DBtn === 'function') {
+      try { iniciarRobo3DBtn(); } catch(e) {}
+    }
+  }
 
   const emailNorm = (email || '').toLowerCase().trim();
   const isAdmin = isUsuarioAdmin(emailNorm);
@@ -14512,6 +14895,11 @@ function alternarModalRoboFlutuante() {
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
     
+    // Inicializa o Robô 3D no cabeçalho do Modal
+    if (typeof iniciarRobo3DModal === 'function') {
+      try { iniciarRobo3DModal(); } catch(e) {}
+    }
+
     // Inicializa desenho técnico e cálculo de tolerância se estiver na aba de desenho
     setTimeout(() => {
       selecionarCroquiTecnicoRobo(croquiAtualRobo || 'eixo');
@@ -15400,7 +15788,8 @@ window.addEventListener('DOMContentLoaded', () => {
   <!-- ================= BOTÃO FLUTUANTE DO ROBÔ MECÂNICO IA ================= -->
   <div id="btn-flutuante-robo" onclick="alternarModalRoboFlutuante()" title="Robô Mecânico 4.0 IA - Especialista Virtual" style="display:none;">
     <div class="robo-floating-halo"></div>
-    <img src="assets/mecanico_robo_ia.jpg" alt="Robô Mecânico IA">
+    <canvas id="canvasRobo3DBtn" width="112" height="112" style="width:56px; height:56px; border-radius:50%; position:absolute; top:0; left:0; z-index:2; pointer-events:none;"></canvas>
+    <img src="assets/mecanico_robo_ia.jpg" id="avatarRoboBtnFallback" alt="Robô Mecânico IA">
     <div class="robo-floating-badge" title="Robô IA Ativo"></div>
     <div class="robo-tooltip">🤖 Robô IA 4.0 (Clique para abrir)</div>
   </div>
@@ -15411,9 +15800,12 @@ window.addEventListener('DOMContentLoaded', () => {
       <!-- CABEÇALHO -->
       <div class="robo-modal-header">
         <div class="robo-header-left">
-          <img src="assets/mecanico_robo_ia.jpg" alt="Robô Mecânico IA" class="robo-header-avatar">
+          <div style="position:relative; width:48px; height:48px; border-radius:50%; overflow:hidden; border:2px solid #00f2fe; box-shadow:0 0 12px rgba(0,242,254,0.45); flex-shrink:0; background:#070f1e;">
+            <canvas id="canvasRobo3DModal" width="96" height="96" style="width:48px; height:48px; display:block;"></canvas>
+            <img src="assets/mecanico_robo_ia.jpg" id="avatarRoboModalFallback" alt="Robô Mecânico IA" class="robo-header-avatar" style="display:none; width:100%; height:100%; object-fit:cover; margin:0;">
+          </div>
           <div class="robo-header-title">
-            <h3>🤖 Robô Mecânico 4.0 IA <span class="rf-tag-tech">ONLINE</span></h3>
+            <h3>🤖 Robô Mecânico 4.0 IA <span class="rf-tag-tech">3D ONLINE</span></h3>
             <p>Engenharia & Manutenção Industrial • Especialista Técnico Integrado</p>
           </div>
         </div>
