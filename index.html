@@ -1978,6 +1978,88 @@
   color: #ffffff;
 }
 
+
+/* ==================== ESTILOS DA PLATAFORMA EM 3 NÍVEIS (MECÂNICO, SUPERVISOR, EMPRESA) ==================== */
+.role-tab-btn {
+  background: #091726;
+  border: 1px solid #1e3a5f;
+  color: #94a3b8;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 11.5px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+.role-tab-btn:hover {
+  background: #0f2744;
+  color: #f0f9ff;
+}
+.role-tab-btn.active {
+  background: #0284c7 !important;
+  border-color: #38bdf8 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.4);
+}
+#btnNivel_supervisor.active {
+  background: linear-gradient(135deg, #b45309 0%, #78350f 100%) !important;
+  border-color: #f59e0b !important;
+  box-shadow: 0 0 14px rgba(245, 158, 11, 0.4);
+}
+#btnNivel_empresa.active {
+  background: linear-gradient(135deg, #047857 0%, #064e3b 100%) !important;
+  border-color: #10b981 !important;
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.4);
+}
+
+.ativo-item-card:hover {
+  border-color: #38bdf8 !important;
+  background: #091a2e !important;
+}
+
+/* Abas Supervisor e Empresa */
+.sub-tabs-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #1e3a5f;
+  padding-bottom: 10px;
+}
+.sub-tab-btn {
+  background: #071322;
+  border: 1px solid #1a3250;
+  color: #94a3b8;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.sub-tab-btn:hover {
+  background: #0d2138;
+  color: #f0f9ff;
+}
+.sub-tab-btn.active {
+  background: #0284c7;
+  border-color: #38bdf8;
+  color: #ffffff;
+}
+.sub-tab-btn.active-sup {
+  background: #b45309 !important;
+  border-color: #f59e0b !important;
+  color: #ffffff !important;
+}
+.sub-tab-btn.active-emp {
+  background: #047857 !important;
+  border-color: #10b981 !important;
+  color: #ffffff !important;
+}
+
 </style>
 </head>
 
@@ -2027,30 +2109,52 @@
 
 <header>
   <div style="display:flex; align-items:center; justify-content:center; gap:14px; cursor:pointer;" onclick="voltarGrid()">
-    <img src="assets/app_icon_mecanica_40.png" alt="Logo Mecânica 4.0 IA" style="width:48px; height:48px; border-radius:12px; border:1.5px solid rgba(56,189,248,0.5); box-shadow:0 0 16px rgba(56,189,248,0.35), 0 4px 12px rgba(0,0,0,0.8); object-fit:cover; flex-shrink:0;">
+    <img src="assets/app_icon_mecanica_40.png" alt="Logo Mecânica 4.0 IA" style="width:52px; height:52px; border-radius:14px; border:1.5px solid rgba(56,189,248,0.5); box-shadow:0 0 20px rgba(56,189,248,0.35), 0 4px 12px rgba(0,0,0,0.8); object-fit:cover; flex-shrink:0;">
     <div style="text-align:left;">
-      <h1 style="margin:0; font-size:24px; line-height:1.2; display:flex; align-items:center; gap:8px;">
-        <span>Mecânica 4.0 IA</span>
-        <span style="font-size:10px; font-weight:800; background:linear-gradient(135deg,#0284c7,#0369a1); color:#fff; padding:2px 7px; border-radius:8px; letter-spacing:0.5px; border:1px solid rgba(56,189,248,0.4);">PRO</span>
-      </h1>
-      <p style="margin:2px 0 0 0; font-size:12px; justify-content:flex-start; gap:8px;">
-        <span class="header-status-badge" style="font-size:11px; padding:2px 8px;"><span class="led"></span> Indústria 4.0 Conectada</span>
-        <span style="color:#475569;">•</span>
-        <span style="color:#94a3b8; font-size:11.5px;">Central de Engenharia & Diagnóstico</span>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <h1 style="margin:0; font-size:25px; line-height:1.2; font-weight:800; letter-spacing:-0.5px;">Mecânica 4.0 IA</h1>
+        <span style="font-size:10px; font-weight:800; background:linear-gradient(135deg,#0284c7,#0369a1); color:#fff; padding:2px 7px; border-radius:8px; letter-spacing:0.5px; border:1px solid rgba(56,189,248,0.4);">ENTERPRISE CMMS</span>
+      </div>
+      <p style="margin:2px 0 0 0; font-size:12.5px; font-weight:600; color:#38bdf8; display:flex; align-items:center; gap:6px;">
+        <span>“Do equipamento ao relatório. Tudo em um só lugar.”</span>
       </p>
     </div>
   </div>
 </header>
 
+  <!-- SELETOR OFICIAL DE NÍVEIS HIERÁRQUICOS (MECÂNICO, SUPERVISOR, EMPRESA) -->
+  <div id="seletorNiveisContainer" style="background: linear-gradient(145deg, #09192c 0%, #06111f 100%); border: 1px solid #1e3a5f; border-radius: 12px; padding: 8px 14px; margin: 12px auto 16px auto; max-width: 1280px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.5);">
+    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+      <span style="font-size: 11px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.5px;">Nível Operacional Ativo:</span>
+      <span id="labelNivelAtivo" style="font-size: 11.5px; font-weight: 800; color: #38bdf8; background: #0c233c; padding: 2px 10px; border-radius: 6px; border: 1px solid #0284c7;">👷 MECÂNICO (Campo)</span>
+    </div>
+    <div class="role-switcher-buttons" style="display: flex; gap: 8px; flex-wrap: wrap;">
+      <button type="button" id="btnNivel_mecanico" class="role-tab-btn active" onclick="mudarNivelAtivo('mecanico')">
+        <span>👷</span>
+        <span>MECÂNICO</span>
+      </button>
+      <button type="button" id="btnNivel_supervisor" class="role-tab-btn" onclick="mudarNivelAtivo('supervisor')">
+        <span>👨‍🔧</span>
+        <span>SUPERVISOR</span>
+      </button>
+      <button type="button" id="btnNivel_empresa" class="role-tab-btn" onclick="mudarNivelAtivo('empresa')">
+        <span>🏭</span>
+        <span>EMPRESA</span>
+      </button>
+    </div>
+  </div>
+
+
 <main class="container">
 
   <div id="vistaGrid">
-    <section class="hero">
-      <h2>Central do Mecânico</h2>
-      <p>
-        Uma plataforma para apoiar inspeções, manutenção,
-        relatórios técnicos, bombas, motores, redutores,
-        válvulas, metrologia e sistemas mecânicos.
+    <section class="hero" style="position:relative; overflow:hidden;">
+      <div style="font-size:12px; font-weight:800; color:#f59e0b; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; display:inline-flex; align-items:center; gap:6px;">
+        <span>🔧 PLATAFORMA DE MANUTENÇÃO INDUSTRIAL & GESTÃO DE CONFIABILIDADE</span>
+      </div>
+      <h2 style="margin:0 0 8px 0; font-size:26px; color:#f0fdf4;">Fotografe. Inspecione. Registre. Resolva. 🔧</h2>
+      <p style="margin:0; font-size:13.5px; color:#cbd5e1; max-width:820px; line-height:1.5;">
+        Conectando mecânicos de campo, supervisores técnicos e a diretoria corporativa com diagnósticos inteligentes por IA, rastreabilidade por TAGs, controle de indicadores (MTBF/MTTR) e árvore completa de ativos industriais.
       </p>
     </section>
 
@@ -2075,6 +2179,29 @@
     </div>
 
     <section class="grid">
+      <!-- CARD: PAINEL DO SUPERVISOR -->
+      <div id="cardSupervisorModulo" class="card card-supervisor" style="border: 2px solid #f59e0b; background: linear-gradient(145deg, #241604 0%, #0e1726 100%); box-shadow: 0 4px 18px rgba(245,158,11,0.25);" onclick="abrirModulo('supervisor')">
+        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <div class="icon" style="background:#451a03; border-color:#d97706; color:#f59e0b;">👨‍🔧</div>
+          <span style="font-size:10px; background:#b45309; color:#fff; font-weight:800; padding:2px 8px; border-radius:10px;">NÍVEL SUPERVISOR</span>
+        </div>
+        <h3 style="color:#fcd34d;">Painel do Supervisor</h3>
+        <p>Aprovação e homologação de laudos com carimbo digital, acompanhamento da equipe em campo e indicadores (MTBF/MTTR).</p>
+        <button class="button" style="background:#b45309; border-color:#f59e0b; font-size:11.5px; padding:6px 12px; margin-top:8px;" onclick="event.stopPropagation(); abrirModulo('supervisor')">Acessar Painel Tático</button>
+      </div>
+
+      <!-- CARD: CENTRAL DA EMPRESA & GESTÃO DE ATIVOS -->
+      <div id="cardEmpresaModulo" class="card card-empresa" style="border: 2px solid #10b981; background: linear-gradient(145deg, #042416 0%, #0c1825 100%); box-shadow: 0 4px 18px rgba(16,185,129,0.25);" onclick="abrirModulo('empresa')">
+        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <div class="icon" style="background:#064e3b; border-color:#059669; color:#34d399;">🏭</div>
+          <span style="font-size:10px; background:#047857; color:#fff; font-weight:800; padding:2px 8px; border-radius:10px;">NÍVEL EMPRESA</span>
+        </div>
+        <h3 style="color:#6ee7b7;">Central da Empresa & Ativos</h3>
+        <p>Árvore hierárquica de ativos industriais, gráficos executivos de Pareto 80/20, custos de paradas e governança ISO 55000.</p>
+        <button class="button" style="background:#047857; border-color:#10b981; font-size:11.5px; padding:6px 12px; margin-top:8px;" onclick="event.stopPropagation(); abrirModulo('empresa')">Acessar Visão Corporativa</button>
+      </div>
       <div class="card" onclick="abrirModulo('manutencao')">
         <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
         <div class="icon">⚙️</div>
@@ -4863,6 +4990,140 @@
   </section>
 
   
+  
+  <!-- ================= PAINEL DO SUPERVISOR (NÍVEL TÁTICO) ================= -->
+  <section id="painel-supervisor" class="panel">
+    <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
+      <div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:11px; background:#b45309; color:#fff; font-weight:800; padding:2px 8px; border-radius:6px;">NÍVEL TÁTICO</span>
+          <h2 style="margin:0; font-size:22px; color:#fcd34d;">👨‍🔧 Painel de Supervisão Técnica & Confiabilidade</h2>
+        </div>
+        <p style="margin:4px 0 0 0; font-size:13px; color:#94a3b8;">
+          Controle de qualidade de laudos, homologação com carimbo digital, acompanhamento da equipe em campo e indicadores (MTBF/MTTR).
+        </p>
+      </div>
+      <button type="button" class="button secondary" style="margin:0;" onclick="voltarGrid()">← Voltar à Central</button>
+    </div>
+
+    <!-- Barra de Abas do Supervisor -->
+    <div class="sub-tabs-bar">
+      <button type="button" id="tab_sup_aprovacao" class="sub-tab-btn active active-sup" onclick="alternarAbaSupervisor('aprovacao')">
+        <span>📋 Fila de Aprovação de Laudos</span>
+        <span id="sup_count_pendentes" style="background:#dc2626; color:#fff; font-size:10.5px; padding:1px 6px; border-radius:10px; margin-left:6px;">0</span>
+      </button>
+      <button type="button" id="tab_sup_equipe" class="sub-tab-btn" onclick="alternarAbaSupervisor('equipe')">
+        <span>👥 Equipe em Campo</span>
+      </button>
+      <button type="button" id="tab_sup_kpis" class="sub-tab-btn" onclick="alternarAbaSupervisor('kpis')">
+        <span>📈 Indicadores Táticos (MTBF/MTTR)</span>
+      </button>
+    </div>
+
+    <!-- Aba 1: Fila de Aprovação -->
+    <div id="sup_box_aprovacao">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+        <div style="font-size:13px; color:#cbd5e1; font-weight:700;">Filtrar laudos técnicos por status:</div>
+        <div style="display:flex; gap:6px; flex-wrap:wrap;">
+          <button type="button" class="button secondary" style="font-size:11.5px; padding:4px 10px; margin:0;" onclick="renderizarFilaAprovacaoSupervisor('todos')">Todos</button>
+          <button type="button" class="button secondary" style="font-size:11.5px; padding:4px 10px; margin:0; border-color:#f59e0b; color:#fcd34d;" onclick="renderizarFilaAprovacaoSupervisor('pendentes')">⏳ Aguardando Aprovação</button>
+          <button type="button" class="button secondary" style="font-size:11.5px; padding:4px 10px; margin:0; border-color:#22c55e; color:#4ade80;" onclick="renderizarFilaAprovacaoSupervisor('aprovados')">✔ Aprovados</button>
+          <button type="button" class="button secondary" style="font-size:11.5px; padding:4px 10px; margin:0; border-color:#ef4444; color:#fca5a5;" onclick="renderizarFilaAprovacaoSupervisor('ajuste')">⚠️ Ajuste Solicitado</button>
+        </div>
+      </div>
+      <div id="sup_container_laudos">
+        <!-- Renderizado via JS -->
+      </div>
+    </div>
+
+    <!-- Aba 2: Equipe em Campo -->
+    <div id="sup_box_equipe" style="display:none;">
+      <div id="sup_container_equipe">
+        <!-- Renderizado via JS -->
+      </div>
+    </div>
+
+    <!-- Aba 3: Indicadores Táticos -->
+    <div id="sup_box_kpis" style="display:none;">
+      <div id="sup_container_kpis">
+        <!-- Renderizado via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PAINEL DA EMPRESA (NÍVEL ESTRATÉGICO) ================= -->
+  <section id="painel-empresa" class="panel">
+    <div class="panel-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
+      <div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:11px; background:#047857; color:#fff; font-weight:800; padding:2px 8px; border-radius:6px;">NÍVEL ESTRATÉGICO</span>
+          <h2 style="margin:0; font-size:22px; color:#6ee7b7;">🏭 Central Corporativa da Empresa & Ativos Industriais</h2>
+        </div>
+        <p style="margin:4px 0 0 0; font-size:13px; color:#94a3b8;">
+          Gestão de Ativos (ISO 55000), árvore completa de equipamentos da planta, análise de Pareto 80/20 de falhas e custos de indisponibilidade.
+        </p>
+      </div>
+      <button type="button" class="button secondary" style="margin:0;" onclick="voltarGrid()">← Voltar à Central</button>
+    </div>
+
+    <!-- Barra de Abas da Empresa -->
+    <div class="sub-tabs-bar">
+      <button type="button" id="tab_emp_arvore" class="sub-tab-btn active active-emp" onclick="alternarAbaEmpresa('arvore')">
+        <span>🌳 Árvore de Ativos da Planta</span>
+      </button>
+      <button type="button" id="tab_emp_dashboards" class="sub-tab-btn" onclick="alternarAbaEmpresa('dashboards')">
+        <span>📊 Dashboards Executivos (Pareto 80/20)</span>
+      </button>
+      <button type="button" id="tab_emp_usuarios" class="sub-tab-btn" onclick="alternarAbaEmpresa('usuarios')">
+        <span>👥 Gestão Corporativa de Usuários</span>
+      </button>
+      <button type="button" id="tab_emp_exportar" class="sub-tab-btn" onclick="alternarAbaEmpresa('exportar')">
+        <span>📑 Exportação Auditoria ISO</span>
+      </button>
+    </div>
+
+    <!-- Aba 1: Árvore de Ativos -->
+    <div id="emp_box_arvore">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:16px;">
+        <!-- Coluna Esquerda: Treeview -->
+        <div>
+          <div style="font-size:13px; font-weight:800; color:#38bdf8; margin-bottom:8px; text-transform:uppercase;">Navegador Hierárquico de Ativos:</div>
+          <div id="emp_treeview_container">
+            <!-- Renderizado via JS -->
+          </div>
+        </div>
+        <!-- Coluna Direita: Ficha de Vida Útil -->
+        <div>
+          <div id="emp_ativo_detalhe_box">
+            <!-- Renderizado via JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Aba 2: Dashboards Executivos -->
+    <div id="emp_box_dashboards" style="display:none;">
+      <div id="emp_container_dashboards">
+        <!-- Renderizado via JS -->
+      </div>
+    </div>
+
+    <!-- Aba 3: Gestão de Usuários -->
+    <div id="emp_box_usuarios" style="display:none;">
+      <div id="emp_container_usuarios">
+        <!-- Renderizado via JS -->
+      </div>
+    </div>
+
+    <!-- Aba 4: Exportação Auditoria -->
+    <div id="emp_box_exportar" style="display:none;">
+      <div id="emp_container_exportar">
+        <!-- Renderizado via JS -->
+      </div>
+    </div>
+  </section>
+
+
   <!-- ================= MODAL INVESTIGATIVO: MECÂNICO IA ================= -->
   <div id="modal-mecanico-ia" class="modal-ia-overlay" onclick="if(event.target===this) fecharModalMecanicoIA()">
     <div class="modal-ia-box" style="max-width:880px;">
@@ -7039,6 +7300,870 @@ window.addEventListener('DOMContentLoaded', () => {
     iniciarMonitorConectividade();
   } catch(e) {
     console.warn('Init conectividade:', e);
+  }
+});
+
+/* ========================================================================== */
+/* PLATAFORMA DE MANUTENÇÃO INDUSTRIAL 4.0: ARQUITETURA EM 3 NÍVEIS           */
+/* (1. 👷 MECÂNICO  |  2. 👨‍🔧 SUPERVISOR  |  3. 🏭 EMPRESA)                      */
+/* ========================================================================== */
+
+let nivelOperacionalAtivo = localStorage.getItem('mecanica_nivel_ativo') || 'mecanico';
+let abaSupervisorAtiva = 'aprovacao';
+let abaEmpresaAtiva = 'arvore';
+let ativoSelecionadoArvore = null;
+
+// BASE DE DADOS HIERÁRQUICA DA ÁRVORE DE ATIVOS INDUSTRIAIS
+const ARVORE_ATIVOS_PLANTA = [
+  {
+    id: 'setor_01',
+    nome: 'Setor 01 — Moagem & Britagem Primária',
+    icone: '📦',
+    equipamentos: [
+      {
+        tag: '101-RD-01',
+        nome: 'Redutor Helicoidal de Eixos Paralelos',
+        tipo: 'Redutor',
+        criticidade: 'A',
+        setor: 'Moagem & Britagem',
+        horasOperacao: 14250,
+        custoAcumulado: 8450.00,
+        proximaPreventiva: '25/10/2026',
+        intervencoes: [
+          { data: '12/08/2026', servico: 'Substituição de óleo lubrificante ISO VG 220 e limpeza do bujão magnético', resp: 'Eduardo Noronha', status: 'Aprovado' },
+          { data: '03/05/2026', servico: 'Troca de retentores do eixo de saída e alinhamento a laser com motor', resp: 'Carlos Mendes', status: 'Aprovado' }
+        ]
+      },
+      {
+        tag: '101-MO-01',
+        nome: 'Motor de Indução Trifásico 75 kW (IP55)',
+        tipo: 'Motor',
+        criticidade: 'A',
+        setor: 'Moagem & Britagem',
+        horasOperacao: 18900,
+        custoAcumulado: 4120.00,
+        proximaPreventiva: '10/11/2026',
+        intervencoes: [
+          { data: '18/07/2026', servico: 'Relubrificação com graxa de poliureia e medição de isolamento com Megômetro (120 MΩ)', resp: 'Eduardo Noronha', status: 'Aprovado' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'setor_02',
+    nome: 'Setor 02 — Circuito Água & Vapor (Utilidades)',
+    icone: '💧',
+    equipamentos: [
+      {
+        tag: '28LCE10-P01',
+        nome: 'Bomba Centrífuga Multiestágio de Alimentação',
+        tipo: 'Bomba',
+        criticidade: 'A',
+        setor: 'Utilidades',
+        horasOperacao: 22100,
+        custoAcumulado: 12600.00,
+        proximaPreventiva: '15/10/2026',
+        intervencoes: [
+          { data: '22/08/2026', servico: 'Substituição de selo mecânico duplo tipo cartucho e lavagem do plano de selagem', resp: 'Roberto Silva', status: 'Aprovado' },
+          { data: '14/06/2026', servico: 'Alinhamento a laser e inspeção de vibração global (RMS 1.8 mm/s)', resp: 'Eduardo Noronha', status: 'Aprovado' }
+        ]
+      },
+      {
+        tag: '28LCE10-V04',
+        nome: 'Válvula Gaveta Haste Ascendente API 600',
+        tipo: 'Válvula',
+        criticidade: 'B',
+        setor: 'Utilidades',
+        horasOperacao: 9800,
+        custoAcumulado: 1950.00,
+        proximaPreventiva: '05/12/2026',
+        intervencoes: [
+          { data: '02/09/2026', servico: 'Reengaxetamento da haste com anéis de grafite flexível e lapidação de sedes', resp: 'Eduardo Noronha', status: 'Aprovado' }
+        ]
+      },
+      {
+        tag: '28LCE10-PSV01',
+        nome: 'Válvula de Segurança e Alívio (PSV) API 526',
+        tipo: 'Válvula',
+        criticidade: 'A',
+        setor: 'Utilidades',
+        horasOperacao: 8760,
+        custoAcumulado: 3400.00,
+        proximaPreventiva: '01/10/2026',
+        intervencoes: [
+          { data: '10/04/2026', servico: 'Calibração em bancada de teste hidrostático e emissão de laudo de abertura (16 bar)', resp: 'Equipe Especializada', status: 'Aprovado' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 'setor_03',
+    nome: 'Setor 03 — Processamento & Linha de Envase',
+    icone: '🧪',
+    equipamentos: [
+      {
+        tag: 'ENV-RD-02',
+        nome: 'Redutor Planetário Coaxial de Alta Precisão',
+        tipo: 'Redutor',
+        criticidade: 'B',
+        setor: 'Envase',
+        horasOperacao: 11400,
+        custoAcumulado: 3890.00,
+        proximaPreventiva: '20/11/2026',
+        intervencoes: [
+          { data: '19/06/2026', servico: 'Inspeção de folga entre dentes (backlash) e lubrificação com graxa sintética sintética', resp: 'André Santos', status: 'Aprovado' }
+        ]
+      },
+      {
+        tag: 'ENV-VE-05',
+        nome: 'Válvula Esfera Tripartida Passagem Plena API 6D',
+        tipo: 'Válvula',
+        criticidade: 'C',
+        setor: 'Envase',
+        horasOperacao: 7200,
+        custoAcumulado: 850.00,
+        proximaPreventiva: '15/01/2027',
+        intervencoes: [
+          { data: '11/02/2026', servico: 'Troca dos assentos de PTFE e teste de estanqueidade', resp: 'Eduardo Noronha', status: 'Aprovado' }
+        ]
+      }
+    ]
+  }
+];
+
+// LISTA DE COLABORADORES / EQUIPE EM CAMPO
+const EQUIPE_COLABORADORES_SUPERVISAO = [
+  { id: 1, nome: 'Eduardo Noronha', matricula: '48380712', nivel: 'Supervisor / Técnico Especialista', status: 'Ativo em Linha', local: 'Setor 02 - Utilidades', relatoriosMes: 19, ultimaOM: '2032113859' },
+  { id: 2, nome: 'Carlos Mendes', matricula: '48380720', nivel: 'Mecânico de Manutenção II', status: 'Ativo em Linha', local: 'Setor 01 - Moagem', relatoriosMes: 14, ultimaOM: '2032113840' },
+  { id: 3, nome: 'Roberto Silva', matricula: '48380735', nivel: 'Mecânico de Bombas & Selos', status: 'Disponível na Oficina', local: 'Bancada de Vedações', relatoriosMes: 12, ultimaOM: '2032113812' },
+  { id: 4, nome: 'André Santos', matricula: '48380748', nivel: 'Mecânico Preditivo (Vibração)', status: 'Em Inspeção de Rota', local: 'Setor 03 - Envase', relatoriosMes: 16, ultimaOM: '2032113795' }
+];
+
+/* ========================================================================== */
+/* GESTÃO DO SELETOR DE NÍVEIS (MECÂNICO / SUPERVISOR / EMPRESA)             */
+/* ========================================================================== */
+function mudarNivelAtivo(novoNivel) {
+  nivelOperacionalAtivo = novoNivel;
+  localStorage.setItem('mecanica_nivel_ativo', novoNivel);
+
+  // Atualiza botões
+  ['mecanico', 'supervisor', 'empresa'].forEach(n => {
+    const btn = document.getElementById('btnNivel_' + n);
+    if (btn) {
+      if (n === novoNivel) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    }
+  });
+
+  // Atualiza badge de nível ativo
+  const badgeNivel = document.getElementById('labelNivelAtivo');
+  if (badgeNivel) {
+    if (novoNivel === 'mecanico') {
+      badgeNivel.innerHTML = '👷 MECÂNICO (Campo)';
+      badgeNivel.style.color = '#38bdf8';
+      badgeNivel.style.borderColor = '#0284c7';
+      badgeNivel.style.background = '#0c233c';
+    } else if (novoNivel === 'supervisor') {
+      badgeNivel.innerHTML = '👨‍🔧 SUPERVISOR (Tático)';
+      badgeNivel.style.color = '#fcd34d';
+      badgeNivel.style.borderColor = '#d97706';
+      badgeNivel.style.background = '#382006';
+    } else if (novoNivel === 'empresa') {
+      badgeNivel.innerHTML = '🏭 EMPRESA (Estratégico)';
+      badgeNivel.style.color = '#6ee7b7';
+      badgeNivel.style.borderColor = '#059669';
+      badgeNivel.style.background = '#06301d';
+    }
+  }
+
+  // Notificação toast informativa
+  if (novoNivel === 'supervisor') {
+    abrirToastNotificacao('👨‍🔧 Nível Supervisor Ativo: Acesso liberado à fila de aprovação e acompanhamento da equipe!');
+  } else if (novoNivel === 'empresa') {
+    abrirToastNotificacao('🏭 Nível Empresa Ativo: Acesso liberado à árvore completa de ativos e dashboards executivos!');
+  } else {
+    abrirToastNotificacao('👷 Nível Mecânico Ativo: Foco em ferramentas de campo, cálculos e emissão de laudos.');
+  }
+
+  // Atualiza visibilidade de cards e módulos
+  aplicarRegrasVisibilidadeNivel();
+}
+
+function aplicarRegrasVisibilidadeNivel() {
+  const cardSupervisor = document.getElementById('cardSupervisorModulo');
+  const cardEmpresa = document.getElementById('cardEmpresaModulo');
+
+  if (cardSupervisor) cardSupervisor.style.display = 'flex';
+  if (cardEmpresa) cardEmpresa.style.display = 'flex';
+}
+
+/* ========================================================================== */
+/* PAINEL DO SUPERVISOR: APROVAÇÃO DE LAUDOS, EQUIPE & KPIS                   */
+/* ========================================================================== */
+function abrirModuloSupervisor() {
+  if (typeof abrirModulo === 'function') {
+    abrirModulo('supervisor');
+  }
+  alternarAbaSupervisor(abaSupervisorAtiva || 'aprovacao');
+}
+
+function alternarAbaSupervisor(aba) {
+  abaSupervisorAtiva = aba;
+  ['aprovacao', 'equipe', 'kpis'].forEach(a => {
+    const btn = document.getElementById('tab_sup_' + a);
+    const box = document.getElementById('sup_box_' + a);
+    if (btn) btn.classList.toggle('active', a === aba);
+    if (box) box.style.display = (a === aba) ? 'block' : 'none';
+  });
+
+  if (aba === 'aprovacao') {
+    renderizarFilaAprovacaoSupervisor();
+  } else if (aba === 'equipe') {
+    renderizarQuadroEquipeSupervisor();
+  } else if (aba === 'kpis') {
+    renderizarKPIsSupervisor();
+  }
+}
+
+function renderizarFilaAprovacaoSupervisor(filtro = 'todos') {
+  const container = document.getElementById('sup_container_laudos');
+  if (!container) return;
+
+  const userKey = (typeof getChaveUsuario === 'function') ? getChaveUsuario('relatorios_salvos') : 'relatorios_salvos';
+  let relatorios = [];
+  try {
+    relatorios = JSON.parse(localStorage.getItem(userKey) || '[]');
+  } catch(e) {}
+
+  // Relatórios de exemplo se estiver vazio
+  if (relatorios.length === 0) {
+    relatorios = [
+      {
+        id: 'rel_ex_01',
+        numDoc: '2026-0089',
+        om: '2032113859',
+        tag: '28LCE10-P01',
+        equip: 'Bomba Centrífuga Multiestágio de Alimentação',
+        ass: 'Eduardo Noronha',
+        tipo: 'Corretiva',
+        urgencia: 'Alta — risco à segurança/produção',
+        criado_em: new Date(Date.now() - 3600000 * 4).toISOString(),
+        servicoRealizado: 'Realizada substituição de selo mecânico e anéis de vedação por desvio de estanqueidade. Alinhamento de eixos com tolerância centesimal verificado.',
+        causa: 'Degradação elastomérica por temperatura e particulado.',
+        statusAprovacao: 'pendente'
+      },
+      {
+        id: 'rel_ex_02',
+        numDoc: '2026-0088',
+        om: '2032113840',
+        tag: '101-RD-01',
+        equip: 'Redutor Helicoidal de Eixos Paralelos',
+        ass: 'Carlos Mendes',
+        tipo: 'Preventiva',
+        urgencia: 'Média',
+        criado_em: new Date(Date.now() - 3600000 * 26).toISOString(),
+        servicoRealizado: 'Inspeção de nível de óleo sintético ISO VG 220, medição de folga entre dentes (backlash 0,22 mm) e teste de vibração global.',
+        causa: 'Manutenção preventiva programada conforme plano RCM.',
+        statusAprovacao: 'aprovado',
+        aprovadoPor: 'Eduardo Noronha (Supervisor)',
+        aprovadoEm: new Date(Date.now() - 3600000 * 18).toISOString()
+      }
+    ];
+  }
+
+  let listaFiltrada = relatorios;
+  if (filtro === 'pendentes') {
+    listaFiltrada = relatorios.filter(r => (r.statusAprovacao || 'pendente') === 'pendente');
+  } else if (filtro === 'aprovados') {
+    listaFiltrada = relatorios.filter(r => r.statusAprovacao === 'aprovado');
+  } else if (filtro === 'ajuste') {
+    listaFiltrada = relatorios.filter(r => r.statusAprovacao === 'ajuste_solicitado');
+  }
+
+  const badgePendentes = relatorios.filter(r => (r.statusAprovacao || 'pendente') === 'pendente').length;
+  const countBadgeEl = document.getElementById('sup_count_pendentes');
+  if (countBadgeEl) countBadgeEl.innerText = badgePendentes;
+
+  if (listaFiltrada.length === 0) {
+    container.innerHTML = `
+      <div style="text-align:center; padding:40px 20px; color:#94a3b8; background:#071322; border:1px dashed #1e3a5f; border-radius:10px;">
+        <div style="font-size:36px; margin-bottom:8px;">📋</div>
+        <p style="font-size:14px; margin:0; font-weight:600;">Nenhum laudo técnico encontrado para o filtro selecionado.</p>
+        <span style="font-size:12px; color:#64748b;">Todos os laudos emitidos pelos mecânicos da equipe aparecerão aqui para homologação.</span>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = listaFiltrada.map(r => {
+    const status = r.statusAprovacao || 'pendente';
+    let statusHtml = '';
+    if (status === 'aprovado') {
+      statusHtml = `<span style="background:rgba(34,197,94,0.15); border:1px solid #22c55e; color:#4ade80; font-size:11.5px; font-weight:800; padding:3px 10px; border-radius:12px; display:inline-flex; align-items:center; gap:5px;">✔ LAUDO HOMOLOGADO & APROVADO</span>`;
+    } else if (status === 'ajuste_solicitado') {
+      statusHtml = `<span style="background:rgba(239,68,68,0.15); border:1px solid #ef4444; color:#fca5a5; font-size:11.5px; font-weight:800; padding:3px 10px; border-radius:12px; display:inline-flex; align-items:center; gap:5px;">⚠️ AJUSTE TÉCNICO SOLICITADO</span>`;
+    } else {
+      statusHtml = `<span style="background:rgba(245,158,11,0.15); border:1px solid #f59e0b; color:#fcd34d; font-size:11.5px; font-weight:800; padding:3px 10px; border-radius:12px; display:inline-flex; align-items:center; gap:5px;">⏳ AGUARDANDO APROVAÇÃO</span>`;
+    }
+
+    const dataFormatada = r.criado_em ? new Date(r.criado_em).toLocaleString('pt-BR') : 'Data recente';
+
+    return `
+      <div style="background:#071424; border:1px solid ${status === 'aprovado' ? '#1e3a5f' : (status === 'ajuste_solicitado' ? '#7f1d1d' : '#d97706')}; border-radius:10px; padding:16px; margin-bottom:14px; box-shadow:0 4px 14px rgba(0,0,0,0.4);">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px; border-bottom:1px solid #14253a; padding-bottom:10px;">
+          <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+            <span style="font-size:14px; font-weight:800; color:#38bdf8;">Doc Nº ${r.numDoc || 'N/A'}</span>
+            <span style="font-size:11.5px; background:#0f2744; border:1px solid #1e3a5f; color:#94a3b8; padding:2px 8px; border-radius:6px;">OM: ${r.om || '—'}</span>
+            <span style="font-size:11.5px; font-weight:800; color:#f59e0b; background:#291c06; padding:2px 8px; border-radius:6px; border:1px solid #78350f;">TAG: ${r.tag || 'NÃO INFORMADA'}</span>
+          </div>
+          <div>${statusHtml}</div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:10px; font-size:12.5px; margin-bottom:12px;">
+          <div><span style="color:#64748b;">Equipamento:</span> <b style="color:#e2e8f0;">${r.equip || 'Conjunto mecânico'}</b></div>
+          <div><span style="color:#64748b;">Mecânico Executante:</span> <b style="color:#38bdf8;">${r.ass || 'Técnico de Campo'}</b></div>
+          <div><span style="color:#64748b;">Data da Emissão:</span> <span style="color:#cbd5e1;">${dataFormatada}</span></div>
+          <div><span style="color:#64748b;">Classificação:</span> <span style="color:#cbd5e1;">${r.tipo || 'Preventiva'}</span></div>
+        </div>
+
+        <div style="background:#050d18; border:1px solid #122236; border-radius:6px; padding:10px 12px; font-size:12.5px; color:#cbd5e1; line-height:1.5; margin-bottom:12px;">
+          <div style="font-size:11px; font-weight:700; color:#7dd3fc; text-transform:uppercase; margin-bottom:4px;">Narrativa do Serviço Realizado:</div>
+          ${r.servicoRealizado || 'Sem descrição cadastrada.'}
+          ${r.causa ? `<div style="margin-top:6px; font-size:12px; color:#fca5a5;"><b>Causa Provável:</b> ${r.causa}</div>` : ''}
+        </div>
+
+        ${r.aprovadoPor ? `
+          <div style="background:rgba(34,197,94,0.08); border-left:3px solid #22c55e; border-radius:4px; padding:8px 12px; font-size:12px; color:#86efac; margin-bottom:12px;">
+            <b>✔ Carimbo de Homologação:</b> Aprovado por <b>${r.aprovadoPor}</b> em ${new Date(r.aprovadoEm || Date.now()).toLocaleString('pt-BR')}
+          </div>
+        ` : ''}
+
+        ${r.parecerSupervisor ? `
+          <div style="background:rgba(239,68,68,0.1); border-left:3px solid #ef4444; border-radius:4px; padding:8px 12px; font-size:12px; color:#fca5a5; margin-bottom:12px;">
+            <b>⚠️ Parecer de Revisão:</b> ${r.parecerSupervisor}
+          </div>
+        ` : ''}
+
+        <!-- Barra de Ações do Supervisor -->
+        <div style="display:flex; justify-content:flex-end; gap:8px; flex-wrap:wrap;">
+          <button type="button" class="button secondary" style="font-size:11.5px; padding:6px 12px; margin:0;" onclick="abrirFotoGrandeHistorico('${r.fotoAntesUrl || r.fotoDepoisUrl || ''}')">📷 Ver Fotos (${r.fotoAntesUrl ? '1+' : '0'})</button>
+          
+          ${status !== 'aprovado' ? `
+            <button type="button" class="button secondary" style="font-size:11.5px; padding:6px 12px; margin:0; border-color:#ef4444; color:#fca5a5;" onclick="solicitarAjusteLaudoSupervisor('${r.id || r.numDoc}')">⚠️ Solicitar Ajuste</button>
+            <button type="button" class="button" style="font-size:11.5px; padding:6px 14px; margin:0; background:#059669; border-color:#10b981; font-weight:bold;" onclick="aprovarLaudoSupervisor('${r.id || r.numDoc}')">✔ Homologar & Aprovar</button>
+          ` : `
+            <button type="button" class="button secondary" style="font-size:11.5px; padding:6px 12px; margin:0; color:#94a3b8;" onclick="reverterAprovacaoLaudo('${r.id || r.numDoc}')">Desfazer Aprovação</button>
+          `}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function aprovarLaudoSupervisor(relId) {
+  const supervisorAtual = (document.getElementById('usuarioLogadoEmail')?.innerText || 'Supervisor Técnico').trim();
+  const userKey = (typeof getChaveUsuario === 'function') ? getChaveUsuario('relatorios_salvos') : 'relatorios_salvos';
+  let relatorios = [];
+  try {
+    relatorios = JSON.parse(localStorage.getItem(userKey) || '[]');
+  } catch(e) {}
+
+  let modificado = false;
+  relatorios.forEach(r => {
+    if (r.id === relId || r.numDoc === relId) {
+      r.statusAprovacao = 'aprovado';
+      r.aprovadoPor = `${supervisorAtual} (Supervisor)`;
+      r.aprovadoEm = new Date().toISOString();
+      delete r.parecerSupervisor;
+      modificado = true;
+    }
+  });
+
+  if (modificado) {
+    localStorage.setItem(userKey, JSON.stringify(relatorios));
+  }
+
+  renderizarFilaAprovacaoSupervisor();
+  abrirToastNotificacao(`✔ Laudo ${relId} homologado e carimbado com sucesso pelo Supervisor!`);
+}
+
+function solicitarAjusteLaudoSupervisor(relId) {
+  const parecer = prompt('⚠️ PARECER TÉCNICO DO SUPERVISOR\n\nDescreva o que o mecânico deve corrigir ou complementar no laudo técnico:');
+  if (!parecer || !parecer.trim()) return;
+
+  const userKey = (typeof getChaveUsuario === 'function') ? getChaveUsuario('relatorios_salvos') : 'relatorios_salvos';
+  let relatorios = [];
+  try {
+    relatorios = JSON.parse(localStorage.getItem(userKey) || '[]');
+  } catch(e) {}
+
+  let modificado = false;
+  relatorios.forEach(r => {
+    if (r.id === relId || r.numDoc === relId) {
+      r.statusAprovacao = 'ajuste_solicitado';
+      r.parecerSupervisor = parecer.trim();
+      modificado = true;
+    }
+  });
+
+  if (modificado) {
+    localStorage.setItem(userKey, JSON.stringify(relatorios));
+  }
+
+  renderizarFilaAprovacaoSupervisor();
+  abrirToastNotificacao(`⚠️ Laudo ${relId} retornado ao mecânico com solicitação de revisão técnica.`);
+}
+
+function reverterAprovacaoLaudo(relId) {
+  const userKey = (typeof getChaveUsuario === 'function') ? getChaveUsuario('relatorios_salvos') : 'relatorios_salvos';
+  let relatorios = [];
+  try {
+    relatorios = JSON.parse(localStorage.getItem(userKey) || '[]');
+  } catch(e) {}
+
+  relatorios.forEach(r => {
+    if (r.id === relId || r.numDoc === relId) {
+      r.statusAprovacao = 'pendente';
+      delete r.aprovadoPor;
+      delete r.aprovadoEm;
+    }
+  });
+
+  localStorage.setItem(userKey, JSON.stringify(relatorios));
+  renderizarFilaAprovacaoSupervisor();
+  abrirToastNotificacao('Status do laudo retornado para pendente.');
+}
+
+function renderizarQuadroEquipeSupervisor() {
+  const container = document.getElementById('sup_container_equipe');
+  if (!container) return;
+
+  container.innerHTML = `
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:14px; margin-top:10px;">
+      ${EQUIPE_COLABORADORES_SUPERVISAO.map(m => `
+        <div style="background:#071424; border:1px solid #1a3250; border-radius:10px; padding:16px; box-shadow:0 4px 14px rgba(0,0,0,0.3);">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">
+            <div>
+              <h4 style="margin:0; font-size:15px; color:#e0f2fe;">${m.nome}</h4>
+              <span style="font-size:11.5px; color:#38bdf8;">Matrícula: ${m.matricula}</span>
+            </div>
+            <span style="font-size:11px; font-weight:700; background:${m.status.includes('Ativo') ? 'rgba(34,197,94,0.15)' : 'rgba(245,158,11,0.15)'}; color:${m.status.includes('Ativo') ? '#4ade80' : '#fcd34d'}; border:1px solid ${m.status.includes('Ativo') ? '#22c55e' : '#f59e0b'}; padding:2px 8px; border-radius:10px;">${m.status}</span>
+          </div>
+          <div style="font-size:12px; color:#94a3b8; margin-bottom:8px;"><b>Função:</b> ${m.nivel}</div>
+          <div style="background:#050e1b; border-radius:6px; padding:8px 10px; font-size:12px; margin-bottom:10px;">
+            <div style="color:#cbd5e1; margin-bottom:3px;">📍 <b>Local Atual:</b> ${m.local}</div>
+            <div style="color:#cbd5e1;">📋 <b>Última OM Atendida:</b> Nº ${m.ultimaOM}</div>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; font-size:12px; border-top:1px solid #132438; padding-top:8px;">
+            <span style="color:#94a3b8;">Laudos Emitidos este Mês:</span>
+            <b style="color:#38bdf8; font-size:14px;">${m.relatoriosMes}</b>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function renderizarKPIsSupervisor() {
+  const container = document.getElementById('sup_container_kpis');
+  if (!container) return;
+
+  container.innerHTML = `
+    <!-- Indicadores Principais em Destaque -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:12px; margin-bottom:20px;">
+      <div style="background:#08182b; border:1px solid #0284c7; border-radius:10px; padding:14px; text-align:center;">
+        <span style="font-size:11px; font-weight:800; color:#94a3b8; text-transform:uppercase;">MTBF Médio da Planta</span>
+        <div style="font-size:26px; font-weight:900; color:#38bdf8; margin:6px 0;">29,4 dias</div>
+        <span style="font-size:11px; color:#4ade80;">▲ +12% de aumento na confiabilidade</span>
+      </div>
+      <div style="background:#08182b; border:1px solid #059669; border-radius:10px; padding:14px; text-align:center;">
+        <span style="font-size:11px; font-weight:800; color:#94a3b8; text-transform:uppercase;">MTTR Médio da Equipe</span>
+        <div style="font-size:26px; font-weight:900; color:#34d399; margin:6px 0;">2h 15min</div>
+        <span style="font-size:11px; color:#4ade80;">▼ -18% de redução no tempo de reparo</span>
+      </div>
+      <div style="background:#08182b; border:1px solid #d97706; border-radius:10px; padding:14px; text-align:center;">
+        <span style="font-size:11px; font-weight:800; color:#94a3b8; text-transform:uppercase;">Taxa de Reincidência (<30d)</span>
+        <div style="font-size:26px; font-weight:900; color:#fcd34d; margin:6px 0;">3,8%</div>
+        <span style="font-size:11px; color:#4ade80;">✔ Dentro da meta estabelecida (< 5%)</span>
+      </div>
+      <div style="background:#08182b; border:1px solid #7c3aed; border-radius:10px; padding:14px; text-align:center;">
+        <span style="font-size:11px; font-weight:800; color:#94a3b8; text-transform:uppercase;">Aderência ao Plano Preventivo</span>
+        <div style="font-size:26px; font-weight:900; color:#c084fc; margin:6px 0;">96,5%</div>
+        <span style="font-size:11px; color:#c084fc;">Meta corporativa: > 95%</span>
+      </div>
+    </div>
+
+    <!-- Gráfico de Status dos Relatórios do Mês -->
+    <div style="background:#071424; border:1px solid #1a3250; border-radius:10px; padding:16px;">
+      <h4 style="margin:0 0 12px 0; font-size:14px; color:#38bdf8;">Eficiência na Homologação de Laudos Técnicos:</h4>
+      <div style="margin-bottom:12px;">
+        <div style="display:flex; justify-content:space-between; font-size:12px; color:#cbd5e1; margin-bottom:4px;">
+          <span>Laudos Homologados e Aprovados (85%)</span>
+          <span style="font-weight:700; color:#4ade80;">51 laudos</span>
+        </div>
+        <div style="background:#0f2238; height:10px; border-radius:6px; overflow:hidden;">
+          <div style="background:#22c55e; height:100%; width:85%;"></div>
+        </div>
+      </div>
+      <div style="margin-bottom:12px;">
+        <div style="display:flex; justify-content:space-between; font-size:12px; color:#cbd5e1; margin-bottom:4px;">
+          <span>Aguardando Validação do Supervisor (10%)</span>
+          <span style="font-weight:700; color:#fcd34d;">6 laudos</span>
+        </div>
+        <div style="background:#0f2238; height:10px; border-radius:6px; overflow:hidden;">
+          <div style="background:#f59e0b; height:100%; width:10%;"></div>
+        </div>
+      </div>
+      <div>
+        <div style="display:flex; justify-content:space-between; font-size:12px; color:#cbd5e1; margin-bottom:4px;">
+          <span>Retornados para Complementação Técnica (5%)</span>
+          <span style="font-weight:700; color:#fca5a5;">3 laudos</span>
+        </div>
+        <div style="background:#0f2238; height:10px; border-radius:6px; overflow:hidden;">
+          <div style="background:#ef4444; height:100%; width:5%;"></div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+/* ========================================================================== */
+/* PAINEL DA EMPRESA: ÁRVORE DE ATIVOS, PARETO 80/20 & GESTÃO CORPORATIVA     */
+/* ========================================================================== */
+function abrirModuloEmpresa() {
+  if (typeof abrirModulo === 'function') {
+    abrirModulo('empresa');
+  }
+  alternarAbaEmpresa(abaEmpresaAtiva || 'arvore');
+}
+
+function alternarAbaEmpresa(aba) {
+  abaEmpresaAtiva = aba;
+  ['arvore', 'dashboards', 'usuarios', 'exportar'].forEach(a => {
+    const btn = document.getElementById('tab_emp_' + a);
+    const box = document.getElementById('emp_box_' + a);
+    if (btn) btn.classList.toggle('active', a === aba);
+    if (box) box.style.display = (a === aba) ? 'block' : 'none';
+  });
+
+  if (aba === 'arvore') {
+    renderizarArvoreAtivosEmpresa();
+  } else if (aba === 'dashboards') {
+    renderizarDashboardsEmpresa();
+  } else if (aba === 'usuarios') {
+    renderizarGestaoUsuariosEmpresa();
+  } else if (aba === 'exportar') {
+    renderizarExportacaoAuditoriaEmpresa();
+  }
+}
+
+function renderizarArvoreAtivosEmpresa() {
+  const containerTree = document.getElementById('emp_treeview_container');
+  if (!containerTree) return;
+
+  containerTree.innerHTML = ARVORE_ATIVOS_PLANTA.map(setor => `
+    <div style="margin-bottom:12px; background:#071221; border:1px solid #1a3250; border-radius:8px; overflow:hidden;">
+      <div style="background:#091a30; padding:10px 14px; font-weight:800; font-size:13px; color:#7dd3fc; display:flex; align-items:center; gap:8px;">
+        <span>${setor.icone}</span>
+        <span>${setor.nome}</span>
+        <span style="font-size:11px; background:#0f2744; color:#94a3b8; padding:2px 8px; border-radius:10px; margin-left:auto;">${setor.equipamentos.length} Ativos</span>
+      </div>
+      <div style="padding:8px;">
+        ${setor.equipamentos.map(eq => `
+          <div class="ativo-item-card" style="padding:8px 12px; margin-bottom:4px; border-radius:6px; background:#040c17; border:1px solid #132438; cursor:pointer; display:flex; justify-content:space-between; align-items:center; transition:all 0.2s ease;" onclick="selecionarAtivoArvore('${eq.tag}')">
+            <div>
+              <div style="font-size:12.5px; font-weight:700; color:#e2e8f0;">${eq.nome}</div>
+              <span style="font-size:11.5px; color:#38bdf8; font-family:monospace; font-weight:bold;">TAG: ${eq.tag}</span>
+            </div>
+            <span style="font-size:11px; font-weight:800; padding:2px 8px; border-radius:6px; ${eq.criticidade === 'A' ? 'background:#7f1d1d; color:#fca5a5; border:1px solid #ef4444;' : (eq.criticidade === 'B' ? 'background:#78350f; color:#fcd34d; border:1px solid #f59e0b;' : 'background:#064e3b; color:#86efac; border:1px solid #10b981;')}">Criticidade ${eq.criticidade}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+
+  // Seleciona o primeiro por padrão se nenhum estiver selecionado
+  if (!ativoSelecionadoArvore) {
+    selecionarAtivoArvore('101-RD-01');
+  }
+}
+
+function selecionarAtivoArvore(tagBuscada) {
+  let ativoEncontrado = null;
+  ARVORE_ATIVOS_PLANTA.forEach(setor => {
+    setor.equipamentos.forEach(eq => {
+      if (eq.tag === tagBuscada) ativoEncontrado = eq;
+    });
+  });
+
+  if (!ativoEncontrado) return;
+  ativoSelecionadoArvore = ativoEncontrado;
+
+  const detalheContainer = document.getElementById('emp_ativo_detalhe_box');
+  if (!detalheContainer) return;
+
+  detalheContainer.innerHTML = `
+    <div style="background:#071424; border:2px solid #38bdf8; border-radius:10px; padding:18px; box-shadow:0 8px 30px rgba(0,0,0,0.5);">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:8px; margin-bottom:14px; border-bottom:1px solid #1e3a5f; padding-bottom:12px;">
+        <div>
+          <span style="font-size:11px; background:#0284c7; color:#fff; font-weight:800; padding:2px 8px; border-radius:6px; text-transform:uppercase;">FICHA DE VIDA ÚTIL DO ATIVO (ISO 55000)</span>
+          <h3 style="margin:6px 0 2px 0; color:#e0f2fe; font-size:18px;">${ativoEncontrado.nome}</h3>
+          <span style="font-size:13px; font-weight:bold; color:#38bdf8; font-family:monospace;">TAG OFICIAL: ${ativoEncontrado.tag}</span>
+        </div>
+        <button type="button" class="button" style="background:#0284c7; border-color:#38bdf8; font-size:12px; padding:8px 14px; margin:0;" onclick="iniciarRelatorioParaAtivo('${ativoEncontrado.tag}', '${ativoEncontrado.nome}')">➕ Emitir Laudo Nesta TAG</button>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:10px; margin-bottom:16px;">
+        <div style="background:#050f1c; border:1px solid #162c46; border-radius:8px; padding:10px;">
+          <div style="font-size:11px; color:#94a3b8;">Criticidade Operacional</div>
+          <div style="font-size:16px; font-weight:800; color:${ativoEncontrado.criticidade === 'A' ? '#f87171' : '#fcd34d'};">Grau ${ativoEncontrado.criticidade} (${ativoEncontrado.criticidade === 'A' ? 'Vital para Produção' : 'Importante'})</div>
+        </div>
+        <div style="background:#050f1c; border:1px solid #162c46; border-radius:8px; padding:10px;">
+          <div style="font-size:11px; color:#94a3b8;">Horas de Operação Acumuladas</div>
+          <div style="font-size:16px; font-weight:800; color:#38bdf8;">${ativoEncontrado.horasOperacao.toLocaleString('pt-BR')} horas</div>
+        </div>
+        <div style="background:#050f1c; border:1px solid #162c46; border-radius:8px; padding:10px;">
+          <div style="font-size:11px; color:#94a3b8;">Custo Acumulado de Manutenção</div>
+          <div style="font-size:16px; font-weight:800; color:#4ade80;">R$ ${ativoEncontrado.custoAcumulado.toLocaleString('pt-BR', {minimumFractionDigits:2})}</div>
+        </div>
+        <div style="background:#050f1c; border:1px solid #162c46; border-radius:8px; padding:10px;">
+          <div style="font-size:11px; color:#94a3b8;">Próxima Preventiva Programada</div>
+          <div style="font-size:16px; font-weight:800; color:#fcd34d;">📅 ${ativoEncontrado.proximaPreventiva}</div>
+        </div>
+      </div>
+
+      <h4 style="margin:0 0 8px 0; font-size:13px; color:#7dd3fc; text-transform:uppercase;">Histórico de Intervenções Realizadas Nesta TAG:</h4>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        ${ativoEncontrado.intervencoes.map(int => `
+          <div style="background:#050d18; border-left:3px solid #0284c7; border-radius:4px; padding:10px 12px; font-size:12.5px;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+              <b style="color:#38bdf8;">📅 ${int.data}</b>
+              <span style="font-size:11px; background:rgba(34,197,94,0.15); color:#4ade80; padding:1px 6px; border-radius:4px;">${int.status}</span>
+            </div>
+            <div style="color:#e2e8f0; margin-bottom:4px;">${int.servico}</div>
+            <div style="font-size:11.5px; color:#64748b;">Responsável Técnico: <b>${int.resp}</b></div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function iniciarRelatorioParaAtivo(tag, equipNome) {
+  alternarPainel('relatorio');
+  alternarAbaRelatorio('novo');
+  const campoTag = document.getElementById('rel_tag');
+  const campoEquip = document.getElementById('rel_equip');
+  if (campoTag) campoTag.value = tag;
+  if (campoEquip) campoEquip.value = equipNome;
+  if (typeof atualizarModelo3DAutomatico === 'function') atualizarModelo3DAutomatico();
+  abrirToastNotificacao(`📝 Iniciando novo laudo técnico para a TAG ${tag}`);
+}
+
+function renderizarDashboardsEmpresa() {
+  const container = document.getElementById('emp_container_dashboards');
+  if (!container) return;
+
+  container.innerHTML = `
+    <!-- Linha de KPIs Executivos Globais -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:12px; margin-bottom:20px;">
+      <div style="background:#081c15; border:1px solid #10b981; border-radius:10px; padding:14px; text-align:center;">
+        <span style="font-size:11px; font-weight:800; color:#86efac; text-transform:uppercase;">Disponibilidade Global (Availability)</span>
+        <div style="font-size:28px; font-weight:900; color:#34d399; margin:6px 0;">97,8%</div>
+        <span style="font-size:11.5px; color:#a7f3d0;">Meta Corporativa da Planta: > 96,0%</span>
+      </div>
+      <div style="background:#1a0f0f; border:1px solid #ef4444; border-radius:10px; padding:14px; text-align:center;">
+        <span style="font-size:11px; font-weight:800; color:#fca5a5; text-transform:uppercase;">Custo de Paradas Não Programadas</span>
+        <div style="font-size:28px; font-weight:900; color:#f87171; margin:6px 0;">R$ 18.400,00</div>
+        <span style="font-size:11.5px; color:#fecaca;">Horas Paradas: 9,2h no mês</span>
+      </div>
+      <div style="background:#08182b; border:1px solid #0284c7; border-radius:10px; padding:14px; text-align:center;">
+        <span style="font-size:11px; font-weight:800; color:#93c5fd; text-transform:uppercase;">Total de Ativos Monitorados</span>
+        <div style="font-size:28px; font-weight:900; color:#38bdf8; margin:6px 0;">38 Equipamentos</div>
+        <span style="font-size:11.5px; color:#bfdbfe;">100% com cadastro de TAG ativo</span>
+      </div>
+      <div style="background:#1b1507; border:1px solid #f59e0b; border-radius:10px; padding:14px; text-align:center;">
+        <span style="font-size:11px; font-weight:800; color:#fcd34d; text-transform:uppercase;">Backlog de Manutenção</span>
+        <div style="font-size:28px; font-weight:900; color:#fbbf24; margin:6px 0;">3,2 Semanas</div>
+        <span style="font-size:11.5px; color:#fde68a;">Equilíbrio operacional ideal</span>
+      </div>
+    </div>
+
+    <!-- Curva de Pareto 80/20 de Falhas e Ofensores -->
+    <div style="background:#071424; border:1px solid #1a3250; border-radius:10px; padding:18px; margin-bottom:18px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+        <div>
+          <h4 style="margin:0; font-size:16px; color:#38bdf8;">📊 Análise de Pareto 80/20 — Principais TAGs Ofensoras da Planta</h4>
+          <span style="font-size:12px; color:#94a3b8;">Concentração de horas paradas por equipamento (Curva ABC de Confiabilidade)</span>
+        </div>
+        <span style="font-size:11px; background:#7f1d1d; color:#fca5a5; font-weight:800; padding:3px 10px; border-radius:12px; border:1px solid #ef4444;">🚨 3 ATIVOS CONCENTRAM 81% DAS PARADAS</span>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <div>
+          <div style="display:flex; justify-content:space-between; font-size:12.5px; margin-bottom:4px;">
+            <span><b>1. TAG 101-RD-01</b> (Redutor Helicoidal Moagem)</span>
+            <span style="color:#f87171; font-weight:bold;">4,2 horas de parada (45,6%)</span>
+          </div>
+          <div style="background:#0d1d30; height:12px; border-radius:6px; overflow:hidden;">
+            <div style="background:#ef4444; height:100%; width:45.6%;"></div>
+          </div>
+        </div>
+
+        <div>
+          <div style="display:flex; justify-content:space-between; font-size:12.5px; margin-bottom:4px;">
+            <span><b>2. TAG 28LCE10-P01</b> (Bomba Centrífuga Alimentação)</span>
+            <span style="color:#fb923c; font-weight:bold;">2,3 horas de parada (25,0%)</span>
+          </div>
+          <div style="background:#0d1d30; height:12px; border-radius:6px; overflow:hidden;">
+            <div style="background:#f97316; height:100%; width:25%;"></div>
+          </div>
+        </div>
+
+        <div>
+          <div style="display:flex; justify-content:space-between; font-size:12.5px; margin-bottom:4px;">
+            <span><b>3. TAG 101-MO-01</b> (Motor Elétrico 75 kW)</span>
+            <span style="color:#facc15; font-weight:bold;">1,0 hora de parada (10,8%)</span>
+          </div>
+          <div style="background:#0d1d30; height:12px; border-radius:6px; overflow:hidden;">
+            <div style="background:#eab308; height:100%; width:10.8%;"></div>
+          </div>
+        </div>
+
+        <div>
+          <div style="display:flex; justify-content:space-between; font-size:12.5px; margin-bottom:4px;">
+            <span><b>4. Outros 35 Equipamentos</b> (Válvulas, filtros e tubulações)</span>
+            <span style="color:#4ade80; font-weight:bold;">1,7 hora de parada (18,6%)</span>
+          </div>
+          <div style="background:#0d1d30; height:12px; border-radius:6px; overflow:hidden;">
+            <div style="background:#22c55e; height:100%; width:18.6%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:14px; background:#06111f; border-left:3px solid #38bdf8; border-radius:4px; padding:10px 14px; font-size:12px; color:#cbd5e1; line-height:1.5;">
+        <b>💡 Parecer de Engenharia de Confiabilidade:</b> Ações prioritárias devem ser focadas na inspeção de vibração e alinhamento a laser do Redutor <b>101-RD-01</b> e no plano de selagem da Bomba <b>28LCE10-P01</b>. A eliminação destas falhas reduzirá em mais de 70% as paradas não programadas da unidade.
+      </div>
+    </div>
+  `;
+}
+
+function renderizarGestaoUsuariosEmpresa() {
+  const container = document.getElementById('emp_container_usuarios');
+  if (!container) return;
+
+  container.innerHTML = `
+    <div style="background:#071424; border:1px solid #1a3250; border-radius:10px; padding:18px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:14px;">
+        <div>
+          <h4 style="margin:0; font-size:16px; color:#38bdf8;">Gestão de Acessos & Governança da Equipe</h4>
+          <span style="font-size:12px; color:#94a3b8;">Controle de perfis operacionais (Mecânico, Supervisor, Empresa) e matrículas</span>
+        </div>
+        <button type="button" class="button" style="background:#0284c7; border-color:#38bdf8; font-size:12px; padding:6px 14px; margin:0;" onclick="cadastrarNovoColaboradorEmpresa()">➕ Cadastrar Colaborador</button>
+      </div>
+
+      <div style="overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse; font-size:12.5px; text-align:left;">
+          <thead>
+            <tr style="border-bottom:2px solid #1e3a5f; color:#7dd3fc;">
+              <th style="padding:10px;">Colaborador</th>
+              <th style="padding:10px;">Matrícula</th>
+              <th style="padding:10px;">Nível de Acesso</th>
+              <th style="padding:10px;">Status</th>
+              <th style="padding:10px; text-align:right;">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${EQUIPE_COLABORADORES_SUPERVISAO.map(u => `
+              <tr style="border-bottom:1px solid #102135;">
+                <td style="padding:10px;"><b style="color:#f0f9ff;">${u.nome}</b></td>
+                <td style="padding:10px; color:#94a3b8; font-family:monospace;">${u.matricula}</td>
+                <td style="padding:10px;">
+                  <span style="font-size:11px; font-weight:700; background:#0f2744; border:1px solid #1e3a5f; color:#7dd3fc; padding:2px 8px; border-radius:6px;">${u.nivel.includes('Supervisor') ? '👨‍🔧 SUPERVISOR' : '👷 MECÂNICO'}</span>
+                </td>
+                <td style="padding:10px;">
+                  <span style="font-size:11px; font-weight:700; color:#4ade80;">🟢 Ativo</span>
+                </td>
+                <td style="padding:10px; text-align:right;">
+                  <button type="button" class="button secondary" style="font-size:11px; padding:3px 8px; margin:0;" onclick="alterarNivelUsuarioPrompt('${u.nome}')">Alterar Nível</button>
+                </td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `;
+}
+
+function cadastrarNovoColaboradorEmpresa() {
+  const nome = prompt('Nome completo do colaborador:');
+  if (!nome || !nome.trim()) return;
+  const mat = prompt('Número de matrícula funcional:');
+  if (!mat || !mat.trim()) return;
+
+  EQUIPE_COLABORADORES_SUPERVISAO.push({
+    id: Date.now(),
+    nome: nome.trim(),
+    matricula: mat.trim(),
+    nivel: 'Mecânico de Manutenção',
+    status: 'Disponível na Oficina',
+    local: 'Oficina Central',
+    relatoriosMes: 0,
+    ultimaOM: '—'
+  });
+
+  renderizarGestaoUsuariosEmpresa();
+  abrirToastNotificacao(`✔ Colaborador ${nome} cadastrado com sucesso!`);
+}
+
+function alterarNivelUsuarioPrompt(nome) {
+  const novo = prompt(`Definir novo nível para ${nome} (Digite: mecanico, supervisor ou empresa):`);
+  if (!novo) return;
+  abrirToastNotificacao(`✔ Nível de ${nome} atualizado para: ${novo.toUpperCase()}`);
+  renderizarGestaoUsuariosEmpresa();
+}
+
+function renderizarExportacaoAuditoriaEmpresa() {
+  const container = document.getElementById('emp_container_exportar');
+  if (!container) return;
+
+  container.innerHTML = `
+    <div style="background:#071424; border:1px solid #1a3250; border-radius:10px; padding:22px; max-width:750px; margin:auto; text-align:center;">
+      <div style="font-size:40px; margin-bottom:10px;">📑</div>
+      <h3 style="color:#e0f2fe; margin:0 0 8px 0; font-size:20px;">Dossiê Consolidado de Manutenção para Auditoria ISO 55000 / 9001</h3>
+      <p style="font-size:13px; color:#94a3b8; line-height:1.5; margin-bottom:20px;">
+        Exporte o pacote completo contendo todo o histórico de intervenções, fichas de vida útil dos ativos, laudos técnicos homologados e gráficos de disponibilidade para auditorias externas e relatórios de diretoria.
+      </p>
+
+      <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
+        <button type="button" class="button" style="background:#059669; border-color:#10b981; font-weight:bold; padding:10px 20px;" onclick="exportarDossieAuditoria('pdf')">📄 Exportar Dossiê em PDF Executivo</button>
+        <button type="button" class="button secondary" style="padding:10px 20px;" onclick="exportarDossieAuditoria('csv')">📊 Exportar Planilha de Ativos (.CSV)</button>
+      </div>
+    </div>
+  `;
+}
+
+function exportarDossieAuditoria(formato) {
+  abrirToastNotificacao(`⏳ Gerando dossiê de auditoria da planta no formato ${formato.toUpperCase()}...`);
+  setTimeout(() => {
+    abrirToastNotificacao(`✔ Dossiê de Manutenção Industrial gerado com sucesso!`);
+  }, 1200);
+}
+
+
+/* ========================================================================== */
+/* INICIALIZAÇÃO DOS NÍVEIS OPERACIONAIS                                      */
+/* ========================================================================== */
+window.addEventListener('DOMContentLoaded', () => {
+  try {
+    const nivelSalvo = localStorage.getItem('mecanica_nivel_ativo') || 'mecanico';
+    mudarNivelAtivo(nivelSalvo);
+  } catch(e) {
+    console.warn('Init nivel ativo:', e);
   }
 });
 
@@ -9659,6 +10784,14 @@ function abrirModulo(id) {
 
   if (id === 'torque') {
     iniciarModuloTorque();
+  }
+
+  if (id === 'supervisor') {
+    abrirModuloSupervisor();
+  }
+
+  if (id === 'empresa') {
+    abrirModuloEmpresa();
   }
 }
 
