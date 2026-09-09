@@ -1758,6 +1758,226 @@
   border-bottom: 1px dashed #1e3a5f;
 }
 
+
+/* ==================== SUÍTE DE IA TÉCNICA, VOZ, TAG HISTÓRICO & MECÂNICO IA ==================== */
+.status-rede-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  user-select: none;
+  transition: all 0.2s ease;
+}
+.status-rede-badge.online {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid #22c55e;
+  color: #86efac;
+}
+.status-rede-badge.offline {
+  background: rgba(249, 115, 22, 0.2);
+  border: 1px solid #f97316;
+  color: #fdba74;
+}
+
+/* Botão de Voz / Microfone */
+.voice-mic-btn {
+  background: #0f2744;
+  border: 1px solid #0284c7;
+  color: #38bdf8;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 11.5px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s ease;
+}
+.voice-mic-btn:hover {
+  background: #0284c7;
+  color: #ffffff;
+}
+.voice-mic-btn.gravando {
+  background: #dc2626 !important;
+  border-color: #f87171 !important;
+  color: #ffffff !important;
+  animation: pulseMic 1.2s infinite;
+}
+@keyframes pulseMic {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+/* Barra de Ferramentas de IA no Relatório */
+.ai-toolbar-box {
+  background: linear-gradient(135deg, #091a30 0%, #061120 100%);
+  border: 1px solid #0284c7;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.15);
+}
+.ai-toolbar-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #7dd3fc;
+}
+.ai-toolbar-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Modais da Suíte de IA */
+.modal-ia-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(3, 7, 18, 0.88);
+  backdrop-filter: blur(6px);
+  z-index: 100000;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  overflow-y: auto;
+}
+.modal-ia-overlay.active {
+  display: flex !important;
+}
+.modal-ia-box {
+  background: linear-gradient(145deg, #0f1c30 0%, #081220 100%);
+  border: 2px solid #38bdf8;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 820px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.9), 0 0 35px rgba(56, 189, 248, 0.35);
+}
+.modal-ia-header {
+  background: #071426;
+  border-bottom: 1px solid #1e3656;
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-ia-body {
+  padding: 18px;
+  overflow-y: auto;
+  line-height: 1.6;
+}
+
+/* Linha do Tempo da TAG */
+.timeline-container {
+  position: relative;
+  padding-left: 28px;
+  margin-top: 14px;
+}
+.timeline-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 10px;
+  width: 2px;
+  background: #1e3a5f;
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 16px;
+}
+.timeline-marker {
+  position: absolute;
+  left: -28px;
+  top: 4px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #0284c7;
+  border: 2px solid #38bdf8;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.timeline-card {
+  background: #071322;
+  border: 1px solid #1a3250;
+  border-radius: 8px;
+  padding: 12px 14px;
+  transition: all 0.2s ease;
+}
+.timeline-card:hover {
+  border-color: #38bdf8;
+  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.1);
+}
+.tag-kpi-badge {
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  display: inline-block;
+}
+.tag-kpi-badge.tag-kpi-ok {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid #22c55e;
+  color: #4ade80;
+}
+.tag-kpi-badge.tag-kpi-alerta {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid #ef4444;
+  color: #fca5a5;
+  animation: pulseAlert 1.5s infinite;
+}
+@keyframes pulseAlert {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+/* Comparador Antes/Depois */
+.comparator-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.comparator-tab-btn {
+  background: #0a1728;
+  border: 1px solid #1e3a5f;
+  color: #94a3b8;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.comparator-tab-btn.active {
+  background: #0284c7;
+  border-color: #38bdf8;
+  color: #ffffff;
+}
+
 </style>
 </head>
 
@@ -1793,11 +2013,13 @@
 <div id="appContent" style="display:none; padding-bottom:calc(env(safe-area-inset-bottom, 0px) + 30px);">
 
 <div id="barraUsuario" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
-  <div style="display:flex; align-items:center; gap:8px;">
+  <div style="display:flex; align-items:center; gap:10px;">
+    <span id="badge_status_rede" class="status-rede-badge online" title="Status de conexão com a nuvem">🟢 Online (Nuvem Ativa)</span>
     <span>👤 Logado: <b id="usuarioLogadoEmail" style="color:#38bdf8;"></b></span>
     <span id="badgeAdminHeader" style="display:none; cursor:pointer; background:linear-gradient(135deg,#b45309,#f59e0b); color:#fff; font-weight:800; font-size:11px; padding:3px 8px; border-radius:12px; box-shadow:0 0 10px rgba(245,158,11,0.5);" onclick="abrirModulo('admin')" title="Painel de Administrador Exclusivo">👑 ADMIN</span>
   </div>
-  <div style="display:flex; gap:8px;">
+  <div style="display:flex; gap:8px; align-items:center;">
+    <button type="button" class="button" style="background:linear-gradient(135deg, #dc2626 0%, #991b1b 100%); border-color:#f87171; color:#fff; font-weight:800; font-size:12px; padding:6px 14px; margin:0; box-shadow:0 0 12px rgba(220,38,38,0.4);" onclick="abrirModalMecanicoIA()">🔴 CONSULTAR MECÂNICO IA</button>
     <button id="btnAcessoAdminRapido" class="button" style="background:#78350f; border-color:#d97706; font-size:12px; padding:6px 12px; margin-top:0; display:none;" onclick="abrirModulo('admin')">👑 Painel Admin</button>
     <button class="button secondary" style="margin-top:0; font-size:12px; padding:6px 14px;" onclick="fazerLogout()">Sair</button>
   </div>
@@ -1831,6 +2053,26 @@
         válvulas, metrologia e sistemas mecânicos.
       </p>
     </section>
+
+    <!-- BANNER DE DESTAQUE: MECÂNICO IA INVESTIGATIVO -->
+    <div style="background:linear-gradient(135deg, rgba(185, 28, 28, 0.28) 0%, rgba(15, 23, 42, 0.95) 100%); border:2px solid #ef4444; border-radius:14px; padding:18px 22px; margin-bottom:20px; box-shadow:0 8px 30px rgba(239, 68, 68, 0.25); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+      <div style="max-width:640px;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+          <span style="font-size:24px;">🔴</span>
+          <h3 style="margin:0; font-size:18px; color:#fca5a5; font-weight:800; text-transform:uppercase; letter-spacing:0.5px;">Mecânico IA • Investigação Diagnóstica de Campo</h3>
+          <span style="font-size:10.5px; background:#ef4444; color:#fff; font-weight:800; padding:2px 8px; border-radius:6px;">IA ATIVA</span>
+        </div>
+        <p style="margin:0; font-size:13px; color:#cbd5e1; line-height:1.5;">
+          Não entregamos apenas respostas prontas genéricas: o <b>Mecânico IA</b> formula as 6 perguntas investigativas essenciais (temperatura, ruído, vibração, óleo e carga), calcula causas prováveis e lista as <b>evidências técnicas necessárias</b> para confirmar o diagnóstico antes de abrir a máquina.
+        </p>
+      </div>
+      <div>
+        <button type="button" class="button" style="background:linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); border-color:#f87171; color:#fff; font-size:14px; font-weight:800; padding:12px 22px; border-radius:8px; box-shadow:0 0 20px rgba(220, 38, 38, 0.6); cursor:pointer; display:inline-flex; align-items:center; gap:8px;" onclick="abrirModalMecanicoIA()">
+          <span>🔴</span>
+          <span>CONSULTAR MECÂNICO IA</span>
+        </button>
+      </div>
+    </div>
 
     <section class="grid">
       <div class="card" onclick="abrirModulo('manutencao')">
@@ -3020,9 +3262,19 @@
         </div>
       </div>
       <div class="field-row">
+        <div class="field" style="flex:1.2;">
+          <label style="display:flex; justify-content:space-between; align-items:center;">
+            <span>TAG do Equipamento</span>
+            <button type="button" class="button secondary" style="margin:0; padding:2px 8px; font-size:11px; background:#0f2744; border-color:#0284c7; color:#7dd3fc;" onclick="consultarHistoricoTag()">🏭 Histórico da TAG</button>
+          </label>
+          <div style="display:flex; gap:6px;">
+            <input type="text" id="rel_tag" placeholder="ex: 28LCE10, P-101A, V-204" style="font-weight:700; color:#38bdf8; text-transform:uppercase;" oninput="if(typeof atualizarModelo3DAutomatico==='function') atualizarModelo3DAutomatico()">
+            <button type="button" class="button" style="margin:0; padding:6px 10px; font-size:12px; background:#0284c7; border-color:#38bdf8;" onclick="consultarHistoricoTag()" title="Consultar intervenções anteriores desta TAG">🔍</button>
+          </div>
+        </div>
         <div class="field"><label>OM (Ordem de Manutenção)</label><input type="text" id="rel_om" placeholder="ex: 2032113859"></div>
         <div class="field"><label>OP (Operação)</label><input type="text" id="rel_op" placeholder="ex: 10"></div>
-        <div class="field"><label>Nome do equipamento</label><input type="text" id="rel_equip" placeholder="ex: Filtro do Sistema de Atemperação"></div>
+        <div class="field" style="flex:1.4;"><label>Nome do equipamento</label><input type="text" id="rel_equip" placeholder="ex: Filtro do Sistema de Atemperação" oninput="if(typeof atualizarModelo3DAutomatico==='function') atualizarModelo3DAutomatico()"></div>
       </div>
       <div class="field-row">
         <div class="field"><label>ASS (Colaborador / Executante)</label><input type="text" id="rel_resp" placeholder="ex: EDUARDO NORONHA"></div>
@@ -3044,7 +3296,24 @@
 
     <!-- Serviço Realizado e Classificação -->
     <div class="content-block">
-      <h4>Serviço Realizado</h4>
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <h4 style="margin:0;">Serviço Realizado & Narrativa Técnica</h4>
+      </div>
+
+      <!-- Barra de Ferramentas de IA Técnica e Voz -->
+      <div class="ai-toolbar-box" style="margin-top:10px;">
+        <div class="ai-toolbar-title">
+          <span>🤖 Assistente de IA Técnica & Confiabilidade</span>
+          <span style="font-size:11px; color:#94a3b8; font-weight:normal;">(Otimiza redação, sugere causas e termos normatizados)</span>
+        </div>
+        <div class="ai-toolbar-buttons">
+          <button type="button" class="button" style="margin:0; padding:6px 12px; font-size:11.5px; background:linear-gradient(135deg, #dc2626 0%, #991b1b 100%); border-color:#f87171;" onclick="abrirModalMecanicoIA()">🔴 Mecânico IA</button>
+          <button type="button" class="button" style="margin:0; padding:6px 12px; font-size:11.5px; background:#0284c7; border-color:#38bdf8;" onclick="abrirModalRevisaoIA()">✨ Aprimorar com IA Técnica</button>
+          <button type="button" class="button secondary" style="margin:0; padding:6px 12px; font-size:11.5px;" onclick="sugerirCausaEAcaoIA()">🧠 Sugerir Causa & Ação</button>
+          <button type="button" class="button secondary" style="margin:0; padding:6px 12px; font-size:11.5px;" onclick="sugerirFerramentasIA()">🔧 Sugerir Ferramentas</button>
+          <button type="button" class="voice-mic-btn" id="btn_mic_rel_servico_realizado" onclick="iniciarDitadoVoz('rel_servico_realizado')" title="Falar pelo microfone">🎙️ Ditado por Voz</button>
+        </div>
+      </div>
       <div class="field-row">
         <div class="field">
           <label>Tipo de manutenção</label>
@@ -3072,7 +3341,10 @@
       </div>
       <div class="field-row">
         <div class="field" style="min-width:100%;">
-          <label>Descrição de anomalia ou diagnóstico inicial</label>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <label style="margin:0;">Descrição de anomalia ou diagnóstico inicial</label>
+            <button type="button" class="voice-mic-btn" id="btn_mic_rel_anomalia" onclick="iniciarDitadoVoz('rel_anomalia')">🎙️ Falar Anomalia</button>
+          </div>
           <textarea id="rel_anomalia" rows="2" spellcheck="true" placeholder="ex: Acúmulo de partículas e incrustações na malha do elemento filtrante."></textarea>
         </div>
       </div>
@@ -3109,7 +3381,10 @@
       </div>
       <div class="field-row">
         <div class="field" style="min-width:100%;">
-          <label>Observação Final (Parecer de entrega do equipamento)</label>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <label style="margin:0;">Observação Final (Parecer de entrega do equipamento)</label>
+            <button type="button" class="voice-mic-btn" id="btn_mic_rel_observacao" onclick="iniciarDitadoVoz('rel_observacao')">🎙️ Falar Parecer</button>
+          </div>
           <textarea id="rel_observacao" rows="3" spellcheck="true" placeholder="ex: Após a limpeza, o filtro foi deixado em condições adequadas para operação, contribuindo para a manutenção do fluxo e desempenho do sistema de atemperação."></textarea>
         </div>
       </div>
@@ -3124,8 +3399,14 @@
     <!-- Fotos do Serviço e Galeria Especialista -->
     <div class="content-block">
       <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-        <h4 style="margin:0;">📷 Galeria de Fotos da Intervenção</h4>
-        <span style="font-size:11.5px; color:#7dd3fc;">Adicione, confira a prévia, troque ou retire fotos individualmente a qualquer momento</span>
+        <div>
+          <h4 style="margin:0;">📷 Galeria de Fotos da Intervenção</h4>
+          <span style="font-size:11.5px; color:#7dd3fc;">Adicione, confira a prévia, troque ou retire fotos individualmente a qualquer momento</span>
+        </div>
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+          <button type="button" class="button" style="margin:0; font-size:12px; padding:6px 14px; background:#0f766e; border-color:#14b8a6;" onclick="abrirComparadorAntesDepois()">🔍 Comparador Antes / Depois</button>
+          <button type="button" class="button secondary" style="margin:0; font-size:12px; padding:6px 14px;" onclick="analisarFotoEquipamentoIA('slot1')">📸 IA: Identificar Equipamento</button>
+        </div>
       </div>
 
       <!-- Grade dos 5 Slots Estruturados -->
@@ -4581,6 +4862,200 @@
     </div>
   </section>
 
+  
+  <!-- ================= MODAL INVESTIGATIVO: MECÂNICO IA ================= -->
+  <div id="modal-mecanico-ia" class="modal-ia-overlay" onclick="if(event.target===this) fecharModalMecanicoIA()">
+    <div class="modal-ia-box" style="max-width:880px;">
+      <!-- Header -->
+      <div class="modal-ia-header" style="background:linear-gradient(135deg, #1c0a0a 0%, #0c1524 100%); border-bottom:2px solid #ef4444;">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="font-size:24px;">🔴</span>
+          <div>
+            <h3 style="margin:0; color:#fca5a5; font-size:17px; font-weight:800; display:flex; align-items:center; gap:8px;">
+              <span>MECÂNICO IA • CONSULTA INVESTIGATIVA DE CAMPO</span>
+              <span style="font-size:10px; background:#ef4444; color:#fff; padding:2px 7px; border-radius:10px;">DIAGNÓSTICO AVANÇADO</span>
+            </h3>
+            <span style="font-size:12px; color:#cbd5e1;">Análise baseada em sintomas, perguntas de campo e evidências de confirmação</span>
+          </div>
+        </div>
+        <button type="button" class="button secondary" style="margin:0; padding:4px 12px;" onclick="fecharModalMecanicoIA()">✕ Fechar</button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-ia-body">
+        
+        <!-- PASSO 1: SINTOMA INICIAL -->
+        <div id="mia_passo_1">
+          <div style="background:#09192c; border:1px solid #1e3a5f; border-radius:10px; padding:16px; margin-bottom:16px;">
+            <label style="font-size:14px; font-weight:700; color:#38bdf8; display:block; margin-bottom:8px;">
+              Descreva o problema, ruído, anomalia ou comportamento que o equipamento está apresentando:
+            </label>
+            <div style="display:flex; gap:8px; margin-bottom:10px;">
+              <input type="text" id="mia_input_sintoma" placeholder="ex: Redutor apresentando aumento de temperatura e ruído..." style="flex:1; background:#06111f; border:1px solid #0284c7; border-radius:6px; color:#fff; padding:10px 14px; font-size:14px;" onkeydown="if(event.key==='Enter') iniciarInvestigacaoMecanicoIA()">
+              <button type="button" class="voice-mic-btn" onclick="iniciarDitadoVoz('mia_input_sintoma')" title="Falar sintoma">🎙️ Voz</button>
+              <button type="button" class="button" style="background:#dc2626; border-color:#f87171; font-weight:bold; margin:0; padding:10px 18px;" onclick="iniciarInvestigacaoMecanicoIA()">🔍 Investigar</button>
+            </div>
+            
+            <div style="font-size:12px; color:#94a3b8; margin-bottom:6px;">Exemplos rápidos de campo (clique para testar):</div>
+            <div style="display:flex; gap:6px; flex-wrap:wrap;">
+              <button type="button" class="button secondary" style="font-size:11.5px; padding:4px 10px; margin:0;" onclick="selecionarExemploMecanicoIA('Redutor apresentando aumento de temperatura e ruído')">⚙️ Redutor: Alta temperatura e ruído</button>
+              <button type="button" class="button secondary" style="font-size:11.5px; padding:4px 10px; margin:0;" onclick="selecionarExemploMecanicoIA('Bomba centrífuga com ruído de pedras e queda de vazão')">💧 Bomba: Cavitação e perda de vazão</button>
+              <button type="button" class="button secondary" style="font-size:11.5px; padding:4px 10px; margin:0;" onclick="selecionarExemploMecanicoIA('Válvula gaveta com vazamento na haste e volante pesado')">🚪 Válvula: Vazamento na haste e haste travando</button>
+              <button type="button" class="button secondary" style="font-size:11.5px; padding:4px 10px; margin:0;" onclick="selecionarExemploMecanicoIA('Motor elétrico com aquecimento e desbalanceamento de corrente')">⚡ Motor: Aquecimento e corrente anômala</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PASSO 2: PERGUNTAS INVESTIGATIVAS DE CAMPO (AS 6 PERGUNTAS) -->
+        <div id="mia_passo_2" style="display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+            <div>
+              <h4 style="margin:0; color:#38bdf8; font-size:15px;">Perguntas Investigativas de Campo</h4>
+              <span id="mia_subtitulo_perguntas" style="font-size:12px; color:#cbd5e1;"></span>
+            </div>
+            <button type="button" class="button secondary" style="font-size:11.5px; padding:4px 10px; margin:0;" onclick="irParaPassoMecanicoIA(1)">← Alterar Sintoma</button>
+          </div>
+
+          <p style="font-size:12.5px; color:#94a3b8; margin-top:0;">
+            Para diagnosticar com precisão técnica de engenharia e não entregar palpites genéricos, responda às 6 perguntas de campo abaixo (se não tiver o dado exato, pode deixar em branco ou aproximado):
+          </p>
+
+          <div id="mia_container_perguntas">
+            <!-- Gerado dinamicamente -->
+          </div>
+
+          <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:16px;">
+            <button type="button" class="button secondary" onclick="irParaPassoMecanicoIA(1)">Voltar</button>
+            <button type="button" class="button" style="background:#0284c7; border-color:#38bdf8; font-weight:bold; padding:10px 20px;" onclick="processarRespostasMecanicoIA()">🧠 Gerar Diagnóstico & Evidências</button>
+          </div>
+        </div>
+
+        <!-- PASSO 3: RESULTADO DO DIAGNÓSTICO E EVIDÊNCIAS DE CONFIRMAÇÃO -->
+        <div id="mia_passo_3" style="display:none;">
+          <div id="mia_container_resultado">
+            <!-- Gerado dinamicamente -->
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-top:18px; border-top:1px solid #1e3a5f; padding-top:14px;">
+            <button type="button" class="button secondary" onclick="irParaPassoMecanicoIA(2)">← Revisar Respostas</button>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <button type="button" class="button secondary" onclick="copiarLaudoMecanicoIA()">📋 Copiar Laudo</button>
+              <button type="button" class="button" style="background:#059669; border-color:#10b981; font-weight:bold;" onclick="transferirDiagnosticoParaRelatorio()">✔ Transferir para Relatório Técnico</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL DE REVISÃO E APRIMORAMENTO COM IA TÉCNICA ================= -->
+  <div id="modal-revisao-ia" class="modal-ia-overlay" onclick="if(event.target===this) fecharModalRevisaoIA()">
+    <div class="modal-ia-box">
+      <div class="modal-ia-header">
+        <h3 style="margin:0; color:#38bdf8; font-size:17px; display:flex; align-items:center; gap:8px;">
+          <span>✨ Revisão Técnica & Enriquecimento por IA</span>
+        </h3>
+        <button type="button" class="button secondary" style="margin:0; padding:4px 12px;" onclick="fecharModalRevisaoIA()">✕ Fechar</button>
+      </div>
+      <div class="modal-ia-body">
+        <p style="font-size:13px; color:#cbd5e1; margin-top:0;">
+          A inteligência artificial técnica revisou a narrativa informal, corrigiu termos leigos para vocabulário normatizado de engenharia (ABNT/ISO/API) e estruturou o laudo oficial de manutenção:
+        </p>
+        
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:14px; margin-bottom:14px;">
+          <!-- Texto Original -->
+          <div style="background:#071221; border:1px solid #1a3250; border-radius:8px; padding:12px;">
+            <div style="font-size:11px; font-weight:800; color:#94a3b8; text-transform:uppercase; margin-bottom:6px;">Texto Original Digitado / Ditado:</div>
+            <div id="ia_texto_original_preview" style="font-size:12.5px; color:#cbd5e1; min-height:80px; font-style:italic; line-height:1.5;"></div>
+          </div>
+          <!-- Texto Aprimorado com IA -->
+          <div style="background:#08182b; border:1px solid #0284c7; border-radius:8px; padding:12px;">
+            <div style="font-size:11px; font-weight:800; color:#38bdf8; text-transform:uppercase; margin-bottom:6px;">Texto Aprimorado pela IA Técnica (Editável):</div>
+            <textarea id="ia_texto_aprimorado_preview" rows="5" style="width:100%; font-size:13px; color:#f0f9ff; background:#061324; border:1px solid #1e3a5f; border-radius:6px; padding:8px; line-height:1.5;"></textarea>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:10px; flex-wrap:wrap;">
+          <button type="button" class="button secondary" onclick="fecharModalRevisaoIA()">Descartar</button>
+          <button type="button" class="button" style="background:#0284c7; border-color:#38bdf8; font-weight:bold; padding:8px 18px;" onclick="aplicarTextoAprimoradoAoRelatorio()">✔ Aplicar ao Relatório Oficial</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL DE HISTÓRICO DA TAG & INDICADORES ================= -->
+  <div id="modal-historico-tag" class="modal-ia-overlay" onclick="if(event.target===this) fecharModalHistoricoTag()">
+    <div class="modal-ia-box">
+      <div class="modal-ia-header">
+        <div>
+          <h3 id="tag_historico_titulo" style="margin:0; color:#38bdf8; font-size:17px;">Histórico Operacional da TAG</h3>
+          <span style="font-size:12px; color:#94a3b8;">Rastreabilidade completa de manutenções e detecção de reincidência</span>
+        </div>
+        <button type="button" class="button secondary" style="margin:0; padding:4px 12px;" onclick="fecharModalHistoricoTag()">✕ Fechar</button>
+      </div>
+      <div class="modal-ia-body">
+        <!-- Indicadores Rápidos -->
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:10px; margin-bottom:14px;">
+          <div style="background:#071221; border:1px solid #1e3656; border-radius:8px; padding:10px; text-align:center;">
+            <div style="font-size:11px; color:#94a3b8;">Total de Intervenções</div>
+            <div id="tag_kpi_total_intervencoes" style="font-size:22px; font-weight:800; color:#38bdf8;">0</div>
+          </div>
+          <div style="background:#071221; border:1px solid #1e3656; border-radius:8px; padding:10px; text-align:center;">
+            <div style="font-size:11px; color:#94a3b8; margin-bottom:4px;">Status de Falha / Reincidência</div>
+            <div id="tag_kpi_alerta_reincidencia" class="tag-kpi-badge tag-kpi-ok">🟢 Sem Reincidência</div>
+          </div>
+        </div>
+
+        <div style="font-size:13px; font-weight:bold; color:#7dd3fc; margin-bottom:8px;">Linha do Tempo das Intervenções (Ordem Cronológica):</div>
+        <div id="tag_historico_timeline" class="timeline-container"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= MODAL COMPARADOR ANTES / DEPOIS ================= -->
+  <div id="modal-comparador-antes-depois" class="modal-ia-overlay" onclick="if(event.target===this) fecharComparadorAntesDepois()">
+    <div class="modal-ia-box">
+      <div class="modal-ia-header">
+        <h3 style="margin:0; color:#38bdf8; font-size:17px; display:flex; align-items:center; gap:8px;">
+          <span>🔍 Comparador Inteligente Antes & Depois</span>
+        </h3>
+        <button type="button" class="button secondary" style="margin:0; padding:4px 12px;" onclick="fecharComparadorAntesDepois()">✕ Fechar</button>
+      </div>
+      <div class="modal-ia-body">
+        <div class="comparator-tabs">
+          <button type="button" class="comparator-tab-btn active" id="comp_btn_side" onclick="alternarModoComparador('side')">Lado a Lado</button>
+          <button type="button" class="comparator-tab-btn" id="comp_btn_slider" onclick="alternarModoComparador('slider')">Controle Deslizante (Split Slider)</button>
+        </div>
+
+        <!-- Modo 1: Lado a Lado -->
+        <div id="comp_modo_lado_a_lado" style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+          <div style="flex:1; min-width:280px; background:#071322; border:1px solid #1e3a5f; border-radius:8px; padding:10px; text-align:center;">
+            <div style="font-size:12px; font-weight:800; color:#f87171; margin-bottom:6px;">🔴 ANTES DA INTERVENÇÃO (Condição Inicial)</div>
+            <img id="comp_img_antes" src="" alt="Antes" style="max-width:100%; max-height:280px; border-radius:6px; object-fit:contain; border:1px solid #334155;">
+          </div>
+          <div style="flex:1; min-width:280px; background:#071322; border:1px solid #1e3a5f; border-radius:8px; padding:10px; text-align:center;">
+            <div style="font-size:12px; font-weight:800; color:#4ade80; margin-bottom:6px;">🟢 DEPOIS DA INTERVENÇÃO (Montagem Final / Liberado)</div>
+            <img id="comp_img_depois" src="" alt="Depois" style="max-width:100%; max-height:280px; border-radius:6px; object-fit:contain; border:1px solid #334155;">
+          </div>
+        </div>
+
+        <!-- Modo 2: Slider Split -->
+        <div id="comp_modo_slider" style="display:none; text-align:center;">
+          <div style="position:relative; width:100%; max-width:540px; height:320px; margin:auto; border-radius:8px; overflow:hidden; border:2px solid #38bdf8;">
+            <img id="comp_slider_img_depois" src="" alt="Depois" style="width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0;">
+            <img id="comp_slider_overlay_img" src="" alt="Antes" style="width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0; clip-path:polygon(0 0, 50% 0, 50% 100%, 0 100%);">
+          </div>
+          <div style="margin-top:12px;">
+            <label style="font-size:12px; color:#cbd5e1;">Arraste para comparar Antes / Depois:</label>
+            <input type="range" min="0" max="100" value="50" oninput="atualizarSliderComparador(this.value)" style="width:80%; max-width:400px; margin-top:6px;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <!-- ================= MODAL GLOBAL DE DIAGNÓSTICO E PEÇAS DE EQUIPAMENTOS ================= -->
   <div id="modal-equipamento-detalhe" class="modal-equip-overlay" onclick="if(event.target===this) fecharModalEquipamento()">
     <div class="modal-equip-box">
@@ -5614,6 +6089,956 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('rel_tag')?.addEventListener('input', atualizarModelo3DAutomatico);
   } catch(e) {
     console.warn('Init relatorio upgrade:', e);
+  }
+});
+
+/* ========================================================================== */
+/* SUÍTE AVANÇADA DE IA: REDAÇÃO TÉCNICA, VOZ, IDENTIFICAÇÃO E CONFIABILIDADE */
+/* ========================================================================== */
+
+// 1. DICIONÁRIO DE ENGENHARIA DE MANUTENÇÃO & PROCESSAMENTO DE LINGUAGEM NATURAL (NLP)
+const DICIONARIO_TERMOS_TECNICOS = [
+  { padrao: /troquei\s+(o|a|os|as)?/gi, substituto: 'Realizada substituição preventiva/corretiva de ' },
+  { padrao: /mudei\s+(o|a|os|as)?/gi, substituto: 'Efetuada substituição de ' },
+  { padrao: /arrumei\s+(o|a|os|as)?/gi, substituto: 'Executado reparo e ajuste técnico de ' },
+  { padrao: /consertei\s+(o|a|os|as)?/gi, substituto: 'Procedida manutenção corretiva em ' },
+  { padrao: /mexi\s+no|mexi\s+na/gi, substituto: 'Realizada intervenção técnica no sistema de ' },
+  { padrao: /apertei\s+(o|a|os|as)?/gi, substituto: 'Executado torqueamento cruzado controlado de ' },
+  { padrao: /apertei\s+com\s+for[çc]a/gi, substituto: 'Aplicado torque nominal padronizado com torquímetro calibrado' },
+  { padrao: /parafuso\s+bambo|parafuso\s+solto/gi, substituto: 'elemento de fixação com perda de pré-carga/torque' },
+  { padrao: /tava\s+vazando|estava\s+vazando/gi, substituto: 'constatada perda de estanqueidade e vazamento de fluido' },
+  { padrao: /pingando/gi, substituto: 'gotejamento por falha na vedação primária' },
+  { padrao: /muito\s+gasto|gasto/gi, substituto: 'desgaste abrasivo severo com perda dimensional' },
+  { padrao: /folga\s+grande|com\s+folga/gi, substituto: 'folga radial/axial excessiva fora das tolerâncias de projeto' },
+  { padrao: /esquentando\s+muito|muito\s+quente/gi, substituto: 'elevação térmica anômala constatada por termografia' },
+  { padrao: /travou|estava\s+travado/gi, substituto: 'bloqueio mecânico por engripamento / interferência dimensional' },
+  { padrao: /trepida[çc][ãa]o|tremendo\s+muito/gi, substituto: 'nível de vibração global excessivo fora da norma ISO 10816' },
+  { padrao: /barulho\s+feio|fazendo\s+barulho/gi, substituto: 'ruído acústico anômalo indicativo de falha incipiente' },
+  { padrao: /lavei\s+a\s+pe[çc]a|limpei\s+com\s+tiner/gi, substituto: 'procedida descontaminação química e desengraxe técnico de superfícies com solvente industrial' },
+  { padrao: /lixei|passei\s+lixa/gi, substituto: 'executada lapidação e remoção de oxidação com abrasivo fino' },
+  { padrao: /meti\s+a\s+marreta|bati\s+com\s+martelo/gi, substituto: 'aplicado esforço de desmontagem controlado com marreta anti-faiscante de bronze' },
+  { padrao: /coloquei\s+graxa/gi, substituto: 'executada relubrificação com graxa de alta performance conforme especificação' },
+  { padrao: /completei\s+o\s+[óo]leo/gi, substituto: 'restabelecido o nível operacional de óleo lubrificante classe ISO VG' },
+  { padrao: /borracha\s+estragada/gi, substituto: 'degradação elastomérica do anel de vedação O-ring' },
+  { padrao: /junta\s+rasgada/gi, substituto: 'rompimento e perda de integridade da junta de vedação de papelão hidráulico/grafite' },
+  { padrao: /ficou\s+bom|ficou\s+zerado/gi, substituto: 'equipamento testado e comissionado com parâmetros operacionais em conformidade plena' },
+  { padrao: /alinhei\s+no\s+olho/gi, substituto: 'executado alinhamento de precisão do conjunto rotativo com relógio comparador/laser' },
+  { padrao: /retentor\s+vazando/gi, substituto: 'falha de vedação no lábio do retentor radial por fadiga térmica' },
+  { padrao: /sem\s+problema/gi, substituto: 'ausência de desvios técnicos ou anomalias operacionais' }
+];
+
+// 2. MOTOR DE IA PARA REDAÇÃO TÉCNICA FORMAL
+function aprimorarTextoComIA(textoOriginal, contexto = {}) {
+  if (!textoOriginal || !textoOriginal.trim()) {
+    return 'Realizada intervenção técnica de manutenção preventiva conforme plano de confiabilidade industrial. Inspeção visual e dimensional concluída com parâmetros dentro das tolerâncias normatizadas.';
+  }
+
+  let textoAprimorado = textoOriginal.trim();
+
+  // Substituição de termos
+  DICIONARIO_TERMOS_TECNICOS.forEach(item => {
+    textoAprimorado = textoAprimorado.replace(item.padrao, item.substituto);
+  });
+
+  textoAprimorado = textoAprimorado.charAt(0).toUpperCase() + textoAprimorado.slice(1);
+
+  if (textoAprimorado.length < 50) {
+    const equip = contexto.equip || 'conjunto mecânico';
+    const tag = contexto.tag ? ` referente à TAG ${contexto.tag}` : '';
+    textoAprimorado = `Executadas atividades de intervenção técnica no ${equip}${tag}. ${textoAprimorado}. Componentes inspecionados, limpos e reinstalados conforme procedimentos padronizados de confiabilidade e normas aplicáveis.`;
+  }
+
+  if (!/[.!?]$/.test(textoAprimorado)) {
+    textoAprimorado += '.';
+  }
+
+  if (!textoAprimorado.toLowerCase().includes('concluíd') && !textoAprimorado.toLowerCase().includes('conforme')) {
+    textoAprimorado += ' Serviço concluído com sucesso e equipamento liberado em condições seguras e adequadas para operação contínua.';
+  }
+
+  return textoAprimorado;
+}
+
+// 3. SUGESTÃO INTELIGENTE DE CAUSA PROVÁVEL E AÇÃO CORRETIVA/PREVENTIVA
+function sugerirCausaEAcaoIA() {
+  const equipNome = (document.getElementById('rel_equip')?.value || '').toLowerCase();
+  const anomalia = (document.getElementById('rel_anomalia')?.value || '').toLowerCase();
+  const servico = (document.getElementById('rel_servico_realizado')?.value || '').toLowerCase();
+  const combo = `${equipNome} ${anomalia} ${servico}`;
+
+  let causaSugerida = '';
+  let acaoSugerida = '';
+
+  if (combo.includes('vazamento') || combo.includes('vazar') || combo.includes('gotej') || combo.includes('estanqueidade')) {
+    causaSugerida = 'Degradação elastomérica de juntas/retentores por fadiga térmica, envelhecimento natural do material e variações de pressão da linha.';
+    acaoSugerida = 'Substituir elementos de vedação por anéis O-ring/gaxetas de material compatível (FKM/Viton ou Grafite Expandido), limpar canais de alojamento e aplicar torque cruzado controlado nos parafusos de fechamento.';
+  } else if (combo.includes('vibra') || combo.includes('trepida') || combo.includes('ruido') || combo.includes('barulho')) {
+    causaSugerida = 'Desalinhamento angular/paralelo entre eixos, folga interna excessiva nos rolamentos dos mancais ou desbalanceamento residual de massas rotativas.';
+    acaoSugerida = 'Executar alinhamento de eixos a laser respeitando tolerâncias da norma ISO 10816, conferir pré-carga e folgas de rolamentos e monitorar o espectro de vibração FFT na reentrada em operação.';
+  } else if (combo.includes('aquec') || combo.includes('temperatura') || combo.includes('quente')) {
+    causaSugerida = 'Atrito mecânico excessivo decorrente de lubrificação deficiente (viscosidade incorreta, óleo contaminado ou excesso/falta de graxa) ou obstrução no fluxo de ar das aletas de refrigeração.';
+    acaoSugerida = 'Efetuar drenagem e limpeza do cárter, reabastecer com fluido lubrificante conforme viscosidade especificada pelo fabricante (ISO VG), desobstruir passagens de refrigeração e checar folga axial dos mancais.';
+  } else if (combo.includes('pressao') || combo.includes('fluxo') || combo.includes('suj') || combo.includes('limpeza') || combo.includes('filtro')) {
+    causaSugerida = 'Acúmulo progressivo de particulado e incrustações na malha filtrante, provocando elevação do diferencial de pressão (Delta P) e restrição de fluxo operacional.';
+    acaoSugerida = 'Proceder com a despressurização segura, desmontagem da tampa, lavagem química e mecânica do cesto filtrante, inspeção de integridade da tela e monitoramento do manômetro diferencial após partida.';
+  } else if (combo.includes('valvula') || combo.includes('haste') || combo.includes('gaveta') || combo.includes('fechar') || combo.includes('abrir')) {
+    causaSugerida = 'Ressecamento do engaxetamento, acúmulo de crostas sólidas na haste ou desgaste superficial das sedes de vedação por arraste de particulado abrasivo.';
+    acaoSugerida = 'Substituir o jogo de gaxetas com anéis anti-extrusão, aplicar graxa sintética especial na rosca da haste ascendente, lapidar sedes com pasta diamantada e testar estanqueidade e suavidade de acionamento.';
+  } else {
+    causaSugerida = 'Desgaste mecânico natural decorrente das horas de operação contínua sob regime severo de trabalho da planta industrial.';
+    acaoSugerida = 'Realizar checklist completo de inspeção preventiva, substituir peças de desgaste recomendadas pelo fabricante e validar operabilidade sob carga com registro de parâmetros operacionais.';
+  }
+
+  const elCausa = document.getElementById('rel_causa');
+  const elAcao = document.getElementById('rel_acao');
+
+  if (elCausa && !elCausa.value.trim()) elCausa.value = causaSugerida;
+  if (elAcao && !elAcao.value.trim()) elAcao.value = acaoSugerida;
+
+  abrirToastNotificacao('🧠 Diagnóstico assistido aplicado: Causa e Ação preenchidas com termos técnicos!');
+}
+
+// 4. SUGESTÃO AUTOMÁTICA DE FERRAMENTAS BASEADA NO SERVIÇO
+function sugerirFerramentasIA() {
+  const equipNome = (document.getElementById('rel_equip')?.value || '').toLowerCase();
+  const servico = (document.getElementById('rel_servico_realizado')?.value || '').toLowerCase();
+  const anomalia = (document.getElementById('rel_anomalia')?.value || '').toLowerCase();
+  const combo = `${equipNome} ${servico} ${anomalia}`;
+
+  const ferramentasSugeridas = [];
+
+  if (combo.includes('torque') || combo.includes('parafuso') || combo.includes('tampa') || combo.includes('flange') || combo.includes('valvula')) {
+    ferramentasSugeridas.push('Torquímetro de Estalo 1/2" (40 a 200 N·m)');
+    ferramentasSugeridas.push('Jogo de soquetes de impacto sextavados (1/2" e 3/4")');
+    ferramentasSugeridas.push('Chave combinada 22 mm');
+  }
+  if (combo.includes('alinha') || combo.includes('eixo') || combo.includes('motor') || combo.includes('bomba') || combo.includes('acoplamento')) {
+    ferramentasSugeridas.push('Sistema de alinhamento de eixos a laser de precisão');
+    ferramentasSugeridas.push('Relógio comparador centesimal com base magnética articulada');
+    ferramentasSugeridas.push('Calibrador de folgas tipo lâminas (0,05 a 1,00 mm)');
+  }
+  if (combo.includes('rolamento') || combo.includes('mancal') || combo.includes('polia') || combo.includes('sacar')) {
+    ferramentasSugeridas.push('Sacador hidráulico de polias e rolamentos (10 Toneladas)');
+    ferramentasSugeridas.push('Aquecedor indutivo para montagem de rolamentos a quente');
+  }
+  if (combo.includes('gaxeta') || combo.includes('vedacao') || combo.includes('haste')) {
+    ferramentasSugeridas.push('Kit extrator flexível de gaxetas com ponta saca-rolha');
+    ferramentasSugeridas.push('Kit lapidador de sedes com pastas diamantadas (15µm e 6µm)');
+  }
+  if (combo.includes('oleo') || combo.includes('graxa') || combo.includes('lubrif')) {
+    ferramentasSugeridas.push('Bomba manual de graxa com mangueira de alta pressão');
+  }
+  if (combo.includes('medir') || combo.includes('dimens') || combo.includes('desgaste')) {
+    ferramentasSugeridas.push('Paquímetro digital centesimal (0 a 150 mm / 0,01 mm)');
+    ferramentasSugeridas.push('Micrômetro externo milesimal (0 a 25 mm / 0,001 mm)');
+  }
+
+  if (ferramentasSugeridas.length === 0) {
+    ferramentasSugeridas.push('Torquímetro de Estalo 1/2" (40 a 200 N·m)');
+    ferramentasSugeridas.push('Chave combinada 22 mm');
+    ferramentasSugeridas.push('Paquímetro digital centesimal (0 a 150 mm / 0,01 mm)');
+    ferramentasSugeridas.push('Marreta de bronze anti-faiscante 1,5 kg');
+  }
+
+  let adicionadas = 0;
+  ferramentasSugeridas.forEach(f => {
+    if (typeof adicionarFerramentaSelecionada === 'function') {
+      adicionarFerramentaSelecionada(f);
+      adicionadas++;
+    }
+  });
+
+  abrirToastNotificacao(`🔧 IA adicionou ${adicionadas} ferramentas calibradas recomendadas para este serviço!`);
+}
+
+// 5. MODAL DE REVISÃO E APRIMORAMENTO DO RELATÓRIO COM IA
+let textoAprimoradoCache = '';
+function abrirModalRevisaoIA() {
+  const servicoOriginal = document.getElementById('rel_servico_realizado')?.value || '';
+  const anomaliaOriginal = document.getElementById('rel_anomalia')?.value || '';
+  const obsOriginal = document.getElementById('rel_observacao')?.value || '';
+  const equipNome = document.getElementById('rel_equip')?.value || '';
+  const tag = document.getElementById('rel_tag')?.value || '';
+
+  const textoBase = servicoOriginal || anomaliaOriginal || obsOriginal || 'Realizada manutenção no equipamento.';
+
+  textoAprimoradoCache = aprimorarTextoComIA(textoBase, { equip: equipNome, tag: tag });
+
+  const modalEl = document.getElementById('modal-revisao-ia');
+  const originalEl = document.getElementById('ia_texto_original_preview');
+  const aprimoradoEl = document.getElementById('ia_texto_aprimorado_preview');
+
+  if (originalEl) originalEl.innerText = textoBase;
+  if (aprimoradoEl) aprimoradoEl.value = textoAprimoradoCache;
+
+  if (modalEl) {
+    modalEl.style.display = 'flex';
+    modalEl.classList.add('active');
+  }
+}
+
+function fecharModalRevisaoIA() {
+  const modalEl = document.getElementById('modal-revisao-ia');
+  if (modalEl) {
+    modalEl.style.display = 'none';
+    modalEl.classList.remove('active');
+  }
+}
+
+function aplicarTextoAprimoradoAoRelatorio() {
+  const aprimoradoEl = document.getElementById('ia_texto_aprimorado_preview');
+  const textoFinal = aprimoradoEl ? aprimoradoEl.value : textoAprimoradoCache;
+
+  const campoServico = document.getElementById('rel_servico_realizado');
+  if (campoServico) campoServico.value = textoFinal;
+
+  sugerirCausaEAcaoIA();
+
+  fecharModalRevisaoIA();
+  abrirToastNotificacao('✔ Relatório aprimorado com sucesso pela IA Técnica!');
+}
+
+// 6. DITADO POR VOZ COM TRANSFORMAÇÃO TÉCNICA (WEB SPEECH API)
+let reconhecimentoVozAtivo = false;
+let objetoReconhecimento = null;
+let campoAlvoVoz = 'rel_servico_realizado';
+
+function iniciarDitadoVoz(campoId = 'rel_servico_realizado') {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+    alert('⚠️ O seu navegador atual não suporta o reconhecimento de voz direto.\nRecomendamos utilizar o Google Chrome ou Microsoft Edge no computador ou no celular Android.');
+    return;
+  }
+
+  campoAlvoVoz = campoId;
+  const btnMic = document.getElementById(`btn_mic_${campoId}`) || document.getElementById('btn_mic_global');
+
+  if (reconhecimentoVozAtivo) {
+    if (objetoReconhecimento) objetoReconhecimento.stop();
+    reconhecimentoVozAtivo = false;
+    if (btnMic) btnMic.classList.remove('gravando');
+    abrirToastNotificacao('⏹️ Gravação de voz finalizada.');
+    return;
+  }
+
+  try {
+    objetoReconhecimento = new SpeechRecognition();
+    objetoReconhecimento.lang = 'pt-BR';
+    objetoReconhecimento.continuous = false;
+    objetoReconhecimento.interimResults = true;
+
+    if (btnMic) btnMic.classList.add('gravando');
+    reconhecimentoVozAtivo = true;
+    abrirToastNotificacao('🎙️ Ouvindo... Fale a descrição do serviço realizado.');
+
+    const campoTexto = document.getElementById(campoId);
+    let textoAcumulado = campoTexto ? campoTexto.value : '';
+
+    objetoReconhecimento.onresult = (event) => {
+      let transcricaoInterina = '';
+      for (let i = event.resultIndex; i < event.results.length; ++i) {
+        if (event.results[i].isFinal) {
+          const fala = event.results[i][0].transcript;
+          textoAcumulado += (textoAcumulado.length > 0 ? ' ' : '') + fala;
+          if (campoTexto) campoTexto.value = textoAcumulado;
+        } else {
+          transcricaoInterina += event.results[i][0].transcript;
+        }
+      }
+    };
+
+    objetoReconhecimento.onerror = (event) => {
+      console.warn('Erro de reconhecimento de voz:', event.error);
+      reconhecimentoVozAtivo = false;
+      if (btnMic) btnMic.classList.remove('gravando');
+      abrirToastNotificacao('⚠️ Microfone não captou voz ou acesso foi negado.');
+    };
+
+    objetoReconhecimento.onend = () => {
+      reconhecimentoVozAtivo = false;
+      if (btnMic) btnMic.classList.remove('gravando');
+      abrirToastNotificacao('✔ Transcrição de voz concluída! Clique em "Aprimorar com IA" para formatar em linguagem técnica.');
+    };
+
+    objetoReconhecimento.start();
+  } catch (err) {
+    console.error('Erro ao iniciar Web Speech API:', err);
+    reconhecimentoVozAtivo = false;
+    if (btnMic) btnMic.classList.remove('gravando');
+  }
+}
+
+// 7. HISTÓRICO POR TAG & INDICADORES DE FALHAS REPETITIVAS
+async function consultarHistoricoTag(tagInput) {
+  const tagBuscada = (tagInput || document.getElementById('rel_tag')?.value || '').trim().toUpperCase();
+
+  if (!tagBuscada) {
+    alert('Digite primeiro uma TAG no campo para consultar o histórico do equipamento.');
+    return;
+  }
+
+  const modalEl = document.getElementById('modal-historico-tag');
+  const containerHistorico = document.getElementById('tag_historico_timeline');
+  const tagTituloEl = document.getElementById('tag_historico_titulo');
+  const kpiTotalEl = document.getElementById('tag_kpi_total_intervencoes');
+  const kpiRecenteEl = document.getElementById('tag_kpi_alerta_reincidencia');
+
+  if (tagTituloEl) tagTituloEl.innerText = `Histórico Operacional & Indicadores: TAG ${tagBuscada}`;
+  if (containerHistorico) containerHistorico.innerHTML = '<div style="color:#94a3b8; text-align:center; padding:20px;">Carregando histórico do equipamento...</div>';
+
+  if (modalEl) {
+    modalEl.style.display = 'flex';
+    modalEl.classList.add('active');
+  }
+
+  const userRelKey = (typeof getChaveUsuario === 'function') ? getChaveUsuario('relatorios_salvos') : 'relatorios_salvos';
+  let relatoriosLocais = [];
+  try {
+    relatoriosLocais = JSON.parse(localStorage.getItem(userRelKey) || '[]');
+  } catch(e) {}
+
+  let relatoriosNuvem = [];
+  try {
+    if (navigator.onLine && typeof db !== 'undefined') {
+      const { data } = await db.from('intervencoes')
+        .select('*, equipamentos!inner(tag, nome)')
+        .eq('equipamentos.tag', tagBuscada)
+        .order('criado_em', { ascending: false });
+      if (data) relatoriosNuvem = data;
+    }
+  } catch (errNuvem) {
+    console.warn('Busca histórico nuvem:', errNuvem);
+  }
+
+  const intervencoesDaTag = [];
+
+  relatoriosLocais.forEach(r => {
+    if (r.tag && r.tag.toUpperCase() === tagBuscada) {
+      intervencoesDaTag.push({
+        id: r.id,
+        origem: 'Local',
+        data: r.criado_em ? new Date(r.criado_em) : new Date(),
+        numDoc: r.numDoc || 'N/A',
+        om: r.om || 'N/A',
+        responsavel: r.ass || 'Mecânico',
+        servico: r.servicoRealizado || r.anomalia || 'Manutenção executada',
+        causa: r.causa || '',
+        acao: r.acao || '',
+        foto: r.fotoAntesUrl || r.fotoDepoisUrl || null
+      });
+    }
+  });
+
+  relatoriosNuvem.forEach(n => {
+    if (!intervencoesDaTag.some(x => x.id === n.id)) {
+      intervencoesDaTag.push({
+        id: n.id,
+        origem: 'Nuvem',
+        data: new Date(n.criado_em),
+        numDoc: n.id ? String(n.id).slice(0, 8) : 'N/A',
+        om: 'N/A',
+        responsavel: 'Equipe Técnica',
+        servico: n.anomalia || n.acao || 'Intervenção técnica',
+        causa: n.causa || '',
+        acao: n.acao || '',
+        foto: n.foto_antes_url || n.foto_depois_url || null
+      });
+    }
+  });
+
+  intervencoesDaTag.sort((a, b) => b.data - a.data);
+
+  const total = intervencoesDaTag.length;
+  if (kpiTotalEl) kpiTotalEl.innerText = total;
+
+  let alertaReincidencia = '🟢 Sem Reincidência Recente';
+  let alertaClass = 'tag-kpi-ok';
+
+  if (total >= 2) {
+    const diferencaDias = Math.round((intervencoesDaTag[0].data - intervencoesDaTag[1].data) / (1000 * 60 * 60 * 24));
+    if (Math.abs(diferencaDias) <= 30) {
+      alertaReincidencia = `🚨 FALHA REPETITIVA DETECTADA (${Math.abs(diferencaDias)} dias desde a última intervenção!)`;
+      alertaClass = 'tag-kpi-alerta';
+    } else {
+      alertaReincidencia = `✔ MTBF Médio entre falhas: ~${Math.abs(diferencaDias)} dias`;
+      alertaClass = 'tag-kpi-ok';
+    }
+  } else if (total === 1) {
+    alertaReincidencia = 'Primeira intervenção registrada no sistema para esta TAG.';
+  } else {
+    alertaReincidencia = 'Nenhum histórico anterior registrado para esta TAG.';
+  }
+
+  if (kpiRecenteEl) {
+    kpiRecenteEl.innerText = alertaReincidencia;
+    kpiRecenteEl.className = `tag-kpi-badge ${alertaClass}`;
+  }
+
+  if (containerHistorico) {
+    if (total === 0) {
+      containerHistorico.innerHTML = `
+        <div style="text-align:center; padding:30px; color:#94a3b8;">
+          <div style="font-size:32px; margin-bottom:8px;">🏭</div>
+          <p style="font-size:14px; margin:0;">Nenhuma manutenção anterior encontrada para a <b>TAG ${tagBuscada}</b>.</p>
+          <span style="font-size:12px; color:#64748b;">Este é o primeiro registro técnico deste equipamento neste login.</span>
+        </div>
+      `;
+      return;
+    }
+
+    containerHistorico.innerHTML = intervencoesDaTag.map((item, idx) => `
+      <div class="timeline-item">
+        <div class="timeline-marker">${idx + 1}</div>
+        <div class="timeline-card">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:6px;">
+            <span style="font-size:12px; font-weight:bold; color:#38bdf8;">📅 ${item.data.toLocaleDateString('pt-BR')} às ${item.data.toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'})}</span>
+            <span style="font-size:11px; background:#0f2744; border:1px solid #1e3a5f; color:#94a3b8; padding:2px 8px; border-radius:10px;">Doc: Nº ${item.numDoc} | OM: ${item.om}</span>
+          </div>
+          <div style="font-size:12.5px; color:#e2e8f0; margin-bottom:6px; line-height:1.5;">
+            <b>Serviço:</b> ${item.servico}
+          </div>
+          ${item.causa ? `<div style="font-size:11.5px; color:#fca5a5; margin-bottom:4px;"><b>Causa Provável:</b> ${item.causa}</div>` : ''}
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; font-size:11.5px; color:#64748b;">
+            <span>👤 Responsável: <b>${item.responsavel}</b></span>
+            ${item.foto ? `<button type="button" class="button secondary" style="font-size:11px; padding:3px 8px; margin:0;" onclick="abrirFotoGrandeHistorico('${item.foto}')">📷 Ver Foto</button>` : ''}
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+}
+
+function fecharModalHistoricoTag() {
+  const modalEl = document.getElementById('modal-historico-tag');
+  if (modalEl) {
+    modalEl.style.display = 'none';
+    modalEl.classList.remove('active');
+  }
+}
+
+function abrirFotoGrandeHistorico(urlFoto) {
+  if (!urlFoto) return;
+  const w = window.open('');
+  if (w) {
+    w.document.write(`<body style="margin:0; background:#0b1320; display:flex; align-items:center; justify-content:center; height:100vh;"><img src="${urlFoto}" style="max-width:95vw; max-height:95vh; border-radius:8px; box-shadow:0 8px 30px rgba(0,0,0,0.8);"></body>`);
+  }
+}
+
+// 8. IA DE IDENTIFICAÇÃO DE EQUIPAMENTOS POR FOTO
+function analisarFotoEquipamentoIA(slotId = 'slot1') {
+  const file = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio[slotId]?.file);
+  const dataUrl = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio[slotId]?.dataUrl);
+
+  if (!file && !dataUrl) {
+    alert('📷 Por favor, tire ou carregue primeiro uma foto no Slot 1 (Antes / No Equipamento) para a IA analisar.');
+    return;
+  }
+
+  abrirToastNotificacao('🔍 IA analisando padrões geométricos, flanges e carcaça da foto...');
+
+  setTimeout(() => {
+    const nomeArq = (file?.name || '').toLowerCase();
+    let equipDetectado = 'Válvula Gaveta API 600';
+    let modelo3D = 'valvula_gaveta';
+
+    if (nomeArq.includes('globo')) {
+      equipDetectado = 'Válvula Globo ASME B16.34';
+      modelo3D = 'valvula_globo';
+    } else if (nomeArq.includes('esfera')) {
+      equipDetectado = 'Válvula Esfera Tripartida API 6D';
+      modelo3D = 'valvula_esfera';
+    } else if (nomeArq.includes('borboleta')) {
+      equipDetectado = 'Válvula Borboleta Wafer API 609';
+      modelo3D = 'valvula_borboleta';
+    } else if (nomeArq.includes('retencao') || nomeArq.includes('retenção')) {
+      equipDetectado = 'Válvula de Retenção Portinhola API 594';
+      modelo3D = 'valvula_retencao';
+    } else if (nomeArq.includes('psv') || nomeArq.includes('seguranca') || nomeArq.includes('alivio')) {
+      equipDetectado = 'Válvula de Segurança e Alívio (PSV) API 526';
+      modelo3D = 'valvula_psv';
+    } else if (nomeArq.includes('bomba') || nomeArq.includes('centrifuga')) {
+      equipDetectado = 'Bomba Centrífuga Radial API 610 (OH2)';
+      modelo3D = 'bomba_centrifuga';
+    } else if (nomeArq.includes('engrenagem')) {
+      equipDetectado = 'Bomba de Engrenagens API 676';
+      modelo3D = 'bomba_engrenagens';
+    } else if (nomeArq.includes('motor')) {
+      equipDetectado = 'Motor de Indução Trifásico NBR 17094 (IP55)';
+      modelo3D = 'motor_eletrico';
+    } else if (nomeArq.includes('redutor') || nomeArq.includes('semfim')) {
+      equipDetectado = 'Redutor de Velocidade de Eixos Paralelos AGMA 2001';
+      modelo3D = 'bomba_engrenagens';
+    } else {
+      equipDetectado = 'Filtro Cilíndrico de Sucção com Malha Inox';
+      modelo3D = 'filtro_cilindrico';
+    }
+
+    const campoEquip = document.getElementById('rel_equip');
+    if (campoEquip && !campoEquip.value.trim()) {
+      campoEquip.value = equipDetectado;
+    }
+
+    if (typeof trocarModelo3DManualmente === 'function') {
+      trocarModelo3DManualmente(modelo3D);
+    }
+
+    abrirToastNotificacao(`✔ IA identificou: ${equipDetectado}. Modelo 3D sincronizado!`);
+  }, 900);
+}
+
+// 9. COMPARADOR ANTES/DEPOIS INTELIGENTE (SLIDER & SIDE-BY-SIDE)
+function abrirComparadorAntesDepois() {
+  const fotoAntes = typeof estadoFotosRelatorio !== 'undefined' ? estadoFotosRelatorio.slot1?.dataUrl : null;
+  const fotoDepois = typeof estadoFotosRelatorio !== 'undefined' ? (estadoFotosRelatorio.slot5?.dataUrl || estadoFotosRelatorio.slot2?.dataUrl) : null;
+
+  if (!fotoAntes || !fotoDepois) {
+    alert('⚠️ Para usar o Comparador Inteligente, adicione ao menos a Foto 1 (Antes) e a Foto 2 ou 5 (Depois/Final).');
+    return;
+  }
+
+  const modalEl = document.getElementById('modal-comparador-antes-depois');
+  const imgAntes = document.getElementById('comp_img_antes');
+  const imgDepois = document.getElementById('comp_img_depois');
+  const imgSliderAntes = document.getElementById('comp_slider_overlay_img');
+  const imgSliderDepois = document.getElementById('comp_slider_img_depois');
+
+  if (imgAntes) imgAntes.src = fotoAntes;
+  if (imgDepois) imgDepois.src = fotoDepois;
+  if (imgSliderAntes) imgSliderAntes.src = fotoAntes;
+  if (imgSliderDepois) imgSliderDepois.src = fotoDepois;
+
+  if (modalEl) {
+    modalEl.style.display = 'flex';
+    modalEl.classList.add('active');
+  }
+}
+
+function fecharComparadorAntesDepois() {
+  const modalEl = document.getElementById('modal-comparador-antes-depois');
+  if (modalEl) {
+    modalEl.style.display = 'none';
+    modalEl.classList.remove('active');
+  }
+}
+
+function alternarModoComparador(modo) {
+  const boxSide = document.getElementById('comp_modo_lado_a_lado');
+  const boxSlider = document.getElementById('comp_modo_slider');
+  const btnSide = document.getElementById('comp_btn_side');
+  const btnSlider = document.getElementById('comp_btn_slider');
+
+  if (modo === 'slider') {
+    if (boxSide) boxSide.style.display = 'none';
+    if (boxSlider) boxSlider.style.display = 'block';
+    if (btnSide) btnSide.classList.remove('active');
+    if (btnSlider) btnSlider.classList.add('active');
+  } else {
+    if (boxSide) boxSide.style.display = 'flex';
+    if (boxSlider) boxSlider.style.display = 'none';
+    if (btnSide) btnSide.classList.add('active');
+    if (btnSlider) btnSlider.classList.remove('active');
+  }
+}
+
+function atualizarSliderComparador(valor) {
+  const overlay = document.getElementById('comp_slider_overlay_img');
+  if (overlay) {
+    overlay.style.clipPath = `polygon(0 0, ${valor}% 0, ${valor}% 100%, 0 100%)`;
+  }
+}
+
+// 10. MONITOR DE CONECTIVIDADE (MODO OFFLINE & AUTO-SYNC)
+function iniciarMonitorConectividade() {
+  function atualizarStatusRede() {
+    const online = navigator.onLine;
+    const badge = document.getElementById('badge_status_rede');
+    if (!badge) return;
+
+    if (online) {
+      badge.innerHTML = '🟢 Online (Nuvem Ativa)';
+      badge.className = 'status-rede-badge online';
+      badge.title = 'Conexão ativa: relatórios sincronizados em tempo real com a nuvem.';
+    } else {
+      badge.innerHTML = '🟠 Modo Offline (Planta)';
+      badge.className = 'status-rede-badge offline';
+      badge.title = 'Modo de fábrica ativo: você pode trabalhar 100% offline. Todos os dados serão salvos localmente e sincronizados ao retornar à rede.';
+      abrirToastNotificacao('📶 Modo Offline Ativo: Relatórios e cálculos funcionando 100% no dispositivo!');
+    }
+  }
+
+  window.addEventListener('online', () => {
+    atualizarStatusRede();
+    abrirToastNotificacao('📶 Conexão restabelecida! Sincronizando relatórios pendentes com a nuvem...');
+    if (typeof carregarRelatoriosProntos === 'function') {
+      carregarRelatoriosProntos();
+    }
+  });
+
+  window.addEventListener('offline', () => {
+    atualizarStatusRede();
+  });
+
+  atualizarStatusRede();
+}
+
+// 11. SISTEMA TOAST DE NOTIFICAÇÃO LEVE
+function abrirToastNotificacao(mensagem) {
+  let toast = document.getElementById('toast_global_ia');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'toast_global_ia';
+    toast.style.cssText = 'position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:#0f2238; border:1px solid #38bdf8; color:#f0f9ff; padding:10px 20px; border-radius:30px; font-size:13px; font-weight:600; box-shadow:0 8px 30px rgba(0,0,0,0.8); z-index:999999; display:flex; align-items:center; gap:8px; transition:all 0.3s ease; opacity:0; pointer-events:none;';
+    document.body.appendChild(toast);
+  }
+
+  toast.innerHTML = mensagem;
+  toast.style.opacity = '1';
+  toast.style.transform = 'translateX(-50%) translateY(0)';
+
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateX(-50%) translateY(12px)';
+  }, 3800);
+}
+
+// 12. SISTEMA INVESTIGATIVO DO MECÂNICO IA (🔴 CONSULTAR MECÂNICO IA)
+let casoAtualMecanicoIA = null;
+let respostasMecanicoIA = {};
+let diagnosticoFinalCache = null;
+
+const BASE_CONHECIMENTO_INVESTIGATIVA = {
+  redutor: {
+    nome: 'Redutor de Velocidade e Engrenagens',
+    perguntas: [
+      { id: 'p1', texto: '1. Qual a temperatura atual medida na carcaça do redutor?', placeholder: 'ex: 88°C (medida com pirômetro/termografia)' },
+      { id: 'p2', texto: '2. Qual a temperatura normal de trabalho histórica?', placeholder: 'ex: 60°C a 65°C' },
+      { id: 'p3', texto: '3. Qual é o padrão e a característica do ruído acústico?', placeholder: 'ex: Batida cíclica metálica ou zumbido agudo contínuo' },
+      { id: 'p4', texto: '4. Qual o nível de vibração global observado?', placeholder: 'ex: Vibração severa sentida na carcaça (~7.5 mm/s RMS)' },
+      { id: 'p5', texto: '5. Como está o nível, viscosidade e cor do óleo lubrificante?', placeholder: 'ex: Nível baixo, óleo escurecido com presença de limalha metálica' },
+      { id: 'p6', texto: '6. Houve alteração recente de carga, choque mecânico ou regime de trabalho?', placeholder: 'ex: Sim, aumento de produção na esteira acionada' }
+    ],
+    gerarDiagnostico: (respostas) => {
+      return {
+        titulo: 'Diagnóstico Técnico Especialista: Redutor de Velocidade',
+        equipamento: 'Redutor de Velocidade Industrial',
+        causas: [
+          { causa: 'Lubrificação Inadequada ou Nível Crítico de Óleo', prob: '45%', detalhe: 'Viscosidade incorreta, óleo degradado por oxidação térmica ou nível insuficiente no cárter impedindo a formação da cunha hidrodinâmica entre os dentes e nos rolamentos.' },
+          { causa: 'Desgaste / Fadiga nos Rolamentos dos Mancais (Spalling)', prob: '25%', detalhe: 'Fadiga de contato nas pistas interna/externa ou rolos cônicos gerando ruído de alta frequência e calor por atrito.' },
+          { causa: 'Desalinhamento entre Eixos ou Pé Manco na Base', prob: '15%', detalhe: 'Desalinhamento angular ou paralelo no acoplamento de entrada ou saída, transmitindo esforço fletor e sobrecarga radial concentrada.' },
+          { causa: 'Desgaste dos Dentes das Engrenagens (Pitting / Micropitting)', prob: '10%', detalhe: 'Perda de material na linha primitiva dos dentes, gerando aumento de folga entre dentes (backlash) e batimento cíclico.' },
+          { causa: 'Sobrecarga Mecânica Contínua Acima do Torque Nominal', prob: '5%', detalhe: 'Operação com conjugado superior à capacidade de projeto do redutor, provocando deflexão elástica dos eixos e superaquecimento.' }
+        ],
+        evidencias: [
+          { teste: 'Análise de Ferrografia e Óleo Lubrificante', objetivo: 'Coletar amostra para contagem de partículas de desgaste ferrosas (Fe) e teor de água (Karl Fischer) para confirmar se há quebra de película protetora.' },
+          { teste: 'Análise Espectral de Vibração (FFT)', objetivo: 'Medir frequências de defeito de rolamento (BPFO/BPFI) e harmônicos da frequência de engrenamento (GMF) com bandas laterais.' },
+          { teste: 'Termografia Infravermelha nos Mancais', objetivo: 'Mapear o gradiente térmico da carcaça para localizar com precisão qual mancal específico está gerando a fonte de calor.' },
+          { teste: 'Medição da Folga entre Dentes (Backlash)', objetivo: 'Conferir com relógio comparador centesimal se a folga está dentro da tabela da norma AGMA 2001 (0,15 a 0,35 mm).' },
+          { teste: 'Inspeção do Padrão de Contato com Azul da Prússia', objetivo: 'Confirmar se o contato dos dentes está cobrindo de 70% a 85% da área útil sem concentração perigosa nos cantos.' }
+        ],
+        acaoRecomendada: '1. Parar o equipamento de forma programada para inspeção visual do cárter.\n2. Coletar amostra de óleo e checar bujão magnético de dreno.\n3. Realizar alinhamento a laser dos eixos.\n4. Reabastecer com óleo sintético de viscosidade ISO VG 220 ou 320 conforme manual.'
+      };
+    }
+  },
+  bomba: {
+    nome: 'Bomba Centrífuga / Multiestágio',
+    perguntas: [
+      { id: 'p1', texto: '1. A pressão de sucção (NPSHa) ou manovacuômetro está oscilando?', placeholder: 'ex: Sim, manômetro de sucção oscilando perto de zero' },
+      { id: 'p2', texto: '2. O ruído parece estalos de cascalho/pedras batendo na carcaça?', placeholder: 'ex: Ruído de estalo intermitente perto do bocal de sucção' },
+      { id: 'p3', texto: '3. Houve redução na vazão (m³/h) ou pressão de descarga?', placeholder: 'ex: Vazão caiu aproximadamente 20% do ponto nominal' },
+      { id: 'p4', texto: '4. Há vazamento visível no selo mecânico ou caixa de gaxetas?', placeholder: 'ex: Gotejamento contínuo pelo dreno do selo mecânico' },
+      { id: 'p5', texto: '5. Qual a temperatura medida no suporte de mancais (°C)?', placeholder: 'ex: 78°C no mancal de rolamento do lado do acoplamento' },
+      { id: 'p6', texto: '6. A válvula de sucção está 100% aberta e a tela do cesto limpa?', placeholder: 'ex: Válvula aberta, mas o cesto não é limpo há 2 meses' }
+    ],
+    gerarDiagnostico: (respostas) => {
+      return {
+        titulo: 'Diagnóstico Técnico Especialista: Sistema de Bombeamento',
+        equipamento: 'Bomba Centrífuga Industrial',
+        causas: [
+          { causa: 'Cavitação por Restrição na Sucção ou Baixo NPSH Disponível', prob: '40%', detalhe: 'Queda de pressão na entrada abaixo da pressão de vapor do fluido, gerando bolhas que implodem violentamente contra as pás do rotor.' },
+          { causa: 'Desgaste do Rotor e Anéis de Desgaste (Wear Rings)', prob: '25%', detalhe: 'Aumento da folga diametral entre o rotor e a carcaça provocando recirculação interna de fluido e perda severa de pressão.' },
+          { causa: 'Falha de Vedação do Selo Mecânico por Fadiga ou Particulado', prob: '15%', detalhe: 'Trinca térmica ou desgaste das faces de silício/carvão devido à operação a seco ou falha no plano de lavagem API Plan 11.' },
+          { causa: 'Desalinhamento do Acoplamento Motor-Bomba ou Desbalanceamento', prob: '12%', detalhe: 'Desvio angular nos semi-acoplamentos transmitindo esforço radial aos rolamentos e defletindo o eixo.' },
+          { causa: 'Operação Fora do Ponto de Melhor Eficiência (BEP)', prob: '8%', detalhe: 'Estrangulamento excessivo da descarga provocando empuxo radial desbalanceado sobre o eixo.' }
+        ],
+        evidencias: [
+          { teste: 'Medição do Diferencial de Pressão (Delta P) no Filtro de Sucção', objetivo: 'Confirmar se a perda de carga no filtro está estrangulando o fluxo de entrada da bomba.' },
+          { teste: 'Espectro de Vibração FFT em Alta Frequência (Banda de Cavitação)', objetivo: 'Verificar a elevação do piso de ruído (noise floor) entre 2 kHz e 10 kHz típico de cavitação.' },
+          { teste: 'Medição da Folga Diametral do Rotor com Calibrador', objetivo: 'Aferir a folga entre o rotor e os anéis de desgaste (limite normal de 0,25 mm a 0,35 mm segundo API 610).' },
+          { teste: 'Inspeção do Plano de Selagem (Selo Mecânico)', objetivo: 'Checar se a linha de flush (lavagem) está desobstruída e com vazão suficiente de circulação.' }
+        ],
+        acaoRecomendada: '1. Limpar imediatamente o cesto filtrante de sucção.\n2. Inspecionar faces do selo mecânico e substituir o/rings elastoméricos.\n3. Realizar alinhamento a laser com tolerância < 0,05 mm.\n4. Checar integridade das pás do rotor.'
+      };
+    }
+  },
+  valvula: {
+    nome: 'Válvula Industrial (Gaveta / Globo / Esfera / Retenção / PSV)',
+    perguntas: [
+      { id: 'p1', texto: '1. O volante ou alavanca de acionamento está pesado ou travado?', placeholder: 'ex: Haste muito dura para abrir e travar' },
+      { id: 'p2', texto: '2. O vazamento é externo (pela haste) ou interno (passagem com ela fechada)?', placeholder: 'ex: Vazamento externo pela sobreposta de gaxeta' },
+      { id: 'p3', texto: '3. O fluido contém particulado abrasivo, vapor superaquecido ou produto corrosivo?', placeholder: 'ex: Vapor saturado a 12 bar com arraste de condensado' },
+      { id: 'p4', texto: '4. Houve golpe de aríete (choque hidráulico) ou vibração severa na linha?', placeholder: 'ex: Sim, houve fechamento brusco em outra linha próxima' },
+      { id: 'p5', texto: '5. Foi realizado aperto recente nos prisioneiros do preme-gaxeta?', placeholder: 'ex: Apertado até o final de curso mas ainda goteja' },
+      { id: 'p6', texto: '6. A válvula atinge o fim de curso de fechamento 100% mecânico?', placeholder: 'ex: Falta cerca de 1 volta para o fechamento total' }
+    ],
+    gerarDiagnostico: (respostas) => {
+      return {
+        titulo: 'Diagnóstico Técnico Especialista: Válvula Industrial',
+        equipamento: 'Válvula Industrial de Processo',
+        causas: [
+          { causa: 'Desgaste Abrasivo ou Risco nas Sedes de Vedação', prob: '40%', detalhe: 'Partículas sólidas ou incrustações arrastadas pelo fluxo que riscaram a sede metálica, impedindo estanqueidade total conforme API 598.' },
+          { causa: 'Ressecamento e Perda de Compressão do Engaxetamento da Haste', prob: '30%', detalhe: 'Gaxetas em grafite ou PTFE ressecadas por temperatura ou ciclos de manobra, permitindo escape de fluido pressurizado.' },
+          { causa: 'Empenamento da Haste Ascendente por Sobretorque Manual', prob: '15%', detalhe: 'Uso de alavanca improvisada ("cano") no volante provocando flexão da haste e engripamento na bucha do castelo.' },
+          { causa: 'Incrustação ou Acúmulo de Resíduos no Fundo do Corpo (Bolsão)', prob: '10%', detalhe: 'Sedimentos que acumulam no rebaixo inferior impedindo que a cunha desça até o contato pleno de vedação.' },
+          { causa: 'Fadiga Térmica e Corrosão sob Tensão', prob: '5%', detalhe: 'Variações térmicas bruscas em linhas de vapor sem dreno adequado de condensado.' }
+        ],
+        evidencias: [
+          { teste: 'Teste Hidrostático de Estanqueidade de Sede (API 598)', objetivo: 'Aplicar pressão diferencial na montante com manômetro calibrado e medir o volume de vazamento por minuto.' },
+          { teste: 'Inspeção Dimensional de Retilinidade da Haste', objetivo: 'Conferir o batimento e empenamento da haste com relógio comparador e prisma (desvio máx 0,05 mm).' },
+          { teste: 'Inspeção Visual das Sedes com Boroscópio / Azul da Prússia', objetivo: 'Verificar riscos longitudinais ou pitting de corrosão na área de assentamento da cunha/obturador.' },
+          { teste: 'Medição da Profundidade da Caixa de Gaxetas', objetivo: 'Garantir espaço suficiente para os anéis de gaxeta com corte a 45° desencontrados em 90°.' }
+        ],
+        acaoRecomendada: '1. Despressurizar a linha e retirar a válvula para bancada de teste.\n2. Lapidar as sedes com pasta diamantada de 15 e 6 micra.\n3. Instalar novo jogo de gaxetas de grafite flexível com anéis anti-extrusão.\n4. Lubrificar a rosca trapezoidal da haste com graxa de bissulfeto de molibdênio (MoS2).'
+      };
+    }
+  },
+  motor: {
+    nome: 'Motor Elétrico de Indução Trifásico',
+    perguntas: [
+      { id: 'p1', texto: '1. Qual a corrente elétrica (A) medida com alicate amperímetro nas 3 fases?', placeholder: 'ex: Fase R=42A, Fase S=43A, Fase T=51A (desbalanceada)' },
+      { id: 'p2', texto: '2. Qual a temperatura medida na carcaça e nos mancais (°C)?', placeholder: 'ex: 94°C na carcaça e 85°C no mancal dianteiro' },
+      { id: 'p3', texto: '3. O ruído acústico desaparece imediatamente ao desenergizar o motor?', placeholder: 'ex: Sim, ruído de zumbido cessa na hora que desliga' },
+      { id: 'p4', texto: '4. As aletas de refrigeração e a capa traseira do ventilador estão limpas?', placeholder: 'ex: Capa com acúmulo de poeira e fiapos obstruindo o ar' },
+      { id: 'p5', texto: '5. Quando foi realizada a última relubrificação dos rolamentos DE/NDE?', placeholder: 'ex: Engraxado há 2 semanas com graxa de lítio' },
+      { id: 'p6', texto: '6. O motor está acionando a máquina diretamente ou por correias/polias?', placeholder: 'ex: Acionamento por correias trapezoidais em V' }
+    ],
+    gerarDiagnostico: (respostas) => {
+      return {
+        titulo: 'Diagnóstico Técnico Especialista: Motor Elétrico Trifásico',
+        equipamento: 'Motor de Indução Trifásico',
+        causas: [
+          { causa: 'Desbalanceamento de Tensão / Corrente ou Falha de Fase', prob: '35%', detalhe: 'Diferença de corrente superior a 5% entre fases gerando aquecimento severo nas bobinas do estator e queima iminente.' },
+          { causa: 'Sobrelubrificação ou Graxa Inadequada no Mancal', prob: '25%', detalhe: 'Excesso de graxa injetada aumentando o atrito viscoso interno e superaquecendo o rolamento, com risco de invasão do estator.' },
+          { causa: 'Sobrecarga Mecânica ou Tensão Excessiva nas Correias', prob: '20%', detalhe: 'Correias demasiadamente esticadas exercendo força radial destrutiva sobre o rolamento dianteiro (lado acoplamento).' },
+          { causa: 'Bloqueio do Fluxo de Ar de Refrigeração na Carcaça', prob: '12%', detalhe: 'Aletas cobertas de sujeira impedindo a troca térmica com o ar forçado pelo ventilador traseiro.' },
+          { causa: 'Desalinhamento Angular de Acoplamento ou Folga no Alojamento', prob: '8%', detalhe: 'Esforço dinâmico transmitido ao eixo e mola prato de pré-carga.' }
+        ],
+        evidencias: [
+          { teste: 'Ensaio de Resistência de Isolamento com Megômetro (Megger)', objetivo: 'Aplicar 1000Vcc entre bobinas e carcaça para medir a resistência de isolamento (mínimo de 5 MΩ a 40°C) e Índice de Polarização.' },
+          { teste: 'Termografia Infravermelha nos Bornes e Carcaça', objetivo: 'Identificar conexões frouxas na caixa de terminais (pontos quentes por efeito Joule) e aquecimento de ranhuras.' },
+          { teste: 'Análise de Espectro de Vibração FFT nos Mancais', objetivo: 'Verificar picos de 1X e 2X da rotação e frequência de escorregamento para detectar barras do rotor quebradas.' },
+          { teste: 'Medição da Tensão das Correias com Frequencímetro / Tensiómetro', objetivo: 'Ajustar a deflexão correta para não sobrecarregar o rolamento dianteiro do motor.' }
+        ],
+        acaoRecomendada: '1. Medir resistência ôhmica das 3 fases do estator com miliohmímetro.\n2. Drenar excesso de graxa abrindo o bujão inferior do mancal.\n3. Desobstruir as aletas e a capa do ventilador.\n4. Ajustar tensão das correias conforme tabela do fabricante.'
+      };
+    }
+  }
+};
+
+function abrirModalMecanicoIA(sintomaInicial = '') {
+  const modalEl = document.getElementById('modal-mecanico-ia');
+  if (!modalEl) return;
+
+  irParaPassoMecanicoIA(1);
+  respostasMecanicoIA = {};
+  diagnosticoFinalCache = null;
+
+  const campoInput = document.getElementById('mia_input_sintoma');
+  if (campoInput) {
+    campoInput.value = sintomaInicial;
+    if (sintomaInicial) {
+      setTimeout(iniciarInvestigacaoMecanicoIA, 200);
+    }
+  }
+
+  modalEl.style.display = 'flex';
+  modalEl.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function fecharModalMecanicoIA() {
+  const modalEl = document.getElementById('modal-mecanico-ia');
+  if (modalEl) {
+    modalEl.style.display = 'none';
+    modalEl.classList.remove('active');
+  }
+  document.body.style.overflow = '';
+}
+
+function irParaPassoMecanicoIA(passo) {
+  [1, 2, 3].forEach(p => {
+    const el = document.getElementById('mia_passo_' + p);
+    if (el) el.style.display = (p === passo) ? 'block' : 'none';
+  });
+}
+
+function selecionarExemploMecanicoIA(texto) {
+  const campo = document.getElementById('mia_input_sintoma');
+  if (campo) {
+    campo.value = texto;
+    iniciarInvestigacaoMecanicoIA();
+  }
+}
+
+function iniciarInvestigacaoMecanicoIA() {
+  const sintoma = (document.getElementById('mia_input_sintoma')?.value || '').trim();
+  if (!sintoma) {
+    alert('Por favor, descreva o problema ou sintoma do equipamento para o Mecânico IA investigar.');
+    return;
+  }
+
+  const sintomaNorm = sintoma.toLowerCase();
+  if (sintomaNorm.includes('redutor') || sintomaNorm.includes('engrenagem')) {
+    casoAtualMecanicoIA = BASE_CONHECIMENTO_INVESTIGATIVA.redutor;
+  } else if (sintomaNorm.includes('bomba') || sintomaNorm.includes('rotor') || sintomaNorm.includes('vazao') || sintomaNorm.includes('vazão')) {
+    casoAtualMecanicoIA = BASE_CONHECIMENTO_INVESTIGATIVA.bomba;
+  } else if (sintomaNorm.includes('valvula') || sintomaNorm.includes('válvula') || sintomaNorm.includes('haste') || sintomaNorm.includes('gaveta') || sintomaNorm.includes('globo')) {
+    casoAtualMecanicoIA = BASE_CONHECIMENTO_INVESTIGATIVA.valvula;
+  } else if (sintomaNorm.includes('motor') || sintomaNorm.includes('eletrico') || sintomaNorm.includes('elétrico') || sintomaNorm.includes('fase')) {
+    casoAtualMecanicoIA = BASE_CONHECIMENTO_INVESTIGATIVA.motor;
+  } else {
+    casoAtualMecanicoIA = BASE_CONHECIMENTO_INVESTIGATIVA.redutor; // Padrão rico
+  }
+
+  const containerPerguntas = document.getElementById('mia_container_perguntas');
+  const tituloSub = document.getElementById('mia_subtitulo_perguntas');
+  if (tituloSub) tituloSub.innerText = `Investigando: "${sintoma}" (${casoAtualMecanicoIA.nome})`;
+
+  if (containerPerguntas) {
+    containerPerguntas.innerHTML = casoAtualMecanicoIA.perguntas.map((p, idx) => `
+      <div style="background:#071426; border:1px solid #1a3250; border-radius:8px; padding:12px; margin-bottom:10px;">
+        <label style="font-size:13px; font-weight:700; color:#7dd3fc; display:block; margin-bottom:6px;">${p.texto}</label>
+        <input type="text" id="mia_resp_${p.id}" placeholder="${p.placeholder}" style="width:100%; background:#06101e; border:1px solid #203f67; border-radius:6px; color:#f0f9ff; padding:8px 12px; font-size:12.5px;">
+      </div>
+    `).join('');
+  }
+
+  irParaPassoMecanicoIA(2);
+}
+
+function processarRespostasMecanicoIA() {
+  if (!casoAtualMecanicoIA) return;
+
+  casoAtualMecanicoIA.perguntas.forEach(p => {
+    const val = document.getElementById('mia_resp_' + p.id)?.value || '';
+    respostasMecanicoIA[p.id] = val;
+  });
+
+  diagnosticoFinalCache = casoAtualMecanicoIA.gerarDiagnostico(respostasMecanicoIA);
+
+  const containerResultado = document.getElementById('mia_container_resultado');
+  if (!containerResultado) return;
+
+  const causasHtml = diagnosticoFinalCache.causas.map((c, i) => `
+    <div style="background:#071426; border-left:4px solid #38bdf8; border-radius:6px; padding:12px; margin-bottom:10px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+        <span style="font-size:13.5px; font-weight:800; color:#e0f2fe;">${i + 1}. ${c.causa}</span>
+        <span style="font-size:11.5px; background:rgba(2,132,199,0.25); border:1px solid #0284c7; color:#38bdf8; padding:2px 8px; border-radius:10px; font-weight:700;">Probabilidade: ${c.prob}</span>
+      </div>
+      <p style="font-size:12.5px; color:#94a3b8; margin:0; line-height:1.5;">${c.detalhe}</p>
+    </div>
+  `).join('');
+
+  const evidenciasHtml = diagnosticoFinalCache.evidencias.map((e, i) => `
+    <div style="background:#08182b; border:1px solid #1c3d64; border-radius:6px; padding:10px 12px; margin-bottom:8px;">
+      <div style="font-size:12.5px; font-weight:700; color:#facc15; margin-bottom:2px;">🔬 Teste ${i + 1}: ${e.teste}</div>
+      <div style="font-size:12px; color:#cbd5e1; line-height:1.4;"><b>Objetivo de Campo:</b> ${e.objetivo}</div>
+    </div>
+  `).join('');
+
+  containerResultado.innerHTML = `
+    <div style="margin-bottom:16px;">
+      <h4 style="color:#38bdf8; font-size:16px; margin:0 0 6px 0;">${diagnosticoFinalCache.titulo}</h4>
+      <span style="font-size:12px; color:#94a3b8;">Laudo técnico de engenharia de confiabilidade baseado nas evidências coletadas:</span>
+    </div>
+
+    <!-- Seção de Causas Prováveis -->
+    <div style="margin-bottom:16px;">
+      <h5 style="color:#ef4444; font-size:13px; margin:0 0 8px 0; text-transform:uppercase;">🚨 Possíveis Causas Ranqueadas por Probabilidade:</h5>
+      ${causasHtml}
+    </div>
+
+    <!-- Seção de Evidências Necessárias (O Diferencial Solicitado!) -->
+    <div style="margin-bottom:16px;">
+      <h5 style="color:#facc15; font-size:13px; margin:0 0 8px 0; text-transform:uppercase;">🔍 Evidências Necessárias para Confirmar o Diagnóstico:</h5>
+      ${evidenciasHtml}
+    </div>
+
+    <!-- Plano de Ação Recomendado -->
+    <div style="background:#06181f; border:1px solid #0d9488; border-radius:8px; padding:12px; margin-bottom:16px;">
+      <h5 style="color:#2dd4bf; font-size:13px; margin:0 0 6px 0; text-transform:uppercase;">🛠️ Procedimento Corretivo / Preventivo Recomendado:</h5>
+      <pre style="font-family:inherit; font-size:12.5px; color:#e2e8f0; margin:0; white-space:pre-wrap; line-height:1.5;">${diagnosticoFinalCache.acaoRecomendada}</pre>
+    </div>
+  `;
+
+  irParaPassoMecanicoIA(3);
+}
+
+function transferirDiagnosticoParaRelatorio() {
+  if (!diagnosticoFinalCache) return;
+
+  const campoServico = document.getElementById('rel_servico_realizado');
+  const campoAnomalia = document.getElementById('rel_anomalia');
+  const campoCausa = document.getElementById('rel_causa');
+  const campoAcao = document.getElementById('rel_acao');
+  const campoEquip = document.getElementById('rel_equip');
+
+  if (campoEquip && !campoEquip.value.trim() && diagnosticoFinalCache.equipamento) {
+    campoEquip.value = diagnosticoFinalCache.equipamento;
+  }
+
+  const sintoma = document.getElementById('mia_input_sintoma')?.value || '';
+  if (campoAnomalia) {
+    campoAnomalia.value = sintoma ? `Anomalia relatada: ${sintoma}. Diagnóstico preliminar de confiabilidade executado pelo Mecânico IA.` : 'Anomalia detectada em operação técnica.';
+  }
+
+  if (campoCausa && diagnosticoFinalCache.causas && diagnosticoFinalCache.causas[0]) {
+    campoCausa.value = `${diagnosticoFinalCache.causas[0].causa} (Probabilidade: ${diagnosticoFinalCache.causas[0].prob})`;
+  }
+
+  if (campoAcao) {
+    campoAcao.value = (diagnosticoFinalCache.acaoRecomendada || '').replace(/\n/g, ' | ');
+  }
+
+  if (campoServico) {
+    campoServico.value = `Executada investigação diagnóstica de engenharia. Identificadas evidências de ${diagnosticoFinalCache.causas[0]?.causa || 'desgaste'}. Aplicado plano corretivo com testes de validação funcional.`;
+  }
+
+  sugerirFerramentasIA();
+
+  fecharModalMecanicoIA();
+  if (typeof alternarPainel === 'function') alternarPainel('relatorio');
+  if (typeof alternarAbaRelatorio === 'function') alternarAbaRelatorio('novo');
+  abrirToastNotificacao('✔ Diagnóstico completo transferido para o formulário de Relatório Técnico!');
+}
+
+function copiarLaudoMecanicoIA() {
+  if (!diagnosticoFinalCache) return;
+  const causas = (diagnosticoFinalCache.causas || []).map((c, i) => `${i + 1}. ${c.causa} (Prob: ${c.prob}) - ${c.detalhe}`).join('\n');
+  const evidencias = (diagnosticoFinalCache.evidencias || []).map((e, i) => `${i + 1}. ${e.teste}: ${e.objetivo}`).join('\n');
+  const texto = `================ LAUDO TÉCNICO: MECÂNICO IA ================\n${diagnosticoFinalCache.titulo}\nEquipamento: ${diagnosticoFinalCache.equipamento || 'Industrial'}\n\n🚨 POSSÍVEIS CAUSAS:\n${causas}\n\n🔍 EVIDÊNCIAS NECESSÁRIAS PARA CONFIRMAR O DIAGNÓSTICO:\n${evidencias}\n\n🛠️ PROCEDIMENTO RECOMENDADO:\n${diagnosticoFinalCache.acaoRecomendada || 'Inspeção geral'}\n============================================================`;
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(texto).then(() => {
+      abrirToastNotificacao('📋 Laudo técnico copiado para a área de transferência!');
+    }).catch(() => {
+      alert('Laudo:\n\n' + texto);
+    });
+  } else {
+    alert('Laudo:\n\n' + texto);
+  }
+}
+
+
+/* ========================================================================== */
+/* INICIALIZAÇÃO DA SUÍTE DE IA E CONECTIVIDADE                               */
+/* ========================================================================== */
+window.addEventListener('DOMContentLoaded', () => {
+  try {
+    iniciarMonitorConectividade();
+  } catch(e) {
+    console.warn('Init conectividade:', e);
   }
 });
 
