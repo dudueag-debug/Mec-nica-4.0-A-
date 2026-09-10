@@ -6703,7 +6703,9 @@
 
 </div><!-- fim #appContent -->
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">/* ========================================================================== */
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* ========================================================================== */
 /* SISTEMA AVANÇADO DE DESENHO TÉCNICO 3D, FOTOS E FERRAMENTAS DO RELATÓRIO */
 /* ========================================================================== */
 
@@ -6995,9 +6997,12 @@ let modoCorte3D = 'isometrico'; // 'isometrico' | 'corte' | 'cotas'
 function alternarAbaDesenhoTecnico(modo) {
   modoDesenhoTecnicoAtivo = modo;
   ['3d', 'upload', 'blueprint'].forEach(m => {
-    const btn = document.getElementById('desenho_tab_btn_' + m);
-    const view = document.getElementById('desenho_view_' + m);
-    if (btn) btn.classList.toggle('active', m === modo);
+    const btn = document.getElementById('tab_btn_' + m) || document.getElementById('desenho_tab_btn_' + m);
+    const view = document.getElementById('aba_conteudo_' + m) || document.getElementById('desenho_view_' + m);
+    if (btn) {
+      btn.classList.toggle('active', m === modo);
+      btn.classList.toggle('ativo', m === modo);
+    }
     if (view) view.style.display = (m === modo ? 'block' : 'none');
   });
   
@@ -7019,6 +7024,22 @@ function processarUploadDesenhoCustom(inputEl) {
 }
 
 function renderizarPreviewDesenhoUpload(nomeArquivo) {
+  const dropzoneView = document.getElementById('upload_desenho_dropzone_view');
+  const previewArea = document.getElementById('desenho_custom_preview_area');
+  const previewImg = document.getElementById('desenho_custom_preview_img');
+
+  if (dropzoneView && previewArea && previewImg) {
+    if (desenhoTecnicoCustomDataUrl) {
+      dropzoneView.style.display = 'none';
+      previewArea.style.display = 'block';
+      previewImg.src = desenhoTecnicoCustomDataUrl;
+    } else {
+      dropzoneView.style.display = 'block';
+      previewArea.style.display = 'none';
+      previewImg.src = '';
+    }
+  }
+
   const container = document.getElementById('desenho_upload_preview_area');
   if (!container) return;
   
@@ -7057,7 +7078,7 @@ function renderizarPreviewDesenhoUpload(nomeArquivo) {
 
 function removerDesenhoCustom() {
   desenhoTecnicoCustomDataUrl = null;
-  const input = document.getElementById('input_desenho_arquivo');
+  const input = document.getElementById('input_desenho_arquivo') || document.getElementById('rel_upload_desenho_input');
   if (input) input.value = '';
   renderizarPreviewDesenhoUpload('');
 }
@@ -7548,6 +7569,25 @@ function aplicarDesenho3DAoRelatorio() {
   if (!canvas) return;
   desenhoTecnicoDataUrl = canvas.toDataURL('image/png');
   alert('✔ Desenho Técnico 3D aplicado com sucesso ao relatório oficial!\nEle aparecerá na folha de impressão e visualização A4.');
+}
+
+function girarModelo3D() {
+  anguloRotacao3D = ((anguloRotacao3D || 35) + 35) % 360;
+  renderizarDesenhoTecnico3DCanvas();
+}
+
+function alternarCorte3D() {
+  modoCorte3D = (modoCorte3D === 'corte') ? 'isometrico' : 'corte';
+  renderizarDesenhoTecnico3DCanvas();
+}
+
+function imprimirRelatorioA4Direto() {
+  window.print();
+}
+
+function fecharRelatorioA4Modal() {
+  const modal = document.getElementById('modal-relatorio-a4');
+  if (modal) modal.style.display = 'none';
 }
 
 function refazerDesenho3D() {
@@ -11409,7 +11449,8 @@ function previewFotoRelatorio(inputId, imgId) {
 
 function previewFotosExtra() {
   const input = document.getElementById('rel_fotos_extra');
-  const container = document.getElementById('preview_extra');
+  const container = document.getElementById('preview_extras_container') || document.getElementById('preview_extra');
+  if (!container || !input || !input.files) return;
   container.innerHTML = '';
   Array.from(input.files).forEach(file => {
     const div = document.createElement('div');
@@ -11614,7 +11655,8 @@ function adicionarFerramentaPredefinida(texto) {
 let desenhoTecnicoDataUrl = null;
 
 function atualizarOpcaoDesenhoTecnico() {
-  const tipo = document.getElementById('rel_tipo_desenho').value;
+  const tipoEl = document.getElementById('rel_tipo_desenho');
+  const tipo = tipoEl ? tipoEl.value : 'padrao';
   const campoUpload = document.getElementById('campo_upload_desenho');
   if (campoUpload) {
     campoUpload.style.display = tipo === 'upload_desenho' ? 'block' : 'none';
@@ -12989,122 +13031,138 @@ async function visualizarRelatorioPronto(id) {
     }
   }
 
-  document.getElementById('r4_data').innerText = `${dia}/${mes}/${ano}`;
-  document.getElementById('r4_tag').innerText = r.tag || 'TAG-GERAL';
-  document.getElementById('r4_om').innerText = r.om || 'N/A';
-  document.getElementById('r4_num').innerText = r.numDoc || 'N/A';
-  document.getElementById('r4_op').innerText = r.op || '10';
-  document.getElementById('r4_ass').innerText = (r.ass || 'EDUARDO NORONHA').toUpperCase();
-  document.getElementById('r4_equipe').innerText = (r.equipe || 'EDUARDO NORONHA').toUpperCase();
-  document.getElementById('r4_local').innerText = (r.localTexto || 'PLANTA INDUSTRIAL').toUpperCase();
+  // Cabeçalho da Folha Petrobras
+  const setTxt = (elId, val) => {
+    const el = document.getElementById(elId);
+    if (el) el.innerText = val;
+  };
 
-  document.getElementById('r4_servico').innerText = r.servicoRealizado || r.anomalia || 'Manutenção técnica executada.';
-  document.getElementById('r4_observacao').innerText = r.observacao || 'Equipamento revisado e entregue em condições plenas de operabilidade.';
+  setTxt('r4_data', `${dia}/${mes}/${ano}`);
+  setTxt('r4_tag', r.tag || 'TAG-GERAL');
+  setTxt('r4_om', r.om || 'N/A');
+  setTxt('r4_num', r.numDoc || 'N/A');
+  setTxt('r4_op', r.op || '10');
+  setTxt('r4_ass', (r.ass || 'EDUARDO NORONHA').toUpperCase());
+  setTxt('r4_equipe', (r.equipe || 'EDUARDO NORONHA').toUpperCase());
+  setTxt('r4_local', (r.localTexto || 'PLANTA INDUSTRIAL').toUpperCase());
 
-  const listaF = document.getElementById('r4_lista_ferramentas');
-  const ferramentasTexto = r.ferramentas || '• Ferramentas padrão de mecânica';
-  const linhasF = ferramentasTexto.split('\n').filter(l => l.trim().length > 0);
-  listaF.innerHTML = '<ul>' + linhasF.map(f => `<li>${f.replace(/^[•\-\*]\s*/, '')}</li>`).join('') + '</ul>';
+  setTxt('r4_servico', r.servicoRealizado || r.anomalia || 'Manutenção técnica executada.');
+  setTxt('r4_observacao', r.observacao || 'Equipamento revisado e entregue em condições plenas de operabilidade.');
 
-  const imgFerramenta = document.getElementById('r4_img_ferramenta');
-  if (imgFerramenta) {
-    imgFerramenta.src = r.ferramentaImgUrl || CHAVE_COMBINADA_22_B64;
-    imgFerramenta.style.display = 'block';
-  }
+  // Títulos dinâmicos com o nome do equipamento (ex: FILTRO – DESENHO TÉCNICO / FILTROS – FOTOS REAIS)
+  const equipNome = (r.equip || 'FILTRO').toUpperCase();
+  let equipPlural = equipNome;
+  if (equipPlural.endsWith('R')) equipPlural += 'ES';
+  else if (!equipPlural.endsWith('S')) equipPlural += 'S';
 
-  const linhasReg = document.getElementById('r4_linhas_registro');
-  if (r.registroServico) {
-    const itens = r.registroServico.split('\n').filter(l => l.trim().length > 0);
-    linhasReg.innerHTML = itens.map(i => `<div class="r-a4-linha-ponto">${i}</div>`).join('');
-  } else {
-    linhasReg.innerHTML = `
-      <div class="r-a4-linha-ponto">1. Bloqueio e despressurização da linha concluídos com sucesso.</div>
-      <div class="r-a4-linha-ponto">2. Remoção da tampa sem deformações no alojamento.</div>
-      <div class="r-a4-linha-ponto">3. Junta de vedação inspecionada e aprovada.</div>
-    `;
-  }
+  setTxt('r4_titulo_desenho', equipNome + ' – DESENHO TÉCNICO');
+  setTxt('r4_titulo_fotos_reais', equipPlural + ' – FOTOS REAIS');
+  setTxt('r4_titulo_3d', equipPlural + ' – VISTA REAL (3D)');
 
-  document.getElementById('r4_nome_responsavel').innerText = r.ass || 'Eduardo Noronha';
-  document.getElementById('r4_dia').innerText = dia;
-  document.getElementById('r4_mes').innerText = mes;
-  document.getElementById('r4_ano').innerText = ano;
-
-  const imgAssinatura = document.getElementById('r4_img_assinatura');
-  const textoCursiva = document.getElementById('r4_texto_assinatura_cursiva');
-  if (r.assinaturaDataUrl) {
-    imgAssinatura.src = r.assinaturaDataUrl;
-    imgAssinatura.style.display = 'block';
-    textoCursiva.style.display = 'none';
-  } else {
-    imgAssinatura.style.display = 'none';
-    textoCursiva.innerText = r.ass || 'Eduardo Noronha';
-    textoCursiva.style.display = 'block';
-  }
-
-  const r4ImgEquip = document.getElementById('r4_img_equip');
-  const r4EquipPlaceholder = document.getElementById('r4_img_equip_placeholder');
-  if (r.fotoAntesUrl) {
-    r4ImgEquip.src = r.fotoAntesUrl;
-    r4ImgEquip.style.display = 'block';
-    r4EquipPlaceholder.style.display = 'none';
-  } else {
-    r4ImgEquip.style.display = 'none';
-    r4EquipPlaceholder.style.display = 'block';
-  }
-
-  const r4ImgTampa = document.getElementById('r4_img_tampa');
-  const r4TampaPlaceholder = document.getElementById('r4_img_tampa_placeholder');
-  if (r.fotoDepoisUrl) {
-    r4ImgTampa.src = r.fotoDepoisUrl;
-    r4ImgTampa.style.display = 'block';
-    r4TampaPlaceholder.style.display = 'none';
-  } else {
-    r4ImgTampa.style.display = 'none';
-    r4TampaPlaceholder.style.display = 'block';
-  }
-
-  const r4Img3D = document.getElementById('r4_img_3d');
-  const r43DPlaceholder = document.getElementById('r4_img_3d_placeholder');
-  if (r.foto3DUrl) {
-    r4Img3D.src = r.foto3DUrl;
-    r4Img3D.style.display = 'block';
-    r43DPlaceholder.style.display = 'none';
-  } else {
-    r4Img3D.style.display = 'none';
-    r43DPlaceholder.style.display = 'block';
-  }
-
-  // Galeria de evidências complementares no A4
-  const galeriaA4 = document.getElementById('r4_galeria_complementar_fotos');
-  const blocoGaleriaA4 = document.getElementById('r4_galeria_complementar_bloco');
-  if (galeriaA4 && blocoGaleriaA4) {
-    galeriaA4.innerHTML = '';
-    const complementares = [];
-    if (r.fotoSlot3Url) complementares.push({ url: r.fotoSlot3Url, rotulo: 'Anomalia / Dano' });
-    if (r.fotoSlot5Url) complementares.push({ url: r.fotoSlot5Url, rotulo: 'Montagem Final' });
-    if (r.fotosExtraTexto) {
+  // Grade de Fotos Reais de Campo (Formato Petrobras Lado a Lado)
+  const containerFotosReais = document.getElementById('r4_fotos_reais_container');
+  if (containerFotosReais) {
+    containerFotosReais.innerHTML = '';
+    const fotos = [];
+    if (r.fotoAntesUrl) fotos.push({ url: r.fotoAntesUrl, rotulo: 'No Equipamento' });
+    if (r.fotoDepoisUrl) fotos.push({ url: r.fotoDepoisUrl, rotulo: 'Desmontagem / Tampa' });
+    if (r.fotoSlot5Url) fotos.push({ url: r.fotoSlot5Url, rotulo: 'Montagem Final' });
+    if (r.fotoSlot3Url && fotos.length < 3) fotos.push({ url: r.fotoSlot3Url, rotulo: 'Anomalia / Inspeção' });
+    if (r.fotosExtraTexto && fotos.length < 3) {
       const extras = r.fotosExtraTexto.split('|').filter(Boolean);
       extras.forEach((u, i) => {
-        if (!complementares.some(c => c.url === u) && u !== r.fotoAntesUrl && u !== r.fotoDepoisUrl && u !== r.foto3DUrl) {
-          complementares.push({ url: u, rotulo: 'Evidência #' + (i + 1) });
+        if (!fotos.some(f => f.url === u) && fotos.length < 3) {
+          fotos.push({ url: u, rotulo: 'Evidência #' + (i + 1) });
         }
       });
     }
-    if (complementares.length > 0) {
-      blocoGaleriaA4.style.display = 'block';
-      galeriaA4.innerHTML = complementares.map(c => `
-        <div style="text-align:center; border:1px solid #cbd5e1; border-radius:4px; padding:3px; background:#fff; width:120px;">
-          <img src="${c.url}" alt="${c.rotulo}" style="width:100%; height:75px; object-fit:cover; border-radius:3px; display:block;">
-          <div style="font-size:8.5px; font-weight:bold; color:#1e3a5f; margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${c.rotulo}</div>
+
+    if (fotos.length > 0) {
+      containerFotosReais.innerHTML = fotos.map(f => `
+        <div class="r-a4-foto-col">
+          <img src="${f.url}" alt="${f.rotulo}">
         </div>
       `).join('');
     } else {
-      blocoGaleriaA4.style.display = 'none';
+      containerFotosReais.innerHTML = `
+        <div style="color:#64748b; font-size:11.5px; text-align:center; padding:35px 10px; width:100%;">
+          <div style="font-size:26px; margin-bottom:4px;">📷</div>
+          <b>Fotos Reais do Equipamento</b><br>
+          <span style="font-size:10px; color:#94a3b8;">Registro fotográfico da intervenção</span>
+        </div>
+      `;
     }
   }
 
-  atualizarDesenhoNoA4(r.desenhoTecnicoUrl);
-  document.getElementById('modal-relatorio-a4').style.display = 'block';
+  // Ferramentas Utilizadas
+  const listaF = document.getElementById('r4_lista_ferramentas');
+  const ferramentasTexto = r.ferramentas || '• Ferramentas padrão de mecânica';
+  const linhasF = ferramentasTexto.split('\n').filter(l => l.trim().length > 0);
+  if (listaF) {
+    listaF.innerHTML = '<ul>' + linhasF.map(f => `<li>${f.replace(/^[•\-\*]\s*/, '')}</li>`).join('') + '</ul>';
+  }
+
+  const imgFerramenta = document.getElementById('r4_img_ferramenta');
+  if (imgFerramenta) {
+    imgFerramenta.src = r.ferramentaImgUrl || (typeof CHAVE_COMBINADA_22_B64 !== 'undefined' ? CHAVE_COMBINADA_22_B64 : '');
+    imgFerramenta.style.display = imgFerramenta.src ? 'block' : 'none';
+  }
+
+  // Linhas pontilhadas de Registro de Serviço
+  const linhasReg = document.getElementById('r4_linhas_registro');
+  if (linhasReg) {
+    if (r.registroServico) {
+      const itens = r.registroServico.split('\n').filter(l => l.trim().length > 0);
+      linhasReg.innerHTML = itens.map(i => `<div class="r-a4-linha-ponto">${i}</div>`).join('');
+    } else {
+      linhasReg.innerHTML = `
+        <div class="r-a4-linha-ponto">1. Bloqueio e despressurização da linha concluídos com sucesso.</div>
+        <div class="r-a4-linha-ponto">2. Remoção da tampa sem deformações no alojamento.</div>
+        <div class="r-a4-linha-ponto">3. Junta de vedação inspecionada e aprovada.</div>
+      `;
+    }
+  }
+
+  // Rodapé e Assinatura
+  setTxt('r4_nome_responsavel', r.ass || 'Eduardo Noronha');
+  setTxt('r4_dia', dia);
+  setTxt('r4_mes', mes);
+  setTxt('r4_ano', ano);
+
+  const imgAssinatura = document.getElementById('r4_img_assinatura');
+  const textoCursiva = document.getElementById('r4_texto_assinatura_cursiva');
+  if (imgAssinatura && textoCursiva) {
+    if (r.assinaturaDataUrl) {
+      imgAssinatura.src = r.assinaturaDataUrl;
+      imgAssinatura.style.display = 'block';
+      textoCursiva.style.display = 'none';
+    } else {
+      imgAssinatura.style.display = 'none';
+      textoCursiva.innerText = r.ass || 'Eduardo Noronha';
+      textoCursiva.style.display = 'block';
+    }
+  }
+
+  // Imagem 3D / Renderização
+  const r4Img3D = document.getElementById('r4_img_3d');
+  const r43DPlaceholder = document.getElementById('r4_img_3d_placeholder');
+  if (r4Img3D) {
+    if (r.foto3DUrl) {
+      r4Img3D.src = r.foto3DUrl;
+      r4Img3D.style.display = 'block';
+      if (r43DPlaceholder) r43DPlaceholder.style.display = 'none';
+    } else {
+      r4Img3D.style.display = 'none';
+      if (r43DPlaceholder) r43DPlaceholder.style.display = 'block';
+    }
+  }
+
+  if (typeof atualizarDesenhoNoA4 === 'function') {
+    atualizarDesenhoNoA4(r.desenhoTecnicoUrl);
+  }
+
+  const modalA4 = document.getElementById('modal-relatorio-a4');
+  if (modalA4) modalA4.style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -17204,6 +17262,64 @@ function executarAnaliseServicoRobo() {
 }
 
 /* ================= ABA 4: RELATÓRIO TÉCNICO IA ================= */
+function gerarRelatorioTecnicoRobo() {
+  const tag = (document.getElementById('rf_rel_tag')?.value || '38LCE10 (Filtro do Sistema de Atemperação)').trim();
+  const setor = (document.getElementById('rf_rel_setor')?.value || 'Bloco 3 Ciclo Água Vapor').trim();
+  const anomalia = (document.getElementById('rf_rel_anomalia')?.value || 'Colmatação e perda de carga').trim();
+  const causa = (document.getElementById('rf_rel_causa')?.value || 'Incrustações e arraste de partículas na malha filtrante').trim();
+  const acoes = (document.getElementById('rf_rel_acoes')?.value || 'Desmontagem, limpeza química e mecânica, substituição de juntas').trim();
+
+  const resEl = document.getElementById('rf_rel_resultado');
+  if (!resEl) return;
+
+  resEl.style.display = 'block';
+  resEl.innerHTML = '<div style="padding:15px; text-align:center; color:#38bdf8;">⚙️ Processando dados com Inteligência de Engenharia Mecânica Petrobras...</div>';
+
+  setTimeout(() => {
+    const dataAtual = new Date().toLocaleDateString('pt-BR');
+    const laudoHtml = `
+      <div style="background:#071221; border:1px solid #0284c7; border-radius:8px; padding:14px; color:#e2e8f0; font-size:12.5px; line-height:1.5;">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #1e3a5f; padding-bottom:8px; margin-bottom:10px;">
+          <b style="color:#38bdf8; font-size:13px;">📑 LAUDO TÉCNICO PERICIAL DE ENGENHARIA MECÂNICA</b>
+          <span style="font-size:11px; background:#0c2540; color:#7dd3fc; padding:2px 8px; border-radius:4px;">PADRÃO PETROBRAS / ABNT</span>
+        </div>
+
+        <div style="margin-bottom:8px;">
+          <span style="color:#7dd3fc; font-weight:bold;">1. IDENTIFICAÇÃO DO ATIVO:</span><br>
+          <b>TAG:</b> ${tag} | <b>Setor / Área:</b> ${setor} | <b>Data:</b> ${dataAtual}
+        </div>
+
+        <div style="margin-bottom:8px;">
+          <span style="color:#7dd3fc; font-weight:bold;">2. CONSTATAÇÃO PERICIAL DE CAMPO:</span><br>
+          Identificada anomalia caracterizada por: ${anomalia}. Parâmetros operacionais divergentes dos limites de projeto e integridade estrutural.
+        </div>
+
+        <div style="margin-bottom:8px;">
+          <span style="color:#7dd3fc; font-weight:bold;">3. DIAGNÓSTICO DE CAUSA RAIZ:</span><br>
+          Mecanismo de falha primário: ${causa}. Análise físico-mecânica confirma necessidade de restauração dos padrões metrológicos e de vedação.
+        </div>
+
+        <div style="margin-bottom:8px;">
+          <span style="color:#7dd3fc; font-weight:bold;">4. AÇÕES TÉCNICAS EXECUTADAS:</span><br>
+          ${acoes}. Procedimentos realizados com torques controlados e rigorosa assepsia dos componentes internos.
+        </div>
+
+        <div style="background:rgba(2,132,199,0.12); border-left:3px solid #38bdf8; padding:8px 10px; border-radius:4px; margin-bottom:12px;">
+          <b style="color:#38bdf8;">5. CONCLUSÃO & LIBERAÇÃO:</b><br>
+          Ativo submetido a teste estático/dinâmico sem registro de vazamento ou vibração anômala. Equipamento homologado e apto para retomada da operação comercial.
+        </div>
+
+        <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end;">
+          <button type="button" class="button secondary" style="font-size:11.5px; padding:5px 12px; margin:0;" onclick="copiarTextoRoboFlutuante('rf_rel_resultado')">📋 Copiar Laudo</button>
+          <button type="button" class="button" style="font-size:11.5px; padding:5px 14px; margin:0; background:#0284c7; border-color:#38bdf8; font-weight:bold;" onclick="transferirRelatorioParaModuloApp('${tag.replace(/'/g, '')}', '${anomalia.replace(/'/g, '')}', '${causa.replace(/'/g, '')}', '${acoes.replace(/'/g, '')}')">📑 Transferir p/ Folha A4 Oficial</button>
+        </div>
+      </div>
+    `;
+    resEl.innerHTML = laudoHtml;
+    resEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 350);
+}
+
 function preencherExemploRelatorioRobo() {
   const tag = document.getElementById('rf_rel_tag');
   const setor = document.getElementById('rf_rel_setor');
