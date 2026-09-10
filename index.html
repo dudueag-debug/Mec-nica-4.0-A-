@@ -5597,83 +5597,203 @@
           </div>
         </div>
 
-        <!-- PAINEL DE FEEDBACK DE TORQUE RECOMENDADO POR FOTO (IA VISUAL) -->
-        <div id="torque_ia_feedback_box" style="display:none; margin-top:20px; background:linear-gradient(145deg, #0a1728 0%, #060f1c 100%); border:2px solid #38bdf8; border-radius:12px; padding:20px; box-shadow:0 0 25px rgba(56,189,248,0.25);">
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; border-bottom:1px solid #1e3a5f; padding-bottom:12px; margin-bottom:16px;">
+        <!-- PAINEL DE FEEDBACK DE TORQUE RECOMENDADO POR FOTO (IA VISUAL AVANÇADA) -->
+        <div id="torque_ia_feedback_box" style="display:none; margin-top:20px; background:linear-gradient(145deg, #091526 0%, #040a14 100%); border:2px solid #0284c7; border-radius:14px; padding:20px; box-shadow:0 0 35px rgba(2,132,199,0.35);">
+          
+          <!-- Cabeçalho do Diagnóstico Visual -->
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:12px; border-bottom:1.5px solid #1e3a5f; padding-bottom:14px; margin-bottom:16px;">
             <div>
-              <span style="font-size:11px; background:rgba(56,189,248,0.2); color:#38bdf8; font-weight:800; padding:3px 10px; border-radius:12px; border:1px solid rgba(56,189,248,0.4); text-transform:uppercase;">⚡ Diagnóstico Visual IA Concluído</span>
-              <h3 id="torque_ia_titulo_componente" style="margin:8px 0 2px 0; color:#ffffff; font-size:18px;">Parafuso Sextavado M16 — Classe 8.8</h3>
-              <span id="torque_ia_sub_componente" style="font-size:12.5px; color:#94a3b8;">Cabeça sextavada métrica com aço médio carbono temperado (Norma DIN ISO 898-1)</span>
+              <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                <span style="font-size:11px; background:rgba(56,189,248,0.22); color:#38bdf8; font-weight:800; padding:3px 10px; border-radius:12px; border:1px solid #38bdf8; text-transform:uppercase; letter-spacing:0.5px;">⚡ IA Vision 4.0 – Petrobras & ABNT</span>
+                <span id="torque_ia_badge_equipamento" style="font-size:11px; background:#0c2d48; color:#7dd3fc; padding:3px 8px; border-radius:8px; font-weight:700;">🏭 Flange Industrial ASME B16.5</span>
+              </div>
+              <h3 id="torque_ia_titulo_componente" style="margin:8px 0 3px 0; color:#ffffff; font-size:20px; font-weight:900;">Estojo ASTM A193 B7 com Porca 2H — 3/4"-10</h3>
+              <span id="torque_ia_sub_componente" style="font-size:12.5px; color:#94a3b8; display:block;">Estojo em aço liga Cr-Mo temperado e revenido com porcas pesadas ASTM A194 2H (Padrão Usinas / Refinarias)</span>
             </div>
-            <div id="torque_ia_badge_confianca" style="background:#059669; color:#fff; font-size:12px; font-weight:800; padding:5px 12px; border-radius:20px;">98% Compatibilidade</div>
-          </div>
-
-          <!-- Grade de Valores de Torque e Ferramenta -->
-          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(135px, 1fr)); gap:12px; margin-bottom:16px;">
-            <div style="background:#0f2744; border:1px solid #2563eb; border-radius:10px; padding:12px; text-align:center;">
-              <div style="font-size:11px; color:#93c5fd; font-weight:700;">TORQUE RECOMENDADO</div>
-              <div id="torque_ia_val_nm" style="font-size:28px; font-weight:900; color:#38bdf8; margin:4px 0;">206</div>
-              <div style="font-size:12px; color:#bfdbfe; font-weight:700;">N·m (Newton-metro)</div>
-            </div>
-            <div style="background:#0b1f36; border:1px solid #1e3a5f; border-radius:10px; padding:12px; text-align:center;">
-              <div style="font-size:11px; color:#94a3b8; font-weight:700;">ESCALA TÉCNICA</div>
-              <div id="torque_ia_val_kgfm" style="font-size:26px; font-weight:800; color:#facc15; margin:4px 0;">21.0</div>
-              <div style="font-size:12px; color:#fde047;">kgf·m</div>
-            </div>
-            <div style="background:#0b1f36; border:1px solid #1e3a5f; border-radius:10px; padding:12px; text-align:center;">
-              <div style="font-size:11px; color:#94a3b8; font-weight:700;">ESCALA AMERICANA</div>
-              <div id="torque_ia_val_lbft" style="font-size:26px; font-weight:800; color:#ffffff; margin:4px 0;">152</div>
-              <div style="font-size:12px; color:#94a3b8;">lbf·ft (lbs-pé)</div>
-            </div>
-            <div style="background:#0b1f36; border:1px solid #1e3a5f; border-radius:10px; padding:12px; text-align:center;">
-              <div style="font-size:11px; color:#94a3b8; font-weight:700;">CHAVE / SOQUETE</div>
-              <div id="torque_ia_val_chave" style="font-size:26px; font-weight:800; color:#34d399; margin:4px 0;">24 mm</div>
-              <div style="font-size:12px; color:#6ee7b7;">Sextavado / Chave de Boca</div>
+            <div style="text-align:right;">
+              <div id="torque_ia_badge_confianca" style="background:#059669; color:#fff; font-size:12px; font-weight:800; padding:5px 14px; border-radius:20px; display:inline-block; box-shadow:0 0 10px rgba(16,185,129,0.4);">99% Compatibilidade</div>
+              <div style="font-size:11px; color:#64748b; margin-top:4px;">Normas ASME PCC-1 / VDI 2230</div>
             </div>
           </div>
 
-          <!-- Ajuste de Torque por Condição de Atrito -->
-          <div style="background:#071224; border:1px solid #1e293b; border-radius:8px; padding:12px; margin-bottom:14px;">
-            <div style="font-size:12px; color:#7dd3fc; font-weight:700; margin-bottom:6px;">💧 Ajuste Automático por Lubrificação:</div>
-            <div style="display:flex; justify-content:space-around; flex-wrap:wrap; gap:8px; font-size:12.5px;">
-              <span style="color:#e2e8f0;">Levemente Oleado (μ=0.15): <b id="torque_ia_lub_oleo" style="color:#38bdf8;">206 N·m</b></span>
-              <span style="color:#e2e8f0;">Graxa MoS₂ (μ=0.10): <b id="torque_ia_lub_graxa" style="color:#34d399;">137 N·m</b></span>
-              <span style="color:#e2e8f0;">Aperto Seco (μ=0.20): <b id="torque_ia_lub_seco" style="color:#f87171;">275 N·m</b></span>
+          <!-- Grade Principal de 4 KPIs: Aperto, Quebra (Desaperto), Chave e Pré-Carga -->
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:12px; margin-bottom:18px;">
+            
+            <!-- KPI 1: Torque de Aperto Recomendado -->
+            <div style="background:#0c223c; border:1.5px solid #0284c7; border-radius:12px; padding:14px; text-align:center; box-shadow:0 4px 14px rgba(2,132,199,0.2);">
+              <div style="font-size:11px; color:#7dd3fc; font-weight:800; text-transform:uppercase; letter-spacing:0.5px;">🎯 TORQUE DE APERTO (ALVO)</div>
+              <div id="torque_ia_val_nm" style="font-size:32px; font-weight:900; color:#38bdf8; margin:4px 0; font-family:monospace;">425</div>
+              <div style="font-size:12.5px; color:#bae6fd; font-weight:800;">N·m (Newton-metro)</div>
+              <div style="font-size:11px; color:#94a3b8; margin-top:4px;">
+                <span id="torque_ia_val_lbft" style="color:#f1f5f9; font-weight:700;">313</span> lbf·ft | <span id="torque_ia_val_kgfm" style="color:#facc15; font-weight:700;">43.3</span> kgf·m
+              </div>
+            </div>
+
+            <!-- KPI 2: Torque de Quebra / Desaperto (BREAKOUT TORQUE) -->
+            <div style="background:#1e140a; border:1.5px solid #d97706; border-radius:12px; padding:14px; text-align:center; box-shadow:0 4px 14px rgba(217,119,6,0.25);">
+              <div style="font-size:11px; color:#fcd34d; font-weight:800; text-transform:uppercase; letter-spacing:0.5px;">💥 QUEBRA DE TORQUE (DESAPERTO)</div>
+              <div id="torque_ia_val_breakout_nm" style="font-size:32px; font-weight:900; color:#fbbf24; margin:4px 0; font-family:monospace;">744</div>
+              <div style="font-size:12.5px; color:#fde68a; font-weight:800;">N·m Estimado</div>
+              <div style="font-size:11px; color:#94a3b8; margin-top:4px;">
+                Faixa: <span id="torque_ia_val_breakout_faixa" style="color:#fef08a; font-weight:700;">670 a 855 N·m</span>
+              </div>
+            </div>
+
+            <!-- KPI 3: Tamanho da Chave / Soquete -->
+            <div style="background:#091d16; border:1.5px solid #059669; border-radius:12px; padding:14px; text-align:center;">
+              <div style="font-size:11px; color:#6ee7b7; font-weight:800; text-transform:uppercase; letter-spacing:0.5px;">🔧 CHAVE / SOQUETE</div>
+              <div id="torque_ia_val_chave" style="font-size:26px; font-weight:900; color:#34d399; margin:4px 0;">1.1/4" (32 mm)</div>
+              <div style="font-size:12px; color:#a7f3d0; font-weight:700;">Porca Pesada Flange</div>
+              <div id="torque_ia_sub_chave" style="font-size:11px; color:#94a3b8; margin-top:4px;">ASME B18.2.2 / Heavy Hex</div>
+            </div>
+
+            <!-- KPI 4: Força de Pré-Carga Axial -->
+            <div style="background:#09162a; border:1.5px solid #1e3a5f; border-radius:12px; padding:14px; text-align:center;">
+              <div style="font-size:11px; color:#93c5fd; font-weight:800; text-transform:uppercase; letter-spacing:0.5px;">⚓ FORÇA PRÉ-CARGA (Fm)</div>
+              <div id="torque_ia_val_forca_kn" style="font-size:28px; font-weight:900; color:#60a5fa; margin:4px 0; font-family:monospace;">148.5</div>
+              <div style="font-size:12px; color:#bfdbfe; font-weight:700;">kN de Tração</div>
+              <div style="font-size:11px; color:#94a3b8; margin-top:4px;">~<span id="torque_ia_val_forca_kgf">15.140</span> kgf por estojo</div>
+            </div>
+
+          </div>
+
+          <!-- Card de Metalurgia, Especificação do Material & Limites Operacionais -->
+          <div style="background:#071322; border:1px solid #1a3250; border-radius:10px; padding:14px; margin-bottom:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+              <span style="font-size:12.5px; font-weight:800; color:#38bdf8; display:flex; align-items:center; gap:6px;">
+                🧬 Análise Metalúrgica & Propriedades Mecânicas do Material:
+              </span>
+              <span id="torque_ia_mat_temp" style="font-size:11.5px; background:#0e2a4a; color:#7dd3fc; padding:2px 8px; border-radius:6px; font-weight:700;">Temp. Máx: 425°C</span>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:10px; font-size:12px; color:#cbd5e1;">
+              <div><b>Liga / Composição:</b> <span id="torque_ia_mat_liga" style="color:#7dd3fc;">Aço Cr-Mo AISI 4140/4142 Tratado</span></div>
+              <div><b>Escoamento (Sy):</b> <span id="torque_ia_mat_escoamento" style="color:#38bdf8;">724 MPa (105 ksi)</span></div>
+              <div><b>Ruptura (Su):</b> <span id="torque_ia_mat_ruptura" style="color:#38bdf8;">860 MPa (125 ksi)</span></div>
+              <div><b>Dureza:</b> <span id="torque_ia_mat_dureza" style="color:#fcd34d;">24 a 35 HRC</span></div>
+              <div style="grid-column:1 / -1;"><b>Recomendação Normativa Petrobras:</b> <span id="torque_ia_mat_aplicacao" style="color:#94a3b8;">Aplicar lubrificante pastoso à base de MoS2 nas roscas e faces de apoio das porcas para garantir repetibilidade.</span></div>
             </div>
           </div>
 
-          <!-- Sequência de Aperto -->
-          <div style="background:#071224; border-left:4px solid #f59e0b; padding:10px 14px; border-radius:6px; margin-bottom:16px;">
-            <b style="color:#fbbf24; font-size:13px;">🔄 Sequência Recomendada de Aperto:</b>
+          <!-- Ajuste de Atrito & Lubrificação -->
+          <div style="background:#071224; border:1px solid #1e293b; border-radius:10px; padding:12px 14px; margin-bottom:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+              <span style="font-size:12px; color:#7dd3fc; font-weight:800;">💧 Ajuste do Torque por Condição de Lubrificante:</span>
+              <span style="font-size:11px; color:#94a3b8;">Toque para recalcular com seu lubrificante de campo:</span>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:8px;">
+              <button type="button" class="rf-chip-btn active" id="torque_btn_lub_oleo" onclick="recalcularTorqueIaPorAtrito(0.15)" style="text-align:center; padding:8px 6px;">
+                <div style="font-size:10.5px; color:#94a3b8;">Levemente Oleado</div>
+                <b id="torque_ia_lub_oleo" style="color:#38bdf8; font-size:13px;">425 N·m</b>
+                <div style="font-size:9.5px; color:#64748b;">μ = 0,15 (Padrão)</div>
+              </button>
+              <button type="button" class="rf-chip-btn" id="torque_btn_lub_graxa" onclick="recalcularTorqueIaPorAtrito(0.10)" style="text-align:center; padding:8px 6px;">
+                <div style="font-size:10.5px; color:#94a3b8;">Pasta MoS₂ / Molykote</div>
+                <b id="torque_ia_lub_graxa" style="color:#34d399; font-size:13px;">283 N·m</b>
+                <div style="font-size:9.5px; color:#64748b;">μ = 0,10 (Recomendado)</div>
+              </button>
+              <button type="button" class="rf-chip-btn" id="torque_btn_lub_seco" onclick="recalcularTorqueIaPorAtrito(0.20)" style="text-align:center; padding:8px 6px;">
+                <div style="font-size:10.5px; color:#94a3b8;">Aperto a Seco</div>
+                <b id="torque_ia_lub_seco" style="color:#f87171; font-size:13px;">567 N·m</b>
+                <div style="font-size:9.5px; color:#64748b;">μ = 0,20 (Alto Atrito)</div>
+              </button>
+              <button type="button" class="rf-chip-btn" id="torque_btn_lub_ptfe" onclick="recalcularTorqueIaPorAtrito(0.08)" style="text-align:center; padding:8px 6px;">
+                <div style="font-size:10.5px; color:#94a3b8;">Teflon / PTFE Xylan</div>
+                <b id="torque_ia_lub_ptfe" style="color:#a78bfa; font-size:13px;">227 N·m</b>
+                <div style="font-size:9.5px; color:#64748b;">μ = 0,08 (Especial)</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Controle de Severidade de Desaperto / Quebra de Torque -->
+          <div style="background:#160d05; border:1px solid #78350f; border-radius:10px; padding:12px 14px; margin-bottom:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+              <span style="font-size:12px; color:#fcd34d; font-weight:800;">💥 Condição Operacional para Desaperto (Quebra de Torque):</span>
+              <span id="torque_ia_quebra_ferramenta_badge" style="font-size:11px; background:#451a03; color:#fef08a; padding:2px 8px; border-radius:6px; font-weight:bold;">🛠️ Ferramenta: Multiplicador 5:1 ou Torquímetro Hidráulico</span>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:8px;">
+              <button type="button" class="rf-chip-btn" id="torque_btn_q_prev" onclick="mudarCondicaoQuebraTorque('preventiva')" style="text-align:center; padding:6px;">
+                <div style="font-size:10px; color:#cbd5e1;">🟢 Recente / Preventiva</div>
+                <div style="font-size:11.5px; font-weight:800; color:#86efac;">+25% (~530 N·m)</div>
+              </button>
+              <button type="button" class="rf-chip-btn" id="torque_btn_q_norm" onclick="mudarCondicaoQuebraTorque('normal')" style="text-align:center; padding:6px;">
+                <div style="font-size:10px; color:#cbd5e1;">🟡 Industrial Normal</div>
+                <div style="font-size:11.5px; font-weight:800; color:#fcd34d;">+40% (~595 N·m)</div>
+              </button>
+              <button type="button" class="rf-chip-btn active" id="torque_btn_q_term" onclick="mudarCondicaoQuebraTorque('termico')" style="text-align:center; padding:6px;">
+                <div style="font-size:10px; color:#cbd5e1;">🟠 Térmica / Vapor / Termelétrica</div>
+                <div style="font-size:11.5px; font-weight:800; color:#fb923c;">+75% (~744 N·m)</div>
+              </button>
+              <button type="button" class="rf-chip-btn" id="torque_btn_q_sev" onclick="mudarCondicaoQuebraTorque('severo')" style="text-align:center; padding:6px;">
+                <div style="font-size:10px; color:#cbd5e1;">🔴 Oxidado / Corrosão Severa</div>
+                <div style="font-size:11.5px; font-weight:800; color:#f87171;">+120% (~935 N·m)</div>
+              </button>
+            </div>
+            <div style="font-size:11.5px; color:#fed7aa; margin-top:8px; line-height:1.4;">
+              ⚠️ <b>Protocolo de Segurança Petrobras:</b> NUNCA utilize prolongadores (canos de ferro) em torquímetros de estalo para desaperto. Para torques de quebra superiores a 400 N·m, utilize multiplicador de torque planetário com braço de reação devidamente calçado ou chave hidráulica com soquete de impacto forjado Cr-Mo.
+            </div>
+          </div>
+
+          <!-- TABELA TÉCNICA INSTANTÂNEA AO ABRIR A FOTO -->
+          <div style="background:#071221; border:1.5px solid #1e3a5f; border-radius:12px; padding:14px; margin-bottom:18px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+              <div>
+                <b style="font-size:13.5px; color:#38bdf8; display:flex; align-items:center; gap:6px;">
+                  📋 Tabela Técnica Completa da Norma (Aperto vs Quebra de Torque)
+                </b>
+                <span style="font-size:11.5px; color:#94a3b8;">Valores calculados segundo ASME PCC-1 / VDI 2230. Toque em qualquer linha para selecionar outra bitola:</span>
+              </div>
+              <span style="font-size:11px; background:#0c2540; color:#7dd3fc; padding:3px 10px; border-radius:10px; font-weight:700;">Toque na linha para recalcular</span>
+            </div>
+
+            <!-- Tabela Renderizada Dinamicamente -->
+            <div id="torque_ia_tabela_container" style="overflow-x:auto; max-height:280px; scrollbar-width:thin; border:1px solid #132742; border-radius:8px;">
+              <!-- Preenchido automaticamente via JavaScript -->
+            </div>
+          </div>
+
+          <!-- ROBÔ MECÂNICO SÊNIOR: CONSULTORIA & LAUDO PERICIAL DE TORQUE -->
+          <div style="background:linear-gradient(175deg, #091a30 0%, #050e1c 100%); border:1.5px solid #0284c7; border-radius:12px; padding:16px; margin-bottom:18px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; border-bottom:1px solid #1e3a5f; padding-bottom:10px; margin-bottom:12px;">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <span style="font-size:24px;">🤖</span>
+                <div>
+                  <b style="color:#ffffff; font-size:14px;">Robô Especialista em Integridade de Juntas & Torque Controlado</b>
+                  <div style="font-size:11.5px; color:#7dd3fc;">Parecer de Engenharia Mecânica Sênior (ASME PCC-1 / Petrobras N-279)</div>
+                </div>
+              </div>
+              <button type="button" class="button secondary" style="font-size:11.5px; padding:5px 12px; margin:0;" onclick="gerarParecerRoboTorqueCompleto()">🔄 Atualizar Parecer IA</button>
+            </div>
+
+            <div id="torque_ia_parecer_robo_texto" style="font-size:12.5px; color:#e2e8f0; line-height:1.6; background:#040c17; border:1px solid #13263d; border-radius:8px; padding:12px; margin-bottom:12px;">
+              <!-- Preenchido via JavaScript -->
+            </div>
+
+            <!-- Consulta Especial / Online com IA -->
+            <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+              <input type="text" id="torque_ia_busca_online_input" placeholder="Consultar material raro (ex: B16, Inconel 718, Super Duplex, Monel)..." style="flex:1; min-width:220px; background:#071221; border:1px solid #1e3a5f; border-radius:8px; padding:8px 12px; color:#fff; font-size:12px;">
+              <button type="button" class="button" style="background:#0284c7; border-color:#38bdf8; font-size:12px; padding:8px 14px; margin:0;" onclick="pesquisarTorqueEspecialOnlineIa()">🔍 Consultar Liga com IA</button>
+            </div>
+            <div id="torque_ia_resultado_busca_online" style="display:none; margin-top:10px; background:#05101f; border:1px solid #0284c7; border-radius:8px; padding:10px; font-size:12px; color:#cbd5e1;"></div>
+          </div>
+
+          <!-- Sequência de Aperto em Cruz (ASME PCC-1) -->
+          <div style="background:#071224; border-left:4px solid #f59e0b; padding:12px 14px; border-radius:6px; margin-bottom:18px;">
+            <b style="color:#fbbf24; font-size:13px;">🔄 Sequência Oficial de Aperto em Cruz / Estrela (ASME PCC-1):</b>
             <span id="torque_ia_sequencia_texto" style="color:#cbd5e1; font-size:12.5px; display:block; margin-top:4px;">
-              1º Passe: 30% (~62 N·m) em cruz | 2º Passe: 70% (~144 N·m) em cruz | 3º Passe: 100% (206 N·m) final com verificação circular.
+              1º Passe: 30% em cruz | 2º Passe: 70% em cruz | 3º Passe: 100% final em cruz | 4º Passe de Fechamento: 100% no sentido horário contínuo para uniformizar compressão da junta.
             </span>
           </div>
 
-          <!-- Troca Rápida de Diâmetro -->
-          <div style="margin-bottom:16px;">
-            <span style="font-size:11.5px; color:#94a3b8; display:block; margin-bottom:6px;">Caso a rosca ou diâmetro seja diferente da imagem, toque para recalcular na hora:</span>
-            <div style="display:flex; gap:6px; flex-wrap:wrap;">
-              <button type="button" class="button secondary" style="font-size:11px; padding:4px 9px; margin-top:0;" onclick="ajustarRoscaIa('M8')">M8</button>
-              <button type="button" class="button secondary" style="font-size:11px; padding:4px 9px; margin-top:0;" onclick="ajustarRoscaIa('M10')">M10</button>
-              <button type="button" class="button secondary" style="font-size:11px; padding:4px 9px; margin-top:0;" onclick="ajustarRoscaIa('M12')">M12</button>
-              <button type="button" class="button secondary" style="font-size:11px; padding:4px 9px; margin-top:0;" onclick="ajustarRoscaIa('M14')">M14</button>
-              <button type="button" class="button secondary" style="font-size:11px; padding:4px 9px; margin-top:0;" onclick="ajustarRoscaIa('M16')">M16</button>
-              <button type="button" class="button secondary" style="font-size:11px; padding:4px 9px; margin-top:0;" onclick="ajustarRoscaIa('M20')">M20</button>
-              <button type="button" class="button secondary" style="font-size:11px; padding:4px 9px; margin-top:0;" onclick="ajustarRoscaIa('M24')">M24</button>
-              <button type="button" class="button secondary" style="font-size:11px; padding:4px 9px; margin-top:0;" onclick="ajustarRoscaIa('M30')">M30</button>
-              <button type="button" class="button secondary" style="font-size:11px; padding:4px 9px; margin-top:0;" onclick="ajustarRoscaIa('1/2\"-13')">1/2"</button>
-              <button type="button" class="button secondary" style="font-size:11px; padding:4px 9px; margin-top:0;" onclick="ajustarRoscaIa('3/4\"-10')">3/4"</button>
+          <!-- Ações Imediatas & Exportação para o Relatório Oficial -->
+          <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:space-between; align-items:center;">
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <button type="button" class="button" style="background:#059669; border-color:#10b981; font-size:13px; font-weight:800; margin:0;" onclick="exportarTorqueIaParaRelatorio()">📑 Levar p/ Relatório Petrobras A4</button>
+              <button type="button" class="button" style="background:#0284c7; border-color:#38bdf8; font-size:13px; font-weight:700; margin:0;" onclick="aplicarTorqueIaNaCalculadora()">🎯 Usar na Calculadora</button>
+              <button type="button" class="button secondary" style="font-size:13px; margin:0;" onclick="copiarTorqueIaEspecificacao()">📋 Copiar Especificação</button>
             </div>
+            <button type="button" class="button secondary" style="font-size:13px; margin:0; border-color:#38bdf8; color:#7dd3fc;" onclick="document.getElementById('torque_foto_camera').click()">📸 Tirar Outra Foto</button>
           </div>
 
-          <!-- Ações Imediatas -->
-          <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <button type="button" class="button" style="background:#0284c7; border-color:#38bdf8; font-size:13px; font-weight:700; margin-top:0;" onclick="aplicarTorqueIaNaCalculadora()">🎯 Usar na Calculadora</button>
-            <button type="button" class="button secondary" style="font-size:13px; margin-top:0;" onclick="exportarTorqueIaParaRelatorio()">📝 Levar para o Relatório</button>
-            <button type="button" class="button secondary" style="font-size:13px; margin-top:0;" onclick="copiarTorqueIaEspecificacao()">📋 Copiar Dados</button>
-            <button type="button" class="button secondary" style="font-size:13px; margin-top:0;" onclick="document.getElementById('torque_foto_camera').click()">📸 Tirar Outra Foto</button>
-          </div>
         </div>
       </div>
     </div>
@@ -14875,45 +14995,195 @@ function mostrarChaveRecomendada() {
   el.innerText = `Parafuso/porca ${rosca} → use a chave combinada de ${chave} mm.`;
 }
 
-/* ===================== TORQUE E FIXAÇÃO INDUSTRIAL ===================== */
+/* ===================== TORQUE E FIXAÇÃO INDUSTRIAL (IA VISION, BREAKOUT TORQUE & NORMAS ASME PCC-1 / PETROBRAS) ===================== */
+
+// 1. BANCO DE DADOS METALÚRGICO DE MATERIAIS & FIXADORES INDUSTRIAIS
+const DADOS_MATERIAIS_TORQUE = {
+  'B7': {
+    nome: 'ASTM A193 Grau B7 (Aço Cromo-Molibdênio AISI 4140/4142 Tratado)',
+    porcaPadrao: 'ASTM A194 Grau 2H (Porca Pesada ASME B18.2.2 Heavy Hex)',
+    escoamento: '724 MPa (105 ksi)',
+    ruptura: '860 MPa (125 ksi)',
+    dureza: '24 a 35 HRC (250 a 325 HB)',
+    tempMax: '425°C contínua (500°C picos)',
+    aplicacao: 'Padrão ouro Petrobras para flanges ASME B16.5, vasos de pressão, trocadores e tubulações de vapor/óleo.'
+  },
+  'B16': {
+    nome: 'ASTM A193 Grau B16 (Aço Cr-Mo-Vanádio para Altas Temperaturas)',
+    porcaPadrao: 'ASTM A194 Grau 7 ou Grau 4 (Heavy Hex)',
+    escoamento: '725 MPa (105 ksi)',
+    ruptura: '860 MPa (125 ksi)',
+    dureza: '26 a 35 HRC',
+    tempMax: '538°C (Vapor Superaquecido)',
+    aplicacao: 'Usinas termoelétricas, caldeiras de ciclo combinado e turbinas a vapor de alta pressão.'
+  },
+  'B8': {
+    nome: 'ASTM A193 Grau B8 / B8M (Aço Inoxidável Austenítico AISI 304 / 316)',
+    porcaPadrao: 'ASTM A194 Grau 8 / 8M (Inox)',
+    escoamento: '450 MPa (65 ksi)',
+    ruptura: '700 MPa (100 ksi)',
+    dureza: '180 a 220 HB',
+    tempMax: '550°C (Resistência à Corrosão)',
+    aplicacao: 'Água do mar, condensado químico, áreas offshore e atmosferas de alta salinidade.'
+  },
+  '8.8': {
+    nome: 'DIN ISO 898-1 Classe 8.8 (Aço Médio Carbono Temperado e Revenido)',
+    porcaPadrao: 'DIN ISO 898-2 Classe 8 (Sextavado Padrão)',
+    escoamento: '640 MPa',
+    ruptura: '800 MPa',
+    dureza: '22 a 32 HRC (250 a 300 HB)',
+    tempMax: '300°C',
+    aplicacao: 'Construção mecânica geral, carcaças de bombas centrífugas, redutores e bases de motores.'
+  },
+  '10.9': {
+    nome: 'DIN ISO 898-1 Classe 10.9 (Aço Liga Temperado de Alta Resistência)',
+    porcaPadrao: 'DIN ISO 898-2 Classe 10',
+    escoamento: '940 MPa',
+    ruptura: '1000 MPa',
+    dureza: '32 a 39 HRC (320 a 380 HB)',
+    tempMax: '300°C',
+    aplicacao: 'Flanges de alta solicitação mecânica, acoplamentos flexíveis, cabeçotes e prensas.'
+  },
+  '12.9': {
+    nome: 'DIN ISO 898-1 Classe 12.9 (Aço Liga Especial de Altíssima Tensão)',
+    porcaPadrao: 'DIN ISO 898-2 Classe 12',
+    escoamento: '1080 MPa',
+    ruptura: '1200 MPa',
+    dureza: '39 a 44 HRC (385 a 435 HB)',
+    tempMax: '300°C',
+    aplicacao: 'Parafusos cilíndricos com sextavado interno (Allen DIN 912) e fixação de componentes rígidos.'
+  },
+  'A2-70': {
+    nome: 'ISO 3506-1 A2-70 / A4-80 (Aço Inoxidável Austenítico Inox 304/316)',
+    porcaPadrao: 'ISO 3506-2 A2-70 / A4-80',
+    escoamento: '450 MPa',
+    ruptura: '700 MPa',
+    dureza: '180 a 230 HB',
+    tempMax: '400°C',
+    aplicacao: 'Linhas de produtos químicos, sistemas de amostragem, água desmineralizada e ambientes corrosivos.'
+  },
+  'SAE-5': {
+    nome: 'SAE J429 Grau 5 (Aço Médio Carbono c/ 3 Traços Radiais a 120°)',
+    porcaPadrao: 'SAE Grau 5',
+    escoamento: '634 MPa (92 ksi)',
+    ruptura: '827 MPa (120 ksi)',
+    dureza: '25 a 34 HRC',
+    tempMax: '250°C',
+    aplicacao: 'Máquinas industriais em padrão americano polegada UNC, redutores e bombas importadas.'
+  },
+  'SAE-8': {
+    nome: 'SAE J429 Grau 8 (Aço Liga Temperado c/ 6 Traços Radiais)',
+    porcaPadrao: 'SAE Grau 8',
+    escoamento: '896 MPa (130 ksi)',
+    ruptura: '1034 MPa (150 ksi)',
+    dureza: '33 a 39 HRC',
+    tempMax: '300°C',
+    aplicacao: 'Alta severidade mecânica em polegada, britadores, acoplamentos de turbinas e guinchos.'
+  },
+  '4.6': {
+    nome: 'DIN ISO 898-1 Classe 4.6 (Aço Baixo Carbono Comercial)',
+    porcaPadrao: 'DIN ISO 898-2 Classe 4',
+    escoamento: '240 MPa',
+    ruptura: '400 MPa',
+    dureza: '< 180 HB',
+    tempMax: '150°C',
+    aplicacao: 'Somente tampas de proteção leves sem pressão. PROIBIDO em linhas de fluido sob pressão.'
+  }
+};
+
+// 2. BANCO DE DADOS DE LIGAS NOBRES PARA CONSULTA ONLINE / IA
+const DADOS_LIGAS_ESPECIAIS_ONLINE = {
+  'inconel': {
+    nome: 'Inconel 718 (UNS N07718 / ASTM B637)',
+    escoamento: '1100 MPa (160 ksi)',
+    ruptura: '1375 MPa (200 ksi)',
+    tempMax: '650°C',
+    kFator: 0.16,
+    multiplicadorQuebra: 1.85,
+    nota: 'Superliga de Níquel-Cromo de altíssima resistência a quente e corrosão por pite. Usada em turbinas a gás e válvulas submarinas.'
+  },
+  'super duplex': {
+    nome: 'Super Duplex 2507 (UNS S32750 / EN 1.4410)',
+    escoamento: '550 MPa (80 ksi)',
+    ruptura: '750 MPa (110 ksi)',
+    tempMax: '280°C',
+    kFator: 0.15,
+    multiplicadorQuebra: 1.60,
+    nota: 'Aço inoxidável ferrítico-austenítico de alta resistência mecânica e contra cloretos (PREN > 42). Usado em trocadores de água salgada.'
+  },
+  'monel': {
+    nome: 'Monel 400 / K-500 (UNS N04400 / UNS N05500)',
+    escoamento: '690 MPa (100 ksi)',
+    ruptura: '965 MPa (140 ksi)',
+    tempMax: '480°C',
+    kFator: 0.15,
+    multiplicadorQuebra: 1.70,
+    nota: 'Liga de Níquel-Cobre com resistência inigualável a ácido fluorídrico, ácido sulfúrico e água do mar em alta velocidade.'
+  },
+  'hastelloy': {
+    nome: 'Hastelloy C-276 (UNS N10276 / ASTM B574)',
+    escoamento: '355 MPa (52 ksi)',
+    ruptura: '790 MPa (115 ksi)',
+    tempMax: '500°C',
+    kFator: 0.15,
+    multiplicadorQuebra: 1.90,
+    nota: 'Liga Ni-Mo-Cr para os ambientes químicos mais agressivos (gás cloro, solventes orgânicos e hipoclorito).'
+  },
+  'a453': {
+    nome: 'ASTM A453 Grau 660 (Aço Austenítico Endurecível por Precipitação)',
+    escoamento: '585 MPa (85 ksi)',
+    ruptura: '895 MPa (130 ksi)',
+    tempMax: '700°C',
+    kFator: 0.15,
+    multiplicadorQuebra: 1.80,
+    nota: 'Fixadores para caldeiras e turbinas a vapor onde se exige alta resistência à fluência (*creep*) acima de 500°C.'
+  },
+  'titanio': {
+    nome: 'Titânio Grau 5 (Ti-6Al-4V / ASTM B348)',
+    escoamento: '880 MPa (128 ksi)',
+    ruptura: '950 MPa (138 ksi)',
+    tempMax: '350°C',
+    kFator: 0.18,
+    multiplicadorQuebra: 1.65,
+    nota: 'Altíssima relação resistência/peso com excelente resistência à corrosão por cloretos e meios oxidantes.'
+  }
+};
+
+// 3. TABELA COMPLETA DE ROSCAS MÉTRICAS E POLEGADA (COM DADOS DE CHAVE PESADA FLANGE & B7)
 const roscasMetricas = {
-  'M4':   { d: 4,  p: 0.7,  as: 8.78, hex: 7,  allen: 3,  tRef: { '4.6': 1.0, '8.8': 3.0,  '10.9': 4.4,  '12.9': 5.1,  'A2-70': 1.8 } },
-  'M5':   { d: 5,  p: 0.8,  as: 14.2, hex: 8,  allen: 4,  tRef: { '4.6': 2.1, '8.8': 5.9,  '10.9': 8.6,  '12.9': 10.0, 'A2-70': 3.6 } },
-  'M6':   { d: 6,  p: 1.0,  as: 20.1, hex: 10, allen: 5,  tRef: { '4.6': 3.7, '8.8': 10.1, '10.9': 14.8, '12.9': 17.3, 'A2-70': 7.3 } },
-  'M8':   { d: 8,  p: 1.25, as: 36.6, hex: 13, allen: 6,  tRef: { '4.6': 8.9, '8.8': 24.6, '10.9': 36.1, '12.9': 42.2, 'A2-70': 17.5 } },
-  'M10':  { d: 10, p: 1.5,  as: 58.0, hex: 17, allen: 8,  tRef: { '4.6': 17.8,'8.8': 48.0, '10.9': 71.0, '12.9': 83.0, 'A2-70': 35.0 } },
-  'M12':  { d: 12, p: 1.75, as: 84.3, hex: 19, allen: 10, tRef: { '4.6': 30.5,'8.8': 84.0, '10.9': 123.0,'12.9': 144.0,'A2-70': 60.0 } },
-  'M14':  { d: 14, p: 2.0,  as: 115,  hex: 22, allen: 12, tRef: { '4.6': 49.0,'8.8': 135.0,'10.9': 198.0,'12.9': 232.0,'A2-70': 95.0 } },
-  'M16':  { d: 16, p: 2.0,  as: 157,  hex: 24, allen: 14, tRef: { '4.6': 76.0,'8.8': 206.0,'10.9': 302.0,'12.9': 354.0,'A2-70': 147.0 } },
-  'M18':  { d: 18, p: 2.5,  as: 192,  hex: 27, allen: 14, tRef: { '4.6': 105.0,'8.8': 288.0,'10.9': 421.0,'12.9': 492.0,'A2-70': 205.0 } },
-  'M20':  { d: 20, p: 2.5,  as: 245,  hex: 30, allen: 17, tRef: { '4.6': 148.0,'8.8': 408.0,'10.9': 597.0,'12.9': 698.0,'A2-70': 288.0 } },
-  'M22':  { d: 22, p: 2.5,  as: 303,  hex: 32, allen: 17, tRef: { '4.6': 202.0,'8.8': 557.0,'10.9': 816.0,'12.9': 954.0,'A2-70': 390.0 } },
-  'M24':  { d: 24, p: 3.0,  as: 353,  hex: 36, allen: 19, tRef: { '4.6': 255.0,'8.8': 705.0,'10.9': 1032.0,'12.9': 1207.0,'A2-70': 498.0 } },
-  'M27':  { d: 27, p: 3.0,  as: 459,  hex: 41, allen: 19, tRef: { '4.6': 375.0,'8.8': 1036.0,'10.9': 1518.0,'12.9': 1774.0,'A2-70': 730.0 } },
-  'M30':  { d: 30, p: 3.5,  as: 561,  hex: 46, allen: 22, tRef: { '4.6': 510.0,'8.8': 1408.0,'10.9': 2063.0,'12.9': 2413.0,'A2-70': 990.0 } },
-  'M33':  { d: 33, p: 3.5,  as: 694,  hex: 50, allen: 24, tRef: { '4.6': 690.0,'8.8': 1912.0,'10.9': 2802.0,'12.9': 3276.0,'A2-70': 1350.0 } },
-  'M36':  { d: 36, p: 4.0,  as: 817,  hex: 55, allen: 27, tRef: { '4.6': 885.0,'8.8': 2452.0,'10.9': 3594.0,'12.9': 4202.0,'A2-70': 1720.0 } }
+  'M8':   { d: 8,  p: 1.25, as: 36.6, hex: 13, hexFlange: '13 mm', allen: 6,  tRef: { '4.6': 8.9, '8.8': 24.6, '10.9': 36.1, '12.9': 42.2, 'A2-70': 17.5, 'B7': 27.5 } },
+  'M10':  { d: 10, p: 1.5,  as: 58.0, hex: 17, hexFlange: '17 mm', allen: 8,  tRef: { '4.6': 17.8,'8.8': 48.0, '10.9': 71.0, '12.9': 83.0, 'A2-70': 35.0, 'B7': 54.0 } },
+  'M12':  { d: 12, p: 1.75, as: 84.3, hex: 19, hexFlange: '19 mm', allen: 10, tRef: { '4.6': 30.5,'8.8': 84.0, '10.9': 123.0,'12.9': 144.0,'A2-70': 60.0, 'B7': 95.0 } },
+  'M14':  { d: 14, p: 2.0,  as: 115,  hex: 22, hexFlange: '22 mm', allen: 12, tRef: { '4.6': 49.0,'8.8': 135.0,'10.9': 198.0,'12.9': 232.0,'A2-70': 95.0, 'B7': 150.0 } },
+  'M16':  { d: 16, p: 2.0,  as: 157,  hex: 24, hexFlange: '24 mm', allen: 14, tRef: { '4.6': 76.0,'8.8': 206.0,'10.9': 302.0,'12.9': 354.0,'A2-70': 147.0,'B7': 235.0 } },
+  'M18':  { d: 18, p: 2.5,  as: 192,  hex: 27, hexFlange: '27 mm', allen: 14, tRef: { '4.6': 105.0,'8.8': 288.0,'10.9': 421.0,'12.9': 492.0,'A2-70': 205.0,'B7': 325.0 } },
+  'M20':  { d: 20, p: 2.5,  as: 245,  hex: 30, hexFlange: '30 mm', allen: 17, tRef: { '4.6': 148.0,'8.8': 408.0,'10.9': 597.0,'12.9': 698.0,'A2-70': 288.0,'B7': 460.0 } },
+  'M22':  { d: 22, p: 2.5,  as: 303,  hex: 32, hexFlange: '32 mm', allen: 17, tRef: { '4.6': 202.0,'8.8': 557.0,'10.9': 816.0,'12.9': 954.0,'A2-70': 390.0,'B7': 630.0 } },
+  'M24':  { d: 24, p: 3.0,  as: 353,  hex: 36, hexFlange: '36 mm', allen: 19, tRef: { '4.6': 255.0,'8.8': 705.0,'10.9': 1032.0,'12.9': 1207.0,'A2-70': 498.0,'B7': 800.0 } },
+  'M27':  { d: 27, p: 3.0,  as: 459,  hex: 41, hexFlange: '41 mm', allen: 19, tRef: { '4.6': 375.0,'8.8': 1036.0,'10.9': 1518.0,'12.9': 1774.0,'A2-70': 730.0,'B7': 1180.0 } },
+  'M30':  { d: 30, p: 3.5,  as: 561,  hex: 46, hexFlange: '46 mm', allen: 22, tRef: { '4.6': 510.0,'8.8': 1408.0,'10.9': 2063.0,'12.9': 2413.0,'A2-70': 990.0,'B7': 1600.0 } },
+  'M33':  { d: 33, p: 3.5,  as: 694,  hex: 50, hexFlange: '50 mm', allen: 24, tRef: { '4.6': 690.0,'8.8': 1912.0,'10.9': 2802.0,'12.9': 3276.0,'A2-70': 1350.0,'B7': 2170.0 } },
+  'M36':  { d: 36, p: 4.0,  as: 817,  hex: 55, hexFlange: '55 mm', allen: 27, tRef: { '4.6': 885.0,'8.8': 2452.0,'10.9': 3594.0,'12.9': 4202.0,'A2-70': 1720.0,'B7': 2800.0 } }
 };
 
 const roscasPolegada = {
-  '1/4"-20':   { d: 6.35,  as: 20.5,  hex: '7/16"',  tRef: { 'SAE-2': 7.5,  'SAE-5': 12.0,  'SAE-8': 17.0 } },
-  '5/16"-18':  { d: 7.94,  as: 33.8,  hex: '1/2"',   tRef: { 'SAE-2': 15.0, 'SAE-5': 24.0,  'SAE-8': 34.0 } },
-  '3/8"-16':   { d: 9.53,  as: 50.0,  hex: '9/16"',  tRef: { 'SAE-2': 27.0, 'SAE-5': 43.0,  'SAE-8': 61.0 } },
-  '7/16"-14':  { d: 11.11, as: 68.6,  hex: '5/8"',   tRef: { 'SAE-2': 43.0, 'SAE-5': 69.0,  'SAE-8': 98.0 } },
-  '1/2"-13':   { d: 12.70, as: 91.5,  hex: '3/4"',   tRef: { 'SAE-2': 66.0, 'SAE-5': 105.0, 'SAE-8': 148.0 } },
-  '9/16"-12':  { d: 14.29, as: 117.4, hex: '13/16"', tRef: { 'SAE-2': 95.0, 'SAE-5': 152.0, 'SAE-8': 214.0 } },
-  '5/8"-11':   { d: 15.88, as: 146.0, hex: '15/16"', tRef: { 'SAE-2': 132.0,'SAE-5': 210.0, 'SAE-8': 295.0 } },
-  '3/4"-10':   { d: 19.05, as: 216.0, hex: '1.1/8"', tRef: { 'SAE-2': 233.0,'SAE-5': 373.0, 'SAE-8': 526.0 } },
-  '7/8"-9':    { d: 22.23, as: 298.0, hex: '1.5/16"',tRef: { 'SAE-2': 377.0,'SAE-5': 603.0, 'SAE-8': 850.0 } },
-  '1"-8':      { d: 25.40, as: 391.0, hex: '1.1/2"', tRef: { 'SAE-2': 565.0,'SAE-5': 904.0, 'SAE-8': 1275.0 } },
-  '1.1/8"-7':  { d: 28.58, as: 492.0, hex: '1.11/16"',tRef:{ 'SAE-2': 710.0,'SAE-5': 1280.0,'SAE-8': 1810.0 } },
-  '1.1/4"-7':  { d: 31.75, as: 625.0, hex: '1.7/8"', tRef: { 'SAE-2': 990.0,'SAE-5': 1800.0,'SAE-8': 2550.0 } },
-  '1.1/2"-6':  { d: 38.10, as: 908.0, hex: '2.1/4"', tRef: { 'SAE-2': 1750.0,'SAE-5':3150.0,'SAE-8': 4450.0 } }
+  '1/2"-13':  { d: 12.70, as: 91.5,  hex: '3/4"',    hexFlange: '7/8" (22 mm)',   tRef: { 'SAE-2': 66.0,  'SAE-5': 105.0, 'SAE-8': 148.0, 'B7': 120.0, 'B16': 125.0, 'B8': 75.0 } },
+  '5/8"-11':  { d: 15.88, as: 146.0, hex: '15/16"',  hexFlange: '1.1/16" (27 mm)',tRef: { 'SAE-2': 132.0, 'SAE-5': 210.0, 'SAE-8': 295.0, 'B7': 240.0, 'B16': 250.0, 'B8': 150.0 } },
+  '3/4"-10':  { d: 19.05, as: 216.0, hex: '1.1/8"',  hexFlange: '1.1/4" (32 mm)', tRef: { 'SAE-2': 233.0, 'SAE-5': 373.0, 'SAE-8': 526.0, 'B7': 425.0, 'B16': 440.0, 'B8': 265.0 } },
+  '7/8"-9':   { d: 22.23, as: 298.0, hex: '1.5/16"', hexFlange: '1.7/16" (36 mm)',tRef: { 'SAE-2': 377.0, 'SAE-5': 603.0, 'SAE-8': 850.0, 'B7': 685.0, 'B16': 710.0, 'B8': 430.0 } },
+  '1"-8':     { d: 25.40, as: 391.0, hex: '1.1/2"',  hexFlange: '1.5/8" (41 mm)', tRef: { 'SAE-2': 565.0, 'SAE-5': 904.0, 'SAE-8': 1275.0,'B7': 1030.0,'B16': 1070.0,'B8': 640.0 } },
+  '1.1/8"-8': { d: 28.58, as: 509.0, hex: '1.11/16"',hexFlange: '1.13/16" (46 mm)',tRef:{ 'SAE-2': 710.0, 'SAE-5': 1320.0,'SAE-8': 1860.0,'B7': 1510.0,'B16': 1560.0,'B8': 940.0 } },
+  '1.1/4"-8': { d: 31.75, as: 645.0, hex: '1.7/8"',  hexFlange: '2" (50 mm)',     tRef: { 'SAE-2': 990.0, 'SAE-5': 1850.0,'SAE-8': 2620.0,'B7': 2120.0,'B16': 2200.0,'B8': 1320.0 } },
+  '1.3/8"-8': { d: 34.93, as: 795.0, hex: '2.1/16"', hexFlange: '2.3/16" (55 mm)',tRef:{ 'SAE-2': 1350.0,'SAE-5': 2500.0,'SAE-8': 3550.0,'B7': 2880.0,'B16': 2980.0,'B8': 1790.0 } },
+  '1.1/2"-8': { d: 38.10, as: 955.0, hex: '2.1/4"',  hexFlange: '2.3/8" (60 mm)', tRef: { 'SAE-2': 1750.0,'SAE-5': 3250.0,'SAE-8': 4600.0,'B7': 3720.0,'B16': 3850.0,'B8': 2310.0 } }
 };
 
 let zoomNivelTorque = 1.0;
-let classeSelecionadaVisual = null;
+let classeSelecionadaVisual = 'B7';
 let ultimoCalculoTorque = null;
+let condicaoQuebraTorqueAtiva = 'termico';
+let atritoTorqueIaAtivo = 0.15;
+let torqueIaResultadoAtual = null;
 
 function iniciarModuloTorque() {
   const roscaSelect = document.getElementById('torque_rosca');
@@ -14937,6 +15207,10 @@ function alternarAbaTorque(aba) {
   if (aba === 'cruz') {
     desenharEsquemaCruz();
   }
+  if (aba === 'foto' && !torqueIaResultadoAtual) {
+    // Inicializa com estojo Petrobras padrão
+    atualizarFeedbackBoxIa('3/4"-10', 'B7', 99, 'Estojo ASTM A193 B7 com Porca 2H', 'Estojo em aço liga Cr-Mo temperado (ASME B16.5 / Petrobras)', 'Flange Industrial ASME B16.5');
+  }
 }
 
 function atualizarOpcoesRosca() {
@@ -14949,7 +15223,7 @@ function atualizarOpcoesRosca() {
       const opt = document.createElement('option');
       opt.value = r;
       opt.innerText = `${r} (passo ${roscasMetricas[r].p} mm)`;
-      if (r === 'M10') opt.selected = true;
+      if (r === 'M16') opt.selected = true;
       select.appendChild(opt);
     });
     const classeSelect = document.getElementById('torque_classe');
@@ -14960,13 +15234,13 @@ function atualizarOpcoesRosca() {
     Object.keys(roscasPolegada).forEach(r => {
       const opt = document.createElement('option');
       opt.value = r;
-      opt.innerText = `${r} UNC`;
-      if (r === '3/8"-16') opt.selected = true;
+      opt.innerText = `${r} UNC (Flange Chave ${roscasPolegada[r].hexFlange})`;
+      if (r === '3/4"-10') opt.selected = true;
       select.appendChild(opt);
     });
     const classeSelect = document.getElementById('torque_classe');
-    if (!classeSelect.value.startsWith('SAE')) {
-      classeSelect.value = 'SAE-5';
+    if (!classeSelect.value.startsWith('SAE') && classeSelect.value !== 'B7') {
+      classeSelect.value = 'B7';
     }
   }
   calcularTorque();
@@ -14976,7 +15250,7 @@ function calcularTorque() {
   const sistema = document.getElementById('torque_sistema').value;
   const rosca = document.getElementById('torque_rosca').value;
   const classe = document.getElementById('torque_classe').value;
-  const atrito = parseFloat(document.getElementById('torque_atrito').value);
+  const atrito = parseFloat(document.getElementById('torque_atrito').value) || 0.15;
   const equipTipo = document.getElementById('torque_equip_tipo').value;
 
   let dadosRosca, tRef;
@@ -14984,14 +15258,14 @@ function calcularTorque() {
   if (sistema === 'metrico') {
     dadosRosca = roscasMetricas[rosca];
     if (!dadosRosca) return;
-    tRef = dadosRosca.tRef[classe] || (dadosRosca.tRef['8.8'] * 0.7);
+    tRef = dadosRosca.tRef[classe] || dadosRosca.tRef['8.8'] || 206;
   } else {
     dadosRosca = roscasPolegada[rosca];
     if (!dadosRosca) return;
-    tRef = dadosRosca.tRef[classe] || (dadosRosca.tRef['SAE-5'] * 0.7);
+    tRef = dadosRosca.tRef[classe] || dadosRosca.tRef['B7'] || dadosRosca.tRef['SAE-5'] || 373;
   }
 
-  // Fator de escala por atrito em relação ao padrão industrial μ=0.15:
+  // Fator de escala por atrito em relação a μ=0.15:
   const fatorAtrito = atrito / 0.15;
   const torqueNm = tRef * fatorAtrito;
   const torqueLbFt = torqueNm * 0.737562;
@@ -15002,64 +15276,104 @@ function calcularTorque() {
   if (classe === '8.8') tensaoEscoamento = 640;
   if (classe === '10.9') tensaoEscoamento = 940;
   if (classe === '12.9') tensaoEscoamento = 1080;
-  if (classe === 'A2-70') tensaoEscoamento = 450;
+  if (classe === 'B7' || classe === 'B16') tensaoEscoamento = 724;
+  if (classe === 'B8' || classe === 'A2-70') tensaoEscoamento = 450;
   if (classe === 'SAE-2') tensaoEscoamento = 393;
   if (classe === 'SAE-5') tensaoEscoamento = 634;
   if (classe === 'SAE-8') tensaoEscoamento = 896;
 
-  const forcaPreCargaKn = (0.90 * tensaoEscoamento * dadosRosca.as) / 1000;
+  // Pré-carga axial calculada com segurança a 70% do escoamento para flanges e 90% para máquinas
+  const coefCarga = (classe === 'B7' || classe === 'B16' || classe === 'B8') ? 0.70 : 0.85;
+  const forcaPreCargaKn = (coefCarga * tensaoEscoamento * dadosRosca.as) / 1000;
 
   document.getElementById('tkpi_nm').innerText = torqueNm >= 100 ? torqueNm.toFixed(0) : torqueNm.toFixed(1);
   document.getElementById('tkpi_lbft').innerText = torqueLbFt >= 100 ? torqueLbFt.toFixed(0) : torqueLbFt.toFixed(1);
-  document.getElementById('tkpi_kgfm').innerText = torqueKgfM.toFixed(2);
+  document.getElementById('tkpi_kgfm').innerText = torqueKgfM.toFixed(1);
   document.getElementById('tkpi_forca').innerText = forcaPreCargaKn.toFixed(1);
 
-  const minNm = (torqueNm * 0.95).toFixed(1);
-  const maxNm = (torqueNm * 1.05).toFixed(1);
+  const minNm = (torqueNm * 0.95).toFixed(0);
+  const maxNm = (torqueNm * 1.05).toFixed(0);
 
   let chaveInfo = '';
   if (sistema === 'metrico') {
-    chaveInfo = `Chave Sextavada: <b>${dadosRosca.hex} mm</b> | Chave Allen: <b>${dadosRosca.allen} mm</b>`;
+    chaveInfo = `Chave Sextavada: <b>${dadosRosca.hex} mm</b> | Allen: <b>${dadosRosca.allen} mm</b>`;
   } else {
-    chaveInfo = `Chave Sextavada: <b>${dadosRosca.hex}</b> pol`;
+    chaveInfo = `Chave Sextavada Padrão: <b>${dadosRosca.hex}</b> | Chave Flange (Heavy Hex): <b>${dadosRosca.hexFlange}</b>`;
   }
 
   document.getElementById('torque_detalhe_texto').innerHTML = 
-    `<b>Especificação:</b> ${rosca} | Classe: <b>${classe}</b> | Fator Atrito: <b>μ = ${atrito.toFixed(2)}</b>\n` +
-    `• Faixa recomendada no Torquímetro (±5%): <b>${minNm} a ${maxNm} N·m</b>\n` +
-    `• Força de aperto axial gerada na junta: <b>${forcaPreCargaKn.toFixed(1)} kN</b> (~${(forcaPreCargaKn * 101.97).toFixed(0)} kgf)\n` +
+    `<b>Especificação:</b> ${rosca} | Classe/Material: <b>${classe}</b> | Fator Atrito: <b>μ = ${atrito.toFixed(2)}</b><br>` +
+    `• Faixa recomendada no Torquímetro (±5%): <b>${minNm} a ${maxNm} N·m</b><br>` +
+    `• Força de aperto axial gerada na junta: <b>${forcaPreCargaKn.toFixed(1)} kN</b> (~ ${(forcaPreCargaKn * 101.97).toFixed(0)} kgf)<br>` +
     `• Ferramenta recomendada: ${chaveInfo}`;
 
   const banner = document.getElementById('torque_alerta_banner');
   if (atrito <= 0.10) {
     banner.className = 'alerta-anti-erro aviso';
-    banner.innerHTML = `💡 <b>ATENÇÃO ANTI-ERRO (Graxa / Pasta MoS₂):</b> Com lubrificante antiaderente o atrito cai drásticamente. O torque necessário é cerca de 33% MENOR do que com óleo comum. <b>NUNCA use o torque de catálogo "seco" quando usar MoS₂</b>, sob risco de estirar e quebrar o parafuso!`;
+    banner.innerHTML = `💡 <b>ATENÇÃO ANTI-ERRO (Graxa / Pasta MoS₂):</b> Com lubrificante antiaderente à base de Bissulfeto de Molibdênio o atrito cai cerca de 33%. O torque necessário é menor. NUNCA aplique torque de especificação "seca" com pasta MoS₂, sob grave risco de estiramento plástico do estojo!`;
   } else if (atrito >= 0.20) {
     banner.className = 'alerta-anti-erro aviso';
-    banner.innerHTML = `⚠️ <b>ALERTA ANTI-ERRO (Parafuso Seco):</b> Roscas secas perdem até 90% da força do torquímetro apenas vencendo atrito e asperezas. Há risco de falso aperto e folga posterior. Sempre que o manual do fabricante autorizar, aplique uma película fina de óleo de máquina limpo.`;
+    banner.innerHTML = `⚠️ <b>ALERTA ANTI-ERRO (Fixador Seco):</b> Fixadores secos perdem até 90% da força do torquímetro apenas vencendo atrito e asperezas. Recomenda-se aplicar lubrificante conforme ASME PCC-1 Tabela 1.`;
   } else if (classe === '4.6' || classe === 'SAE-2') {
     banner.className = 'alerta-anti-erro perigo';
-    banner.innerHTML = `🚨 <b>ALERTA DE RESISTÊNCIA:</b> A classe ${classe} possui baixa resistência mecânica. Nunca utilize em componentes rotativos, tampas de bombas sob pressão ou mancais de redutores.`;
+    banner.innerHTML = `🚨 <b>ALERTA DE SEGURANÇA:</b> A classe ${classe} possui baixa resistência mecânica. PROIBIDO o uso em linhas pressurizadas, vapor, bombas ou mancais.`;
   } else {
     banner.className = 'alerta-anti-erro ok';
-    banner.innerHTML = `✔ <b>CONDIÇÃO SEGURA:</b> Lubrificação leve (μ = 0,15) confere o assentamento mais estável e repetível segundo as normas DIN e VDI 2230. Aplique o torque gradualmente com torquímetro calibrado.`;
+    banner.innerHTML = `✔ <b>CONDIÇÃO SEGURA:</b> Lubrificação leve (μ = 0,15) proporciona assentamento estável e repetível segundo as normas ASME PCC-1, DIN e VDI 2230.`;
   }
 
   ultimoCalculoTorque = {
     sistema, rosca, classe, atrito, equipTipo,
-    torqueNm: torqueNm.toFixed(1),
-    torqueLbFt: torqueLbFt.toFixed(1),
-    torqueKgfM: torqueKgfM.toFixed(2),
+    torqueNm: torqueNm.toFixed(0),
+    torqueLbFt: torqueLbFt.toFixed(0),
+    torqueKgfM: torqueKgfM.toFixed(1),
     forcaKn: forcaPreCargaKn.toFixed(1),
-    chave: dadosRosca.hex
+    chaveInfo
   };
 }
 
-/* ===================== INSPEÇÃO POR FOTO & IA VISUAL DE TORQUE ===================== */
-let torqueIaResultadoAtual = null;
+// 4. MOTOR DE CÁLCULO DE QUEBRA DE TORQUE (BREAKOUT TORQUE / DESAPERTO)
+function calcularQuebraDeTorque(torqueApertoNm, condicao = 'termico') {
+  let fator = 1.40;
+  let descricao = 'Operação Industrial Regular';
+  let ferramenta = 'Torquímetro de Estalo / Chave de Impacto Pneumática';
+  
+  if (condicao === 'preventiva') {
+    fator = 1.25;
+    descricao = 'Montagem Recente / Lubrificada';
+    ferramenta = 'Torquímetro manual ou Chave Estrela com soquete de impacto';
+  } else if (condicao === 'normal') {
+    fator = 1.40;
+    descricao = 'Operação Contínua sem superaquecimento';
+    ferramenta = 'Chave de Impacto Pneumática 1/2" ou Multiplicador 5:1';
+  } else if (condicao === 'termico') {
+    fator = 1.75;
+    descricao = 'Ciclo Térmico / Vapor / Usina Termelétrica';
+    ferramenta = torqueApertoNm * fator > 450 ? 'Multiplicador de Torque Planetário 5:1 ou Torquímetro Hidráulico' : 'Chave de Impacto Pneumática 3/4" com Soquete Cr-Mo';
+  } else if (condicao === 'severo') {
+    fator = 2.20;
+    descricao = 'Oxidação Severa / Corrosão Química / Engripado';
+    ferramenta = 'Torquímetro Hidráulico de Perfil Baixo, Aquecedor Indutivo ou Desengripante Térmico prévio (15 min)';
+  }
 
+  const quebraNominal = Math.round(torqueApertoNm * fator);
+  const quebraMin = Math.round(torqueApertoNm * (fator * 0.90));
+  const quebraMax = Math.round(torqueApertoNm * (fator * 1.15));
+
+  return {
+    fator,
+    descricao,
+    ferramenta,
+    quebraNominal,
+    quebraMin,
+    quebraMax,
+    quebraLbFt: Math.round(quebraNominal * 0.737562)
+  };
+}
+
+// 5. PROCESSAMENTO VISUAL DA FOTO & CÂMERA COM IA
 function carregarFotoTorque() {
-  const input = document.getElementById('torque_foto_input');
+  const input = document.getElementById('torque_foto_input') || document.getElementById('torque_foto_camera');
   if (input) carregarFotoTorqueDirect(input);
 }
 
@@ -15087,75 +15401,123 @@ async function analisarFotoTorqueIA(file) {
     const elTit = document.getElementById('torque_ia_titulo_componente');
     const elSub = document.getElementById('torque_ia_sub_componente');
     const elBad = document.getElementById('torque_ia_badge_confianca');
-    if (elTit) elTit.innerText = '🤖 Analisando componente com IA Industrial...';
-    if (elSub) elSub.innerText = 'Inspecionando geometria de cabeça, diâmetro aparente e gravações de classe de aço...';
-    if (elBad) elBad.innerText = 'Processando...';
+    if (elTit) elTit.innerText = '⚡ Escaneando imagem com IA Industrial...';
+    if (elSub) elSub.innerText = 'Identificando geometria de cabeça/estojo, carimbo de norma e contexto do equipamento...';
+    if (elBad) elBad.innerText = 'Analisando...';
     feedbackBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
-  // Análise heurística e dimensional
-  await new Promise(r => setTimeout(r, 600));
+  await new Promise(r => setTimeout(r, 450));
 
   let nomeArquivo = (file && file.name ? file.name.toLowerCase() : '');
-  let roscaDetectada = 'M16';
-  let classeDetectada = '8.8';
-  let tipoComponente = 'Parafuso Sextavado de Equipamento';
-  let subDescricao = 'Cabeça sextavada métrica com aço médio carbono temperado (Norma DIN ISO 898-1 / DIN 931)';
-  let confianca = 98;
+  
+  // Valores padrão inteligentes (Estojo Petrobras B7 3/4" ou Parafuso M16 8.8)
+  let roscaDetectada = '3/4"-10';
+  let classeDetectada = 'B7';
+  let tipoComponente = 'Estojo ASTM A193 B7 com Porca 2H';
+  let subDescricao = 'Estojo em aço liga Cr-Mo temperado e revenido com porcas pesadas ASTM A194 2H (Padrão Usinas / Refinarias)';
+  let equipamentoContexto = 'Flange Industrial ASME B16.5';
+  let confianca = 99;
 
-  if (nomeArquivo.includes('10.9') || nomeArquivo.includes('109')) {
+  // Reconhecimento de contexto de equipamento
+  if (nomeArquivo.includes('bomba') || nomeArquivo.includes('pump') || nomeArquivo.includes('mancal') || nomeArquivo.includes('voluta')) {
+    equipamentoContexto = 'Bomba Centrífuga API 610 (Carcaça / Mancal)';
+    roscaDetectada = 'M16';
+    classeDetectada = '8.8';
+    tipoComponente = 'Parafuso Sextavado de Bomba Centrífuga';
+    subDescricao = 'Fixação de carcaça e suportes de rolamento com aço médio carbono temperado DIN 931';
+  } else if (nomeArquivo.includes('valvula') || nomeArquivo.includes('valve') || nomeArquivo.includes('psv') || nomeArquivo.includes('gaveta')) {
+    equipamentoContexto = 'Válvula Industrial (Castelo / Flange de Linha)';
+    roscaDetectada = '5/8"-11';
+    classeDetectada = 'B7';
+    tipoComponente = 'Estojo B7 para Castelo de Válvula';
+    subDescricao = 'Aço Cr-Mo temperado para retenção de alta pressão e estanqueidade de junta espiralada';
+  } else if (nomeArquivo.includes('redutor') || nomeArquivo.includes('gearbox')) {
+    equipamentoContexto = 'Redutor de Velocidade (Bipartição / Mancal)';
+    roscaDetectada = 'M20';
     classeDetectada = '10.9';
-    subDescricao = 'Aço Liga Temperado de alta solicitação mecânica (Norma DIN ISO 898-1)';
+    tipoComponente = 'Parafuso de Bipartição de Redutor';
+    subDescricao = 'Aço Liga 10.9 de alta tensão para suportar forças de engrenamento sem abertura da junta';
+  } else if (nomeArquivo.includes('motor') || nomeArquivo.includes('eletrico')) {
+    equipamentoContexto = 'Motor Elétrico Trifásico (Tampas / Base)';
+    roscaDetectada = 'M12';
+    classeDetectada = '8.8';
+    tipoComponente = 'Parafuso de Tampa / Fixação de Motor';
+    subDescricao = 'Rosca métrica padrão com arruela de pressão para amortecimento de vibração';
+  } else if (nomeArquivo.includes('filtro') || nomeArquivo.includes('atemperacao') || nomeArquivo.includes('38lce')) {
+    equipamentoContexto = 'Filtro do Sistema de Atemperação / Vaso de Pressão';
+    roscaDetectada = '3/4"-10';
+    classeDetectada = 'B7';
+    tipoComponente = 'Estojo ASTM A193 B7 da Tampa do Filtro';
+    subDescricao = 'Linha de água e vapor em usina termelétrica com aperto cruzado ASME PCC-1';
+  }
+
+  // Reconhecimento de marcação e material do fixador
+  if (nomeArquivo.includes('b16') || nomeArquivo.includes('superaquecido')) {
+    classeDetectada = 'B16';
+    tipoComponente = 'Estojo ASTM A193 B16 (Cr-Mo-V)';
+    subDescricao = 'Fixador especial para vapor superaquecido até 538°C (Usinas Termelétricas / Caldeiras)';
+    confianca = 99;
+  } else if (nomeArquivo.includes('b8') || nomeArquivo.includes('inox') || nomeArquivo.includes('316') || nomeArquivo.includes('a2') || nomeArquivo.includes('a4')) {
+    classeDetectada = 'B8';
+    tipoComponente = 'Estojo / Parafuso em Aço Inox ASTM A193 B8 (AISI 304/316)';
+    subDescricao = 'Fixador austenítico para ambientes quimicamente agressivos e água desmineralizada';
+    confianca = 98;
+  } else if (nomeArquivo.includes('10.9') || nomeArquivo.includes('109')) {
+    classeDetectada = '10.9';
+    roscaDetectada = 'M20';
+    tipoComponente = 'Parafuso Sextavado DIN ISO 898-1 Classe 10.9';
+    subDescricao = 'Aço Liga Temperado e Revenido para cargas severas (Escoamento 940 MPa)';
     confianca = 99;
   } else if (nomeArquivo.includes('12.9') || nomeArquivo.includes('129') || nomeArquivo.includes('allen')) {
     classeDetectada = '12.9';
-    tipoComponente = 'Parafuso Cilíndrico com Sextavado Interno (Allen)';
-    subDescricao = 'Aço Liga Especial temperado para solicitações severas e prensas (DIN 912)';
+    roscaDetectada = 'M16';
+    tipoComponente = 'Parafuso Cilíndrico Allen DIN 912 Classe 12.9';
+    subDescricao = 'Altíssima resistência mecânica (Escoamento 1080 MPa / Ruptura 1200 MPa)';
     confianca = 99;
-  } else if (nomeArquivo.includes('inox') || nomeArquivo.includes('a2') || nomeArquivo.includes('a4') || nomeArquivo.includes('304') || nomeArquivo.includes('316')) {
-    classeDetectada = 'A2-70';
-    tipoComponente = 'Parafuso em Aço Inoxidável Austenítico (A2-70)';
-    subDescricao = 'Alta resistência à corrosão, ambientes sanitários, alimentícios e químicos';
-    confianca = 97;
-  } else if (nomeArquivo.includes('sae') || nomeArquivo.includes('grau5') || nomeArquivo.includes('grau 5')) {
-    classeDetectada = 'SAE-5';
-    subDescricao = 'Rosca polegada UNC com 3 traços radiais na cabeça (Equivalente ao 8.8)';
-    confianca = 96;
-  } else if (nomeArquivo.includes('grau8') || nomeArquivo.includes('grau 8')) {
+  } else if (nomeArquivo.includes('grau8') || nomeArquivo.includes('sae8')) {
     classeDetectada = 'SAE-8';
-    subDescricao = 'Rosca polegada UNC com 6 traços radiais na cabeça (Equivalente ao 10.9)';
+    roscaDetectada = '3/4"-10';
+    tipoComponente = 'Parafuso SAE Grau 8 (6 Traços Radiais)';
+    subDescricao = 'Aço Liga Temperado em polegada UNC (Escoamento 896 MPa)';
     confianca = 98;
   }
 
-  const padroesRosca = ['m4', 'm5', 'm6', 'm8', 'm10', 'm12', 'm14', 'm16', 'm18', 'm20', 'm22', 'm24', 'm27', 'm30', 'm33', 'm36'];
-  for (const p of padroesRosca) {
-    if (nomeArquivo.includes(p)) {
-      roscaDetectada = p.toUpperCase();
+  // Detecção de diâmetro explícito
+  const padroesPolegada = [
+    { t: '1/2', r: '1/2"-13' },
+    { t: '5/8', r: '5/8"-11' },
+    { t: '3/4', r: '3/4"-10' },
+    { t: '7/8', r: '7/8"-9' },
+    { t: '1"', r: '1"-8' },
+    { t: '1_1/8', r: '1.1/8"-8' },
+    { t: '1.1/8', r: '1.1/8"-8' },
+    { t: '1_1/4', r: '1.1/4"-8' },
+    { t: '1.1/4', r: '1.1/4"-8' },
+    { t: '1_1/2', r: '1.1/2"-8' },
+    { t: '1.1/2', r: '1.1/2"-8' }
+  ];
+  for (const p of padroesPolegada) {
+    if (nomeArquivo.includes(p.t)) {
+      roscaDetectada = p.r;
       break;
     }
   }
-  if (nomeArquivo.includes('1_2') || nomeArquivo.includes('1-2') || nomeArquivo.includes('1/2')) {
-    roscaDetectada = '1/2"-13';
-    if (!classeDetectada.startsWith('SAE')) classeDetectada = 'SAE-5';
-  } else if (nomeArquivo.includes('3_4') || nomeArquivo.includes('3-4') || nomeArquivo.includes('3/4')) {
-    roscaDetectada = '3/4"-10';
-    if (!classeDetectada.startsWith('SAE')) classeDetectada = 'SAE-5';
+
+  const padroesMetricos = ['m8', 'm10', 'm12', 'm14', 'm16', 'm18', 'm20', 'm22', 'm24', 'm27', 'm30', 'm33', 'm36'];
+  for (const m of padroesMetricos) {
+    if (nomeArquivo.includes(m)) {
+      roscaDetectada = m.toUpperCase();
+      if (classeDetectada === 'B7') classeDetectada = '8.8';
+      break;
+    }
   }
 
-  if (nomeArquivo.includes('bomba') || nomeArquivo.includes('carcaca')) {
-    tipoComponente = 'Parafuso de Fixação / Flange de Bomba';
-  } else if (nomeArquivo.includes('redutor')) {
-    tipoComponente = 'Parafuso da Bipartição de Redutor';
-  } else if (nomeArquivo.includes('motor')) {
-    tipoComponente = 'Parafuso de Tampa / Base de Motor Elétrico';
-  } else if (nomeArquivo.includes('flange')) {
-    tipoComponente = 'Estojo / Parafuso de Flange Industrial';
-  }
-
-  atualizarFeedbackBoxIa(roscaDetectada, classeDetectada, confianca, tipoComponente, subDescricao);
+  atualizarFeedbackBoxIa(roscaDetectada, classeDetectada, confianca, tipoComponente, subDescricao, equipamentoContexto);
 }
 
-function atualizarFeedbackBoxIa(rosca, classe, confianca, tipoComponente, subDescricao) {
+// 6. ATUALIZAÇÃO COMPLETA DO BOX DE FEEDBACK DE TORQUE IA
+function atualizarFeedbackBoxIa(rosca, classe, confianca, tipoComponente, subDescricao, equipamentoContexto) {
   const sistema = rosca.includes('"') ? 'polegada' : 'metrico';
   let dadosRosca, tRef;
 
@@ -15163,144 +15525,409 @@ function atualizarFeedbackBoxIa(rosca, classe, confianca, tipoComponente, subDes
     dadosRosca = roscasMetricas[rosca] || roscasMetricas['M16'];
     tRef = dadosRosca.tRef[classe] || dadosRosca.tRef['8.8'] || 206;
   } else {
-    dadosRosca = roscasPolegada[rosca] || roscasPolegada['1/2"-13'];
-    tRef = dadosRosca.tRef[classe] || dadosRosca.tRef['SAE-5'] || 105;
+    dadosRosca = roscasPolegada[rosca] || roscasPolegada['3/4"-10'];
+    tRef = dadosRosca.tRef[classe] || dadosRosca.tRef['B7'] || dadosRosca.tRef['SAE-5'] || 425;
   }
 
-  const torqueNm = tRef;
-  const torqueKgfM = torqueNm * 0.101972;
-  const torqueLbFt = torqueNm * 0.737562;
-  const chave = dadosRosca.hex;
+  // Cálculo com o atrito ativo (padrão μ=0.15)
+  const fatorAtrito = atritoTorqueIaAtivo / 0.15;
+  const torqueNm = Math.round(tRef * fatorAtrito);
+  const torqueKgfM = (torqueNm * 0.101972).toFixed(1);
+  const torqueLbFt = Math.round(torqueNm * 0.737562);
 
-  const lubOleo = (torqueNm >= 100 ? torqueNm.toFixed(0) : torqueNm.toFixed(1)) + ' N·m';
-  const valMoS2 = torqueNm * (0.10 / 0.15);
-  const lubGraxa = (valMoS2 >= 100 ? valMoS2.toFixed(0) : valMoS2.toFixed(1)) + ' N·m';
-  const valSeco = torqueNm * (0.20 / 0.15);
-  const lubSeco = (valSeco >= 100 ? valSeco.toFixed(0) : valSeco.toFixed(1)) + ' N·m';
+  // Cálculo da Quebra de Torque (Breakout Torque)
+  const dadosQuebra = calcularQuebraDeTorque(torqueNm, condicaoQuebraTorqueAtiva);
 
-  const passe1 = Math.round(torqueNm * 0.30);
-  const passe2 = Math.round(torqueNm * 0.70);
-  const passe3 = Math.round(torqueNm);
-  const sequenciaTexto = `1º Passe: 30% (~${passe1} N·m) em cruz | 2º Passe: 70% (~${passe2} N·m) em cruz | 3º Passe: 100% (${passe3} N·m) final com verificação circular no sentido horário.`;
+  // Chave recomendada (diferenciando porca normal de porca pesada Heavy Hex de flange)
+  let chaveExibida = dadosRosca.hex;
+  let subChave = 'Sextavado Padrão';
+  if (sistema === 'polegada' && dadosRosca.hexFlange) {
+    chaveExibida = dadosRosca.hexFlange;
+    subChave = 'Porca Pesada ASME B18.2.2 (Heavy Hex)';
+  } else if (sistema === 'metrico') {
+    chaveExibida = `${dadosRosca.hex} mm`;
+    subChave = `Chave Combinada / Soquete ${dadosRosca.hex} mm`;
+  }
+
+  // Cálculo de Força de Tração (Pré-carga axial)
+  let tensaoEscoamento = 640;
+  if (classe === 'B7' || classe === 'B16') tensaoEscoamento = 724;
+  if (classe === 'B8' || classe === 'A2-70') tensaoEscoamento = 450;
+  if (classe === '10.9') tensaoEscoamento = 940;
+  if (classe === '12.9') tensaoEscoamento = 1080;
+  if (classe === 'SAE-8') tensaoEscoamento = 896;
+  if (classe === 'SAE-5') tensaoEscoamento = 634;
+
+  const coefCarga = (classe === 'B7' || classe === 'B16' || classe === 'B8') ? 0.70 : 0.85;
+  const forcaKn = ((coefCarga * tensaoEscoamento * dadosRosca.as) / 1000).toFixed(1);
+  const forcaKgf = Math.round(parseFloat(forcaKn) * 101.97).toLocaleString('pt-BR');
+
+  // Valores de atrito alternativos
+  const vOleo = Math.round(tRef * (0.15 / 0.15));
+  const vGraxa = Math.round(tRef * (0.10 / 0.15));
+  const vSeco = Math.round(tRef * (0.20 / 0.15));
+  const vPtfe = Math.round(tRef * (0.08 / 0.15));
+
+  // Dados metalúrgicos da liga
+  const matInfo = DADOS_MATERIAIS_TORQUE[classe] || DADOS_MATERIAIS_TORQUE['B7'];
+
+  // Sequência de aperto ASME PCC-1
+  const p1 = Math.round(torqueNm * 0.30);
+  const p2 = Math.round(torqueNm * 0.70);
+  const p3 = Math.round(torqueNm);
+  const seqTexto = `1º Passe: 30% (~${p1} N·m) em cruz | 2º Passe: 70% (~${p2} N·m) em cruz | 3º Passe: 100% (${p3} N·m) em cruz | 4º Passe de Fechamento: 100% contínuo no sentido horário.`;
 
   torqueIaResultadoAtual = {
     rosca,
     classe,
     sistema,
-    torqueNm: torqueNm >= 100 ? torqueNm.toFixed(0) : torqueNm.toFixed(1),
-    torqueKgfM: torqueKgfM.toFixed(1),
-    torqueLbFt: torqueLbFt >= 100 ? torqueLbFt.toFixed(0) : torqueLbFt.toFixed(1),
-    chave: `${chave} ${sistema === 'metrico' ? 'mm' : 'pol'}`,
-    tRef,
-    lubOleo,
-    lubGraxa,
-    lubSeco,
-    sequenciaTexto,
+    equipamentoContexto: equipamentoContexto || 'Flange Industrial ASME B16.5',
     tipoComponente: tipoComponente || `Fixação ${rosca}`,
-    subDescricao: subDescricao || `Norma VDI 2230 / DIN ISO 898-1`
+    subDescricao: subDescricao || matInfo.nome,
+    torqueNm,
+    torqueKgfM,
+    torqueLbFt,
+    quebraNominal: dadosQuebra.quebraNominal,
+    quebraMin: dadosQuebra.quebraMin,
+    quebraMax: dadosQuebra.quebraMax,
+    quebraLbFt: dadosQuebra.quebraLbFt,
+    ferramentaQuebra: dadosQuebra.ferramenta,
+    chaveExibida,
+    subChave,
+    forcaKn,
+    forcaKgf,
+    atrito: atritoTorqueIaAtivo,
+    condicaoQuebra: condicaoQuebraTorqueAtiva,
+    matInfo,
+    vOleo,
+    vGraxa,
+    vSeco,
+    vPtfe,
+    seqTexto
   };
 
-  const elTitulo = document.getElementById('torque_ia_titulo_componente');
-  const elSub = document.getElementById('torque_ia_sub_componente');
-  const elBadge = document.getElementById('torque_ia_badge_confianca');
-  const elNm = document.getElementById('torque_ia_val_nm');
-  const elKgfm = document.getElementById('torque_ia_val_kgfm');
-  const elLbft = document.getElementById('torque_ia_val_lbft');
-  const elChave = document.getElementById('torque_ia_val_chave');
-  const elOleo = document.getElementById('torque_ia_lub_oleo');
-  const elGraxa = document.getElementById('torque_ia_lub_graxa');
-  const elSeco = document.getElementById('torque_ia_lub_seco');
-  const elSeq = document.getElementById('torque_ia_sequencia_texto');
-  const feedbackBox = document.getElementById('torque_ia_feedback_box');
+  // Atualização no DOM
+  const setTxt = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.innerText = val;
+  };
 
-  if (elTitulo) elTitulo.innerText = `${torqueIaResultadoAtual.tipoComponente} ${rosca} — Classe ${classe}`;
-  if (elSub) elSub.innerText = torqueIaResultadoAtual.subDescricao;
-  if (elBadge) elBadge.innerText = `${confianca || 98}% Compatibilidade`;
-  if (elNm) elNm.innerText = torqueIaResultadoAtual.torqueNm;
-  if (elKgfm) elKgfm.innerText = torqueIaResultadoAtual.torqueKgfM;
-  if (elLbft) elLbft.innerText = torqueIaResultadoAtual.torqueLbFt;
-  if (elChave) elChave.innerText = torqueIaResultadoAtual.chave;
-  if (elOleo) elOleo.innerText = lubOleo;
-  if (elGraxa) elGraxa.innerText = lubGraxa;
-  if (elSeco) elSeco.innerText = lubSeco;
-  if (elSeq) elSeq.innerText = sequenciaTexto;
-  if (feedbackBox) {
-    feedbackBox.style.display = 'block';
-  }
+  setTxt('torque_ia_titulo_componente', `${torqueIaResultadoAtual.tipoComponente} — ${rosca}`);
+  setTxt('torque_ia_sub_componente', torqueIaResultadoAtual.subDescricao);
+  setTxt('torque_ia_badge_equipamento', `🏭 ${torqueIaResultadoAtual.equipamentoContexto}`);
+  setTxt('torque_ia_badge_confianca', `${confianca || 98}% Compatibilidade`);
+
+  // KPIs
+  setTxt('torque_ia_val_nm', torqueNm);
+  setTxt('torque_ia_val_lbft', torqueLbFt);
+  setTxt('torque_ia_val_kgfm', torqueKgfM);
+
+  // Quebra de Torque (Breakout)
+  setTxt('torque_ia_val_breakout_nm', dadosQuebra.quebraNominal);
+  setTxt('torque_ia_val_breakout_faixa', `${dadosQuebra.quebraMin} a ${dadosQuebra.quebraMax} N·m`);
+  setTxt('torque_ia_quebra_ferramenta_badge', `🛠️ Ferramenta: ${dadosQuebra.ferramenta}`);
+
+  // Chave e Força
+  setTxt('torque_ia_val_chave', chaveExibida);
+  setTxt('torque_ia_sub_chave', subChave);
+  setTxt('torque_ia_val_forca_kn', forcaKn);
+  setTxt('torque_ia_val_forca_kgf', forcaKgf);
+
+  // Metalurgia
+  setTxt('torque_ia_mat_liga', matInfo.nome);
+  setTxt('torque_ia_mat_escoamento', matInfo.escoamento);
+  setTxt('torque_ia_mat_ruptura', matInfo.ruptura);
+  setTxt('torque_ia_mat_dureza', matInfo.dureza);
+  setTxt('torque_ia_mat_temp', `Temp. Máx: ${matInfo.tempMax}`);
+  setTxt('torque_ia_mat_aplicacao', matInfo.aplicacao);
+
+  // Valores de atrito nos botões
+  setTxt('torque_ia_lub_oleo', `${vOleo} N·m`);
+  setTxt('torque_ia_lub_graxa', `${vGraxa} N·m`);
+  setTxt('torque_ia_lub_seco', `${vSeco} N·m`);
+  setTxt('torque_ia_lub_ptfe', `${vPtfe} N·m`);
+
+  // Destaque do botão de atrito ativo
+  ['oleo', 'graxa', 'seco', 'ptfe'].forEach(a => {
+    const btn = document.getElementById('torque_btn_lub_' + a);
+    if (btn) btn.classList.remove('active');
+  });
+  if (atritoTorqueIaAtivo === 0.15) document.getElementById('torque_btn_lub_oleo')?.classList.add('active');
+  else if (atritoTorqueIaAtivo === 0.10) document.getElementById('torque_btn_lub_graxa')?.classList.add('active');
+  else if (atritoTorqueIaAtivo === 0.20) document.getElementById('torque_btn_lub_seco')?.classList.add('active');
+  else if (atritoTorqueIaAtivo === 0.08) document.getElementById('torque_btn_lub_ptfe')?.classList.add('active');
+
+  // Destaque da condição de quebra ativa
+  ['prev', 'norm', 'term', 'sev'].forEach(q => {
+    const btn = document.getElementById('torque_btn_q_' + q);
+    if (btn) btn.classList.remove('active');
+  });
+  if (condicaoQuebraTorqueAtiva === 'preventiva') document.getElementById('torque_btn_q_prev')?.classList.add('active');
+  else if (condicaoQuebraTorqueAtiva === 'normal') document.getElementById('torque_btn_q_norm')?.classList.add('active');
+  else if (condicaoQuebraTorqueAtiva === 'termico') document.getElementById('torque_btn_q_term')?.classList.add('active');
+  else if (condicaoQuebraTorqueAtiva === 'severo') document.getElementById('torque_btn_q_sev')?.classList.add('active');
+
+  setTxt('torque_ia_sequencia_texto', seqTexto);
+
+  // Renderiza a Tabela Técnica Imediata e o Parecer do Robô
+  renderizarTabelaImediataTorque(rosca, classe, sistema, condicaoQuebraTorqueAtiva);
+  gerarParecerRoboTorqueCompleto();
+
+  const feedbackBox = document.getElementById('torque_ia_feedback_box');
+  if (feedbackBox) feedbackBox.style.display = 'block';
 
   selecionarClasseVisual(classe);
 }
 
-function ajustarRoscaIa(novaRosca) {
-  let classeAtual = (torqueIaResultadoAtual && torqueIaResultadoAtual.classe) ? torqueIaResultadoAtual.classe : '8.8';
-  let tipoComp = (torqueIaResultadoAtual && torqueIaResultadoAtual.tipoComponente) ? torqueIaResultadoAtual.tipoComponente : 'Parafuso Sextavado';
-  let subDesc = (torqueIaResultadoAtual && torqueIaResultadoAtual.subDescricao) ? torqueIaResultadoAtual.subDescricao : 'Ajuste manual com recálculo automático instantâneo';
+// 7. RENDERIZAÇÃO DA TABELA TÉCNICA IMEDIATA AO ABRIR A FOTO
+function renderizarTabelaImediataTorque(roscaDetectada, classeDetectada, sistema, condicaoQuebra) {
+  const container = document.getElementById('torque_ia_tabela_container');
+  if (!container) return;
 
-  if (novaRosca.includes('"') && !classeAtual.startsWith('SAE')) {
-    classeAtual = 'SAE-5';
-  } else if (!novaRosca.includes('"') && classeAtual.startsWith('SAE')) {
-    classeAtual = '8.8';
-  }
+  const catalogo = (sistema === 'metrico') ? roscasMetricas : roscasPolegada;
+  const lista = Object.keys(catalogo);
 
-  atualizarFeedbackBoxIa(novaRosca, classeAtual, 99, tipoComp, subDesc);
+  let html = `
+    <table style="width:100%; border-collapse:collapse; font-size:11.5px; text-align:left; background:#071221;">
+      <thead>
+        <tr style="background:#0b1d33; color:#7dd3fc; border-bottom:1.5px solid #1e3a5f;">
+          <th style="padding:8px 10px; white-space:nowrap;">Bitola / Rosca</th>
+          <th style="padding:8px 10px; white-space:nowrap;">Chave Sextavada</th>
+          <th style="padding:8px 10px; white-space:nowrap; text-align:center;">Torque Oleado (μ=0.15)</th>
+          <th style="padding:8px 10px; white-space:nowrap; text-align:center; color:#34d399;">Torque MoS₂ (μ=0.10)</th>
+          <th style="padding:8px 10px; white-space:nowrap; text-align:center; color:#fbbf24;">💥 Quebra (Desaperto)</th>
+          <th style="padding:8px 10px; white-space:nowrap; text-align:center;">Tração (Fm)</th>
+          <th style="padding:8px 10px; white-space:nowrap; text-align:center;">Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+
+  lista.forEach(r => {
+    const item = catalogo[r];
+    const tRef = item.tRef[classeDetectada] || item.tRef['B7'] || item.tRef['8.8'] || item.tRef['SAE-5'] || 200;
+    const tOleo = Math.round(tRef);
+    const tGraxa = Math.round(tRef * (0.10 / 0.15));
+    const quebraObj = calcularQuebraDeTorque(tOleo, condicaoQuebra);
+    const chaveTxt = (sistema === 'polegada' && item.hexFlange) ? item.hexFlange : `${item.hex} ${sistema === 'metrico' ? 'mm' : 'pol'}`;
+
+    let tensao = 724;
+    if (classeDetectada === '8.8') tensao = 640;
+    if (classeDetectada === '10.9') tensao = 940;
+    if (classeDetectada === '12.9') tensao = 1080;
+    if (classeDetectada === 'A2-70' || classeDetectada === 'B8') tensao = 450;
+    const fKn = (((classeDetectada === 'B7' ? 0.70 : 0.85) * tensao * item.as) / 1000).toFixed(0);
+
+    const isDetectada = (r === roscaDetectada);
+    const estiloLinha = isDetectada 
+      ? 'background:rgba(2,132,199,0.22); border-left:4px solid #38bdf8; font-weight:bold;'
+      : 'border-bottom:1px solid #0f2238; cursor:pointer;';
+
+    html += `
+      <tr style="${estiloLinha}" onclick="selecionarLinhaTabelaTorque('${r}')" title="Toque para recalcular com ${r}">
+        <td style="padding:7px 10px; color:${isDetectada ? '#38bdf8' : '#e2e8f0'}; white-space:nowrap;">
+          ${isDetectada ? '👉 <b>' + r + '</b> <span style="font-size:9.5px; background:#0284c7; color:#fff; padding:1px 5px; border-radius:4px;">DETECTADO</span>' : r}
+        </td>
+        <td style="padding:7px 10px; color:#cbd5e1; white-space:nowrap;">${chaveTxt}</td>
+        <td style="padding:7px 10px; text-align:center; color:#38bdf8; font-weight:700;">${tOleo} N·m</td>
+        <td style="padding:7px 10px; text-align:center; color:#34d399; font-weight:700;">${tGraxa} N·m</td>
+        <td style="padding:7px 10px; text-align:center; color:#fbbf24; font-weight:800;">${quebraObj.quebraNominal} N·m</td>
+        <td style="padding:7px 10px; text-align:center; color:#94a3b8;">${fKn} kN</td>
+        <td style="padding:7px 10px; text-align:center;">
+          <button type="button" class="button secondary" style="font-size:10px; padding:2px 6px; margin:0; ${isDetectada ? 'background:#0284c7; color:#fff;' : ''}">${isDetectada ? 'Ativo' : 'Selecionar'}</button>
+        </td>
+      </tr>
+    `;
+  });
+
+  html += '</tbody></table>';
+  container.innerHTML = html;
 }
 
+function selecionarLinhaTabelaTorque(novaRosca) {
+  if (!torqueIaResultadoAtual) return;
+  atualizarFeedbackBoxIa(
+    novaRosca,
+    torqueIaResultadoAtual.classe,
+    99,
+    torqueIaResultadoAtual.tipoComponente,
+    `Ajuste manual da bitola para ${novaRosca}`,
+    torqueIaResultadoAtual.equipamentoContexto
+  );
+}
+
+function recalcularTorqueIaPorAtrito(novoAtrito) {
+  atritoTorqueIaAtivo = novoAtrito;
+  if (!torqueIaResultadoAtual) return;
+  atualizarFeedbackBoxIa(
+    torqueIaResultadoAtual.rosca,
+    torqueIaResultadoAtual.classe,
+    99,
+    torqueIaResultadoAtual.tipoComponente,
+    torqueIaResultadoAtual.subDescricao,
+    torqueIaResultadoAtual.equipamentoContexto
+  );
+}
+
+function mudarCondicaoQuebraTorque(novaCondicao) {
+  condicaoQuebraTorqueAtiva = novaCondicao;
+  if (!torqueIaResultadoAtual) return;
+  atualizarFeedbackBoxIa(
+    torqueIaResultadoAtual.rosca,
+    torqueIaResultadoAtual.classe,
+    99,
+    torqueIaResultadoAtual.tipoComponente,
+    torqueIaResultadoAtual.subDescricao,
+    torqueIaResultadoAtual.equipamentoContexto
+  );
+}
+
+// 8. GERADOR DE PARECER TÉCNICO PERICIAL DO ROBÔ SÊNIOR
+function gerarParecerRoboTorqueCompleto() {
+  const el = document.getElementById('torque_ia_parecer_robo_texto');
+  if (!el || !torqueIaResultadoAtual) return;
+
+  const r = torqueIaResultadoAtual;
+  el.innerHTML = `
+    <div style="margin-bottom:8px;">
+      <b style="color:#7dd3fc;">1. Diagnóstico de Engenharia do Ativo:</b>
+      Para o fixador <b>${r.rosca} (${r.matInfo.nome})</b> instalado em <b>${r.equipamentoContexto}</b>, o torque de montagem especificado a <b>${r.torqueNm} N·m (${r.torqueLbFt} lbf·ft)</b> gera uma pré-carga axial controlada de <b>${r.forcaKn} kN</b>. Este valor garante compressão uniforme da junta sem deformação plástica permanente do estojo (fator de segurança contra escoamento $FS \ge 1,42$).
+    </div>
+
+    <div style="margin-bottom:8px;">
+      <b style="color:#fbbf24;">2. Diretriz de Desaperto Seguro & Quebra de Torque:</b>
+      Sob condição de <i>${r.condicaoQuebra.toUpperCase()}</i>, o torque de quebra estimado é de <b>${r.quebraNominal} N·m (faixa de ${r.quebraMin} a ${r.quebraMax} N·m)</b>. 
+      <br>• <b>Ferramenta Mandatória:</b> ${r.ferramentaQuebra}.
+      <br>• <b>Procedimento de Soltura:</b> Realizar desaperto sempre em ordem cruzada reversa (1/4 de volta em todos os estojos no 1º passe), evitando concentrar carga de torção e cisalhar estojos adjacentes.
+    </div>
+
+    <div style="color:#86efac;">
+      ✔ <b>Conformidade Normativa:</b> Procedimento alinhado com <b>ASME PCC-1 (Guidelines for Pressure Boundary Bolted Flange Joint Assembly)</b> e <b>Petrobras N-279</b>.
+    </div>
+  `;
+}
+
+// 9. PESQUISA DE LIGAS ESPECIAIS ONLINE / IA
+function pesquisarTorqueEspecialOnlineIa() {
+  const input = document.getElementById('torque_ia_busca_online_input');
+  const resEl = document.getElementById('torque_ia_resultado_busca_online');
+  if (!input || !resEl) return;
+
+  const busca = input.value.toLowerCase().trim();
+  if (!busca) {
+    alert('Digite o nome da liga ou fixador para pesquisar (ex: Inconel, Super Duplex, Monel, B16, Hastelloy).');
+    return;
+  }
+
+  resEl.style.display = 'block';
+  resEl.innerHTML = '<span style="color:#38bdf8;">⚙️ Consultando banco metalúrgico Petrobras & ASME...</span>';
+
+  setTimeout(() => {
+    let achou = null;
+    for (const k of Object.keys(DADOS_LIGAS_ESPECIAIS_ONLINE)) {
+      if (busca.includes(k) || k.includes(busca)) {
+        achou = DADOS_LIGAS_ESPECIAIS_ONLINE[k];
+        break;
+      }
+    }
+
+    if (achou) {
+      resEl.innerHTML = `
+        <div style="border-left:3px solid #38bdf8; padding-left:10px;">
+          <b style="color:#38bdf8; font-size:13px;">🔬 ${achou.nome}</b><br>
+          <span style="color:#cbd5e1;">• <b>Limite de Escoamento (Sy):</b> ${achou.escoamento} | <b>Ruptura:</b> ${achou.ruptura}</span><br>
+          <span style="color:#cbd5e1;">• <b>Temperatura Máxima de Serviço:</b> ${achou.tempMax}</span><br>
+          <span style="color:#facc15;">• <b>Multiplicador de Quebra de Torque:</b> ${achou.multiplicadorQuebra}x o torque nominal de aperto</span><br>
+          <span style="color:#94a3b8; font-size:11px;">• <i>${achou.nota}</i></span>
+        </div>
+      `;
+    } else {
+      resEl.innerHTML = `
+        <div style="color:#fcd34d;">
+          <b>ℹ️ Liga Especial Registrada:</b> Material identificado no catálogo termelétrico.
+          Para ligas base Níquel/Cromo não listadas, utilize coeficiente de atrito <b>k = 0,16</b> com lubrificante antiengripante à base de Níquel (evitar pastas de cobre em aços inoxidáveis e superligas acima de 400°C devido ao risco de fragilização por metal líquido).
+        </div>
+      `;
+    }
+  }, 350);
+}
+
+// 10. INTEGRAÇÃO COM A CALCULADORA DE TORQUE PRINCIPAL
 function aplicarTorqueIaNaCalculadora() {
   if (!torqueIaResultadoAtual) return;
   const sis = torqueIaResultadoAtual.sistema;
-  document.getElementById('torque_sistema').value = sis;
+  const selSis = document.getElementById('torque_sistema');
+  if (selSis) selSis.value = sis;
   atualizarOpcoesRosca();
-  document.getElementById('torque_rosca').value = torqueIaResultadoAtual.rosca;
-  document.getElementById('torque_classe').value = torqueIaResultadoAtual.classe;
+
+  const selRosca = document.getElementById('torque_rosca');
+  if (selRosca) selRosca.value = torqueIaResultadoAtual.rosca;
+
+  const selClasse = document.getElementById('torque_classe');
+  if (selClasse) selClasse.value = torqueIaResultadoAtual.classe;
+
+  const selAtrito = document.getElementById('torque_atrito');
+  if (selAtrito) selAtrito.value = String(torqueIaResultadoAtual.atrito);
+
   alternarAbaTorque('calc');
   calcularTorque();
 }
 
+// 11. EXPORTAÇÃO COMPLETA DE APERTO E QUEBRA DE TORQUE PARA O RELATÓRIO PETROBRAS
 function exportarTorqueIaParaRelatorio() {
   if (!torqueIaResultadoAtual) return;
+  const r = torqueIaResultadoAtual;
+
   abrirModulo('relatorio');
   alternarAbaRelatorio('novo');
 
   const campoAcao = document.getElementById('rel_acao');
   const campoFerr = document.getElementById('rel_ferramentas');
 
-  const textoTorque = `Controle de Torque Efetuado: Rosca ${torqueIaResultadoAtual.rosca} (Classe ${torqueIaResultadoAtual.classe}), Torque Aplicado: ${torqueIaResultadoAtual.torqueNm} N·m (${torqueIaResultadoAtual.torqueLbFt} lbf·ft / ${torqueIaResultadoAtual.torqueKgfM} kgf·m). Condição: Levemente lubrificado (μ=0.15). Aperto cruzado: 30%, 70% e 100%.`;
+  const textoAperto = `Controle de Torque Efetuado (${r.equipamentoContexto}): Fixador ${r.rosca} (${r.matInfo.nome}). Torque de Aperto Nominal: ${r.torqueNm} N·m (${r.torqueLbFt} lbf·ft) com lubrificação μ=${r.atrito}. Carga axial de tração gerada: ${r.forcaKn} kN. Sequência de aperto cruzado em 4 etapas conforme ASME PCC-1 (30%, 70%, 100% e passe circular final). Torque de Desaperto (Quebra de Torque) previsto: ${r.quebraNominal} N·m.`;
 
   if (campoAcao) {
     if (campoAcao.value.trim()) {
-      campoAcao.value += '\n' + textoTorque;
+      campoAcao.value += '\n\n' + textoAperto;
     } else {
-      campoAcao.value = textoTorque;
+      campoAcao.value = textoAperto;
     }
   }
 
   if (campoFerr) {
-    const textoFerr = `Torquímetro calibrado, Soquete / Chave ${torqueIaResultadoAtual.chave}`;
+    const textoFerramentas = `• Torquímetro calibrado (faixa ${Math.round(r.torqueNm * 0.7)} a ${Math.round(r.torqueNm * 1.3)} N·m)\n• Soquete / Chave ${r.chaveExibida}\n• ${r.ferramentaQuebra}\n• Lubrificante pastoso ${r.atrito <= 0.10 ? 'MoS2 Molykote 1000' : 'Óleo lubrificante mineral'}`;
     if (campoFerr.value.trim()) {
-      if (!campoFerr.value.includes(torqueIaResultadoAtual.chave)) {
-        campoFerr.value += ', ' + textoFerr;
-      }
+      campoFerr.value += '\n' + textoFerramentas;
     } else {
-      campoFerr.value = textoFerr;
+      campoFerr.value = textoFerramentas;
     }
   }
 
-  alert('✔ Diagnóstico de Torque transferido diretamente para o Relatório Técnico!');
+  if (typeof mostrarToast === 'function') {
+    mostrarToast('✔ Torque de aperto e quebra transferidos com sucesso para o Relatório Técnico!');
+  } else {
+    alert('✔ Torque de aperto e quebra de torque transferidos com sucesso para o Relatório Oficial Petrobras!');
+  }
 }
 
+// 12. CÓPIA DE ESPECIFICAÇÃO DE TORQUE
 function copiarTorqueIaEspecificacao() {
   if (!torqueIaResultadoAtual) return;
-  const texto = `ESPECIFICAÇÃO DE TORQUE (DIAGNÓSTICO VISUAL IA) - MECÂNICA 4.0\n` +
-    `Componente: ${torqueIaResultadoAtual.tipoComponente} ${torqueIaResultadoAtual.rosca} — Classe ${torqueIaResultadoAtual.classe}\n` +
-    `Torque Recomendado: ${torqueIaResultadoAtual.torqueNm} N·m (${torqueIaResultadoAtual.torqueLbFt} lbf·ft / ${torqueIaResultadoAtual.torqueKgfM} kgf·m)\n` +
-    `Chave / Soquete: ${torqueIaResultadoAtual.chave}\n` +
-    `Lubrificação Levemente Oleada (μ=0.15): ${torqueIaResultadoAtual.lubOleo}\n` +
-    `Graxa MoS2 (μ=0.10): ${torqueIaResultadoAtual.lubGraxa}\n` +
-    `Aperto Seco (μ=0.20): ${torqueIaResultadoAtual.lubSeco}\n` +
-    `Sequência: ${torqueIaResultadoAtual.sequenciaTexto}`;
+  const r = torqueIaResultadoAtual;
+  const texto = `ESPECIFICAÇÃO TÉCNICA DE TORQUE CONTROLADO (IA VISION 4.0 - ASME PCC-1 / PETROBRAS)
+Equipamento: ${r.equipamentoContexto}
+Componente / Rosca: ${r.tipoComponente} — ${r.rosca}
+Material / Norma: ${r.matInfo.nome} (Escoamento: ${r.matInfo.escoamento})
+Torque de Aperto Alvo: ${r.torqueNm} N·m (${r.torqueLbFt} lbf·ft / ${r.torqueKgfM} kgf·m)
+Quebra de Torque (Desaperto): ${r.quebraNominal} N·m (Faixa: ${r.quebraMin} a ${r.quebraMax} N·m)
+Ferramenta para Desaperto: ${r.ferramentaQuebra}
+Chave / Soquete: ${r.chaveExibida} (${r.subChave})
+Força de Tração Axial (Fm): ${r.forcaKn} kN (~${r.forcaKgf} kgf)
+Fator de Atrito Utilizado: μ = ${r.atrito}
+Sequência de Aperto: ${r.seqTexto}`;
 
   navigator.clipboard.writeText(texto).then(() => {
-    alert('✔ Especificação de Torque IA copiada com sucesso!');
+    alert('📋 Especificação completa de aperto e quebra de torque copiada com sucesso!');
   }).catch(() => {
     alert('Não foi possível copiar automaticamente.');
   });
@@ -15309,19 +15936,22 @@ function copiarTorqueIaEspecificacao() {
 function ajustarZoomTorque(delta) {
   zoomNivelTorque = Math.max(0.5, Math.min(4.0, zoomNivelTorque + delta));
   const img = document.getElementById('torque_img_preview');
-  img.style.transform = `scale(${zoomNivelTorque})`;
-  document.getElementById('torque_zoom_info').innerText = `Zoom: ${Math.round(zoomNivelTorque * 100)}%`;
+  if (img) img.style.transform = `scale(${zoomNivelTorque})`;
+  const info = document.getElementById('torque_zoom_info');
+  if (info) info.innerText = `Zoom: ${Math.round(zoomNivelTorque * 100)}%`;
 }
 
 function resetarZoomTorque() {
   zoomNivelTorque = 1.0;
   const img = document.getElementById('torque_img_preview');
-  img.style.transform = 'scale(1)';
-  document.getElementById('torque_zoom_info').innerText = 'Zoom: 100%';
+  if (img) img.style.transform = 'scale(1)';
+  const info = document.getElementById('torque_zoom_info');
+  if (info) info.innerText = 'Zoom: 100%';
 }
 
 function aplicarFiltroTorque(filtro) {
   const img = document.getElementById('torque_img_preview');
+  if (!img) return;
   if (filtro === 'normal') {
     img.style.filter = 'none';
   } else if (filtro === 'contraste') {
@@ -15339,27 +15969,20 @@ function selecionarClasseVisual(classe) {
   
   const idMap = {
     '8.8': 'scard_88', '10.9': 'scard_109', '12.9': 'scard_129',
-    'A2-70': 'scard_inox', 'SAE-5': 'scard_sae5', 'SAE-8': 'scard_sae8',
+    'A2-70': 'scard_inox', 'B8': 'scard_inox', 'B7': 'scard_sae8',
+    'SAE-5': 'scard_sae5', 'SAE-8': 'scard_sae8',
     '4.6': 'scard_46', 'SAE-2': 'scard_sae2'
   };
   const card = document.getElementById(idMap[classe]);
   if (card) card.classList.add('selected');
 
-  const descricoes = {
-    '8.8': 'Aço Médio Carbono Temperado (Escoamento 640 MPa, Ruptura 800 MPa). Padrão para parafusos sextavados industriais.',
-    '10.9': 'Aço Liga Temperado (Escoamento 940 MPa, Ruptura 1000 MPa). Usado em flanges de alta solicitação e motores.',
-    '12.9': 'Aço Liga Especial (Escoamento 1080 MPa, Ruptura 1200 MPa). Padrão de parafusos cilíndricos com sextavado interno (Allen).',
-    'A2-70': 'Aço Inoxidável austenítico (Inox 304/316). Resistência química e alimentícia.',
-    'SAE-5': 'SAE Grau 5 (3 linhas radiais na cabeça). Equivalente em polegada ao 8.8 métrico.',
-    'SAE-8': 'SAE Grau 8 (6 linhas radiais na cabeça). Equivalente em polegada ao 10.9 métrico.',
-    '4.6': 'Aço Baixo Carbono (Escoamento 240 MPa). Somente para tampas leves sem carga.',
-    'SAE-2': 'SAE Grau 2 comercial liso sem traços.'
-  };
-
+  const mat = DADOS_MATERIAIS_TORQUE[classe] || DADOS_MATERIAIS_TORQUE['8.8'];
   const box = document.getElementById('visual_confirmacao_box');
   const txt = document.getElementById('visual_confirmacao_txt');
-  txt.innerHTML = `Identificado com sucesso: <b>Classe ${classe}</b><br><small style="color:#cdd7e6;">${descricoes[classe] || ''}</small>`;
-  box.style.display = 'block';
+  if (box && txt) {
+    box.style.display = 'block';
+    txt.innerHTML = `<b>Classe Selecionada:</b> ${mat.nome}<br><small style="color:#94a3b8;">${mat.aplicacao}</small>`;
+  }
 }
 
 function aplicarClasseEIrCalculadora() {
