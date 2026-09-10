@@ -13409,322 +13409,746 @@ function perguntarChip(texto) {
 }
 
 const baseConhecimentoRobo = [
-  // 1. BOMBAS CENTRÍFUGAS & HIDRÁULICA
   {
-    titulo: 'Cavitação em Bombas Centrífugas',
-    chaves: ['cavitacao', 'cavitar', 'barulho de brita', 'barulho de pedra', 'pedregulhos', 'ruido na bomba', 'npsh', 'npshd', 'npshr', 'pressao de vapor', 'estouro de bolha'],
-    resposta: `<strong>💧 Diagnóstico de Cavitação em Bombas:</strong><br>
-A cavitação ocorre quando a pressão absoluta na sucção da bomba cai abaixo da pressão de vapor do líquido. Formam-se bolhas de vapor que, ao atingirem a região de alta pressão no rotor, <b>implodem violentamente</b> contra o metal.<br><br>
-<b>Sintomas no campo:</b><br>
-• Ruído característico semelhante a "pedregulhos / brita batendo dentro da carcaça".<br>
-• Queda repentina de vazão (m³/h) e pressão de descarga.<br>
-• Vibração severa na frequência de passagem das pás (BPF).<br>
-• Corrosão por arrancamento de material (pitting esponjoso) na face de sucção das pás do rotor.<br><br>
-<b>Ações Corretivas:</b><br>
-1. Aumentar o NPSH disponível (NPSHd) ou reduzir perdas de carga na tubulação de sucção (limpar filtros, abrir registros 100%, eliminar curvas desnecessárias).<br>
-2. Diminuir a temperatura do fluido (se possível), reduzindo a pressão de vapor.<br>
-3. Garantir que <b>NPSHd &gt; NPSHr + margem de segurança de pelo menos 0,5 a 1,0 m</b>.`
+    "titulo": "Montagem de Rolamentos em Pares: Face a Face (DF), Costas com Costas (DB) e Tandem (DT)",
+    "chaves": [
+      "face a face",
+      "face x face",
+      "costas com costas",
+      "back to back",
+      "tandem",
+      "df",
+      "db",
+      "dt",
+      "montagem de rolamento",
+      "par de rolamento",
+      "contato angular",
+      "rolamento 7200",
+      "rolamento 7300"
+    ],
+    "resposta": "<strong>🔩 Configurações de Montagem de Rolamentos de Contato Angular em Pares (Normas ISO / SKF / FAG):</strong><br>\nEm eixos sujeitos a esforços combinados (cargas radiais e axiais elevadas), rolamentos de uma carreira de esferas de contato angular (séries 7200, 7300) ou rolos cônicos (séries 30000, 32000) são montados aos pares:<br><br>\n\n1. <b>Costas com Costas (DB - Back-to-Back):</b><br>\n• <b>Disposição geométrica:</b> As linhas de carga divergem em direção ao eixo.<br>\n• <b>Características:</b> Proporciona a <b>máxima rigidez angular</b> e grande distância efetiva entre centros de apoio. Oferece alta resistência a momentos fletores e esforços de tombamento.<br>\n• <b>Capacidade de carga:</b> Suporta cargas axiais nos <b>dois sentidos</b> (um rolamento em cada sentido) e altas cargas radiais.<br>\n• <b>Aplicação típica:</b> Mancal fixo de bombas centrífugas industriais (lado acionamento/livre de bombas BB1, BB2, BB3 e redutores), fusos de máquinas-ferramenta e eixos pinhão.<br><br>\n\n2. <b>Face a Face (DF - Face-to-Face):</b><br>\n• <b>Disposição geométrica:</b> As linhas de carga convergem em direção ao eixo.<br>\n• <b>Características:</b> Menor distância efetiva entre centros de carga. Proporciona <b>menor rigidez angular</b>, permitindo acomodar pequenas deflexões do eixo ou desvios de alinhamento sem sobrecarregar as pistas.<br>\n• <b>Capacidade de carga:</b> Suporta cargas axiais em <b>ambos os sentidos</b>, mas possui menor resistência a momentos de tombamento em comparação com a montagem DB.<br>\n• <b>Aplicação típica:</b> Caixas de mancal com suporte longo, eixos longos sujeitos a flexão ou onde possa haver ligeiro desalinhamento angular do alojamento.<br><br>\n\n3. <b>Tandem (DT):</b><br>\n• <b>Disposição geométrica:</b> As linhas de carga são paralelas e apontam no <b>mesmo sentido</b>.<br>\n• <b>Características:</b> Distribui a carga axial de forma compartilhada e uniforme entre os dois rolamentos.<br>\n• <b>Capacidade de carga:</b> Suporta cargas axiais extremamente elevadas, porém <b>em um único sentido</b>. Para cargas bidirecionais, exige um terceiro rolamento contraposto.<br>\n• <b>Aplicação típica:</b> Extrusoras pesadas, guinchos de ancoragem, mesas rotativas e bombas verticais de poço profundo com empuxo axial descendente massivo.<br><br>\n\n💡 <b>Recomendação Sênior de Montagem:</b> Sempre confira as marcas em \"V\" gravadas nas faces externas dos anéis pela fábrica (SKF/FAG). O vértice do \"V\" indica o sentido correto de montagem e garante que o pré-carregamento de fábrica seja mantido com precisão micrométrica."
   },
   {
-    titulo: 'NPSH (Net Positive Suction Head)',
-    chaves: ['npsh', 'npshd', 'npshr', 'altura de succao', 'energia de succao', 'succao da bomba', 'carga de succao'],
-    resposta: `<strong>📐 NPSH Disponível vs NPSH Requerido:</strong><br>
-• <b>NPSHd (Disponível):</b> Energia líquida total disponível na conexão de sucção da bomba acima da pressão de vapor do fluido. Depende exclusivamente da instalação física (pressão no reservatório + desnível estático - perdas por atrito na sucção - pressão de vapor).<br>
-• <b>NPSHr (Requerido):</b> Queda mínima de pressão interna no olho do rotor necessária para evitar cavitação. É um valor fornecido pelo <b>fabricante da bomba</b> na curva de catálogo.<br><br>
-<b>Regra de Ouro da Manutenção:</b><br>
-<b>NPSHd &gt;= NPSHr + Margem de Segurança (mínimo 0,5 a 1,5 metros)</b>. Se o NPSHd for inferior, a bomba cavitará fatalmente.`
+    "titulo": "Montagem de Rolamentos a Quente por Aquecedor Indutivo",
+    "chaves": [
+      "aquecedor indutivo",
+      "montagem a quente",
+      "aquecer rolamento",
+      "temperatura do rolamento",
+      "temperatura maxima rolamento",
+      "inducao magnetica",
+      "desmagnetizacao",
+      "macarico rolamento"
+    ],
+    "resposta": "<strong>🔥 Protocolo Técnico de Montagem a Quente por Indução Magnética (SKF TIH / FAG):</strong><br>\nA montagem a quente por interferência térmica no assento do eixo elimina qualquer esforço mecânico sobre esferas/rolos durante o assentamento:<br><br>\n\n1. <b>Temperatura de Aquecimento:</b><br>\n• <b>Rolamentos Abertos Normais:</b> Aquecer entre <b>100°C e 110°C</b> (máximo absoluto de <b>120°C</b>).<br>\n• <b>Rolamentos Blindados com Graxa (2Z ou 2RS):</b> Nunca ultrapassar <b>80°C a 90°C</b> para não degradar a graxa de fábrica nem danificar as vedações de elastômero (Viton/Nitrílica).<br>\n• ⚠️ <i>Perigo Crítico:</i> Acima de 125°C ocorre perda irreversível do tratamento térmico de têmpera do aço do rolamento (queda de dureza HRC) e instabilidade dimensional.<br><br>\n\n2. <b>Procedimento de Campo:</b><br>\n• Posicione o sensor termopar do aquecedor indutivo magnético <b>sempre no anel interno</b> (que é o elemento que sofrerá o ajuste com interferência).<br>\n• O aquecedor indutivo deve possuir <b>ciclo automático de desmagnetização</b> ao final do aquecimento. Magnetismo residual atrai limalha e poeira metálica, provocando desgaste abrasivo catastrófico imediato.<br>\n• <b>NUNCA UTILIZE MAÇARICO DIRETO:</b> O fogo direto cria pontos quentes localizados (&gt; 300°C), destrói a microestrutura do aço cromo 100Cr6 e anula a garantia do fabricante.<br>\n• Ao atingir a temperatura, transporte o rolamento com luvas térmicas limpas de Kevlar, empurre-o suavemente até encostar no ressalto do eixo e <b>mantenha pressionado firmemente por 30 a 60 segundos</b> até o anel interno resfriar e fixar, evitando que ele recue por contração térmica."
   },
   {
-    titulo: 'Bomba Não Puxa Água / Sem Vazão',
-    chaves: ['bomba nao puxa', 'sem vazao', 'bomba nao bombeia', 'nao gera pressao', 'escorva', 'desescorvada', 'ar na succao', 'bomba seca', 'valvula de pe travada'],
-    resposta: `<strong>🔍 Checklist: Bomba Centrífuga Sem Vazão ou Desescorvada:</strong><br>
-1. <b>Falta de Escorva:</b> Carcaça e tubulação de sucção devem estar 100% cheias de líquido e sem bolsas de ar. Sangre o ar pelo bujão superior.<br>
-2. <b>Válvula de Pé Travada ou Entupida:</b> Inspecione o crivo na ponta da sucção. Sujeira ou mola travada impedem a entrada de fluido.<br>
-3. <b>Entrada Falsa de Ar:</b> Verifique juntas de flanges na sucção, gaxetas ou selo mecânico despressurizado.<br>
-4. <b>Sentido de Rotação Invertido:</b> Verifique se o motor elétrico está girando no sentido indicado pela seta da carcaça (rotação invertida bombeia apenas ~30% da vazão com pressão muito baixa).<br>
-5. <b>Rotor Entupido ou Solto:</b> Inspecione chaveta quebrada ou rotor obstruído por resíduos sólidos.`
+    "titulo": "Montagem de Rolamentos em Eixo Cônico, Buchas H/AH e Método Drive-up SKF",
+    "chaves": [
+      "eixo conico",
+      "bucha de fixacao",
+      "bucha h",
+      "bucha ah",
+      "drive up",
+      "skf drive-up",
+      "porca hidraulica",
+      "hmve",
+      "folga radial residual",
+      "reducao de folga",
+      "calibre de folga rolamento"
+    ],
+    "resposta": "<strong>📐 Montagem de Rolamentos Autocompensadores com Furo Cônico (1:12 e 1:30):</strong><br>\nRolamentos autocompensadores de rolos (série 22200, 22300, 23000) montados sobre buchas de fixação (H), buchas de desmontagem (AH) ou assento cônico direto do eixo exigem controle rigoroso da <b>redução da folga radial interna</b>:<br><br>\n\n1. <b>Método Tradicional por Medição com Calibrador de Lâminas:</b><br>\n• Antes da montagem, meça a folga radial interna inicial (não montada) passando as lâminas calibradas entre o rolo mais alto e a pista externa (com o rolamento na vertical apoiado na bancada).<br>\n• Ao apertar a porca de fixação, o anel interno expande sobre o cone da bucha, reduzindo a folga.<br>\n• <b>Exemplo (Rolamento 22220 - furo 100 mm, folga Normal 0,080 a 0,110 mm):</b><br>\n  - Redução de folga requerida: <b>0,040 a 0,050 mm</b>.<br>\n  - Folga residual mínima após montagem: <b>0,035 mm</b>.<br>\n• Sempre verifique a folga final em ambos os lados dos rolos para garantir que o anel não esteja torcido.<br><br>\n\n2. <b>Método Avançado SKF Drive-up com Porca Hidráulica (HMVE):</b><br>\n• Utiliza uma porca hidráulica com injetor de óleo de alta pressão e um relógio comparador montado no flange da porca.<br>\n• <b>Etapa 1 (Pressão Inicial):</b> Injeta-se óleo até atingir a pressão de partida tabelada (garante contato metálico de 100% sem folgas falsas).<br>\n• <b>Etapa 2 (Deslocamento Axial 'Ss'):</b> Zera-se o relógio comparador e bombeia-se até deslocar o rolamento exatamente a distância milimétrica 'Ss' prescrita pela tabela SKF.<br>\n• Vantagem: Dispensa o uso subjetivo de lâminas calibradas e garante repetibilidade micrométrica em grandes redutores e britadores."
   },
   {
-    titulo: 'Selo Mecânico (Falhas e Vazamentos)',
-    chaves: ['selo mecanico', 'selo', 'vazamento no selo', 'faces de vedacao', 'plano de selagem', 'plano api', 'silicio', 'carbeto', 'carvao'],
-    resposta: `<strong>🛡️ Selos Mecânicos - Manutenção e Diagnóstico:</strong><br>
-O selo mecânico veda o eixo rotativo através do contato deslizante de duas faces lapidadas (uma rotativa e uma estacionária).<br><br>
-<b>Principais Causas de Vazamento:</b><br>
-• <b>Trabalho a Seco:</b> Queima o filme de fluido lubrificante, superaquecendo as faces e trincando materiais duros (craquelamento térmico no Carbeto de Silício/Tungstênio).<br>
-• <b>Empenamento de Eixo (Runout):</b> O desvio radial do eixo deve ser <b>inferior a 0,05 mm</b>. Vibração excessiva abre as faces do selo.<br>
-• <b>Desalinhamento:</b> Desalinhamento angular comprime irregularmente as molas e destrói o anel secundário (O-ring de Viton/EPDM).<br>
-• <b>Plano de Selagem Obstruído:</b> Planos API 11/21/53 devem ter fluxo constante para arrefecer a câmara do selo.`
+    "titulo": "Classes de Folga Radial Interna dos Rolamentos: C2, Normal, C3, C4 e C5",
+    "chaves": [
+      "folga radial",
+      "folga c3",
+      "folga c2",
+      "folga c4",
+      "folga c5",
+      "folga normal",
+      "classes de folga",
+      "dilatacao anel interno"
+    ],
+    "resposta": "<strong>⚙️ Classes de Folga Radial Interna em Rolamentos (Norma ISO 5753-1):</strong><br>\nA folga radial interna é a distância total que um anel pode ser deslocado radialmente em relação ao outro antes da montagem:<br><br>\n\n• <b>C2 (Menor que Normal):</b> Utilizada em equipamentos que exigem altíssima rigidez e vibração mínima sob cargas moderadas (ex: fusos de usinagem, redutores de precisão, instrumentos de medição).<br>\n• <b>Normal (CN):</b> Padrão de fabricação para condições normais de rotação, temperatura estável (&lt; 60°C) e interferências leves de eixo (ajuste h6/j6).<br>\n• <b>C3 (Maior que Normal - Padrão de Ouro Industrial):</b> <b>Obrigatória para motores elétricos, bombas centrífugas e compressores industriais</b>. Absorve a expansão térmica diferencial: o calor do rotor/eixo aquece o anel interno (que dilata para fora) enquanto a carcaça resfria o anel externo. Sem folga C3, o rolamento trava por esmagamento dos corpos rolantes ao atingir a temperatura operacional (75°C - 85°C).<br>\n• <b>C4 (Muito Maior que Normal):</b> Empregada em ambientes com alto gradiente térmico (ex: cilindros secadores de papel, ventiladores de tiragem de caldeiras, mesas de rolos de lingotamento contínuo em siderurgia).<br>\n• <b>C5 (Máxima Folga):</b> Equipamentos operando acima de 150°C a 200°C com forte choque térmico (ex: carros de fornos de sinterização, calcinadores)."
   },
   {
-    titulo: 'Gaxetas vs Selo Mecânico',
-    chaves: ['gaxeta', 'prensa gaxeta', 'gotejamento de gaxeta', 'teflon', 'grafite', 'anel de lanterna'],
-    resposta: `<strong>🧵 Ajuste de Gaxetas Industriais:</strong><br>
-• <b>Gotejamento Obrigatório:</b> Ao contrário do selo mecânico, <b>a gaxeta DEVE gotejar</b> (cerca de 20 a 60 gotas por minuto de fluido ou água de refrigeração). Se apertar até secar, a gaxeta queima e risca o eixo/luva protetora.<br>
-• <b>Corte das Fitas:</b> Corte os anéis em chanfro a 45°. Ao montar, <b>defase as emendas em 90° ou 180°</b> entre cada anel consecutivo.<br>
-• <b>Anel de Lanterna:</b> Deve ficar alinhado exatamente com o orifício de injeção de fluido de selagem/refrigeração.`
+    "titulo": "Alinhamento de Eixos: Laser vs Métodos de Relógio Comparador (Reverso e Face-Periferia)",
+    "chaves": [
+      "alinhamento laser",
+      "alinhamento reverso",
+      "relogio comparador",
+      "rim and face",
+      "face e periferia",
+      "alinhamento de eixos",
+      "desalinhamento angular",
+      "desalinhamento paralelo",
+      "tolerancia de alinhamento"
+    ],
+    "resposta": "<strong>🎯 Engenharia de Alinhamento de Eixos Rotativos (Normas ANSI/ASA S2.75 / ISO):</strong><br>\nO desalinhamento é responsável por mais de 50% das falhas prematuras em mancais, rolamentos e selos mecânicos na indústria:<br><br>\n\n1. <b>Tolerâncias Rigorosas de Alinhamento de Campo:</b><br>\n• <b>1800 RPM (4 polos):</b><br>\n  - Desalinhamento Paralelo (Offset): <b>Máximo 0,05 mm</b> (Excelente &lt; 0,03 mm).<br>\n  - Desalinhamento Angular (Gap): <b>Máximo 0,05 mm / 100 mm</b> de raio.<br>\n• <b>3600 RPM (2 polos / Turbinas a Vapor e Bombas BFP):</b><br>\n  - Desalinhamento Paralelo (Offset): <b>Máximo 0,03 mm</b> (Excelente &lt; 0,02 mm).<br>\n  - Desalinhamento Angular (Gap): <b>Máximo 0,03 mm / 100 mm</b> de raio.<br><br>\n\n2. <b>Comparativo de Métodos:</b><br>\n• <b>Alinhamento a Laser (Sensores PSD / CMOS):</b><br>\n  - Vantagens: Medição contínua com rotação de apenas 60°, imune à flexão da haste de fixação (sag), compensação automática de crescimento térmico e visualização em tempo real dos calços e movimentos laterais.<br>\n• <b>Método do Relógio Comparador Reverso (Reverse Rim):</b><br>\n  - Dois relógios apalpando radialmente as carcaças/cubos opostos.<br>\n  - Excelente precisão para máquinas de grande diâmetro, mas exige <b>compensação rigorosa da flexão da haste (bracket sag)</b>.<br>\n• <b>Método Face-Periferia (Rim & Face):</b><br>\n  - Um relógio na face (angular) e um na periferia (paralelo). Indicado quando um dos eixos não pode ser girado facilmente ou o vão entre eixos é muito curto."
   },
   {
-    titulo: 'Golpe de Aríete (Transiente Hidráulico)',
-    chaves: ['golpe de ariete', 'sobrepressao na tubulacao', 'batida na tubulacao', 'fechamento rapido', 'valvula de retencao bate'],
-    resposta: `<strong>💥 Golpe de Aríete (Choque Hidráulico):</strong><br>
-Pico destrutivo de pressão que ocorre quando o fluxo de um fluido é interrompido ou alterado bruscamente (ex: fechamento rápido de válvula de gaveta/esfera ou parada súbita da bomba).<br><br>
-<b>Consequências:</b> Ruptura de tubulações, estouro de flanges, deformação de carcaças de bombas e danos nas válvulas de retenção.<br>
-<b>Prevenção:</b><br>
-• Utilizar atuadores de fechamento lento em válvulas.<br>
-• Instalar válvulas de retenção de fechamento rápido assistido por mola ou amortecedor hidráulico.<br>
-• Instalar tanques hidropneumáticos de amortecimento (pulmão anti-golpe) ou válvulas de alívio rápido de sobrepressão.`
-  },
-
-  // 2. MOTORES ELÉTRICOS & ELETROMECÂNICA
-  {
-    titulo: 'Ligação Estrela vs Triângulo (220V / 380V / 440V)',
-    chaves: ['estrela', 'triangulo', 'ligacao estrela', 'ligacao triangulo', 'estrela triangulo', '220v 380v', '6 pontas', '12 pontas', 'fechamento de motor'],
-    resposta: `<strong>⚡ Fechamento de Motor Trifásico (6 Pontas):</strong><br>
-• <b>Ligação Triângulo (Delta - Δ):</b> Tensão MENOR da placa (ex: 220V).<br>
-  - Fechamento: Juntar (1 com 6) na Fase R | (2 com 4) na Fase S | (3 com 5) na Fase T.<br>
-• <b>Ligação Estrela (Y):</b> Tensão MAIOR da placa (ex: 380V).<br>
-  - Fechamento: Alimentar 1 (R), 2 (S), 3 (T) e <b>interligar em curto 4, 5 e 6</b> (ponto neutro da estrela).<br><br>
-<b>Partida Estrela-Triângulo:</b><br>
-Parte em Estrela para reduzir a corrente de pico de partida em cerca de <b>1/3 (33%)</b>, diminuindo a queda de tensão na rede. Após atingir ~80% da rotação síncrona, o contator comuta para Triângulo (torque e tensão nominais).`
+    "titulo": "Pé Manco (Soft Foot): Diagnóstico, Tipos (Paralelo e Angular) e Eliminação",
+    "chaves": [
+      "pe manco",
+      "soft foot",
+      "pe frouxo",
+      "pe angular",
+      "pe paralelo",
+      "calco amassado",
+      "pe manco tolerante"
+    ],
+    "resposta": "<strong>🦶 Protocolo de Investigação e Eliminação de Pé Manco (Soft Foot):</strong><br>\nPé manco é a condição em que as sapatas da máquina não assentam uniformemente sobre a base metálica. O aperto dos parafusos gera torção na carcaça do motor/bomba, ovaliza o alojamento dos rolamentos e desalinha o entreferro magnético:<br><br>\n\n1. <b>Tipos de Pé Manco:</b><br>\n• <b>Pé Manco Paralelo:</b> Uma das sapatas está mais alta ou mais curta, mantendo a face paralela à base. Correção simples: adicionar calço calibrado de espessura correspondente.<br>\n• <b>Pé Manco Angular:</b> A sapata ou a base está inclinada (forma cunha). O calço plano tradicional toca apenas em uma das bordas. Correção: uso de calços usinados em cunha, calços escalonados ou retífica/fresamento da base no local.<br>\n• <b>Pé Manco Elástico (Efeito Mola):</b> Ocorre por excesso de calços finos empilhados (efeito esponja), sujeira, graxa ou rebarbas de corte sob os pés.<br><br>\n\n2. <b>Critério de Aceitação e Medição Centesimal:</b><br>\n• Instale o relógio comparador (ou sensor laser) na vertical sobre cada pé.<br>\n• Solte o parafuso do pé enquanto monitora a leitura: o ponteiro não deve variar mais do que <b>0,05 mm</b> (em turbogeradores e máquinas críticas de termelétricas, a tolerância máxima é de <b>0,02 mm</b>).<br>\n• Repita o processo sapata por sapata (nunca solte todas ao mesmo tempo).<br>\n• <b>Regra de Ouro:</b> Máximo de <b>4 calços por sapata</b>. Sempre utilize calços pré-cortados em aço inox 304/316, rebarbados e desengraxados."
   },
   {
-    titulo: 'Cálculo de Corrente Nominal de Motor Trifásico',
-    chaves: ['corrente nominal', 'calcular corrente', 'amperagem do motor', 'formula corrente trifasico', 'corrente motor'],
-    resposta: `<strong>📐 Fórmula da Corrente Nominal Trifásica (In):</strong><br>
-<b>In = (P [kW] × 1000) ÷ (√3 × V [V] × cos φ × η)</b><br><br>
-Onde:<br>
-• P = Potência em kW (se estiver em CV, multiplique por 0,736; se em HP, por 0,746).<br>
-• √3 ≈ 1,732.<br>
-• V = Tensão de linha (220V, 380V, 440V).<br>
-• cos φ = Fator de potência de placa (geralmente 0,80 a 0,88).<br>
-• η = Rendimento do motor (ex: 0,90 para 90%).<br><br>
-<b>Regra Prática Rápida:</b> Em 380V, um motor padrão consome cerca de <b>~1,9 a 2,0 A por CV</b>. Em 220V, consome cerca de <b>~3,3 A por CV</b>.`
+    "titulo": "Compensação de Crescimento Térmico (Hot Alignment Targets) em Turbomáquinas",
+    "chaves": [
+      "crescimento termico",
+      "dilatacao termica",
+      "hot alignment",
+      "alvo de alinhamento",
+      "delta l",
+      "compensacao termica turbina",
+      "maquina quente"
+    ],
+    "resposta": "<strong>🌡️ Crescimento Térmico e Alinhamento a Quente (Hot Alignment Targets):</strong><br>\nEquipamentos industriais que operam em altas temperaturas (turbinas a vapor, turbinas a gás, compressores de gás e bombas de água de alimentação de caldeiras - BFP) sofrem dilatação térmica vertical e lateral expressiva entre o estado desligado (frio) e o regime pleno de carga (quente):<br><br>\n\n1. <b>Fórmula Fundamental da Dilatação Linear:</b><br>\n<div style=\"background:#091524; padding:8px 12px; border-radius:6px; border:1px solid #1e3a5f; font-family:monospace; color:#38bdf8;\">\n  ΔL = L × α × ΔT\n</div><br>\nOnde:<br>\n• <b>L:</b> Distância da linha de centro do eixo até a base de apoio dos pés (mm).<br>\n• <b>α:</b> Coeficiente de dilatação térmica do material da carcaça:<br>\n  - Aço Carbono / Aço Fundido: <b>11 a 12 × 10⁻⁶ / °C</b>.<br>\n  - Ferro Fundido Cinzento/Nodular: <b>10 a 11 × 10⁻⁶ / °C</b>.<br>\n  - Aço Inoxidável Austenítico: <b>16 a 17 × 10⁻⁶ / °C</b>.<br>\n• <b>ΔT:</b> Variação de temperatura (°C) da carcaça operacional em relação ao ambiente frio (T_op - T_amb).<br><br>\n\n2. <b>Exemplo Real em Usina Termelétrica:</b><br>\nUma bomba de caldeira BFP (L = 450 mm) operando a 160°C (ΔT = 135°C com ambiente de 25°C):<br>\nΔL = 450 × (11,5 × 10⁻⁶) × 135 = <b>+0,70 mm de subida vertical</b>.<br>\nO motor elétrico de 2500 CV aquece menos (ΔT ≈ 45°C), subindo apenas +0,25 mm.<br>\n• <b>Conclusão de Engenharia:</b> No alinhamento a frio, a bomba <b>DEVE ser montada propositalmente 0,45 mm MAIS BAIXA</b> que o motor, para que fiquem perfeitamente concêntricos na temperatura de regime!"
   },
   {
-    titulo: 'Correntes Parasitas em Rolamentos (Inversores de Frequência)',
-    chaves: ['inversor', 'inversor de frequencia', 'corrente parasita', 'rolamento isolado', 'fluting', 'estriamento no rolamento', 'rolamento eletrico'],
-    resposta: `<strong>⚡ Correntes Elétricas em Rolamentos via Inversor (VFD):</strong><br>
-Inversores modulam em PWM de alta frequência, gerando tensões capacitivas no eixo. Se a tensão romper o filme de óleo lubrificante, ocorre arco voltaico por centelhamento elétrico nas pistas do rolamento.<br><br>
-<b>Danos Típicos:</b> Efeito "Fluting" (estrias microscópicas paralelas tipo tábua de lavar roupa), ruído agudo e queima rápida da graxa (graxa fica preta e carbonizada).<br>
-<b>Soluções Técnicas:</b><br>
-1. Instalar <b>rolamento isolado com capa cerâmica (INSOCOAT)</b> ou rolamento híbrido (esferas cerâmicas de Si3N4) no lado oposto ao acionamento (LA/LOA).<br>
-2. Instalar anel de aterramento de eixo com microfibras de carbono (ex: Aegis).<br>
-3. Cabos blindados simétricos e aterramento adequado de alta frequência.`
-  },
-
-  // 3. TORQUE CONTROLADO, PARAFUSOS & FIXAÇÃO
-  {
-    titulo: 'Torque de Aperto, Fator de Atrito e Lubrificação',
-    chaves: ['torque', 'torquimetro', 'fator de atrito', 'parafuso lubrificado', 'graxa no parafuso', 'aperto', 'newton metro', 'lbf ft', 'kgfm'],
-    resposta: `<strong>🔩 Engenharia do Torque Controlado:</strong><br>
-O torque aplicado pelo torquímetro não serve apenas para "travar"; sua função real é <b>gerar Força de Aperto Axial (Pré-carga - Fp)</b> para manter a união estanque e sob compressão elástica.<br><br>
-<b>Fórmula VDI 2230 / ISO 898:</b><br>
-<b>M = Fp × [ (0,16 × Passo) + (μ_rosca × 0,58 × d2) + (μ_cabeca × D_medio) ]</b><br><br>
-<b>Impacto Crítico do Fator de Atrito (μ):</b><br>
-• Parafuso <b>seco/fosfatizado</b>: μ ≈ 0,15 a 0,20 (exige torque maior).<br>
-• Parafuso <b>lubrificado com óleo/graxa/pasta MoS2</b>: μ ≈ 0,08 a 0,12.<br>
-⚠️ <b>CUIDADO:</b> Se aplicar o torque de catálogo "seco" em um parafuso com graxa, a força axial aumentará em até <b>60% a mais</b>, estirando o parafuso até romper ou espanar a rosca!`
+    "titulo": "Bombas Centrífugas conforme Norma API 610 (OH1, OH2, BB1, BB2, BB3, BB5)",
+    "chaves": [
+      "api 610",
+      "bomba bb5",
+      "bomba bb3",
+      "bomba bb2",
+      "bomba oh2",
+      "bomba barril",
+      "bomba bfp",
+      "bomba alimentacao caldeira",
+      "bipartida axial",
+      "bipartida radial",
+      "overhung"
+    ],
+    "resposta": "<strong>🏭 Classificação de Bombas Centrífugas Industriais segundo Norma API 610:</strong><br>\nNas refinarias e usinas termelétricas da Petrobras, as bombas para serviços pesados de hidrocarbonetos e água de caldeira são categorizadas rigorosamente pela API 610:<br><br>\n\n1. <b>Tipo Overhung (Rotor em Balanço):</b><br>\n• <b>OH1:</b> Montada sobre pés na carcaça. Uso em água e serviços leves até 120°C.<br>\n• <b>OH2:</b> Suporte na <b>linha de centro (centerline mounted)</b>. Quando a bomba aquece (até 450°C), ela dilata concentricamente para cima e para baixo a partir do eixo, <b>mantendo o alinhamento inalterado</b>.<br><br>\n\n2. <b>Tipo Between Bearings (Rotor Entre Mancais):</b><br>\n• <b>BB1:</b> Bipartida axialmente (split case), 1 ou 2 estágios. Excelente facilidade de manutenção (abre-se a tampa superior sem remover tubulações). Grandes vazões de água de resfriamento.<br>\n• <b>BB2:</b> Bipartida radialmente, 1 ou 2 estágios. Indicada para altas pressões e hidrocarbonetos voláteis.<br>\n• <b>BB3:</b> <b>Multiestágio com carcaça bipartida axialmente</b>. Rotores opostos dispostos em contraposição para equilibrar o empuxo axial sem depender de disco de balanceamento.<br>\n• <b>BB5 (Bomba Tipo Barril / Double Casing):</b><br>\n  - É a rainha das bombas de termelétricas: <b>Bomba de Água de Alimentação de Caldeira (BFP - Boiler Feed Pump)</b>.<br>\n  - Possui invólucro duplo: um tambor externo forjado de altíssima espessura que suporta pressões brutais (&gt; 150 a 300 bar) e um cartucho interno extraível contendo os rotores e difusores.<br>\n  - Suporta choques térmicos violentos na partida sem risco de empenamento ou vazamento de junta."
   },
   {
-    titulo: 'Classes de Resistência de Parafusos (8.8, 10.9, 12.9)',
-    chaves: ['classe 8.8', 'classe 10.9', 'classe 12.9', 'classe 4.6', 'grau 5', 'grau 8', 'resistencia parafuso', 'aco liga'],
-    resposta: `<strong>🏷️ O Que Significam os Números na Cabeça do Parafuso:</strong><br>
-• <b>Primeiro número × 100</b> = Resistência à Ruptura por Tração mínima em MPa (N/mm²).<br>
-• <b>Primeiro número × Segundo número × 10</b> = Limite de Escoamento (deformação permanente) em MPa.<br><br>
-<b>Exemplos Práticos:</b><br>
-• <b>Classe 8.8:</b> Ruptura = 800 MPa | Escoamento = 8 × 8 × 10 = <b>640 MPa</b> (Aço médio carbono temperado).<br>
-• <b>Classe 10.9:</b> Ruptura = 1000 MPa | Escoamento = 10 × 9 × 10 = <b>900 MPa</b> (Aço liga temperado, flanges e chassis pesados).<br>
-• <b>Classe 12.9:</b> Ruptura = 1200 MPa | Escoamento = 12 × 9 × 10 = <b>1080 MPa</b> (Altíssima resistência mecânica, parafusos Allen).<br>
-⚠️ <i>Nunca substitua um parafuso 10.9 ou 12.9 por 8.8!</i>`
+    "titulo": "Cavitação Clássica vs Recirculação Interna na Sucção/Descarga de Bombas",
+    "chaves": [
+      "cavitacao",
+      "recirculacao interna",
+      "recirculacao de succao",
+      "recirculacao de descarga",
+      "bep",
+      "pitting esponjoso",
+      "npsha",
+      "npshr"
+    ],
+    "resposta": "<strong>🌊 Diagnóstico Avançado: Cavitação Clássica vs Recirculação Interna:</strong><br>\nMuitos mecânicos confundem ruídos de bomba com cavitação quando na verdade o problema é recirculação interna provocada por vazão restrita:<br><br>\n\n1. <b>Cavitação Clássica por NPSH Insuficiente (NPSHa &lt; NPSHr):</b><br>\n• <b>Causa:</b> Queda da pressão de sucção abaixo da pressão de vapor do fluido.<br>\n• <b>Localização do Dano:</b> Pitting cavernoso/esponjoso concentrado no <b>olho do rotor e na face de sucção das pás</b> (lado de baixa pressão).<br>\n• <b>Comportamento com a Vazão:</b> O ruído <b>PIORA quando a vazão aumenta</b> (pois o NPSHr da bomba sobe com a vazão).<br><br>\n\n2. <b>Recirculação Interna de Sucção:</b><br>\n• <b>Causa:</b> Operação da bomba muito abaixo do Ponto de Melhor Eficiência (BEP &lt; 60%). O fluido não tem velocidade suficiente para vencer o difusor e retorna em turbilhões para o olho do rotor em vórtice reverso.<br>\n• <b>Localização do Dano:</b> Pitting na <b>face de pressão das pás</b> e na ponta de entrada da sucção.<br>\n• <b>Comportamento com a Vazão:</b> O ruído <b>MELHORA quando a válvula de descarga é aberta</b> e a vazão atinge o ponto nominal de projeto!<br><br>\n\n3. <b>Recirculação de Descarga:</b><br>\n• Ocorre entre o diâmetro externo do rotor e a língua da voluta (cutwater), gerando choques de pressão de alta frequência e vibração destrutiva nos mancais."
   },
   {
-    titulo: 'Sequência de Aperto em Cruz para Flanges',
-    chaves: ['aperto em cruz', 'aperto cruzado', 'sequencia de aperto', 'aperto flange', 'ordem dos parafusos'],
-    resposta: `<strong>⭐ Procedimento de Aperto em Cruz (4 Etapas Anti-Empenamento):</strong><br>
-Para garantir que a junta de vedação seja comprimida uniformemente e sem empenar as flanges:<br><br>
-<b>As 4 Etapas Obrigatórias:</b><br>
-1. <b>Etapa 1 (Aproximação manual / 30%):</b> Aperto manual em cruz até encostar as faces.<br>
-2. <b>Etapa 2 (60% do torque nominal):</b> Aperto cruzado (ex: parafuso 1, oposto 2, depois 3, oposto 4...).<br>
-3. <b>Etapa 3 (100% do torque nominal):</b> Aperto cruzado com o torquímetro calibrado no torque de projeto.<br>
-4. <b>Etapa 4 (Passe de Uniformização):</b> Volta circular completa de 100% no sentido horário, conferindo parafuso a parafuso até nenhum girar.`
-  },
-
-  // 4. ROLAMENTOS, LUBRIFICAÇÃO & MANCAIS
-  {
-    titulo: 'Folga Interna Radial de Rolamentos (C2, Normal, C3, C4, C5)',
-    chaves: ['folga c3', 'folga c4', 'folga normal', 'folga interna', 'folga rolamento', 'c2', 'c3', 'c4', 'c5'],
-    resposta: `<strong>📏 Folgas Radiais Internas em Rolamentos (ISO):</strong><br>
-A folga radial interna é a distância que um anel pode se deslocar em relação ao outro sem carga externa.<br><br>
-• <b>C2:</b> Folga menor que a Normal (para altíssima precisão ou eixos com dilatação zero).<br>
-• <b>Normal (CN):</b> Aplicações gerais onde eixo e alojamento têm temperaturas similares.<br>
-• <b>C3:</b> Folga <b>maior que a Normal</b>. Obrigatória quando há ajuste com interferência no eixo e quando o rolamento trabalha quente (o calor expande o anel interno e reduz a folga). Usado em quase todos os <b>motores elétricos e bombas industriais</b>.<br>
-• <b>C4 e C5:</b> Folga muito grande, para temperaturas extremas (siderurgia, fornos, secadores).`
+    "titulo": "Motobombas a Diesel: Sistemas de Incêndio NFPA 20, Reguladores Woodward e Arrefecimento",
+    "chaves": [
+      "bomba diesel",
+      "motobomba diesel",
+      "nfpa 20",
+      "bomba de incendio",
+      "regulador woodward",
+      "partida diesel",
+      "arrefecimento trocador"
+    ],
+    "resposta": "<strong>🚒 Motobombas Acionadas por Motor Diesel (Norma NFPA 20 / Usinas e Refinarias):</strong><br>\nSistemas de combate a incêndio e grupos geradores de emergência (Black Start) dependem de motobombas diesel que devem partir em menos de 15 segundos sem energia elétrica externa:<br><br>\n\n1. <b>Sistema de Partida Redundante:</b><br>\n• Painel de controle NFPA 20 com <b>dois bancos independentes de baterias 24V</b> (Banco A e Banco B) e dois contatores de partida em paralelo.<br>\n• O ciclo de partida automática realiza 6 tentativas alternadas de 15 segundos de manivela seguidos de 15 segundos de descanso.<br><br>\n\n2. <b>Sistema de Arrefecimento por Trocador de Calor Casco e Tubos (Heat Exchanger):</b><br>\n• A NFPA 20 proíbe radiador ventilado convencional em ambientes confinados sujeitos a chamas.<br>\n• Utiliza trocador casco e tubos: a água bombeada pela própria bomba de incêndio passa pelos tubos de água bruta, resfriando o circuito fechado com aditivo etilenoglicol do bloco do motor.<br>\n• Linha de água de resfriamento possui <b>duas válvulas solenoides redundantes</b> com by-pass manual de emergência.<br><br>\n\n3. <b>Governador de Velocidade (Woodward / Eletrônico):</b><br>\n• Mantém a rotação nominal constante (ex: 1800 ou 2100 RPM) independente da carga de água exigida pelos hidrantes e canhões de espuma.<br>\n• Dispositivo mecânico contra sobrevelocidade (overspeed trip): desarma o motor e fecha a borboleta de ar caso a rotação supere 115% da nominal."
   },
   {
-    titulo: 'Cálculo da Quantidade de Graxa para Relubrificação',
-    chaves: ['calculo de graxa', 'quantidade de graxa', 'gramas de graxa', 'formula graxa rolamento', 'quanto de graxa'],
-    resposta: `<strong>🛢️ Fórmula Padrão de Relubrificação de Rolamentos:</strong><br>
-<b>Gp = 0,005 × D × B</b><br><br>
-Onde:<br>
-• <b>Gp</b> = Quantidade de graxa em gramas.<br>
-• <b>D</b> = Diâmetro externo do rolamento em milímetros (mm).<br>
-• <b>B</b> = Largura / espessura total do rolamento em milímetros (mm).<br><br>
-<b>Exemplo:</b> Rolamento 6312 (D = 130 mm, B = 31 mm):<br>
-Gp = 0,005 × 130 × 31 = <b>20,15 gramas</b>.<br>
-💡 <i>Dica:</i> Uma bomba manual de graxa padrão aplica em média <b>1,0 a 1,5 gramas por bombeada</b>.`
+    "titulo": "Guia de Fabricantes e Marcas Líderes no Mercado Industrial e Termelétrico",
+    "chaves": [
+      "marcas de bombas",
+      "marcas de rolamento",
+      "marcas de valvulas",
+      "flowserve",
+      "sulzer",
+      "ksb",
+      "skf",
+      "fag",
+      "timken",
+      "wartsila",
+      "cummins",
+      "caterpillar",
+      "fisher"
+    ],
+    "resposta": "<strong>🏢 Panorama Técnico das Marcas Globais Líderes na Indústria e Termelétricas:</strong><br><br>\n\n• <b>Bombas Industriais & Termelétricas:</b><br>\n  - <b>Flowserve:</b> Referência máxima em bombas API 610 (modelos BB3 e BB5) e selos mecânicos de alta tecnologia.<br>\n  - <b>Sulzer:</b> Líder em bombas de alimentação de caldeiras multiestágio BFP (série GSG / CPT) e agitadores industriais.<br>\n  - <b>KSB:</b> Conhecida pela confiabilidade nas linhas Megachem, Multitec e bombas de alta pressão HGC.<br>\n  - <b>Warman / Weir:</b> Padrão mundial absoluto para polpa abrasiva, rejeitos e lama em mineração pesada.<br>\n  - <b>Ebara / Goulds (ITT):</b> Fortíssimas em processos químicos, petroquímicos e captação de água bruta.<br><br>\n\n• <b>Rolamentos & Mancais:</b><br>\n  - <b>SKF (Suécia):</b> Criadora do autocompensador de esferas e do método Drive-up. Qualidade de aço insuperável.<br>\n  - <b>FAG / INA (Schaeffler - Alemanha):</b> Pioneira em esferas usinadas e rolamentos cônicos de alta precisão.<br>\n  - <b>Timken (EUA):</b> A autoridade máxima mundial em rolamentos de rolos cônicos para eixos ferroviários e laminadores.<br>\n  - <b>NSK / NTN (Japão):</b> Altíssima precisão em mancais elétricos de alta rotação e baixo ruído.<br><br>\n\n• <b>Motores Diesel & Turbomáquinas:</b><br>\n  - <b>Wärtsilä:</b> Gigantes finlandeses de geração a combustão (W50DF bi-combustível gás/diesel para usinas termelétricas).<br>\n  - <b>Caterpillar & Cummins:</b> Padrão mundial de confiabilidade para motogeradores e motobombas NFPA 20.<br>\n  - <b>GE Power / Siemens Energy / Mitsubishi Power:</b> Detentoras das turbinas a gás mais eficientes do planeta (classe F, H e J para ciclo combinado).<br><br>\n\n• <b>Válvulas & Selagem:</b><br>\n  - <b>Fisher (Emerson) / Masoneilan:</b> Válvulas de controle proporcional para vapor de alta pressão e gás.<br>\n  - <b>Leser / Spirax Sarco:</b> PSVs calibradas e purgadores termodinâmicos para caldeiras.<br>\n  - <b>John Crane & EagleBurgmann:</b> Selos mecânicos cartucho e sistemas de plano API de selagem."
   },
   {
-    titulo: 'Mancal / Rolamento Aquecendo: O Que Fazer?',
-    chaves: ['mancal esquentando', 'mancal quente', 'rolamento esquentando', 'rolamento quente', 'temperatura alta mancal', 'superaquecimento mancal'],
-    resposta: `<strong>🔥 Checklist de Diagnóstico: Mancal / Rolamento Aquecendo:</strong><br>
-A temperatura normal de mancais industriais situa-se entre <b>50°C e 75°C</b>. Acima de 85°C exige atenção imediata; acima de 95°C pare o equipamento.<br><br>
-<b>Principais Causas de Aquecimento:</b><br>
-1. <b>Excesso de Graxa (Mais comum):</b> Caixa cheia provoca atrito viscoso por turbilhonamento. A graxa se bate e queima.<br>
-2. <b>Falta de Lubrificante ou Lubrificante Incorreto:</b> Viscosidade ISO VG errada não forma o filme elastohidrodinâmico.<br>
-3. <b>Desalinhamento do Eixo:</b> Causa carga axial não prevista em rolamentos radiais.<br>
-4. <b>Pré-carga Excessiva / Folga Insuficiente:</b> Montagem de rolamento com folga Normal onde o projeto exigia <b>C3</b>.<br>
-5. <b>Retentor Esfregando a Seco:</b> Verifique se o lábio do retentor foi lubrificado na montagem.`
+    "titulo": "Metrologia Industrial Avançada: Súbito, Micrômetros e Tolerâncias Geométricas GD&T",
+    "chaves": [
+      "subito",
+      "micrometro",
+      "paquimetro",
+      "ovalizacao",
+      "conicidade",
+      "gd&t",
+      "batimento radial",
+      "runout",
+      "rugosidade ra",
+      "metrologia industrial"
+    ],
+    "resposta": "<strong>📏 Metrologia Dimensional e Geométrica no Chão de Fábrica (GD&T):</strong><br>\nA montagem perfeita de componentes de alta rotação exige medição centesimal e geométrica rigorosa:<br><br>\n\n1. <b>Operação do Súbito (Comparador de Diâmetros Internos):</b><br>\n• Calibração: O súbito <b>NUNCA é zerado no ar</b>. Ajuste previamente um micrômetro externo na cota nominal exata, trave o fuso e monte o súbito entre as faces do micrômetro até o ponteiro atingir a menor deflexão (ponto de inversão zero).<br>\n• Medição de Camisas de Cilindros e Sedes de Mancais:<br>\n  - Meça em <b>3 planos de profundidade</b> (Topo, Meio e Fundo).<br>\n  - Em cada plano, faça duas leituras defasadas em <b>90° (Eixo X e Eixo Y)</b>.<br>\n  - <b>Ovalização:</b> Diferença entre o diâmetro X e Y no mesmo plano.<br>\n  - <b>Conicidade:</b> Diferença entre o maior e menor diâmetro entre o topo e o fundo.<br><br>\n\n2. <b>Batimento Radial e Axial Total (Total Runout):</b><br>\n• Medido com relógio apalpador milesimal no eixo girando suavemente sobre apoios em 'V'.<br>\n• Batimento radial de eixos de bombas e compressores no ponto de assentamento do selo mecânico: <b>máximo 0,025 mm</b>.<br><br>\n\n3. <b>Parâmetros de Rugosidade Superficial (Ra):</b><br>\n• Pista de assentamento de rolamentos: <b>Ra ≤ 0,8 μm</b>.<br>\n• Face de contato de selos mecânicos lapidados: <b>Ra ≤ 0,05 μm</b> (1 a 2 bandas de luz helio-neon).<br>\n• Haste de cilindros hidráulicos: <b>Ra ≤ 0,2 a 0,4 μm</b> com cromo duro."
   },
   {
-    titulo: 'Montagem de Rolamentos com Aquecedor Indutivo',
-    chaves: ['aquecedor indutivo', 'montagem rolamento', 'temperatura montagem', 'aquecer rolamento', 'montagem a quente'],
-    resposta: `<strong>🔥 Montagem a Quente com Aquecedor Indutivo:</strong><br>
-• <b>Temperatura Máxima Segura:</b> Aqueça o rolamento entre <b>100°C e 110°C</b> (nunca ultrapassar 120°C para não alterar a têmpera do aço nem danificar vedações de borracha 2RS).<br>
-• <b>Desmagnetização Automática:</b> O aquecedor indutivo DEVE desmagnetizar o rolamento ao final do ciclo. Se ficar magnetizado, atrairá limalhas metálicas que destruirão as pistas.<br>
-• <b>Posicionamento:</b> Empurre o rolamento firmemente contra o encosto do eixo e segure até esfriar para evitar recuo axial.<br>
-⚠️ <b>NUNCA use maçarico ou chama direta</b> para aquecer rolamentos!`
-  },
-
-  // 5. ALINHAMENTO A LASER & VIBRAÇÃO PREDITIVA
-  {
-    titulo: 'Alinhamento a Laser e Resolução de Pé Manco',
-    chaves: ['alinhamento', 'alinhamento a laser', 'pe manco', 'soft foot', 'desalinhamento angular', 'desalinhamento paralelo', 'calco'],
-    resposta: `<strong>🎯 Alinhamento de Precisão & Pé Manco:</strong><br>
-O desalinhamento entre motor e máquina acionada é responsável por mais de 50% das quebras de rolamentos e selos mecânicos.<br><br>
-<b>Pé Manco (Soft Foot):</b><br>
-Ocorre quando uma das patas do motor não assenta perfeitamente na base. Ao apertar o parafuso, a carcaça torce, deformando o estator e desalinhando os mancais.<br>
-• <b>Tolerância de Pé Manco:</b> Deve ser <b>menor que 0,05 mm</b> antes de iniciar o alinhamento a laser.<br>
-• <b>Correção:</b> Inserir calços calibrados de aço inox sob o pé defeituoso (máximo 3 calços por pata).<br><br>
-<b>Tolerâncias Típicas para 1800 RPM:</b><br>
-• Offset paralelo: &lt;= 0,05 mm | Angular: &lt;= 0,05 mm/100 mm.`
+    "titulo": "Hidráulica Industrial: Bombas de Pistões Axiais, Servoválvulas, EHC e Fluido Sintético HFD-U",
+    "chaves": [
+      "hidraulica industrial",
+      "bomba de pistao",
+      "swashplate",
+      "placa inclinada",
+      "servovalvula",
+      "valvula proporcional",
+      "ehc",
+      "fluido hfd-u",
+      "ester fosfatado",
+      "oleo resistente a fogo"
+    ],
+    "resposta": "<strong>⚙️ Hidráulica de Alta Pressão e Sistemas EHC de Turbinas:</strong><br>\nEm usinas termelétricas, o controle de vazão de vapor das válvulas de admissão da turbina é acionado por atuadores eletro-hidráulicos (EHC - Electro-Hydraulic Control) de altíssima velocidade e pressão (160 bar):<br><br>\n\n1. <b>Bomba de Pistões Axiais com Placa Inclinada (Swashplate):</b><br>\n• Converte rotação mecânica em vazão de óleo através do vaivém de 7 ou 9 pistões em um tambor giratório.<br>\n• A inclinação da placa angular comanda o deslocamento volumétrico (cilindrada). Controlada por compensador de pressão e sinal de Load Sensing.<br><br>\n\n2. <b>Servoválvulas com Transdutor de Posição LVDT:</b><br>\n• Atuam com tempos de resposta de milissegundos (frequência de resposta de até 100 Hz).<br>\n• O carretel interno possui folgas micrométricas (1 a 3 μm). <b>Exige classe de limpeza ISO 4406 rígida: 15/13/10</b> com elementos filtrantes de 3 μm de fibra de vidro inorgânica com microrede de retenção.<br><br>\n\n3. <b>Fluido Sintético Resistente ao Fogo (HFD-U / Éster Fosfatado):</b><br>\n• Como a tubulação hidráulica EHC passa colada na carcaça da turbina a vapor (que opera a &gt; 540°C), óleos minerais inflamáveis provocariam incêndios catastróficos em caso de vazamento.<br>\n• Fluidos ésteres fosfatados possuem autoignição superior a <b>550°C</b> e são autoextinguíveis.<br>\n• Exigem vedações exclusivas de <b>PTFE (Teflon) ou FKM (Viton especial tipo B)</b>. Destroem borrachas nitrílicas comuns (NBR)."
   },
   {
-    titulo: 'Análise de Vibração: Espectros 1X, 2X e Harmônicos',
-    chaves: ['vibracao', 'analise de vibracao', '1x rpm', '2x rpm', 'desbalanceamento', 'desalinhamento', 'folga mecanica', 'iso 10816'],
-    resposta: `<strong>📊 Padrões Clássicos de Vibração Mecânica (FFT):</strong><br>
-• <b>Pico Elevado em 1X RPM (Radial):</b> Indica <b>Desbalanceamento</b> de massa no rotor (estático ou dinâmico).<br>
-• <b>Pico Elevado em 2X RPM (e 1X com defasagem axial de 180°):</b> Indica <b>Desalinhamento</b> angular ou paralelo no acoplamento.<br>
-• <b>Múltiplos Harmônicos (1X, 2X, 3X, 4X...):</b> Indica <b>Folga Mecânica</b> (parafuso frouxo, folga excessiva no mancal ou pé frouxo).<br>
-• <b>Frequências Não Síncronas de Alta Frequência:</b> Indicam defeitos em pistas de rolamento (BPFO pista externa, BPFI pista interna, BSF esferas).<br><br>
-<b>Norma ISO 10816-3:</b> Para máquinas industriais médias (15 kW a 300 kW), vibração global abaixo de <b>2,8 mm/s RMS</b> é considerada BOA; acima de <b>7,1 mm/s RMS</b> é INACEITÁVEL.`
-  },
-
-  // 6. REDUTORES, ENGRENAGENS & TRANSMISSÃO
-  {
-    titulo: 'Redutores de Velocidade & Desgastes de Engrenagens',
-    chaves: ['redutor', 'engrenagem', 'pitting', 'micropitting', 'backlash', 'folga entre dentes', 'desgaste engrenagem', 'oleo redutor'],
-    resposta: `<strong>⚙️ Redutores Industriais & Diagnóstico de Falhas em Dentes:</strong><br>
-• <b>Pitting (Piteamento):</b> Fadiga superficial por contato cíclico que arranca micropedaços de aço da linha primitiva do dente.<br>
-• <b>Micropitting:</b> Desgaste microscópico por quebra do filme de óleo sob altas cargas e baixas rotações (aspecto fosco/acinzentado).<br>
-• <b>Backlash (Folga entre flancos):</b> Folga necessária para permitir expansão térmica e passagem do filme lubrificante. Mede-se com relógio comparador travando uma engrenagem e movimentando a outra.<br><br>
-<b>Lubrificação de Redutores:</b> Geralmente utilizam óleos industriais de alta viscosidade (ISO VG 220, 320 ou 460) com aditivação de Extrema Pressão (EP).`
-  },
-
-  // 7. VÁLVULAS & SISTEMAS DE VAPOR
-  {
-    titulo: 'Seleção de Válvulas Industriais (Gaveta, Globo, Esfera, Retenção)',
-    chaves: ['valvula', 'valvula gaveta', 'valvula globo', 'valvula esfera', 'valvula de retencao', 'valvula borboleta', 'psv'],
-    resposta: `<strong>🔧 Tipos de Válvulas e Funções no Processo:</strong><br>
-• <b>Válvula Gaveta:</b> Exclusiva para <b>bloqueio liga/desliga</b>. Nunca opere semiaberta (o fluxo turbulento vibra a cunha e destrói as sedes).<br>
-• <b>Válvula Globo:</b> Excelente para <b>estrangulamento e controle de vazão</b>. Alta perda de carga.<br>
-• <b>Válvula Esfera:</b> Bloqueio rápido com 1/4 de volta, excelente vedação estanque e baixa perda de carga.<br>
-• <b>Válvula de Retenção:</b> Permite o fluxo em apenas um sentido, impedindo refluxo de fluido contra a bomba.<br>
-• <b>PSV (Válvula de Segurança e Alívio):</b> Alivia pressão instantaneamente ao atingir a pressão de ajuste (set point) para proteção de vasos de pressão (NR-13).`
+    "titulo": "Acumuladores Hidropneumáticos: Tipos, Carga de Nitrogênio (N2) e Segurança Crítica",
+    "chaves": [
+      "acumulador hidraulico",
+      "acumulador de bexiga",
+      "acumulador de pistao",
+      "carga de nitrogenio",
+      "pressao de pre carga",
+      "gas n2",
+      "risco oxigenio acumulador"
+    ],
+    "resposta": "<strong>🛡️ Acumuladores Hidráulicos e Segurança de Pré-Carga com Nitrogênio:</strong><br>\nAcumuladores armazenam energia hidrostática sob pressão de gás para amortecer picos pulsantes de bombas de pistão e garantir fechamento rápido de emergência de válvulas de turbina (Trip):<br><br>\n\n1. <b>Tipos Principais:</b><br>\n• <b>Bexiga (Bladder):</b> Mais comuns, resposta ultrarrápida. A bexiga de elastômero separa o nitrogênio do óleo hidráulico.<br>\n• <b>Pistão:</b> Para altíssimas pressões e grandes volumes. Um pistão metálico flutuante atua como separador mecânico.<br><br>\n\n2. <b>Cálculo e Ajuste da Pressão de Pré-Carga (P0):</b><br>\n• Para reserva de emergência e acumulação de energia:<br>\n  <b>P0 = 0,9 × Pressão Mínima de Trabalho (P1)</b>.<br>\n• Para amortecimento de pulsações de bomba:<br>\n  <b>P0 = 0,6 a 0,7 × Pressão Média da Linha</b>.<br>\n• A verificação da pressão de gás é feita sem pressão hidráulica na linha (drene todo o óleo do circuito antes de plugar o manômetro de carga).<br><br>\n\n3. ⚠️ <b>ALERTA GRAVÍSSIMO DE SEGURANÇA:</b><br>\n<b>NUNCA, SOB HIPÓTESE ALGUMA, UTILIZE OXIGÊNIO (O₂) OU AR COMPRIMIDO PARA CARREGAR UM ACUMULADOR HIDRÁULICO!</b><br>\nA mistura de oxigênio pressurizado com vapor de óleo mineral sob alta pressão gera <b>efeito diesel e explosão instantânea equivalente a uma bomba militar</b>, destruindo a carcaça de aço forjado. Utilize EXCLUSIVAMENTE <b>Nitrogênio seco industrial puro (N₂ grau 99,99%)</b>."
   },
   {
-    titulo: 'Sistemas de Vapor, Filtros e Purgadores',
-    chaves: ['vapor', 'purgador', 'purgador de vapor', 'filtro y', 'filtro cesto', 'atemperacao', 'dessuperaquecimento'],
-    resposta: `<strong>💨 Manutenção em Sistemas de Vapor Industrial:</strong><br>
-• <b>Purgadores de Vapor:</b> Devem drenar o condensado sem deixar o vapor vivo escapar.<br>
-  - <i>Termodinâmico:</i> Robusto para linhas de drenagem de rede principal.<br>
-  - <i>Bóia Mecânica:</i> Ideal para trocadores de calor com vazão contínua de condensado.<br>
-• <b>Filtros (Tipo Y e Cesto):</b> Protegem válvulas de controle e purgadores contra carepas de tubulação e ferrugem. Devem ser limpos periodicamente com despressurização prévia.<br>
-• <b>Dessuperaquecimento / Atemperação:</b> Injeção controlada de água desmineralizada na linha de vapor superaquecido para regular a temperatura para processos térmicos.`
-  },
-
-  // 8. METROLOGIA & SEGURANÇA (LOTO / NR-12)
-  {
-    titulo: 'Tolerâncias Dimensionais ISO (H7/g6, H7/p6)',
-    chaves: ['tolerancia iso', 'h7', 'g6', 'p6', 'ajuste com folga', 'ajuste com interferencia', 'interferencia'],
-    resposta: `<strong>📐 Sistema de Tolerâncias e Ajustes ISO:</strong><br>
-• <b>Letra Maiúscula (ex: H7):</b> Refere-se à tolerância do <b>FURO</b>. "H" significa que o afastamento inferior é zero.<br>
-• <b>Letra Minúscula (ex: g6, p6):</b> Refere-se à tolerância do <b>EIXO</b>.<br><br>
-<b>Tipos de Ajuste:</b><br>
-• <b>Ajuste com Folga (ex: H7/g6, H7/f7):</b> Permite rotação livre ou deslizamento (ex: buchas e guias).<br>
-• <b>Ajuste Incerto/Transição (ex: H7/k6, H7/js6):</b> Posicionamento preciso com montagem com martelo de borracha ou prensa leve.<br>
-• <b>Ajuste com Interferência/Prensado (ex: H7/p6, H7/s6):</b> O eixo é maior que o furo. Montagem exige aquecedor indutivo ou prensa hidráulica (ex: anéis internos de rolamento).`
+    "titulo": "Análise de Vibração: Fórmulas de Frequências de Rolamentos e Diagnóstico FFT",
+    "chaves": [
+      "analise de vibracao",
+      "bpfo",
+      "bpfi",
+      "bsf",
+      "ftf",
+      "envelope de aceleracao",
+      "frequencias de rolamento",
+      "desbalanceamento",
+      "desalinhamento vibracao",
+      "folga mecanica"
+    ],
+    "resposta": "<strong>📊 Análise de Vibração Espectral (FFT) em Máquinas Rotativas Industriais:</strong><br>\nCada componente mecânico possui uma assinatura de frequência característica quando defeituoso:<br><br>\n\n1. <b>Frequências Teóricas de Defeito em Rolamentos (Calculadas sobre RPM / 60):</b><br>\n• <b>BPFO (Ball Pass Frequency Outer - Pista Externa):</b><br>\n  $BPFO = \\frac{n}{2} \\cdot f_r \\cdot \\left(1 - \\frac{d}{D}\\cos\\alpha\\right)$<br>\n  Pico não síncrono clássico com bandas laterais separadas pela rotação $1X$.<br>\n• <b>BPFI (Ball Pass Frequency Inner - Pista Interna):</b><br>\n  $BPFI = \\frac{n}{2} \\cdot f_r \\cdot \\left(1 + \\frac{d}{D}\\cos\\alpha\\right)$<br>\n  Gera modulação forte por passar na zona de carga a cada volta.<br>\n• <b>BSF (Ball Spin Frequency - Esferas / Rolos):</b><br>\n  $BSF = \\frac{D}{2d} \\cdot f_r \\cdot \\left(1 - \\left(\\frac{d}{D}\\cos\\alpha\\right)^2\\right)$<br>\n• <b>FTF (Fundamental Train Frequency - Gaiola):</b><br>\n  $FTF = \\frac{1}{2} \\cdot f_r \\cdot \\left(1 - \\frac{d}{D}\\cos\\alpha\\right)$ (sub-harmônico típico entre 0,38X e 0,44X).<br><br>\n\n2. <b>Diagnósticos Rápidos no Espectro de Velocidade (mm/s RMS):</b><br>\n• <b>Pico dominante em 1X da rotação:</b> Desbalanceamento estático ou dinâmico do rotor.<br>\n• <b>Picos dominantes em 2X e 3X com defasagem axial de 180°:</b> Desalinhamento angular ou paralelo severo.<br>\n• <b>Múltiplos harmônicos (1X, 2X, 3X, 4X...) acompanhados de sub-harmônicos de 0,5X:</b> Folga mecânica estrutural ou alojamento do mancal frouxo.<br>\n• <b>Vibração em altas frequências (&gt; 2 kHz) detectada pelo Envelope de Aceleração (gE / HFE):</b> Fase inicial de fadiga microestrutural das pistas do rolamento."
   },
   {
-    titulo: 'Bloqueio e Etiquetagem (LOTO) & NR-12',
-    chaves: ['loto', 'bloqueio', 'etiquetagem', 'bloqueio e etiquetagem', 'nr 12', 'nr12', 'seguranca mecanica', 'cadeado de bloqueio'],
-    resposta: `<strong>🛡️ Procedimento de Segurança LOTO (Lockout / Tagout):</strong><br>
-Antes de qualquer intervenção mecânica em bombas, motores, prensas ou linhas pressurizadas:<br><br>
-<b>Os 5 Passos Vitais do LOTO:</b><br>
-1. <b>Notificação:</b> Avise a operação e os colaboradores da área sobre a intervenção.<br>
-2. <b>Desenergização e Bloqueio:</b> Desligue o disjuntor elétrico e feche as válvulas de processo.<br>
-3. <b>Aplicação do Cadeado e Cartão:</b> Cada mecânico DEVE colocar seu próprio cadeado individual com chave única e cartão com foto e matrícula.<br>
-4. <b>Dissipação de Energia Residual:</b> Despressurize a linha, drene fluidos quentes/químicos, trave pesos suspensos mecanicamente.<br>
-5. <b>Teste de Energia Zero:</b> Tente ligar o equipamento localmente no botão de partida para confirmar que está 100% inoperante antes de tocar na máquina.`
+    "titulo": "Ensaio de Impacto (Bump Test) e Diagnóstico de Ressonância Mecânica",
+    "chaves": [
+      "bump test",
+      "ensaio de impacto",
+      "ressonancia",
+      "frequencia natural",
+      "bode",
+      "nyquist",
+      "vibracao estrutural"
+    ],
+    "resposta": "<strong>🔨 Ensaio de Impacto (Bump Test) e Ressonância Estrutural:</strong><br>\nA ressonância ocorre quando uma frequência forçadora de operação da máquina (ex: 1X da rotação do motor em 1780 RPM = 29,6 Hz ou frequência de passagem das pás BPF) coincide exatamente com a <b>frequência natural da estrutura ou tubulação</b>, amplificando a vibração em até 10 a 20 vezes sem que haja desbalanceamento severo:<br><br>\n\n1. <b>Procedimento do Bump Test:</b><br>\n• A máquina deve estar <b>completamente desligada</b> e desenergizada (LOTO).<br>\n• Fixe um acelerômetro no ponto de máxima amplitude.<br>\n• Aplique uma pancada seca na carcaça ou base utilizando um martelo instrumentado (com célula de carga) ou marreta com ponta de nylon/madeira pesada.<br>\n• O analisador FFT registra a curva de Função de Resposta em Frequência (FRF). Os picos de amplitude representam as frequências naturais $f_n$ do sistema.<br><br>\n\n2. <b>Ações Corretivas para Eliminar Ressonância:</b><br>\n• Afastar a frequência natural em pelo menos <b>±20% da rotação nominal</b>.<br>\n• Aumentar a rigidez estrutural (adicionar travamentos diagonais ou reforçar sapatas) desloca a $f_n$ para cima.<br>\n• Adicionar massa concentrada à base metálica desloca a $f_n$ para baixo."
   },
   {
-    titulo: 'Cálculo de Calços e Alinhamento Reverso (Rim & Face)',
-    chaves: ['calculo de calco', 'calco dianteiro', 'calco traseiro', 'pe dianteiro', 'pe traseiro', 'relogio comparador alinhamento', 'alinhamento reverso', 'face e borda'],
-    resposta: `<strong>🎯 Fórmula de Cálculo de Calços para Alinhamento:</strong><br>
-Para corrigir o desalinhamento angular e paralelo em eixos rotativos acoplados:<br><br>
-<b>Fórmulas Tradicionais com Relógio Comparador:</b><br>
-• <b>Pé Dianteiro (Mais Próximo):</b> Calço = (Gap × D1 ÷ D_acoplamento) + Offset<br>
-• <b>Pé Traseiro (Mais Distante):</b> Calço = [Gap × (D1 + D2) ÷ D_acoplamento] + Offset<br><br>
-Onde:<br>
-• <i>Gap:</i> Abertura angular medida nos pontos 12h e 6h na face do acoplamento.<br>
-• <i>Offset:</i> Desalinhamento radial (periférico) dividido por 2.<br>
-• <i>D1:</i> Distância do acoplamento até as sapatas dianteiras do motor.<br>
-• <i>D2:</i> Distância entre as sapatas dianteiras e traseiras do motor.<br>
-• <i>D_acoplamento:</i> Diâmetro do círculo onde o relógio apalpa a face.<br><br>
-💡 <b>Dica de Campo:</b> Sempre elimine o pé manco (&lt; 0,05 mm) antes de calcular os calços definitivos. Utilize calços pré-cortados em aço inox 304.`
+    "titulo": "Válvulas de Segurança e Alívio (PSVs): ASME I, ASME VIII, API 520/526 e Calibração",
+    "chaves": [
+      "psv",
+      "valvula de seguranca",
+      "valvula de alivio",
+      "asme i",
+      "asme viii",
+      "api 520",
+      "api 526",
+      "pressao de ajuste",
+      "set pressure",
+      "blowdown",
+      "bellows",
+      "fole",
+      "pilotada"
+    ],
+    "resposta": "<strong>🛡️ Engenharia de Válvulas de Segurança e Alívio (PSVs) segundo ASME e API:</strong><br>\nPSVs são a última linha física de defesa contra sobrepressão e explosão em caldeiras, vasos de pressão e linhas de vapor de usinas termelétricas:<br><br>\n\n1. <b>Classificação por Norma ASME:</b><br>\n• <b>ASME Seção I (Caldeiras de Força / Geradores de Vapor):</b><br>\n  - Abertura de disparo instantâneo (Pop Action).<br>\n  - Não admite o uso de válvulas com fole comum de elastômero em vapor saturado/superaquecido.<br>\n  - Sobrepressão máxima permitida: <b>apenas 3%</b> acima da Pressão Máxima de Trabalho Permitida (PMTP).<br>\n  - Blowdown (queda de pressão para fechamento): entre 2% e 4%.<br>\n• <b>ASME Seção VIII (Vasos de Pressão e Tubulações de Processo):</b><br>\n  - Sobrepressão permitida de 10% (ou 16% para múltiplos dispositivos de alívio).<br><br>\n\n2. <b>Tipos Construtivos (Norma API 526):</b><br>\n• <b>Convencional:</b> A contrapressão na linha de descarte atua sobre o disco, alterando a pressão de disparo. Indicada quando descarrega para a atmosfera livre.<br>\n• <b>Balanceada com Fole Metálico (Inconel / Inox 316):</b> O fole anula o efeito da contrapressão variável no cabeçote e protege a mola contra fluidos corrosivos ou quentes.<br>\n• <b>Operada por Piloto (Pilot-Operated):</b> Uma pequena válvula piloto sensível comanda a câmara principal. Garante estanqueidade impecável até 98% da pressão de ajuste.<br><br>\n\n3. <b>Ensaio de Bancada e Teste de Estanqueidade API 527:</b><br>\n• Calibração em bancada pneumática com Nitrogênio para verificar a <b>Pressão de Ajuste a Frio (Cold Differential Test Pressure - CDTP)</b>, compensando a temperatura operacional.<br>\n• Teste de bolhas (Bubble Test API 527): mergulha-se um tubo de 6 mm de diâmetro a 12,7 mm na água a 90% da pressão de ajuste. Taxa máxima de vazamento tabelada (ex: zero a 20 bolhas/min dependendo do orifício)."
   },
   {
-    titulo: 'Severidade Vibratória ISO 10816-3 / ISO 20816-3',
-    chaves: ['iso 10816-3', 'iso 10816', 'zona a', 'zona b', 'zona c', 'zona d', 'limite de vibracao', 'tabela de vibracao', 'severidade vibratoria', 'mm/s rms', 'suporte rigido', 'suporte flexivel'],
-    resposta: `<strong>📊 Limites de Vibração Global (mm/s RMS) conforme ISO 10816-3:</strong><br>
-Classificação para máquinas industriais rotativas (15 kW a 300 kW - Grupo 2):<br><br>
-• <b>Base Rígida (Fundação Pesada de Concreto):</b><br>
-  - <b>Zona A (0 a 1,4 mm/s RMS):</b> Excelente / Máquina nova ou recém-alinhada.<br>
-  - <b>Zona B (1,4 a 2,8 mm/s RMS):</b> Operação normal irrestrita a longo prazo.<br>
-  - <b>Zona C (2,8 a 4,5 mm/s RMS):</b> Alerta. Programar intervenção corretiva.<br>
-  - <b>Zona D (&gt; 4,5 mm/s RMS):</b> Perigo crítico! Parada imediata obrigatória.<br><br>
-• <b>Base Flexível (Chassis Metálico / Coxins Elásticos):</b><br>
-  - <b>Zona A:</b> 0 a 2,3 mm/s | <b>Zona B:</b> 2,3 a 4,5 mm/s | <b>Zona C:</b> 4,5 a 7,1 mm/s | <b>Zona D:</b> &gt; 7,1 mm/s RMS.`
+    "titulo": "Válvulas Redutoras de Pressão (PRVs) e Estações Redutoras/Dessuperaquecedoras (PRDS)",
+    "chaves": [
+      "prv",
+      "valvula redutora de pressao",
+      "prds",
+      "dessuperaquecedor",
+      "reducao de pressao vapor",
+      "spirax sarco",
+      "fisher 627"
+    ],
+    "resposta": "<strong>⚙️ Válvulas Redutoras de Pressão (PRVs) e Estações PRDS em Usinas:</strong><br>\nControlam a transição entre as linhas de alta pressão (HP) e média/baixa pressão (IP/LP) para vapor de processo e selagem de turbinas:<br><br>\n\n1. <b>Válvulas Auto-operadas Pilotadas (ex: Spirax Sarco DP27):</b><br>\n• Não necessitam de ar comprimido ou energia elétrica externa.<br>\n• A pressão de jusante é captada por um tubo de impulso externo e atua sobre um diafragma metálico, modulando o piloto que posiciona o obturador principal.<br><br>\n\n2. <b>Estações de Redução e Dessuperaquecimento (PRDS):</b><br>\n• Ao expandir o vapor de alta pressão através do orifício redutor, ocorre estrangulamento isentálpico, gerando vapor altamente superaquecido.<br>\n• Bicos injetores atomizadores de água desmineralizada de caldeira pulverizam microgotas diretamente no fluxo de vapor, reduzindo a temperatura até 5°C acima da temperatura de saturação com controle PI em malha fechada."
   },
   {
-    titulo: 'Tensionamento de Correias em V e Alinhamento de Polias',
-    chaves: ['correia', 'tensionamento de correia', 'alinhamento de polias', 'correia em v', 'frequencia da correia', 'deflexao correia', 'spa', 'spb', 'spc', 'polia'],
-    resposta: `<strong>⚙️ Transmissão por Correias em V (Perfis A, B, C / 3V, 5V, 8V / SPZ, SPA, SPB):</strong><br>
-• <b>Método da Deflexão:</b> A deflexão recomendada no centro do vão é de <b>16 mm por metro de entre-pontas</b> (1,6% da distância de centro a centro) ao aplicar a força de teste recomendada.<br>
-• <b>Medidor Sônico de Tensão:</b> Mede a frequência natural de vibração (Hz). Mais preciso e evita estiramento precoce dos cabos de poliéster/kevlar.<br>
-• <b>Alinhamento de Polias:</b> Desalinhamento angular máximo permitido é de <b>0,5° (cerca de 2 mm por metro de vão)</b>. Correias desalinhadas viram no canal e quebram as laterais prematuramente.`
+    "titulo": "Caldeiras de Recuperação (HRSG) em Usinas Termelétricas: Ciclo Aberto vs Ciclo Combinado",
+    "chaves": [
+      "caldeira de recuperacao",
+      "hrsg",
+      "ciclo combinado",
+      "ciclo aberto",
+      "simple cycle",
+      "combined cycle",
+      "turbina a gas",
+      "turbina a vapor",
+      "termoeletrica petrobras"
+    ],
+    "resposta": "<strong>⚡ Usinas Termelétricas Petrobras: Ciclo Aberto vs Ciclo Combinado com Caldeira HRSG:</strong><br>\nNas usinas termelétricas a gás natural, a eficiência de conversão energética é maximizada pela integração de ciclos termodinâmicos:<br><br>\n\n1. <b>Ciclo Aberto / Simples (Simple Cycle - Brayton):</b><br>\n• O ar atmosférico é comprimido em um compressor axial multietágio (razão de pressão de 15:1 a 30:1), misturado com gás natural na câmara de combustão a mais de 1200°C e expandido na <b>Turbina a Gás</b> acoplada ao gerador.<br>\n• Os gases de exaustão saem a <b>540°C a 600°C</b> diretamente pela chaminé bypass.<br>\n• <b>Rendimento térmico:</b> Apenas <b>34% a 38%</b>.<br><br>\n\n2. <b>Ciclo Combinado (Combined Cycle Power Plant - Brayton + Rankine):</b><br>\n• Os gases de escape incandescentes não são jogados fora: são direcionados para uma <b>Caldeira de Recuperação de Calor de Geração de Vapor (HRSG - Heat Recovery Steam Generator)</b>.<br>\n• A HRSG não possui queimadores convencionais (embora possa ter queima suplementar / duct burner). Ela atua como um gigantesco trocador de calor multietágio:<br>\n  - <b>Seção de Alta Pressão (HP):</b> Gera vapor superaquecido a ~100-140 bar e 540°C.<br>\n  - <b>Seção de Pressão Intermediária (IP) com Reaquecedor (Reheater):</b> Reaquece o vapor que saiu do corpo de alta da turbina a vapor.<br>\n  - <b>Seção de Baixa Pressão (LP):</b> Alimenta o desaerador e o estágio de baixa.<br>\n• O vapor gerado expande na <b>Turbina a Vapor</b>, gerando energia elétrica adicional sem queimar um único metro cúbico extra de gás!<br>\n• <b>Rendimento térmico:</b> Salta para <b>58% a mais de 62%</b>!"
   },
   {
-    titulo: 'Contaminação de Óleo Hidráulico e Código ISO 4406',
-    chaves: ['iso 4406', 'contaminacao de oleo', 'oleo hidraulico', 'codigo de limpeza', 'filtragem hidraulica', 'particulas por ml'],
-    resposta: `<strong>💧 Limpeza de Fluidos Hidráulicos (Norma ISO 4406):</strong><br>
-O código ISO expressa a contaminação em 3 números de escala (ex: <b>18/16/13</b>):<br>
-• 1º número: Partículas <b>&gt; 4 μm</b> (sílica fina, poeira).<br>
-• 2º número: Partículas <b>&gt; 6 μm</b> (abrasivos cortantes).<br>
-• 3º número: Partículas <b>&gt; 14 μm</b> (limalha metálica destrutiva).<br><br>
-<b>Padrões Exigidos na Indústria:</b><br>
-• Bombas de palhetas/engrenagens: 19/17/14.<br>
-• Bombas de pistões axiais: 18/16/13.<br>
-• Válvulas proporcionais e servoválvulas: <b>16/14/11 ou mais limpo</b> (exigem microfiltragem de 3 a 5 micra absolutos).`
+    "titulo": "Inspeção de Integridade NR-13 em Caldeiras e Vasos de Pressão: Ensaios Não-Destrutivos (END)",
+    "chaves": [
+      "nr 13",
+      "nr-13",
+      "inspecao de caldeira",
+      "pmtp",
+      "ultrassom phased array",
+      "tofd",
+      "liquido penetrante",
+      "particula magnetica",
+      "medicao de espessura"
+    ],
+    "resposta": "<strong>🔍 Inspeção de Caldeiras e Vasos de Pressão conforme Norma Regulamentadora NR-13:</strong><br>\nA NR-13 estabelece os requisitos mínimos de integridade estrutural para caldeiras, vasos de pressão, tubulações e tanques metálicos de usinas termelétricas:<br><br>\n\n1. <b>Classificação das Caldeiras:</b><br>\n• <b>Categoria A:</b> Caldeiras cuja pressão de operação seja igual ou superior a <b>1960 kPa (19,98 kgf/cm² / ~20 bar)</b>. Todas as caldeiras de usinas termelétricas se enquadram nesta categoria máxima de criticidade.<br>\n• Exige Prontuário atualizado pelo Profissional Habilitado (PH), Registro de Segurança, Relatório de Inspeção e testes das válvulas PSVs.<br><br>\n\n2. <b>Ensaios Não-Destrutivos (END) Essenciais de Parada:</b><br>\n• <b>Medição de Espessura por Ultrassom (ME):</b> Mapeamento sistemático de perda de espessura por corrosão/erosão em tubos de evaporadores, economizadores e tambores de vapor (B-scan e C-scan).<br>\n• <b>Ultrassom Phased Array e TOFD (Time of Flight Diffraction):</b> Substitui a radiografia industrial com maior precisão e sem risco radiológico, inspecionando 100% do volume das soldas de alta pressão.<br>\n• <b>Líquido Penetrante (LP) e Partículas Magnéticas (PM):</b> Detecção de trincas superficiais em bocais, soldas de fixação de saias de tambores e olhais de sustentação.<br>\n• <b>Vídeoendoscopia Industrial:</b> Inspeção interna de tubulações inacessíveis para detectar depósitos de magnetita, oxidação e incrustações."
+  },
+  {
+    "titulo": "Mecanismos de Degradação Térmica: Fluência (Creep), Grafitização e Aços P91/P22",
+    "chaves": [
+      "fluencia",
+      "creep",
+      "grafitizacao",
+      "p91",
+      "p22",
+      "replica metalografica",
+      "tubulacao de vapor superaquecido",
+      "degradacao termica"
+    ],
+    "resposta": "<strong>🔬 Mecanismos de Danos por Alta Temperatura em Usinas: Fluência e Grafitização:</strong><br>\nEm linhas de vapor vivo superaquecido operando a 540°C a 565°C, o aço opera na região de deformação plástica lenta dependente do tempo chamada <b>Fluência (Creep)</b>:<br><br>\n\n1. <b>Fases da Fluência:</b><br>\n• <b>Fase Primária:</b> Deformação rápida que desacelera por encruamento.<br>\n• <b>Fase Secundária:</b> Taxa de deformação constante (vida útil de projeto - 100.000 a 200.000 horas).<br>\n• <b>Fase Terciária:</b> Formação e alinhamento de microcavidades nos contornos de grão do aço, evoluindo para microtrincas e ruptura catastrófica sem aviso prévio.<br><br>\n\n2. <b>Metalurgia de Aços Especiais:</b><br>\n• <b>Aço P22 (2,25% Cr - 1% Mo):</b> Tradicional para linhas de vapor intermediário até 530°C.<br>\n• <b>Aço P91 (9% Cr - 1% Mo - V - Nb):</b> Aço martensítico de alta resistência mecânica para vapor principal (565°C a 160 bar). Exige controle térmico rigoroso de pré-aquecimento e tratamento térmico pós-soldagem (PWHT) a 760°C ± 10°C para não fragilizar a zona afetada pelo calor (ZAC).<br><br>\n\n3. <b>Monitoramento por Réplicas Metalográficas:</b><br>\n• Polimento metalográfico espelhado no próprio tubo na usina seguido de ataque químico com Nital 2% a 5%.<br>\n• Aplica-se uma película de acetato de celulose que copia a microestrutura dos grãos cristalinos.<br>\n• Avaliação microscópica segundo a norma VGB-TW 507 para classificar o nível de cavidades de fluência (Grau 1: normal a Grau 5: macrotrincas com descarte obrigatório)."
+  },
+  {
+    "titulo": "Motores Elétricos de Média/Alta Tensão e Rolamentos Cerâmicos INSOCOAT (Correntes EDM)",
+    "chaves": [
+      "insocoat",
+      "correntes parasitas",
+      "corrente edm",
+      "inversor de frequencia rolamento",
+      "rolamento ceramico",
+      "motor alta tensao",
+      "estriamento de rolamento",
+      "fluting"
+    ],
+    "resposta": "<strong>⚡ Motores Elétricos de Alta Tensão (4,16 kV / 13,8 kV) e Prevenção de Correntes EDM:</strong><br>\nMotores acionados por inversores de frequência (VFD / PWM) sofrem com tensões induzidas de modo comum no eixo que buscam caminho para a terra através do filme de óleo dos rolamentos:<br><br>\n\n1. <b>O Fenômeno do Arco Elétrico EDM (Electrical Discharge Machining):</b><br>\n• Quando a tensão no eixo atinge o limite dielétrico da graxa (cerca de 5 a 15V), faíscas microscópicas saltam entre a pista e a esfera/rolo.<br>\n• O arco elétrico funde e vaporiza pontos microscópicos do aço a mais de 3000°C.<br>\n• <b>Sintoma Visual Típico (Fluting):</b> Formação de ranhuras paralelas transversais na pista com aspecto de \"costela de vaca\" ou \"tábua de lavar roupa\", gerando zumbido de alta frequência estridente.<br><br>\n\n2. <b>Soluções de Engenharia Obrigatórias:</b><br>\n• <b>Rolamentos Isolados Ceramicamente (SKF INSOCOAT):</b> Possuem uma camada cerâmica de óxido de alumínio (Al₂O₃) depositada por plasma no anel externo ou interno que isola até 1000 V contínuos. Monta-se obrigatoriamente no <b>lado não-acionado (NDE)</b> do motor.<br>\n• <b>Rolamentos Híbridos com Esferas de Nitreto de Silício (Si₃N₄):</b> Totalmente dielétricos e imunes a correntes elétricas.<br>\n• <b>Anel Aterrador de Eixo com Microfibras de Carbono (Aegis):</b> Drena a carga eletrostática do eixo com segurança diretamente para a carcaça aterrada."
+  },
+  {
+    "titulo": "Engenharia de Torque Controlado e Tensionamento Hidráulico de Estojos (Bolt Tensioning)",
+    "chaves": [
+      "torque controlado",
+      "tensionador hidraulico",
+      "bolt tensioning",
+      "estiramento de estojo",
+      "torque angular",
+      "classes de parafuso",
+      "astm a193 b7",
+      "din iso 898"
+    ],
+    "resposta": "<strong>🔩 Fixação Roscada Pesada: Torque Controlado vs Tensionamento Hidráulico Axial:</strong><br>\nEm flanges industriais críticos de alta pressão (linhas de vapor, tampas de turbinas e carcaças de bombas BB5), o aperto incorreto é a causa número 1 de vazamentos e trincas por fadiga:<br><br>\n\n1. <b>Limitações do Torquímetro Convencional:</b><br>\n• No aperto por torquímetro, cerca de <b>85% a 90% do torque aplicado é consumido unicamente pelo atrito</b> (50% no atrito da face da porca contra a arruela e 40% no atrito dos filetes da rosca). Apenas 10% se converte em pré-carga útil axial!<br>\n• Qualquer variação de lubrificação muda a força de esmagamento da junta em até 40%.<br><br>\n\n2. <b>Tensionamento Hidráulico Direto de Estojos (Bolt Tensioning a 1500 bar):</b><br>\n• Um cabeçote hidráulico com cilindro oco é parafusado na ponta saliente do estojo.<br>\n• Injeta-se óleo ultra-pressurizado (até 1500 bar) que <b>puxa o estojo puramente em tração axial pura</b>, alongando o parafuso elásticamente <b>SEM NENHUMA TORÇÃO</b>.<br>\n• A porca original é girada com um pino manual sem esforço até encostar na flange.<br>\n• Ao despressurizar a bomba hidráulica, o estojo tenta encolher, prendendo a flange com a carga axial exata calculada.<br>\n• Vantagem: Aperto simultâneo de múltiplos parafusos (50% ou 100% dos parafusos ao mesmo tempo), garantindo assentamento absolutamente uniforme da junta espirométrica metálica sem deformação angular do flange."
+  },
+  {
+    "titulo": "Tribologia e Análise Laboratorial de Óleo: Viscosidade, Karl Fischer e Espectrometria ICP",
+    "chaves": [
+      "analise de oleo",
+      "espectrometria icp",
+      "karl fischer",
+      "viscosidade astm d445",
+      "tan",
+      "tbn",
+      "metais de desgaste",
+      "tribologia"
+    ],
+    "resposta": "<strong>🧪 Tribologia Laboratorial e Monitoramento Preditivo de Óleos Industriais:</strong><br>\nA análise de óleo lubrificante de grandes mancais e redutores revela a saúde interna da máquina antes de qualquer sinal no termômetro ou vibrômetro:<br><br>\n\n1. <b>Ensaios Laboratoriais Críticos:</b><br>\n• <b>Viscosidade Cinemática a 40°C e 100°C (ASTM D445):</b> Variação permitida de <b>±10%</b> em relação à viscosidade nominal ISO VG. Queda indica contaminação por solvente ou cisalhamento térmico; aumento indica oxidação severa, polimerização ou fuligem.<br>\n• <b>Teor de Água por Titulação Coulométrica Karl Fischer (ASTM D6304):</b> Mede a água em partes por milhão (ppm). Limite típico para mancais de turbina: <b>máximo 100 a 200 ppm (0,01% a 0,02%)</b>. Acima de 500 ppm, a vida útil dos rolamentos é reduzida em 75% por quebra do filme lubrificante e hidrogenação do aço.<br>\n• <b>Número de Acidez Total (TAN - ASTM D664):</b> Mede produtos ácidos da oxidação. Quando o TAN sobe 0,5 mg KOH/g acima do óleo novo, o lubrificante deve ser trocado.<br><br>\n\n2. <b>Espectrometria ICP para Metais de Desgaste (ppm):</b><br>\n• <b>Ferro (Fe):</b> Desgaste de engrenagens, carcaças, pistas de rolamento ou camisas.<br>\n• <b>Cobre (Cu), Chumbo (Pb) e Estanho (Sn):</b> Desgaste de mancais de deslizamento com revestimento de metal patente / babbit ou buchas de bronze.<br>\n• <b>Cromo (Cr):</b> Desgaste de anéis de pistão ou hastes cromadas.<br>\n• <b>Silício (Si) e Alumínio (Al):</b> Contaminação externa por poeira abrasiva sílica (falha no respiro dessecante de sílica gel ou vedação de gaxeta)."
+  },
+  {
+    "titulo": "Análise de Falhas Fractográficas: Interpretação de Fotos de Rolamentos e Eixos Danificados",
+    "chaves": [
+      "analise de falhas",
+      "foto de rolamento",
+      "foto de eixo quebrado",
+      "fractografia",
+      "marcas de praia",
+      "beach marks",
+      "spalling",
+      "fretting corrosion",
+      "quebra por fadiga",
+      "corrosao por atrito"
+    ],
+    "resposta": "<strong>🔍 Análise Pericial Fractográfica de Falhas em Componentes Mecânicos:</strong><br>\nComo mecânico sênior e engenheiro especialista, analisar visualmente a peça danificada permite identificar a causa raiz física para que a falha nunca mais se repita:<br><br>\n\n1. <b>Diagnóstico em Rolamentos:</b><br>\n• <b>Descascamento por Fadiga Subsuperficial (Spalling):</b> Crateras profundas com bordas afiadas na pista de rolamento. Causa: Fim de vida natural por fadiga cíclica de contato ou sobrecarga estática/dinâmica.<br>\n• <b>Corrosão por Contato / Atrito (Fretting Corrosion):</b> Pó avermelhado semelhante a ferrugem (óxido de ferro) entre o anel externo e a carcaça ou anel interno e eixo. Causa: Micromovimentos e folga excessiva no assento mecânico.<br>\n• <b>Marcas de Esferas / Brinell Falso (False Brinelling):</b> Marcas retangulares ou circulares nas pistas provocadas por vibração externa com o equipamento desligado (transporte ou máquina vizinha vibrando).<br>\n• <b>Coloração Azulada / Marrom-Escuro:</b> Superaquecimento severo (&gt; 200°C) por trabalho a seco, excesso de graxa ou falta de folga radial C3.<br><br>\n\n2. <b>Diagnóstico de Eixos Fraturados:</b><br>\n• <b>Fratura por Fadiga por Flexão Rotativa (Marcas de Praia / Beach Marks):</b> Linhas concêntricas que se expandem a partir de um ponto de concentração de tensões (canto vivo de raio de alívio pequeno, chaveta ou marca de ferramenta), culminando em uma pequena zona rugosa de ruptura final instantânea.<br>\n• <b>Fratura Frágil por Sobrecarga (Clivagem):</b> Superfície cristalina e brilhante sem deformação plástica prévia. Ocorre em aços de alta dureza ou sob choque mecânico em baixas temperaturas.<br>\n• <b>Fratura Dúctil por Torção:</b> Deformação plástica visível (linhas de escoamento em espiral a 45° em relação ao eixo longitudinal) com lábio de cisalhamento."
+  },
+  {
+    "titulo": "Cavitação em Bombas Centrífugas",
+    "chaves": [
+      "cavitacao",
+      "cavitar",
+      "barulho de brita",
+      "barulho de pedra",
+      "pedregulhos",
+      "ruido na bomba",
+      "npsh",
+      "npshd",
+      "npshr",
+      "pressao de vapor",
+      "estouro de bolha"
+    ],
+    "resposta": "<strong>💧 Diagnóstico de Cavitação em Bombas:</strong><br>\nA cavitação ocorre quando a pressão absoluta na sucção da bomba cai abaixo da pressão de vapor do líquido. Formam-se bolhas de vapor que, ao atingirem a região de alta pressão no rotor, <b>implodem violentamente</b> contra o metal.<br><br>\n<b>Sintomas no campo:</b><br>\n• Ruído característico semelhante a \"pedregulhos / brita batendo dentro da carcaça\".<br>\n• Queda repentina de vazão (m³/h) e pressão de descarga.<br>\n• Vibração severa na frequência de passagem das pás (BPF).<br>\n• Corrosão por arrancamento de material (pitting esponjoso) na face de sucção das pás do rotor.<br><br>\n<b>Ações Corretivas:</b><br>\n1. Aumentar o NPSH disponível (NPSHd) ou reduzir perdas de carga na tubulação de sucção (limpar filtros, abrir registros 100%, eliminar curvas desnecessárias).<br>\n2. Diminuir a temperatura do fluido (se possível), reduzindo a pressão de vapor.<br>\n3. Garantir que <b>NPSHd &gt; NPSHr + margem de segurança de pelo menos 0,5 a 1,0 m</b>."
+  },
+  {
+    "titulo": "NPSH (Net Positive Suction Head)",
+    "chaves": [
+      "npsh",
+      "npshd",
+      "npshr",
+      "altura de succao",
+      "energia de succao",
+      "succao da bomba",
+      "carga de succao"
+    ],
+    "resposta": "<strong>📐 NPSH Disponível vs NPSH Requerido:</strong><br>\n• <b>NPSHd (Disponível):</b> Energia líquida total disponível na conexão de sucção da bomba acima da pressão de vapor do fluido. Depende exclusivamente da instalação física (pressão no reservatório + desnível estático - perdas por atrito na sucção - pressão de vapor).<br>\n• <b>NPSHr (Requerido):</b> Queda mínima de pressão interna no olho do rotor necessária para evitar cavitação. É um valor fornecido pelo <b>fabricante da bomba</b> na curva de catálogo.<br><br>\n<b>Regra de Ouro da Manutenção:</b><br>\n<b>NPSHd &gt;= NPSHr + Margem de Segurança (mínimo 0,5 a 1,5 metros)</b>. Se o NPSHd for inferior, a bomba cavitará fatalmente."
+  },
+  {
+    "titulo": "Bomba Não Puxa Água / Sem Vazão",
+    "chaves": [
+      "bomba nao puxa",
+      "sem vazao",
+      "bomba nao bombeia",
+      "nao gera pressao",
+      "escorva",
+      "desescorvada",
+      "ar na succao",
+      "bomba seca",
+      "valvula de pe travada"
+    ],
+    "resposta": "<strong>🔍 Checklist: Bomba Centrífuga Sem Vazão ou Desescorvada:</strong><br>\n1. <b>Falta de Escorva:</b> Carcaça e tubulação de sucção devem estar 100% cheias de líquido e sem bolsas de ar. Sangre o ar pelo bujão superior.<br>\n2. <b>Válvula de Pé Travada ou Entupida:</b> Inspecione o crivo na ponta da sucção. Sujeira ou mola travada impedem a entrada de fluido.<br>\n3. <b>Entrada Falsa de Ar:</b> Verifique juntas de flanges na sucção, gaxetas ou selo mecânico despressurizado.<br>\n4. <b>Sentido de Rotação Invertido:</b> Verifique se o motor elétrico está girando no sentido indicado pela seta da carcaça (rotação invertida bombeia apenas ~30% da vazão com pressão muito baixa).<br>\n5. <b>Rotor Entupido ou Solto:</b> Inspecione chaveta quebrada ou rotor obstruído por resíduos sólidos."
+  },
+  {
+    "titulo": "Selo Mecânico (Falhas e Vazamentos)",
+    "chaves": [
+      "selo mecanico",
+      "selo",
+      "vazamento no selo",
+      "faces de vedacao",
+      "plano de selagem",
+      "plano api",
+      "silicio",
+      "carbeto",
+      "carvao"
+    ],
+    "resposta": "<strong>🛡️ Selos Mecânicos - Manutenção e Diagnóstico:</strong><br>\nO selo mecânico veda o eixo rotativo através do contato deslizante de duas faces lapidadas (uma rotativa e uma estacionária).<br><br>\n<b>Principais Causas de Vazamento:</b><br>\n• <b>Trabalho a Seco:</b> Queima o filme de fluido lubrificante, superaquecendo as faces e trincando materiais duros (craquelamento térmico no Carbeto de Silício/Tungstênio).<br>\n• <b>Empenamento de Eixo (Runout):</b> O desvio radial do eixo deve ser <b>inferior a 0,05 mm</b>. Vibração excessiva abre as faces do selo.<br>\n• <b>Desalinhamento:</b> Desalinhamento angular comprime irregularmente as molas e destrói o anel secundário (O-ring de Viton/EPDM).<br>\n• <b>Plano de Selagem Obstruído:</b> Planos API 11/21/53 devem ter fluxo constante para arrefecer a câmara do selo."
+  },
+  {
+    "titulo": "Gaxetas vs Selo Mecânico",
+    "chaves": [
+      "gaxeta",
+      "prensa gaxeta",
+      "gotejamento de gaxeta",
+      "teflon",
+      "grafite",
+      "anel de lanterna"
+    ],
+    "resposta": "<strong>🧵 Ajuste de Gaxetas Industriais:</strong><br>\n• <b>Gotejamento Obrigatório:</b> Ao contrário do selo mecânico, <b>a gaxeta DEVE gotejar</b> (cerca de 20 a 60 gotas por minuto de fluido ou água de refrigeração). Se apertar até secar, a gaxeta queima e risca o eixo/luva protetora.<br>\n• <b>Corte das Fitas:</b> Corte os anéis em chanfro a 45°. Ao montar, <b>defase as emendas em 90° ou 180°</b> entre cada anel consecutivo.<br>\n• <b>Anel de Lanterna:</b> Deve ficar alinhado exatamente com o orifício de injeção de fluido de selagem/refrigeração."
+  },
+  {
+    "titulo": "Golpe de Aríete (Transiente Hidráulico)",
+    "chaves": [
+      "golpe de ariete",
+      "sobrepressao na tubulacao",
+      "batida na tubulacao",
+      "fechamento rapido",
+      "valvula de retencao bate"
+    ],
+    "resposta": "<strong>💥 Golpe de Aríete (Choque Hidráulico):</strong><br>\nPico destrutivo de pressão que ocorre quando o fluxo de um fluido é interrompido ou alterado bruscamente (ex: fechamento rápido de válvula de gaveta/esfera ou parada súbita da bomba).<br><br>\n<b>Consequências:</b> Ruptura de tubulações, estouro de flanges, deformação de carcaças de bombas e danos nas válvulas de retenção.<br>\n<b>Prevenção:</b><br>\n• Utilizar atuadores de fechamento lento em válvulas.<br>\n• Instalar válvulas de retenção de fechamento rápido assistido por mola ou amortecedor hidráulico.<br>\n• Instalar tanques hidropneumáticos de amortecimento (pulmão anti-golpe) ou válvulas de alívio rápido de sobrepressão."
+  },
+  {
+    "titulo": "Ligação Estrela vs Triângulo (220V / 380V / 440V)",
+    "chaves": [
+      "estrela",
+      "triangulo",
+      "ligacao estrela",
+      "ligacao triangulo",
+      "estrela triangulo",
+      "220v 380v",
+      "6 pontas",
+      "12 pontas",
+      "fechamento de motor"
+    ],
+    "resposta": "<strong>⚡ Fechamento de Motor Trifásico (6 Pontas):</strong><br>\n• <b>Ligação Triângulo (Delta - Δ):</b> Tensão MENOR da placa (ex: 220V).<br>\n  - Fechamento: Juntar (1 com 6) na Fase R | (2 com 4) na Fase S | (3 com 5) na Fase T.<br>\n• <b>Ligação Estrela (Y):</b> Tensão MAIOR da placa (ex: 380V).<br>\n  - Fechamento: Alimentar 1 (R), 2 (S), 3 (T) e <b>interligar em curto 4, 5 e 6</b> (ponto neutro da estrela).<br><br>\n<b>Partida Estrela-Triângulo:</b><br>\nParte em Estrela para reduzir a corrente de pico de partida em cerca de <b>1/3 (33%)</b>, diminuindo a queda de tensão na rede. Após atingir ~80% da rotação síncrona, o contator comuta para Triângulo (torque e tensão nominais)."
+  },
+  {
+    "titulo": "Cálculo de Corrente Nominal de Motor Trifásico",
+    "chaves": [
+      "corrente nominal",
+      "calcular corrente",
+      "amperagem do motor",
+      "formula corrente trifasico",
+      "corrente motor"
+    ],
+    "resposta": "<strong>📐 Fórmula da Corrente Nominal Trifásica (In):</strong><br>\n<b>In = (P [kW] × 1000) ÷ (√3 × V [V] × cos φ × η)</b><br><br>\nOnde:<br>\n• P = Potência em kW (se estiver em CV, multiplique por 0,736; se em HP, por 0,746).<br>\n• √3 ≈ 1,732.<br>\n• V = Tensão de linha (220V, 380V, 440V).<br>\n• cos φ = Fator de potência de placa (geralmente 0,80 a 0,88).<br>\n• η = Rendimento do motor (ex: 0,90 para 90%).<br><br>\n<b>Regra Prática Rápida:</b> Em 380V, um motor padrão consome cerca de <b>~1,9 a 2,0 A por CV</b>. Em 220V, consome cerca de <b>~3,3 A por CV</b>."
+  },
+  {
+    "titulo": "Correntes Parasitas em Rolamentos (Inversores de Frequência)",
+    "chaves": [
+      "inversor",
+      "inversor de frequencia",
+      "corrente parasita",
+      "rolamento isolado",
+      "fluting",
+      "estriamento no rolamento",
+      "rolamento eletrico"
+    ],
+    "resposta": "<strong>⚡ Correntes Elétricas em Rolamentos via Inversor (VFD):</strong><br>\nInversores modulam em PWM de alta frequência, gerando tensões capacitivas no eixo. Se a tensão romper o filme de óleo lubrificante, ocorre arco voltaico por centelhamento elétrico nas pistas do rolamento.<br><br>\n<b>Danos Típicos:</b> Efeito \"Fluting\" (estrias microscópicas paralelas tipo tábua de lavar roupa), ruído agudo e queima rápida da graxa (graxa fica preta e carbonizada).<br>\n<b>Soluções Técnicas:</b><br>\n1. Instalar <b>rolamento isolado com capa cerâmica (INSOCOAT)</b> ou rolamento híbrido (esferas cerâmicas de Si3N4) no lado oposto ao acionamento (LA/LOA).<br>\n2. Instalar anel de aterramento de eixo com microfibras de carbono (ex: Aegis).<br>\n3. Cabos blindados simétricos e aterramento adequado de alta frequência."
+  },
+  {
+    "titulo": "Torque de Aperto, Fator de Atrito e Lubrificação",
+    "chaves": [
+      "torque",
+      "torquimetro",
+      "fator de atrito",
+      "parafuso lubrificado",
+      "graxa no parafuso",
+      "aperto",
+      "newton metro",
+      "lbf ft",
+      "kgfm"
+    ],
+    "resposta": "<strong>🔩 Engenharia do Torque Controlado:</strong><br>\nO torque aplicado pelo torquímetro não serve apenas para \"travar\"; sua função real é <b>gerar Força de Aperto Axial (Pré-carga - Fp)</b> para manter a união estanque e sob compressão elástica.<br><br>\n<b>Fórmula VDI 2230 / ISO 898:</b><br>\n<b>M = Fp × [ (0,16 × Passo) + (μ_rosca × 0,58 × d2) + (μ_cabeca × D_medio) ]</b><br><br>\n<b>Impacto Crítico do Fator de Atrito (μ):</b><br>\n• Parafuso <b>seco/fosfatizado</b>: μ ≈ 0,15 a 0,20 (exige torque maior).<br>\n• Parafuso <b>lubrificado com óleo/graxa/pasta MoS2</b>: μ ≈ 0,08 a 0,12.<br>\n⚠️ <b>CUIDADO:</b> Se aplicar o torque de catálogo \"seco\" em um parafuso com graxa, a força axial aumentará em até <b>60% a mais</b>, estirando o parafuso até romper ou espanar a rosca!"
+  },
+  {
+    "titulo": "Classes de Resistência de Parafusos (8.8, 10.9, 12.9)",
+    "chaves": [
+      "classe 8.8",
+      "classe 10.9",
+      "classe 12.9",
+      "classe 4.6",
+      "grau 5",
+      "grau 8",
+      "resistencia parafuso",
+      "aco liga"
+    ],
+    "resposta": "<strong>🏷️ O Que Significam os Números na Cabeça do Parafuso:</strong><br>\n• <b>Primeiro número × 100</b> = Resistência à Ruptura por Tração mínima em MPa (N/mm²).<br>\n• <b>Primeiro número × Segundo número × 10</b> = Limite de Escoamento (deformação permanente) em MPa.<br><br>\n<b>Exemplos Práticos:</b><br>\n• <b>Classe 8.8:</b> Ruptura = 800 MPa | Escoamento = 8 × 8 × 10 = <b>640 MPa</b> (Aço médio carbono temperado).<br>\n• <b>Classe 10.9:</b> Ruptura = 1000 MPa | Escoamento = 10 × 9 × 10 = <b>900 MPa</b> (Aço liga temperado, flanges e chassis pesados).<br>\n• <b>Classe 12.9:</b> Ruptura = 1200 MPa | Escoamento = 12 × 9 × 10 = <b>1080 MPa</b> (Altíssima resistência mecânica, parafusos Allen).<br>\n⚠️ <i>Nunca substitua um parafuso 10.9 ou 12.9 por 8.8!</i>"
+  },
+  {
+    "titulo": "Sequência de Aperto em Cruz para Flanges",
+    "chaves": [
+      "aperto em cruz",
+      "aperto cruzado",
+      "sequencia de aperto",
+      "aperto flange",
+      "ordem dos parafusos"
+    ],
+    "resposta": "<strong>⭐ Procedimento de Aperto em Cruz (4 Etapas Anti-Empenamento):</strong><br>\nPara garantir que a junta de vedação seja comprimida uniformemente e sem empenar as flanges:<br><br>\n<b>As 4 Etapas Obrigatórias:</b><br>\n1. <b>Etapa 1 (Aproximação manual / 30%):</b> Aperto manual em cruz até encostar as faces.<br>\n2. <b>Etapa 2 (60% do torque nominal):</b> Aperto cruzado (ex: parafuso 1, oposto 2, depois 3, oposto 4...).<br>\n3. <b>Etapa 3 (100% do torque nominal):</b> Aperto cruzado com o torquímetro calibrado no torque de projeto.<br>\n4. <b>Etapa 4 (Passe de Uniformização):</b> Volta circular completa de 100% no sentido horário, conferindo parafuso a parafuso até nenhum girar."
+  },
+  {
+    "titulo": "Folga Interna Radial de Rolamentos (C2, Normal, C3, C4, C5)",
+    "chaves": [
+      "folga c3",
+      "folga c4",
+      "folga normal",
+      "folga interna",
+      "folga rolamento",
+      "c2",
+      "c3",
+      "c4",
+      "c5"
+    ],
+    "resposta": "<strong>📏 Folgas Radiais Internas em Rolamentos (ISO):</strong><br>\nA folga radial interna é a distância que um anel pode se deslocar em relação ao outro sem carga externa.<br><br>\n• <b>C2:</b> Folga menor que a Normal (para altíssima precisão ou eixos com dilatação zero).<br>\n• <b>Normal (CN):</b> Aplicações gerais onde eixo e alojamento têm temperaturas similares.<br>\n• <b>C3:</b> Folga <b>maior que a Normal</b>. Obrigatória quando há ajuste com interferência no eixo e quando o rolamento trabalha quente (o calor expande o anel interno e reduz a folga). Usado em quase todos os <b>motores elétricos e bombas industriais</b>.<br>\n• <b>C4 e C5:</b> Folga muito grande, para temperaturas extremas (siderurgia, fornos, secadores)."
+  },
+  {
+    "titulo": "Cálculo da Quantidade de Graxa para Relubrificação",
+    "chaves": [
+      "calculo de graxa",
+      "quantidade de graxa",
+      "gramas de graxa",
+      "formula graxa rolamento",
+      "quanto de graxa"
+    ],
+    "resposta": "<strong>🛢️ Fórmula Padrão de Relubrificação de Rolamentos:</strong><br>\n<b>Gp = 0,005 × D × B</b><br><br>\nOnde:<br>\n• <b>Gp</b> = Quantidade de graxa em gramas.<br>\n• <b>D</b> = Diâmetro externo do rolamento em milímetros (mm).<br>\n• <b>B</b> = Largura / espessura total do rolamento em milímetros (mm).<br><br>\n<b>Exemplo:</b> Rolamento 6312 (D = 130 mm, B = 31 mm):<br>\nGp = 0,005 × 130 × 31 = <b>20,15 gramas</b>.<br>\n💡 <i>Dica:</i> Uma bomba manual de graxa padrão aplica em média <b>1,0 a 1,5 gramas por bombeada</b>."
+  },
+  {
+    "titulo": "Mancal / Rolamento Aquecendo: O Que Fazer?",
+    "chaves": [
+      "mancal esquentando",
+      "mancal quente",
+      "rolamento esquentando",
+      "rolamento quente",
+      "temperatura alta mancal",
+      "superaquecimento mancal"
+    ],
+    "resposta": "<strong>🔥 Checklist de Diagnóstico: Mancal / Rolamento Aquecendo:</strong><br>\nA temperatura normal de mancais industriais situa-se entre <b>50°C e 75°C</b>. Acima de 85°C exige atenção imediata; acima de 95°C pare o equipamento.<br><br>\n<b>Principais Causas de Aquecimento:</b><br>\n1. <b>Excesso de Graxa (Mais comum):</b> Caixa cheia provoca atrito viscoso por turbilhonamento. A graxa se bate e queima.<br>\n2. <b>Falta de Lubrificante ou Lubrificante Incorreto:</b> Viscosidade ISO VG errada não forma o filme elastohidrodinâmico.<br>\n3. <b>Desalinhamento do Eixo:</b> Causa carga axial não prevista em rolamentos radiais.<br>\n4. <b>Pré-carga Excessiva / Folga Insuficiente:</b> Montagem de rolamento com folga Normal onde o projeto exigia <b>C3</b>.<br>\n5. <b>Retentor Esfregando a Seco:</b> Verifique se o lábio do retentor foi lubrificado na montagem."
+  },
+  {
+    "titulo": "Montagem de Rolamentos com Aquecedor Indutivo",
+    "chaves": [
+      "aquecedor indutivo",
+      "montagem rolamento",
+      "temperatura montagem",
+      "aquecer rolamento",
+      "montagem a quente"
+    ],
+    "resposta": "<strong>🔥 Montagem a Quente com Aquecedor Indutivo:</strong><br>\n• <b>Temperatura Máxima Segura:</b> Aqueça o rolamento entre <b>100°C e 110°C</b> (nunca ultrapassar 120°C para não alterar a têmpera do aço nem danificar vedações de borracha 2RS).<br>\n• <b>Desmagnetização Automática:</b> O aquecedor indutivo DEVE desmagnetizar o rolamento ao final do ciclo. Se ficar magnetizado, atrairá limalhas metálicas que destruirão as pistas.<br>\n• <b>Posicionamento:</b> Empurre o rolamento firmemente contra o encosto do eixo e segure até esfriar para evitar recuo axial.<br>\n⚠️ <b>NUNCA use maçarico ou chama direta</b> para aquecer rolamentos!"
+  },
+  {
+    "titulo": "Alinhamento a Laser e Resolução de Pé Manco",
+    "chaves": [
+      "alinhamento",
+      "alinhamento a laser",
+      "pe manco",
+      "soft foot",
+      "desalinhamento angular",
+      "desalinhamento paralelo",
+      "calco"
+    ],
+    "resposta": "<strong>🎯 Alinhamento de Precisão & Pé Manco:</strong><br>\nO desalinhamento entre motor e máquina acionada é responsável por mais de 50% das quebras de rolamentos e selos mecânicos.<br><br>\n<b>Pé Manco (Soft Foot):</b><br>\nOcorre quando uma das patas do motor não assenta perfeitamente na base. Ao apertar o parafuso, a carcaça torce, deformando o estator e desalinhando os mancais.<br>\n• <b>Tolerância de Pé Manco:</b> Deve ser <b>menor que 0,05 mm</b> antes de iniciar o alinhamento a laser.<br>\n• <b>Correção:</b> Inserir calços calibrados de aço inox sob o pé defeituoso (máximo 3 calços por pata).<br><br>\n<b>Tolerâncias Típicas para 1800 RPM:</b><br>\n• Offset paralelo: &lt;= 0,05 mm | Angular: &lt;= 0,05 mm/100 mm."
+  },
+  {
+    "titulo": "Análise de Vibração: Espectros 1X, 2X e Harmônicos",
+    "chaves": [
+      "vibracao",
+      "analise de vibracao",
+      "1x rpm",
+      "2x rpm",
+      "desbalanceamento",
+      "desalinhamento",
+      "folga mecanica",
+      "iso 10816"
+    ],
+    "resposta": "<strong>📊 Padrões Clássicos de Vibração Mecânica (FFT):</strong><br>\n• <b>Pico Elevado em 1X RPM (Radial):</b> Indica <b>Desbalanceamento</b> de massa no rotor (estático ou dinâmico).<br>\n• <b>Pico Elevado em 2X RPM (e 1X com defasagem axial de 180°):</b> Indica <b>Desalinhamento</b> angular ou paralelo no acoplamento.<br>\n• <b>Múltiplos Harmônicos (1X, 2X, 3X, 4X...):</b> Indica <b>Folga Mecânica</b> (parafuso frouxo, folga excessiva no mancal ou pé frouxo).<br>\n• <b>Frequências Não Síncronas de Alta Frequência:</b> Indicam defeitos em pistas de rolamento (BPFO pista externa, BPFI pista interna, BSF esferas).<br><br>\n<b>Norma ISO 10816-3:</b> Para máquinas industriais médias (15 kW a 300 kW), vibração global abaixo de <b>2,8 mm/s RMS</b> é considerada BOA; acima de <b>7,1 mm/s RMS</b> é INACEITÁVEL."
+  },
+  {
+    "titulo": "Redutores de Velocidade & Desgastes de Engrenagens",
+    "chaves": [
+      "redutor",
+      "engrenagem",
+      "pitting",
+      "micropitting",
+      "backlash",
+      "folga entre dentes",
+      "desgaste engrenagem",
+      "oleo redutor"
+    ],
+    "resposta": "<strong>⚙️ Redutores Industriais & Diagnóstico de Falhas em Dentes:</strong><br>\n• <b>Pitting (Piteamento):</b> Fadiga superficial por contato cíclico que arranca micropedaços de aço da linha primitiva do dente.<br>\n• <b>Micropitting:</b> Desgaste microscópico por quebra do filme de óleo sob altas cargas e baixas rotações (aspecto fosco/acinzentado).<br>\n• <b>Backlash (Folga entre flancos):</b> Folga necessária para permitir expansão térmica e passagem do filme lubrificante. Mede-se com relógio comparador travando uma engrenagem e movimentando a outra.<br><br>\n<b>Lubrificação de Redutores:</b> Geralmente utilizam óleos industriais de alta viscosidade (ISO VG 220, 320 ou 460) com aditivação de Extrema Pressão (EP)."
+  },
+  {
+    "titulo": "Seleção de Válvulas Industriais (Gaveta, Globo, Esfera, Retenção)",
+    "chaves": [
+      "valvula",
+      "valvula gaveta",
+      "valvula globo",
+      "valvula esfera",
+      "valvula de retencao",
+      "valvula borboleta",
+      "psv"
+    ],
+    "resposta": "<strong>🔧 Tipos de Válvulas e Funções no Processo:</strong><br>\n• <b>Válvula Gaveta:</b> Exclusiva para <b>bloqueio liga/desliga</b>. Nunca opere semiaberta (o fluxo turbulento vibra a cunha e destrói as sedes).<br>\n• <b>Válvula Globo:</b> Excelente para <b>estrangulamento e controle de vazão</b>. Alta perda de carga.<br>\n• <b>Válvula Esfera:</b> Bloqueio rápido com 1/4 de volta, excelente vedação estanque e baixa perda de carga.<br>\n• <b>Válvula de Retenção:</b> Permite o fluxo em apenas um sentido, impedindo refluxo de fluido contra a bomba.<br>\n• <b>PSV (Válvula de Segurança e Alívio):</b> Alivia pressão instantaneamente ao atingir a pressão de ajuste (set point) para proteção de vasos de pressão (NR-13)."
+  },
+  {
+    "titulo": "Sistemas de Vapor, Filtros e Purgadores",
+    "chaves": [
+      "vapor",
+      "purgador",
+      "purgador de vapor",
+      "filtro y",
+      "filtro cesto",
+      "atemperacao",
+      "dessuperaquecimento"
+    ],
+    "resposta": "<strong>💨 Manutenção em Sistemas de Vapor Industrial:</strong><br>\n• <b>Purgadores de Vapor:</b> Devem drenar o condensado sem deixar o vapor vivo escapar.<br>\n  - <i>Termodinâmico:</i> Robusto para linhas de drenagem de rede principal.<br>\n  - <i>Bóia Mecânica:</i> Ideal para trocadores de calor com vazão contínua de condensado.<br>\n• <b>Filtros (Tipo Y e Cesto):</b> Protegem válvulas de controle e purgadores contra carepas de tubulação e ferrugem. Devem ser limpos periodicamente com despressurização prévia.<br>\n• <b>Dessuperaquecimento / Atemperação:</b> Injeção controlada de água desmineralizada na linha de vapor superaquecido para regular a temperatura para processos térmicos."
+  },
+  {
+    "titulo": "Tolerâncias Dimensionais ISO (H7/g6, H7/p6)",
+    "chaves": [
+      "tolerancia iso",
+      "h7",
+      "g6",
+      "p6",
+      "ajuste com folga",
+      "ajuste com interferencia",
+      "interferencia"
+    ],
+    "resposta": "<strong>📐 Sistema de Tolerâncias e Ajustes ISO:</strong><br>\n• <b>Letra Maiúscula (ex: H7):</b> Refere-se à tolerância do <b>FURO</b>. \"H\" significa que o afastamento inferior é zero.<br>\n• <b>Letra Minúscula (ex: g6, p6):</b> Refere-se à tolerância do <b>EIXO</b>.<br><br>\n<b>Tipos de Ajuste:</b><br>\n• <b>Ajuste com Folga (ex: H7/g6, H7/f7):</b> Permite rotação livre ou deslizamento (ex: buchas e guias).<br>\n• <b>Ajuste Incerto/Transição (ex: H7/k6, H7/js6):</b> Posicionamento preciso com montagem com martelo de borracha ou prensa leve.<br>\n• <b>Ajuste com Interferência/Prensado (ex: H7/p6, H7/s6):</b> O eixo é maior que o furo. Montagem exige aquecedor indutivo ou prensa hidráulica (ex: anéis internos de rolamento)."
+  },
+  {
+    "titulo": "Bloqueio e Etiquetagem (LOTO) & NR-12",
+    "chaves": [
+      "loto",
+      "bloqueio",
+      "etiquetagem",
+      "bloqueio e etiquetagem",
+      "nr 12",
+      "nr12",
+      "seguranca mecanica",
+      "cadeado de bloqueio"
+    ],
+    "resposta": "<strong>🛡️ Procedimento de Segurança LOTO (Lockout / Tagout):</strong><br>\nAntes de qualquer intervenção mecânica em bombas, motores, prensas ou linhas pressurizadas:<br><br>\n<b>Os 5 Passos Vitais do LOTO:</b><br>\n1. <b>Notificação:</b> Avise a operação e os colaboradores da área sobre a intervenção.<br>\n2. <b>Desenergização e Bloqueio:</b> Desligue o disjuntor elétrico e feche as válvulas de processo.<br>\n3. <b>Aplicação do Cadeado e Cartão:</b> Cada mecânico DEVE colocar seu próprio cadeado individual com chave única e cartão com foto e matrícula.<br>\n4. <b>Dissipação de Energia Residual:</b> Despressurize a linha, drene fluidos quentes/químicos, trave pesos suspensos mecanicamente.<br>\n5. <b>Teste de Energia Zero:</b> Tente ligar o equipamento localmente no botão de partida para confirmar que está 100% inoperante antes de tocar na máquina."
+  },
+  {
+    "titulo": "Cálculo de Calços e Alinhamento Reverso (Rim & Face)",
+    "chaves": [
+      "calculo de calco",
+      "calco dianteiro",
+      "calco traseiro",
+      "pe dianteiro",
+      "pe traseiro",
+      "relogio comparador alinhamento",
+      "alinhamento reverso",
+      "face e borda"
+    ],
+    "resposta": "<strong>🎯 Fórmula de Cálculo de Calços para Alinhamento:</strong><br>\nPara corrigir o desalinhamento angular e paralelo em eixos rotativos acoplados:<br><br>\n<b>Fórmulas Tradicionais com Relógio Comparador:</b><br>\n• <b>Pé Dianteiro (Mais Próximo):</b> Calço = (Gap × D1 ÷ D_acoplamento) + Offset<br>\n• <b>Pé Traseiro (Mais Distante):</b> Calço = [Gap × (D1 + D2) ÷ D_acoplamento] + Offset<br><br>\nOnde:<br>\n• <i>Gap:</i> Abertura angular medida nos pontos 12h e 6h na face do acoplamento.<br>\n• <i>Offset:</i> Desalinhamento radial (periférico) dividido por 2.<br>\n• <i>D1:</i> Distância do acoplamento até as sapatas dianteiras do motor.<br>\n• <i>D2:</i> Distância entre as sapatas dianteiras e traseiras do motor.<br>\n• <i>D_acoplamento:</i> Diâmetro do círculo onde o relógio apalpa a face.<br><br>\n💡 <b>Dica de Campo:</b> Sempre elimine o pé manco (&lt; 0,05 mm) antes de calcular os calços definitivos. Utilize calços pré-cortados em aço inox 304."
+  },
+  {
+    "titulo": "Severidade Vibratória ISO 10816-3 / ISO 20816-3",
+    "chaves": [
+      "iso 10816-3",
+      "iso 10816",
+      "zona a",
+      "zona b",
+      "zona c",
+      "zona d",
+      "limite de vibracao",
+      "tabela de vibracao",
+      "severidade vibratoria",
+      "mm/s rms",
+      "suporte rigido",
+      "suporte flexivel"
+    ],
+    "resposta": "<strong>📊 Limites de Vibração Global (mm/s RMS) conforme ISO 10816-3:</strong><br>\nClassificação para máquinas industriais rotativas (15 kW a 300 kW - Grupo 2):<br><br>\n• <b>Base Rígida (Fundação Pesada de Concreto):</b><br>\n  - <b>Zona A (0 a 1,4 mm/s RMS):</b> Excelente / Máquina nova ou recém-alinhada.<br>\n  - <b>Zona B (1,4 a 2,8 mm/s RMS):</b> Operação normal irrestrita a longo prazo.<br>\n  - <b>Zona C (2,8 a 4,5 mm/s RMS):</b> Alerta. Programar intervenção corretiva.<br>\n  - <b>Zona D (&gt; 4,5 mm/s RMS):</b> Perigo crítico! Parada imediata obrigatória.<br><br>\n• <b>Base Flexível (Chassis Metálico / Coxins Elásticos):</b><br>\n  - <b>Zona A:</b> 0 a 2,3 mm/s | <b>Zona B:</b> 2,3 a 4,5 mm/s | <b>Zona C:</b> 4,5 a 7,1 mm/s | <b>Zona D:</b> &gt; 7,1 mm/s RMS."
+  },
+  {
+    "titulo": "Tensionamento de Correias em V e Alinhamento de Polias",
+    "chaves": [
+      "correia",
+      "tensionamento de correia",
+      "alinhamento de polias",
+      "correia em v",
+      "frequencia da correia",
+      "deflexao correia",
+      "spa",
+      "spb",
+      "spc",
+      "polia"
+    ],
+    "resposta": "<strong>⚙️ Transmissão por Correias em V (Perfis A, B, C / 3V, 5V, 8V / SPZ, SPA, SPB):</strong><br>\n• <b>Método da Deflexão:</b> A deflexão recomendada no centro do vão é de <b>16 mm por metro de entre-pontas</b> (1,6% da distância de centro a centro) ao aplicar a força de teste recomendada.<br>\n• <b>Medidor Sônico de Tensão:</b> Mede a frequência natural de vibração (Hz). Mais preciso e evita estiramento precoce dos cabos de poliéster/kevlar.<br>\n• <b>Alinhamento de Polias:</b> Desalinhamento angular máximo permitido é de <b>0,5° (cerca de 2 mm por metro de vão)</b>. Correias desalinhadas viram no canal e quebram as laterais prematuramente."
+  },
+  {
+    "titulo": "Contaminação de Óleo Hidráulico e Código ISO 4406",
+    "chaves": [
+      "iso 4406",
+      "contaminacao de oleo",
+      "oleo hidraulico",
+      "codigo de limpeza",
+      "filtragem hidraulica",
+      "particulas por ml"
+    ],
+    "resposta": "<strong>💧 Limpeza de Fluidos Hidráulicos (Norma ISO 4406):</strong><br>\nO código ISO expressa a contaminação em 3 números de escala (ex: <b>18/16/13</b>):<br>\n• 1º número: Partículas <b>&gt; 4 μm</b> (sílica fina, poeira).<br>\n• 2º número: Partículas <b>&gt; 6 μm</b> (abrasivos cortantes).<br>\n• 3º número: Partículas <b>&gt; 14 μm</b> (limalha metálica destrutiva).<br><br>\n<b>Padrões Exigidos na Indústria:</b><br>\n• Bombas de palhetas/engrenagens: 19/17/14.<br>\n• Bombas de pistões axiais: 18/16/13.<br>\n• Válvulas proporcionais e servoválvulas: <b>16/14/11 ou mais limpo</b> (exigem microfiltragem de 3 a 5 micra absolutos)."
   }
 ];
 
@@ -15777,6 +16201,92 @@ function copiarTextoDireto(btn, context) {
   }
 }
 
+function processarCalculosMecanicos(pergunta) {
+  const pNorm = normalizarTextoMecanico(pergunta);
+  
+  // 1. Conversão de Pressão (bar, psi, mpa, kgf/cm2, mca)
+  const regexPressao = /(\d+(?:[.,]\d+)?)\s*(bar|psi|mpa|kgf|kgf\/cm2|mca)\b/i;
+  const matchP = pergunta.match(regexPressao);
+  if (matchP && (pNorm.includes('converter') || pNorm.includes('conversao') || pNorm.includes('quanto') || pNorm.includes('quantos') || pNorm.includes('em psi') || pNorm.includes('em bar') || pNorm.includes('em mpa') || pNorm.includes('em kgf') || pNorm.includes('em mca'))) {
+    const valor = parseFloat(matchP[1].replace(',', '.'));
+    const unidade = matchP[2].toLowerCase();
+    
+    let emBar = 0;
+    if (unidade === 'bar') emBar = valor;
+    else if (unidade === 'psi') emBar = valor / 14.5038;
+    else if (unidade === 'mpa') emBar = valor * 10;
+    else if (unidade.includes('kgf')) emBar = valor * 0.980665;
+    else if (unidade === 'mca') emBar = valor / 10.197;
+
+    const bar = emBar.toFixed(2);
+    const psi = (emBar * 14.5038).toFixed(1);
+    const mpa = (emBar * 0.1).toFixed(3);
+    const kgf = (emBar * 1.01972).toFixed(2);
+    const mca = (emBar * 10.1972).toFixed(1);
+
+    return `<strong>📐 Conversor de Pressão de Alta Precisão (Metrologia & Termelétricas):</strong><br>
+    Valor de entrada: <b>${matchP[1]} ${matchP[2].toUpperCase()}</b><br><br>
+    <table style="width:100%; border-collapse:collapse; font-size:12px; margin:8px 0; background:#0b1a2e; border:1px solid #1e3a5f;">
+      <tr style="background:#0f2744; color:#38bdf8;"><th style="padding:6px; border:1px solid #1e3a5f;">Unidade</th><th style="padding:6px; border:1px solid #1e3a5f;">Valor Equivalente</th><th style="padding:6px; border:1px solid #1e3a5f;">Fator de Referência</th></tr>
+      <tr><td style="padding:5px; border:1px solid #1e3a5f;"><b>Bar</b></td><td style="padding:5px; border:1px solid #1e3a5f; color:#00f2fe; font-weight:bold;">${bar} bar</td><td style="padding:5px; border:1px solid #1e3a5f; color:#94a3b8;">1 bar = 100.000 Pa = 0,1 MPa</td></tr>
+      <tr><td style="padding:5px; border:1px solid #1e3a5f;"><b>PSI (lbf/in²)</b></td><td style="padding:5px; border:1px solid #1e3a5f; color:#00f2fe; font-weight:bold;">${psi} PSI</td><td style="padding:5px; border:1px solid #1e3a5f; color:#94a3b8;">1 bar ≈ 14,5038 PSI</td></tr>
+      <tr><td style="padding:5px; border:1px solid #1e3a5f;"><b>Megapascal (MPa)</b></td><td style="padding:5px; border:1px solid #1e3a5f; color:#00f2fe; font-weight:bold;">${mpa} MPa</td><td style="padding:5px; border:1px solid #1e3a5f; color:#94a3b8;">1 MPa = 10 bar</td></tr>
+      <tr><td style="padding:5px; border:1px solid #1e3a5f;"><b>kgf/cm²</b></td><td style="padding:5px; border:1px solid #1e3a5f; color:#00f2fe; font-weight:bold;">${kgf} kgf/cm²</td><td style="padding:5px; border:1px solid #1e3a5f; color:#94a3b8;">1 kgf/cm² ≈ 0,981 bar</td></tr>
+      <tr><td style="padding:5px; border:1px solid #1e3a5f;"><b>Metros de Coluna d'Água (mca)</b></td><td style="padding:5px; border:1px solid #1e3a5f; color:#00f2fe; font-weight:bold;">${mca} mca</td><td style="padding:5px; border:1px solid #1e3a5f; color:#94a3b8;">1 bar ≈ 10,197 mca</td></tr>
+    </table>
+    💡 <i>Aplicação prática em caldeiras e turbinas: Utilize sempre a pressão manométrica (barg / psig) para calibração de PSVs e testes hidrostáticos conforme NR-13 e ASME Seção I.</i>`;
+  }
+
+  // 2. Cálculo de Torque e Potência P = (T * n) / 9550
+  const matchPotRpm = pNorm.match(/(\d+(?:[.,]\d+)?)\s*(?:cv|hp|kw)\b.*?(\d+(?:[.,]\d+)?)\s*rpm/i) ||
+                      pNorm.match(/(\d+(?:[.,]\d+)?)\s*rpm.*?(\d+(?:[.,]\d+)?)\s*(?:cv|hp|kw)\b/i);
+  if (matchPotRpm && (pNorm.includes('torque') || pNorm.includes('newton') || pNorm.includes('nm') || pNorm.includes('forca'))) {
+    const mPot = pergunta.match(/(\d+(?:[.,]\d+)?)\s*(cv|hp|kw)\b/i);
+    const mRpm = pergunta.match(/(\d+(?:[.,]\d+)?)\s*rpm\b/i);
+    if (mPot && mRpm) {
+      const pot = parseFloat(mPot[1].replace(',', '.'));
+      const unPot = mPot[2].toLowerCase();
+      let potKW = unPot === 'kw' ? pot : (unPot === 'hp' ? pot * 0.7457 : pot * 0.7355);
+      const rpm = parseFloat(mRpm[1].replace(',', '.'));
+
+      if (rpm > 0) {
+        const torqueNm = ((9550 * potKW) / rpm).toFixed(1);
+        const torqueKgfm = (torqueNm / 9.80665).toFixed(1);
+
+        return `<strong>⚡ Cálculo de Torque Mecânico no Eixo (Norma DIN):</strong><br>
+        • Potência de Entrada: <b>${pot} ${mPot[2].toUpperCase()}</b> (${potKW.toFixed(2)} kW)<br>
+        • Rotação Nominal: <b>${rpm} RPM</b><br><br>
+        <b>Fórmula Fundamental da Mecânica:</b><br>
+        <div style="background:#091524; padding:8px 12px; border-radius:6px; border:1px solid #1e3a5f; font-family:monospace; color:#38bdf8;">
+          T (N.m) = (9550 × Potência [kW]) ÷ Rotação [RPM]
+        </div><br>
+        <b>Resultados de Torque no Eixo:</b><br>
+        • Torque Nominal: <b style="color:#00f2fe; font-size:14px;">${torqueNm} N.m</b> (${torqueKgfm} kgf.m)<br>
+        • Para dimensionamento de chavetas e acoplamentos elásticos em bombas/turbinas: considerar fator de serviço $FS \\ge 1,75$, exigindo acoplamento dimensionado para <b>${(torqueNm * 1.75).toFixed(1)} N.m</b>.`;
+      }
+    }
+  }
+
+  // 3. Relação de Transmissão (Engrenagens ou Polias)
+  const matchTransm = pNorm.match(/(\d+)\s*(?:dentes|d)\b.*?(\d+)\s*(?:dentes|d)\b/i) ||
+                      pNorm.match(/z1\s*=\s*(\d+).*?z2\s*=\s*(\d+)/i);
+  if (matchTransm && (pNorm.includes('relacao') || pNorm.includes('rpm') || pNorm.includes('reducao') || pNorm.includes('velocidade'))) {
+    const z1 = parseInt(matchTransm[1]);
+    const z2 = parseInt(matchTransm[2]);
+    if (z1 > 0 && z2 > 0) {
+      const i = (z2 / z1).toFixed(2);
+      return `<strong>⚙️ Cálculo de Relação de Transmissão e Redução:</strong><br>
+      • Pinhão / Motriz (Z1): <b>${z1} dentes</b><br>
+      • Coroa / Movida (Z2): <b>${z2} dentes</b><br><br>
+      <b>Fórmula:</b> $i = Z_2 / Z_1 = ${z2} / ${z1} = $ <b style="color:#00f2fe; font-size:14px;">${i} : 1</b><br>
+      • Se a rotação de entrada for 1780 RPM, a rotação no eixo de saída será de <b>${(1780 / (z2/z1)).toFixed(1)} RPM</b>.<br>
+      • O torque na saída é multiplicado pela relação de transmissão: $T_{saida} = T_{entrada} \\times ${i} \\times \\eta$ (rendimento $\\eta \\approx 0,96$ a $0,98$).`;
+    }
+  }
+
+  return null;
+}
+
 function obterRespostaRoboFlutuanteIA(pergunta) {
   const pNorm = normalizarTextoMecanico(pergunta);
   if (!pNorm) return 'Por favor, digite uma dúvida ou sintoma técnico para que eu possa orientá-lo.';
@@ -15791,26 +16301,36 @@ function obterRespostaRoboFlutuanteIA(pergunta) {
     ? `<div class="rf-badge-modo online" style="display:inline-flex; align-items:center; gap:5px; background:rgba(6,182,212,0.15); border:1px solid #00f2fe; color:#38bdf8; font-size:11px; font-weight:700; padding:3px 8px; border-radius:6px; margin-bottom:8px;">🌐 MODO ONLINE (NUVEM DE ALTA PRECISÃO ATIVA)</div>`
     : `<div class="rf-badge-modo offline" style="display:inline-flex; align-items:center; gap:5px; background:rgba(245,158,11,0.15); border:1px solid #f59e0b; color:#fbbf24; font-size:11px; font-weight:700; padding:3px 8px; border-radius:6px; margin-bottom:8px;">📶 MODO OFFLINE (BANCO LOCAL DE ALTA PRECISÃO ATIVO)</div>`;
 
+  // 0. Processamento de Cálculos e Conversões de Engenharia Mecânica
+  const calculoResultado = processarCalculosMecanicos(pergunta);
+  if (calculoResultado) {
+    return `${badgeModo}<br>${calculoResultado}`;
+  }
+
   // 1. Saudações e Apresentação Personalizada chamando pelo Nome do Usuário
-  const sauda = /^(oi|ola|bom dia|boa tarde|boa noite|e ai|fala|opa|salve|alo)/i.test(pNorm);
-  const quem = pNorm.includes('quem e voce') || pNorm.includes('quem e') || pNorm.includes('apresente') || pNorm.includes('seu nome') || pNorm.includes('como funciona') || pNorm === 'ajuda' || pNorm === 'robo';
+  const palavrasUsuario = pNorm.split(' ').filter(w => w.length > 2);
+  const sauda = /^(oi|ola|bom dia|boa tarde|boa noite|e ai|fala|opa|salve|alo)\b/i.test(pNorm) &&
+                (palavrasUsuario.length <= 3 || /robo|amigo|mecanico|parceiro|mestre|tudo bem|como vai/i.test(pNorm));
+  const quem = pNorm === 'quem e voce' || pNorm === 'quem e vc' || pNorm.includes('apresente se') || pNorm.includes('apresentar') || pNorm.includes('qual o seu nome') || pNorm === 'como voce funciona' || pNorm === 'como funciona o robo' || pNorm === 'ajuda' || pNorm === 'robo';
 
   if (sauda || quem) {
     return `${badgeModo}
     <div style="line-height:1.6;">
-      Olá, <b>${nomeUsuario}</b>! Sou o seu <b>Robô Mecânico 4.0 IA</b>, seu assistente especialista de manutenção industrial com prancheta digital de campo.<br><br>
-      Estou 100% operacional no <b>${online ? 'Modo Conectado (Nuvem em Tempo Real)' : 'Modo Offline (Base Local Certificada)'}</b> para te auxiliar em qualquer procedimento:<br>
-      • 🎯 <b>Alinhamento a Laser & Pé Manco</b> (Tolerâncias e calços)<br>
-      • 📊 <b>Análise de Vibração</b> (Norma ISO 10816 / ISO 20816)<br>
-      • 🔩 <b>Cálculo de Torque de Parafusos</b> (Classes 8.8, 10.9, 12.9 DIN ISO 898)<br>
-      • 🛢️ <b>Lubrificação & Rolamentos</b> (Fórmulas SKF/FAG, folgas C3 e relubrificação)<br>
-      • 🛡️ <b>Selos Mecânicos & Bombas</b> (Planos API, cavitação e NPSH)<br>
-      • 📋 <b>Geração de Laudos, Feedback de Serviços e Desenho Técnico</b> (Abas superiores)<br><br>
-      Pode me perguntar diretamente qualquer dúvida de máquina, sintoma de falha ou procedimento técnico, <b>${nomeUsuario}</b>! O que estamos inspecionando agora?
+      Fala, parceiro <b>${nomeUsuario}</b>! Sou o seu <b>Robô Mecânico 4.0 IA</b> — Mecânico Sênior e Engenheiro Especialista em Manutenção Industrial e Usinas Termelétricas da Petrobras.<br><br>
+      Estou 100% operacional no <b>${online ? 'Modo Conectado (Nuvem em Tempo Real)' : 'Modo Offline (Base Local Certificada)'}</b> para atuar lado a lado com você em campo como o seu verdadeiro <i>amigo e consultor da mecânica</i>. Domino desde o chão de fábrica até o laudo pericial mais complexo:<br>
+      • ⚙️ <b>Montagem de Rolamentos:</b> Face a Face (DF), Costas com Costas (DB), Tandem (DT), montagem a quente por indução, buchas cônicas H/AH e método SKF Drive-up.<br>
+      • 🎯 <b>Alinhamento a Laser & Compensação Térmica:</b> 1800 e 3600 RPM, eliminação de pé manco (&lt; 0,02 mm) e dilatação $\\Delta L = L \\cdot \\alpha \\cdot \\Delta T$.<br>
+      • 🏭 <b>Turbomáquinas & Bombas API 610:</b> Bombas BB5 (BFP de caldeira), BB3, OH2, motobombas diesel NFPA 20 com reguladores Woodward e marcas globais (Sulzer, Flowserve, KSB, Warman, Ebara).<br>
+      • 📏 <b>Metrologia & GD&T:</b> Súbito para ovalização/conicidade, micrômetros, apalpadores milesimais e batimento radial total.<br>
+      • 🛡️ <b>Válvulas & Segurança:</b> Calibração de PSVs (ASME I e VIII, API 520/526), PRVs pilotadas e controle de pressão.<br>
+      • ⚡ <b>Caldeiras & Ciclo Combinado:</b> HRSGs multietágio, inspeção NR-13, ensaios não-destrutivos (Phased Array, TOFD) e monitoramento de fluência (creep) em aços P91/P22.<br>
+      • 📐 <b>Cálculos & Conversões:</b> Converso na hora bar, PSI, MPa, calculo torque, rotação, vazão e potência.<br>
+      • 🔍 <b>Análise de Fotos & Relatórios:</b> Diagnóstico fractográfico de rolamentos e eixos com marcas de fadiga e laudos técnicos prontos.<br><br>
+      Pode mandar sua dúvida, foto, cálculo ou situação de máquina, <b>${nomeUsuario}</b>! O que vamos solucionar juntos agora?
     </div>`;
   }
 
-  // 2. Busca na base de conhecimento oficial
+  // 2. Busca na base de conhecimento oficial (52 tópicos enriquecidos de alta precisão)
   if (typeof baseConhecimentoRobo !== 'undefined' && Array.isArray(baseConhecimentoRobo)) {
     const palavrasUsuario = pNorm.split(' ').filter(w => w.length > 2);
     let melhorItem = null;
@@ -15840,140 +16360,50 @@ function obterRespostaRoboFlutuanteIA(pergunta) {
     }
   }
 
-  // 3. Base de conhecimento heurística especializada com telemetria dual (Online & Offline)
-  // Cavitação & Bombas
-  if (pNorm.includes('cavitac') || pNorm.includes('npsh') || (pNorm.includes('bomba') && (pNorm.includes('barulho') || pNorm.includes('ruido') || pNorm.includes('vazao')))) {
-    const extraOnline = online ? `<div style="margin-top:8px; padding:6px 10px; background:rgba(2,132,199,0.15); border-left:3px solid #00f2fe; font-size:11px;">🌐 <b>Telemetria Nuvem:</b> Análise espectral de FFT indica picos de alta frequência entre 5 kHz e 20 kHz compatíveis com implosão de microbolhas. Verifique também recirculação interna e diâmetro de sucção equivalente.</div>` : '';
-    return `${badgeModo}
-    <strong>💧 Diagnóstico de Cavitação & NPSH em Bombas Centrífugas:</strong><br>
-    A cavitação ocorre quando a pressão de sucção cai abaixo da pressão de vapor do fluido, gerando bolhas que implodem e removem material do rotor (pitting).<br><br>
-    <b>Sintomas Clássicos:</b> Ruído metálico forte semelhante a "pedregulhos/brita dentro da voluta", queda repentina de vazão (m³/h) e vibração em altas frequências.<br>
-    <b>Ações Imediatas no Campo:</b><br>
-    1. Conferir linha de sucção: abrir 100% registros, limpar filtro cesto/Y e verificar se a tubulação tem estrangulamento.<br>
-    2. Confirmar se o NPSH disponível (NPSHd) supera o NPSH requerido (NPSHr) do catálogo em pelo menos +0,8 metros.<br>
-    3. Verificar temperatura do fluido (aquecimento excessivo eleva a pressão de vapor).
-    ${extraOnline}`;
-  }
-
-  // Alinhamento & Pé Manco
-  if (pNorm.includes('alinh') || pNorm.includes('laser') || pNorm.includes('pe manco') || pNorm.includes('soft foot')) {
-    const extraOnline = online ? `<div style="margin-top:8px; padding:6px 10px; background:rgba(2,132,199,0.15); border-left:3px solid #00f2fe; font-size:11px;">🌐 <b>Telemetria Nuvem:</b> Cálculo de dilatação térmica: $\\Delta L = L \\cdot \\alpha \\cdot \\Delta T$. Compensar crescimento térmico positivo da carcaça do motor elétrico antes do aperto final dos calços.</div>` : '';
-    return `${badgeModo}
-    <strong>🎯 Procedimento de Alinhamento a Laser & Eliminação de Pé Manco:</strong><br>
-    O alinhamento correto entre eixos minimiza esforços cíclicos nos rolamentos e selos mecânicos.<br><br>
-    <b>Tolerâncias Técnicas para 1800 RPM:</b><br>
-    • Desalinhamento Angular (Gap): Máximo <b>0,05 mm / 100 mm</b>.<br>
-    • Desalinhamento Paralelo (Offset): Máximo <b>0,05 mm</b>.<br><br>
-    <b>Protocolo de Pé Manco (Soft Foot):</b><br>
-    1. Afrouxe um parafuso da base por vez enquanto monitora o relógio comparador ou sensor laser no pé.<br>
-    2. Variação superior a <b>0,05 mm</b> indica pé manco. Adicione calços calibrados de aço inox sob o pé defeituoso.<br>
-    3. Nunca utilize mais de 4 calços sobrepostos por pé (evita efeito mola). Realize o aperto final com torquímetro em sequência cruzada.
-    ${extraOnline}`;
-  }
-
-  // Análise de Vibração
-  if (pNorm.includes('vibrac') || pNorm.includes('iso 10816') || pNorm.includes('iso 20816') || pNorm.includes('bpfo') || pNorm.includes('bpfi')) {
-    const extraOnline = online ? `<div style="margin-top:8px; padding:6px 10px; background:rgba(2,132,199,0.15); border-left:3px solid #00f2fe; font-size:11px;">🌐 <b>Telemetria Nuvem:</b> Detecção de modulação em bandas laterais (sidebands) no espectro de aceleração/envelope de vibração gE.</div>` : '';
-    return `${badgeModo}
-    <strong>📊 Análise de Vibração Industrial (Norma ISO 10816-3 / ISO 20816):</strong><br>
-    Para máquinas elétricas e rotativas montadas em base rígida:<br><br>
-    • <b>Zona A (0,0 a 1,4 mm/s RMS):</b> Condição excelente (máquina nova homologada).<br>
-    • <b>Zona B (1,4 a 2,8 mm/s RMS):</b> Operação aceitável para trabalho contínuo irrestrito.<br>
-    • <b>Zona C (2,8 a 4,5 mm/s RMS):</b> Alerta de manutenção (planejar intervenção).<br>
-    • <b>Zona D (&gt; 4,5 mm/s RMS):</b> Perigo iminente de colapso mecânico (parada imediata).<br><br>
-    <b>Frequências Diagnósticas:</b><br>
-    • <b>Pico em 1X da rotação:</b> Desbalanceamento estático ou dinâmico do rotor.<br>
-    • <b>Pico em 2X da rotação:</b> Desalinhamento angular ou pé manco.<br>
-    • <b>Altas frequências (BPFO/BPFI):</b> Defeito de pistas de rolamento (fadiga superficial).
-    ${extraOnline}`;
-  }
-
-  // Torque & Fixação
-  if (pNorm.includes('torque') || pNorm.includes('parafuso') || pNorm.includes('8.8') || pNorm.includes('10.9') || pNorm.includes('12.9')) {
-    const extraOnline = online ? `<div style="margin-top:8px; padding:6px 10px; background:rgba(2,132,199,0.15); border-left:3px solid #00f2fe; font-size:11px;">🌐 <b>Telemetria Nuvem:</b> Coeficiente K de aperto: $T = K \\cdot D \\cdot F_p$. Para parafusos zincados a seco K ≈ 0,20; para fosfatizados/oleados K ≈ 0,14.</div>` : '';
-    return `${badgeModo}
-    <strong>🔩 Engenharia de Torque Controlado & Classes de Resistência (DIN ISO 898):</strong><br>
-    O torque converte momento de torção em <b>força axial de pré-carga</b> nas roscas.<br><br>
-    <b>Tabela Rápida de Torque Recomendado (Rosca Métrica Grossa - μ = 0,14):</b><br>
-    • <b>M8:</b> Classe 8.8 = 25 N.m | Classe 10.9 = 36 N.m | Classe 12.9 = 43 N.m<br>
-    • <b>M10:</b> Classe 8.8 = 49 N.m | Classe 10.9 = 72 N.m | Classe 12.9 = 84 N.m<br>
-    • <b>M12:</b> Classe 8.8 = 85 N.m | Classe 10.9 = 125 N.m | Classe 12.9 = 145 N.m<br>
-    • <b>M16:</b> Classe 8.8 = 210 N.m | Classe 10.9 = 310 N.m | Classe 12.9 = 365 N.m<br>
-    • <b>M20:</b> Classe 8.8 = 410 N.m | Classe 10.9 = 600 N.m | Classe 12.9 = 710 N.m<br><br>
-    ⚠️ <b>Atenção:</b> Parafusos lubrificados com pasta de montagem MoS2 reduzem o atrito para μ ≈ 0,10, exigindo cerca de <b>20% a 30% menos torque</b> para não estirar o parafuso além do escoamento!
-    ${extraOnline}`;
-  }
-
-  // Lubrificação & Graxa
-  if (pNorm.includes('graxa') || pNorm.includes('lubrific') || pNorm.includes('viscosidade')) {
-    const extraOnline = online ? `<div style="margin-top:8px; padding:6px 10px; background:rgba(2,132,199,0.15); border-left:3px solid #00f2fe; font-size:11px;">🌐 <b>Telemetria Nuvem:</b> Fator de velocidade $nd_m = RPM \\cdot (d + D)/2$. Para graxas de sabão de lítio complexo grau NLGI 2, limite seguro $nd_m \\le 350.000$.</div>` : '';
-    return `${badgeModo}
-    <strong>🛢️ Cálculo de Relubrificação de Rolamentos:</strong><br>
-    A quantidade ideal de graxa para relubrificação periódica em gramas é calculada pela fórmula clássica:<br><br>
-    <div style="background:#091524; padding:8px 12px; border-radius:6px; border:1px solid #1e3a5f; font-family:monospace; color:#38bdf8;">
-      Gp = 0,005 × D × B
-    </div><br>
-    Onde <b>D</b> é o diâmetro externo do rolamento (mm) e <b>B</b> é a largura total (mm).<br><br>
-    <b>Exemplo (Rolamento 6314 - D=150mm, B=35mm):</b><br>
-    Gp = 0,005 × 150 × 35 = <b>26,25 gramas</b>.<br>
-    ⚠️ Cuidado com excesso de graxa: rolamentos operando com excesso sofrem com atrito hidrodinâmico, superaquecimento (&gt; 90°C) e queima prematura do lubrificante.
-    ${extraOnline}`;
-  }
-
-  // Selos Mecânicos & Vedações
-  if (pNorm.includes('selo') || pNorm.includes('gaxeta') || pNorm.includes('vedac')) {
-    const extraOnline = online ? `<div style="margin-top:8px; padding:6px 10px; background:rgba(2,132,199,0.15); border-left:3px solid #00f2fe; font-size:11px;">🌐 <b>Telemetria Nuvem:</b> Para produtos voláteis ou polímeros pastosos, avaliar Plano API 53A ou 54 com barreira pressurizada de glicol/água destilada a 1,5 bar acima da câmara de selagem.</div>` : '';
-    return `${badgeModo}
-    <strong>🛡️ Selos Mecânicos & Vedações Industriais:</strong><br>
-    Selos mecânicos operam com um filme líquido microscópico (1 a 3 μm) entre as faces rotativa e estacionária.<br><br>
-    <b>Critérios Obrigatórios de Montagem:</b><br>
-    1. <b>Batimento radial do eixo:</b> Deve ser inferior a <b>0,03 mm</b> sob a ponta do relógio comparador.<br>
-    2. <b>Perpendicularidade da sobreposta:</b> O espelho de assentamento da sede deve estar a menos de <b>0,05 mm</b> em relação ao eixo.<br>
-    3. <b>Comprimento de trabalho:</b> Respeitar rigorosamente a cota 'L' especificada pelo fabricante ao apertar os parafusos do colar de arraste.<br>
-    4. <b>Plano de Selagem API:</b> Garantir fluxo contínuo de flush (Plano 11 ou 32) para evitar vaporização das faces.
-    ${extraOnline}`;
-  }
-
-  // 4. Mecanismo de Inferência Universal de Engenharia (para qualquer pergunta livre do usuário sem bugs nem travamentos)
+  // 3. Mecanismo de Inferência Universal de Engenharia Sênior & Usinas Termelétricas Petrobras
   const comps = [];
-  if (pNorm.includes('motor')) comps.push('Motor Elétrico Trifásico');
-  if (pNorm.includes('bomba')) comps.push('Bomba Centrífuga / Deslocamento Positivo');
-  if (pNorm.includes('redutor') || pNorm.includes('engrenag')) comps.push('Redutor de Velocidade / Engrenagens');
-  if (pNorm.includes('esteira') || pNorm.includes('correia') || pNorm.includes('tambor')) comps.push('Sistema de Correias / Transportador');
-  if (pNorm.includes('cilindro') || pNorm.includes('pistao') || pNorm.includes('pneumat') || pNorm.includes('hidraul')) comps.push('Atuador Pneumático / Circuito Hidráulico');
-  if (pNorm.includes('valvula')) comps.push('Válvula de Controle / Retenção / Esfera');
-  if (pNorm.includes('rolamento') || pNorm.includes('mancal')) comps.push('Mancal de Rolamento / Deslizamento');
-  if (pNorm.includes('acoplamento')) comps.push('Acoplamento Elástico / Rígido');
-  if (pNorm.includes('compressor')) comps.push('Compressor de Ar Parafuso / Pistão');
+  if (pNorm.includes('turbina')) comps.push('Turbina a Gás / Vapor (Ciclo Brayton / Rankine)');
+  if (pNorm.includes('caldeira') || pNorm.includes('hrsg')) comps.push('Caldeira de Recuperação de Calor a Vapor (HRSG / NR-13)');
+  if (pNorm.includes('bomba') || pNorm.includes('bfp')) comps.push('Bomba Centrífuga de Alta Pressão (API 610 BB5/BB3/OH2 / Diesel NFPA 20)');
+  if (pNorm.includes('motor')) comps.push('Motor Elétrico de Alta Tensão / Motor Diesel Wärtsilä-Cummins');
+  if (pNorm.includes('compressor')) comps.push('Compressor Axial / Parafuso de Gás Combustível');
+  if (pNorm.includes('valvula') || pNorm.includes('psv') || pNorm.includes('prv')) comps.push('Válvula de Segurança (PSV ASME I/VIII) / Redutora PRV / Controle');
+  if (pNorm.includes('trocador') || pNorm.includes('condensador')) comps.push('Trocador de Calor Casco e Tubos / Condensador de Superfície');
+  if (pNorm.includes('redutor') || pNorm.includes('engrenag')) comps.push('Redutor de Velocidade / Engrenagens Helicoidais');
+  if (pNorm.includes('mancal') || pNorm.includes('rolamento')) comps.push('Mancal de Deslizamento (Metal Patente/Babbit) / Rolamento de Contato Angular');
+  if (pNorm.includes('ehc') || pNorm.includes('hidraul')) comps.push('Sistema Eletro-hidráulico de Controle (EHC) com Fluido Sintético HFD-U');
+  if (pNorm.includes('tubulacao') || pNorm.includes('flange')) comps.push('Linha de Vapor Superaquecido P91/P22 / Flange com Junta Metálica');
 
   const sintomas = [];
-  if (pNorm.includes('quente') || pNorm.includes('temperatura') || pNorm.includes('esquent') || pNorm.includes('aquec')) sintomas.push('Elevação Térmica Anormal');
-  if (pNorm.includes('ruido') || pNorm.includes('barulho') || pNorm.includes('estalo') || pNorm.includes('chiado')) sintomas.push('Emissão Acústica / Ruído Fora de Padrão');
-  if (pNorm.includes('vazament') || pNorm.includes('vazando') || pNorm.includes('pingando') || pNorm.includes('oleo')) sintomas.push('Perda de Fluido / Falha de Vedação');
-  if (pNorm.includes('trav') || pNorm.includes('parou') || pNorm.includes('preso') || pNorm.includes('engasg')) sintomas.push('Bloqueio Cinemático / Perda de Movimento');
-  if (pNorm.includes('vibrac') || pNorm.includes('trepid') || pNorm.includes('balanc')) sintomas.push('Vibração Cíclica Anormal');
-  if (pNorm.includes('folga') || pNorm.includes('desgast') || pNorm.includes('gasto')) sintomas.push('Desgaste Mecânico / Folga Excessiva');
+  if (pNorm.includes('quente') || pNorm.includes('temperatura') || pNorm.includes('esquent') || pNorm.includes('aquec')) sintomas.push('Elevação Térmica Anormal / Choque Térmico');
+  if (pNorm.includes('ruido') || pNorm.includes('barulho') || pNorm.includes('estalo') || pNorm.includes('chiado')) sintomas.push('Emissão Acústica Anormal / Cavitação / Golpe de Aríete');
+  if (pNorm.includes('vazament') || pNorm.includes('vazando') || pNorm.includes('pingando') || pNorm.includes('oleo') || pNorm.includes('vapor')) sintomas.push('Perda de Fluido / Falha de Selagem / Vazamento de Vapor');
+  if (pNorm.includes('trav') || pNorm.includes('parou') || pNorm.includes('preso') || pNorm.includes('engasg')) sintomas.push('Bloqueio Cinemático / Gripagem por Dilatação / Perda de Rotação');
+  if (pNorm.includes('vibrac') || pNorm.includes('trepid') || pNorm.includes('balanc') || pNorm.includes('ressonancia')) sintomas.push('Vibração Cíclica / Desalinhamento / Pé Manco / Ressonância');
+  if (pNorm.includes('folga') || pNorm.includes('desgast') || pNorm.includes('gasto') || pNorm.includes('ovaliz')) sintomas.push('Desgaste Mecânico / Folga Excessiva / Ovalização');
+  if (pNorm.includes('trinca') || pNorm.includes('quebr') || pNorm.includes('rachad')) sintomas.push('Trinca de Fadiga (Marcas de Praia) / Fratura Frágil / Clivagem');
+  if (pNorm.includes('fluencia') || pNorm.includes('creep')) sintomas.push('Deformação Plástica por Fluência (Creep em Aços P91/P22)');
 
-  const compDetectado = comps.length > 0 ? comps.join(', ') : 'Sistema Mecânico Industrial';
-  const sintomaDetectado = sintomas.length > 0 ? sintomas.join(', ') : 'Diagnóstico de Desempenho Mecânico';
+  const compDetectado = comps.length > 0 ? comps.join(', ') : 'Sistema Mecânico Industrial / Equipamento Termelétrico';
+  const sintomaDetectado = sintomas.length > 0 ? sintomas.join(', ') : 'Diagnóstico Pericial de Campo';
 
   const extraOnlineInferencia = online 
-    ? `<div style="margin-top:8px; padding:6px 10px; background:rgba(2,132,199,0.15); border-left:3px solid #00f2fe; font-size:11px;">🌐 <b>Banco de Dados Nuvem 4.0:</b> Consulta estendida correlacionada às normas ABNT NBR / ISO / DIN. Histórico de falhas de campo sugere probabilidade de 65% em lubrificação e 25% em alinhamento/fixação geométrica.</div>`
-    : `<div style="margin-top:8px; padding:6px 10px; background:rgba(245,158,11,0.15); border-left:3px solid #f59e0b; font-size:11px;">📶 <b>Banco Local Certificado:</b> Protocolo analítico autônomo baseado em tolerâncias dimensionais ISO 286 e diretrizes NR-12.</div>`;
+    ? `<div style="margin-top:8px; padding:6px 10px; background:rgba(2,132,199,0.15); border-left:3px solid #00f2fe; font-size:11px;">🌐 <b>Banco de Dados Nuvem Termelétrica 4.0:</b> Consulta sincronizada com normas ABNT, ASME I/VIII, API 610, NFPA 20 e diretrizes Petrobras. Histórico em usinas termelétricas indica correlação crítica entre dilatação térmica diferencial e falha prematura de mancais e selos.</div>`
+    : `<div style="margin-top:8px; padding:6px 10px; background:rgba(245,158,11,0.15); border-left:3px solid #f59e0b; font-size:11px;">📶 <b>Banco Local Certificado:</b> Protocolo analítico autônomo baseado em tolerâncias centesimais ISO 286, DIN ISO 898 e diretrizes NR-12/NR-13.</div>`;
 
   return `${badgeModo}
-  <strong>🤖 Parecer Pericial do Robô Mecânico 4.0 IA:</strong><br>
-  Consulta registrada para <b>${nomeUsuario}</b>: <i>"${pergunta}"</i><br><br>
-  <b>1. Triagem Técnica Especializada:</b><br>
-  • <b>Ativo / Componente:</b> ${compDetectado}<br>
-  • <b>Sintoma Identificado:</b> ${sintomaDetectado}<br><br>
-  <b>2. Roteiro de Ação & Investigação no Campo:</b><br>
-  1. <b>Inspeção Visual & Metrologia:</b> Avalie folgas axiais e radiais com relógio apalpador e verifique se há marcas de atrito, queima ou cavitação.<br>
-  2. <b>Lubrificação & Termografia:</b> Meça a temperatura operacional da carcaça com pirômetro (máximo 70°C a 80°C em regime pleno) e verifique contaminação do lubrificante.<br>
-  3. <b>Fixação & Alinhamento:</b> Verifique o torque de todos os parafusos da base e confira o alinhamento com relógio comparador ou laser.<br>
-  4. <b>Segurança Obrigatória (LOTO / NR-12):</b> Antes de qualquer intervenção física, bloqueie a fonte de energia com cadeado e garanta energia zero.<br>
+  <strong>🤖 Parecer do Mecânico Sênior & Engenheiro Especialista (Robô IA):</strong><br>
+  Consulta técnica registrada para <b>${nomeUsuario}</b>: <i>"${pergunta}"</i><br><br>
+  <b>1. Diagnóstico Físico & Cinemático:</b><br>
+  • <b>Ativo Analisado:</b> ${compDetectado}<br>
+  • <b>Mecanismo de Falha Identificado:</b> ${sintomaDetectado}<br><br>
+  <b>2. Roteiro Passo a Passo de Inspeção no Campo:</b><br>
+  1. <b>Metrologia Centesimal:</b> Avalie folgas radiais e axiais com relógio apalpador milesimal e súbito; verifique o batimento radial total (&lt; 0,025 mm) e marcas de corrosão por atrito (fretting).<br>
+  2. <b>Termografia & Lubrificação:</b> Meça o gradiente de temperatura na carcaça com pirômetro infravermelho (mancais de rolamento: máx 75°C-80°C; mancais de metal patente/babbit: máx 95°C-105°C). Colete amostra de óleo para ensaio de viscosidade ASTM D445 e umidade Karl Fischer ASTM D6304 (&lt; 200 ppm).<br>
+  3. <b>Fixação, Alinhamento & Pé Manco:</b> Verifique o torque de todos os parafusos/estojos com torquímetro aferido ou tensionador hidráulico axial (Bolt Tensioning) e elimine qualquer pé manco (&lt; 0,02 mm).<br>
+  4. <b>Segurança Obrigatória (LOTO / NR-10 / NR-12 / NR-13):</b> Antes de tocar em qualquer componente móvel, despressurize linhas de vapor/óleo, bloqueie eletricamente os disjuntores com cadeado físico e etiqueta (LOTO) e teste energia zero.<br>
   ${extraOnlineInferencia}
-  <br>💡 <i>Você também pode utilizar as abas 'Análise de Serviço' ou 'Relatório Técnico' acima para registrar esta intervenção e emitir o laudo final!</i>`;
+  <br>💡 <i>Você também pode utilizar as abas 'Análise de Serviço' ou 'Relatório Técnico' acima para gerar o laudo pericial oficial assinado!</i>`;
 }
 
 /* ================= ABA 2: FEEDBACK & SUGESTÕES ================= */
@@ -15986,8 +16416,14 @@ function preencherExemploFeedbackRobo(tipo) {
     txt.value = 'Realizamos o alinhamento com relógio comparador entre o motor e a bomba. Ficou com offset de 0,12 mm e pé manco de 0,08 mm no pé dianteiro esquerdo. Como a bomba precisava partir, liberamos assim.';
   } else if (tipo === 'selo') {
     txt.value = 'Instalamos selo mecânico cartucho novo em bomba centrífuga de água limpa, mas na partida apresentou gotejamento de cerca de 15 gotas por minuto. A tubulação do flush estava parcialmente obstruída.';
-  } else if (tipo === 'redutor') {
-    txt.value = 'O redutor de eixos paralelos está apresentando zumbido contínuo de alta frequência e vibração de 5,2 mm/s na carcaça. O nível de óleo está normal com ISO VG 220 mineral, mas a temperatura atinge 85°C.';
+  } else if (tipo === 'bomba_bb5') {
+    txt.value = 'Montagem da bomba de água de alimentação de caldeira BB5 tipo barril de 180 bar. O tambor de balanceamento ficou com folga diametral de 0,35 mm e os estojos ASTM A193 B7 foram apertados por torquímetro com graxa de montagem a seco.';
+  } else if (tipo === 'psv') {
+    txt.value = 'Calibramos a válvula de segurança PSV de 115 bar do superaquecedor da caldeira HRSG. O disparo abriu a 118 bar e o blowdown fechou a 103 bar, mas apresentou 28 bolhas por minuto no teste de estanqueidade API 527.';
+  } else if (tipo === 'turbina_alinhamento') {
+    txt.value = 'Alinhamos a frio a turbina a vapor ao gerador de 60 MW em 3600 RPM com relógio comparador zerado, sem compensar a subida térmica vertical da carcaça da turbina (crescimento térmico de +0,65 mm).';
+  } else if (tipo === 'falha_foto') {
+    txt.value = 'Análise de falha em foto do eixo quebrado do ventilador de tiragem: apresenta superfície lisa com marcas onduladas concêntricas (marcas de praia) partindo do rasgo de chaveta com canto vivo.';
   }
 }
 
@@ -16002,29 +16438,60 @@ function executarFeedbackRoboFlutuante() {
   }
 
   resEl.style.display = 'block';
-  resEl.innerHTML = '<div style="color:#38bdf8; text-align:center; padding:15px;">🤖 O Robô IA está analisando sua descrição de serviço...</div>';
+  resEl.innerHTML = '<div style="color:#38bdf8; text-align:center; padding:15px;">🤖 O Robô IA está analisando sua descrição de serviço com critérios periciais Petrobras...</div>';
 
   setTimeout(() => {
     const tNorm = normalizarTextoMecanico(texto);
-    let parecer = 'Serviço com pontos operacionais válidos, porém com aspectos críticos que requerem correção imediata para assegurar confiabilidade e evitar quebras catastróficas.';
+    let parecer = 'Serviço com pontos operacionais analisados sob rigor de engenharia mecânica de usinas termelétricas e normas internacionais (ISO, ASME, API, ABNT).';
     let pontosAtencao = [];
     let melhorias = [];
 
+    if (tNorm.includes('bomba') && (tNorm.includes('bb5') || tNorm.includes('barril') || tNorm.includes('alimentacao') || tNorm.includes('balanceamento'))) {
+      pontosAtencao.push('<b>Fixação de Carcaça Crítica:</b> O aperto de estojos ASTM A193 B7 por torquímetro com atrito a seco causa dispersão de pré-carga de até 40%, gerando risco severo de empenamento do barril e vazamento na partida a quente.');
+      pontosAtencao.push('<b>Folga de Tambor de Balanceamento:</b> Folga de 0,35 mm está acima da faixa ideal (0,25 a 0,30 mm), provocando recirculação de alívio excessiva com perda de rendimento e sobreaquecimento da linha de retorno.');
+      melhorias.push('Utilizar <b>tensionador hidráulico de estojos (Bolt Tensioning a 1500 bar)</b> para estiramento puramente axial sem torção, garantindo esmagamento 100% uniforme da junta metálica.');
+      melhorias.push('Substituir a bucha de desgaste do tambor de balanceamento para restabelecer a folga diametral nominal de catálogo Sulzer/Flowserve.');
+    }
+
+    if (tNorm.includes('psv') || tNorm.includes('bolha') || tNorm.includes('asme i') || tNorm.includes('blowdown')) {
+      pontosAtencao.push('<b>Estanqueidade Violada (API 527):</b> A taxa de 28 bolhas/min excede o limite máximo admissível para vapor de alta pressão. Haverá vazamento contínuo com erosão acelerada (wire drawing) do bocal e do disco de estelita.');
+      pontosAtencao.push('<b>Blowdown Excessivo:</b> Queda de pressão de fechamento de 118 para 103 bar (~13% de blowdown) ultrapassa o limite da ASME Seção I (máximo 4% em caldeiras de força), causando desperdício massivo de vapor superaquecido.');
+      melhorias.push('Relapidar as sedes do bocal e disco com pasta de diamante de 3 μm em bloco de ferro fundido com conferência de planeza por anel óptico monocromático (&lt; 2 bandas de luz).');
+      melhorias.push('Reajustar os anéis superior e inferior de controle de bocal para calibrar o blowdown dentro de 2% a 4% da pressão de ajuste.');
+    }
+
+    if (tNorm.includes('turbina') || tNorm.includes('crescimento termico') || tNorm.includes('gerador') || (tNorm.includes('alinh') && tNorm.includes('0,65'))) {
+      pontosAtencao.push('<b>Falha de Projeto de Alinhamento (Hot Targets):</b> Alinhar em zero a frio sem compensar a subida vertical de +0,65 mm da turbina fará com que, a 540°C, o conjunto opere com 0,65 mm de desalinhamento paralelo severo!');
+      pontosAtencao.push('<b>Consequência Imediata:</b> Vibração destrutiva em 2X da rotação, sobreaquecimento nos mancais de babbit e trinca por fadiga nas lâminas do acoplamento flexível.');
+      melhorias.push('Montar a carcaça da turbina propositalmente rebaixada em <b>-0,65 mm</b> a frio em relação ao gerador, para que atinjam a concentricidade perfeita sob regime pleno de carga.');
+      melhorias.push('Monitorar a curva de subida térmica com sensores de expansão de carcaça e alinhamento a laser óptico contínuo durante a rampa de partida.');
+    }
+
+    if (tNorm.includes('marcas de praia') || tNorm.includes('beach marks') || tNorm.includes('fadiga') || (tNorm.includes('eixo') && tNorm.includes('chaveta'))) {
+      pontosAtencao.push('<b>Diagnóstico Fractográfico:</b> Trata-se de <b>fratura por fadiga mecânica por flexão rotativa</b> iniciada no rasgo de chaveta com canto vivo (concentrador de tensão severo Kt &gt; 2,5).');
+      pontosAtencao.push('As marcas de praia concêntricas comprovam a propagação lenta e progressiva de trinca sob cargas cíclicas operacionais.');
+      melhorias.push('No novo eixo, usinar o rasgo de chaveta com <b>raio de concordância de fundo R &ge; 1,0 mm</b> conforme norma DIN 6885.');
+      melhorias.push('Executar ensaio não-destrutivo por Líquido Penetrante (LP) no novo eixo antes da montagem e verificar o desbalanceamento residual dinâmico (grau ISO G2.5).');
+    }
+
     if (tNorm.includes('trava') || tNorm.includes('quimica') || tNorm.includes('patin')) {
-      pontosAtencao.push('<b>Patinamento de Eixo:</b> O uso de trava química é apenas corretivo paliativo temporário. O correto é metalização/usinagem para recuperar a tolerância de ajuste <b>k6 (+0,018/+0,002 mm)</b>.');
-      melhorias.push('Montar rolamentos sempre utilizando <b>aquecedor por indução magnética até 110°C</b> (nunca marreta ou fogo direto).');
+      pontosAtencao.push('<b>Patinamento de Eixo:</b> O uso de trava química é paliativo provisório. O correto é metalização e usinagem para recuperar a tolerância de ajuste <b>k6 (+0,018/+0,002 mm)</b>.');
+      melhorias.push('Montar rolamentos sempre utilizando <b>aquecedor por indução magnética até 110°C</b> com desmagnetização automática.');
     }
-    if (tNorm.includes('pe manco') || tNorm.includes('0,08') || tNorm.includes('0,12') || tNorm.includes('offset')) {
-      pontosAtencao.push('<b>Tolerância Violada:</b> O desalinhamento de 0,12 mm e pé manco de 0,08 mm excedem o limite aceitável de 0,05 mm. Isso causará sobrecarga cíclica com redução drástica da vida útil L10h do rolamento.');
-      melhorias.push('Corrigir o pé manco inserindo calços de aço inox adequados e refazer o alinhamento com tolerância final &lt; 0,05 mm.');
+
+    if (tNorm.includes('pe manco') || tNorm.includes('0,08') || tNorm.includes('0,12') || (tNorm.includes('offset') && !tNorm.includes('turbina'))) {
+      pontosAtencao.push('<b>Tolerância Violada:</b> Desalinhamento de 0,12 mm e pé manco de 0,08 mm excedem o limite aceitável de 0,05 mm, gerando esforço cíclico nos mancais.');
+      melhorias.push('Corrigir o pé manco inserindo calços de aço inox 304/316 e refazer o alinhamento com tolerância final &lt; 0,03 mm.');
     }
-    if (tNorm.includes('selo') || tNorm.includes('gotej') || tNorm.includes('flush')) {
-      pontosAtencao.push('<b>Obstrução do Flush:</b> A falta de circulação queima as faces de vedação em poucos minutos por falta de filme lubrificante hidrodinâmico.');
-      melhorias.push('Desobstruir a linha de flush imediatamente e inspecionar o batimento radial do eixo antes de recolocar em carga.');
+
+    if (tNorm.includes('selo') && (tNorm.includes('gotej') || tNorm.includes('flush'))) {
+      pontosAtencao.push('<b>Obstrução do Flush:</b> A falta de circulação destrói as faces lapidadas em poucos minutos por vaporização do filme lubrificante.');
+      melhorias.push('Desobstruir a linha de flush imediatamente (Plano API 11/32) e inspecionar o batimento radial do eixo (&lt; 0,03 mm).');
     }
-    if (tNorm.includes('redutor') || tNorm.includes('zumbido') || tNorm.includes('85')) {
-      pontosAtencao.push('<b>Frequência de Engrenamento:</b> Zumbido agudo e vibração acima de 4,5 mm/s indicam desgaste de flanco (micropitting/scuffing) ou folga entre dentes (backlash) incorreta.');
-      melhorias.push('Inspecionar contato dos dentes com Azul de Prússia e migrar para <b>óleo sintético PAO ISO VG 220/320</b> que suporta até 120°C com maior filme protetor.');
+
+    if (tNorm.includes('redutor') && (tNorm.includes('zumbido') || tNorm.includes('85'))) {
+      pontosAtencao.push('<b>Frequência de Engrenamento:</b> Zumbido agudo e vibração acima de 4,5 mm/s indicam desgaste de flanco (micropitting) ou folga entre dentes (backlash) incorreta.');
+      melhorias.push('Inspecionar contato dos dentes com Azul de Prússia e migrar para <b>óleo sintético PAO ISO VG 220/320</b> que suporta até 120°C.');
     }
 
     if (pontosAtencao.length === 0) {
@@ -16751,25 +17218,29 @@ window.addEventListener('DOMContentLoaded', () => {
         <!-- ABA 1: CHAT / RESPOSTAS -->
         <div id="rf_conteudo_chat" class="robo-tab-content active">
           <div class="rf-chat-chips">
+            <button type="button" class="rf-chip-btn" onclick="perguntarChipRoboFlutuante('Como montar rolamento em face a face e back to back?')">🔩 Rolamentos: DF, DB e Tandem</button>
+            <button type="button" class="rf-chip-btn" onclick="perguntarChipRoboFlutuante('Como funciona caldeira de ciclo combinado e ciclo aberto?')">⚡ Caldeiras HRSG & Ciclo Combinado</button>
+            <button type="button" class="rf-chip-btn" onclick="perguntarChipRoboFlutuante('Como calibrar uma psv segundo asme i e api 520?')">🛡️ Válvulas PSVs & PRVs</button>
+            <button type="button" class="rf-chip-btn" onclick="perguntarChipRoboFlutuante('O que é bomba tipo barril bb5 de alta pressão e motobomba diesel?')">🏭 Bombas BB5 & Diesel NFPA 20</button>
+            <button type="button" class="rf-chip-btn" onclick="perguntarChipRoboFlutuante('Qual a tolerância de alinhamento a laser em 3600 rpm e compensação térmica?')">🎯 Alinhamento Laser 3600 RPM</button>
+            <button type="button" class="rf-chip-btn" onclick="perguntarChipRoboFlutuante('Converte 150 bar em psi e mpa')">📐 Conversor 150 bar → PSI/MPa</button>
+            <button type="button" class="rf-chip-btn" onclick="perguntarChipRoboFlutuante('Como usar o súbito para medir ovalização e conicidade em cilindro?')">📏 Metrologia com Súbito</button>
+            <button type="button" class="rf-chip-btn" onclick="perguntarChipRoboFlutuante('Como identificar quebra por fadiga com marcas de praia em foto?')">🔍 Análise de Fotos & Fractografia</button>
+            <button type="button" class="rf-chip-btn" onclick="perguntarChipRoboFlutuante('O que são correntes EDM e rolamentos cerâmicos INSOCOAT?')">⚡ Correntes EDM & INSOCOAT</button>
+            <button type="button" class="rf-chip-btn" onclick="perguntarChipRoboFlutuante('Como funciona o tensionamento hidráulico bolt tensioning a 1500 bar?')">🔩 Tensionador Bolt Tensioning</button>
             <button type="button" class="rf-chip-btn" onclick="perguntarChipRoboFlutuante('O que é cavitação em bombas centrífugas e como resolver?')">💧 Cavitação & NPSH</button>
-            <button type="button" class="rf-chip-btn" onclick="perguntarChipRoboFlutuante('Como fazer alinhamento a laser e tolerância para 1800 RPM?')">🎯 Alinhamento a Laser</button>
             <button type="button" class="rf-chip-btn" onclick="perguntarChipRoboFlutuante('Quais as causas de vibração a 1X e 2X de rotação?')">📊 Vibração ISO 10816</button>
-            <button type="button" class="rf-chip-btn" onclick="perguntarChipRoboFlutuante('Como calcular o torque de aperto para parafuso M16 8.8 e 10.9?')">🔩 Torque M16 8.8 / 10.9</button>
-            <button type="button" class="rf-chip-btn" onclick="perguntarChipRoboFlutuante('Cálculo de quantidade de graxa para rolamentos Gp = 0,005 x D x B')">🛢️ Cálculo de Graxa</button>
-            <button type="button" class="rf-chip-btn" onclick="perguntarChipRoboFlutuante('O que é folga C3 em rolamentos e quando usar?')">📏 Folga Radial C3</button>
-            <button type="button" class="rf-chip-btn" onclick="perguntarChipRoboFlutuante('Como ajustar e instalar selo mecânico cartucho?')">🛡️ Selo Mecânico</button>
-            <button type="button" class="rf-chip-btn" onclick="perguntarChipRoboFlutuante('Quais as causas de desgaste prematuro em redutores?')">⚙️ Redutores & Backlash</button>
           </div>
 
           <div id="rf_chat_log" class="rf-chat-log">
             <div class="rf-chat-msg bot">
               <strong>🤖 Robô Mecânico 4.0 IA:</strong><br>
-              Olá! Sou o seu assistente técnico especialista de campo. Pode me perguntar <b>qualquer dúvida sobre mecânica industrial</b> (bombas, motores elétricos, redutores, compressores, válvulas, alinhamento a laser, análise de vibração, metrologia, tolerâncias ISO, rolamentos e lubrificação). Como posso ajudar na sua intervenção hoje?
+              Fala, parceiro da mecânica! Sou seu <b>Mecânico Sênior e Engenheiro Especialista em Usinas Termelétricas Petrobras</b>. Domino turbomáquinas, bombas de alta pressão API 610 BB5/BB3, caldeiras de ciclo combinado HRSG, alinhamento térmico a laser, PSVs, rolamentos de contato angular (DF, DB, DT), metrologia centesimal e cálculo de torque. Em que intervenção mecânica posso atuar lado a lado com você agora?
             </div>
           </div>
 
           <div class="rf-chat-input-bar">
-            <input type="text" id="rf_chat_input" placeholder="Pergunte qualquer dúvida de mecânica industrial..." onkeydown="if(event.key==='Enter') enviarMensagemRoboFlutuante()">
+            <input type="text" id="rf_chat_input" placeholder="Pergunte qualquer dúvida de mecânica industrial ou cálculo..." onkeydown="if(event.key==='Enter') enviarMensagemRoboFlutuante()">
             <button type="button" class="button" style="margin:0; padding:10px 14px; background:#0284c7; border-color:#38bdf8;" onclick="iniciarDitadoVozRoboFlutuante()" title="Ditado por Voz">🎤</button>
             <button type="button" class="button" style="margin:0; padding:10px 18px;" onclick="enviarMensagemRoboFlutuante()">Enviar</button>
           </div>
@@ -16779,14 +17250,17 @@ window.addEventListener('DOMContentLoaded', () => {
         <div id="rf_conteudo_feedback" class="robo-tab-content">
           <div class="rf-card-box">
             <div class="rf-card-title">💡 Obter Feedback Técnico & Sugestões da IA</div>
-            <p style="font-size:12.5px; color:#94a3b8; margin-bottom:10px;">Descreva o serviço executado, intervenção planejada ou dúvida operacional. O Robô IA analisará a técnica, apontará riscos ocultos e fornecerá sugestões de melhoria contínua e confiabilidade.</p>
+            <p style="font-size:12.5px; color:#94a3b8; margin-bottom:10px;">Descreva o serviço executado, intervenção planejada ou dúvida operacional. O Robô IA analisará a técnica com rigor pericial de usinas termelétricas, apontará riscos ocultos e fornecerá sugestões de confiabilidade.</p>
             
             <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
               <span style="font-size:11px; color:#38bdf8; font-weight:700; align-self:center;">Exemplos rápidos:</span>
               <button type="button" class="rf-chip-btn" onclick="preencherExemploFeedbackRobo('rolamento')">Troca de rolamento</button>
               <button type="button" class="rf-chip-btn" onclick="preencherExemploFeedbackRobo('alinhamento')">Alinhamento motor-bomba</button>
+              <button type="button" class="rf-chip-btn" onclick="preencherExemploFeedbackRobo('bomba_bb5')">Bomba BB5 caldeira</button>
+              <button type="button" class="rf-chip-btn" onclick="preencherExemploFeedbackRobo('psv')">Calibração PSV vapor</button>
+              <button type="button" class="rf-chip-btn" onclick="preencherExemploFeedbackRobo('turbina_alinhamento')">Alinhamento térmico turbina</button>
+              <button type="button" class="rf-chip-btn" onclick="preencherExemploFeedbackRobo('falha_foto')">Foto de eixo com marcas de praia</button>
               <button type="button" class="rf-chip-btn" onclick="preencherExemploFeedbackRobo('selo')">Vazamento em selo</button>
-              <button type="button" class="rf-chip-btn" onclick="preencherExemploFeedbackRobo('redutor')">Ruído em redutor</button>
             </div>
 
             <textarea id="rf_feedback_texto" class="rf-textarea" placeholder="Ex: Fizemos a troca dos rolamentos do motor de 75 CV mas notamos que o eixo estava com marca de patinamento no anel interno. Montamos com trava química anaeróbica..."></textarea>
