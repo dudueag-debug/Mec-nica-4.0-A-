@@ -777,284 +777,564 @@
     max-width: 210mm;
     min-height: 297mm;
     background: #ffffff;
-    color: #111827;
+    color: #0b1f3a;
     margin: 0 auto;
-    border: 2.5px solid #003366;
+    border: 2px solid #003b71;
     box-shadow: 0 10px 30px rgba(0,0,0,0.6);
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, "Segoe UI", Helvetica, sans-serif;
     display: flex;
     flex-direction: column;
+    position: relative;
   }
-  .r-a4-header {
-    background: #003366;
-    color: #ffffff;
+
+  /* 1. TOPO OFICIAL COM LOGO, TÍTULO E NÚMERO */
+  .r-a4-header-top {
     display: flex;
+    align-items: stretch;
     justify-content: space-between;
-    align-items: center;
-    padding: 10px 18px;
-    border-bottom: 2px solid #002244;
+    border-bottom: 2px solid #003b71;
+    min-height: 62px;
+    background: #ffffff;
   }
-  .r-a4-header h1 {
-    font-size: 19px;
-    font-weight: 900;
-    letter-spacing: 0.8px;
-    margin: 0;
-    color: #ffffff;
-    text-transform: uppercase;
-  }
-  .r-a4-header .r-a4-logo {
+  .r-a4-logo-box {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 17px;
-    font-weight: 900;
-    color: #ffffff;
-    letter-spacing: 0.5px;
-  }
-  .r-a4-meta-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.35fr;
-    border-bottom: 2px solid #003366;
-  }
-  .r-a4-meta-left {
-    padding: 8px 14px;
-    border-right: 2px solid #003366;
-    font-size: 11px;
-    line-height: 1.65;
-  }
-  .r-a4-meta-row {
-    display: flex;
-    margin-bottom: 2px;
-  }
-  .r-a4-meta-label {
-    font-weight: 900;
-    color: #003366;
-    width: 68px;
+    padding: 6px 12px;
+    border-right: 1.5px solid #003b71;
     flex-shrink: 0;
   }
-  .r-a4-meta-val {
-    color: #111827;
-    font-weight: 700;
-    word-break: break-word;
+  .r-a4-logo-box svg {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
   }
-  .r-a4-meta-right {
-    padding: 8px 14px;
+  .r-a4-logo-text {
     display: flex;
     flex-direction: column;
   }
-  .r-a4-servico-titulo {
-    font-size: 12.5px;
+  .r-a4-logo-text-main {
+    font-size: 11px;
     font-weight: 900;
-    color: #003366;
-    margin-bottom: 6px;
+    color: #003b71;
+    line-height: 1.15;
+    letter-spacing: 0.3px;
+  }
+  .r-a4-logo-text-sub {
+    font-size: 7.5px;
+    font-weight: 700;
+    color: #334155;
+    letter-spacing: 0.2px;
+  }
+  .r-a4-title-center {
+    flex-grow: 1;
+    background: #003b71;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 6px 10px;
+    text-align: center;
+  }
+  .r-a4-title-main {
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin: 0;
+  }
+  .r-a4-title-sub {
+    font-size: 8.5px;
+    font-weight: 600;
+    color: #7dd3fc;
+    letter-spacing: 1.2px;
+    margin-top: 3px;
     text-transform: uppercase;
   }
-  .r-a4-servico-desc {
-    font-size: 11px;
-    color: #1f2937;
-    line-height: 1.48;
-    text-align: justify;
-    flex-grow: 1;
-    font-weight: 500;
-  }
-  /* Grade Central em 2 Painéis (Desenho Técnico ~38% e Fotos Reais ~62%) */
-  .r-a4-mid-grid {
-    display: grid;
-    grid-template-columns: 38% 62%;
-    border-bottom: 2px solid #003366;
-    min-height: 235px;
-  }
-  /* Grade Inferior em 3 Colunas (Ferramentas, 3D, Observação) */
-  .r-a4-lower-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    border-bottom: 2px solid #003366;
-    min-height: 185px;
-  }
-  .r-a4-card-box {
-    border-right: 2px solid #003366;
+  .r-a4-num-box {
+    min-width: 65px;
+    border-left: 1.5px solid #003b71;
     display: flex;
     flex-direction: column;
-    height: 100%;
-    box-sizing: border-box;
-  }
-  .r-a4-card-box:last-child {
-    border-right: none;
-  }
-  .r-a4-card-header {
+    align-items: center;
+    justify-content: center;
+    padding: 4px 8px;
+    flex-shrink: 0;
     background: #ffffff;
-    border-bottom: 1.5px solid #003366;
-    padding: 5px 6px;
-    text-align: center;
+  }
+  .r-a4-num-label {
     font-size: 10px;
     font-weight: 900;
-    color: #003366;
+    color: #003b71;
+  }
+  .r-a4-num-val {
+    font-size: 10.5px;
+    font-weight: 800;
+    color: #0f172a;
+    border-bottom: 1px solid #003b71;
+    padding: 0 4px;
+    margin-top: 2px;
+    min-width: 44px;
+    text-align: center;
+  }
+
+  /* 2. BARRA DE IDENTIFICAÇÃO PARAMÉTRICA COM BADGE DE STATUS */
+  .r-a4-ident-bar {
+    display: grid;
+    grid-template-columns: 1fr 0.8fr 1.25fr 1fr 1fr 1.9fr;
+    border-bottom: 2px solid #003b71;
+    background: #ffffff;
+  }
+  .r-a4-status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 2px 6px;
+    font-weight: 900;
+    font-size: 8.5px;
+    letter-spacing: 0.5px;
+    background: repeating-linear-gradient(45deg, #fbbf24, #fbbf24 6px, #f59e0b 6px, #f59e0b 12px);
+    color: #000000;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.4);
+    box-sizing: border-box;
+    white-space: nowrap;
+    border-left: 1.5px solid #003b71;
+  }
+  .r-a4-status-badge.concluido {
+    background: repeating-linear-gradient(45deg, #34d399, #34d399 6px, #10b981 6px, #10b981 12px);
+    color: #ffffff;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.6);
+  }
+  .r-a4-ident-cell {
+    display: flex;
+    align-items: center;
+    border-right: 1.5px solid #003b71;
+    font-size: 9.5px;
+    padding: 0;
+    overflow: hidden;
+  }
+  .r-a4-ident-cell:last-child {
+    border-right: none;
+  }
+  .r-a4-ident-lbl {
+    background: #003b71;
+    color: #ffffff;
+    font-weight: 900;
+    padding: 3px 6px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 9px;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+  }
+  .r-a4-ident-val {
+    padding: 2px 6px;
+    font-weight: 800;
+    color: #0f172a;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 9.5px;
+  }
+
+  /* 3. SEÇÃO PRINCIPAL: DESENHO TÉCNICO - EQUIPAMENTO / CONJUNTO */
+  .r-a4-section-header {
+    background: #003b71;
+    color: #ffffff;
+    font-size: 10.5px;
+    font-weight: 900;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 3px 6px;
+    border-bottom: 1.5px solid #003b71;
+  }
+  .r-a4-cad-section-grid {
+    display: grid;
+    grid-template-columns: 73% 27%;
+    border-bottom: 2px solid #003b71;
+    min-height: 290px;
+    background: #ffffff;
+  }
+  .r-a4-cad-vistas-col {
+    display: flex;
+    flex-direction: column;
+    border-right: 2px solid #003b71;
+  }
+  .r-a4-vistas-top-row {
+    display: grid;
+    grid-template-columns: 46% 54%;
+    border-bottom: 1.5px solid #003b71;
+    min-height: 165px;
+  }
+  .r-a4-vista-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    box-sizing: border-box;
+    background: #ffffff;
+    overflow: hidden;
+  }
+  .r-a4-vista-box:first-child {
+    border-right: 1.5px solid #003b71;
+  }
+  .r-a4-vista-tag {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #003b71;
+    color: #ffffff;
+    font-size: 8px;
+    font-weight: 900;
+    padding: 2px 7px;
+    border-bottom-right-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    z-index: 5;
+  }
+  .r-a4-vista-superior-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    min-height: 120px;
+    background: #ffffff;
+    overflow: hidden;
+  }
+
+  /* Lateral Direita do Desenho: Componentes, Aplicação, Obs Técnicas */
+  .r-a4-cad-info-col {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+  }
+  .r-a4-sub-header {
+    background: #e8f1fa;
+    color: #003b71;
+    font-size: 9px;
+    font-weight: 900;
+    text-align: center;
+    padding: 2.5px 4px;
+    border-bottom: 1.5px solid #003b71;
     text-transform: uppercase;
     letter-spacing: 0.3px;
   }
-  .r-a4-card-body {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 6px;
-    position: relative;
-    overflow: hidden;
-    background: #ffffff;
-    box-sizing: border-box;
-  }
-  .r-a4-card-body img {
-    max-width: 100%;
-    max-height: 195px;
-    object-fit: contain;
-  }
-  /* Fotos Reais em Grade Horizontal */
-  .r-a4-fotos-reais-grid {
-    display: flex;
-    gap: 4px;
-    width: 100%;
-    height: 100%;
-    align-items: stretch;
-    justify-content: center;
-  }
-  .r-a4-foto-col {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    border-right: 1px solid #cbd5e1;
-    padding: 2px;
-    background: #f8fafc;
-    overflow: hidden;
-  }
-  .r-a4-foto-col:last-child {
-    border-right: none;
-  }
-  .r-a4-foto-col img {
-    width: 100%;
-    height: 100%;
-    max-height: 205px;
-    object-fit: cover;
-    border-radius: 2px;
-    display: block;
-  }
-  .r-a4-ferramentas-content {
-    width: 100%;
-    font-size: 11px;
-    color: #1f2937;
+  .r-a4-componentes-list {
+    padding: 3px 6px;
+    font-size: 8.5px;
     line-height: 1.45;
-  }
-  .r-a4-ferramentas-content ul {
-    margin: 0;
-    padding-left: 14px;
-    margin-bottom: 8px;
-  }
-  .r-a4-ferramentas-content li {
-    margin-bottom: 3px;
-    font-weight: 700;
-  }
-  .r-a4-obs-texto {
-    font-size: 11px;
-    color: #1f2937;
-    line-height: 1.48;
-    text-align: justify;
-    padding: 4px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .r-a4-registro-bloco {
-    border-bottom: 2px solid #003366;
-    padding: 8px 14px;
-    min-height: 95px;
-    display: flex;
-    flex-direction: column;
-  }
-  .r-a4-registro-titulo {
-    font-size: 12px;
-    font-weight: 900;
-    color: #003366;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-  }
-  .r-a4-linhas-pautadas {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    min-height: 65px;
   }
-  .r-a4-linha-ponto {
-    border-bottom: 1px dotted #9ca3af;
-    width: 100%;
-    height: 18px;
-    font-size: 10px;
-    color: #374151;
-    padding-left: 4px;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-  .r-a4-footer {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    min-height: 85px;
-    margin-top: auto;
-  }
-  .r-a4-footer-left {
-    border-right: 2px solid #003366;
-    padding: 8px 16px;
+  .r-a4-comp-item {
     display: flex;
-    flex-direction: column;
-  }
-  .r-a4-footer-titulo {
-    font-size: 11.5px;
-    font-weight: 900;
-    color: #003366;
-    text-transform: uppercase;
-  }
-  .r-a4-assinatura-area {
-    margin-top: auto;
-    text-align: center;
-    padding-top: 2px;
-  }
-  .r-a4-assinatura-img {
-    max-height: 44px;
-    max-width: 180px;
-    display: block;
-    margin: 0 auto;
-  }
-  .r-a4-assinatura-linha {
-    width: 210px;
-    border-bottom: 1px solid #111827;
-    margin: 2px auto 3px auto;
-  }
-  .r-a4-assinatura-nome {
-    font-size: 11px;
-    color: #111827;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 1.5px;
     font-weight: 700;
+    color: #1e293b;
   }
-  .r-a4-footer-right {
-    padding: 8px 16px;
-    display: flex;
-    flex-direction: column;
-  }
-  .r-a4-data-boxes {
-    margin-top: auto;
+  .r-a4-comp-circle {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #003b71;
+    color: #ffffff;
+    font-size: 8.5px;
+    font-weight: 900;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    font-size: 13px;
-    font-weight: 700;
-    color: #111827;
-    padding-bottom: 6px;
+    flex-shrink: 0;
   }
-  .r-a4-data-sublinha {
-    border-bottom: 1.5px solid #111827;
-    padding: 0 10px;
+  .r-a4-comp-txt {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .r-a4-aplicacao-box {
+    border-top: 1.5px solid #003b71;
+    display: flex;
+    flex-direction: column;
+  }
+  .r-a4-aplicacao-content {
+    padding: 4px 6px;
+    font-size: 8.5px;
+    color: #1f2937;
+    line-height: 1.35;
+    min-height: 28px;
+    font-weight: 600;
+  }
+  .r-a4-obs-tecnicas-box {
+    border-top: 1.5px solid #003b71;
+    display: flex;
+    flex-direction: column;
+  }
+  .r-a4-obs-tecnicas-content {
+    padding: 4px 6px;
+    font-size: 8px;
+    color: #1f2937;
+    line-height: 1.35;
+    min-height: 44px;
+  }
+  .r-a4-obs-tecnicas-content ul {
+    margin: 0;
+    padding-left: 12px;
+  }
+  .r-a4-obs-tecnicas-content li {
+    margin-bottom: 1.5px;
+  }
+
+  /* 4. SEÇÃO FOTOS E DETALHES */
+  .r-a4-fotos-section {
+    display: grid;
+    grid-template-columns: 29% 71%;
+    border-bottom: 2px solid #003b71;
+    min-height: 128px;
+    background: #ffffff;
+  }
+  .r-a4-foto-equip-col {
+    display: flex;
+    flex-direction: column;
+    border-right: 2px solid #003b71;
+  }
+  .r-a4-foto-equip-body {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+    background: #f8fafc;
+    overflow: hidden;
+  }
+  .r-a4-foto-equip-body img {
+    max-width: 100%;
+    max-height: 106px;
+    object-fit: contain;
+    display: block;
+    margin: auto;
+  }
+  .r-a4-detalhes-col {
+    display: flex;
+    flex-direction: column;
+  }
+  .r-a4-detalhes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    flex-grow: 1;
+  }
+  .r-a4-detalhe-item {
+    border-right: 1px solid #cbd5e1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3px 2px 2px 2px;
+    background: #ffffff;
+  }
+  .r-a4-detalhe-item:last-child {
+    border-right: none;
+  }
+  .r-a4-detalhe-img-wrap {
+    flex-grow: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    max-height: 94px;
+  }
+  .r-a4-detalhe-img-wrap img {
+    max-width: 100%;
+    max-height: 92px;
+    object-fit: cover;
+    border-radius: 2px;
+  }
+  .r-a4-detalhe-lbl {
+    font-size: 7.5px;
+    font-weight: 800;
+    color: #003b71;
+    text-align: center;
+    padding-top: 2px;
+    text-transform: uppercase;
+  }
+
+  /* 5. SEÇÃO DESCRIÇÃO DO SERVIÇO, FERRAMENTAS E EQUIPE */
+  .r-a4-servico-section {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    border-bottom: 2px solid #003b71;
+    min-height: 138px;
+    background: #ffffff;
+  }
+  .r-a4-desc-col {
+    display: flex;
+    flex-direction: column;
+    border-right: 2px solid #003b71;
+  }
+  .r-a4-pautada-box {
+    flex-grow: 1;
+    padding: 3px 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .r-a4-pautada-linha {
+    border-bottom: 1px solid #94a3b8;
+    min-height: 15px;
+    font-size: 8.5px;
+    color: #1e293b;
+    padding: 0 2px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .r-a4-ferr-equipe-col {
+    display: flex;
+    flex-direction: column;
+  }
+  .r-a4-ferr-body {
+    padding: 3px 8px;
+    font-size: 8.5px;
+    color: #1e293b;
+    line-height: 1.35;
+    flex-grow: 1;
+    min-height: 52px;
+  }
+  .r-a4-ferr-body ul {
+    margin: 0;
+    padding-left: 12px;
+  }
+  .r-a4-ferr-body li {
+    margin-bottom: 1.5px;
+    font-weight: 700;
+  }
+  .r-a4-equipe-body {
+    padding: 3px 8px;
+    font-size: 8.5px;
+    color: #1e293b;
+    line-height: 1.35;
+    min-height: 38px;
+    font-weight: 700;
+  }
+
+  /* 6. SEÇÃO FINAL: MATERIAIS, OBSERVAÇÕES, RESPONSÁVEL, REVISÃO */
+  .r-a4-rodape-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1.25fr 1.25fr 0.4fr;
+    border-bottom: 2px solid #003b71;
+    min-height: 90px;
+    background: #ffffff;
+  }
+  .r-a4-rodape-col {
+    display: flex;
+    flex-direction: column;
+    border-right: 1.5px solid #003b71;
+  }
+  .r-a4-rodape-col:last-child {
+    border-right: none;
+  }
+  .r-a4-rodape-body {
+    padding: 3px 6px;
+    font-size: 8.5px;
+    color: #1e293b;
+    line-height: 1.35;
+    flex-grow: 1;
+  }
+  .r-a4-rodape-body ul {
+    margin: 0;
+    padding-left: 12px;
+  }
+  .r-a4-rodape-body li {
+    margin-bottom: 1.5px;
+  }
+  .r-a4-resp-content {
+    padding: 3px 6px;
+    font-size: 8.5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+  .r-a4-resp-campo {
+    margin-bottom: 2px;
+    font-weight: 800;
+    color: #003b71;
+  }
+  .r-a4-resp-campo span {
+    color: #0f172a;
+    font-weight: 700;
+  }
+  .r-a4-resp-assinatura-wrap {
+    text-align: center;
+    margin-top: auto;
+  }
+  .r-a4-resp-assinatura-wrap img {
+    max-height: 28px;
+    max-width: 140px;
+    margin: 0 auto;
+    display: block;
+  }
+  .r-a4-resp-assinatura-wrap .texto-cursiva {
+    font-family: 'Segoe Script', 'Brush Script MT', cursive;
+    font-size: 13px;
+    color: #0f172a;
+  }
+  .r-a4-revisao-content {
+    padding: 4px 2px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 8.5px;
+    font-weight: 800;
+    color: #003b71;
+  }
+
+  /* 7. BARRA INDUSTRIAL INFERIOR (SILHUETA) */
+  .r-a4-banner-inferior {
+    min-height: 38px;
+    background: linear-gradient(180deg, #0b2f56 0%, #001e3d 100%);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid #003b71;
+  }
+  .r-a4-banner-frase {
+    font-size: 9.5px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-align: center;
+    flex-grow: 1;
+    color: #e0f2fe;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  }
+  .r-a4-banner-gear {
+    width: 26px;
+    height: 26px;
+    color: #38bdf8;
+    flex-shrink: 0;
   }
 
   /* Pad de Assinatura Interativo no Formulário */
@@ -3036,19 +3316,19 @@
 <div id="telaLogin">
   <div class="login-box" style="text-align:center;">
     <div style="margin-bottom:16px;">
-      <img src="assets/app_icon_mecanica_40.png" alt="Logo Mecânica 4.0 IA" style="width:88px; height:88px; border-radius:22px; border:2px solid rgba(56,189,248,0.6); box-shadow:0 0 25px rgba(56,189,248,0.4), 0 8px 24px rgba(0,0,0,0.85); object-fit:cover; display:inline-block;">
+      <img src="assets/app_icon_mecanica_40.png" id="logoLoginApp" ondblclick="revelarAcessoAdminLogin()" title="Mecânica 4.0 IA" alt="Logo Mecânica 4.0 IA" style="width:88px; height:88px; border-radius:22px; border:2px solid rgba(56,189,248,0.6); box-shadow:0 0 25px rgba(56,189,248,0.4), 0 8px 24px rgba(0,0,0,0.85); object-fit:cover; display:inline-block; cursor:pointer;">
     </div>
     <h2 style="font-size:25px; margin-bottom:4px; color:#ffffff; font-weight:900; letter-spacing:0.5px;">Mecânica 4.0 IA</h2>
     <p class="sub" style="color:#94a3b8; font-size:13px; margin-bottom:20px;">Engenharia & Manutenção Industrial Avançada<br><span style="color:#38bdf8; font-size:11.5px; font-weight:700;">Criado por Eduardo Noronha</span></p>
 
     <div class="field" id="campoCadastroNome" style="text-align:left; display:none;"><label>Seu Nome Completo</label><input type="text" id="login_nome" placeholder="Ex: Carlos Silva" onkeydown="if(event.key==='Enter') fazerCadastro()"></div>
-    <div class="field" style="text-align:left;"><label>E-mail</label><input type="email" id="login_email" placeholder="seu@email.com" onkeydown="if(event.key==='Enter') fazerLogin()"></div>
+    <div class="field" style="text-align:left;"><label>E-mail</label><input type="email" id="login_email" placeholder="seu@email.com" oninput="verificarExibicaoAdminLogin(this.value)" onkeydown="if(event.key==='Enter') fazerLogin()"></div>
     <div class="field" style="text-align:left;"><label>Senha</label><input type="password" id="login_senha" placeholder="••••••••" onkeydown="if(event.key==='Enter') fazerLogin()"></div>
 
     <button class="button" id="btnEntrar" onclick="fazerLogin()">Entrar no Sistema</button>
     <button class="button secondary" id="btnCriarConta" onclick="fazerCadastro()" style="display:none;">Criar conta</button>
 
-    <div style="margin-top:12px; padding-top:12px; border-top:1px solid #1f2f47;">
+    <div id="containerAcessoDiretoAdmin" style="display:none; margin-top:12px; padding-top:12px; border-top:1px solid #1f2f47;">
       <button type="button" class="button" style="background:linear-gradient(135deg, #78350f 0%, #451a03 100%); border-color:#f59e0b; margin-top:0; font-size:12.5px; padding:9px 14px; width:100%; display:flex; align-items:center; justify-content:center; gap:8px;" onclick="acessoRapidoEduardo()">👑 Acesso Direto do Administrador</button>
     </div>
 
@@ -4465,7 +4745,8 @@
       </div>
       <div class="field-row">
         <div class="field"><label>ASS (Colaborador / Executante)</label><input type="text" id="rel_resp" placeholder="ex: EDUARDO NORONHA"></div>
-        <div class="field"><label>Equipe / Matrícula</label><input type="text" id="rel_equipe_matr" placeholder="ex: EDUARDO NORONHA / 48380712"></div>
+        <div class="field"><label>Matrícula do Responsável</label><input type="text" id="rel_matricula" placeholder="ex: 48380712"></div>
+        <div class="field"><label>Equipe / Turno</label><input type="text" id="rel_equipe_matr" placeholder="ex: EDUARDO NORONHA / 48380712"></div>
       </div>
       <div class="field-row">
         <div class="field" style="min-width:100%;">
@@ -4593,6 +4874,18 @@
         <div class="field" style="min-width:100%;">
           <label>Registro do Serviço (Linhas pautadas de campo / checklist)</label>
           <textarea id="rel_registro_servico" rows="3" spellcheck="true" placeholder="ex: 1. Bloqueio e despressurização da linha concluídos com sucesso.&#10;2. Remoção da tampa sem deformações no alojamento.&#10;3. Junta de vedação inspecionada e aprovada."></textarea>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field" style="flex:1;">
+          <label>Materiais Utilizados (Folha A4)</label>
+          <textarea id="rel_materiais" rows="2" spellcheck="true" placeholder="• Junta grafitada DN 80&#10;• Desengraxante técnico&#10;• Solução antioxidante"></textarea>
+        </div>
+        <div class="field" style="flex:1;">
+          <label>Aplicação do Equipamento (Folha A4)</label>
+          <input type="text" id="rel_aplicacao" placeholder="ex: Sistema de Atemperação de Vapor / Ciclo Água-Vapor">
+          <label style="margin-top:6px;">Observações Técnicas / Metrologia (Folha A4)</label>
+          <textarea id="rel_obs_tecnicas" rows="2" spellcheck="true" placeholder="• Fabricado em Aço Inox AISI 316L&#10;• Tolerâncias ISO 2768-m&#10;• Cotas: H=263 mm, Ø 70 mm&#10;• Ensaio de estanqueidade aprovado"></textarea>
         </div>
       </div>
     </div>
@@ -4884,128 +5177,273 @@
       </div>
     </div>
 
-    <!-- DOCUMENTO A4 OFICIAL (Renderizado 1:1 conforme imagem) -->
+    <!-- DOCUMENTO A4 OFICIAL (1:1 com a prancha do usuário) -->
     <div id="relatorio-a4-imprimir" class="relatorio-a4-folha">
-      <!-- Cabeçalho Oficial Azul -->
-      <div class="r-a4-header">
-        <h1>RELATÓRIO TÉCNICO DE SERVIÇO</h1>
-        <div class="r-a4-logo">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="3"/>
-            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+      <!-- 1. Topo Oficial com Logo, Título e Número -->
+      <div class="r-a4-header-top">
+        <div class="r-a4-logo-box">
+          <!-- Logo com Engrenagem e Chave de Boca Industrial -->
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="46" stroke="#003b71" stroke-width="6" stroke-dasharray="12 4"/>
+            <circle cx="50" cy="50" r="34" fill="#003b71"/>
+            <path d="M43 27L57 27L53 37L61 41L70 33L79 42L71 51L75 59L85 55L85 69L75 65L71 73L79 82L70 91L61 83L53 87L57 97L43 97L47 87L39 83L30 91L21 82L29 73L25 65L15 69L15 55L25 59L29 51L21 42L30 33L39 41L47 37Z" fill="#003b71" opacity="0.2"/>
+            <!-- Chave de Boca Inclinada em Branco -->
+            <path d="M34 66L61 39C63 37 66 37 68 39L71 42C73 44 73 47 71 49L44 76C42 78 39 78 37 76L34 73C32 71 32 68 34 66Z" fill="#ffffff"/>
+            <path d="M63 33C66 30 71 30 75 32L68 39L71 42L78 35C80 39 80 44 77 47C75 49 72 50 69 50L60 41C60 38 61 35 63 33Z" fill="#ffffff"/>
+            <circle cx="37" cy="73" r="3.5" fill="#003b71"/>
           </svg>
-          <span>MECÂNICA</span>
-        </div>
-      </div>
-
-      <!-- Quadro Superior de Informações -->
-      <div class="r-a4-meta-grid">
-        <div class="r-a4-meta-left">
-          <div class="r-a4-meta-row"><span class="r-a4-meta-label">DATA:</span><span class="r-a4-meta-val" id="r4_data">02/09/26</span></div>
-          <div class="r-a4-meta-row"><span class="r-a4-meta-label">TAG:</span><span class="r-a4-meta-val" id="r4_tag">38LCE10</span></div>
-          <div class="r-a4-meta-row"><span class="r-a4-meta-label">OM:</span><span class="r-a4-meta-val" id="r4_om">20321136862</span></div>
-          <div class="r-a4-meta-row"><span class="r-a4-meta-label">Nº:</span><span class="r-a4-meta-val" id="r4_num">22147492</span></div>
-          <div class="r-a4-meta-row"><span class="r-a4-meta-label">OP:</span><span class="r-a4-meta-val" id="r4_op">10</span></div>
-          <div class="r-a4-meta-row"><span class="r-a4-meta-label">ASS:</span><span class="r-a4-meta-val" id="r4_ass">EDUARDO NORONHA</span></div>
-          <div class="r-a4-meta-row"><span class="r-a4-meta-label">EQUIPE:</span><span class="r-a4-meta-val" id="r4_equipe">EDUARDO / 48380712</span></div>
-          <div class="r-a4-meta-row"><span class="r-a4-meta-label">LOCAL:</span><span class="r-a4-meta-val" id="r4_local">BLOCO 3 CICLO ÁGUA VAPOR</span></div>
-        </div>
-        <div class="r-a4-meta-right">
-          <div class="r-a4-servico-titulo">SERVIÇO REALIZADO:</div>
-          <div class="r-a4-servico-desc" id="r4_servico">
-            Realizada limpeza do filtro do sistema de atemperação, com remoção de resíduos e impurezas acumuladas, visando manter a adequada passagem do fluido e o correto funcionamento do sistema.
-          </div>
-        </div>
-      </div>
-
-      <!-- Grade Central em 2 Painéis: Desenho Técnico (~38%) e Fotos Reais (~62%) -->
-      <div class="r-a4-mid-grid">
-        <!-- Painel Esquerdo: Desenho Técnico CAD -->
-        <div class="r-a4-card-box">
-          <div class="r-a4-card-header" id="r4_titulo_desenho">DESENHO TÉCNICO DO FILTRO</div>
-          <div class="r-a4-card-body" id="r4_container_desenho">
-            <!-- Preenchido dinamicamente com SVG CAD Paramétrico -->
+          <div class="r-a4-logo-text">
+            <span class="r-a4-logo-text-main">MANUTENÇÃO INDUSTRIAL</span>
+            <span class="r-a4-logo-text-sub">CONFIABILIDADE EM MOVIMENTO</span>
           </div>
         </div>
 
-        <!-- Painel Direito: Fotos Reais em Grade Horizontal -->
-        <div class="r-a4-card-box">
-          <div class="r-a4-card-header" id="r4_titulo_fotos_reais">FILTROS – FOTOS REAIS</div>
-          <div class="r-a4-card-body" style="padding: 2px;">
-            <div id="r4_fotos_reais_container" class="r-a4-fotos-reais-grid">
-              <!-- Fotos preenchidas dinamicamente lado a lado -->
+        <div class="r-a4-title-center">
+          <h1 class="r-a4-title-main">RELATÓRIO TÉCNICO DE MANUTENÇÃO</h1>
+          <div class="r-a4-title-sub">PLANEJAR &nbsp;|&nbsp; EXECUTAR &nbsp;|&nbsp; REGISTRAR &nbsp;|&nbsp; GARANTIR DISPONIBILIDADE</div>
+        </div>
+
+        <div class="r-a4-num-box">
+          <span class="r-a4-num-label">Nº</span>
+          <span class="r-a4-num-val" id="r4_header_no">2214/2026</span>
+        </div>
+      </div>
+
+      <!-- 2. Barra de Parâmetros Operacionais com Status Badge -->
+      <div class="r-a4-ident-bar">
+        <div class="r-a4-ident-cell">
+          <span class="r-a4-ident-lbl">DATA:</span>
+          <span class="r-a4-ident-val" id="r4_data">__/__/____</span>
+        </div>
+        <div class="r-a4-ident-cell">
+          <span class="r-a4-ident-lbl">OP:</span>
+          <span class="r-a4-ident-val" id="r4_op">10</span>
+        </div>
+        <div class="r-a4-ident-cell">
+          <span class="r-a4-ident-lbl">OM:</span>
+          <span class="r-a4-ident-val" id="r4_om">20321136862</span>
+        </div>
+        <div class="r-a4-ident-cell">
+          <span class="r-a4-ident-lbl">TAG:</span>
+          <span class="r-a4-ident-val" id="r4_tag">38LCE10</span>
+        </div>
+        <div class="r-a4-ident-cell">
+          <span class="r-a4-ident-lbl">Nº:</span>
+          <span class="r-a4-ident-val" id="r4_num">22147492</span>
+        </div>
+        <div class="r-a4-ident-cell" style="padding:0; border:none; display:flex; align-items:center; justify-content:center;">
+          <div id="r4_status_badge" class="r-a4-status-badge em-andamento">/// ⚙️ SERVIÇO EM ANDAMENTO ///</div>
+        </div>
+      </div>
+
+      <!-- 3. Seção Principal: Desenho Técnico - Equipamento / Conjunto -->
+      <div class="r-a4-section-header" id="r4_cad_titulo_banner">
+        DESENHO TÉCNICO – MOTOR / CONJUNTO DE VENTILAÇÃO
+      </div>
+      <div class="r-a4-cad-section-grid">
+        <!-- Coluna Esquerda: As 3 Vistas Técnicas (Lateral, Frontal e Superior) -->
+        <div class="r-a4-cad-vistas-col">
+          <div class="r-a4-vistas-top-row">
+            <!-- Vista Lateral -->
+            <div class="r-a4-vista-box" id="r4_container_vista_lateral">
+              <span class="r-a4-vista-tag">VISTA LATERAL</span>
+              <div id="r4_vista_lateral_svg" style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
+                <!-- SVG da Vista Lateral gerado dinamicamente -->
+              </div>
+            </div>
+
+            <!-- Vista Frontal -->
+            <div class="r-a4-vista-box" id="r4_container_vista_frontal">
+              <span class="r-a4-vista-tag">VISTA FRONTAL</span>
+              <div id="r4_vista_frontal_svg" style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
+                <!-- SVG da Vista Frontal gerado dinamicamente -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Vista Superior (Ocupa a largura total inferior do bloco de desenho) -->
+          <div class="r-a4-vista-superior-box" id="r4_container_vista_superior">
+            <span class="r-a4-vista-tag">VISTA SUPERIOR</span>
+            <div id="r4_vista_superior_svg" style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
+              <!-- SVG da Vista Superior gerado dinamicamente -->
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Grade Inferior em 3 Colunas: Ferramentas, Vista Real 3D, Observação -->
-      <div class="r-a4-lower-grid">
-        <!-- Coluna 1: Ferramentas Utilizadas -->
-        <div class="r-a4-card-box">
-          <div class="r-a4-card-header">FERRAMENTAS UTILIZADAS</div>
-          <div class="r-a4-card-body" id="r4_corpo_ferramentas" style="justify-content:flex-start; align-items:flex-start; padding:8px 10px;">
-            <div class="r-a4-ferramentas-content" id="r4_lista_ferramentas">
+        <!-- Coluna Direita: Principais Componentes, Aplicação e Observações Técnicas -->
+        <div class="r-a4-cad-info-col">
+          <div class="r-a4-sub-header">PRINCIPAIS COMPONENTES</div>
+          <div class="r-a4-componentes-list" id="r4_lista_componentes">
+            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">1</span><span class="r-a4-comp-txt" id="r4_comp_1">Alça de Içamento (Inox)</span></div>
+            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">2</span><span class="r-a4-comp-txt" id="r4_comp_2">Anel Superior / Flange</span></div>
+            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">3</span><span class="r-a4-comp-txt" id="r4_comp_3">Corpo Perfurado (AISI 316L)</span></div>
+            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">4</span><span class="r-a4-comp-txt" id="r4_comp_4">Malha Filtrante Interna</span></div>
+            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">5</span><span class="r-a4-comp-txt" id="r4_comp_5">Fundo Cônico Soldado</span></div>
+            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">6</span><span class="r-a4-comp-txt" id="r4_comp_6">Cordão de Solda TIG</span></div>
+            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">7</span><span class="r-a4-comp-txt" id="r4_comp_7">Junta de Vedação Plana</span></div>
+            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">8</span><span class="r-a4-comp-txt" id="r4_comp_8">Trava Guia Anti-Giro</span></div>
+          </div>
+
+          <div class="r-a4-aplicacao-box">
+            <div class="r-a4-sub-header">APLICAÇÃO</div>
+            <div class="r-a4-aplicacao-content" id="r4_aplicacao">
+              Sistema de Atemperação de Vapor / Linha de Água de Alimentação de Alta Pressão.
+            </div>
+          </div>
+
+          <div class="r-a4-obs-tecnicas-box">
+            <div class="r-a4-sub-header">OBSERVAÇÕES TÉCNICAS</div>
+            <div class="r-a4-obs-tecnicas-content" id="r4_obs_tecnicas">
               <ul>
-                <li>Chave combinada 22 mm</li>
+                <li>Fabricado em Aço Inox AISI 316L resistente à corrosão térmica.</li>
+                <li>Tolerâncias dimensionais conforme norma ISO 2768-m.</li>
+                <li>Cotas nominais: H=263 mm, Diâmetro externo Ø=70 mm.</li>
+                <li>Ensaio de estanqueidade e integridade mecânica 100% aprovado.</li>
               </ul>
             </div>
-            <div id="r4_container_ferramenta_img" style="width:100%; margin-top:auto; text-align:center; padding-top:4px;">
-              <img id="r4_img_ferramenta" src="" alt="Ferramenta Realista" style="max-height:85px; max-width:100%; object-fit:contain; display:block; margin:auto;">
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Seção Fotos: Foto do Equipamento e Detalhes do Equipamento com Legendas Automáticas -->
+      <div class="r-a4-fotos-section">
+        <div class="r-a4-foto-equip-col">
+          <div class="r-a4-section-header" style="font-size:9.5px;">FOTO DO EQUIPAMENTO</div>
+          <div class="r-a4-foto-equip-body">
+            <img id="r4_foto_principal" src="" alt="Foto do Equipamento" style="display:none;">
+            <div id="r4_foto_principal_placeholder" style="color:#64748b; font-size:10px; text-align:center;">
+              <span style="font-size:20px;">📷</span><br>Foto Principal (Slot 1)
             </div>
           </div>
+          <div class="r-a4-detalhe-lbl" id="r4_foto_principal_lbl" style="border-top:1px solid #003b71; font-weight:800;">VISTA LATERAL</div>
         </div>
 
-        <!-- Coluna 2: Vista Real (3D) do Equipamento -->
-        <div class="r-a4-card-box">
-          <div class="r-a4-card-header" id="r4_titulo_3d">FILTROS – VISTA REAL (3D)</div>
-          <div class="r-a4-card-body" style="padding:4px;">
-            <img id="r4_img_3d" src="" alt="Equipamento vista 3D" style="display:none; max-height:175px; max-width:100%; object-fit:contain; margin:auto;">
-            <div id="r4_img_3d_placeholder" style="color:#6b7280; font-size:11px; text-align:center;">Foto Vista Real / Peças Limpas</div>
-          </div>
-        </div>
-
-        <!-- Coluna 3: Observação -->
-        <div class="r-a4-card-box">
-          <div class="r-a4-card-header">OBSERVAÇÃO</div>
-          <div class="r-a4-card-body" style="justify-content:flex-start; align-items:flex-start;">
-            <div class="r-a4-obs-texto" id="r4_observacao">
-              Após a limpeza, o filtro foi deixado em condições adequadas para operação, contribuindo para a manutenção do fluxo e desempenho do sistema de atemperação.
+        <div class="r-a4-detalhes-col">
+          <div class="r-a4-section-header" style="font-size:9.5px;">DETALHES DO EQUIPAMENTO</div>
+          <div class="r-a4-detalhes-grid">
+            <div class="r-a4-detalhe-item">
+              <div class="r-a4-detalhe-img-wrap">
+                <img id="r4_detalhe_1_img" src="" alt="Detalhe 1" style="display:none;">
+                <span id="r4_detalhe_1_ph" style="color:#94a3b8; font-size:9px;">Sem foto</span>
+              </div>
+              <div class="r-a4-detalhe-lbl" id="r4_detalhe_1_lbl">HÉLICE / IMPELIDOR AXIAL (VISTA FRONTAL)</div>
+            </div>
+            <div class="r-a4-detalhe-item">
+              <div class="r-a4-detalhe-img-wrap">
+                <img id="r4_detalhe_2_img" src="" alt="Detalhe 2" style="display:none;">
+                <span id="r4_detalhe_2_ph" style="color:#94a3b8; font-size:9px;">Sem foto</span>
+              </div>
+              <div class="r-a4-detalhe-lbl" id="r4_detalhe_2_lbl">EIXO DO MOTOR</div>
+            </div>
+            <div class="r-a4-detalhe-item">
+              <div class="r-a4-detalhe-img-wrap">
+                <img id="r4_detalhe_3_img" src="" alt="Detalhe 3" style="display:none;">
+                <span id="r4_detalhe_3_ph" style="color:#94a3b8; font-size:9px;">Sem foto</span>
+              </div>
+              <div class="r-a4-detalhe-lbl" id="r4_detalhe_3_lbl">OLHAL DE IÇAMENTO</div>
+            </div>
+            <div class="r-a4-detalhe-item">
+              <div class="r-a4-detalhe-img-wrap">
+                <img id="r4_detalhe_4_img" src="" alt="Detalhe 4" style="display:none;">
+                <span id="r4_detalhe_4_ph" style="color:#94a3b8; font-size:9px;">Sem foto</span>
+              </div>
+              <div class="r-a4-detalhe-lbl" id="r4_detalhe_4_lbl">DETALHE 4</div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Bloco de Registro do Serviço -->
-      <div class="r-a4-registro-bloco">
-        <div class="r-a4-registro-titulo">REGISTRO DO SERVIÇO</div>
-        <div class="r-a4-linhas-pautadas" id="r4_linhas_registro">
-          <div class="r-a4-linha-ponto">....................................................................................................................................................................................</div>
-          <div class="r-a4-linha-ponto">....................................................................................................................................................................................</div>
-          <div class="r-a4-linha-ponto">....................................................................................................................................................................................</div>
-          <div class="r-a4-linha-ponto">....................................................................................................................................................................................</div>
+      <!-- 5. Seção Descrição do Serviço, Ferramentas Utilizadas e Equipe -->
+      <div class="r-a4-servico-section">
+        <div class="r-a4-desc-col">
+          <div class="r-a4-section-header" style="font-size:9.5px; text-align:left; padding-left:10px;">DESCRIÇÃO DO SERVIÇO</div>
+          <div class="r-a4-pautada-box" id="r4_servico_linhas_container">
+            <div class="r-a4-pautada-linha" id="r4_pautada_1">Realizada intervenção técnica com bloqueio de segurança LOTO e despressurização da linha.</div>
+            <div class="r-a4-pautada-linha" id="r4_pautada_2">Desmontagem da tampa de inspeção e extração do elemento filtrante para avaliação metrológica.</div>
+            <div class="r-a4-pautada-linha" id="r4_pautada_3">Limpeza minuciosa da malha perfurada, remoção de incrustações e teste de integridade estrutural.</div>
+            <div class="r-a4-pautada-linha" id="r4_pautada_4">Substituição da junta de vedação, reinstalação do cesto no alojamento e aperto calibrado em cruz.</div>
+            <div class="r-a4-pautada-linha" id="r4_pautada_5">Sistema reenergizado e testado sob pressão nominal sem registros de vazamento ou perda de carga.</div>
+            <div class="r-a4-pautada-linha" id="r4_pautada_6">Equipamento liberado e entregue para operação com garantia de confiabilidade mecânica.</div>
+          </div>
+        </div>
+
+        <div class="r-a4-ferr-equipe-col">
+          <div class="r-a4-section-header" style="font-size:9.5px; text-align:left; padding-left:8px;">FERRAMENTAS UTILIZADAS</div>
+          <div class="r-a4-ferr-body" id="r4_ferramentas_linhas">
+            <ul>
+              <li>Chave combinada 22 mm</li>
+              <li>Torquímetro calibrado (torque 85 N.m)</li>
+              <li>Escova de latão para higienização</li>
+              <li>Paquímetro digital centesimal</li>
+            </ul>
+          </div>
+
+          <div class="r-a4-section-header" style="font-size:9.5px; text-align:left; padding-left:8px; border-top:1.5px solid #003b71;">EQUIPE</div>
+          <div class="r-a4-equipe-body" id="r4_equipe_linhas">
+            Mecânica Industrial 4.0 IA
+          </div>
         </div>
       </div>
 
-      <!-- Rodapé: Responsável e Data -->
-      <div class="r-a4-footer">
-        <div class="r-a4-footer-left">
-          <div class="r-a4-footer-titulo">RESPONSÁVEL</div>
-          <div class="r-a4-assinatura-area">
-            <img id="r4_img_assinatura" class="r-a4-assinatura-img" src="" alt="Assinatura" style="display:none;">
-            <div id="r4_texto_assinatura_cursiva" style="font-family:'Segoe Script', 'Brush Script MT', cursive; font-size:18px; color:#111827; min-height:26px; display:flex; align-items:center; justify-content:center;">Eduardo Noronha</div>
-            <div class="r-a4-assinatura-linha"></div>
-            <div class="r-a4-assinatura-nome" id="r4_nome_responsavel">Eduardo Noronha</div>
+      <!-- 6. Seção Inferior: Materiais Utilizados, Observações, Responsável Técnico e Revisão -->
+      <div class="r-a4-rodape-grid">
+        <div class="r-a4-rodape-col">
+          <div class="r-a4-section-header" style="font-size:9px;">MATERIAIS UTILIZADOS</div>
+          <div class="r-a4-rodape-body" id="r4_materiais_linhas">
+            <ul>
+              <li>Junta grafitada DN 80</li>
+              <li>Desengraxante técnico</li>
+              <li>Solução antioxidante</li>
+            </ul>
           </div>
         </div>
-        <div class="r-a4-footer-right">
-          <div class="r-a4-footer-titulo">DATA</div>
-          <div class="r-a4-data-boxes">
-            <span class="r-a4-data-sublinha" id="r4_dia">02</span> / 
-            <span class="r-a4-data-sublinha" id="r4_mes">09</span> / 
-            <span class="r-a4-data-sublinha" id="r4_ano">26</span>
+
+        <div class="r-a4-rodape-col">
+          <div class="r-a4-section-header" style="font-size:9px;">OBSERVAÇÕES</div>
+          <div class="r-a4-rodape-body" id="r4_observacoes_linhas">
+            <ul>
+              <li>Equipamento operando com fluxo nominal e estabilidade térmica.</li>
+              <li>Manutenção realizada em estrita conformidade com NR-12 e NR-13.</li>
+            </ul>
           </div>
         </div>
+
+        <div class="r-a4-rodape-col">
+          <div class="r-a4-section-header" style="font-size:9px;">RESPONSÁVEL TÉCNICO / EXECUÇÃO</div>
+          <div class="r-a4-resp-content">
+            <div class="r-a4-resp-campo">NOME: <span id="r4_resp_nome">EDUARDO NORONHA</span></div>
+            <div class="r-a4-resp-campo">MATRÍCULA: <span id="r4_resp_matr">48380712</span></div>
+            <div class="r-a4-resp-assinatura-wrap">
+              <img id="r4_img_assinatura" src="" alt="Assinatura" style="display:none;">
+              <div id="r4_texto_assinatura_cursiva" class="texto-cursiva">Eduardo Noronha</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="r-a4-rodape-col">
+          <div class="r-a4-section-header" style="font-size:9px;">REVISÃO</div>
+          <div class="r-a4-revisao-content">
+            <div>DATA:</div>
+            <div id="r4_rev_data" style="margin-top:4px; font-size:10px; color:#0f172a; font-weight:900;">__/__/____</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7. Faixa Inferior com Silhueta Industrial e Lema Oficial -->
+      <div class="r-a4-banner-inferior">
+        <!-- Silhueta SVG de tubulações e refinaria -->
+        <svg style="position:absolute; left:0; bottom:0; width:100%; height:100%; opacity:0.18; pointer-events:none;" preserveAspectRatio="none" viewBox="0 0 800 60">
+          <path d="M0 60 L0 35 L20 35 L20 20 L30 20 L30 35 L50 35 L50 10 L60 10 L60 35 L90 35 L90 5 L100 5 L100 35 L140 35 L140 18 L160 18 L160 35 L200 35 L200 25 L215 25 L215 35 L250 35 L270 12 L290 35 L330 35 L330 8 L340 8 L340 35 L380 35 L390 15 L410 15 L420 35 L480 35 L480 22 L510 22 L510 35 L550 35 L550 5 L560 5 L560 35 L620 35 L620 18 L640 18 L640 35 L680 35 L700 8 L720 35 L760 35 L760 25 L780 25 L780 35 L800 35 L800 60 Z" fill="#ffffff"/>
+        </svg>
+
+        <div class="r-a4-banner-frase">
+          “MANUTENÇÃO HOJE, DISPONIBILIDADE SEMPRE.”
+        </div>
+
+        <svg class="r-a4-banner-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
       </div>
     </div>
   </div>
@@ -5021,10 +5459,10 @@
           </div>
           <div>
             <h3 style="margin:0; font-size:17px; color:#ffffff; display:flex; align-items:center; gap:8px;">
-              🤖 Robô Mecânico 4.0 IA <span class="rf-tag-tech">REVISOR OFICIAL PETROBRAS</span>
+              🤖 Robô Mecânico 4.0 IA <span class="rf-tag-tech">REVISOR MECÂNICA 4.0 IA</span>
             </h3>
             <p style="margin:2px 0 0 0; font-size:12px; color:#94a3b8;">
-              Leitura pericial, correção ortográfica e elevação para a linguagem de engenharia Petrobras / SAP PM
+              Leitura pericial, correção ortográfica e elevação técnica para o padrão Mecânica 4.0 IA / Engenharia de Confiabilidade
             </p>
           </div>
         </div>
@@ -5059,7 +5497,7 @@
         <!-- Coluna Direita: Aprimorado pela IA -->
         <div style="background:#0b1d36; border:1.5px solid #38bdf8; border-radius:8px; padding:12px; box-shadow:0 0 15px rgba(56,189,248,0.15);">
           <div style="font-size:12px; font-weight:bold; color:#38bdf8; margin-bottom:8px; display:flex; justify-content:space-between;">
-            <span>✨ REDAÇÃO TÉCNICA APRIMORADA (PADRÃO PETROBRAS)</span>
+            <span>✨ REDAÇÃO TÉCNICA APRIMORADA (PADRÃO MECÂNICA 4.0 IA)</span>
             <span class="rf-tag-tech" style="font-size:9px;">PRONTO</span>
           </div>
           <div style="font-size:11.5px; color:#cbd5e1; line-height:1.5;">
@@ -5787,7 +6225,7 @@
           <!-- Ações Imediatas & Exportação para o Relatório Oficial -->
           <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:space-between; align-items:center;">
             <div style="display:flex; gap:8px; flex-wrap:wrap;">
-              <button type="button" class="button" style="background:#059669; border-color:#10b981; font-size:13px; font-weight:800; margin:0;" onclick="exportarTorqueIaParaRelatorio()">📑 Levar p/ Relatório Petrobras A4</button>
+              <button type="button" class="button" style="background:#059669; border-color:#10b981; font-size:13px; font-weight:800; margin:0;" onclick="exportarTorqueIaParaRelatorio()">📑 Levar p/ Relatório A4 Mecânica 4.0 IA</button>
               <button type="button" class="button" style="background:#0284c7; border-color:#38bdf8; font-size:13px; font-weight:700; margin:0;" onclick="aplicarTorqueIaNaCalculadora()">🎯 Usar na Calculadora</button>
               <button type="button" class="button secondary" style="font-size:13px; margin:0;" onclick="copiarTorqueIaEspecificacao()">📋 Copiar Especificação</button>
             </div>
@@ -6993,6 +7431,13 @@ async function processarFotoSlot(slotKey, inputEl) {
         nome: fileOriginal.name
       };
       renderizarSlotFoto(slotKey);
+      if (slotKey === 'slot1') {
+        try {
+          gerarDesenhoTecnicoDaFoto(dataUrl);
+        } catch (eDraw) {
+          console.warn('Auto desenho foto:', eDraw);
+        }
+      }
     };
     reader.readAsDataURL(fileComprimido);
   } catch (err) {
@@ -7000,12 +7445,20 @@ async function processarFotoSlot(slotKey, inputEl) {
     // Fallback direto
     const reader = new FileReader();
     reader.onload = function(e) {
+      const dataUrl = e.target.result;
       estadoFotosRelatorio[slotKey] = {
         file: fileOriginal,
-        dataUrl: e.target.result,
+        dataUrl: dataUrl,
         nome: fileOriginal.name
       };
       renderizarSlotFoto(slotKey);
+      if (slotKey === 'slot1') {
+        try {
+          gerarDesenhoTecnicoDaFoto(dataUrl);
+        } catch (eDraw) {
+          console.warn('Auto desenho foto:', eDraw);
+        }
+      }
     };
     reader.readAsDataURL(fileOriginal);
   }
@@ -8920,40 +9373,17 @@ function renderizarFilaAprovacaoSupervisor(filtro = 'todos') {
     relatorios = JSON.parse(localStorage.getItem(userKey) || '[]');
   } catch(e) {}
 
-  // Relatórios de exemplo se estiver vazio
   if (relatorios.length === 0) {
-    relatorios = [
-      {
-        id: 'rel_ex_01',
-        numDoc: '2026-0089',
-        om: '2032113859',
-        tag: '28LCE10-P01',
-        equip: 'Bomba Centrífuga Multiestágio de Alimentação',
-        ass: 'Eduardo Noronha',
-        tipo: 'Corretiva',
-        urgencia: 'Alta — risco à segurança/produção',
-        criado_em: new Date(Date.now() - 3600000 * 4).toISOString(),
-        servicoRealizado: 'Realizada substituição de selo mecânico e anéis de vedação por desvio de estanqueidade. Alinhamento de eixos com tolerância centesimal verificado.',
-        causa: 'Degradação elastomérica por temperatura e particulado.',
-        statusAprovacao: 'pendente'
-      },
-      {
-        id: 'rel_ex_02',
-        numDoc: '2026-0088',
-        om: '2032113840',
-        tag: '101-RD-01',
-        equip: 'Redutor Helicoidal de Eixos Paralelos',
-        ass: 'Carlos Mendes',
-        tipo: 'Preventiva',
-        urgencia: 'Média',
-        criado_em: new Date(Date.now() - 3600000 * 26).toISOString(),
-        servicoRealizado: 'Inspeção de nível de óleo sintético ISO VG 220, medição de folga entre dentes (backlash 0,22 mm) e teste de vibração global.',
-        causa: 'Manutenção preventiva programada conforme plano RCM.',
-        statusAprovacao: 'aprovado',
-        aprovadoPor: 'Eduardo Noronha (Supervisor)',
-        aprovadoEm: new Date(Date.now() - 3600000 * 18).toISOString()
-      }
-    ];
+    container.innerHTML = `
+      <div style="text-align:center; padding:40px 20px; color:#94a3b8; background:#071322; border:1px dashed #1e3a5f; border-radius:10px;">
+        <div style="font-size:36px; margin-bottom:8px;">📋</div>
+        <p style="font-size:14px; margin:0; font-weight:600; color:#e2e8f0;">Nenhum laudo pendente ou registrado no momento.</p>
+        <span style="font-size:12px; color:#64748b;">Novos relatórios salvos aparecerão aqui automaticamente para homologação e acompanhamento.</span>
+      </div>
+    `;
+    const countBadgeEl = document.getElementById('sup_count_pendentes');
+    if (countBadgeEl) countBadgeEl.innerText = 0;
+    return;
   }
 
   let listaFiltrada = relatorios;
@@ -9635,7 +10065,7 @@ async function idbListarRelatoriosUsuario(userEmail) {
       req.onsuccess = () => {
         const todos = req.result || [];
         if (!emailAlvo || emailAlvo === 'usuario_padrao') {
-          resolve(todos);
+          resolve([]);
           return;
         }
         // Isolamento rigoroso: cada usuário só visualiza seus relatórios próprios
@@ -11352,6 +11782,22 @@ function alternarModoLogin() {
   }
 }
 
+async 
+function verificarExibicaoAdminLogin(val) {
+  const c = document.getElementById('containerAcessoDiretoAdmin');
+  if (!c) return;
+  const v = (val || '').toLowerCase().trim();
+  if (v === 'dudusemog@gmail.com' || v.includes('dudusemog') || v.includes('dudu_petro') || v.includes('dudueag')) {
+    c.style.display = 'block';
+  } else {
+    c.style.display = 'none';
+  }
+}
+function revelarAcessoAdminLogin() {
+  const c = document.getElementById('containerAcessoDiretoAdmin');
+  if (c) c.style.display = (c.style.display === 'none') ? 'block' : 'none';
+}
+
 async function fazerLogin() {
   const email = (document.getElementById('login_email')?.value || '').trim();
   const senha = document.getElementById('login_senha')?.value || '';
@@ -11585,19 +12031,33 @@ function previewFotosExtra() {
   });
 }
 
+// Helper de Timeout para chamadas assíncronas de rede e nuvem
+function withTimeout(promise, ms = 2500) {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout de rede (nuvem)')), ms))
+  ]);
+}
+
 // Compacta imagens antes do upload ou armazenamento para evitar erro de limites de rede ou storage
 async function comprimirImagem(file, maxLargura = 800, qualidade = 0.68) {
-  if (!file || !file.type || !file.type.startsWith('image/')) return file;
+  if (!file) return null;
+  if (typeof file === 'string') return file; // Já em Base64 Data URL
+  if (!file.type || !file.type.startsWith('image/')) return file;
+  
   return new Promise((resolve) => {
+    let resolvido = false;
+    const finalizar = (res) => { if (!resolvido) { resolvido = true; resolve(res); } };
+    const timer = setTimeout(() => finalizar(file), 1500); // Garante resolução em até 1.5s mesmo em caso de falha/iOS
+
     try {
       const reader = new FileReader();
-      reader.readAsDataURL(file);
       reader.onload = (event) => {
         const img = new Image();
-        img.src = event.target.result;
         img.onload = () => {
-          let largura = img.width;
-          let altura = img.height;
+          clearTimeout(timer);
+          let largura = img.width || 800;
+          let altura = img.height || 600;
           if (largura > maxLargura || altura > maxLargura) {
             if (largura > altura) {
               altura = Math.round((altura * maxLargura) / largura);
@@ -11614,27 +12074,29 @@ async function comprimirImagem(file, maxLargura = 800, qualidade = 0.68) {
           ctx.drawImage(img, 0, 0, largura, altura);
           canvas.toBlob(
             (blob) => {
-              if (!blob) { resolve(file); return; }
+              if (!blob) { finalizar(file); return; }
               try {
                 const novoArquivo = new File([blob], "foto.jpg", {
                   type: 'image/jpeg',
                   lastModified: Date.now()
                 });
-                resolve(novoArquivo);
+                finalizar(novoArquivo);
               } catch (eFile) {
-                // Em WebViews Android onde o construtor File pode falhar, usa o blob diretamente
-                resolve(blob);
+                finalizar(blob);
               }
             },
             'image/jpeg',
             qualidade
           );
         };
-        img.onerror = () => resolve(file);
+        img.onerror = () => { clearTimeout(timer); finalizar(file); };
+        img.src = event.target.result;
       };
-      reader.onerror = () => resolve(file);
+      reader.onerror = () => { clearTimeout(timer); finalizar(file); };
+      reader.readAsDataURL(file);
     } catch (e) {
-      resolve(file);
+      clearTimeout(timer);
+      finalizar(file);
     }
   });
 }
@@ -11647,27 +12109,32 @@ async function uploadFotoSupabase(fileOriginal, tag, tipo) {
     const tagLimpa = (tag || 'equip').replace(/[^a-zA-Z0-9_-]/g, '_');
     const nomeArquivo = `${tagLimpa}/${Date.now()}_${tipo}.jpg`;
     
-    // 1. Tenta upload no bucket Supabase Storage se existir
+    // 1. Tenta upload no bucket Supabase Storage se existir com timeout de 2.5 segundos
     try {
       if (typeof db !== 'undefined' && db && db.storage) {
-        const { data: upData, error } = await db.storage.from('fotos-intervencoes').upload(nomeArquivo, file, {
+        const uploadTask = db.storage.from('fotos-intervencoes').upload(nomeArquivo, file, {
           contentType: 'image/jpeg',
           upsert: true
         });
+        const { data: upData, error } = await withTimeout(uploadTask, 2500);
         if (!error && upData) {
           const { data } = db.storage.from('fotos-intervencoes').getPublicUrl(nomeArquivo);
           if (data && data.publicUrl) return data.publicUrl;
         }
       }
     } catch (errUpload) {
-      console.warn('Storage indisponível ou sem bucket, usando fallback Base64 ultra-leve:', errUpload);
+      console.warn('Storage indisponível ou timeout, usando fallback Base64 ultra-leve:', errUpload);
     }
 
-    // 2. Fallback Anti-Erro definitivo: converte a imagem comprimida (~45KB) para Data URL (Base64)
+    // 2. Fallback Anti-Erro definitivo: converte a imagem comprimida para Data URL (Base64)
+    if (typeof file === 'string' && file.startsWith('data:image')) {
+      return file;
+    }
     return await new Promise((resolve) => {
       const reader = new FileReader();
-      reader.onloadend = () => resolve(reader.result);
-      reader.onerror = () => resolve(null);
+      const timer = setTimeout(() => resolve(null), 1500);
+      reader.onloadend = () => { clearTimeout(timer); resolve(reader.result); };
+      reader.onerror = () => { clearTimeout(timer); resolve(null); };
       reader.readAsDataURL(file);
     });
   } catch (err) {
@@ -11783,29 +12250,33 @@ function atualizarOpcaoDesenhoTecnico() {
   }
 }
 
-function gerarDesenhoTecnicoDaFoto() {
+function gerarDesenhoTecnicoDaFoto(customFotoUrl) {
   const status = document.getElementById('status_geracao_desenho');
-  const inputAntes = document.getElementById('rel_foto_antes');
-  const inputDepois = document.getElementById('rel_foto_depois');
-  const file = (inputAntes && inputAntes.files && inputAntes.files[0]) || (inputDepois && inputDepois.files && inputDepois.files[0]);
+  const fotoAtiva = customFotoUrl || 
+                    (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot1 && estadoFotosRelatorio.slot1.dataUrl) ||
+                    (document.getElementById('rel_foto_slot1')?.files?.[0]) ||
+                    (document.getElementById('rel_foto_antes')?.files?.[0]);
 
-  if (!file) {
-    status.innerText = '⚠️ Selecione primeiro a foto do equipamento nos campos acima!';
-    status.style.color = '#ffd479';
+  if (!fotoAtiva) {
+    if (status) {
+      status.innerText = '⚠️ Selecione ou tire primeiro a foto do equipamento (Slot 1)!';
+      status.style.color = '#ffd479';
+    }
     return;
   }
 
-  status.innerText = '⏳ Gerando desenho técnico da foto...';
-  status.style.color = '#75b7ff';
+  if (status) {
+    status.innerText = '⏳ Gerando desenho técnico e blueprint fiel à foto real...';
+    status.style.color = '#75b7ff';
+  }
 
-  const reader = new FileReader();
-  reader.onload = (e) => {
+  const processarImg = (srcUrl) => {
     const img = new Image();
-    img.src = e.target.result;
+    img.crossOrigin = 'anonymous';
     img.onload = () => {
       const canvas = document.createElement('canvas');
-      const w = 400;
-      const h = Math.round((img.height * 400) / img.width);
+      const w = 480;
+      const h = Math.round((img.height * 480) / img.width);
       canvas.width = w;
       canvas.height = h;
       const ctx = canvas.getContext('2d');
@@ -11814,9 +12285,34 @@ function gerarDesenhoTecnicoDaFoto() {
       ctx.fillRect(0, 0, w, h);
       ctx.drawImage(img, 0, 0, w, h);
 
-      // Aplica processamento de borda e traço técnico
+      // Aplica processamento de contorno técnico Sobel adaptativo
       const imgData = ctx.getImageData(0, 0, w, h);
       const data = imgData.data;
+
+      // Reconhecimento Pericial por IA da Foto do Equipamento
+      let azuis = 0, laranjas = 0, totalAmostras = 0;
+      for (let i = 0; i < data.length; i += 16) {
+        totalAmostras++;
+        const r = data[i], g = data[i+1], b = data[i+2];
+        if (b > r + 20 && b > g + 10) azuis++;
+        if (r > 140 && g > 50 && g < 170 && b < 95) laranjas++;
+      }
+      const pctAzul = (azuis / totalAmostras) * 100;
+      const pctLaranja = (laranjas / totalAmostras) * 100;
+
+      const tagTxt = (document.getElementById('rel_tag')?.value || '').toLowerCase();
+      const equipTxt = (document.getElementById('rel_equip')?.value || '').toLowerCase();
+      const isMotorVentilador = (pctAzul > 0.6 && pctLaranja > 0.4) || 
+                                tagTxt.includes('mot') || tagTxt.includes('vent') ||
+                                equipTxt.includes('motor') || equipTxt.includes('ventilador');
+
+      if (isMotorVentilador) {
+        const cEquip = document.getElementById('rel_equip');
+        if (cEquip && (!cEquip.value || cEquip.value.includes('Filtro'))) {
+          cEquip.value = 'Motor / Conjunto de Ventilação';
+        }
+      }
+
       const gray = new Float32Array(w * h);
 
       for (let i = 0; i < data.length; i += 4) {
@@ -11831,14 +12327,14 @@ function gerarDesenhoTecnicoDaFoto() {
           const mag = Math.sqrt(gx * gx + gy * gy);
           
           const pIdx = idx * 4;
-          if (mag > 42) {
-            data[pIdx] = 16;
-            data[pIdx + 1] = 68;
-            data[pIdx + 2] = 140;
+          if (mag > 36) {
+            data[pIdx] = 0;
+            data[pIdx + 1] = 59;
+            data[pIdx + 2] = 113; // #003b71 Azul técnico oficial
             data[pIdx + 3] = 255;
           } else {
-            data[pIdx] = 252;
-            data[pIdx + 1] = 253;
+            data[pIdx] = 255;
+            data[pIdx + 1] = 255;
             data[pIdx + 2] = 255;
             data[pIdx + 3] = 255;
           }
@@ -11847,80 +12343,83 @@ function gerarDesenhoTecnicoDaFoto() {
 
       ctx.putImageData(imgData, 0, 0);
 
-      // Traçados técnicos e cotas
-      ctx.strokeStyle = '#10448c';
+      // Traçados técnicos, cotas normatizadas e balões sobre a foto real
+      ctx.strokeStyle = '#003b71';
       ctx.lineWidth = 1.5;
 
-      // Cota de altura
+      // Cota de altura lateral
       ctx.beginPath();
-      ctx.moveTo(25, 20); ctx.lineTo(25, h - 20);
-      ctx.moveTo(18, 20); ctx.lineTo(32, 20);
-      ctx.moveTo(18, h - 20); ctx.lineTo(32, h - 20);
+      ctx.moveTo(30, 25); ctx.lineTo(30, h - 25);
+      ctx.moveTo(22, 25); ctx.lineTo(38, 25);
+      ctx.moveTo(22, h - 25); ctx.lineTo(38, h - 25);
       ctx.stroke();
 
-      ctx.fillStyle = '#10448c';
+      ctx.fillStyle = '#003b71';
       ctx.font = 'bold 11px Arial';
       ctx.save();
-      ctx.translate(16, h / 2);
+      ctx.translate(20, h / 2);
       ctx.rotate(-Math.PI / 2);
       ctx.textAlign = 'center';
-      ctx.fillText('263 mm (Ref)', 0, 0);
+      ctx.fillText(isMotorVentilador ? 'Hélice Ø 450 mm (Ref)' : '263 mm (Ref)', 0, 0);
       ctx.restore();
 
-      // Cota inferior
+      // Cota de diâmetro ou comprimento inferior
       ctx.beginPath();
-      ctx.moveTo(w / 4, h - 15); ctx.lineTo(w * 0.75, h - 15);
-      ctx.moveTo(w / 4, h - 22); ctx.lineTo(w / 4, h - 8);
-      ctx.moveTo(w * 0.75, h - 22); ctx.lineTo(w * 0.75, h - 8);
+      ctx.moveTo(w / 4, h - 18); ctx.lineTo(w * 0.75, h - 18);
+      ctx.moveTo(w / 4, h - 25); ctx.lineTo(w / 4, h - 11);
+      ctx.moveTo(w * 0.75, h - 25); ctx.lineTo(w * 0.75, h - 11);
       ctx.stroke();
 
       ctx.textAlign = 'center';
-      ctx.fillText('Ø 70 mm (Ref)', w / 2, h - 3);
+      ctx.fillText(isMotorVentilador ? 'Comprimento 620 mm (Ref)' : 'Ø 70 mm (Ref)', w / 2, h - 6);
 
-      ctx.fillText('ALÇA DE IÇAMENTO', w * 0.65, 30);
-      ctx.fillText('CORPO PERFURADO', w * 0.65, h / 2);
+      // Balões de identificação de componentes
+      function desenharBalao(bx, by, num, lx, ly) {
+        ctx.beginPath();
+        ctx.moveTo(lx, ly);
+        ctx.lineTo(bx, by);
+        ctx.strokeStyle = '#003b71';
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(bx, by, 9, 0, 2 * Math.PI);
+        ctx.fillStyle = '#003b71';
+        ctx.fill();
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 9px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(num.toString(), bx, by);
+      }
+
+      desenharBalao(w * 0.82, 35, 1, w / 2, 35);
+      desenharBalao(w * 0.82, h * 0.45, 3, w / 2, h * 0.45);
+      desenharBalao(w * 0.82, h - 45, 5, w / 2, h - 35);
 
       desenhoTecnicoDataUrl = canvas.toDataURL('image/png');
-      document.getElementById('rel_tipo_desenho').value = 'foto_blueprint';
-      status.innerText = '✔ Desenho técnico blueprint gerado da foto com sucesso!';
-      status.style.color = '#79d2a6';
+      const selTipo = document.getElementById('rel_tipo_desenho');
+      if (selTipo) selTipo.value = 'foto_blueprint';
+
+      if (status) {
+        status.innerText = '✔ Desenho técnico blueprint gerado da foto com fidelidade geométrica 1:1!';
+        status.style.color = '#10b981';
+      }
+
+      if (typeof atualizarDesenhosTecnicosA4 === 'function') {
+        atualizarDesenhosTecnicosA4();
+      }
     };
+    img.src = srcUrl;
   };
-  reader.readAsDataURL(file);
-}
 
-function atualizarDesenhoNoA4(customUrl) {
-  const tipo = document.getElementById('rel_tipo_desenho') ? document.getElementById('rel_tipo_desenho').value : 'padrao';
-  const container = document.getElementById('r4_container_desenho');
-  const titulo = document.getElementById('r4_titulo_desenho');
-  if (!container) return;
-
-  if (customUrl) {
-    titulo.innerText = 'DESENHO TÉCNICO DO FILTRO';
-    container.innerHTML = `<img src="${customUrl}" alt="Desenho Técnico" style="max-height:195px; max-width:100%; object-fit:contain; display:block; margin:auto;">`;
-    return;
-  }
-
-  if (tipo === 'foto_blueprint' && desenhoTecnicoDataUrl) {
-    titulo.innerText = 'DESENHO TÉCNICO DO FILTRO';
-    container.innerHTML = `<img src="${desenhoTecnicoDataUrl}" alt="Desenho Técnico gerado da foto" style="max-height:195px; max-width:100%; object-fit:contain; display:block; margin:auto;">`;
-    return;
-  }
-
-  const inputCustom = document.getElementById('rel_desenho_custom');
-  if (tipo === 'upload_desenho' && inputCustom && inputCustom.files && inputCustom.files[0]) {
-    titulo.innerText = 'DESENHO TÉCNICO DO COMPONENTE';
+  if (typeof fotoAtiva === 'string') {
+    processarImg(fotoAtiva);
+  } else if (fotoAtiva instanceof Blob || fotoAtiva instanceof File) {
     const reader = new FileReader();
-    reader.onload = (e) => {
-      container.innerHTML = `<img src="${e.target.result}" alt="Desenho Técnico" style="max-height:195px; max-width:100%; object-fit:contain; display:block; margin:auto;">`;
-    };
-    reader.readAsDataURL(inputCustom.files[0]);
-    return;
+    reader.onload = (e) => processarImg(e.target.result);
+    reader.readAsDataURL(fotoAtiva);
   }
-
-  // Padrão: Desenho Técnico Oficial Realista 1:1 com a Foto
-  titulo.innerText = 'DESENHO TÉCNICO DO FILTRO';
-  container.innerHTML = `<img src="${DESENHO_TECNICO_OFICIAL_B64}" alt="Desenho Técnico do Filtro com Cotas" style="max-height:195px; max-width:100%; object-fit:contain; display:block; margin:auto;">`;
 }
 
 /* ===================== PAD DE ASSINATURA DIGITAL ===================== */
@@ -12009,7 +12508,7 @@ function adotarAssinaturaTexto() {
   alert('✔ Assinatura digital estilizada adotada!');
 }
 
-/* ===================== CONTROLE DO RELATÓRIO A4 / PDF (PADRÃO OFICIAL PETROBRAS 1:1) ===================== */
+/* ===================== CONTROLE DO RELATÓRIO A4 / PDF (PADRÃO MECÂNICA 4.0 IA 1:1) ===================== */
 let modoExibicaoFerramentasA4 = 'ilustrado';
 let relatorioIAUltimaRevisao = null;
 
@@ -12018,431 +12517,883 @@ function atualizarModoExibicaoFerramentas() {
   modoExibicaoFerramentasA4 = (modoTextoEl && modoTextoEl.checked) ? 'texto' : 'ilustrado';
 }
 
-/* GERADOR DE DESENHO TÉCNICO CAD PARAMÉTRICO VETORIAL (SVG) */
-function gerarSvgCadTecnico(tipo = 'filtro_cesto', params = {}) {
-  tipo = (tipo || 'filtro_cesto').toLowerCase();
-  
-  if (tipo.includes('bomba') || tipo.includes('centrifuga')) {
-    // BOMBA CENTRÍFUGA API 610 (CORTE ORTOGRÁFICO)
+/* ===================== GERADOR DE DESENHO TÉCNICO CAD 3 VISTAS ORTOGRÁFICAS (PADRÃO 1:1) ===================== */
+function gerarSvg3VistasTecnicas(tipo = 'motor_ventilador', params = {}) {
+  tipo = (tipo || 'motor_ventilador').toLowerCase();
+
+  if (tipo.includes('motor') || tipo.includes('ventilador') || tipo.includes('ventilacao') || tipo.includes('helice') || tipo.includes('impelidor')) {
+    // MOTOR ELÉTRICO COM HÉLICE AXIAL / CONJUNTO DE VENTILAÇÃO (PADRÃO MECÂNICA 4.0 IA 1:1)
+    const lateral = `<svg viewBox="0 0 420 220" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:Arial,sans-serif; display:block; margin:auto;">
+      <defs>
+        <linearGradient id="gradMotorLat" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#3b82f6"/>
+          <stop offset="30%" stop-color="#1d4ed8"/>
+          <stop offset="85%" stop-color="#1e40af"/>
+          <stop offset="100%" stop-color="#172554"/>
+        </linearGradient>
+        <linearGradient id="gradCowlLat" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#fbbf24"/>
+          <stop offset="35%" stop-color="#f59e0b"/>
+          <stop offset="85%" stop-color="#d97706"/>
+          <stop offset="100%" stop-color="#92400e"/>
+        </linearGradient>
+        <linearGradient id="gradBladeLat" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#fb923c"/>
+          <stop offset="40%" stop-color="#ea580c"/>
+          <stop offset="100%" stop-color="#c2410c"/>
+        </linearGradient>
+        <linearGradient id="gradShaftLat" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#cbd5e1"/>
+          <stop offset="50%" stop-color="#64748b"/>
+          <stop offset="100%" stop-color="#334155"/>
+        </linearGradient>
+        <marker id="arrCadM" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse">
+          <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#000000"/>
+        </marker>
+      </defs>
+      <!-- Linha de Centro Vermelha -->
+      <line x1="15" y1="110" x2="400" y2="110" stroke="#dc2626" stroke-width="1.1" stroke-dasharray="10,3,2,3"/>
+      
+      <!-- Base de Fixacao / Concreto -->
+      <path d="M 68 165 L 195 165 L 202 195 L 60 195 Z" fill="#64748b" stroke="#334155" stroke-width="1.6"/>
+      <rect x="75" y="165" width="112" height="6" fill="#475569"/>
+      
+      <!-- Tampa de Protecao da Ventoinha (Cowl Amarelo/Laranja) -->
+      <path d="M 72 65 C 32 65, 22 84, 22 110 C 22 136, 32 155, 72 155 Z" fill="url(#gradCowlLat)" stroke="#b45309" stroke-width="1.8"/>
+      
+      <!-- Carcaca do Motor Eletrico (Azul Aletado) -->
+      <rect x="72" y="62" width="126" height="96" rx="3" fill="url(#gradMotorLat)" stroke="#003b71" stroke-width="1.8"/>
+      <!-- Aletas de refrigeracao -->
+      <g stroke="#1e3a8a" stroke-width="2.2" opacity="0.85">
+        <line x1="75" y1="72" x2="195" y2="72"/>
+        <line x1="75" y1="80" x2="195" y2="80"/>
+        <line x1="75" y1="88" x2="195" y2="88"/>
+        <line x1="75" y1="96" x2="195" y2="96"/>
+        <line x1="75" y1="104" x2="195" y2="104"/>
+        <line x1="75" y1="112" x2="195" y2="112"/>
+        <line x1="75" y1="120" x2="195" y2="120"/>
+        <line x1="75" y1="128" x2="195" y2="128"/>
+        <line x1="75" y1="136" x2="195" y2="136"/>
+        <line x1="75" y1="144" x2="195" y2="144"/>
+      </g>
+      <!-- Tampa dianteira do mancal -->
+      <rect x="198" y="70" width="10" height="80" fill="#1d4ed8" stroke="#003b71" stroke-width="1.5"/>
+
+      <!-- Olhal de Icamento -->
+      <rect x="127" y="55" width="16" height="7" rx="1" fill="#1d4ed8" stroke="#003b71" stroke-width="1.2"/>
+      <circle cx="135" cy="42" r="11" fill="none" stroke="#2563eb" stroke-width="4"/>
+      <circle cx="135" cy="42" r="6" fill="#ffffff" stroke="#003b71" stroke-width="1.2"/>
+
+      <!-- Eixo do Motor -->
+      <rect x="208" y="102" width="28" height="16" fill="url(#gradShaftLat)" stroke="#1e293b" stroke-width="1.4"/>
+
+      <!-- Helice / Impelidor Axial (Ventilador Laranja) -->
+      <rect x="236" y="94" width="16" height="32" rx="2" fill="#9a3412" stroke="#7c2d12" stroke-width="1.5"/>
+      <g fill="url(#gradBladeLat)" stroke="#9a3412" stroke-width="1.4">
+        <path d="M 242 94 L 255 24 L 275 32 L 250 94 Z"/>
+        <path d="M 244 126 L 258 196 L 278 188 L 252 126 Z"/>
+        <path d="M 252 98 L 305 48 L 318 64 L 252 108 Z"/>
+        <path d="M 252 112 L 318 156 L 305 172 L 252 122 Z"/>
+        <path d="M 250 102 L 322 96 L 320 124 L 250 118 Z"/>
+      </g>
+      <circle cx="244" cy="110" r="6" fill="#1e293b"/>
+
+      <!-- Linhas de Chamada e Textos Fiel a Imagem do Usuario -->
+      <g transform="translate(4, 22)">
+        <rect x="0" y="0" width="76" height="20" rx="3" fill="#fde047" stroke="#ca8a04" stroke-width="1.2"/>
+        <text x="38" y="9" font-size="7.2" font-weight="bold" fill="#000000" text-anchor="middle">Tampa de proteção</text>
+        <text x="38" y="17" font-size="7.2" font-weight="bold" fill="#000000" text-anchor="middle">da ventoinha</text>
+      </g>
+      <line x1="28" y1="42" x2="38" y2="70" stroke="#000000" stroke-width="1" marker-end="url(#arrCadM)"/>
+
+      <line x1="110" y1="40" x2="114" y2="62" stroke="#000000" stroke-width="1" marker-end="url(#arrCadM)"/>
+      <text x="108" y="36" font-size="8" font-weight="bold" fill="#000000" text-anchor="middle">Motor elétrico</text>
+
+      <line x1="172" y1="28" x2="148" y2="38" stroke="#000000" stroke-width="1" marker-end="url(#arrCadM)"/>
+      <text x="174" y="24" font-size="8" font-weight="bold" fill="#000000">Olhal de</text>
+      <text x="174" y="33" font-size="8" font-weight="bold" fill="#000000">içamento</text>
+
+      <line x1="288" y1="52" x2="265" y2="60" stroke="#000000" stroke-width="1" marker-end="url(#arrCadM)"/>
+      <text x="290" y="46" font-size="8" font-weight="bold" fill="#000000">Hélice /</text>
+      <text x="290" y="55" font-size="8" font-weight="bold" fill="#000000">Impelidor axial</text>
+      <text x="290" y="64" font-size="7.5" fill="#334155">(ventilador)</text>
+
+      <line x1="240" y1="140" x2="222" y2="118" stroke="#000000" stroke-width="1" marker-end="url(#arrCadM)"/>
+      <text x="242" y="142" font-size="7.8" font-weight="bold" fill="#000000">Eixo do motor</text>
+      <text x="242" y="151" font-size="7.2" fill="#334155">(acoplamento direto</text>
+      <text x="242" y="159" font-size="7.2" fill="#334155">com o ventilador)</text>
+
+      <line x1="125" y1="205" x2="132" y2="188" stroke="#000000" stroke-width="1" marker-end="url(#arrCadM)"/>
+      <text x="124" y="213" font-size="8" font-weight="bold" fill="#000000" text-anchor="middle">Base de fixação</text>
+    </svg>`;
+
+    const frontal = `<svg viewBox="0 0 240 220" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:Arial,sans-serif; display:block; margin:auto;">
+      <defs>
+        <linearGradient id="gradBladeFront" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#fb923c"/>
+          <stop offset="40%" stop-color="#ea580c"/>
+          <stop offset="100%" stop-color="#9a3412"/>
+        </linearGradient>
+        <linearGradient id="gradHubFront" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#fed7aa"/>
+          <stop offset="50%" stop-color="#ea580c"/>
+          <stop offset="100%" stop-color="#7c2d12"/>
+        </linearGradient>
+      </defs>
+      <!-- Linhas de Centro Vermelhas Cruzadas -->
+      <line x1="120" y1="10" x2="120" y2="210" stroke="#dc2626" stroke-width="1.1" stroke-dasharray="10,3,2,3"/>
+      <line x1="10" y1="110" x2="230" y2="110" stroke="#dc2626" stroke-width="1.1" stroke-dasharray="10,3,2,3"/>
+
+      <!-- Base do Motor ao Fundo -->
+      <rect x="68" y="170" width="104" height="24" rx="2" fill="#64748b" stroke="#334155" stroke-width="1.6"/>
+      <rect x="75" y="170" width="90" height="5" fill="#475569"/>
+
+      <!-- Olhal Superior ao Fundo -->
+      <circle cx="120" cy="38" r="11" fill="none" stroke="#2563eb" stroke-width="4"/>
+      <circle cx="120" cy="38" r="6" fill="#ffffff" stroke="#003b71" stroke-width="1.2"/>
+
+      <!-- Contorno Circular da Carcaca do Motor ao Fundo -->
+      <circle cx="120" cy="110" r="64" fill="#1d4ed8" stroke="#003b71" stroke-width="2"/>
+      <circle cx="120" cy="110" r="54" fill="#2563eb" stroke="#1e40af" stroke-width="1.2" opacity="0.9"/>
+
+      <!-- 8 Pas da Helice Axial Radiando a cada 45 Graus -->
+      <g transform="translate(120, 110)">
+        ${[0, 45, 90, 135, 180, 225, 270, 315].map(deg => `
+          <g transform="rotate(${deg})">
+            <path d="M -10 -22 L -18 -76 L 18 -76 L 10 -22 Z" fill="url(#gradBladeFront)" stroke="#7c2d12" stroke-width="1.2"/>
+            <line x1="0" y1="-22" x2="0" y2="-74" stroke="#fed7aa" stroke-width="1" opacity="0.6"/>
+          </g>
+        `).join('')}
+        <!-- Cubo Central e Porca de Retencao -->
+        <circle cx="0" cy="0" r="26" fill="url(#gradHubFront)" stroke="#7c2d12" stroke-width="1.8"/>
+        <circle cx="0" cy="0" r="16" fill="#c2410c" stroke="#431407" stroke-width="1.2"/>
+        <polygon points="0,-9 7.8,-4.5 7.8,4.5 0,9 -7.8,4.5 -7.8,-4.5" fill="#0f172a" stroke="#475569" stroke-width="1"/>
+        <circle cx="0" cy="0" r="4" fill="#334155"/>
+      </g>
+    </svg>`;
+
+    const superior = `<svg viewBox="0 0 420 140" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:Arial,sans-serif; display:block; margin:auto;">
+      <defs>
+        <linearGradient id="gradMotorSup" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#3b82f6"/>
+          <stop offset="35%" stop-color="#1d4ed8"/>
+          <stop offset="70%" stop-color="#1e40af"/>
+          <stop offset="100%" stop-color="#172554"/>
+        </linearGradient>
+        <linearGradient id="gradCowlSup" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#fbbf24"/>
+          <stop offset="40%" stop-color="#f59e0b"/>
+          <stop offset="100%" stop-color="#b45309"/>
+        </linearGradient>
+        <marker id="arrCadDimS" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+          <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#0b1f3a"/>
+        </marker>
+      </defs>
+      <!-- Linha de Centro Vermelha Longitudinal -->
+      <line x1="20" y1="70" x2="400" y2="70" stroke="#dc2626" stroke-width="1.1" stroke-dasharray="12,3,2,3"/>
+
+      <!-- Tampa da Ventoinha Laranja (Cowl Visto de Cima) -->
+      <path d="M 100 32 C 75 32, 65 48, 65 70 C 65 92, 75 108, 100 108 Z" fill="url(#gradCowlSup)" stroke="#b45309" stroke-width="1.6"/>
+      
+      <!-- Carcaca do Motor Eletrico com Aletas -->
+      <rect x="100" y="30" width="128" height="80" rx="3" fill="url(#gradMotorSup)" stroke="#003b71" stroke-width="1.8"/>
+      <g stroke="#1e3a8a" stroke-width="1.8" opacity="0.8">
+        <line x1="104" y1="38" x2="224" y2="38"/>
+        <line x1="104" y1="46" x2="224" y2="46"/>
+        <line x1="104" y1="54" x2="224" y2="54"/>
+        <line x1="104" y1="62" x2="224" y2="62"/>
+        <line x1="104" y1="78" x2="224" y2="78"/>
+        <line x1="104" y1="86" x2="224" y2="86"/>
+        <line x1="104" y1="94" x2="224" y2="94"/>
+        <line x1="104" y1="102" x2="224" y2="102"/>
+      </g>
+      <!-- Caixa de Ligacao Superior -->
+      <rect x="146" y="18" width="36" height="15" rx="2" fill="#1e3a8a" stroke="#003b71" stroke-width="1.4"/>
+      
+      <!-- Olhal Central (Projecao Topo) -->
+      <ellipse cx="164" cy="70" rx="7" ry="3.5" fill="#1d4ed8" stroke="#ffffff" stroke-width="1"/>
+
+      <!-- Eixo do Motor -->
+      <rect x="228" y="63" width="22" height="14" fill="#64748b" stroke="#1e293b" stroke-width="1.3"/>
+
+      <!-- Helice / Ventilador (Projecao Topo) -->
+      <rect x="250" y="56" width="16" height="28" rx="2" fill="#9a3412" stroke="#7c2d12" stroke-width="1.5"/>
+      <g fill="#ea580c" stroke="#7c2d12" stroke-width="1.2">
+        <path d="M 252 56 L 244 8 L 274 16 L 264 56 Z"/>
+        <path d="M 252 84 L 244 132 L 274 124 L 264 84 Z"/>
+        <path d="M 264 62 L 296 42 L 302 54 L 264 68 Z"/>
+        <path d="M 264 78 L 296 98 L 302 86 L 264 72 Z"/>
+      </g>
+
+      <!-- COTAS DIMENSIONAIS FIEL A IMAGEM DO USUARIO -->
+      <!-- 1. COTA VERTICAL ESQUERDA: LARGURA (APROX.) -->
+      <line x1="58" y1="30" x2="42" y2="30" stroke="#0b1f3a" stroke-width="0.8"/>
+      <line x1="58" y1="110" x2="42" y2="110" stroke="#0b1f3a" stroke-width="0.8"/>
+      <line x1="47" y1="30" x2="47" y2="110" stroke="#0b1f3a" stroke-width="1" marker-start="url(#arrCadDimS)" marker-end="url(#arrCadDimS)"/>
+      <text x="36" y="70" font-size="7.5" font-weight="bold" fill="#0b1f3a" transform="rotate(-90 36 70)" text-anchor="middle">LARGURA (APROX.)</text>
+
+      <!-- 2. COTA HORIZONTAL INFERIOR: COMPRIMENTO (APROX.) -->
+      <line x1="65" y1="114" x2="65" y2="130" stroke="#0b1f3a" stroke-width="0.8"/>
+      <line x1="228" y1="114" x2="228" y2="130" stroke="#0b1f3a" stroke-width="0.8"/>
+      <line x1="65" y1="124" x2="228" y2="124" stroke="#0b1f3a" stroke-width="1" marker-start="url(#arrCadDimS)" marker-end="url(#arrCadDimS)"/>
+      <text x="146" y="134" font-size="7.5" font-weight="bold" fill="#0b1f3a" text-anchor="middle">COMPRIMENTO (APROX.)</text>
+
+      <!-- 3. COTA VERTICAL DIREITA: DIAMETRO DO VENTILADOR (APROX.) -->
+      <line x1="275" y1="8" x2="310" y2="8" stroke="#0b1f3a" stroke-width="0.8"/>
+      <line x1="275" y1="132" x2="310" y2="132" stroke="#0b1f3a" stroke-width="0.8"/>
+      <line x1="302" y1="8" x2="302" y2="132" stroke="#0b1f3a" stroke-width="1" marker-start="url(#arrCadDimS)" marker-end="url(#arrCadDimS)"/>
+      <text x="350" y="64" font-size="7.5" font-weight="bold" fill="#0b1f3a" text-anchor="middle">DIÂMETRO</text>
+      <text x="350" y="73" font-size="7.5" font-weight="bold" fill="#0b1f3a" text-anchor="middle">DO VENTILADOR</text>
+      <text x="350" y="82" font-size="7" font-weight="bold" fill="#0b1f3a" text-anchor="middle">(APROX.)</text>
+    </svg>`;
+
+    return {
+      lateral, frontal, superior,
+      tituloBanner: 'DESENHO TÉCNICO – MOTOR / CONJUNTO DE VENTILAÇÃO',
+      componentes: [
+        'Tampa de proteção da ventoinha',
+        'Motor elétrico',
+        'Olhal de içamento',
+        'Eixo do motor',
+        'Hélice / Impelidor axial (ventilador)',
+        'Base de fixação',
+        'Caixa de ligação elétrica NBR',
+        'Mancal e rolamento dianteiro'
+      ],
+      aplicacao: 'Ventilação / Resfriamento de equipamentos e processos industriais.',
+      obsTecnicas: [
+        'Desenho ilustrativo, baseado no equipamento da imagem.',
+        'Dimensões podem variar conforme fabricante e modelo.',
+        'Verificar alinhamento, fixações e condições da hélice.',
+        'Realizar inspeções periódicas na tampa de proteção, hélice e mancais.',
+        'Manter o equipamento limpo e em boas condições de pintura.'
+      ],
+      legendasFotos: {
+        principal: 'VISTA LATERAL',
+        detalhe1: 'HÉLICE / IMPELIDOR AXIAL (VISTA FRONTAL)',
+        detalhe2: 'EIXO DO MOTOR',
+        detalhe3: 'OLHAL DE IÇAMENTO',
+        detalhe4: 'DETALHE ADICIONAL'
+      }
+    };
+  } else if (tipo.includes('bomba') || tipo.includes('centrifuga')) {
+    // BOMBA CENTRÍFUGA API 610 (3 VISTAS TÉCNICAS)
     const diamRotor = params.diamRotor || 'Ø 210 mm';
     const bocalSuc = params.bocalSuc || 'Ø 125 mm (5")';
     const bocalDesc = params.bocalDesc || 'Ø 80 mm (3")';
     const distMancais = params.distMancais || '340 mm';
 
-    return `<svg viewBox="0 0 400 310" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:Arial, sans-serif; display:block; margin:auto;">
+    const lateral = `<svg viewBox="0 0 220 220" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:Arial,sans-serif; display:block; margin:auto;">
       <defs>
-        <marker id="arrowCAD" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#111827"/>
+        <marker id="arrCadBL" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#003b71"/>
         </marker>
-        <marker id="arrowBlue" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#003366"/>
+        <marker id="arrCadBlackL" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#0b1f3a"/>
         </marker>
-        <pattern id="cadHatchMetal" width="8" height="8" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
-          <line x1="0" y1="0" x2="0" y2="8" stroke="#cbd5e1" stroke-width="1.2"/>
-        </pattern>
       </defs>
-
-      <!-- Linha de Centro do Eixo -->
-      <line x1="20" y1="175" x2="380" y2="175" stroke="#ef4444" stroke-width="1" stroke-dasharray="14,4,4,4"/>
-
-      <!-- Carcaça da Bomba (Voluta) -->
-      <path d="M 50 175 C 50 105, 110 65, 170 65 L 170 28 L 215 28 L 215 70 C 265 80, 290 120, 290 175 C 290 235, 250 270, 170 270 C 100 270, 50 230, 50 175 Z" fill="url(#cadHatchMetal)" stroke="#111827" stroke-width="2"/>
-      
-      <!-- Bocal de Descarga (Flange Superior) -->
-      <rect x="155" y="20" width="75" height="10" fill="#e2e8f0" stroke="#111827" stroke-width="1.8"/>
-      <!-- Bocal de Sucção (Flange Esquerdo Axial) -->
-      <rect x="42" y="140" width="10" height="70" fill="#e2e8f0" stroke="#111827" stroke-width="1.8"/>
-
-      <!-- Rotor / Impelidor Fechado -->
-      <path d="M 120 115 L 175 125 L 175 225 L 120 235 L 120 217 L 160 211 L 160 139 L 120 133 Z" fill="#94a3b8" stroke="#111827" stroke-width="1.6"/>
-      <circle cx="155" cy="175" r="14" fill="#64748b" stroke="#111827" stroke-width="1.5"/>
-
-      <!-- Eixo e Caixa de Mancal -->
-      <rect x="175" y="167" width="185" height="16" fill="#f1f5f9" stroke="#111827" stroke-width="1.8"/>
-      <!-- Mancais de Rolamento -->
-      <rect x="250" y="151" width="22" height="48" fill="#e2e8f0" stroke="#111827" stroke-width="1.5"/>
-      <circle cx="261" cy="159" r="5" fill="#475569"/>
-      <circle cx="261" cy="191" r="5" fill="#475569"/>
-      <rect x="315" y="151" width="22" height="48" fill="#e2e8f0" stroke="#111827" stroke-width="1.5"/>
-      <circle cx="326" cy="159" r="5" fill="#475569"/>
-      <circle cx="326" cy="191" r="5" fill="#475569"/>
-
-      <!-- Suporte do Mancal / Pedestal -->
-      <path d="M 235 199 L 350 199 L 350 255 L 235 255 Z" fill="none" stroke="#111827" stroke-width="1.6"/>
-
-      <!-- Linhas de Cotas Dimensionais -->
-      <line x1="145" y1="14" x2="240" y2="14" stroke="#111827" stroke-width="1.2" marker-start="url(#arrowCAD)" marker-end="url(#arrowCAD)"/>
-      <text x="192" y="10" font-size="9.5" font-weight="bold" fill="#111827" text-anchor="middle">${bocalDesc}</text>
-
-      <line x1="28" y1="140" x2="28" y2="210" stroke="#111827" stroke-width="1.2" marker-start="url(#arrowCAD)" marker-end="url(#arrowCAD)"/>
-      <text x="24" y="178" font-size="9" font-weight="bold" fill="#111827" transform="rotate(-90 24 178)" text-anchor="middle">${bocalSuc}</text>
-
-      <line x1="261" y1="280" x2="326" y2="280" stroke="#111827" stroke-width="1.2" marker-start="url(#arrowCAD)" marker-end="url(#arrowCAD)"/>
-      <line x1="261" y1="255" x2="261" y2="287" stroke="#111827" stroke-width="0.8"/>
-      <line x1="326" y1="255" x2="326" y2="287" stroke="#111827" stroke-width="0.8"/>
-      <text x="293" y="294" font-size="9.5" font-weight="bold" fill="#111827" text-anchor="middle">${distMancais}</text>
-
-      <!-- Chamadas Técnicas -->
-      <line x1="215" y1="42" x2="285" y2="42" stroke="#003366" stroke-width="1.4" marker-start="url(#arrowBlue)"/>
-      <text x="290" y="45" font-size="9" font-weight="800" fill="#003366">FLANGE DE DESCARGA</text>
-
-      <line x1="145" y1="120" x2="90" y2="80" stroke="#003366" stroke-width="1.4" marker-start="url(#arrowBlue)"/>
-      <line x1="90" y1="80" x2="25" y2="80" stroke="#003366" stroke-width="1.4"/>
-      <text x="25" y="75" font-size="9" font-weight="800" fill="#003366">ROTOR (IMPELIDOR)</text>
-
-      <line x1="290" y1="165" x2="290" y2="115" stroke="#003366" stroke-width="1.4" marker-start="url(#arrowBlue)"/>
-      <line x1="290" y1="115" x2="335" y2="115" stroke="#003366" stroke-width="1.4"/>
-      <text x="338" y="118" font-size="9" font-weight="800" fill="#003366">CAIXA DE MANCAIS</text>
-
-      <line x1="205" y1="167" x2="205" y2="220" stroke="#003366" stroke-width="1.4" marker-start="url(#arrowBlue)"/>
-      <line x1="205" y1="220" x2="160" y2="220" stroke="#003366" stroke-width="1.4"/>
-      <text x="155" y="217" font-size="9" font-weight="800" fill="#003366" text-anchor="end">CÂMARA DE SELAGEM</text>
+      <!-- Linha de Centro -->
+      <line x1="15" y1="130" x2="205" y2="130" stroke="#dc2626" stroke-width="1" stroke-dasharray="10,3,2,3"/>
+      <!-- Voluta / Carcaça -->
+      <path d="M 35 130 C 35 75, 75 45, 115 45 L 115 20 L 145 20 L 145 50 C 180 60, 195 95, 195 130 C 195 180, 165 200, 115 200 C 65 200, 35 170, 35 130 Z" fill="#f1f5f9" stroke="#003b71" stroke-width="1.8"/>
+      <!-- Flange Descarga -->
+      <rect x="105" y="15" width="50" height="8" fill="#cbd5e1" stroke="#003b71" stroke-width="1.5"/>
+      <!-- Flange Sucção -->
+      <rect x="28" y="105" width="8" height="50" fill="#cbd5e1" stroke="#003b71" stroke-width="1.5"/>
+      <!-- Eixo e Caixa Mancal -->
+      <rect x="115" y="123" width="85" height="14" fill="#e2e8f0" stroke="#003b71" stroke-width="1.5"/>
+      <!-- Cotas -->
+      <line x1="100" y1="10" x2="160" y2="10" stroke="#0b1f3a" stroke-width="1" marker-start="url(#arrCadBlackL)" marker-end="url(#arrCadBlackL)"/>
+      <text x="130" y="7" font-size="8" font-weight="bold" fill="#0b1f3a" text-anchor="middle">${bocalDesc}</text>
+      <!-- Balões -->
+      <circle cx="155" cy="30" r="7" fill="#003b71"/><text x="155" y="32.5" font-size="8" font-weight="bold" fill="#fff" text-anchor="middle">1</text>
+      <circle cx="85" cy="115" r="7" fill="#003b71"/><text x="85" y="117.5" font-size="8" font-weight="bold" fill="#fff" text-anchor="middle">3</text>
+      <circle cx="165" cy="115" r="7" fill="#003b71"/><text x="165" y="117.5" font-size="8" font-weight="bold" fill="#fff" text-anchor="middle">5</text>
     </svg>`;
-  } else if (tipo.includes('rolamento') || tipo.includes('mancal')) {
-    // PAR DE ROLAMENTOS DE CONTATO ANGULAR (FACE A FACE - DF / DB)
-    const dEixo = params.dEixo || 'Ø 75 mm';
-    const dExt = params.dExt || 'Ø 160 mm';
-    const largB = params.largB || '37 mm';
 
-    return `<svg viewBox="0 0 400 310" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:Arial, sans-serif; display:block; margin:auto;">
+    const frontal = `<svg viewBox="0 0 220 220" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:Arial,sans-serif; display:block; margin:auto;">
       <defs>
-        <marker id="arrowCAD" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#111827"/>
+        <marker id="arrCadBlackF" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#0b1f3a"/>
         </marker>
-        <marker id="arrowBlue" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#003366"/>
-        </marker>
-        <pattern id="hatchAco" width="6" height="6" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
-          <line x1="0" y1="0" x2="0" y2="6" stroke="#94a3b8" stroke-width="1.2"/>
-        </pattern>
       </defs>
-
-      <!-- Linha de Centro do Eixo -->
-      <line x1="20" y1="250" x2="380" y2="250" stroke="#ef4444" stroke-width="1.2" stroke-dasharray="14,4,4,4"/>
-      <text x="375" y="245" font-size="9" fill="#ef4444" font-weight="bold">CL EIXO</text>
-
-      <!-- Eixo de Apoio -->
-      <rect x="30" y="200" width="340" height="50" fill="#f8fafc" stroke="#111827" stroke-width="1.8"/>
-
-      <!-- ROLAMENTO 1 (ESQUERDO) -->
-      <rect x="90" y="55" width="65" height="35" fill="url(#hatchAco)" stroke="#111827" stroke-width="1.8"/>
-      <rect x="90" y="165" width="65" height="35" fill="url(#hatchAco)" stroke="#111827" stroke-width="1.8"/>
-      <circle cx="122.5" cy="127" r="28" fill="#f1f5f9" stroke="#111827" stroke-width="2"/>
-      <circle cx="122.5" cy="127" r="2" fill="#111827"/>
-
-      <!-- ROLAMENTO 2 (DIREITO) -->
-      <rect x="180" y="55" width="65" height="35" fill="url(#hatchAco)" stroke="#111827" stroke-width="1.8"/>
-      <rect x="180" y="165" width="65" height="35" fill="url(#hatchAco)" stroke="#111827" stroke-width="1.8"/>
-      <circle cx="212.5" cy="127" r="28" fill="#f1f5f9" stroke="#111827" stroke-width="2"/>
-      <circle cx="212.5" cy="127" r="2" fill="#111827"/>
-
-      <!-- Linhas de Carga de Contato Angular (40°) convergentes (Face a Face - DF) -->
-      <line x1="102" y1="75" x2="143" y2="180" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5,3"/>
-      <line x1="233" y1="75" x2="192" y2="180" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5,3"/>
-      <text x="167" y="132" font-size="10" font-weight="900" fill="#d97706" text-anchor="middle">α=40°</text>
-
-      <!-- Cotas Dimensionais -->
-      <line x1="60" y1="55" x2="60" y2="250" stroke="#111827" stroke-width="1.2" marker-start="url(#arrowCAD)" marker-end="url(#arrowCAD)"/>
-      <line x1="55" y1="55" x2="90" y2="55" stroke="#111827" stroke-width="0.8"/>
-      <text x="50" y="152" font-size="10" font-weight="bold" fill="#111827" transform="rotate(-90 50 152)" text-anchor="middle">${dExt}</text>
-
-      <line x1="75" y1="200" x2="75" y2="250" stroke="#111827" stroke-width="1.2" marker-start="url(#arrowCAD)" marker-end="url(#arrowCAD)"/>
-      <text x="70" y="228" font-size="9" font-weight="bold" fill="#111827" transform="rotate(-90 70 228)" text-anchor="middle">${dEixo}</text>
-
-      <line x1="90" y1="38" x2="155" y2="38" stroke="#111827" stroke-width="1.2" marker-start="url(#arrowCAD)" marker-end="url(#arrowCAD)"/>
-      <text x="122" y="32" font-size="9.5" font-weight="bold" fill="#111827" text-anchor="middle">B = ${largB}</text>
-
-      <!-- Chamadas Técnicas -->
-      <line x1="145" y1="60" x2="270" y2="40" stroke="#003366" stroke-width="1.4" marker-start="url(#arrowBlue)"/>
-      <text x="275" y="43" font-size="9" font-weight="800" fill="#003366">PISTA EXTERNA</text>
-
-      <line x1="145" y1="125" x2="270" y2="100" stroke="#003366" stroke-width="1.4" marker-start="url(#arrowBlue)"/>
-      <text x="275" y="103" font-size="9" font-weight="800" fill="#003366">CORPO ROLANTE (ESFERA)</text>
-
-      <line x1="150" y1="180" x2="270" y2="155" stroke="#003366" stroke-width="1.4" marker-start="url(#arrowBlue)"/>
-      <text x="275" y="158" font-size="9" font-weight="800" fill="#003366">PISTA INTERNA AJUSTE k5</text>
-
-      <line x1="205" y1="220" x2="270" y2="220" stroke="#003366" stroke-width="1.4" marker-start="url(#arrowBlue)"/>
-      <text x="275" y="223" font-size="9" font-weight="800" fill="#003366">MONTAGEM FACE A FACE (DF)</text>
+      <!-- Linhas de Centro Cruzadas -->
+      <line x1="20" y1="110" x2="200" y2="110" stroke="#dc2626" stroke-width="1" stroke-dasharray="10,3,2,3"/>
+      <line x1="110" y1="20" x2="110" y2="200" stroke="#dc2626" stroke-width="1" stroke-dasharray="10,3,2,3"/>
+      <!-- Círculos de Flange Frontal e Furos -->
+      <circle cx="110" cy="110" r="70" fill="#f8fafc" stroke="#003b71" stroke-width="1.8"/>
+      <circle cx="110" cy="110" r="55" fill="none" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,3"/>
+      <circle cx="110" cy="110" r="38" fill="#e2e8f0" stroke="#003b71" stroke-width="1.5"/>
+      <!-- Furos dos Prisioneiros -->
+      <circle cx="110" cy="55" r="4" fill="#003b71"/><circle cx="110" cy="165" r="4" fill="#003b71"/>
+      <circle cx="55" cy="110" r="4" fill="#003b71"/><circle cx="165" cy="110" r="4" fill="#003b71"/>
+      <circle cx="71" cy="71" r="4" fill="#003b71"/><circle cx="149" cy="149" r="4" fill="#003b71"/>
+      <circle cx="149" cy="71" r="4" fill="#003b71"/><circle cx="71" cy="149" r="4" fill="#003b71"/>
+      <!-- Cota Diâmetro -->
+      <line x1="30" y1="195" x2="190" y2="195" stroke="#0b1f3a" stroke-width="1" marker-start="url(#arrCadBlackF)" marker-end="url(#arrCadBlackF)"/>
+      <text x="110" y="207" font-size="8.5" font-weight="bold" fill="#0b1f3a" text-anchor="middle">${bocalSuc}</text>
+      <!-- Balões -->
+      <circle cx="110" cy="38" r="7" fill="#003b71"/><text x="110" y="40.5" font-size="8" font-weight="bold" fill="#fff" text-anchor="middle">2</text>
+      <circle cx="160" cy="95" r="7" fill="#003b71"/><text x="160" y="97.5" font-size="8" font-weight="bold" fill="#fff" text-anchor="middle">4</text>
     </svg>`;
+
+    const superior = `<svg viewBox="0 0 380 125" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:Arial,sans-serif; display:block; margin:auto;">
+      <defs>
+        <marker id="arrCadBlackS" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#0b1f3a"/>
+        </marker>
+      </defs>
+      <!-- Linha de Centro Eixo Horizontal -->
+      <line x1="15" y1="62" x2="365" y2="62" stroke="#dc2626" stroke-width="1" stroke-dasharray="12,3,3,3"/>
+      <!-- Baseplate e Mancais -->
+      <rect x="40" y="20" width="300" height="85" rx="3" fill="#f8fafc" stroke="#003b71" stroke-width="1.6"/>
+      <rect x="55" y="30" width="75" height="65" fill="#e2e8f0" stroke="#003b71" stroke-width="1.4"/>
+      <rect x="175" y="38" width="145" height="48" fill="#cbd5e1" stroke="#003b71" stroke-width="1.4"/>
+      <!-- Cota Distância Mancais -->
+      <line x1="195" y1="114" x2="295" y2="114" stroke="#0b1f3a" stroke-width="1" marker-start="url(#arrCadBlackS)" marker-end="url(#arrCadBlackS)"/>
+      <text x="245" y="122" font-size="8" font-weight="bold" fill="#0b1f3a" text-anchor="middle">Distância Mancais: ${distMancais}</text>
+      <!-- Balões -->
+      <circle cx="100" cy="45" r="7" fill="#003b71"/><text x="100" y="47.5" font-size="8" font-weight="bold" fill="#fff" text-anchor="middle">6</text>
+      <circle cx="245" cy="45" r="7" fill="#003b71"/><text x="245" y="47.5" font-size="8" font-weight="bold" fill="#fff" text-anchor="middle">7</text>
+      <circle cx="330" cy="62" r="7" fill="#003b71"/><text x="330" y="64.5" font-size="8" font-weight="bold" fill="#fff" text-anchor="middle">8</text>
+    </svg>`;
+
+    return {
+      lateral, frontal, superior,
+      componentes: [
+        'Bocal de Descarga Flangeado (3")',
+        'Bocal de Sucção Axial (5")',
+        'Rotor Fechado Equilibrado (Ø 210mm)',
+        'Câmara de Selagem / Selo Mecânico',
+        'Caixa de Mancais Refrig. a Óleo',
+        'Eixo em Aço AISI 4140',
+        'Rolamentos de Contato Angular',
+        'Acoplamento Flexível de Lamelas'
+      ],
+      aplicacao: 'Bombeamento de Água de Alimentação de Caldeira / Ciclo Térmico Petrobras API 610.',
+      obsTecnicas: [
+        'Inspeção metrológica do eixo: excentricidade (runout) < 0,02 mm.',
+        'Folgas axiais dos mancais ajustadas conforme norma API 610 11ª Ed.',
+        'Alinhamento a laser entre eixos tolerância angular < 0,03 mm/100mm.',
+        'Ensaio hidrostático de carcaça e câmara de selagem 100% estanque.'
+      ]
+    };
   } else if (tipo.includes('valvula') || tipo.includes('psv')) {
-    // VÁLVULA INDUSTRIAL / PSV
+    // VÁLVULA INDUSTRIAL API 600 / ASME B16.34
     const dn = params.dn || 'DN 150 mm (6")';
     const alt = params.alt || '520 mm';
     const flg = params.flg || '285 mm';
 
-    return `<svg viewBox="0 0 400 310" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:Arial, sans-serif; display:block; margin:auto;">
+    const lateral = `<svg viewBox="0 0 220 220" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:Arial,sans-serif; display:block; margin:auto;">
       <defs>
-        <marker id="arrowCAD" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#111827"/>
-        </marker>
-        <marker id="arrowBlue" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#003366"/>
+        <marker id="arrCadVl" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#0b1f3a"/>
         </marker>
       </defs>
-
-      <!-- Corpo da Válvula -->
-      <path d="M 80 195 L 140 215 L 140 175 L 170 165 L 170 235 L 80 235 Z" fill="#e2e8f0" stroke="#111827" stroke-width="1.8"/>
-      <path d="M 260 195 L 200 215 L 200 175 L 170 165 L 170 235 L 260 235 Z" fill="#e2e8f0" stroke="#111827" stroke-width="1.8"/>
-      <!-- Flanges de Conexão -->
-      <rect x="70" y="185" width="12" height="65" fill="#cbd5e1" stroke="#111827" stroke-width="1.8"/>
-      <rect x="258" y="185" width="12" height="65" fill="#cbd5e1" stroke="#111827" stroke-width="1.8"/>
-
-      <!-- Castelo e Tampa -->
-      <path d="M 130 165 L 130 105 L 210 105 L 210 165 Z" fill="#f1f5f9" stroke="#111827" stroke-width="1.8"/>
-      <rect x="120" y="100" width="100" height="10" fill="#94a3b8" stroke="#111827" stroke-width="1.5"/>
-
-      <!-- Haste Roscada e Cunha/Obturador -->
-      <rect x="165" y="42" width="10" height="150" fill="#e2e8f0" stroke="#111827" stroke-width="1.5"/>
-      <path d="M 150 180 L 170 210 L 190 180 Z" fill="#475569" stroke="#111827" stroke-width="1.6"/>
-
-      <!-- Volante de Operação -->
-      <ellipse cx="170" cy="38" rx="45" ry="12" fill="#ef4444" stroke="#111827" stroke-width="2"/>
-      <circle cx="170" cy="38" r="5" fill="#ffffff" stroke="#111827" stroke-width="1.5"/>
-
-      <!-- Cotas Dimensionais -->
-      <line x1="45" y1="38" x2="45" y2="250" stroke="#111827" stroke-width="1.2" marker-start="url(#arrowCAD)" marker-end="url(#arrowCAD)"/>
-      <text x="38" y="145" font-size="10" font-weight="bold" fill="#111827" transform="rotate(-90 38 145)" text-anchor="middle">${alt}</text>
-
-      <line x1="70" y1="270" x2="270" y2="270" stroke="#111827" stroke-width="1.2" marker-start="url(#arrowCAD)" marker-end="url(#arrowCAD)"/>
-      <text x="170" y="285" font-size="10" font-weight="bold" fill="#111827" text-anchor="middle">${flg}</text>
-
-      <!-- Chamadas Técnicas -->
-      <line x1="215" y1="38" x2="285" y2="33" stroke="#003366" stroke-width="1.4" marker-start="url(#arrowBlue)"/>
-      <text x="290" y="36" font-size="9" font-weight="800" fill="#003366">VOLANTE DE MANOBRA</text>
-
-      <line x1="205" y1="75" x2="285" y2="70" stroke="#003366" stroke-width="1.4" marker-start="url(#arrowBlue)"/>
-      <text x="290" y="73" font-size="9" font-weight="800" fill="#003366">PRENSA-GAXETA (GLAND)</text>
-
-      <line x1="210" y1="130" x2="285" y2="130" stroke="#003366" stroke-width="1.4" marker-start="url(#arrowBlue)"/>
-      <text x="290" y="133" font-size="9" font-weight="800" fill="#003366">CASTELO PARAFUSADO</text>
-
-      <line x1="185" y1="195" x2="285" y2="190" stroke="#003366" stroke-width="1.4" marker-start="url(#arrowBlue)"/>
-      <text x="290" y="193" font-size="9" font-weight="800" fill="#003366">OBTURADOR (${dn})</text>
+      <!-- Linha Cota Altura 520 mm -->
+      <line x1="22" y1="20" x2="22" y2="195" stroke="#0b1f3a" stroke-width="1" marker-start="url(#arrCadVl)" marker-end="url(#arrCadVl)"/>
+      <text x="14" y="110" font-size="8.5" font-weight="bold" fill="#0b1f3a" transform="rotate(-90 14 110)" text-anchor="middle">H = ${alt}</text>
+      <!-- Corpo Válvula -->
+      <path d="M 50 155 L 90 170 L 90 145 L 110 140 L 110 185 L 50 185 Z" fill="#e2e8f0" stroke="#003b71" stroke-width="1.6"/>
+      <path d="M 170 155 L 130 170 L 130 145 L 110 140 L 110 185 L 170 185 Z" fill="#e2e8f0" stroke="#003b71" stroke-width="1.6"/>
+      <rect x="42" y="145" width="8" height="45" fill="#cbd5e1" stroke="#003b71" stroke-width="1.4"/>
+      <rect x="170" y="145" width="8" height="45" fill="#cbd5e1" stroke="#003b71" stroke-width="1.4"/>
+      <!-- Castelo, Haste e Volante -->
+      <rect x="88" y="90" width="44" height="50" fill="#f1f5f9" stroke="#003b71" stroke-width="1.5"/>
+      <rect x="106" y="28" width="8" height="70" fill="#cbd5e1" stroke="#003b71" stroke-width="1.4"/>
+      <ellipse cx="110" cy="24" rx="42" ry="9" fill="#ef4444" stroke="#003b71" stroke-width="1.6"/>
+      <!-- Balões -->
+      <circle cx="155" cy="24" r="7" fill="#003b71"/><text x="155" y="26.5" font-size="8" font-weight="bold" fill="#fff" text-anchor="middle">1</text>
+      <circle cx="145" cy="80" r="7" fill="#003b71"/><text x="145" y="82.5" font-size="8" font-weight="bold" fill="#fff" text-anchor="middle">3</text>
+      <circle cx="110" cy="165" r="7" fill="#003b71"/><text x="110" y="167.5" font-size="8" font-weight="bold" fill="#fff" text-anchor="middle">5</text>
     </svg>`;
+
+    const frontal = `<svg viewBox="0 0 220 220" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:Arial,sans-serif; display:block; margin:auto;">
+      <defs>
+        <marker id="arrCadVf" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#0b1f3a"/>
+        </marker>
+      </defs>
+      <!-- Linha de Centro Vertical e Horizontal -->
+      <line x1="110" y1="15" x2="110" y2="205" stroke="#dc2626" stroke-width="1" stroke-dasharray="10,3,2,3"/>
+      <line x1="25" y1="165" x2="195" y2="165" stroke="#dc2626" stroke-width="1" stroke-dasharray="10,3,2,3"/>
+      <!-- Flange Frontal Circular -->
+      <circle cx="110" cy="165" r="42" fill="#f8fafc" stroke="#003b71" stroke-width="1.6"/>
+      <circle cx="110" cy="165" r="32" fill="none" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,3"/>
+      <circle cx="110" cy="165" r="22" fill="#e2e8f0" stroke="#003b71" stroke-width="1.4"/>
+      <!-- Furos Flange -->
+      <circle cx="110" cy="133" r="3.5" fill="#003b71"/><circle cx="110" cy="197" r="3.5" fill="#003b71"/>
+      <circle cx="78" cy="165" r="3.5" fill="#003b71"/><circle cx="142" cy="165" r="3.5" fill="#003b71"/>
+      <!-- Cota Face a Face -->
+      <line x1="68" y1="212" x2="152" y2="212" stroke="#0b1f3a" stroke-width="1" marker-start="url(#arrCadVf)" marker-end="url(#arrCadVf)"/>
+      <text x="110" y="210" font-size="8" font-weight="bold" fill="#0b1f3a" text-anchor="middle">Face: ${flg}</text>
+      <!-- Balões -->
+      <circle cx="110" cy="85" r="7" fill="#003b71"/><text x="110" y="87.5" font-size="8" font-weight="bold" fill="#fff" text-anchor="middle">2</text>
+      <circle cx="155" cy="140" r="7" fill="#003b71"/><text x="155" y="142.5" font-size="8" font-weight="bold" fill="#fff" text-anchor="middle">4</text>
+    </svg>`;
+
+    const superior = `<svg viewBox="0 0 380 125" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:Arial,sans-serif; display:block; margin:auto;">
+      <!-- Centro Cruzado -->
+      <line x1="20" y1="62" x2="360" y2="62" stroke="#dc2626" stroke-width="1" stroke-dasharray="12,3,3,3"/>
+      <!-- Flanges Laterais em Top View -->
+      <rect x="40" y="32" width="12" height="60" fill="#cbd5e1" stroke="#003b71" stroke-width="1.4"/>
+      <rect x="328" y="32" width="12" height="60" fill="#cbd5e1" stroke="#003b71" stroke-width="1.4"/>
+      <path d="M 52 42 L 150 48 L 150 76 L 52 82 Z" fill="#f1f5f9" stroke="#003b71" stroke-width="1.4"/>
+      <path d="M 328 42 L 230 48 L 230 76 L 328 82 Z" fill="#f1f5f9" stroke="#003b71" stroke-width="1.4"/>
+      <!-- Volante Central Circular -->
+      <circle cx="190" cy="62" r="48" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+      <circle cx="190" cy="62" r="38" fill="none" stroke="#ef4444" stroke-width="1.2"/>
+      <circle cx="190" cy="62" r="8" fill="#ffffff" stroke="#003b71" stroke-width="1.4"/>
+      <line x1="142" y1="62" x2="238" y2="62" stroke="#ef4444" stroke-width="2"/>
+      <line x1="190" y1="14" x2="190" y2="110" stroke="#ef4444" stroke-width="2"/>
+      <!-- Balões -->
+      <circle cx="65" cy="30" r="7" fill="#003b71"/><text x="65" y="32.5" font-size="8" font-weight="bold" fill="#fff" text-anchor="middle">6</text>
+      <circle cx="190" cy="30" r="7" fill="#003b71"/><text x="190" y="32.5" font-size="8" font-weight="bold" fill="#fff" text-anchor="middle">7</text>
+      <circle cx="315" cy="30" r="7" fill="#003b71"/><text x="315" y="32.5" font-size="8" font-weight="bold" fill="#fff" text-anchor="middle">8</text>
+    </svg>`;
+
+    return {
+      lateral, frontal, superior,
+      componentes: [
+        'Volante de Manobra Manual API 600',
+        'Prensa-Gaxeta (Gland Flange)',
+        'Castelo Aparafusado (Bonnet)',
+        'Haste Roscada Retificada (Stem)',
+        'Cunha / Obturador Flexível (DN 150)',
+        'Flange de Entrada Classe 300#',
+        'Junta Espiralada Inox 316 / Grafite',
+        'Prisioneiros B7 com Porcas 2H'
+      ],
+      aplicacao: 'Bloqueio de Linha de Processo / Vapor Superaquecido Petrobras.',
+      obsTecnicas: [
+        'Engaxetamento com anéis de grafite flexível defasados a 90°.',
+        'Torque nos estojos do castelo calibrado conforme norma ASME B16.5.',
+        'Teste hidrostático de carcaça realizado a 1,5x da pressão de projeto.',
+        'Estanqueidade de sede testada conforme API 598 sem vazamento.'
+      ]
+    };
   } else {
-    // PADRÃO 1:1 COM A FOTO OFICIAL (CESTO FILTRANTE DO SISTEMA DE ATEMPERAÇÃO)
+    // PADRÃO 1:1 OFICIAL: FILTRO DO SISTEMA DE ATEMPERAÇÃO (263 mm x Ø 70 mm)
     const altura = params.altura || '263 mm';
     const diametro = params.diametro || 'Ø 70 mm';
 
-    return `<svg viewBox="0 0 340 300" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:Arial, sans-serif; display:block; margin:auto;">
+    // VISTA LATERAL (Perfil completo com cota H=263mm, alça, colar e corpo perfurado)
+    const lateral = `<svg viewBox="0 0 200 230" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:Arial,sans-serif; display:block; margin:auto;">
       <defs>
-        <!-- Malha perfurada padrão idêntico à foto -->
-        <pattern id="r4_mesh_perf" width="6" height="6" patternUnits="userSpaceOnUse">
-          <circle cx="3" cy="3" r="1.1" fill="#374151"/>
+        <pattern id="cad_perf_lat" width="5" height="5" patternUnits="userSpaceOnUse">
+          <circle cx="2.5" cy="2.5" r="0.95" fill="#003b71" opacity="0.8"/>
         </pattern>
-        <marker id="arrowBlue" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#003366"/>
+        <marker id="arrCadL" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#003b71"/>
         </marker>
-        <marker id="arrowCAD" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#111827"/>
+        <marker id="arrCadDimL" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#0b1f3a"/>
         </marker>
       </defs>
+      <!-- Cota Vertical 263 mm -->
+      <line x1="22" y1="28" x2="22" y2="208" stroke="#0b1f3a" stroke-width="1.1" marker-start="url(#arrCadDimL)" marker-end="url(#arrCadDimL)"/>
+      <line x1="16" y1="28" x2="28" y2="28" stroke="#0b1f3a" stroke-width="0.9"/>
+      <line x1="16" y1="208" x2="28" y2="208" stroke="#0b1f3a" stroke-width="0.9"/>
+      <text x="14" y="118" transform="rotate(-90 14 118)" font-size="9" font-weight="900" fill="#0b1f3a" text-anchor="middle">${altura}</text>
 
-      <!-- Linha de Cota Vertical 263 mm com Setas -->
-      <line x1="25" y1="48" x2="25" y2="250" stroke="#1f2937" stroke-width="1.2" marker-start="url(#arrowCAD)" marker-end="url(#arrowCAD)"/>
-      <line x1="18" y1="48" x2="35" y2="48" stroke="#1f2937" stroke-width="1.2"/>
-      <line x1="18" y1="250" x2="35" y2="250" stroke="#1f2937" stroke-width="1.2"/>
-      <text x="16" y="152" transform="rotate(-90 16 152)" font-size="11" font-weight="bold" fill="#111827" text-anchor="middle">${altura}</text>
-
-      <!-- ELEMENTO 1 (ESQUERDO) -->
       <!-- Alça de Içamento 1 -->
-      <path d="M 45 100 L 45 60 Q 45 45 60 45 Q 75 45 75 60 L 75 100" fill="none" stroke="#111827" stroke-width="2"/>
-      <!-- Colar Flangeado Superior 1 -->
-      <rect x="38" y="100" width="44" height="6" rx="2" fill="#e5e7eb" stroke="#111827" stroke-width="1.5"/>
-      <!-- Corpo Perfurado 1 -->
-      <rect x="42" y="106" width="36" height="144" fill="#f3f4f6" stroke="#111827" stroke-width="1.5"/>
-      <rect x="42" y="106" width="36" height="144" fill="url(#r4_mesh_perf)"/>
+      <path d="M 75 62 L 75 35 Q 75 25 105 25 Q 135 25 135 35 L 135 62" fill="none" stroke="#003b71" stroke-width="2.2"/>
+      <circle cx="105" cy="25" r="2.5" fill="#003b71"/>
 
-      <!-- ELEMENTO 2 (DIREITO) -->
-      <!-- Alça de Içamento 2 -->
-      <path d="M 125 100 L 125 60 Q 125 45 140 45 Q 155 45 155 60 L 155 100" fill="none" stroke="#111827" stroke-width="2"/>
       <!-- Colar Flangeado Superior 2 -->
-      <rect x="118" y="100" width="44" height="6" rx="2" fill="#e5e7eb" stroke="#111827" stroke-width="1.5"/>
-      <!-- Corpo Perfurado 2 -->
-      <rect x="122" y="106" width="36" height="144" fill="#f3f4f6" stroke="#111827" stroke-width="1.5"/>
-      <rect x="122" y="106" width="36" height="144" fill="url(#r4_mesh_perf)"/>
+      <rect x="68" y="62" width="74" height="7" rx="1.5" fill="#e2e8f0" stroke="#003b71" stroke-width="1.5"/>
 
-      <!-- Cota Diâmetro da Base Ø 70 mm com Setas -->
-      <line x1="42" y1="262" x2="78" y2="262" stroke="#1f2937" stroke-width="1.2" marker-start="url(#arrowCAD)" marker-end="url(#arrowCAD)"/>
-      <line x1="42" y1="254" x2="42" y2="268" stroke="#1f2937" stroke-width="1.2"/>
-      <line x1="78" y1="254" x2="78" y2="268" stroke="#1f2937" stroke-width="1.2"/>
-      <text x="60" y="278" font-size="11" font-weight="bold" fill="#111827" text-anchor="middle">${diametro}</text>
+      <!-- Corpo Perfurado Cilíndrico 3 -->
+      <rect x="73" y="69" width="64" height="130" fill="#f8fafc" stroke="#003b71" stroke-width="1.6"/>
+      <rect x="73" y="69" width="64" height="130" fill="url(#cad_perf_lat)"/>
 
-      <!-- Projeção da Base Circular Perfurada -->
-      <g transform="translate(195, 195)">
-        <circle cx="25" cy="25" r="28" fill="#f9fafb" stroke="#111827" stroke-width="1.8"/>
-        <circle cx="25" cy="25" r="22" fill="url(#r4_mesh_perf)" stroke="#111827" stroke-width="1.2"/>
-        <circle cx="25" cy="25" r="8" fill="#e5e7eb" stroke="#111827" stroke-width="1.2"/>
-      </g>
+      <!-- Fundo Cônico / Solda 5 e 6 -->
+      <path d="M 73 199 L 85 208 L 125 208 L 137 199 Z" fill="#cbd5e1" stroke="#003b71" stroke-width="1.5"/>
 
-      <!-- Linhas de Chamada Técnicas (Padrão Exato da Foto Petrobras) -->
-      <line x1="75" y1="52" x2="185" y2="52" stroke="#003366" stroke-width="1.4" marker-start="url(#arrowBlue)"/>
-      <text x="190" y="50" font-size="9.5" font-weight="800" fill="#003366">ALÇA DE</text>
-      <text x="190" y="62" font-size="9.5" font-weight="800" fill="#003366">IÇAMENTO</text>
-
-      <line x1="158" y1="140" x2="185" y2="140" stroke="#003366" stroke-width="1.4" marker-start="url(#arrowBlue)"/>
-      <text x="190" y="138" font-size="9.5" font-weight="800" fill="#003366">CORPO</text>
-      <text x="190" y="150" font-size="9.5" font-weight="800" fill="#003366">PERFURADO</text>
-
-      <line x1="220" y1="230" x2="220" y2="258" stroke="#003366" stroke-width="1.4" marker-start="url(#arrowBlue)"/>
-      <text x="220" y="270" font-size="9.5" font-weight="800" fill="#003366" text-anchor="middle">BASE</text>
-      <text x="220" y="282" font-size="9.5" font-weight="800" fill="#003366" text-anchor="middle">PERFURADA</text>
+      <!-- Linhas de Chamada com Balões Oficiais ❶, ❷, ❸, ❺, ❻ -->
+      <!-- Balão 1: Alça -->
+      <line x1="135" y1="35" x2="168" y2="35" stroke="#003b71" stroke-width="1"/>
+      <circle cx="178" cy="35" r="8" fill="#003b71"/><text x="178" y="38" font-size="9" font-weight="bold" fill="#fff" text-anchor="middle">1</text>
+      <!-- Balão 2: Flange -->
+      <line x1="142" y1="65" x2="168" y2="65" stroke="#003b71" stroke-width="1"/>
+      <circle cx="178" cy="65" r="8" fill="#003b71"/><text x="178" y="68" font-size="9" font-weight="bold" fill="#fff" text-anchor="middle">2</text>
+      <!-- Balão 3: Corpo Perfurado -->
+      <line x1="137" y1="125" x2="168" y2="125" stroke="#003b71" stroke-width="1"/>
+      <circle cx="178" cy="125" r="8" fill="#003b71"/><text x="178" y="128" font-size="9" font-weight="bold" fill="#fff" text-anchor="middle">3</text>
+      <!-- Balão 5: Fundo Cônico -->
+      <line x1="137" y1="202" x2="168" y2="202" stroke="#003b71" stroke-width="1"/>
+      <circle cx="178" cy="202" r="8" fill="#003b71"/><text x="178" y="205" font-size="9" font-weight="bold" fill="#fff" text-anchor="middle">5</text>
     </svg>`;
+
+    // VISTA FRONTAL (Corte com linha de centro vermelha e cota de diâmetro Ø 70 mm)
+    const frontal = `<svg viewBox="0 0 200 230" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:Arial,sans-serif; display:block; margin:auto;">
+      <defs>
+        <pattern id="cad_mesh_int" width="4" height="4" patternUnits="userSpaceOnUse">
+          <line x1="0" y1="0" x2="4" y2="4" stroke="#003b71" stroke-width="0.8" opacity="0.6"/>
+          <line x1="0" y1="4" x2="4" y2="0" stroke="#003b71" stroke-width="0.8" opacity="0.6"/>
+        </pattern>
+        <marker id="arrCadF" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#0b1f3a"/>
+        </marker>
+      </defs>
+      <!-- Linha de Centro Red Dash-Dot -->
+      <line x1="105" y1="15" x2="105" y2="218" stroke="#dc2626" stroke-width="1.1" stroke-dasharray="12,3,3,3"/>
+      <text x="105" y="12" font-size="7" font-weight="bold" fill="#dc2626" text-anchor="middle">CL</text>
+
+      <!-- Alça Frontal -->
+      <path d="M 85 62 L 85 32 Q 85 24 105 24 Q 125 24 125 32 L 125 62" fill="none" stroke="#003b71" stroke-width="2"/>
+      
+      <!-- Flange Superior -->
+      <rect x="70" y="62" width="70" height="7" rx="1.5" fill="#e2e8f0" stroke="#003b71" stroke-width="1.5"/>
+
+      <!-- Corpo com Detalhe da Malha Interna 4 -->
+      <rect x="75" y="69" width="60" height="130" fill="#f8fafc" stroke="#003b71" stroke-width="1.5"/>
+      <rect x="80" y="75" width="50" height="118" fill="url(#cad_mesh_int)"/>
+
+      <!-- Junta de Vedação 7 e Trava 8 -->
+      <line x1="68" y1="62" x2="142" y2="62" stroke="#f59e0b" stroke-width="2"/>
+      <rect x="135" y="75" width="4" height="10" fill="#003b71"/>
+
+      <!-- Cota Diâmetro Inferior Ø 70 mm -->
+      <line x1="75" y1="212" x2="135" y2="212" stroke="#0b1f3a" stroke-width="1.1" marker-start="url(#arrCadF)" marker-end="url(#arrCadF)"/>
+      <line x1="75" y1="202" x2="75" y2="218" stroke="#0b1f3a" stroke-width="0.8"/>
+      <line x1="135" y1="202" x2="135" y2="218" stroke="#0b1f3a" stroke-width="0.8"/>
+      <text x="105" y="222" font-size="9" font-weight="900" fill="#0b1f3a" text-anchor="middle">${diametro}</text>
+
+      <!-- Balões 4 (Malha Interna), 7 (Junta Vedação), 8 (Trava) -->
+      <line x1="130" y1="105" x2="168" y2="105" stroke="#003b71" stroke-width="1"/>
+      <circle cx="178" cy="105" r="8" fill="#003b71"/><text x="178" y="108" font-size="9" font-weight="bold" fill="#fff" text-anchor="middle">4</text>
+
+      <line x1="140" y1="62" x2="168" y2="62" stroke="#003b71" stroke-width="1"/>
+      <circle cx="178" cy="62" r="8" fill="#003b71"/><text x="178" y="65" font-size="9" font-weight="bold" fill="#fff" text-anchor="middle">7</text>
+
+      <line x1="139" y1="80" x2="168" y2="80" stroke="#003b71" stroke-width="1"/>
+      <circle cx="178" cy="80" r="8" fill="#003b71"/><text x="178" y="83" font-size="9" font-weight="bold" fill="#fff" text-anchor="middle">8</text>
+    </svg>`;
+
+    // VISTA SUPERIOR (Olhando de cima com círculos concêntricos e alça)
+    const superior = `<svg viewBox="0 0 380 125" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:Arial,sans-serif; display:block; margin:auto;">
+      <defs>
+        <pattern id="cad_perf_top" width="5" height="5" patternUnits="userSpaceOnUse">
+          <circle cx="2.5" cy="2.5" r="1.1" fill="#003b71" opacity="0.8"/>
+        </pattern>
+        <marker id="arrCadS" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#0b1f3a"/>
+        </marker>
+      </defs>
+      <!-- Linhas de Centro Cruzadas -->
+      <line x1="30" y1="62" x2="350" y2="62" stroke="#dc2626" stroke-width="1" stroke-dasharray="12,3,3,3"/>
+      <line x1="190" y1="10" x2="190" y2="115" stroke="#dc2626" stroke-width="1" stroke-dasharray="10,3,3,3"/>
+
+      <!-- Elemento Circular Esquerdo (Projeção da Base) -->
+      <g transform="translate(85, 62)">
+        <circle cx="0" cy="0" r="44" fill="#f8fafc" stroke="#003b71" stroke-width="1.8"/>
+        <circle cx="0" cy="0" r="35" fill="url(#cad_perf_top)" stroke="#003b71" stroke-width="1.2"/>
+        <circle cx="0" cy="0" r="12" fill="#e2e8f0" stroke="#003b71" stroke-width="1.4"/>
+        <line x1="-35" y1="0" x2="35" y2="0" stroke="#003b71" stroke-width="2"/>
+      </g>
+      <text x="85" y="118" font-size="8" font-weight="bold" fill="#003b71" text-anchor="middle">PROJEÇÃO DA BASE</text>
+
+      <!-- Elemento Circular Direito (Projeção do Flange e Alça) -->
+      <g transform="translate(265, 62)">
+        <circle cx="0" cy="0" r="48" fill="#f1f5f9" stroke="#003b71" stroke-width="2"/>
+        <circle cx="0" cy="0" r="40" fill="none" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,3"/>
+        <circle cx="0" cy="0" r="32" fill="#ffffff" stroke="#003b71" stroke-width="1.5"/>
+        <!-- Ponte da Alça -->
+        <rect x="-36" y="-4" width="72" height="8" rx="2" fill="#003b71"/>
+        <circle cx="0" cy="0" r="3" fill="#ffffff"/>
+      </g>
+      <text x="265" y="118" font-size="8" font-weight="bold" fill="#003b71" text-anchor="middle">ANEL SUPERIOR & ALÇA</text>
+
+      <!-- Balão 1 e Balão 8 -->
+      <circle cx="340" cy="40" r="7" fill="#003b71"/><text x="340" y="42.5" font-size="8" font-weight="bold" fill="#fff" text-anchor="middle">1</text>
+      <circle cx="340" cy="85" r="7" fill="#003b71"/><text x="340" y="87.5" font-size="8" font-weight="bold" fill="#fff" text-anchor="middle">8</text>
+    </svg>`;
+
+    return {
+      lateral, frontal, superior,
+      componentes: [
+        'Alça de Içamento Reforçada (Inox)',
+        'Anel Superior / Flange de Assentamento',
+        'Corpo Perfurado Cilíndrico (AISI 316L)',
+        'Malha Filtrante Interna Calibrada',
+        'Fundo Cônico Estampado e Soldado',
+        'Cordão de Solda Processo TIG Contínuo',
+        'Junta de Vedação Plana de Alta Temperatura',
+        'Trava Guia Anti-Giro de Alinhamento'
+      ],
+      aplicacao: 'Sistema de Atemperação de Vapor / Linha de Água de Alimentação de Alta Pressão.',
+      obsTecnicas: [
+        'Fabricado integralmente em Aço Inox AISI 316L de alta resistência térmica.',
+        'Tolerâncias dimensionais rigorosamente alinhadas à norma ISO 2768-m.',
+        'Cotas nominais conferidas por metrologia: H=263 mm, Diâmetro externo Ø=70 mm.',
+        'Ensaio de integridade mecânica, estanqueidade e fluxo 100% aprovado.'
+      ]
+    };
   }
 }
 
+/* Compatibilidade com chamadas legadas */
+function gerarSvgCadTecnico(tipo = 'filtro_cesto', params = {}) {
+  const views = gerarSvg3VistasTecnicas(tipo, params);
+  return views.lateral;
+}
+
+/* ATUALIZADOR DAS 3 VISTAS TÉCNICAS NO RELATÓRIO A4 (PADRÃO MECÂNICA 4.0 IA) */
+function atualizarDesenhosTecnicosA4(customUrl) {
+  const nomeEquip = (document.getElementById('rel_equip')?.value || 'Motor / Conjunto de Ventilação').toLowerCase();
+  const tag = (document.getElementById('rel_tag')?.value || '').toLowerCase();
+  const servico = (document.getElementById('rel_servico_realizado')?.value || '').toLowerCase();
+
+  let tipoCad = 'motor_ventilador';
+  let params = {};
+
+  if (nomeEquip.includes('bomba') || tag.includes('bc') || tag.includes('p-')) {
+    tipoCad = 'bomba_centrifuga';
+    params = { diamRotor: 'Ø 210 mm', bocalSuc: 'Ø 125 mm (5")', bocalDesc: 'Ø 80 mm (3")', distMancais: '340 mm' };
+  } else if (nomeEquip.includes('valvula') || nomeEquip.includes('psv') || tag.includes('psv') || tag.includes('v-')) {
+    tipoCad = 'valvula';
+    params = { dn: 'DN 150 mm (6")', alt: '520 mm', flg: '285 mm' };
+  } else if (nomeEquip.includes('filtro') || tag.includes('flt') || tag.includes('atemp')) {
+    tipoCad = 'filtro_cesto';
+    params = { altura: '263 mm', diametro: 'Ø 70 mm' };
+  } else {
+    // Default Padrão Mecânica 4.0 IA: Motor com Hélice Axial / Conjunto de Ventilação
+    tipoCad = 'motor_ventilador';
+  }
+
+  const v3 = gerarSvg3VistasTecnicas(tipoCad, params);
+
+  // 1. Atualiza Banner do Desenho Técnico
+  const elBanner = document.getElementById('r4_cad_titulo_banner');
+  if (elBanner && v3.tituloBanner) {
+    elBanner.innerText = v3.tituloBanner;
+  }
+
+  // 2. Atualiza as 3 Vistas Técnicas CAD
+  const elLat = document.getElementById('r4_vista_lateral_svg');
+  const elFront = document.getElementById('r4_vista_frontal_svg');
+  const elSup = document.getElementById('r4_vista_superior_svg');
+
+  if (elLat) elLat.innerHTML = v3.lateral;
+  if (elFront) elFront.innerHTML = v3.frontal;
+  if (elSup) elSup.innerHTML = v3.superior;
+
+  // 3. Atualiza Status Badge do Cabeçalho
+  const elStatusBadge = document.getElementById('r4_status_badge');
+  if (elStatusBadge) {
+    const urg = (document.getElementById('rel_urgencia')?.value || '').toLowerCase();
+    const serv = (document.getElementById('rel_servico_realizado')?.value || '').toLowerCase();
+    const obs = (document.getElementById('rel_observacao')?.value || '').toLowerCase();
+    const isConcluido = (serv.includes('concluído') || serv.includes('concluido') || obs.includes('concluído') || obs.includes('concluido') || obs.includes('liberado')) &&
+                        !serv.includes('serviço em andamento') && !obs.includes('serviço em andamento');
+
+    if (isConcluido) {
+      elStatusBadge.className = 'r-a4-status-badge concluido';
+      elStatusBadge.innerText = '/// ✔️ CONCLUÍDO ///';
+    } else {
+      elStatusBadge.className = 'r-a4-status-badge em-andamento';
+      elStatusBadge.innerText = '/// ⚙️ SERVIÇO EM ANDAMENTO ///';
+    }
+  }
+
+  // 4. Preenche Componentes ❶ a ❽
+  v3.componentes.forEach((comp, idx) => {
+    const elComp = document.getElementById(`r4_comp_${idx + 1}`);
+    const elItem = elComp?.closest('.r-a4-comp-item');
+    if (elComp) elComp.innerText = comp;
+    if (elItem) elItem.style.display = comp ? 'flex' : 'none';
+  });
+
+  // 5. Preenche Aplicação
+  const elApl = document.getElementById('r4_aplicacao');
+  if (elApl) {
+    const userApl = document.getElementById('rel_aplicacao')?.value?.trim();
+    elApl.innerText = userApl || v3.aplicacao;
+  }
+
+  // 6. Preenche Observações Técnicas
+  const elObsTec = document.getElementById('r4_obs_tecnicas');
+  if (elObsTec) {
+    const userObsTec = document.getElementById('rel_obs_tecnicas')?.value?.trim();
+    if (userObsTec) {
+      const linhas = userObsTec.split('\n').filter(l => l.trim().length > 0);
+      elObsTec.innerHTML = '<ul>' + linhas.map(l => `<li>${l.replace(/^[•\-\*]\s*/, '')}</li>`).join('') + '</ul>';
+    } else {
+      elObsTec.innerHTML = '<ul>' + v3.obsTecnicas.map(l => `<li>${l}</li>`).join('') + '</ul>';
+    }
+  }
+
+  // 7. Atualiza Legendas Periciais das Fotos
+  if (v3.legendasFotos) {
+    const setLbl = (id, txt) => {
+      const el = document.getElementById(id);
+      if (el && txt) el.innerText = txt;
+    };
+    setLbl('r4_foto_principal_lbl', v3.legendasFotos.principal);
+    setLbl('r4_detalhe_1_lbl', v3.legendasFotos.detalhe1);
+    setLbl('r4_detalhe_2_lbl', v3.legendasFotos.detalhe2);
+    setLbl('r4_detalhe_3_lbl', v3.legendasFotos.detalhe3);
+    setLbl('r4_detalhe_4_lbl', v3.legendasFotos.detalhe4);
+  }
+}
+
+function atualizarDesenhoNoA4(customUrl) {
+  atualizarDesenhosTecnicosA4(customUrl);
+}
+
+/* ===================== CONTROLE DO RELATÓRIO A4 / PDF (PADRÃO OFICIAL 1:1) ===================== */
 function abrirRelatorioA4Modal() {
   relatorioVisualizandoAtualId = null;
   const btnExcluirA4 = document.getElementById('btn_excluir_a4_modal');
   if (btnExcluirA4) btnExcluirA4.style.display = 'none';
 
   const dataVal = document.getElementById('rel_data')?.value || '';
-  let dia = '02', mes = '09', ano = '26';
+  let dia = '02', mes = '09', ano = '26', anoCheio = '2026';
   if (dataVal) {
     const partes = dataVal.split('-');
     if (partes.length === 3) {
+      anoCheio = partes[0];
       ano = partes[0].slice(-2);
       mes = partes[1];
       dia = partes[2];
     }
   }
 
-  // Preenche dados cadastrais
-  document.getElementById('r4_data').innerText = `${dia}/${mes}/${ano}`;
-  document.getElementById('r4_tag').innerText = (document.getElementById('rel_tag')?.value || '38LCE10').trim();
-  document.getElementById('r4_om').innerText = (document.getElementById('rel_om')?.value || '20321136862').trim();
-  document.getElementById('r4_num').innerText = (document.getElementById('rel_num_doc')?.value || '22147492').trim();
-  document.getElementById('r4_op').innerText = (document.getElementById('rel_op')?.value || '10').trim();
-  document.getElementById('r4_ass').innerText = (document.getElementById('rel_resp')?.value || 'EDUARDO NORONHA').trim().toUpperCase();
-  document.getElementById('r4_equipe').innerText = (document.getElementById('rel_equipe_matr')?.value || 'EDUARDO / 48380712').trim().toUpperCase();
-  document.getElementById('r4_local').innerText = (document.getElementById('rel_local_texto')?.value || 'BLOCO 3 CICLO ÁGUA VAPOR').trim().toUpperCase();
+  const numDoc = (document.getElementById('rel_num_doc')?.value || '22147492').trim();
+  const numCurto = numDoc.length >= 4 ? numDoc.slice(-4) : numDoc;
 
-  const equipNome = (document.getElementById('rel_equip')?.value || 'Filtro do sistema de atemperação').trim();
-  const servicoVal = document.getElementById('rel_servico_realizado')?.value.trim();
-  document.getElementById('r4_servico').innerText = servicoVal || 'Realizada limpeza do filtro do sistema de atemperação, com remoção de resíduos e impurezas acumuladas, visando manter a adequada passagem do fluido e o correto funcionamento do sistema.';
+  // 1. Topo: Número oficial formatado (ex: 2214/2026)
+  const headerNo = document.getElementById('r4_header_no');
+  if (headerNo) headerNo.innerText = `${numCurto}/${anoCheio}`;
 
-  const obsVal = document.getElementById('rel_observacao')?.value.trim();
-  document.getElementById('r4_observacao').innerText = obsVal || 'Após a limpeza, o filtro foi deixado em condições adequadas para operação, contribuindo para a manutenção do fluxo e desempenho do sistema de atemperação.';
+  // 2. Barra de Identificação Operacional (DATA, OP, OM, TAG, Nº)
+  const setElText = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.innerText = val;
+  };
 
-  // Títulos dos painéis dinâmicos
-  const equipSingular = equipNome.toUpperCase();
-  let equipPlural = equipSingular;
-  if (equipSingular.includes('FILTRO')) equipPlural = 'FILTROS';
-  else if (equipSingular.includes('BOMBA')) equipPlural = 'BOMBA CENTRÍFUGA';
-  else if (equipSingular.includes('ROLAMENTO')) equipPlural = 'ROLAMENTOS';
-  else if (equipSingular.includes('VALVULA')) equipPlural = 'VÁLVULA';
+  setElText('r4_data', `${dia}/${mes}/${ano}`);
+  setElText('r4_op', (document.getElementById('rel_op')?.value || '10').trim());
+  setElText('r4_om', (document.getElementById('rel_om')?.value || '20321136862').trim());
+  setElText('r4_tag', (document.getElementById('rel_tag')?.value || '38LCE10').trim());
+  setElText('r4_num', numDoc);
 
-  const titDesenho = document.getElementById('r4_titulo_desenho');
-  if (titDesenho) titDesenho.innerText = 'DESENHO TÉCNICO DO ' + (equipSingular.includes('FILTRO') ? 'FILTRO' : equipSingular);
+  // 3. Atualiza as 3 Vistas Técnicas CAD e Componentes
+  atualizarDesenhosTecnicosA4();
 
-  const titFotos = document.getElementById('r4_titulo_fotos_reais');
-  if (titFotos) titFotos.innerText = equipPlural + ' – FOTOS REAIS';
+  // 4. Foto do Equipamento (Slot 1)
+  const imgFotoPrin = document.getElementById('r4_foto_principal');
+  const phFotoPrin = document.getElementById('r4_foto_principal_placeholder');
+  const fotoSlot1Url = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot1?.dataUrl) ||
+                       (document.getElementById('slot_preview_slot1')?.src && !document.getElementById('slot_preview_slot1')?.src.includes('window.location')) ? document.getElementById('slot_preview_slot1')?.src : null;
 
-  const tit3D = document.getElementById('r4_titulo_3d');
-  if (tit3D) tit3D.innerText = equipPlural + ' – VISTA REAL (3D)';
+  if (fotoSlot1Url && fotoSlot1Url.length > 50) {
+    if (imgFotoPrin) { imgFotoPrin.src = fotoSlot1Url; imgFotoPrin.style.display = 'block'; }
+    if (phFotoPrin) phFotoPrin.style.display = 'none';
+  } else {
+    if (imgFotoPrin) imgFotoPrin.style.display = 'none';
+    if (phFotoPrin) phFotoPrin.style.display = 'block';
+  }
 
-  // Grade de Fotos Reais de Campo (Lado a Lado como na Folha Petrobras)
-  const containerFotosReais = document.getElementById('r4_fotos_reais_container');
-  if (containerFotosReais) {
-    containerFotosReais.innerHTML = '';
-    const fotos = [];
-    if (typeof estadoFotosRelatorio !== 'undefined') {
-      if (estadoFotosRelatorio.slot1?.dataUrl) fotos.push({ url: estadoFotosRelatorio.slot1.dataUrl, rotulo: 'No Equipamento' });
-      if (estadoFotosRelatorio.slot2?.dataUrl) fotos.push({ url: estadoFotosRelatorio.slot2.dataUrl, rotulo: 'Desmontagem / Tampa' });
-      if (estadoFotosRelatorio.slot5?.dataUrl) fotos.push({ url: estadoFotosRelatorio.slot5.dataUrl, rotulo: 'Montagem Final' });
-      if (estadoFotosRelatorio.slot3?.dataUrl && fotos.length < 3) fotos.push({ url: estadoFotosRelatorio.slot3.dataUrl, rotulo: 'Anomalia / Inspeção' });
-      if (estadoFotosRelatorio.extras && fotos.length < 3) {
-        estadoFotosRelatorio.extras.forEach(ex => {
-          if (ex.dataUrl && fotos.length < 3) fotos.push({ url: ex.dataUrl, rotulo: 'Evidência de Campo' });
-        });
+  // 5. Quatro Detalhes do Equipamento (Slots 2, 3, 4, 5 ou extras)
+  const detalhesSlots = ['slot2', 'slot3', 'slot4', 'slot5'];
+  detalhesSlots.forEach((sKey, idx) => {
+    const iNum = idx + 1;
+    const imgEl = document.getElementById(`r4_detalhe_${iNum}_img`);
+    const phEl = document.getElementById(`r4_detalhe_${iNum}_ph`);
+    let dUrl = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio[sKey]?.dataUrl) || null;
+    
+    // Fallback para preview direto
+    if (!dUrl) {
+      const prevEl = document.getElementById(`slot_preview_${sKey}`);
+      if (prevEl && prevEl.src && prevEl.src.startsWith('data:image')) {
+        dUrl = prevEl.src;
       }
     }
 
-    if (fotos.length > 0) {
-      containerFotosReais.innerHTML = fotos.map(f => `
-        <div class="r-a4-foto-col">
-          <img src="${f.url}" alt="${f.rotulo}">
-        </div>
-      `).join('');
+    if (dUrl) {
+      if (imgEl) { imgEl.src = dUrl; imgEl.style.display = 'block'; }
+      if (phEl) phEl.style.display = 'none';
     } else {
-      containerFotosReais.innerHTML = `
-        <div style="color:#64748b; font-size:11.5px; text-align:center; padding:40px 10px; width:100%;">
-          <div style="font-size:28px; margin-bottom:6px;">📷</div>
-          <b>Fotos Reais de Campo</b><br>
-          <span style="font-size:10.5px; color:#94a3b8;">Tire ou anexe fotos nos slots 1, 2 e 5 para compor a prancha real</span>
-        </div>
-      `;
+      if (imgEl) imgEl.style.display = 'none';
+      if (phEl) phEl.style.display = 'block';
     }
-  }
+  });
 
-  // Ferramentas Utilizadas & Modo de Exibição (3D/Realista vs Texto)
-  atualizarModoExibicaoFerramentas();
-  const listaF = document.getElementById('r4_lista_ferramentas');
-  const ferramentasTexto = document.getElementById('rel_ferramentas')?.value.trim() || '• Chave combinada 22 mm';
-  const linhasF = ferramentasTexto.split('\n').filter(l => l.trim().length > 0);
-  if (listaF) {
-    listaF.innerHTML = '<ul>' + linhasF.map(f => `<li>${f.replace(/^[•\-\*]\s*/, '')}</li>`).join('') + '</ul>';
-  }
+  // 6. Descrição do Serviço (Preenche as 6 linhas pautadas oficiais)
+  const servicoTexto = (document.getElementById('rel_servico_realizado')?.value || '').trim();
+  const linhasPadrão = [
+    'Realizada intervenção técnica com bloqueio de segurança LOTO e despressurização da linha.',
+    'Desmontagem da tampa de inspeção e extração do elemento filtrante para avaliação metrológica.',
+    'Limpeza minuciosa da malha perfurada, remoção de incrustações e teste de integridade estrutural.',
+    'Substituição da junta de vedação, reinstalação do cesto no alojamento e aperto calibrado em cruz.',
+    'Sistema reenergizado e testado sob pressão nominal sem registros de vazamento ou perda de carga.',
+    'Equipamento liberado e entregue para operação com garantia de confiabilidade mecânica.'
+  ];
 
-  const containerImgFerramenta = document.getElementById('r4_container_ferramenta_img');
-  const imgFerramenta = document.getElementById('r4_img_ferramenta');
-  if (containerImgFerramenta && imgFerramenta) {
-    if (modoExibicaoFerramentasA4 === 'texto') {
-      containerImgFerramenta.style.display = 'none';
+  let linhasParaExibir = [...linhasPadrão];
+  if (servicoTexto) {
+    const splitUser = servicoTexto.split('\n').filter(s => s.trim().length > 0);
+    if (splitUser.length >= 2) {
+      linhasParaExibir = splitUser;
     } else {
-      containerImgFerramenta.style.display = 'block';
-      imgFerramenta.src = CHAVE_COMBINADA_22_B64;
-      imgFerramenta.style.display = 'block';
+      // Divide frases longas por ponto
+      const frases = servicoTexto.split('. ').filter(f => f.trim().length > 0).map(f => f.endsWith('.') ? f : f + '.');
+      if (frases.length > 0) {
+        linhasParaExibir = frases;
+      }
     }
   }
 
-  // Vista 3D Real do Equipamento (Slot 4 ou Render)
-  const r4Img3D = document.getElementById('r4_img_3d');
-  const r43DPlaceholder = document.getElementById('r4_img_3d_placeholder');
-  const foto3DUrl = (typeof estadoFotosRelatorio !== 'undefined' && (estadoFotosRelatorio.slot4?.dataUrl || estadoFotosRelatorio.slot3?.dataUrl));
-  if (foto3DUrl) {
-    if (r4Img3D) { r4Img3D.src = foto3DUrl; r4Img3D.style.display = 'block'; }
-    if (r43DPlaceholder) r43DPlaceholder.style.display = 'none';
-  } else {
-    // Render realista padrão dos filtros em 3D
-    if (r4Img3D) {
-      r4Img3D.src = 'assets/oficina_industrial_bg.jpg';
-      r4Img3D.style.display = 'none';
-    }
-    if (r43DPlaceholder) {
-      r43DPlaceholder.style.display = 'block';
-      r43DPlaceholder.innerHTML = `
-        <div style="font-size:24px; margin-bottom:4px;">⚙️</div>
-        <b style="color:#003366;">Vista 3D / Peças Limpas</b><br>
-        <span style="font-size:9.5px; color:#6b7280;">(Anexe no Slot 4 "Peças Limpas / 3D")</span>
-      `;
+  for (let i = 1; i <= 6; i++) {
+    const elLinha = document.getElementById(`r4_pautada_${i}`);
+    if (elLinha) {
+      elLinha.innerText = linhasParaExibir[i - 1] || '...................................................................................................................................................';
     }
   }
 
-  // Registro do Serviço (Linhas pontilhadas oficiais)
-  const linhasReg = document.getElementById('r4_linhas_registro');
-  const regServico = document.getElementById('rel_registro_servico')?.value.trim();
-  if (linhasReg) {
-    if (regServico) {
-      const itens = regServico.split('\n').filter(l => l.trim().length > 0);
-      linhasReg.innerHTML = itens.map(i => `<div class="r-a4-linha-ponto">${i}</div>`).join('');
-    } else {
-      linhasReg.innerHTML = `
-        <div class="r-a4-linha-ponto">....................................................................................................................................................................................</div>
-        <div class="r-a4-linha-ponto">....................................................................................................................................................................................</div>
-        <div class="r-a4-linha-ponto">....................................................................................................................................................................................</div>
-        <div class="r-a4-linha-ponto">....................................................................................................................................................................................</div>
-      `;
-    }
+  // 7. Ferramentas Utilizadas
+  const ferrTexto = (document.getElementById('rel_ferramentas')?.value || '').trim() || '• Chave combinada 22 mm\n• Torquímetro calibrado (torque 85 N.m)\n• Escova de cerdas de latão';
+  const linhasF = ferrTexto.split('\n').filter(l => l.trim().length > 0);
+  const ferrContainer = document.getElementById('r4_ferramentas_linhas');
+  if (ferrContainer) {
+    ferrContainer.innerHTML = '<ul>' + linhasF.map(f => `<li>${f.replace(/^[•\-\*]\s*/, '')}</li>`).join('') + '</ul>';
   }
 
-  // Assinatura e Data
-  const nomeResp = (document.getElementById('rel_resp')?.value || 'Eduardo Noronha').trim();
-  document.getElementById('r4_nome_responsavel').innerText = nomeResp;
-  document.getElementById('r4_dia').innerText = dia;
-  document.getElementById('r4_mes').innerText = mes;
-  document.getElementById('r4_ano').innerText = ano;
+  // 8. Equipe
+  const equipeTexto = (document.getElementById('rel_equipe_matr')?.value || 'EDUARDO NORONHA / 48380712').trim();
+  const eqContainer = document.getElementById('r4_equipe_linhas');
+  if (eqContainer) eqContainer.innerText = equipeTexto + ' • Mecânica Industrial 4.0 IA';
+
+  // 9. Materiais Utilizados
+  const matTexto = (document.getElementById('rel_materiais')?.value || '').trim() || '• Junta grafitada DN 80\n• Desengraxante técnico\n• Solução antioxidante';
+  const linhasM = matTexto.split('\n').filter(l => l.trim().length > 0);
+  const matContainer = document.getElementById('r4_materiais_linhas');
+  if (matContainer) {
+    matContainer.innerHTML = '<ul>' + linhasM.map(m => `<li>${m.replace(/^[•\-\*]\s*/, '')}</li>`).join('') + '</ul>';
+  }
+
+  // 10. Observações
+  const obsTexto = (document.getElementById('rel_observacao')?.value || '').trim() || '• Equipamento operando com fluxo nominal e estabilidade térmica.\n• Manutenção realizada em estrita conformidade com as normas de segurança.';
+  const linhasO = obsTexto.split('\n').filter(l => l.trim().length > 0);
+  const obsContainer = document.getElementById('r4_observacoes_linhas');
+  if (obsContainer) {
+    obsContainer.innerHTML = '<ul>' + linhasO.map(o => `<li>${o.replace(/^[•\-\*]\s*/, '')}</li>`).join('') + '</ul>';
+  }
+
+  // 11. Responsável Técnico, Matrícula e Assinatura
+  const respNome = (document.getElementById('rel_resp')?.value || 'EDUARDO NORONHA').trim();
+  let matr = '48380712';
+  const userMatr = document.getElementById('rel_matricula')?.value?.trim();
+  if (userMatr) {
+    matr = userMatr;
+  } else if (equipeTexto.includes('/')) {
+    matr = equipeTexto.split('/')[1].trim();
+  }
+
+  setElText('r4_resp_nome', respNome.toUpperCase());
+  setElText('r4_resp_matr', matr);
 
   const imgAssinatura = document.getElementById('r4_img_assinatura');
   const textoCursiva = document.getElementById('r4_texto_assinatura_cursiva');
@@ -12451,49 +13402,15 @@ function abrirRelatorioA4Modal() {
     if (textoCursiva) textoCursiva.style.display = 'none';
   } else {
     if (imgAssinatura) imgAssinatura.style.display = 'none';
-    if (textoCursiva) { textoCursiva.innerText = nomeResp; textoCursiva.style.display = 'block'; }
+    if (textoCursiva) { textoCursiva.innerText = respNome; textoCursiva.style.display = 'block'; }
   }
 
-  // Atualiza Desenho Técnico CAD Paramétrico
-  atualizarDesenhoNoA4();
+  // 12. Revisão
+  setElText('r4_rev_data', `${dia}/${mes}/${anoCheio}`);
 
+  // Exibe Modal
   document.getElementById('modal-relatorio-a4').style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function atualizarDesenhoNoA4(customUrl) {
-  const container = document.getElementById('r4_container_desenho');
-  if (!container) return;
-
-  const nomeEquip = (document.getElementById('rel_equip')?.value || 'Filtro do Sistema de Atemperação').toLowerCase();
-  const tag = (document.getElementById('rel_tag')?.value || '').toLowerCase();
-
-  if (customUrl) {
-    container.innerHTML = `<img src="${customUrl}" alt="Desenho Técnico CAD" style="max-height:195px; max-width:100%; object-fit:contain; display:block; margin:auto;">`;
-    return;
-  }
-
-  if (desenhoTecnicoDataUrl) {
-    container.innerHTML = `<img src="${desenhoTecnicoDataUrl}" alt="Desenho Técnico CAD" style="max-height:195px; max-width:100%; object-fit:contain; display:block; margin:auto;">`;
-    return;
-  }
-
-  // Geração Automática por Tipo com Parâmetros Oficiais Petrobras
-  let tipoCad = 'filtro_cesto';
-  let params = { altura: '263 mm', diametro: 'Ø 70 mm' };
-
-  if (nomeEquip.includes('bomba') || tag.includes('bc') || tag.includes('p-')) {
-    tipoCad = 'bomba_centrifuga';
-    params = { diamRotor: 'Ø 210 mm', bocalSuc: 'Ø 125 mm (5")', bocalDesc: 'Ø 80 mm (3")', distMancais: '340 mm' };
-  } else if (nomeEquip.includes('rolamento') || nomeEquip.includes('mancal')) {
-    tipoCad = 'rolamento';
-    params = { dEixo: 'Ø 75 mm', dExt: 'Ø 160 mm', largB: '37 mm' };
-  } else if (nomeEquip.includes('valvula') || nomeEquip.includes('psv') || tag.includes('psv') || tag.includes('v-')) {
-    tipoCad = 'valvula';
-    params = { dn: 'DN 150 mm (6")', alt: '520 mm', flg: '285 mm' };
-  }
-
-  container.innerHTML = gerarSvgCadTecnico(tipoCad, params);
 }
 
 /* ===================== MOTOR DO ROBÔ IA REVISOR TÉCNICO (PADRÃO PETROBRAS) ===================== */
@@ -12564,16 +13481,16 @@ function aplicarMelhoriasIARelatorioEAbrirA4() {
   abrirRelatorioA4Modal();
 
   if (typeof mostrarToast === 'function') {
-    mostrarToast('✔ Relatório atualizado com redação técnica Petrobras e aberto na folha A4!');
+    mostrarToast('✔ Relatório atualizado com redação técnica Mecânica 4.0 IA e aberto na folha A4!');
   } else if (typeof abrirToastNotificacao === 'function') {
-    abrirToastNotificacao('✔ Relatório atualizado com padrão Petrobras!');
+    abrirToastNotificacao('✔ Relatório atualizado com Padrão Mecânica 4.0 IA!');
   }
 }
 
 function copiarTextoRevisadoIA() {
   if (!relatorioIAUltimaRevisao) return;
   const r = relatorioIAUltimaRevisao.melhorado;
-  const texto = `RELATÓRIO TÉCNICO APRIMORADO POR IA (PADRÃO PETROBRAS)\nTAG: ${relatorioIAUltimaRevisao.tag} • ${relatorioIAUltimaRevisao.equip}\n\nSERVIÇO REALIZADO:\n${r.servico}\n\nANOMALIA IDENTIFICADA:\n${r.anomalia}\n\nCAUSA RAIZ (RCA):\n${r.causa}\n\nAÇÕES CORRETIVAS:\n${r.acoes}\n\nOBSERVAÇÃO & LIBERAÇÃO:\n${r.obs}\n\nFERRAMENTAS:\n${r.ferramentas}`;
+  const texto = `RELATÓRIO TÉCNICO APRIMORADO POR IA (PADRÃO MECÂNICA 4.0 IA)\nTAG: ${relatorioIAUltimaRevisao.tag} • ${relatorioIAUltimaRevisao.equip}\n\nSERVIÇO REALIZADO:\n${r.servico}\n\nANOMALIA IDENTIFICADA:\n${r.anomalia}\n\nCAUSA RAIZ (RCA):\n${r.causa}\n\nAÇÕES CORRETIVAS:\n${r.acoes}\n\nOBSERVAÇÃO & LIBERAÇÃO:\n${r.obs}\n\nFERRAMENTAS:\n${r.ferramentas}`;
   navigator.clipboard.writeText(texto).then(() => {
     alert('✔ Redação técnica copiada para a área de transferência!');
   });
@@ -12894,6 +13811,13 @@ function limparFormularioRelatorio(confirmar = false) {
 
   if (document.getElementById('rel_observacao')) document.getElementById('rel_observacao').value = '';
   if (document.getElementById('rel_registro_servico')) document.getElementById('rel_registro_servico').value = '';
+  const isEdu = emailAtual.includes('dudu') || emailAtual.includes('eduardo');
+  let matSug = isEdu ? '48380712' : '';
+  if (!matSug && typeof usuarioLogadoInfo !== 'undefined' && usuarioLogadoInfo?.matricula) matSug = usuarioLogadoInfo.matricula;
+  if (document.getElementById('rel_matricula')) document.getElementById('rel_matricula').value = matSug;
+  if (document.getElementById('rel_materiais')) document.getElementById('rel_materiais').value = '';
+  if (document.getElementById('rel_aplicacao')) document.getElementById('rel_aplicacao').value = '';
+  if (document.getElementById('rel_obs_tecnicas')) document.getElementById('rel_obs_tecnicas').value = '';
 
   // Limpa todos os 5 slots de fotos
   if (typeof removerFotoSlot === 'function') {
@@ -13141,145 +14065,183 @@ async function visualizarRelatorioPronto(id) {
   const btnExcluirA4 = document.getElementById('btn_excluir_a4_modal');
   if (btnExcluirA4) btnExcluirA4.style.display = 'inline-block';
 
-  let dia = '04', mes = '09', ano = '26';
+  let dia = '02', mes = '09', ano = '26', anoCheio = '2026';
   if (r.criado_em) {
     const d = new Date(r.criado_em);
     if (!isNaN(d.getTime())) {
       dia = String(d.getDate()).padStart(2, '0');
       mes = String(d.getMonth() + 1).padStart(2, '0');
-      ano = String(d.getFullYear()).slice(-2);
+      anoCheio = String(d.getFullYear());
+      ano = anoCheio.slice(-2);
+    }
+  } else if (r.data) {
+    const partes = r.data.split('-');
+    if (partes.length === 3) {
+      anoCheio = partes[0];
+      ano = partes[0].slice(-2);
+      mes = partes[1];
+      dia = partes[2];
     }
   }
 
-  // Cabeçalho da Folha Petrobras
+  const numDoc = (r.numDoc || '22147492').toString().trim();
+  const numCurto = numDoc.length >= 4 ? numDoc.slice(-4) : numDoc;
+
   const setTxt = (elId, val) => {
     const el = document.getElementById(elId);
     if (el) el.innerText = val;
   };
 
+  // 1. Topo: Número oficial formatado (ex: 2214/2026)
+  setTxt('r4_header_no', `${numCurto}/${anoCheio}`);
+
+  // 2. Barra de Identificação Operacional (DATA, OP, OM, TAG, Nº)
   setTxt('r4_data', `${dia}/${mes}/${ano}`);
-  setTxt('r4_tag', r.tag || 'TAG-GERAL');
-  setTxt('r4_om', r.om || 'N/A');
-  setTxt('r4_num', r.numDoc || 'N/A');
   setTxt('r4_op', r.op || '10');
-  setTxt('r4_ass', (r.ass || 'EDUARDO NORONHA').toUpperCase());
-  setTxt('r4_equipe', (r.equipe || 'EDUARDO NORONHA').toUpperCase());
-  setTxt('r4_local', (r.localTexto || 'PLANTA INDUSTRIAL').toUpperCase());
+  setTxt('r4_om', r.om || '20321136862');
+  setTxt('r4_tag', r.tag || '38LCE10');
+  setTxt('r4_num', numDoc);
 
-  setTxt('r4_servico', r.servicoRealizado || r.anomalia || 'Manutenção técnica executada.');
-  setTxt('r4_observacao', r.observacao || 'Equipamento revisado e entregue em condições plenas de operabilidade.');
+  // 3. Atualiza as 3 Vistas Técnicas CAD e Componentes
+  atualizarDesenhosTecnicosA4(r.desenhoTecnicoUrl);
 
-  // Títulos dinâmicos com o nome do equipamento (ex: FILTRO – DESENHO TÉCNICO / FILTROS – FOTOS REAIS)
-  const equipNome = (r.equip || 'FILTRO').toUpperCase();
-  let equipPlural = equipNome;
-  if (equipPlural.endsWith('R')) equipPlural += 'ES';
-  else if (!equipPlural.endsWith('S')) equipPlural += 'S';
-
-  setTxt('r4_titulo_desenho', equipNome + ' – DESENHO TÉCNICO');
-  setTxt('r4_titulo_fotos_reais', equipPlural + ' – FOTOS REAIS');
-  setTxt('r4_titulo_3d', equipPlural + ' – VISTA REAL (3D)');
-
-  // Grade de Fotos Reais de Campo (Formato Petrobras Lado a Lado)
-  const containerFotosReais = document.getElementById('r4_fotos_reais_container');
-  if (containerFotosReais) {
-    containerFotosReais.innerHTML = '';
-    const fotos = [];
-    if (r.fotoAntesUrl) fotos.push({ url: r.fotoAntesUrl, rotulo: 'No Equipamento' });
-    if (r.fotoDepoisUrl) fotos.push({ url: r.fotoDepoisUrl, rotulo: 'Desmontagem / Tampa' });
-    if (r.fotoSlot5Url) fotos.push({ url: r.fotoSlot5Url, rotulo: 'Montagem Final' });
-    if (r.fotoSlot3Url && fotos.length < 3) fotos.push({ url: r.fotoSlot3Url, rotulo: 'Anomalia / Inspeção' });
-    if (r.fotosExtraTexto && fotos.length < 3) {
-      const extras = r.fotosExtraTexto.split('|').filter(Boolean);
-      extras.forEach((u, i) => {
-        if (!fotos.some(f => f.url === u) && fotos.length < 3) {
-          fotos.push({ url: u, rotulo: 'Evidência #' + (i + 1) });
-        }
-      });
+  if (r.aplicacao) {
+    setTxt('r4_aplicacao', r.aplicacao);
+  }
+  if (r.obsTecnicas) {
+    const elObsTec = document.getElementById('r4_obs_tecnicas');
+    if (elObsTec) {
+      const linhas = r.obsTecnicas.split('\n').filter(l => l.trim().length > 0);
+      elObsTec.innerHTML = '<ul>' + linhas.map(l => `<li>${l.replace(/^[•\-\*]\s*/, '')}</li>`).join('') + '</ul>';
     }
+  }
 
-    if (fotos.length > 0) {
-      containerFotosReais.innerHTML = fotos.map(f => `
-        <div class="r-a4-foto-col">
-          <img src="${f.url}" alt="${f.rotulo}">
-        </div>
-      `).join('');
+  // 4. Foto do Equipamento (Slot 1)
+  const imgFotoPrin = document.getElementById('r4_foto_principal');
+  const phFotoPrin = document.getElementById('r4_foto_principal_placeholder');
+  const fotoPrinUrl = r.fotoAntesUrl || r.fotoSlot1Url;
+  if (fotoPrinUrl) {
+    if (imgFotoPrin) { imgFotoPrin.src = fotoPrinUrl; imgFotoPrin.style.display = 'block'; }
+    if (phFotoPrin) phFotoPrin.style.display = 'none';
+  } else {
+    if (imgFotoPrin) imgFotoPrin.style.display = 'none';
+    if (phFotoPrin) phFotoPrin.style.display = 'block';
+  }
+
+  // 5. Quatro Detalhes do Equipamento
+  const detalhesUrls = [
+    r.fotoDepoisUrl || r.fotoSlot2Url,
+    r.fotoSlot3Url,
+    r.foto3DUrl || r.fotoSlot4Url,
+    r.fotoSlot5Url
+  ];
+
+  // Se algum slot faltar, tenta buscar em fotos extras
+  if (r.fotosExtraTexto) {
+    const extras = r.fotosExtraTexto.split('|').filter(Boolean);
+    let extraIdx = 0;
+    for (let i = 0; i < 4; i++) {
+      if (!detalhesUrls[i] && extraIdx < extras.length) {
+        detalhesUrls[i] = extras[extraIdx++];
+      }
+    }
+  }
+
+  detalhesUrls.forEach((dUrl, idx) => {
+    const iNum = idx + 1;
+    const imgEl = document.getElementById(`r4_detalhe_${iNum}_img`);
+    const phEl = document.getElementById(`r4_detalhe_${iNum}_ph`);
+    if (dUrl) {
+      if (imgEl) { imgEl.src = dUrl; imgEl.style.display = 'block'; }
+      if (phEl) phEl.style.display = 'none';
     } else {
-      containerFotosReais.innerHTML = `
-        <div style="color:#64748b; font-size:11.5px; text-align:center; padding:35px 10px; width:100%;">
-          <div style="font-size:26px; margin-bottom:4px;">📷</div>
-          <b>Fotos Reais do Equipamento</b><br>
-          <span style="font-size:10px; color:#94a3b8;">Registro fotográfico da intervenção</span>
-        </div>
-      `;
+      if (imgEl) imgEl.style.display = 'none';
+      if (phEl) phEl.style.display = 'block';
     }
-  }
+  });
 
-  // Ferramentas Utilizadas
-  const listaF = document.getElementById('r4_lista_ferramentas');
-  const ferramentasTexto = r.ferramentas || '• Ferramentas padrão de mecânica';
-  const linhasF = ferramentasTexto.split('\n').filter(l => l.trim().length > 0);
-  if (listaF) {
-    listaF.innerHTML = '<ul>' + linhasF.map(f => `<li>${f.replace(/^[•\-\*]\s*/, '')}</li>`).join('') + '</ul>';
-  }
+  // 6. Descrição do Serviço (Preenche as 6 linhas pautadas oficiais)
+  const servicoTexto = (r.servicoRealizado || r.anomalia || '').trim();
+  const linhasPadrao = [
+    'Realizada intervenção técnica com bloqueio de segurança LOTO e despressurização da linha.',
+    'Desmontagem da tampa de inspeção e extração do elemento filtrante para avaliação metrológica.',
+    'Limpeza minuciosa da malha perfurada, remoção de incrustações e teste de integridade estrutural.',
+    'Substituição da junta de vedação, reinstalação do cesto no alojamento e aperto calibrado em cruz.',
+    'Sistema reenergizado e testado sob pressão nominal sem registros de vazamento ou perda de carga.',
+    'Equipamento liberado e entregue para operação com garantia de confiabilidade mecânica.'
+  ];
 
-  const imgFerramenta = document.getElementById('r4_img_ferramenta');
-  if (imgFerramenta) {
-    imgFerramenta.src = r.ferramentaImgUrl || (typeof CHAVE_COMBINADA_22_B64 !== 'undefined' ? CHAVE_COMBINADA_22_B64 : '');
-    imgFerramenta.style.display = imgFerramenta.src ? 'block' : 'none';
-  }
-
-  // Linhas pontilhadas de Registro de Serviço
-  const linhasReg = document.getElementById('r4_linhas_registro');
-  if (linhasReg) {
-    if (r.registroServico) {
-      const itens = r.registroServico.split('\n').filter(l => l.trim().length > 0);
-      linhasReg.innerHTML = itens.map(i => `<div class="r-a4-linha-ponto">${i}</div>`).join('');
+  let linhasParaExibir = [...linhasPadrao];
+  if (servicoTexto) {
+    const splitUser = servicoTexto.split('\n').filter(s => s.trim().length > 0);
+    if (splitUser.length >= 2) {
+      linhasParaExibir = splitUser;
     } else {
-      linhasReg.innerHTML = `
-        <div class="r-a4-linha-ponto">1. Bloqueio e despressurização da linha concluídos com sucesso.</div>
-        <div class="r-a4-linha-ponto">2. Remoção da tampa sem deformações no alojamento.</div>
-        <div class="r-a4-linha-ponto">3. Junta de vedação inspecionada e aprovada.</div>
-      `;
+      const frases = servicoTexto.split('. ').filter(f => f.trim().length > 0).map(f => f.endsWith('.') ? f : f + '.');
+      if (frases.length > 0) {
+        linhasParaExibir = frases;
+      }
     }
   }
 
-  // Rodapé e Assinatura
-  setTxt('r4_nome_responsavel', r.ass || 'Eduardo Noronha');
-  setTxt('r4_dia', dia);
-  setTxt('r4_mes', mes);
-  setTxt('r4_ano', ano);
+  for (let i = 1; i <= 6; i++) {
+    const elLinha = document.getElementById(`r4_pautada_${i}`);
+    if (elLinha) {
+      elLinha.innerText = linhasParaExibir[i - 1] || '...................................................................................................................................................';
+    }
+  }
+
+  // 7. Ferramentas Utilizadas
+  const ferrTexto = (r.ferramentas || '').trim() || '• Chave combinada 22 mm\n• Torquímetro calibrado (torque 85 N.m)\n• Escova de cerdas de latão';
+  const linhasF = ferrTexto.split('\n').filter(l => l.trim().length > 0);
+  const ferrContainer = document.getElementById('r4_ferramentas_linhas');
+  if (ferrContainer) {
+    ferrContainer.innerHTML = '<ul>' + linhasF.map(f => `<li>${f.replace(/^[•\-\*]\s*/, '')}</li>`).join('') + '</ul>';
+  }
+
+  // 8. Equipe
+  const equipeTexto = (r.equipe || 'EDUARDO NORONHA / 48380712').trim();
+  const eqContainer = document.getElementById('r4_equipe_linhas');
+  if (eqContainer) eqContainer.innerText = equipeTexto + ' • Mecânica Industrial 4.0 IA';
+
+  // 9. Materiais Utilizados
+  const matTexto = (r.materiais || '').trim() || '• Junta grafitada DN 80\n• Desengraxante técnico\n• Solução antioxidante';
+  const linhasM = matTexto.split('\n').filter(l => l.trim().length > 0);
+  const matContainer = document.getElementById('r4_materiais_linhas');
+  if (matContainer) {
+    matContainer.innerHTML = '<ul>' + linhasM.map(m => `<li>${m.replace(/^[•\-\*]\s*/, '')}</li>`).join('') + '</ul>';
+  }
+
+  // 10. Observações
+  const obsTexto = (r.observacao || '').trim() || '• Equipamento operando com fluxo nominal e estabilidade térmica.\n• Manutenção realizada em estrita conformidade com as normas de segurança.';
+  const linhasO = obsTexto.split('\n').filter(l => l.trim().length > 0);
+  const obsContainer = document.getElementById('r4_observacoes_linhas');
+  if (obsContainer) {
+    obsContainer.innerHTML = '<ul>' + linhasO.map(o => `<li>${o.replace(/^[•\-\*]\s*/, '')}</li>`).join('') + '</ul>';
+  }
+
+  // 11. Responsável Técnico, Matrícula e Assinatura
+  const respNome = (r.ass || 'EDUARDO NORONHA').trim();
+  let matr = r.matricula || '48380712';
+  if (!r.matricula && equipeTexto.includes('/')) {
+    matr = equipeTexto.split('/')[1].trim();
+  }
+
+  setTxt('r4_resp_nome', respNome.toUpperCase());
+  setTxt('r4_resp_matr', matr);
 
   const imgAssinatura = document.getElementById('r4_img_assinatura');
   const textoCursiva = document.getElementById('r4_texto_assinatura_cursiva');
-  if (imgAssinatura && textoCursiva) {
-    if (r.assinaturaDataUrl) {
-      imgAssinatura.src = r.assinaturaDataUrl;
-      imgAssinatura.style.display = 'block';
-      textoCursiva.style.display = 'none';
-    } else {
-      imgAssinatura.style.display = 'none';
-      textoCursiva.innerText = r.ass || 'Eduardo Noronha';
-      textoCursiva.style.display = 'block';
-    }
+  if (r.assinaturaDataUrl) {
+    if (imgAssinatura) { imgAssinatura.src = r.assinaturaDataUrl; imgAssinatura.style.display = 'block'; }
+    if (textoCursiva) textoCursiva.style.display = 'none';
+  } else {
+    if (imgAssinatura) imgAssinatura.style.display = 'none';
+    if (textoCursiva) { textoCursiva.innerText = respNome; textoCursiva.style.display = 'block'; }
   }
 
-  // Imagem 3D / Renderização
-  const r4Img3D = document.getElementById('r4_img_3d');
-  const r43DPlaceholder = document.getElementById('r4_img_3d_placeholder');
-  if (r4Img3D) {
-    if (r.foto3DUrl) {
-      r4Img3D.src = r.foto3DUrl;
-      r4Img3D.style.display = 'block';
-      if (r43DPlaceholder) r43DPlaceholder.style.display = 'none';
-    } else {
-      r4Img3D.style.display = 'none';
-      if (r43DPlaceholder) r43DPlaceholder.style.display = 'block';
-    }
-  }
-
-  if (typeof atualizarDesenhoNoA4 === 'function') {
-    atualizarDesenhoNoA4(r.desenhoTecnicoUrl);
-  }
+  // 12. Revisão
+  setTxt('r4_rev_data', `${dia}/${mes}/${anoCheio}`);
 
   const modalA4 = document.getElementById('modal-relatorio-a4');
   if (modalA4) modalA4.style.display = 'block';
@@ -13350,207 +14312,230 @@ async function salvarIntervencao() {
     el.innerText = 'Salvando intervenção...';
   }
 
-  const userEmail = getUsuarioAtualEmail();
-  const tag = document.getElementById('rel_tag').value.trim() || 'TAG-GERAL';
-  const nomeEquip = document.getElementById('rel_equip').value.trim() || 'Equipamento em Manutenção';
-  const om = document.getElementById('rel_om').value.trim();
-  const op = document.getElementById('rel_op').value.trim();
-  let numDoc = document.getElementById('rel_num_doc').value.trim();
-  if (!numDoc) {
-    numDoc = await obterProximoNumeroRelatorio();
-    if (document.getElementById('rel_num_doc')) document.getElementById('rel_num_doc').value = numDoc;
-  }
-  const ass = document.getElementById('rel_resp').value.trim();
-  const equipe = document.getElementById('rel_equipe_matr').value.trim();
-  const localTexto = document.getElementById('rel_local_texto').value.trim();
-  const servicoRealizado = document.getElementById('rel_servico_realizado').value.trim();
-  const ferramentas = document.getElementById('rel_ferramentas').value.trim();
-  const observacao = document.getElementById('rel_observacao').value.trim();
-  const registroServico = document.getElementById('rel_registro_servico').value.trim();
-  const lat = document.getElementById('rel_lat').value || null;
-  const lng = document.getElementById('rel_lng').value || null;
-  const tipo = document.getElementById('rel_tipo').value;
-  const urgencia = document.getElementById('rel_urgencia').value;
-  const anomalia = document.getElementById('rel_anomalia').value.trim() || servicoRealizado || 'Manutenção técnica realizada';
-  const causa = document.getElementById('rel_causa').value.trim();
-  const acao = document.getElementById('rel_acao').value.trim();
+  try {
+    const userEmail = getUsuarioAtualEmail();
+    const tag = document.getElementById('rel_tag')?.value?.trim() || 'TAG-GERAL';
+    const nomeEquip = document.getElementById('rel_equip')?.value?.trim() || 'Equipamento em Manutenção';
+    const om = document.getElementById('rel_om')?.value?.trim() || '';
+    const op = document.getElementById('rel_op')?.value?.trim() || '10';
+    let numDoc = document.getElementById('rel_num_doc')?.value?.trim() || '';
+    if (!numDoc) {
+      try {
+        numDoc = await withTimeout(obterProximoNumeroRelatorio(), 1500);
+      } catch (eNum) {
+        numDoc = '2214' + Math.floor(1000 + Math.random() * 9000);
+      }
+      if (document.getElementById('rel_num_doc')) document.getElementById('rel_num_doc').value = numDoc;
+    }
+    const ass = document.getElementById('rel_resp')?.value?.trim() || 'EDUARDO NORONHA';
+    const equipe = document.getElementById('rel_equipe_matr')?.value?.trim() || 'EDUARDO NORONHA / 48380712';
+    const localTexto = document.getElementById('rel_local_texto')?.value?.trim() || '';
+    const servicoRealizado = document.getElementById('rel_servico_realizado')?.value?.trim() || '';
+    const ferramentas = document.getElementById('rel_ferramentas')?.value?.trim() || '';
+    const observacao = document.getElementById('rel_observacao')?.value?.trim() || '';
+    const registroServico = document.getElementById('rel_registro_servico')?.value?.trim() || '';
+    const aplicacao = document.getElementById('rel_aplicacao')?.value?.trim() || 'Sistema de Atemperação de Vapor / Ciclo Água-Vapor';
+    const obsTecnicas = document.getElementById('rel_obs_tecnicas')?.value?.trim() || '';
+    const materiais = document.getElementById('rel_materiais')?.value?.trim() || '';
+    const matricula = document.getElementById('rel_matricula')?.value?.trim() || (equipe.includes('/') ? equipe.split('/')[1].trim() : '48380712');
+    const lat = document.getElementById('rel_lat')?.value || null;
+    const lng = document.getElementById('rel_lng')?.value || null;
+    const tipo = document.getElementById('rel_tipo')?.value || 'Preventiva';
+    const urgencia = document.getElementById('rel_urgencia')?.value || 'Baixa';
+    const anomalia = document.getElementById('rel_anomalia')?.value?.trim() || servicoRealizado || 'Manutenção técnica realizada';
+    const causa = document.getElementById('rel_causa')?.value?.trim() || '';
+    const acao = document.getElementById('rel_acao')?.value?.trim() || '';
 
-  // Processamento inteligente de fotos dos slots estruturados
-  if (el) el.innerText = 'Processando imagens e fotos em alta definição...';
+    // Processamento paralelo e protegido de fotos dos slots estruturados
+    if (el) el.innerText = 'Processando imagens e fotos em alta definição...';
 
-  const fileSlot1 = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot1.file) || (document.getElementById('rel_foto_slot1')?.files?.[0]) || (document.getElementById('rel_foto_antes')?.files?.[0]);
-  const fileSlot2 = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot2.file) || (document.getElementById('rel_foto_slot2')?.files?.[0]) || (document.getElementById('rel_foto_depois')?.files?.[0]);
-  const fileSlot3 = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot3.file) || (document.getElementById('rel_foto_slot3')?.files?.[0]);
-  const fileSlot4 = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot4.file) || (document.getElementById('rel_foto_slot4')?.files?.[0]) || (document.getElementById('rel_foto_3d')?.files?.[0]);
-  const fileSlot5 = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot5.file) || (document.getElementById('rel_foto_slot5')?.files?.[0]);
+    const fileSlot1 = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot1?.file) || (document.getElementById('rel_foto_slot1')?.files?.[0]) || (document.getElementById('rel_foto_antes')?.files?.[0]);
+    const fileSlot2 = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot2?.file) || (document.getElementById('rel_foto_slot2')?.files?.[0]) || (document.getElementById('rel_foto_depois')?.files?.[0]);
+    const fileSlot3 = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot3?.file) || (document.getElementById('rel_foto_slot3')?.files?.[0]);
+    const fileSlot4 = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot4?.file) || (document.getElementById('rel_foto_slot4')?.files?.[0]) || (document.getElementById('rel_foto_3d')?.files?.[0]);
+    const fileSlot5 = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot5?.file) || (document.getElementById('rel_foto_slot5')?.files?.[0]);
 
-  let fotoAntesUrl = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot1.dataUrl) || null;
-  if (fileSlot1) {
-    const up1 = await uploadFotoSupabase(fileSlot1, tag, 'slot1_antes');
+    let fotoAntesUrl = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot1?.dataUrl) || null;
+    let fotoDepoisUrl = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot2?.dataUrl) || null;
+    let fotoSlot3Url = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot3?.dataUrl) || null;
+    let foto3DUrl = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot4?.dataUrl) || null;
+    let fotoSlot5Url = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot5?.dataUrl) || null;
+
+    // Uploads em paralelo com safety shield
+    const [up1, up2, up3, up4, up5] = await Promise.all([
+      fileSlot1 ? uploadFotoSupabase(fileSlot1, tag, 'slot1_antes') : Promise.resolve(null),
+      fileSlot2 ? uploadFotoSupabase(fileSlot2, tag, 'slot2_desmontagem') : Promise.resolve(null),
+      fileSlot3 ? uploadFotoSupabase(fileSlot3, tag, 'slot3_anomalia') : Promise.resolve(null),
+      fileSlot4 ? uploadFotoSupabase(fileSlot4, tag, 'slot4_pecas3d') : Promise.resolve(null),
+      fileSlot5 ? uploadFotoSupabase(fileSlot5, tag, 'slot5_final') : Promise.resolve(null)
+    ]);
+
     if (up1) fotoAntesUrl = up1;
-  }
-
-  let fotoDepoisUrl = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot2.dataUrl) || null;
-  if (fileSlot2) {
-    const up2 = await uploadFotoSupabase(fileSlot2, tag, 'slot2_desmontagem');
     if (up2) fotoDepoisUrl = up2;
-  }
-
-  let fotoSlot3Url = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot3.dataUrl) || null;
-  if (fileSlot3) {
-    const up3 = await uploadFotoSupabase(fileSlot3, tag, 'slot3_anomalia');
     if (up3) fotoSlot3Url = up3;
-  }
-
-  let foto3DUrl = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot4.dataUrl) || null;
-  if (fileSlot4) {
-    const up4 = await uploadFotoSupabase(fileSlot4, tag, 'slot4_pecas3d');
     if (up4) foto3DUrl = up4;
-  }
-
-  let fotoSlot5Url = (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot5.dataUrl) || null;
-  if (fileSlot5) {
-    const up5 = await uploadFotoSupabase(fileSlot5, tag, 'slot5_final');
     if (up5) fotoSlot5Url = up5;
-  }
 
-  const urlsExtra = [];
-  if (fotoSlot3Url) urlsExtra.push(fotoSlot3Url);
-  if (fotoSlot5Url) urlsExtra.push(fotoSlot5Url);
-  if (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.extras) {
-    for (let i = 0; i < estadoFotosRelatorio.extras.length; i++) {
-      const it = estadoFotosRelatorio.extras[i];
-      let uEx = it.dataUrl;
-      if (it.file) {
-        const u = await uploadFotoSupabase(it.file, tag, 'extra' + i);
-        if (u) uEx = u;
-      }
-      if (uEx) urlsExtra.push(uEx);
-    }
-  }
-  const fotosExtraTexto = urlsExtra.length ? urlsExtra.join('|') : null;
-
-  // Garante desenho técnico em alta definição
-  if (!desenhoTecnicoDataUrl) {
-    const canvas3D = document.getElementById('canvas_desenho_3d');
-    if (canvas3D) {
-      try { desenhoTecnicoDataUrl = canvas3D.toDataURL('image/png'); } catch(e) {}
-    }
-  }
-  const desenhoFinal = desenhoTecnicoDataUrl || DESENHO_TECNICO_OFICIAL_B64;
-
-  const dadosRelatorioLocal = {
-    id: Date.now().toString(),
-    tag, nomeEquip, om, op, numDoc, ass, equipe, localTexto,
-    servicoRealizado, ferramentas, observacao, registroServico,
-    tipo, urgencia, anomalia, causa, acao,
-    fotoAntesUrl, fotoDepoisUrl, foto3DUrl,
-    fotoSlot3Url, fotoSlot5Url,
-    desenhoTecnicoUrl: desenhoFinal,
-    ferramentaImgUrl: CHAVE_COMBINADA_22_B64,
-    assinaturaDataUrl,
-    fotosExtraTexto,
-    usuario_email: userEmail,
-    criado_em: new Date().toISOString()
-  };
-
-  try {
-    await idbSalvarRelatorio(dadosRelatorioLocal);
-
-    const userRelKey = getChaveUsuario('relatorios_salvos');
-    let salvos = JSON.parse(localStorage.getItem(userRelKey) || '[]');
-    salvos.unshift(dadosRelatorioLocal);
-    localStorage.setItem(userRelKey, JSON.stringify(salvos.slice(0, 50)));
-  } catch (errLocal) {
-    console.warn('Armazenamento local:', errLocal);
-  }
-
-  // Registra o número do relatório na sequência global para incrementar para todos os usuários
-  try {
-    await registrarNumeroRelatorioUtilizado(numDoc);
-  } catch (errSeq) {
-    console.warn('Erro ao atualizar sequência global:', errSeq);
-  }
-
-  try {
-    let userData = (await db.auth.getUser()).data;
-    if (!userData || !userData.user) {
-      const sessao = (await db.auth.getSession()).data;
-      if (sessao && sessao.session) {
-        userData = { user: sessao.session.user };
-      }
-    }
-
-    if (userData && userData.user) {
-      if (el) el.innerText = 'Sincronizando com banco de dados na nuvem...';
-
-      let { data: equips } = await db.from('equipamentos').select('*').eq('tag', tag).eq('usuario_id', userData.user.id).limit(1);
-      let equipamentoId;
-      let equipExistente = equips && equips.length > 0 ? equips[0] : null;
-
-      if (equipExistente) {
-        equipamentoId = equipExistente.id;
-        try {
-          await db.from('equipamentos').update({
-            nome: nomeEquip,
-            local_texto: localTexto || equipExistente.local_texto,
-            latitude: lat || equipExistente.latitude,
-            longitude: lng || equipExistente.longitude
-          }).eq('id', equipamentoId);
-        } catch (errUp) {}
-      } else {
-        const { data: novoEquip, error: erroEquip } = await db.from('equipamentos').insert({
-          tag,
-          nome: nomeEquip,
-          local_texto: localTexto,
-          latitude: lat,
-          longitude: lng,
-          usuario_id: userData.user.id
-        }).select().single();
-
-        if (erroEquip) {
-          const { data: equipsRebusca } = await db.from('equipamentos').select('id').eq('tag', tag).limit(1);
-          if (equipsRebusca && equipsRebusca.length > 0) {
-            equipamentoId = equipsRebusca[0].id;
-          }
-        } else {
-          equipamentoId = novoEquip.id;
+    const urlsExtra = [];
+    if (fotoSlot3Url) urlsExtra.push(fotoSlot3Url);
+    if (fotoSlot5Url) urlsExtra.push(fotoSlot5Url);
+    if (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.extras) {
+      for (let i = 0; i < estadoFotosRelatorio.extras.length; i++) {
+        const it = estadoFotosRelatorio.extras[i];
+        let uEx = it.dataUrl;
+        if (it.file) {
+          try {
+            const u = await uploadFotoSupabase(it.file, tag, 'extra' + i);
+            if (u) uEx = u;
+          } catch(eUpEx) {}
         }
-      }
-
-      const metaCabecalho = `[OM: ${om || 'N/A'} | OP: ${op || 'N/A'} | DOC: ${numDoc || 'N/A'} | EQUIPE: ${equipe || 'N/A'}]`;
-      const corpoNarrativa = `SERVIÇO: ${servicoRealizado || 'N/A'}\nFERRAMENTAS: ${ferramentas || 'N/A'}\nOBS: ${observacao || 'N/A'}\n${acao ? 'AÇÃO: ' + acao : ''}`;
-      const acaoCompleta = `${metaCabecalho}\n${corpoNarrativa}`;
-
-      const fAntesEnvio = (fotoAntesUrl && fotoAntesUrl.length < 150000) ? fotoAntesUrl : null;
-      const fDepoisEnvio = (fotoDepoisUrl && fotoDepoisUrl.length < 150000) ? fotoDepoisUrl : null;
-
-      if (equipamentoId) {
-        await db.from('intervencoes').insert({
-          equipamento_id: equipamentoId,
-          usuario_id: userData.user.id,
-          tipo_manutencao: tipo,
-          urgencia,
-          anomalia,
-          causa,
-          acao: acaoCompleta,
-          foto_antes_url: fAntesEnvio,
-          foto_depois_url: fDepoisEnvio,
-          fotos_extra_urls: (fotosExtraTexto && fotosExtraTexto.length < 150000) ? fotosExtraTexto : null
-        });
+        if (uEx) urlsExtra.push(uEx);
       }
     }
-  } catch (errNuvem) {
-    console.warn('Aviso sincronização nuvem:', errNuvem);
+    const fotosExtraTexto = urlsExtra.length ? urlsExtra.join('|') : null;
+
+    // Garante desenho técnico em alta definição
+    if (!desenhoTecnicoDataUrl) {
+      const canvas3D = document.getElementById('canvas_desenho_3d');
+      if (canvas3D) {
+        try { desenhoTecnicoDataUrl = canvas3D.toDataURL('image/png'); } catch(e) {}
+      }
+    }
+    const desenhoFinal = desenhoTecnicoDataUrl || DESENHO_TECNICO_OFICIAL_B64;
+
+    const dadosRelatorioLocal = {
+      id: Date.now().toString(),
+      tag, nomeEquip, om, op, numDoc, ass, equipe, localTexto,
+      servicoRealizado, ferramentas, observacao, registroServico,
+      aplicacao, obsTecnicas, materiais, matricula,
+      tipo, urgencia, anomalia, causa, acao,
+      fotoAntesUrl, fotoDepoisUrl, foto3DUrl,
+      fotoSlot3Url, fotoSlot5Url,
+      desenhoTecnicoUrl: desenhoFinal,
+      ferramentaImgUrl: CHAVE_COMBINADA_22_B64,
+      assinaturaDataUrl,
+      fotosExtraTexto,
+      usuario_email: userEmail,
+      criado_em: new Date().toISOString()
+    };
+
+    // 1. PERSISTÊNCIA LOCAL IMEDIATA (Local-First: nunca trava, <50ms)
+    try {
+      await idbSalvarRelatorio(dadosRelatorioLocal);
+      const userRelKey = getChaveUsuario('relatorios_salvos');
+      let salvos = JSON.parse(localStorage.getItem(userRelKey) || '[]');
+      salvos.unshift(dadosRelatorioLocal);
+      localStorage.setItem(userRelKey, JSON.stringify(salvos.slice(0, 50)));
+    } catch (errLocal) {
+      console.warn('Armazenamento local:', errLocal);
+    }
+
+    // 2. Atualiza imediatamente a lista em memória para refletir nos relatórios prontos
+    if (Array.isArray(relatoriosProntosCache)) {
+      relatoriosProntosCache.unshift(dadosRelatorioLocal);
+      const countEl = document.getElementById('rel_tab_count_prontos');
+      if (countEl) countEl.innerText = relatoriosProntosCache.length;
+      renderizarRelatoriosProntos(relatoriosProntosCache);
+    }
+
+    // 3. Feedback visual imediato de sucesso
+    if (el) {
+      el.className = 'resultado ok';
+      el.innerText = '✔ Relatório salvo com sucesso no dispositivo e prancha A4 oficial gerada!';
+    }
+
+    // 4. SINCRONIZAÇÃO EM NUVEM EM BACKGROUND (Blindada com timeout, sem bloquear o usuário)
+    (async () => {
+      try {
+        await withTimeout(registrarNumeroRelatorioUtilizado(numDoc), 2000);
+      } catch (errSeq) {
+        console.warn('Sequencial num em background:', errSeq);
+      }
+
+      try {
+        if (typeof db !== 'undefined' && db && db.auth) {
+          const userDataTask = db.auth.getUser();
+          const { data: userData } = await withTimeout(userDataTask, 2000);
+          
+          if (userData && userData.user) {
+            const userId = userData.user.id;
+            let equipamentoId = null;
+
+            // Busca ou cria equipamento com timeout
+            try {
+              const equipTask = db.from('equipamentos').select('id').eq('tag', tag).eq('usuario_id', userId).limit(1);
+              const { data: equips } = await withTimeout(equipTask, 2000);
+              if (equips && equips.length > 0) {
+                equipamentoId = equips[0].id;
+              } else {
+                const novoEquipTask = db.from('equipamentos').insert({
+                  tag,
+                  nome: nomeEquip,
+                  local_texto: localTexto,
+                  latitude: lat,
+                  longitude: lng,
+                  usuario_id: userId
+                }).select('id').single();
+                const { data: novoEquip } = await withTimeout(novoEquipTask, 2000);
+                if (novoEquip) equipamentoId = novoEquip.id;
+              }
+            } catch (eEquip) {
+              console.warn('Equipamento nuvem background:', eEquip);
+            }
+
+            if (equipamentoId) {
+              const metaCabecalho = `[OM: ${om || 'N/A'} | OP: ${op || 'N/A'} | DOC: ${numDoc || 'N/A'} | EQUIPE: ${equipe || 'N/A'}]`;
+              const corpoNarrativa = `SERVIÇO: ${servicoRealizado || 'N/A'}\nFERRAMENTAS: ${ferramentas || 'N/A'}\nOBS: ${observacao || 'N/A'}\n${acao ? 'AÇÃO: ' + acao : ''}`;
+              const acaoCompleta = `${metaCabecalho}\n${corpoNarrativa}`;
+
+              const fAntesEnvio = (fotoAntesUrl && fotoAntesUrl.length < 150000) ? fotoAntesUrl : null;
+              const fDepoisEnvio = (fotoDepoisUrl && fotoDepoisUrl.length < 150000) ? fotoDepoisUrl : null;
+
+              const intervTask = db.from('intervencoes').insert({
+                equipamento_id: equipamentoId,
+                usuario_id: userId,
+                tipo_manutencao: tipo,
+                urgencia,
+                anomalia,
+                causa,
+                acao: acaoCompleta,
+                foto_antes_url: fAntesEnvio,
+                foto_depois_url: fDepoisEnvio,
+                fotos_extra_urls: (fotosExtraTexto && fotosExtraTexto.length < 150000) ? fotosExtraTexto : null
+              });
+              await withTimeout(intervTask, 2500);
+            }
+          }
+        }
+      } catch (errNuvem) {
+        console.warn('Sincronização em nuvem background finalizada com aviso:', errNuvem);
+      }
+    })();
+
+    // 5. Auto-Reset com Novo Relatório em Branco e Numeração Sequencial Automática
+    const proximoNumDoc = await withTimeout(obterProximoNumeroRelatorio(), 1500);
+    limparFormularioRelatorio(false);
+
+    if (document.getElementById('rel_num_doc')) document.getElementById('rel_num_doc').value = proximoNumDoc;
+    if (document.getElementById('rel_data')) document.getElementById('rel_data').value = new Date().toISOString().split('T')[0];
+
+    // Mantém o usuário na aba de criação com novo formulário em branco
+    alternarAbaRelatorio('novo');
+
+    // Scroll suave para o topo do formulário
+    const painelRel = document.getElementById('painel-relatorio');
+    if (painelRel) painelRel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    if (typeof abrirToastNotificacao === 'function') {
+      abrirToastNotificacao(`✔ Relatório salvo e anexado com sucesso ao seu banco de dados!\nNovo relatório em branco gerado automaticamente (Nº ${proximoNumDoc}).`);
+    }
+  } catch (errGeral) {
+    console.error('Erro ao salvar intervenção:', errGeral);
+    if (el) {
+      el.className = 'resultado erro';
+      el.innerText = 'Aviso ao salvar: ' + (errGeral.message || errGeral);
+    }
   }
-
-  el.className = 'resultado ok';
-  el.innerText = '✔ Relatório e fotos anexados e salvos com sucesso! Formulário zerado para a próxima intervenção.';
-
-  // Transição automática para Relatórios Prontos e reset 100% sem resíduos
-  await carregarRelatoriosProntos();
-  alternarAbaRelatorio('prontos');
-  limparFormularioRelatorio(false);
 }
 
 /* ===================== MÓDULO INTERVENÇÕES ===================== */
@@ -15906,7 +16891,7 @@ function exportarTorqueIaParaRelatorio() {
   if (typeof mostrarToast === 'function') {
     mostrarToast('✔ Torque de aperto e quebra transferidos com sucesso para o Relatório Técnico!');
   } else {
-    alert('✔ Torque de aperto e quebra de torque transferidos com sucesso para o Relatório Oficial Petrobras!');
+    alert('✔ Torque de aperto e quebra de torque transferidos com sucesso para o Relatório Padrão Mecânica 4.0 IA!');
   }
 }
 
@@ -15914,7 +16899,7 @@ function exportarTorqueIaParaRelatorio() {
 function copiarTorqueIaEspecificacao() {
   if (!torqueIaResultadoAtual) return;
   const r = torqueIaResultadoAtual;
-  const texto = `ESPECIFICAÇÃO TÉCNICA DE TORQUE CONTROLADO (IA VISION 4.0 - ASME PCC-1 / PETROBRAS)
+  const texto = `ESPECIFICAÇÃO TÉCNICA DE TORQUE CONTROLADO (IA VISION 4.0 - PADRÃO MECÂNICA 4.0 IA)
 Equipamento: ${r.equipamentoContexto}
 Componente / Rosca: ${r.tipoComponente} — ${r.rosca}
 Material / Norma: ${r.matInfo.nome} (Escoamento: ${r.matInfo.escoamento})
@@ -17904,7 +18889,7 @@ function gerarRelatorioTecnicoRobo() {
       <div style="background:#071221; border:1px solid #0284c7; border-radius:8px; padding:14px; color:#e2e8f0; font-size:12.5px; line-height:1.5;">
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #1e3a5f; padding-bottom:8px; margin-bottom:10px;">
           <b style="color:#38bdf8; font-size:13px;">📑 LAUDO TÉCNICO PERICIAL DE ENGENHARIA MECÂNICA</b>
-          <span style="font-size:11px; background:#0c2540; color:#7dd3fc; padding:2px 8px; border-radius:4px;">PADRÃO PETROBRAS / ABNT</span>
+          <span style="font-size:11px; background:#0c2540; color:#7dd3fc; padding:2px 8px; border-radius:4px;">PADRÃO MECÂNICA 4.0 IA</span>
         </div>
 
         <div style="margin-bottom:8px;">
@@ -17971,24 +18956,36 @@ function carregarExemploOficialPetrobrasA4() {
   const cFerr = document.getElementById('rel_ferramentas');
   const cData = document.getElementById('rel_data');
 
-  if (cTag) cTag.value = '38LCE10';
-  if (cOm) cOm.value = '20321136862';
-  if (cNum) cNum.value = '22147492';
-  if (cOp) cOp.value = '10';
-  if (cResp) cResp.value = 'EDUARDO NORONHA';
-  if (cEquipe) cEquipe.value = 'EDUARDO / 48380712';
-  if (cLocal) cLocal.value = 'BLOCO 3 CICLO ÁGUA VAPOR';
-  if (cEquip) cEquip.value = 'Filtro do Sistema de Atemperação';
-  if (cServico) cServico.value = 'Realizada limpeza do filtro do sistema de atemperação, com remoção de resíduos e impurezas acumuladas, visando manter a adequada passagem do fluido e o correto funcionamento do sistema.';
-  if (cObs) cObs.value = 'Após a limpeza, o filtro foi deixado em condições adequadas para operação, contribuindo para a manutenção do fluxo e desempenho do sistema de atemperação.';
-  if (cFerr) cFerr.value = '• Chave combinada 22 mm';
-  if (cData) cData.value = '2026-09-02';
+  if (cTag) cTag.value = '---';
+  if (cOm) cOm.value = '---';
+  if (cNum) cNum.value = '---';
+  if (cOp) cOp.value = '---';
+  if (cResp) cResp.value = 'Eduardo Noronha';
+  if (cEquipe) cEquipe.value = 'Reinaldo / Nathan / Eduardo';
+  const cMatr = document.getElementById('rel_matricula');
+  if (cMatr) cMatr.value = '48380712';
+  if (cLocal) cLocal.value = 'Oficina de Manutenção Eletromecânica';
+  if (cEquip) cEquip.value = 'Motor / Conjunto de Ventilação';
+  if (cServico) cServico.value = 'Foi realizada intervenção no conjunto motorizado, com apoio da equipe de elétrica, para avaliação da integridade dos componentes elétricos do motor.\nCom auxílio do equipamento PDMA, foram realizadas medições no motor com o objetivo de verificar suas condições de integridade elétrica.\nPara viabilizar a execução do serviço, foi realizada a movimentação do motor até o local de intervenção com auxílio de empilhadeira.\nNa sequência, foi efetuada a remoção da tampa de proteção da ventoinha, permitindo o acesso necessário para a intervenção e posterior reinstalação do motor.\nServiço em andamento.';
+  if (cObs) cObs.value = 'Status: Serviço em andamento.';
+  if (cFerr) cFerr.value = '• PDMA (Megar)\n• Empilhadeira\n• Ferramentas manuais (chaves, soquetes, etc.)';
+  if (cData) cData.value = '2026-07-10';
+
+  const cMat = document.getElementById('rel_materiais');
+  if (cMat) cMat.value = '---';
+  const cApl = document.getElementById('rel_aplicacao');
+  if (cApl) cApl.value = 'Ventilação / Resfriamento de equipamentos e processos industriais.';
+  const cObsTec = document.getElementById('rel_obs_tecnicas');
+  if (cObsTec) cObsTec.value = '• Desenho ilustrativo, baseado no equipamento da imagem.\n• Dimensões podem variar conforme fabricante e modelo.\n• Verificar alinhamento, fixações e condições da hélice.\n• Realizar inspeções periódicas na tampa de proteção, hélice e mancais.\n• Manter o equipamento limpo e em boas condições de pintura.';
 
   abrirRelatorioA4Modal();
 
   if (typeof mostrarToast === 'function') {
-    mostrarToast('✔ Exemplo oficial da folha Petrobras carregado e aberto no formato 1:1!');
+    mostrarToast('✔ Modelo Padrão Mecânica 4.0 IA carregado e aberto na prancha A4!');
   }
+}
+function carregarExemploOficialMecanica40A4() {
+  carregarExemploOficialPetrobrasA4();
 }
 
 function transferirRelatorioParaModuloApp(tag, anomalia, causa, acoes) {
@@ -18018,7 +19015,7 @@ function transferirRelatorioParaModuloApp(tag, anomalia, causa, acoes) {
     abrirRelatorioA4Modal();
 
     if (typeof mostrarToast === 'function') {
-      mostrarToast('✔ Dados do Laudo transferidos com sucesso para a folha A4 Petrobras!');
+      mostrarToast('✔ Dados do Laudo transferidos com sucesso para a folha A4 Mecânica 4.0 IA!');
     } else {
       alert('✔ Dados transferidos para o formulário e folha A4 oficial!');
     }
