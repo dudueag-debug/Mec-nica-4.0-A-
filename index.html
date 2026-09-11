@@ -4735,13 +4735,13 @@
             <button type="button" class="button secondary" style="margin:0; padding:2px 8px; font-size:11px; background:#0f2744; border-color:#0284c7; color:#7dd3fc;" onclick="consultarHistoricoTag()">🏭 Histórico da TAG</button>
           </label>
           <div style="display:flex; gap:6px;">
-            <input type="text" id="rel_tag" placeholder="ex: 28LCE10, P-101A, V-204" style="font-weight:700; color:#38bdf8; text-transform:uppercase;" oninput="if(typeof atualizarModelo3DAutomatico==='function') atualizarModelo3DAutomatico()">
+            <input type="text" id="rel_tag" placeholder="ex: MOT-01, 28LCE10, P-101A, V-204" style="font-weight:700; color:#38bdf8; text-transform:uppercase;" oninput="if(typeof atualizarModelo3DAutomatico==='function') atualizarModelo3DAutomatico()">
             <button type="button" class="button" style="margin:0; padding:6px 10px; font-size:12px; background:#0284c7; border-color:#38bdf8;" onclick="consultarHistoricoTag()" title="Consultar intervenções anteriores desta TAG">🔍</button>
           </div>
         </div>
         <div class="field"><label>OM (Ordem de Manutenção)</label><input type="text" id="rel_om" placeholder="ex: 2032113859"></div>
         <div class="field"><label>OP (Operação)</label><input type="text" id="rel_op" placeholder="ex: 10"></div>
-        <div class="field" style="flex:1.4;"><label>Nome do equipamento</label><input type="text" id="rel_equip" placeholder="ex: Filtro do Sistema de Atemperação" oninput="if(typeof atualizarModelo3DAutomatico==='function') atualizarModelo3DAutomatico()"></div>
+        <div class="field" style="flex:1.4;"><label>Nome do equipamento</label><input type="text" id="rel_equip" placeholder="ex: Motor / Conjunto de Ventilação" oninput="if(typeof atualizarModelo3DAutomatico==='function') atualizarModelo3DAutomatico()"></div>
       </div>
       <div class="field-row">
         <div class="field"><label>ASS (Colaborador / Executante)</label><input type="text" id="rel_resp" placeholder="ex: EDUARDO NORONHA"></div>
@@ -4775,7 +4775,7 @@
           <span style="font-size:11px; color:#94a3b8; font-weight:normal;">(Otimiza redação, sugere causas e termos normatizados)</span>
         </div>
         <div class="ai-toolbar-buttons">
-          <button type="button" class="button" style="margin:0; padding:6px 12px; font-size:11.5px; background:#003366; border-color:#38bdf8;" onclick="carregarExemploOficialPetrobrasA4()" title="Carregar modelo 1:1 da folha oficial Petrobras">📋 Padrão Oficial Petrobras (Filtro)</button>
+          <button type="button" class="button" style="margin:0; padding:6px 12px; font-size:11.5px; background:#003366; border-color:#38bdf8;" onclick="carregarExemploOficialMecanica40A4()" title="Carregar modelo oficial 1:1 Padrão Mecânica 4.0 IA">📋 Padrão Oficial Mecânica 4.0 IA</button>
           <button type="button" class="button" style="margin:0; padding:6px 12px; font-size:11.5px; background:linear-gradient(135deg, #dc2626 0%, #991b1b 100%); border-color:#f87171;" onclick="abrirModalMecanicoIA()">🔴 Mecânico IA</button>
           <button type="button" class="button" style="margin:0; padding:6px 12px; font-size:11.5px; background:#0284c7; border-color:#38bdf8;" onclick="abrirModalRevisaoIA()">✨ Aprimorar com IA Técnica</button>
           <button type="button" class="button secondary" style="margin:0; padding:6px 12px; font-size:11.5px;" onclick="sugerirCausaEAcaoIA()">🧠 Sugerir Causa & Ação</button>
@@ -5042,6 +5042,7 @@
             <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
               <label style="font-size:12px; color:#94a3b8; margin:0;">Equipamento 3D:</label>
               <select id="seletor_modelo_3d" onchange="trocarModelo3DManualmente(this.value)" style="padding:4px 8px; font-size:12px; border-radius:6px; background:#0f2744; border:1px solid #38bdf8; color:#fff;">
+                <option value="motor_ventilador" selected>Motor com Conjunto de Ventilação (Hélice Axial 8 Pás)</option>
                 <option value="filtro_cilindrico">Filtro Cilíndrico com Cotas (Oficial 263mm Ø70mm)</option>
                 <option value="valvula_gaveta">Válvula Gaveta API 600 (Haste Ascendente & Volante)</option>
                 <option value="valvula_globo">Válvula Globo ASME B16.34 (Sede Plana & Obturador)</option>
@@ -5217,19 +5218,19 @@
         </div>
         <div class="r-a4-ident-cell">
           <span class="r-a4-ident-lbl">OP:</span>
-          <span class="r-a4-ident-val" id="r4_op">10</span>
+          <span class="r-a4-ident-val" id="r4_op">---</span>
         </div>
         <div class="r-a4-ident-cell">
           <span class="r-a4-ident-lbl">OM:</span>
-          <span class="r-a4-ident-val" id="r4_om">20321136862</span>
+          <span class="r-a4-ident-val" id="r4_om">---</span>
         </div>
         <div class="r-a4-ident-cell">
           <span class="r-a4-ident-lbl">TAG:</span>
-          <span class="r-a4-ident-val" id="r4_tag">38LCE10</span>
+          <span class="r-a4-ident-val" id="r4_tag">---</span>
         </div>
         <div class="r-a4-ident-cell">
           <span class="r-a4-ident-lbl">Nº:</span>
-          <span class="r-a4-ident-val" id="r4_num">22147492</span>
+          <span class="r-a4-ident-val" id="r4_num">---</span>
         </div>
         <div class="r-a4-ident-cell" style="padding:0; border:none; display:flex; align-items:center; justify-content:center;">
           <div id="r4_status_badge" class="r-a4-status-badge em-andamento">/// ⚙️ SERVIÇO EM ANDAMENTO ///</div>
@@ -5274,20 +5275,20 @@
         <div class="r-a4-cad-info-col">
           <div class="r-a4-sub-header">PRINCIPAIS COMPONENTES</div>
           <div class="r-a4-componentes-list" id="r4_lista_componentes">
-            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">1</span><span class="r-a4-comp-txt" id="r4_comp_1">Alça de Içamento (Inox)</span></div>
-            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">2</span><span class="r-a4-comp-txt" id="r4_comp_2">Anel Superior / Flange</span></div>
-            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">3</span><span class="r-a4-comp-txt" id="r4_comp_3">Corpo Perfurado (AISI 316L)</span></div>
-            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">4</span><span class="r-a4-comp-txt" id="r4_comp_4">Malha Filtrante Interna</span></div>
-            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">5</span><span class="r-a4-comp-txt" id="r4_comp_5">Fundo Cônico Soldado</span></div>
-            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">6</span><span class="r-a4-comp-txt" id="r4_comp_6">Cordão de Solda TIG</span></div>
-            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">7</span><span class="r-a4-comp-txt" id="r4_comp_7">Junta de Vedação Plana</span></div>
-            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">8</span><span class="r-a4-comp-txt" id="r4_comp_8">Trava Guia Anti-Giro</span></div>
+            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">1</span><span class="r-a4-comp-txt" id="r4_comp_1">Tampa de proteção da ventoinha</span></div>
+            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">2</span><span class="r-a4-comp-txt" id="r4_comp_2">Motor elétrico trifásico</span></div>
+            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">3</span><span class="r-a4-comp-txt" id="r4_comp_3">Olhal de içamento forjado</span></div>
+            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">4</span><span class="r-a4-comp-txt" id="r4_comp_4">Eixo do motor (acoplamento direto)</span></div>
+            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">5</span><span class="r-a4-comp-txt" id="r4_comp_5">Hélice / Impelidor axial (8 pás)</span></div>
+            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">6</span><span class="r-a4-comp-txt" id="r4_comp_6">Base de fixação / Calços</span></div>
+            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">7</span><span class="r-a4-comp-txt" id="r4_comp_7">Caixa de ligação / Bornes</span></div>
+            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">8</span><span class="r-a4-comp-txt" id="r4_comp_8">Chaveta de travamento do eixo</span></div>
           </div>
 
           <div class="r-a4-aplicacao-box">
             <div class="r-a4-sub-header">APLICAÇÃO</div>
             <div class="r-a4-aplicacao-content" id="r4_aplicacao">
-              Sistema de Atemperação de Vapor / Linha de Água de Alimentação de Alta Pressão.
+              Ventilação / Resfriamento de equipamentos e processos industriais.
             </div>
           </div>
 
@@ -5295,10 +5296,11 @@
             <div class="r-a4-sub-header">OBSERVAÇÕES TÉCNICAS</div>
             <div class="r-a4-obs-tecnicas-content" id="r4_obs_tecnicas">
               <ul>
-                <li>Fabricado em Aço Inox AISI 316L resistente à corrosão térmica.</li>
-                <li>Tolerâncias dimensionais conforme norma ISO 2768-m.</li>
-                <li>Cotas nominais: H=263 mm, Diâmetro externo Ø=70 mm.</li>
-                <li>Ensaio de estanqueidade e integridade mecânica 100% aprovado.</li>
+                <li>Desenho ilustrativo, baseado no equipamento da imagem.</li>
+                <li>Dimensões podem variar conforme fabricante e modelo.</li>
+                <li>Verificar alinhamento, fixações e condições da hélice.</li>
+                <li>Realizar inspeções periódicas na tampa de proteção, hélice e mancais.</li>
+                <li>Manter o equipamento limpo e em boas condições de pintura.</li>
               </ul>
             </div>
           </div>
@@ -5358,12 +5360,12 @@
         <div class="r-a4-desc-col">
           <div class="r-a4-section-header" style="font-size:9.5px; text-align:left; padding-left:10px;">DESCRIÇÃO DO SERVIÇO</div>
           <div class="r-a4-pautada-box" id="r4_servico_linhas_container">
-            <div class="r-a4-pautada-linha" id="r4_pautada_1">Realizada intervenção técnica com bloqueio de segurança LOTO e despressurização da linha.</div>
-            <div class="r-a4-pautada-linha" id="r4_pautada_2">Desmontagem da tampa de inspeção e extração do elemento filtrante para avaliação metrológica.</div>
-            <div class="r-a4-pautada-linha" id="r4_pautada_3">Limpeza minuciosa da malha perfurada, remoção de incrustações e teste de integridade estrutural.</div>
-            <div class="r-a4-pautada-linha" id="r4_pautada_4">Substituição da junta de vedação, reinstalação do cesto no alojamento e aperto calibrado em cruz.</div>
-            <div class="r-a4-pautada-linha" id="r4_pautada_5">Sistema reenergizado e testado sob pressão nominal sem registros de vazamento ou perda de carga.</div>
-            <div class="r-a4-pautada-linha" id="r4_pautada_6">Equipamento liberado e entregue para operação com garantia de confiabilidade mecânica.</div>
+            <div class="r-a4-pautada-linha" id="r4_pautada_1">Foi realizada intervenção no conjunto motorizado, com apoio da equipe de elétrica,</div>
+            <div class="r-a4-pautada-linha" id="r4_pautada_2">para avaliação da integridade dos componentes elétricos do motor.</div>
+            <div class="r-a4-pautada-linha" id="r4_pautada_3">Com auxílio do equipamento PDMA, foram realizadas medições no motor com o</div>
+            <div class="r-a4-pautada-linha" id="r4_pautada_4">objetivo de verificar suas condições de integridade elétrica.</div>
+            <div class="r-a4-pautada-linha" id="r4_pautada_5">Para viabilizar a execução do serviço, foi realizada a movimentação do motor com empilhadeira.</div>
+            <div class="r-a4-pautada-linha" id="r4_pautada_6">Remoção da tampa de proteção da ventoinha para acesso e inspeção. Serviço em andamento.</div>
           </div>
         </div>
 
@@ -5371,16 +5373,15 @@
           <div class="r-a4-section-header" style="font-size:9.5px; text-align:left; padding-left:8px;">FERRAMENTAS UTILIZADAS</div>
           <div class="r-a4-ferr-body" id="r4_ferramentas_linhas">
             <ul>
-              <li>Chave combinada 22 mm</li>
-              <li>Torquímetro calibrado (torque 85 N.m)</li>
-              <li>Escova de latão para higienização</li>
-              <li>Paquímetro digital centesimal</li>
+              <li>PDMA (Megar)</li>
+              <li>Empilhadeira industrial</li>
+              <li>Ferramentas manuais (chaves, soquetes, etc.)</li>
             </ul>
           </div>
 
           <div class="r-a4-section-header" style="font-size:9.5px; text-align:left; padding-left:8px; border-top:1.5px solid #003b71;">EQUIPE</div>
           <div class="r-a4-equipe-body" id="r4_equipe_linhas">
-            Mecânica Industrial 4.0 IA
+            Reinaldo / Nathan / Eduardo
           </div>
         </div>
       </div>
@@ -5390,21 +5391,14 @@
         <div class="r-a4-rodape-col">
           <div class="r-a4-section-header" style="font-size:9px;">MATERIAIS UTILIZADOS</div>
           <div class="r-a4-rodape-body" id="r4_materiais_linhas">
-            <ul>
-              <li>Junta grafitada DN 80</li>
-              <li>Desengraxante técnico</li>
-              <li>Solução antioxidante</li>
-            </ul>
+            ---
           </div>
         </div>
 
         <div class="r-a4-rodape-col">
           <div class="r-a4-section-header" style="font-size:9px;">OBSERVAÇÕES</div>
           <div class="r-a4-rodape-body" id="r4_observacoes_linhas">
-            <ul>
-              <li>Equipamento operando com fluxo nominal e estabilidade térmica.</li>
-              <li>Manutenção realizada em estrita conformidade com NR-12 e NR-13.</li>
-            </ul>
+            Status: Serviço em andamento.
           </div>
         </div>
 
@@ -5472,7 +5466,7 @@
       <!-- Resumo das Otimizações da IA -->
       <div style="background:rgba(2,132,199,0.12); border:1px solid #0284c7; border-radius:8px; padding:10px 14px; margin-bottom:14px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
         <div style="font-size:12.5px; color:#bae6fd;">
-          <span style="font-weight:bold; color:#ffffff;">✨ Diagnóstico da IA:</span> Texto elevado para termos normativos Petrobras (ABNT / ISO 10816 / API), correção de concordância verbal e estrutura oficial A4.
+          <span style="font-weight:bold; color:#ffffff;">✨ Diagnóstico da IA:</span> Texto elevado para termos normativos Padrão Mecânica 4.0 IA (ABNT / ISO 10816 / API), correção de concordância verbal e estrutura oficial A4.
         </div>
         <span class="rf-tag-tech" style="background:#047857; border-color:#10b981; color:#fff;">HOMOLOGADO</span>
       </div>
@@ -6108,7 +6102,7 @@
               <div><b>Escoamento (Sy):</b> <span id="torque_ia_mat_escoamento" style="color:#38bdf8;">724 MPa (105 ksi)</span></div>
               <div><b>Ruptura (Su):</b> <span id="torque_ia_mat_ruptura" style="color:#38bdf8;">860 MPa (125 ksi)</span></div>
               <div><b>Dureza:</b> <span id="torque_ia_mat_dureza" style="color:#fcd34d;">24 a 35 HRC</span></div>
-              <div style="grid-column:1 / -1;"><b>Recomendação Normativa Petrobras:</b> <span id="torque_ia_mat_aplicacao" style="color:#94a3b8;">Aplicar lubrificante pastoso à base de MoS2 nas roscas e faces de apoio das porcas para garantir repetibilidade.</span></div>
+              <div style="grid-column:1 / -1;"><b>Recomendação Normativa Mecânica 4.0 IA:</b> <span id="torque_ia_mat_aplicacao" style="color:#94a3b8;">Aplicar lubrificante pastoso à base de MoS2 nas roscas e faces de apoio das porcas para garantir repetibilidade.</span></div>
             </div>
           </div>
 
@@ -6167,7 +6161,7 @@
               </button>
             </div>
             <div style="font-size:11.5px; color:#fed7aa; margin-top:8px; line-height:1.4;">
-              ⚠️ <b>Protocolo de Segurança Petrobras:</b> NUNCA utilize prolongadores (canos de ferro) em torquímetros de estalo para desaperto. Para torques de quebra superiores a 400 N·m, utilize multiplicador de torque planetário com braço de reação devidamente calçado ou chave hidráulica com soquete de impacto forjado Cr-Mo.
+              ⚠️ <b>Protocolo de Segurança Mecânica 4.0 IA:</b> NUNCA utilize prolongadores (canos de ferro) em torquímetros de estalo para desaperto. Para torques de quebra superiores a 400 N·m, utilize multiplicador de torque planetário com braço de reação devidamente calçado ou chave hidráulica com soquete de impacto forjado Cr-Mo.
             </div>
           </div>
 
@@ -7562,25 +7556,37 @@ function renderizarFotosExtras() {
 // 3. ENGINE TÉCNICO 3D ISOMÉTRICO DO EQUIPAMENTO & UPLOAD DE DESENHO
 let modoDesenhoTecnicoAtivo = '3d'; // '3d' | 'upload' | 'blueprint'
 let desenhoTecnicoCustomDataUrl = null;
-let equipamento3DAtual = 'filtro_cilindrico';
+let equipamento3DAtual = 'motor_ventilador';
 let anguloRotacao3D = 35;
 let zoomNivel3D = 1.0;
 let modoCorte3D = 'isometrico'; // 'isometrico' | 'corte' | 'cotas'
 
 function alternarAbaDesenhoTecnico(modo) {
-  modoDesenhoTecnicoAtivo = modo;
-  ['3d', 'upload', 'blueprint'].forEach(m => {
-    const btn = document.getElementById('tab_btn_' + m) || document.getElementById('desenho_tab_btn_' + m);
-    const view = document.getElementById('aba_conteudo_' + m) || document.getElementById('desenho_view_' + m);
-    if (btn) {
-      btn.classList.toggle('active', m === modo);
-      btn.classList.toggle('ativo', m === modo);
+  try {
+    modoDesenhoTecnicoAtivo = modo;
+    ['3d', 'upload', 'blueprint'].forEach(m => {
+      const btn = document.getElementById('tab_btn_' + m) || document.getElementById('desenho_tab_btn_' + m);
+      const view = document.getElementById('aba_conteudo_' + m) || document.getElementById('desenho_view_' + m);
+      if (btn) {
+        btn.classList.toggle('active', m === modo);
+        btn.classList.toggle('ativo', m === modo);
+      }
+      if (view) view.style.display = (m === modo ? 'block' : 'none');
+    });
+    
+    if (modo === '3d') {
+      const nomeEquip = (document.getElementById('rel_equip')?.value || '').trim().toLowerCase();
+      if (nomeEquip && !nomeEquip.includes('filtro')) {
+        atualizarModelo3DAutomatico();
+      } else if (!equipamento3DAtual || equipamento3DAtual === 'filtro_cilindrico') {
+        equipamento3DAtual = 'motor_ventilador';
+        const sel = document.getElementById('seletor_modelo_3d');
+        if (sel) sel.value = 'motor_ventilador';
+      }
+      setTimeout(renderizarDesenhoTecnico3DCanvas, 30);
     }
-    if (view) view.style.display = (m === modo ? 'block' : 'none');
-  });
-  
-  if (modo === '3d') {
-    atualizarModelo3DAutomatico();
+  } catch(e) {
+    console.warn('Erro alternando aba desenho técnico:', e);
   }
 }
 
@@ -7661,6 +7667,7 @@ function renderizarDesenhoTecnico3DCanvas() {
   const canvas = document.getElementById('canvas_desenho_3d');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
+  if (!ctx) return;
   const w = canvas.width;
   const h = canvas.height;
   
@@ -7681,12 +7688,14 @@ function renderizarDesenhoTecnico3DCanvas() {
   }
   
   ctx.save();
-  ctx.translate(w / 2, h / 2 + 10);
+  ctx.translate(w / 2, h / 2 + 5);
   ctx.scale(zoomNivel3D, zoomNivel3D);
   
-  const tipo = equipamento3DAtual || 'filtro_cilindrico';
+  const tipo = (equipamento3DAtual || 'motor_ventilador').toLowerCase();
   
-  if (tipo.includes('gaveta')) {
+  if (tipo.includes('motor_ventilador') || tipo.includes('ventilador') || tipo.includes('helice') || tipo.includes('conjunto') || tipo.includes('exaustor')) {
+    desenharMotorVentilador3D(ctx);
+  } else if (tipo.includes('gaveta')) {
     desenharValvulaGaveta3D(ctx);
   } else if (tipo.includes('globo')) {
     desenharValvulaGlobo3D(ctx);
@@ -7694,18 +7703,20 @@ function renderizarDesenhoTecnico3DCanvas() {
     desenharValvulaEsfera3D(ctx);
   } else if (tipo.includes('borboleta')) {
     desenharValvulaBorboleta3D(ctx);
-  } else if (tipo.includes('retencao')) {
+  } else if (tipo.includes('retencao') || tipo.includes('retenção')) {
     desenharValvulaRetencao3D(ctx);
   } else if (tipo.includes('psv')) {
     desenharValvulaPSV3D(ctx);
   } else if (tipo.includes('centrifuga')) {
     desenharBombaCentrifuga3D(ctx);
-  } else if (tipo.includes('engrenagem') || tipo.includes('engrenagens')) {
+  } else if (tipo.includes('engrenagem')) {
     desenharBombaEngrenagens3D(ctx);
-  } else if (tipo.includes('motor')) {
+  } else if (tipo === 'motor_eletrico') {
     desenharMotorEletrico3D(ctx);
-  } else {
+  } else if (tipo.includes('filtro') || tipo.includes('atempera')) {
     desenharFiltroCilindrico3D(ctx);
+  } else {
+    desenharMotorVentilador3D(ctx);
   }
   
   ctx.restore();
@@ -7713,10 +7724,296 @@ function renderizarDesenhoTecnico3DCanvas() {
   // Rótulo técnico normatizado no canto
   ctx.fillStyle = '#38bdf8';
   ctx.font = 'bold 11px sans-serif';
-  ctx.fillText(`📐 VISTA TÉCNICA 3D: ${tipo.toUpperCase().replace(/_/g, ' ')}`, 14, 20);
+  const labelTipo = (tipo.includes('motor_ventilador') || tipo.includes('ventilador')) ? 'MOTOR COM CONJUNTO DE VENTILAÇÃO (HÉLICE AXIAL)' : tipo.toUpperCase().replace(/_/g, ' ');
+  ctx.fillText(`📐 VISTA TÉCNICA 3D: ${labelTipo}`, 14, 20);
   ctx.fillStyle = '#94a3b8';
   ctx.font = '10px sans-serif';
-  ctx.fillText(`Projeção Isométrica • Normas ABNT/ASME/API • Modo: ${modoCorte3D.toUpperCase()}`, 14, 34);
+  ctx.fillText(`Projeção Isométrica • Padrão Mecânica 4.0 IA • Modo: ${modoCorte3D.toUpperCase()}`, 14, 34);
+}
+
+/* MODELO TÉCNICO 3D OFICIAL: MOTOR COM CONJUNTO DE VENTILAÇÃO (HÉLICE AXIAL 8 PÁS) */
+function desenharMotorVentilador3D(ctx) {
+  const rad = ((anguloRotacao3D || 35) * Math.PI) / 180;
+  const isCorte = modoCorte3D === 'corte';
+  
+  // 1. BASE DE FIXAÇÃO / CALÇOS (CONCRETO / AÇO)
+  ctx.fillStyle = '#1e293b';
+  ctx.strokeStyle = '#475569';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(-110, 50);
+  ctx.lineTo(85, 50);
+  ctx.lineTo(95, 74);
+  ctx.lineTo(-120, 74);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+
+  // Parafusos de fixação na base (chumbadores)
+  ctx.fillStyle = '#94a3b8';
+  [-95, -45, 25, 70].forEach(bx => {
+    ctx.fillRect(bx - 4, 46, 8, 5);
+    ctx.beginPath();
+    ctx.arc(bx, 48, 2, 0, Math.PI * 2);
+    ctx.fillStyle = '#f8fafc';
+    ctx.fill();
+    ctx.fillStyle = '#94a3b8';
+  });
+
+  // 2. TAMPA DE PROTEÇÃO DA VENTOINHA (COWL / DEFLETOR LARANJA)
+  const gradCowl = ctx.createLinearGradient(-115, -45, -60, 45);
+  gradCowl.addColorStop(0, '#ea580c');
+  gradCowl.addColorStop(0.3, '#f97316');
+  gradCowl.addColorStop(0.7, '#fb923c');
+  gradCowl.addColorStop(1, '#9a3412');
+
+  ctx.fillStyle = gradCowl;
+  ctx.strokeStyle = '#c2410c';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(-60, -48);
+  ctx.bezierCurveTo(-100, -48, -118, -25, -118, 0);
+  ctx.bezierCurveTo(-118, 25, -100, 48, -60, 48);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+
+  // Ranhuras / Frestas de entrada de ar da tampa
+  ctx.strokeStyle = 'rgba(154, 52, 18, 0.7)';
+  ctx.lineWidth = 1.8;
+  [-110, -102, -94, -86, -78, -70].forEach(sx => {
+    ctx.beginPath();
+    ctx.moveTo(sx, -20);
+    ctx.lineTo(sx, 20);
+    ctx.stroke();
+  });
+
+  // 3. CARCAÇA DO MOTOR ELÉTRICO (AZUL INDUSTRIAL ALETADO)
+  const gradMotor = ctx.createLinearGradient(0, -48, 0, 48);
+  gradMotor.addColorStop(0, '#1d4ed8');
+  gradMotor.addColorStop(0.2, '#2563eb');
+  gradMotor.addColorStop(0.5, '#3b82f6');
+  gradMotor.addColorStop(0.85, '#1e40af');
+  gradMotor.addColorStop(1, '#0f172a');
+
+  ctx.fillStyle = gradMotor;
+  ctx.strokeStyle = '#60a5fa';
+  ctx.lineWidth = 2;
+  ctx.fillRect(-60, -48, 115, 96);
+  ctx.strokeRect(-60, -48, 115, 96);
+
+  // Aletas longitudinais de refrigeração
+  ctx.strokeStyle = 'rgba(191, 219, 254, 0.45)';
+  ctx.lineWidth = 1.8;
+  for (let y = -42; y <= 42; y += 7) {
+    ctx.beginPath();
+    ctx.moveTo(-58, y);
+    ctx.lineTo(53, y);
+    ctx.stroke();
+  }
+
+  // Flange do escudo dianteiro do motor
+  ctx.fillStyle = '#1e3a8a';
+  ctx.strokeStyle = '#93c5fd';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.ellipse(55, 0, 8, 48, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.stroke();
+
+  // 4. OLHAL DE IÇAMENTO (TOP CENTER)
+  ctx.fillStyle = '#1e40af';
+  ctx.strokeStyle = '#93c5fd';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(-5, -62, 13, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.stroke();
+  // Furo do olhal
+  ctx.fillStyle = '#060f1c';
+  ctx.beginPath();
+  ctx.arc(-5, -62, 6, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.stroke();
+  // Base do olhal
+  ctx.fillStyle = '#1e3a8a';
+  ctx.fillRect(-10, -52, 10, 5);
+
+  // 5. CAIXA DE LIGAÇÃO (TERMINAL BOX)
+  ctx.fillStyle = '#1e40af';
+  ctx.strokeStyle = '#60a5fa';
+  ctx.lineWidth = 1.5;
+  ctx.fillRect(-42, -66, 26, 18);
+  ctx.strokeRect(-42, -66, 26, 18);
+  ctx.fillStyle = '#93c5fd';
+  ctx.fillRect(-38, -68, 18, 3);
+
+  // 6. EIXO DE TRANSMISSÃO (AÇO USINADO)
+  const gradShaft = ctx.createLinearGradient(0, -12, 0, 12);
+  gradShaft.addColorStop(0, '#f1f5f9');
+  gradShaft.addColorStop(0.5, '#cbd5e1');
+  gradShaft.addColorStop(1, '#475569');
+
+  ctx.fillStyle = gradShaft;
+  ctx.strokeStyle = '#334155';
+  ctx.lineWidth = 1.5;
+  ctx.fillRect(55, -11, 48, 22);
+  ctx.strokeRect(55, -11, 48, 22);
+
+  // Rasgo de chaveta no eixo
+  ctx.fillStyle = '#1e293b';
+  ctx.fillRect(66, -11, 24, 4);
+
+  // 7. CUBO DA HÉLICE (HUB CENTRAL)
+  ctx.fillStyle = '#334155';
+  ctx.strokeStyle = '#94a3b8';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.ellipse(102, 0, 10, 24, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.stroke();
+
+  // Parafuso de fixação central
+  ctx.fillStyle = '#e2e8f0';
+  ctx.beginPath();
+  ctx.arc(102, 0, 5, 0, Math.PI * 2);
+  ctx.fill();
+
+  // 8. HÉLICE / IMPELIDOR AXIAL (8 PÁS EM LARANJA VIBRANTE)
+  const nPas = 8;
+  const raioHub = 20;
+  const raioPa = 68;
+  const centroX = 102;
+  const centroY = 0;
+
+  for (let i = 0; i < nPas; i++) {
+    const ang = (i * (2 * Math.PI / nPas)) + rad;
+    const angFim = ang + 0.35;
+    
+    const xPonta = centroX + Math.cos(ang) * 16;
+    const yPonta = centroY + Math.sin(ang) * raioPa;
+    
+    const gradBlade = ctx.createLinearGradient(centroX, centroY, xPonta, yPonta);
+    gradBlade.addColorStop(0, '#fb923c');
+    gradBlade.addColorStop(0.4, '#ea580c');
+    gradBlade.addColorStop(1, '#c2410c');
+
+    ctx.fillStyle = gradBlade;
+    ctx.strokeStyle = '#7c2d12';
+    ctx.lineWidth = 1.6;
+
+    ctx.beginPath();
+    const x1 = centroX + Math.cos(ang) * 10;
+    const y1 = centroY + Math.sin(ang) * raioHub;
+    const x2 = centroX + Math.cos(ang + 0.15) * 22;
+    const y2 = centroY + Math.sin(ang + 0.15) * raioPa;
+    const x3 = centroX + Math.cos(angFim) * 18;
+    const y3 = centroY + Math.sin(angFim) * raioPa;
+    const x4 = centroX + Math.cos(angFim - 0.1) * 8;
+    const y4 = centroY + Math.sin(angFim - 0.1) * raioHub;
+
+    ctx.moveTo(x1, y1);
+    ctx.bezierCurveTo(x1 + 6, y1, x2 - 4, y2, x2, y2);
+    ctx.lineTo(x3, y3);
+    ctx.bezierCurveTo(x3 - 4, y3, x4 + 4, y4, x4, y4);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.strokeStyle = 'rgba(254, 215, 170, 0.4)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo((x1 + x4)/2, (y1 + y4)/2);
+    ctx.lineTo((x2 + x3)/2, (y2 + y3)/2);
+    ctx.stroke();
+  }
+
+  // 9. MODO CORTE / INSPEÇÃO (SE ATIVO)
+  if (isCorte) {
+    ctx.fillStyle = 'rgba(15, 23, 42, 0.88)';
+    ctx.strokeStyle = '#ef4444';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(10, -35, 42, 70);
+    ctx.fillRect(10, -35, 42, 70);
+
+    ctx.fillStyle = '#cbd5e1';
+    ctx.fillRect(10, -8, 42, 16);
+
+    ctx.fillStyle = '#f59e0b';
+    ctx.fillRect(38, -25, 12, 14);
+    ctx.fillRect(38, 11, 12, 14);
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.arc(44, -18, 4, 0, Math.PI * 2);
+    ctx.arc(44, 18, 4, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = '#f87171';
+    ctx.font = 'bold 9px sans-serif';
+    ctx.fillText('CORTE: MANCAL DIANT.', 12, 45);
+  }
+
+  // 10. COTAS TÉCNICAS E BALÕES NORMATIZADOS
+  ctx.strokeStyle = '#facc15';
+  ctx.fillStyle = '#facc15';
+  ctx.lineWidth = 1.2;
+
+  ctx.beginPath();
+  ctx.moveTo(-118, 88);
+  ctx.lineTo(125, 88);
+  ctx.moveTo(-118, 82); ctx.lineTo(-118, 94);
+  ctx.moveTo(125, 82); ctx.lineTo(125, 94);
+  ctx.stroke();
+  ctx.font = 'bold 10px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('COMPRIMENTO TOTAL: ~620 mm', 3, 102);
+
+  ctx.beginPath();
+  ctx.moveTo(135, -raioPa);
+  ctx.lineTo(135, raioPa);
+  ctx.moveTo(130, -raioPa); ctx.lineTo(140, -raioPa);
+  ctx.moveTo(130, raioPa); ctx.lineTo(140, raioPa);
+  ctx.stroke();
+  ctx.save();
+  ctx.translate(148, 0);
+  ctx.rotate(Math.PI / 2);
+  ctx.fillText('HÉLICE: ~Ø 450 mm', 0, 0);
+  ctx.restore();
+
+  function desenharBalao3D(bx, by, num, tx, ty) {
+    ctx.beginPath();
+    ctx.moveTo(tx, ty);
+    ctx.lineTo(bx, by);
+    ctx.strokeStyle = '#38bdf8';
+    ctx.lineWidth = 1.2;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(bx, by, 9, 0, Math.PI * 2);
+    ctx.fillStyle = '#0284c7';
+    ctx.fill();
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 9px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(num.toString(), bx, by);
+  }
+
+  desenharBalao3D(-95, -75, 1, -85, -30);
+  desenharBalao3D(0, -95, 2, 0, -48);
+  desenharBalao3D(-30, -95, 3, -5, -62);
+  desenharBalao3D(75, -55, 4, 75, -11);
+  desenharBalao3D(125, -75, 5, 115, -35);
+
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'alphabetic';
+  ctx.fillStyle = '#38bdf8';
+  ctx.font = 'bold 10px sans-serif';
+  ctx.fillText('CONJUNTO MOTORIZADO • VENTILADOR AXIAL INDUSTRIAL (8 PÁS)', -115, 120);
 }
 
 // Modelos Técnicos 3D em Canvas:
@@ -8110,21 +8407,39 @@ function atualizarModelo3DAutomatico() {
   const tag = (document.getElementById('rel_tag')?.value || '').toLowerCase();
   const combo = (nomeEquip + ' ' + tag);
   
-  if (combo.includes('gaveta')) equipamento3DAtual = 'valvula_gaveta';
-  else if (combo.includes('globo')) equipamento3DAtual = 'valvula_globo';
-  else if (combo.includes('esfera')) equipamento3DAtual = 'valvula_esfera';
-  else if (combo.includes('borboleta')) equipamento3DAtual = 'valvula_borboleta';
-  else if (combo.includes('retencao') || combo.includes('retenção')) equipamento3DAtual = 'valvula_retencao';
-  else if (combo.includes('psv') || combo.includes('segurança') || combo.includes('alivio')) equipamento3DAtual = 'valvula_psv';
-  else if (combo.includes('centrifuga') || combo.includes('bomba')) equipamento3DAtual = 'bomba_centrifuga';
-  else if (combo.includes('engrenagem') || combo.includes('engrenagens')) equipamento3DAtual = 'bomba_engrenagens';
-  else if (combo.includes('motor')) equipamento3DAtual = 'motor_eletrico';
-  else equipamento3DAtual = 'filtro_cilindrico';
+  if (combo.includes('filtro') || combo.includes('atempera')) {
+    equipamento3DAtual = 'filtro_cilindrico';
+  } else if (combo.includes('gaveta')) {
+    equipamento3DAtual = 'valvula_gaveta';
+  } else if (combo.includes('globo')) {
+    equipamento3DAtual = 'valvula_globo';
+  } else if (combo.includes('esfera')) {
+    equipamento3DAtual = 'valvula_esfera';
+  } else if (combo.includes('borboleta')) {
+    equipamento3DAtual = 'valvula_borboleta';
+  } else if (combo.includes('retencao') || combo.includes('retenção')) {
+    equipamento3DAtual = 'valvula_retencao';
+  } else if (combo.includes('psv') || combo.includes('segurança') || combo.includes('alivio')) {
+    equipamento3DAtual = 'valvula_psv';
+  } else if (combo.includes('centrifuga') || combo.includes('bomba')) {
+    equipamento3DAtual = 'bomba_centrifuga';
+  } else if (combo.includes('engrenagem') || combo.includes('engrenagens')) {
+    equipamento3DAtual = 'bomba_engrenagens';
+  } else if (combo.includes('motor') || combo.includes('ventilador') || combo.includes('ventila') || combo.includes('helice') || combo.includes('hélice') || combo.includes('ventoinha') || combo.includes('exaustor') || combo.includes('conjunto')) {
+    equipamento3DAtual = 'motor_ventilador';
+  } else {
+    // Default Padrão Mecânica 4.0 IA: Motor com Conjunto de Ventilação
+    equipamento3DAtual = 'motor_ventilador';
+  }
   
   const selectEl = document.getElementById('seletor_modelo_3d');
   if (selectEl) selectEl.value = equipamento3DAtual;
   
-  renderizarDesenhoTecnico3DCanvas();
+  try {
+    renderizarDesenhoTecnico3DCanvas();
+  } catch(e) {
+    console.warn('Erro ao renderizar 3D:', e);
+  }
 }
 
 function trocarModelo3DManualmente(novoTipo) {
@@ -8138,10 +8453,23 @@ function ajustarZoom3D(delta) {
 }
 
 function aplicarDesenho3DAoRelatorio() {
-  const canvas = document.getElementById('canvas_desenho_3d');
-  if (!canvas) return;
-  desenhoTecnicoDataUrl = canvas.toDataURL('image/png');
-  alert('✔ Desenho Técnico 3D aplicado com sucesso ao relatório oficial!\nEle aparecerá na folha de impressão e visualização A4.');
+  try {
+    const canvas = document.getElementById('canvas_desenho_3d');
+    if (!canvas) return;
+    desenhoTecnicoDataUrl = canvas.toDataURL('image/png');
+    if (typeof atualizarDesenhosTecnicosA4 === 'function') {
+      atualizarDesenhosTecnicosA4(desenhoTecnicoDataUrl);
+    }
+    if (typeof mostrarToast === 'function') {
+      mostrarToast('✔ Desenho Técnico 3D aplicado ao Relatório A4!');
+    } else if (typeof abrirToastNotificacao === 'function') {
+      abrirToastNotificacao('✔ Desenho Técnico 3D aplicado ao Relatório A4!');
+    } else {
+      alert('✔ Desenho Técnico 3D aplicado com sucesso ao relatório oficial A4!');
+    }
+  } catch(err) {
+    console.error('Erro aplicando 3D:', err);
+  }
 }
 
 function girarModelo3D() {
@@ -8640,9 +8968,9 @@ function analisarFotoEquipamentoIA(slotId = 'slot1') {
     const descAtual = (document.getElementById('rel_servico_realizado')?.value || '').toLowerCase();
     const contexto = nomeArq + ' ' + tagAtual + ' ' + descAtual;
 
-    let equipDetectado = 'Filtro do Sistema de Atemperação (Cesto Perfurado)';
-    let tipoCad = 'filtro_cesto';
-    let modelo3D = 'filtro_cilindrico';
+    let equipDetectado = 'Motor / Conjunto de Ventilação';
+    let tipoCad = 'motor_ventilador';
+    let modelo3D = 'motor_ventilador';
 
     if (contexto.includes('bomba') || contexto.includes('centrifug') || contexto.includes('bc') || contexto.includes('p-')) {
       equipDetectado = 'Bomba Centrífuga API 610 (OH2)';
@@ -8656,10 +8984,14 @@ function analisarFotoEquipamentoIA(slotId = 'slot1') {
       equipDetectado = 'Válvula Gaveta API 600 / PSV';
       tipoCad = 'valvula';
       modelo3D = 'valvula_gaveta';
-    } else {
+    } else if (contexto.includes('filtro') || contexto.includes('atempera')) {
       equipDetectado = 'Filtro do Sistema de Atemperação';
       tipoCad = 'filtro_cesto';
       modelo3D = 'filtro_cilindrico';
+    } else {
+      equipDetectado = 'Motor / Conjunto de Ventilação';
+      tipoCad = 'motor_ventilador';
+      modelo3D = 'motor_ventilador';
     }
 
     const campoEquip = document.getElementById('rel_equip');
@@ -13274,9 +13606,9 @@ function abrirRelatorioA4Modal() {
   };
 
   setElText('r4_data', `${dia}/${mes}/${ano}`);
-  setElText('r4_op', (document.getElementById('rel_op')?.value || '10').trim());
-  setElText('r4_om', (document.getElementById('rel_om')?.value || '20321136862').trim());
-  setElText('r4_tag', (document.getElementById('rel_tag')?.value || '38LCE10').trim());
+  setElText('r4_op', (document.getElementById('rel_op')?.value || '---').trim());
+  setElText('r4_om', (document.getElementById('rel_om')?.value || '---').trim());
+  setElText('r4_tag', (document.getElementById('rel_tag')?.value || '---').trim());
   setElText('r4_num', numDoc);
 
   // 3. Atualiza as 3 Vistas Técnicas CAD e Componentes
@@ -13324,12 +13656,12 @@ function abrirRelatorioA4Modal() {
   // 6. Descrição do Serviço (Preenche as 6 linhas pautadas oficiais)
   const servicoTexto = (document.getElementById('rel_servico_realizado')?.value || '').trim();
   const linhasPadrão = [
-    'Realizada intervenção técnica com bloqueio de segurança LOTO e despressurização da linha.',
-    'Desmontagem da tampa de inspeção e extração do elemento filtrante para avaliação metrológica.',
-    'Limpeza minuciosa da malha perfurada, remoção de incrustações e teste de integridade estrutural.',
-    'Substituição da junta de vedação, reinstalação do cesto no alojamento e aperto calibrado em cruz.',
-    'Sistema reenergizado e testado sob pressão nominal sem registros de vazamento ou perda de carga.',
-    'Equipamento liberado e entregue para operação com garantia de confiabilidade mecânica.'
+    'Foi realizada intervenção no conjunto motorizado, com apoio da equipe de elétrica,',
+    'para avaliação da integridade dos componentes elétricos do motor.',
+    'Com auxílio do equipamento PDMA, foram realizadas medições no motor com o',
+    'objetivo de verificar suas condições de integridade elétrica.',
+    'Para viabilizar a execução do serviço, foi realizada a movimentação do motor com empilhadeira.',
+    'Remoção da tampa de proteção da ventoinha para acesso e inspeção. Serviço em andamento.'
   ];
 
   let linhasParaExibir = [...linhasPadrão];
@@ -13415,7 +13747,7 @@ function abrirRelatorioA4Modal() {
 
 /* ===================== MOTOR DO ROBÔ IA REVISOR TÉCNICO (PADRÃO PETROBRAS) ===================== */
 function abrirModalRevisaoIA() {
-  const tag = (document.getElementById('rel_tag')?.value || '38LCE10').trim();
+  const tag = (document.getElementById('rel_tag')?.value || '---').trim();
   const equip = (document.getElementById('rel_equip')?.value || 'Filtro do sistema de atemperação').trim();
   const servico = (document.getElementById('rel_servico_realizado')?.value || '').trim();
   const anomalia = (document.getElementById('rel_anomalia')?.value || '').trim();
@@ -13497,7 +13829,7 @@ function copiarTextoRevisadoIA() {
 }
 
 function aprimorarRelatorioComIAEngine(dadosEntrada) {
-  const tag = (dadosEntrada.tag || '38LCE10').trim();
+  const tag = (dadosEntrada.tag || '---').trim();
   const equip = (dadosEntrada.equip || 'Filtro do Sistema de Atemperação').trim();
   const servicoOrig = (dadosEntrada.servico || '').trim();
   const anomaliaOrig = (dadosEntrada.anomalia || '').trim();
@@ -14099,7 +14431,7 @@ async function visualizarRelatorioPronto(id) {
   setTxt('r4_data', `${dia}/${mes}/${ano}`);
   setTxt('r4_op', r.op || '10');
   setTxt('r4_om', r.om || '20321136862');
-  setTxt('r4_tag', r.tag || '38LCE10');
+  setTxt('r4_tag', r.tag || '---');
   setTxt('r4_num', numDoc);
 
   // 3. Atualiza as 3 Vistas Técnicas CAD e Componentes
@@ -18871,7 +19203,7 @@ function executarAnaliseServicoRobo() {
 
 /* ================= ABA 4: RELATÓRIO TÉCNICO IA ================= */
 function gerarRelatorioTecnicoRobo() {
-  const tag = (document.getElementById('rf_rel_tag')?.value || '38LCE10 (Filtro do Sistema de Atemperação)').trim();
+  const tag = (document.getElementById('rf_rel_tag')?.value || 'MOT-01 (Motor / Conjunto de Ventilação)').trim();
   const setor = (document.getElementById('rf_rel_setor')?.value || 'Bloco 3 Ciclo Água Vapor').trim();
   const anomalia = (document.getElementById('rf_rel_anomalia')?.value || 'Colmatação e perda de carga').trim();
   const causa = (document.getElementById('rf_rel_causa')?.value || 'Incrustações e arraste de partículas na malha filtrante').trim();
@@ -18935,11 +19267,11 @@ function preencherExemploRelatorioRobo() {
   const causa = document.getElementById('rf_rel_causa');
   const acoes = document.getElementById('rf_rel_acoes');
 
-  if (tag) tag.value = '38LCE10 (Filtro do Sistema de Atemperação)';
-  if (setor) setor.value = 'Bloco 3 Ciclo Água Vapor';
-  if (anomalia) anomalia.value = 'Colmatação por acúmulo de partículas e incrustações na malha perfurada do cesto filtrante.';
-  if (causa) causa.value = 'Arraste natural de particulado carreado pelo fluxo de vapor/água do sistema térmico.';
-  if (acoes) acoes.value = 'Limpeza do filtro do sistema de atemperação com chave combinada 22 mm, remoção de resíduos e substituição da junta de vedação.';
+  if (tag) tag.value = 'MOT-01 (Motor / Conjunto de Ventilação)';
+  if (setor) setor.value = 'Oficina de Manutenção Eletromecânica';
+  if (anomalia) anomalia.value = 'Inspeção e medições elétricas no motor com conjunto de ventilação.';
+  if (causa) causa.value = 'Avaliação periódica de isolamento elétrico e integridade mecânica.';
+  if (acoes) acoes.value = 'Intervenção no conjunto motorizado com apoio elétrico, medições com PDMA, movimentação com empilhadeira e remoção da tampa da ventoinha.';
 }
 
 function carregarExemploOficialPetrobrasA4() {
@@ -18978,6 +19310,13 @@ function carregarExemploOficialPetrobrasA4() {
   const cObsTec = document.getElementById('rel_obs_tecnicas');
   if (cObsTec) cObsTec.value = '• Desenho ilustrativo, baseado no equipamento da imagem.\n• Dimensões podem variar conforme fabricante e modelo.\n• Verificar alinhamento, fixações e condições da hélice.\n• Realizar inspeções periódicas na tampa de proteção, hélice e mancais.\n• Manter o equipamento limpo e em boas condições de pintura.';
 
+  equipamento3DAtual = 'motor_ventilador';
+  const sel3D = document.getElementById('seletor_modelo_3d');
+  if (sel3D) sel3D.value = 'motor_ventilador';
+  if (typeof renderizarDesenhoTecnico3DCanvas === 'function') {
+    try { renderizarDesenhoTecnico3DCanvas(); } catch(e) {}
+  }
+
   abrirRelatorioA4Modal();
 
   if (typeof mostrarToast === 'function') {
@@ -19000,16 +19339,16 @@ function transferirRelatorioParaModuloApp(tag, anomalia, causa, acoes) {
     const campoServ = document.getElementById('rel_servico_realizado');
     const campoObs = document.getElementById('rel_observacao');
 
-    if (campoTag) campoTag.value = tag || '38LCE10';
-    if (campoEquip && !campoEquip.value.trim()) campoEquip.value = 'Filtro do Sistema de Atemperação';
+    if (campoTag) campoTag.value = tag || '---';
+    if (campoEquip && !campoEquip.value.trim()) campoEquip.value = 'Motor / Conjunto de Ventilação';
     if (campoAnom) campoAnom.value = anomalia || '';
     if (campoCausa) campoCausa.value = causa || '';
     if (campoAcao) campoAcao.value = acoes || '';
     if (campoServ && (!campoServ.value || campoServ.value.length < 15)) {
-      campoServ.value = 'Realizada limpeza do filtro do sistema de atemperação, com remoção de resíduos e impurezas acumuladas, visando manter a adequada passagem do fluido e o correto funcionamento do sistema.';
+      campoServ.value = 'Foi realizada intervenção no conjunto motorizado, com apoio da equipe de elétrica, para avaliação da integridade dos componentes elétricos do motor.\nCom auxílio do equipamento PDMA, foram realizadas medições no motor com o objetivo de verificar suas condições de integridade elétrica.\nServiço em andamento.';
     }
     if (campoObs && (!campoObs.value || campoObs.value.length < 15)) {
-      campoObs.value = 'Após a limpeza, o filtro foi deixado em condições adequadas para operação, contribuindo para a manutenção do fluxo e desempenho do sistema de atemperação.';
+      campoObs.value = 'Status: Serviço em andamento.';
     }
 
     abrirRelatorioA4Modal();
