@@ -48,6 +48,17 @@
 
 <style>
 
+    
+    /* Resguardo total contra congelamento de toques: overlays inativos nunca capturam cliques */
+    #overlayCarregamentoRobo:not(.active),
+    .robo-apresentacao-overlay:not(.active),
+    .modal-ia-overlay:not(.active),
+    .modal-equip-overlay:not(.active),
+    .robo-modal-overlay:not(.active),
+    #modal-relatorio-a4:not(.active) {
+      pointer-events: none !important;
+    }
+
     /* Estilização clara de placeholders: nunca confundir com texto preenchido */
     input::placeholder, textarea::placeholder {
       color: #64748b !important;
@@ -3485,7 +3496,7 @@
   </div>
   <div style="display:flex; gap:8px; align-items:center;">
     <button type="button" class="button" style="background:linear-gradient(135deg, #dc2626 0%, #991b1b 100%); border-color:#f87171; color:#fff; font-weight:800; font-size:12px; padding:6px 14px; margin:0; box-shadow:0 0 12px rgba(220,38,38,0.4);" onclick="abrirModalMecanicoIA()">🔴 CONSULTAR MECÂNICO IA</button>
-    <button id="btnAcessoAdminRapido" class="button" style="background:#78350f; border-color:#d97706; font-size:12px; padding:6px 12px; margin-top:0; display:none;" onclick="abrirModulo('admin')">👑 Painel Admin</button>
+    <button  id="btnAcessoAdminRapido" class="button" style="background:#78350f; border-color:#d97706; font-size:12px; padding:6px 12px; margin-top:0; display:none;" onclick="event.stopPropagation(); abrirModulo('admin')">👑 Painel Admin</button>
     <button class="button secondary" style="margin-top:0; font-size:12px; padding:6px 14px;" onclick="fazerLogout()">Sair</button>
   </div>
 </div>
@@ -3590,7 +3601,7 @@
         <div class="icon">⚙️</div>
         <h3>Manutenção Mecânica</h3>
         <p>Tipos de manutenção, indicadores (MTBF/MTTR) e planos de lubrificação.</p>
-        <button class="button" onclick="abrirModulo('manutencao')">Acessar</button>
+        <button  class="button" onclick="event.stopPropagation(); abrirModulo('manutencao')">Acessar</button>
       </div>
 
       <div class="card" onclick="abrirModulo('bombas')">
@@ -3598,7 +3609,7 @@
         <div class="icon">💧</div>
         <h3>Bombas</h3>
         <p>Bombas centrífugas, NPSH, cavitação, recirculação e diagnóstico de falhas.</p>
-        <button class="button" onclick="abrirModulo('bombas')">Acessar</button>
+        <button  class="button" onclick="event.stopPropagation(); abrirModulo('bombas')">Acessar</button>
       </div>
 
       <div class="card" onclick="abrirModulo('motores')">
@@ -3606,7 +3617,7 @@
         <div class="icon">⚡</div>
         <h3>Motores Elétricos</h3>
         <p>Ligações estrela/triângulo, dados de placa e calculadora de corrente nominal.</p>
-        <button class="button" onclick="abrirModulo('motores')">Acessar</button>
+        <button  class="button" onclick="event.stopPropagation(); abrirModulo('motores')">Acessar</button>
       </div>
 
       <div class="card" onclick="abrirModulo('redutores')">
@@ -3614,7 +3625,7 @@
         <div class="icon">🔩</div>
         <h3>Redutores e Engrenagens</h3>
         <p>Relação de transmissão, calculadora de RPM/torque e análise de falhas.</p>
-        <button class="button" onclick="abrirModulo('redutores')">Acessar</button>
+        <button  class="button" onclick="event.stopPropagation(); abrirModulo('redutores')">Acessar</button>
       </div>
 
       <div class="card" onclick="abrirModulo('valvulas')">
@@ -3622,7 +3633,7 @@
         <div class="icon">🔧</div>
         <h3>Válvulas</h3>
         <p>Globo, gaveta, esfera, PSV/PRV e critérios de seleção.</p>
-        <button class="button" onclick="abrirModulo('valvulas')">Acessar</button>
+        <button  class="button" onclick="event.stopPropagation(); abrirModulo('valvulas')">Acessar</button>
       </div>
 
       <div class="card" onclick="abrirModulo('metrologia')">
@@ -3630,7 +3641,7 @@
         <div class="icon">📏</div>
         <h3>Metrologia</h3>
         <p>Conversor mm ↔ polegada e verificador de tolerância dimensional.</p>
-        <button class="button" onclick="abrirModulo('metrologia')">Acessar</button>
+        <button  class="button" onclick="event.stopPropagation(); abrirModulo('metrologia')">Acessar</button>
       </div>
 
       <div class="card" onclick="abrirModulo('relatorio')" style="border-color: #6366f1; background: linear-gradient(145deg, #0b1528 0%, #131b38 100%); box-shadow: 0 4px 20px rgba(99, 102, 241, 0.15);">
@@ -3641,7 +3652,7 @@
         <div class="icon" style="background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%); border-color: #818cf8;">✨📝</div>
         <h3>Relatório Técnico <span style="font-size:12.5px; color:#818cf8; font-weight:700;">(Gemini IA)</span></h3>
         <p>Elabore relatórios técnicos com IA Gemini: redação normativa automática, análise de falhas, desenho técnico 3D e folha A4 oficial.</p>
-        <button class="button" style="background:linear-gradient(135deg, #3730a3 0%, #4f46e5 100%); border-color:#818cf8;" onclick="abrirModulo('relatorio')">Acessar com Gemini</button>
+        <button  class="button" style="background:linear-gradient(135deg, #3730a3 0%, #4f46e5 100%); border-color:#818cf8;" onclick="event.stopPropagation(); abrirModulo('relatorio')">Acessar com Gemini</button>
       </div>
 
       <div class="card" style="border-color: #2b6cb0; background: linear-gradient(145deg, #142238 0%, #0e2242 100%);" onclick="abrirModulo('relatorios-prontos')">
@@ -3649,7 +3660,7 @@
         <div class="icon">📑</div>
         <h3>Relatórios Prontos & Impressão</h3>
         <p>Acesse todos os relatórios finalizados e anexados, visualize no modelo oficial A4 e envie direto para imprimir ou PDF.</p>
-        <button class="button" style="background:#10448c; border-color:#2a6ab8;" onclick="abrirModulo('relatorios-prontos')">Ver Relatórios</button>
+        <button  class="button" style="background:#10448c; border-color:#2a6ab8;" onclick="event.stopPropagation(); abrirModulo('relatorios-prontos')">Ver Relatórios</button>
       </div>
 
       <div class="card" onclick="abrirModulo('assistente')">
@@ -3657,7 +3668,7 @@
         <div class="icon">🤖</div>
         <h3>Assistente Técnico</h3>
         <p>Busca inteligente na base de conhecimento do app.</p>
-        <button class="button" onclick="abrirModulo('assistente')">Acessar</button>
+        <button  class="button" onclick="event.stopPropagation(); abrirModulo('assistente')">Acessar</button>
       </div>
 
       <div class="card" onclick="abrirModulo('intervencoes')">
@@ -3665,7 +3676,7 @@
         <div class="icon">📋</div>
         <h3>Intervenções de Equipamentos</h3>
         <p>Histórico de manutenções por equipamento, com fotos e localização.</p>
-        <button class="button" onclick="abrirModulo('intervencoes')">Acessar</button>
+        <button  class="button" onclick="event.stopPropagation(); abrirModulo('intervencoes')">Acessar</button>
       </div>
 
       <div class="card" onclick="abrirModulo('lubrificacao')">
@@ -3673,7 +3684,7 @@
         <div class="icon">🛢️</div>
         <h3>Lubrificação</h3>
         <p>Sistemas de lubrificação em redutores, bombas e motores, e tipos de rolamento.</p>
-        <button class="button" onclick="abrirModulo('lubrificacao')">Acessar</button>
+        <button  class="button" onclick="event.stopPropagation(); abrirModulo('lubrificacao')">Acessar</button>
       </div>
 
       <div class="card" onclick="abrirModulo('chaves')">
@@ -3681,7 +3692,7 @@
         <div class="icon">🔑</div>
         <h3>Chaves e Porcas</h3>
         <p>Tabela de chaves combinadas por tamanho de rosca métrica e polegada.</p>
-        <button class="button" onclick="abrirModulo('chaves')">Acessar</button>
+        <button  class="button" onclick="event.stopPropagation(); abrirModulo('chaves')">Acessar</button>
       </div>
 
       <div class="card" onclick="abrirModulo('torque')">
@@ -3689,7 +3700,7 @@
         <div class="icon">🎯</div>
         <h3>Torque Controlado</h3>
         <p>Torque controlado por equipamento, cálculo anti-erro (DIN/ISO/SAE), foto de porca/parafuso e aperto em cruz.</p>
-        <button class="button" onclick="abrirModulo('torque')">Acessar</button>
+        <button  class="button" onclick="event.stopPropagation(); abrirModulo('torque')">Acessar</button>
       </div>
 
       <div class="card" style="border-color: #0284c7;" onclick="abrirModulo('alinhamento')">
@@ -3697,7 +3708,7 @@
         <div class="icon" style="background: linear-gradient(135deg, #0369a1 0%, #0c284e 100%); border-color: #38bdf8;">📐</div>
         <h3>Alinhamento de Eixos & Laser</h3>
         <p>Desalinhamento paralelo, angular, pé manco, método reverso e tolerâncias por RPM.</p>
-        <button class="button" style="background:#0284c7; border-color:#38bdf8;" onclick="abrirModulo('alinhamento')">Acessar</button>
+        <button  class="button" style="background:#0284c7; border-color:#38bdf8;" onclick="event.stopPropagation(); abrirModulo('alinhamento')">Acessar</button>
       </div>
 
       <div class="card" style="border-color: #8b5cf6;" onclick="abrirModulo('vibracao')">
@@ -3705,7 +3716,7 @@
         <div class="icon" style="background: linear-gradient(135deg, #6d28d9 0%, #2e1065 100%); border-color: #a78bfa;">📈</div>
         <h3>Análise de Vibração & Preditiva</h3>
         <p>Severidade ISO 10816-3, decodificador de espectros FFT (1X, 2X, harmônicos, rolamentos) e acelerômetros.</p>
-        <button class="button" style="background:#7c3aed; border-color:#a78bfa;" onclick="abrirModulo('vibracao')">Acessar</button>
+        <button  class="button" style="background:#7c3aed; border-color:#a78bfa;" onclick="event.stopPropagation(); abrirModulo('vibracao')">Acessar</button>
       </div>
 
       <div class="card" onclick="abrirModulo('sobre')">
@@ -3713,7 +3724,7 @@
         <div class="icon">ℹ️</div>
         <h3>Sobre o App</h3>
         <p>Painel com todos os módulos, tecnologia usada e progresso do projeto.</p>
-        <button class="button" onclick="abrirModulo('sobre')">Acessar</button>
+        <button  class="button" onclick="event.stopPropagation(); abrirModulo('sobre')">Acessar</button>
       </div>
 
       <!-- CARD EXCLUSIVO DO ADMINISTRADOR -->
@@ -3725,7 +3736,7 @@
           <span style="font-size:10px; background:#b45309; color:#fff; padding:2px 8px; border-radius:10px; font-weight:800; letter-spacing:0.5px;">EXCLUSIVO • ADMIN</span>
         </h3>
         <p style="color:#cbd5e1;">Área restrita de controle geral: monitore mecânicos online no momento, novos cadastros em tempo real, histórico de logins e exclua contas imediatamente.</p>
-        <button class="button" style="background:#b45309; border-color:#f59e0b;" onclick="abrirModulo('admin')">👑 Gerenciar Acessos & Usuários</button>
+        <button  class="button" style="background:#b45309; border-color:#f59e0b;" onclick="event.stopPropagation(); abrirModulo('admin')">👑 Gerenciar Acessos & Usuários</button>
       </div>
 
     </section>
@@ -5756,7 +5767,7 @@
     <div class="panel-header">
       <h2>📑 Central de Relatórios Emitidos & Impressão</h2>
       <div style="display:flex; gap:8px;">
-        <button class="button" style="background:#10448c; font-size:12px;" onclick="abrirModulo('relatorio')">➕ Novo Relatório</button>
+        <button  class="button" style="background:#10448c; font-size:12px;" onclick="event.stopPropagation(); abrirModulo('relatorio')">➕ Novo Relatório</button>
         <button class="button secondary" onclick="voltarGrid()">← Voltar</button>
       </div>
     </div>
@@ -12069,6 +12080,7 @@ function criarRoboMecanico3D(canvasId, options = {}) {
     const clock = new THREE.Clock();
     function animar() {
       animId = requestAnimationFrame(animar);
+      if (canvas) canvas.__robo3d_anim_id = animId;
       const t = clock.getElapsedTime();
 
       // Hovering flutuante suave
@@ -12529,31 +12541,20 @@ function atualizarBoasVindasChatRobo(nome) {
 
 /* ===================== LOGIN / SESSÃO ===================== */
 async function verificarSessao() {
-  try {
-    if (typeof db !== 'undefined' && db && db.auth) {
-      const { data } = await db.auth.getSession();
-      if (data && data.session && data.session.user && data.session.user.email) {
-        // Acesso direto imediato sem travamentos ou telas de espera bloqueantes
-        mostrarApp(data.session.user.email);
-        return;
-      }
-    }
-  } catch (err) {
-    console.warn('Verificação de sessão remota:', err);
-  }
-
-  // Fallback: restaura sessão salva localmente diretamente
-  const emailSalvo = localStorage.getItem('mecanica_ultimo_usuario_conectado');
-  const sessaoAtiva = localStorage.getItem('mecanica_sessao_offline_ativa');
-  if (emailSalvo && sessaoAtiva === 'true') {
-    mostrarApp(emailSalvo);
-    return;
-  }
-
+  // Abertura do app: SEMPRE apresenta a tela de login solicitando senha
   const telaLogin = document.getElementById('telaLogin');
   const appContent = document.getElementById('appContent');
   if (telaLogin) telaLogin.style.display = 'flex';
   if (appContent) appContent.style.display = 'none';
+
+  // Pré-preenche o e-mail lembrado para comodidade do operador, mantendo a exigência de senha
+  try {
+    const salvo = localStorage.getItem('mecanica_ultimo_usuario_conectado');
+    const inputEmail = document.getElementById('login_email');
+    if (salvo && inputEmail && !inputEmail.value) {
+      inputEmail.value = salvo;
+    }
+  } catch(e) {}
 }
 
 function iniciarCarregamentoComRoboIA(email) {
@@ -12569,7 +12570,7 @@ function iniciarCarregamentoComRoboIA(email) {
   const emailExibicao = isAdmin ? 'Eduardo Noronha (Administrador Geral)' : `${nomeUsuario} (${email || 'Mecânico Industrial'})`;
 
   if (userTargetEl) userTargetEl.innerHTML = 'Conectando conta pessoal: <b style="color:#38bdf8;">' + emailExibicao + '</b>';
-  if (statusEl) statusEl.innerText = `Robô IA conectando conta de ${nomeUsuario}...`;
+  if (statusEl) statusEl.innerText = `Validando credenciais de ${nomeUsuario}...`;
 
   if (overlay) {
     overlay.style.display = 'flex';
@@ -12577,15 +12578,16 @@ function iniciarCarregamentoComRoboIA(email) {
     overlay.classList.add('active');
   }
 
-  // Inicializa o Robô 3D WebGL na tela de carregamento
-  iniciarRobo3DLogin();
+  // Inicializa o Robô 3D WebGL na tela de carregamento de forma segura
+  try {
+    iniciarRobo3DLogin();
+  } catch(e) {}
 
   const etapas = [
-    { p: 18, msg: `Validando credenciais e perfil pessoal de ${nomeUsuario}...` },
-    { p: 44, msg: 'Sincronizando banco de ativos industriais e TAGs...' },
-    { p: 72, msg: `Inicializando Robô Mecânico 4.0 IA para ${nomeUsuario}...` },
-    { p: 90, msg: 'Carregando módulos de diagnóstico, metrologia e tolerâncias ISO...' },
-    { p: 100, msg: `Acesso Autorizado! Olá, ${nomeUsuario}, bem-vindo à Mecânica 4.0.` }
+    { p: 20, msg: `Autenticando credenciais de ${nomeUsuario}...` },
+    { p: 48, msg: 'Sincronizando banco de ativos industriais e TAGs...' },
+    { p: 76, msg: 'Carregando módulos de engenharia, metrologia e tolerâncias ISO...' },
+    { p: 100, msg: `Acesso Autorizado! Bem-vindo à Mecânica 4.0, ${nomeUsuario}.` }
   ];
 
   let stepIdx = 0;
@@ -12596,21 +12598,30 @@ function iniciarCarregamentoComRoboIA(email) {
       if (percentEl) percentEl.innerText = etapa.p + '%';
       if (statusEl) statusEl.innerText = etapa.msg;
       stepIdx++;
-      setTimeout(avancarPasso, 100);
+      setTimeout(avancarPasso, 280);
     } else {
-      if (overlay) {
-        overlay.classList.remove('active');
-        overlay.style.display = 'none';
-        if (barFill) barFill.style.width = '0%';
-        if (percentEl) percentEl.innerText = '0%';
-      }
-      mostrarApp(email);
+      setTimeout(() => {
+        // Encerra completamente o overlay e cancela render loops em segundo plano
+        if (overlay) {
+          overlay.classList.remove('active');
+          overlay.style.display = 'none';
+          if (barFill) barFill.style.width = '0%';
+          if (percentEl) percentEl.innerText = '0%';
+        }
+        
+        // Cancela loop do canvas de login para liberar 100% de GPU e CPU
+        const canvasLogin = document.getElementById('canvasRobo3DLogin');
+        if (canvasLogin && canvasLogin.__robo3d_anim_id) {
+          try { cancelAnimationFrame(canvasLogin.__robo3d_anim_id); } catch(e) {}
+        }
+
+        mostrarApp(email);
+      }, 250);
     }
   }
 
   avancarPasso();
 }
-
 function mostrarApp(email) {
   // 1. Checa se o usuário foi excluído/bloqueado pelo administrador
   const bloqueados = JSON.parse(localStorage.getItem('mecanica_usuarios_bloqueados') || '[]');
@@ -15918,7 +15929,13 @@ function voltarListaEquip() {
 verificarSessao();
 
 /* ===================== NAVEGAÇÃO ===================== */
+let navegandoModuloTrava = false;
 function abrirModulo(id) {
+  // Trava de reentrância para eliminar travamentos por múltiplos toques rápidos
+  if (navegandoModuloTrava) return;
+  navegandoModuloTrava = true;
+  setTimeout(() => { navegandoModuloTrava = false; }, 320);
+
   const vistaGrid = document.getElementById('vistaGrid');
   if (vistaGrid) vistaGrid.classList.add('hidden');
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
@@ -15936,54 +15953,63 @@ function abrirModulo(id) {
   }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  if (id === 'intervencoes' && !equipamentoSelecionadoId) {
-    document.getElementById('vistaListaEquip').style.display = 'block';
-    document.getElementById('vistaHistoricoEquip').style.display = 'none';
-    carregarEquipamentos();
-  }
-
-  if (id === 'relatorio') {
-    alternarAbaRelatorio('novo');
-    // Garante que o formulário venha 100% zerado e pronto para novo preenchimento
-    if (!relatorioVisualizandoAtualId) {
-      limparFormularioRelatorio();
+  // Execuções específicas seguras por módulo
+  try {
+    if (id === 'intervencoes' && !equipamentoSelecionadoId) {
+      document.getElementById('vistaListaEquip').style.display = 'block';
+      document.getElementById('vistaHistoricoEquip').style.display = 'none';
+      carregarEquipamentos();
     }
-    setTimeout(() => iniciarSignaturePad(), 150);
-  }
 
-  if (id === 'relatorios-prontos') {
-    carregarRelatoriosProntos();
-  }
-
-  if (id === 'admin') {
-    if (!verificarAcessoAdmin()) {
-      voltarGrid();
-      return;
+    if (id === 'relatorio') {
+      alternarAbaRelatorio('novo');
+      if (!relatorioVisualizandoAtualId) {
+        limparFormularioRelatorio();
+      }
+      setTimeout(() => {
+        try { iniciarSignaturePad(); } catch(e) {}
+      }, 100);
     }
-    carregarDashboardAdmin();
-  }
 
-  if (id === 'torque') {
-    iniciarModuloTorque();
-  }
+    if (id === 'relatorios-prontos') {
+      carregarRelatoriosProntos();
+    }
 
-  if (id === 'supervisor') {
-    abrirModuloSupervisor();
-  }
+    if (id === 'admin') {
+      if (!verificarAcessoAdmin()) {
+        voltarGrid();
+        return;
+      }
+      carregarDashboardAdmin();
+    }
 
-  if (id === 'empresa') {
-    abrirModuloEmpresa();
-  }
+    if (id === 'torque') {
+      iniciarModuloTorque();
+    }
 
-  if (id === 'alinhamento') {
-    setTimeout(calcularAlinhamentoInterativo, 60);
-  }
+    if (id === 'supervisor') {
+      abrirModuloSupervisor();
+    }
 
-  if (id === 'vibracao') {
-    setTimeout(avaliarVibracaoInterativo, 60);
+    if (id === 'empresa') {
+      abrirModuloEmpresa();
+    }
+
+    if (id === 'alinhamento') {
+      setTimeout(() => {
+        try { calcularAlinhamentoInterativo(); } catch(e) {}
+      }, 50);
+    }
+
+    if (id === 'vibracao') {
+      setTimeout(() => {
+        try { avaliarVibracaoInterativo(); } catch(e) {}
+      }, 50);
+    }
+  } catch(errMod) {
+    console.warn('Aviso ao inicializar módulo ' + id + ':', errMod);
   }
 }
-
 function voltarGrid() {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.getElementById('vistaGrid').classList.remove('hidden');
