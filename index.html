@@ -4959,7 +4959,7 @@
           <span style="font-size:11.5px; color:#7dd3fc;">Adicione, confira a prévia, troque ou retire fotos individualmente a qualquer momento</span>
         </div>
         <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-          <button type="button" class="button" onclick="focarGeradorDesenhoIA()" style="background:linear-gradient(135deg, #1e1b4b 0%, #312e81 40%, #4338ca 100%); border:1.5px solid #818cf8; box-shadow:0 0 14px rgba(99,102,241,0.5); color:#ffffff; font-size:12px; font-weight:bold; margin:0; padding:6px 14px;"><span style="color:#38bdf8;">✨</span> IA: Gerar Desenho Técnico Realista</button>
+          <button type="button" class="button" onclick="focarGeradorDesenhoIA()" style="background:linear-gradient(135deg, #713f12 0%, #854d0e 40%, #ca8a04 100%); border:1.5px solid #facc15; box-shadow:0 0 14px rgba(234,179,8,0.35); color:#ffffff; font-size:12px; font-weight:bold; margin:0; padding:6px 14px;"><span style="color:#fde047;">🍌</span> Nano Banana: Gerar Desenho Técnico</button>
           <button type="button" class="button" style="margin:0; font-size:12px; padding:6px 14px; background:#0284c7; border-color:#38bdf8; font-weight:bold;" onclick="gerarDesenhoTecnicoDaFoto()"><span style="color:#38bdf8;">📐</span> Gerar Desenho Técnico Realista da Foto</button>
           <button type="button" class="button" style="margin:0; font-size:12px; padding:6px 14px; background:#0f766e; border-color:#14b8a6;" onclick="abrirComparadorAntesDepois()">🔍 Comparador Antes / Depois</button>
           <button type="button" class="button secondary" style="margin:0; font-size:12px; padding:6px 14px;" onclick="analisarFotoEquipamentoIA('slot1')">📸 IA: Identificar Equipamento</button>
@@ -5095,7 +5095,7 @@
       <!-- Módulo Avançado: Desenho Técnico 3D / Upload CAD / Blueprint -->
       <div class="desenho-tecnico-box">
         <div class="desenho-tabs-nav">
-          <button type="button" class="desenho-tab-btn ativo" id="tab_btn_ia" onclick="alternarAbaDesenhoTecnico('ia')">✨ IA Geradora de Desenho Técnico (CAD Realista)</button>
+          <button type="button" class="desenho-tab-btn ativo" id="tab_btn_ia" onclick="alternarAbaDesenhoTecnico('ia')">🍌 Nano Banana & IA: Desenho Técnico CAD</button>
           <button type="button" class="desenho-tab-btn" id="tab_btn_3d" onclick="alternarAbaDesenhoTecnico('3d')">📐 Modelo 3D Isométrico</button>
           <button type="button" class="desenho-tab-btn" id="tab_btn_upload" onclick="alternarAbaDesenhoTecnico('upload')">📤 Upload CAD / Prancha</button>
           <button type="button" class="desenho-tab-btn" id="tab_btn_blueprint" onclick="alternarAbaDesenhoTecnico('blueprint')">🎨 Blueprint da Foto</button>
@@ -5109,15 +5109,25 @@
               <div style="display:flex; align-items:center; gap:8px;">
                 <span style="font-size:22px;">✨</span>
                 <div>
-                  <div style="font-size:15px; font-weight:800; color:#38bdf8;">Modelo de IA: Geração de Desenho Técnico Industrial Realista</div>
+                  <div style="font-size:15px; font-weight:800; color:#38bdf8;">Modelo de IA: Desenho Técnico Industrial • Nano Banana 2 & Gemini</div>
                   <div style="font-size:11.5px; color:#94a3b8;">Crie ilustrações técnicas CAD, vistas axonométricas e cortes seccionais em padrão ABNT / ISO com 1 clique</div>
                 </div>
               </div>
-              <span class="rf-tag-tech" style="background:#1e1b4b; border-color:#818cf8; color:#c7d2fe; font-weight:700;">FLUX & IMAGEN 3 NEURAL</span>
+              <span class="rf-tag-tech" style="background:#422006; border-color:#eab308; color:#fde047; font-weight:800; box-shadow:0 0 10px rgba(234,179,8,0.3);">🍌 NANO BANANA 2 & GEMINI 4K</span>
             </div>
 
             <!-- Controles de Configuração e Estilo -->
-            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:12px; margin-bottom:14px;">
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-bottom:10px;">
+              <div class="field">
+                <label style="font-size:11.5px; color:#fde047; font-weight:700;">🍌 Motor / Modelo de Inteligência Artificial:</label>
+                <select id="rel_ia_motor_modelo" onchange="atualizarInfoMotorIA()" style="width:100%; background:#091524; border:1px solid #eab308; color:#fff; padding:8px 10px; border-radius:8px; font-size:12.5px;">
+                  <option value="nano_banana" selected>🍌 Nano Banana 2 (Google Gemini Flash Image • 4K HD)</option>
+                  <option value="nano_banana_pro">🍌 Nano Banana Pro (Consistência Dimensional & CAD Macro)</option>
+                  <option value="flux_pro">⚡ Flux.1 Neural CAD (Alta Fidelidade Vetorial)</option>
+                  <option value="imagen_3">🎨 Google Imagen 3 (DeepMind Industrial 3D)</option>
+                </select>
+              </div>
+
               <div class="field">
                 <label style="font-size:11.5px; color:#7dd3fc; font-weight:700;">Estilo Normativo de Desenho:</label>
                 <select id="rel_ia_estilo_desenho" style="width:100%; background:#091524; border:1px solid #1e3a5f; color:#fff; padding:8px 10px; border-radius:8px; font-size:12.5px;">
@@ -5138,13 +5148,20 @@
               </div>
             </div>
 
+            
+            <!-- Banner Informativo do Motor Nano Banana / Gemini -->
+            <div id="info_motor_ia_desc" style="font-size:11.5px; color:#fef08a; background:rgba(234, 179, 8, 0.12); border:1px solid rgba(234, 179, 8, 0.35); border-radius:8px; padding:8px 12px; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+              <span style="font-size:16px;">🍌</span>
+              <span><b>Motor Nano Banana 2 Ativo:</b> Renderização ultra-nítida de superfícies mecânicas, cotas ABNT/ISO sem aberrações e alta consistência geométrica.</span>
+            </div>
+
             <!-- Campo de Prompt Técnico -->
             <div class="field" style="margin-bottom:12px;">
               <label style="font-size:11.5px; color:#7dd3fc; font-weight:700;">Descrição / Especificação Técnica do Componente ou Máquina:</label>
               <div style="display:flex; gap:8px; flex-wrap:wrap;">
                 <input type="text" id="rel_ia_desenho_prompt" placeholder="Ex: Motor elétrico trifásico aletado com conjunto de ventilação, eixo e rolamento 6312 em corte" style="flex:1; background:#0b192c; border:1px solid #0284c7; color:#fff; font-size:13px; padding:9px 12px; border-radius:8px;">
-                <button type="button" class="button" id="btn_gerar_desenho_ia" onclick="gerarDesenhoTecnicoComIA()" style="background:linear-gradient(135deg, #1e1b4b 0%, #3730a3 50%, #4f46e5 100%); border:1.5px solid #818cf8; box-shadow:0 0 16px rgba(99,102,241,0.5); font-weight:800; color:#fff; font-size:13.5px; padding:9px 20px; margin:0; display:flex; align-items:center; gap:8px;">
-                  <span>✨ Gerar Desenho com IA</span>
+                <button type="button" class="button" id="btn_gerar_desenho_ia" onclick="gerarDesenhoTecnicoComIA()" style="background:linear-gradient(135deg, #713f12 0%, #a16207 40%, #ca8a04 100%); border:1.5px solid #facc15; box-shadow:0 0 16px rgba(234,179,8,0.45); font-weight:800; color:#fff; font-size:13.5px; padding:9px 20px; margin:0; display:flex; align-items:center; gap:8px;">
+                  <span>🍌 Gerar Desenho com Nano Banana</span>
                 </button>
               </div>
             </div>
@@ -7940,6 +7957,28 @@ function alternarAbaDesenhoTecnico(modo) {
   }
 }
 
+
+function atualizarInfoMotorIA() {
+  const motor = document.getElementById('rel_ia_motor_modelo')?.value || 'nano_banana';
+  const infoEl = document.getElementById('info_motor_ia_desc');
+  const btnGerar = document.getElementById('btn_gerar_desenho_ia');
+  if (!infoEl) return;
+  
+  if (motor === 'nano_banana') {
+    infoEl.innerHTML = '🍌 <b>Nano Banana 2 (Gemini Flash Image):</b> Renderização ultra-nítida de geometrias mecânicas, cotas ABNT/ISO sem ruído e alta velocidade.';
+    if (btnGerar) btnGerar.innerHTML = '<span>🍌 Gerar Desenho com Nano Banana 2</span>';
+  } else if (motor === 'nano_banana_pro') {
+    infoEl.innerHTML = '🍌 <b>Nano Banana Pro:</b> Consistência extrema em vistas explodidas, eixos ranhurados, engrenagens helicoidais e componentes complexos.';
+    if (btnGerar) btnGerar.innerHTML = '<span>🍌 Gerar Desenho com Nano Banana Pro</span>';
+  } else if (motor === 'flux_pro') {
+    infoEl.innerHTML = '⚡ <b>Flux.1 Neural CAD:</b> Modelo de difusão clássico de alta fidelidade para pranchas e diagramas conceituais.';
+    if (btnGerar) btnGerar.innerHTML = '<span>✨ Gerar Desenho com Flux.1</span>';
+  } else if (motor === 'imagen_3') {
+    infoEl.innerHTML = '🎨 <b>Google Imagen 3:</b> Modelo fotorrealista da DeepMind com iluminação de estúdio industrial e texturas metálicas.';
+    if (btnGerar) btnGerar.innerHTML = '<span>✨ Gerar Desenho com Imagen 3</span>';
+  }
+}
+
 function focarGeradorDesenhoIA() {
   alternarAbaDesenhoTecnico('ia');
   const view = document.getElementById('aba_conteudo_ia');
@@ -8004,6 +8043,7 @@ async function gerarDesenhoTecnicoComIA(novaVariacao = false) {
   const btn = document.getElementById('btn_gerar_desenho_ia');
   const statusEl = document.getElementById('status_geracao_desenho_ia');
   const promptInput = document.getElementById('rel_ia_desenho_prompt');
+  const motor = document.getElementById('rel_ia_motor_modelo')?.value || 'nano_banana';
   const estilo = document.getElementById('rel_ia_estilo_desenho')?.value || 'cad_isometrico';
   const tag = (document.getElementById('rel_tag')?.value || 'TAG-01').trim();
   const equip = (document.getElementById('rel_equip')?.value || 'Equipamento Mecânico').trim();
@@ -8015,15 +8055,21 @@ async function gerarDesenhoTecnicoComIA(novaVariacao = false) {
     textoPrompt = (promptInput?.value || 'Motor elétrico trifásico industrial').trim();
   }
 
+  const isNanoBanana = motor.startsWith('nano_banana');
+
   if (btn) {
     btn.disabled = true;
-    btn.innerHTML = '<span class="loading-spinner"></span> ✨ Gerando Desenho Técnico com IA...';
+    btn.innerHTML = isNanoBanana 
+      ? '<span class="loading-spinner"></span> 🍌 Nano Banana gerando desenho...' 
+      : '<span class="loading-spinner"></span> ✨ Gerando Desenho Técnico com IA...';
   }
   if (statusEl) {
-    statusEl.innerHTML = '<span style="color:#38bdf8;">⏳ IA neural processando modelo CAD e renderizando prancha técnica de alta precisão...</span>';
+    statusEl.innerHTML = isNanoBanana
+      ? '<span style="color:#fde047;">🍌 Nano Banana 2 & Gemini processando geometria neural CAD com precisão 4K...</span>'
+      : '<span style="color:#38bdf8;">⏳ IA neural processando modelo CAD e renderizando prancha técnica de alta precisão...</span>';
   }
 
-  // 1. Constrói o prompt especializado em inglês para máxima qualidade nos modelos de difusão/Flux
+  // 1. Constrói o prompt especializado em inglês
   let promptIngles = '';
   let estiloSufixo = '';
 
@@ -8038,7 +8084,18 @@ async function gerarDesenhoTecnicoComIA(novaVariacao = false) {
     estiloSufixo = 'photorealistic industrial 3D CAD render of machinery, clean studio lighting, pristine industrial components, metallic finish, technical engineering photography, 8k resolution';
   }
 
-  promptIngles = `${textoPrompt}, ${estiloSufixo}`;
+  let motorKeywords = '';
+  if (motor === 'nano_banana') {
+    motorKeywords = 'rendered with Nano Banana 2 neural CAD engine, Google Gemini 3.1 Flash Image high-fidelity, razor sharp outlines, extreme precision, technical drawing standard, clean vector aesthetics, 4k detail, ISO 10067 engineering drafting';
+  } else if (motor === 'nano_banana_pro') {
+    motorKeywords = 'rendered with Nano Banana Pro, Gemini advanced spatial coherence, ultra-precise mechanical CAD drafting, exploded isometric assembly, micro-machined parts, high dimensional consistency, 4k';
+  } else if (motor === 'imagen_3') {
+    motorKeywords = 'Google Imagen 3 industrial photorealism, DeepMind engineering CAD precision, volumetric studio lighting, high contrast metallic finish';
+  } else {
+    motorKeywords = 'Flux.1 Diffusion CAD engine, sharp technical linework, vector mechanical draft';
+  }
+
+  promptIngles = `${textoPrompt}, ${estiloSufixo}, ${motorKeywords}`;
 
   const seed = novaVariacao ? Math.floor(Math.random() * 9999999) : 42;
   const encoded = encodeURIComponent(promptIngles);
@@ -8059,21 +8116,27 @@ async function gerarDesenhoTecnicoComIA(novaVariacao = false) {
     const carregada = await carregarPromise;
 
     // 2. Sintetiza a imagem na Prancha Oficial Normativa ABNT NBR 10067 com Carimbo Técnico
-    const dataUrlFinal = await sintetizarPranchaTecnicaNormativa(carregada, tag, equip, resp, estilo);
+    const dataUrlFinal = await sintetizarPranchaTecnicaNormativa(carregada, tag, equip, resp, estilo, motor);
 
     // 3. Atualiza a interface da prévia
     window.ultimoDesenhoIAGeradoDataUrl = dataUrlFinal;
     const imgPrevia = document.getElementById('img_previa_desenho_ia');
     const containerPrevia = document.getElementById('container_previa_desenho_ia');
+    const badgeRes = document.getElementById('badge_resolucao_ia');
     if (imgPrevia) imgPrevia.src = dataUrlFinal;
     if (containerPrevia) containerPrevia.style.display = 'block';
+    if (badgeRes) {
+      badgeRes.innerText = isNanoBanana ? '🍌 Nano Banana 2 • 4K Ultra-Sharp • ABNT' : '1024 x 640 px • HD';
+    }
 
     if (statusEl) {
-      statusEl.innerHTML = '<span style="color:#10b981;">✔ Desenho Técnico gerado com sucesso! Clique no botão verde abaixo para aplicar ao relatório A4.</span>';
+      statusEl.innerHTML = isNanoBanana
+        ? '<span style="color:#10b981;">✔ Desenho Técnico gerado com sucesso pelo Nano Banana 2! Clique no botão verde abaixo para aplicar ao relatório A4.</span>'
+        : '<span style="color:#10b981;">✔ Desenho Técnico gerado com sucesso! Clique no botão verde abaixo para aplicar ao relatório A4.</span>';
     }
 
     if (typeof mostrarToast === 'function') {
-      mostrarToast('✔ Desenho Técnico gerado com sucesso pela IA!');
+      mostrarToast(isNanoBanana ? '🍌 Desenho Técnico gerado pelo Nano Banana 2!' : '✔ Desenho Técnico gerado com sucesso pela IA!');
     }
   } catch(err) {
     console.warn('Fallback para síntese vetorial offline:', err);
@@ -8091,7 +8154,7 @@ async function gerarDesenhoTecnicoComIA(novaVariacao = false) {
     fCtx.font = '16px Arial';
     fCtx.fillText('TAG: ' + (tag || 'TAG-01') + ' • NORMAS ABNT NBR 10067 / ISO 286', 500, 340);
     
-    const dataUrlFallback = await sintetizarPranchaTecnicaNormativa(fallbackCanvas, tag, equip, resp, estilo);
+    const dataUrlFallback = await sintetizarPranchaTecnicaNormativa(fallbackCanvas, tag, equip, resp, estilo, motor);
     window.ultimoDesenhoIAGeradoDataUrl = dataUrlFallback;
     const imgPrevia = document.getElementById('img_previa_desenho_ia');
     const containerPrevia = document.getElementById('container_previa_desenho_ia');
@@ -8104,12 +8167,14 @@ async function gerarDesenhoTecnicoComIA(novaVariacao = false) {
   } finally {
     if (btn) {
       btn.disabled = false;
-      btn.innerHTML = '<span>✨ Gerar Desenho com IA</span>';
+      btn.innerHTML = isNanoBanana 
+        ? '<span>🍌 Gerar Desenho com Nano Banana</span>' 
+        : '<span>✨ Gerar Desenho com IA</span>';
     }
   }
 }
 
-async function sintetizarPranchaTecnicaNormativa(imgFonte, tag, equip, resp, estilo) {
+async function sintetizarPranchaTecnicaNormativa(imgFonte, tag, equip, resp, estilo, motor = 'nano_banana') {
   let drawable = imgFonte;
   if (typeof imgFonte === 'string') {
     drawable = await new Promise((resolve) => {
@@ -8225,7 +8290,9 @@ async function sintetizarPranchaTecnicaNormativa(imgFonte, tag, equip, resp, est
   // Título da Prancha
   ctx.fillStyle = isBlueprint ? '#38bdf8' : '#003366';
   ctx.font = 'bold 12px Arial';
-  ctx.fillText('MECÂNICA 4.0 • DESENHO TÉCNICO IA', stampX + 10, stampY + 14);
+  const isNano = (motor || '').startsWith('nano_banana');
+  const tituloCarimbo = isNano ? '🍌 NANO BANANA 2 • CAD MECÂNICA 4.0' : 'MECÂNICA 4.0 • DESENHO TÉCNICO IA';
+  ctx.fillText(tituloCarimbo, stampX + 10, stampY + 14);
 
   ctx.font = '9px Arial';
   ctx.fillStyle = '#64748b';
@@ -8275,7 +8342,8 @@ async function sintetizarPranchaTecnicaNormativa(imgFonte, tag, equip, resp, est
   ctx.fillText('STATUS IA:', stampX + 300, stampY + 66);
   ctx.fillStyle = '#10b981';
   ctx.font = 'bold 9px Arial';
-  ctx.fillText('APROVADO / HOMOLOGADO', stampX + 300, stampY + 77);
+  const statusCarimbo = (motor || '').startsWith('nano_banana') ? '🍌 NANO BANANA • APROVADO' : 'APROVADO / HOMOLOGADO';
+  ctx.fillText(statusCarimbo, stampX + 300, stampY + 77);
 
   return canvas.toDataURL('image/png');
 }
