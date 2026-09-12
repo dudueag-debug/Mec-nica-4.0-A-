@@ -15862,9 +15862,21 @@ verificarSessao();
 
 /* ===================== NAVEGAÇÃO ===================== */
 function abrirModulo(id) {
-  document.getElementById('vistaGrid').classList.add('hidden');
+  const vistaGrid = document.getElementById('vistaGrid');
+  if (vistaGrid) vistaGrid.classList.add('hidden');
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.getElementById('painel-' + id).classList.add('active');
+
+  // Redirecionamentos de compatibilidade
+  if (id === 'dashboard') id = 'relatorio';
+  if (id === 'equipamentos') id = 'intervencoes';
+  if (id === 'relatorios') id = 'relatorios-prontos';
+
+  const painel = document.getElementById('painel-' + id);
+  if (painel) {
+    painel.classList.add('active');
+  } else {
+    console.warn('Painel não encontrado:', 'painel-' + id);
+  }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
   if (id === 'intervencoes' && !equipamentoSelecionadoId) {
