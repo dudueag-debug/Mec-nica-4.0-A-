@@ -47,6 +47,15 @@
 </script>
 
 <style>
+
+    /* Estilização clara de placeholders: nunca confundir com texto preenchido */
+    input::placeholder, textarea::placeholder {
+      color: #64748b !important;
+      opacity: 0.65 !important;
+      font-style: italic !important;
+      font-weight: 400 !important;
+    }
+
   * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
 
   body {
@@ -4763,7 +4772,7 @@
             <span style="font-size:10.5px; background:rgba(2,132,199,0.25); color:#7dd3fc; border:1px solid #0284c7; padding:2px 7px; border-radius:10px; font-weight:700;">⚡ Numeração Automática</span>
           </label>
           <div style="display:flex; gap:6px;">
-            <input type="text" id="rel_num_doc" placeholder="ex: 22155926" style="font-weight:700; color:#38bdf8; background:#0b192c; border-color:#0284c7;">
+            <input type="text" id="rel_num_doc" placeholder="Nº do relatório técnico" style="font-weight:700; color:#38bdf8; background:#0b192c; border-color:#0284c7;">
             <button type="button" class="button secondary" style="margin-top:0; padding:6px 12px; font-size:13px;" onclick="sincronizarEAtualizarNumRelatorio(true)" title="Sincronizar próximo número da sequência na nuvem">🔄</button>
           </div>
         </div>
@@ -4779,19 +4788,19 @@
             <button type="button" class="button" style="margin:0; padding:6px 10px; font-size:12px; background:#0284c7; border-color:#38bdf8;" onclick="consultarHistoricoTag()" title="Consultar intervenções anteriores desta TAG">🔍</button>
           </div>
         </div>
-        <div class="field"><label>OM (Ordem de Manutenção)</label><input type="text" id="rel_om" placeholder="ex: 2032113859"></div>
-        <div class="field"><label>OP (Operação)</label><input type="text" id="rel_op" placeholder="ex: 10"></div>
-        <div class="field" style="flex:1.4;"><label>Nome do equipamento</label><input type="text" id="rel_equip" placeholder="ex: Motor / Conjunto de Ventilação" oninput="if(typeof atualizarModelo3DAutomatico==='function') atualizarModelo3DAutomatico()"></div>
+        <div class="field"><label>OM (Ordem de Manutenção)</label><input type="text" id="rel_om" placeholder="Nº da OM (opcional)"></div>
+        <div class="field"><label>OP (Operação)</label><input type="text" id="rel_op" placeholder="Nº da OP (opcional)"></div>
+        <div class="field" style="flex:1.4;"><label>Nome do equipamento</label><input type="text" id="rel_equip" placeholder="Nome do equipamento" oninput="if(typeof atualizarModelo3DAutomatico==='function') atualizarModelo3DAutomatico()"></div>
       </div>
       <div class="field-row">
-        <div class="field"><label>ASS (Colaborador / Executante)</label><input type="text" id="rel_resp" placeholder="ex: EDUARDO NORONHA"></div>
-        <div class="field"><label>Matrícula do Responsável</label><input type="text" id="rel_matricula" placeholder="ex: 48380712"></div>
-        <div class="field"><label>Equipe / Turno</label><input type="text" id="rel_equipe_matr" placeholder="ex: EDUARDO NORONHA / 48380712"></div>
+        <div class="field"><label>ASS (Colaborador / Executante)</label><input type="text" id="rel_resp" placeholder="Responsável técnico"></div>
+        <div class="field"><label>Matrícula do Responsável</label><input type="text" id="rel_matricula" placeholder="Matrícula do responsável"></div>
+        <div class="field"><label>Equipe / Turno</label><input type="text" id="rel_equipe_matr" placeholder="Equipe / turno / participantes"></div>
       </div>
       <div class="field-row">
         <div class="field" style="min-width:100%;">
           <label>Local da instalação</label>
-          <input type="text" id="rel_local_texto" placeholder="ex: CICLO ÁGUA VAPOR BLOCO 2">
+          <input type="text" id="rel_local_texto" placeholder="Local / setor / planta">
         </div>
       </div>
       <div class="field-row">
@@ -12524,7 +12533,8 @@ async function verificarSessao() {
     if (typeof db !== 'undefined' && db && db.auth) {
       const { data } = await db.auth.getSession();
       if (data && data.session && data.session.user && data.session.user.email) {
-        iniciarCarregamentoComRoboIA(data.session.user.email);
+        // Acesso direto imediato sem travamentos ou telas de espera bloqueantes
+        mostrarApp(data.session.user.email);
         return;
       }
     }
@@ -12532,11 +12542,11 @@ async function verificarSessao() {
     console.warn('Verificação de sessão remota:', err);
   }
 
-  // Fallback: restaura sessão salva localmente exibindo tela com Robô 3D
+  // Fallback: restaura sessão salva localmente diretamente
   const emailSalvo = localStorage.getItem('mecanica_ultimo_usuario_conectado');
   const sessaoAtiva = localStorage.getItem('mecanica_sessao_offline_ativa');
   if (emailSalvo && sessaoAtiva === 'true') {
-    iniciarCarregamentoComRoboIA(emailSalvo);
+    mostrarApp(emailSalvo);
     return;
   }
 
@@ -12586,19 +12596,15 @@ function iniciarCarregamentoComRoboIA(email) {
       if (percentEl) percentEl.innerText = etapa.p + '%';
       if (statusEl) statusEl.innerText = etapa.msg;
       stepIdx++;
-      setTimeout(avancarPasso, 360);
+      setTimeout(avancarPasso, 100);
     } else {
-      setTimeout(() => {
-        if (overlay) {
-          overlay.classList.remove('active');
-          setTimeout(() => {
-            overlay.style.display = 'none';
-            if (barFill) barFill.style.width = '0%';
-            if (percentEl) percentEl.innerText = '0%';
-          }, 350);
-        }
-        mostrarApp(email);
-      }, 420);
+      if (overlay) {
+        overlay.classList.remove('active');
+        overlay.style.display = 'none';
+        if (barFill) barFill.style.width = '0%';
+        if (percentEl) percentEl.innerText = '0%';
+      }
+      mostrarApp(email);
     }
   }
 
@@ -12651,10 +12657,8 @@ function mostrarApp(email) {
   // Atualiza mensagem inicial do Robô no chat flutuante
   atualizarBoasVindasChatRobo(nomeUsuario);
 
-  // Dispara a apresentação inteligente do Robô IA que se apresenta e chama o nome do usuário
-  setTimeout(() => {
-    exibirApresentacaoRobo(emailFinal);
-  }, 450);
+  // Apresentação disponível sob demanda pelo botão flutuante, sem bloquear a tela do usuário
+  // Mantém a experiência ágil e sem congelamentos na abertura do app
 
   // 2. Registra presença do usuário na telemetria
   try {
@@ -14958,58 +14962,33 @@ function limparFormularioRelatorio(confirmar = false) {
     }
   }
 
-  const hoje = new Date().toISOString().split('T')[0];
-  if (document.getElementById('rel_data')) document.getElementById('rel_data').value = hoje;
-  if (document.getElementById('rel_tag')) document.getElementById('rel_tag').value = '';
-  
-  // Preenche automaticamente o próximo número de relatório sequencial
-  sincronizarEAtualizarNumRelatorio(false);
+  // Zera todos os campos do formulário para virem totalmente em branco (zerado sem nada)
+  const camposZerar = [
+    'rel_data', 'rel_num_doc', 'rel_tag', 'rel_om', 'rel_op', 'rel_equip',
+    'rel_resp', 'rel_matricula', 'rel_equipe_matr', 'rel_local_texto',
+    'rel_lat', 'rel_lng', 'rel_servico_realizado', 'rel_anomalia',
+    'rel_causa', 'rel_acao', 'rel_ferramentas', 'rel_observacao',
+    'rel_registro_servico', 'rel_materiais', 'rel_aplicacao', 'rel_obs_tecnicas',
+    'busca_ferramentas_input'
+  ];
 
-  if (document.getElementById('rel_om')) document.getElementById('rel_om').value = '';
-  if (document.getElementById('rel_op')) document.getElementById('rel_op').value = '10';
-  if (document.getElementById('rel_equip')) document.getElementById('rel_equip').value = '';
+  camposZerar.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
 
-  const emailAtual = getUsuarioAtualEmail();
-  let nomeSugestao = 'Mecânico';
-  try {
-    const users = JSON.parse(localStorage.getItem('mecanica_usuarios_registrados') || '[]');
-    const u = users.find(x => x.email.toLowerCase() === emailAtual.toLowerCase());
-    if (u && u.nome) nomeSugestao = u.nome;
-    else if (emailAtual.includes('dudu') || emailAtual.includes('eduardo')) nomeSugestao = 'EDUARDO NORONHA';
-    else nomeSugestao = emailAtual.split('@')[0].toUpperCase();
-  } catch(e) {}
+  const selTipo = document.getElementById('rel_tipo');
+  if (selTipo) selTipo.selectedIndex = 0;
+  const selUrg = document.getElementById('rel_urgencia');
+  if (selUrg) selUrg.selectedIndex = 0;
 
-  if (document.getElementById('rel_resp')) document.getElementById('rel_resp').value = nomeSugestao;
-  if (document.getElementById('rel_equipe_matr')) document.getElementById('rel_equipe_matr').value = `${nomeSugestao} / ${emailAtual}`;
-  if (document.getElementById('rel_local_texto')) document.getElementById('rel_local_texto').value = '';
-  if (document.getElementById('rel_lat')) document.getElementById('rel_lat').value = '';
-  if (document.getElementById('rel_lng')) document.getElementById('rel_lng').value = '';
   if (document.getElementById('loc_status')) document.getElementById('loc_status').innerText = '';
 
-  if (document.getElementById('rel_tipo')) document.getElementById('rel_tipo').value = 'Preventiva';
-  if (document.getElementById('rel_urgencia')) document.getElementById('rel_urgencia').value = 'Baixa';
-  if (document.getElementById('rel_servico_realizado')) document.getElementById('rel_servico_realizado').value = '';
-  if (document.getElementById('rel_anomalia')) document.getElementById('rel_anomalia').value = '';
-  if (document.getElementById('rel_causa')) document.getElementById('rel_causa').value = '';
-  if (document.getElementById('rel_acao')) document.getElementById('rel_acao').value = '';
-
-  // Limpa ferramentas selecionadas e tags
+  // Limpa ferramentas selecionadas e tags visuais
   if (typeof ferramentasSelecionadasRelatorio !== 'undefined') {
     ferramentasSelecionadasRelatorio = [];
-    atualizarAreaFerramentasRelatorio();
+    if (typeof atualizarAreaFerramentasRelatorio === 'function') atualizarAreaFerramentasRelatorio();
   }
-  if (document.getElementById('busca_ferramentas_input')) document.getElementById('busca_ferramentas_input').value = '';
-  if (document.getElementById('rel_ferramentas')) document.getElementById('rel_ferramentas').value = '';
-
-  if (document.getElementById('rel_observacao')) document.getElementById('rel_observacao').value = '';
-  if (document.getElementById('rel_registro_servico')) document.getElementById('rel_registro_servico').value = '';
-  const isEdu = emailAtual.includes('dudu') || emailAtual.includes('eduardo');
-  let matSug = isEdu ? '48380712' : '';
-  if (!matSug && typeof usuarioLogadoInfo !== 'undefined' && usuarioLogadoInfo?.matricula) matSug = usuarioLogadoInfo.matricula;
-  if (document.getElementById('rel_matricula')) document.getElementById('rel_matricula').value = matSug;
-  if (document.getElementById('rel_materiais')) document.getElementById('rel_materiais').value = '';
-  if (document.getElementById('rel_aplicacao')) document.getElementById('rel_aplicacao').value = '';
-  if (document.getElementById('rel_obs_tecnicas')) document.getElementById('rel_obs_tecnicas').value = '';
 
   // Limpa todos os 5 slots de fotos
   if (typeof removerFotoSlot === 'function') {
@@ -15030,20 +15009,20 @@ function limparFormularioRelatorio(confirmar = false) {
     if (img) { img.src = ''; img.style.display = 'none'; }
   });
 
-  // Limpa desenho técnico customizado e reativa modelo 3D
+  // Limpa desenho técnico customizado e assinatura
   window.desenhoTecnicoDataUrl = null;
   desenhoTecnicoDataUrl = null;
   desenhoCustomArquivo = null;
+  window.assinaturaDataUrl = null;
+  assinaturaDataUrl = null;
   if (typeof removerDesenhoCustom === 'function') removerDesenhoCustom();
-  if (typeof refazerDesenho3D === 'function') refazerDesenho3D();
-  if (typeof alternarAbaDesenhoTecnico === 'function') alternarAbaDesenhoTecnico('3d');
-
   limparAssinatura();
+
+  relatorioVisualizandoAtualId = null;
 
   const elRes = document.getElementById('rel_resultado');
   if (elRes) { elRes.className = 'resultado'; elRes.innerText = ''; }
 }
-
 async function carregarRelatoriosProntos() {
   const container = document.getElementById('listaRelatoriosProntosContainer');
   if (!container) return;
@@ -15964,11 +15943,10 @@ function abrirModulo(id) {
   }
 
   if (id === 'relatorio') {
-    carregarDashboard();
     alternarAbaRelatorio('novo');
-    const campoNum = document.getElementById('rel_num_doc');
-    if (campoNum && !campoNum.value.trim()) {
-      sincronizarEAtualizarNumRelatorio(false);
+    // Garante que o formulário venha 100% zerado e pronto para novo preenchimento
+    if (!relatorioVisualizandoAtualId) {
+      limparFormularioRelatorio();
     }
     setTimeout(() => iniciarSignaturePad(), 150);
   }
