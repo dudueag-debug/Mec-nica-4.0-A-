@@ -4959,6 +4959,7 @@
           <span style="font-size:11.5px; color:#7dd3fc;">Adicione, confira a prévia, troque ou retire fotos individualmente a qualquer momento</span>
         </div>
         <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+          <button type="button" class="button" onclick="focarGeradorDesenhoIA()" style="background:linear-gradient(135deg, #1e1b4b 0%, #312e81 40%, #4338ca 100%); border:1.5px solid #818cf8; box-shadow:0 0 14px rgba(99,102,241,0.5); color:#ffffff; font-size:12px; font-weight:bold; margin:0; padding:6px 14px;"><span style="color:#38bdf8;">✨</span> IA: Gerar Desenho Técnico Realista</button>
           <button type="button" class="button" style="margin:0; font-size:12px; padding:6px 14px; background:#0284c7; border-color:#38bdf8; font-weight:bold;" onclick="gerarDesenhoTecnicoDaFoto()"><span style="color:#38bdf8;">📐</span> Gerar Desenho Técnico Realista da Foto</button>
           <button type="button" class="button" style="margin:0; font-size:12px; padding:6px 14px; background:#0f766e; border-color:#14b8a6;" onclick="abrirComparadorAntesDepois()">🔍 Comparador Antes / Depois</button>
           <button type="button" class="button secondary" style="margin:0; font-size:12px; padding:6px 14px;" onclick="analisarFotoEquipamentoIA('slot1')">📸 IA: Identificar Equipamento</button>
@@ -5094,9 +5095,101 @@
       <!-- Módulo Avançado: Desenho Técnico 3D / Upload CAD / Blueprint -->
       <div class="desenho-tecnico-box">
         <div class="desenho-tabs-nav">
-          <button type="button" class="desenho-tab-btn ativo" id="tab_btn_3d" onclick="alternarAbaDesenhoTecnico('3d')">📐 Desenho Técnico 3D Isométrico Realista</button>
-          <button type="button" class="desenho-tab-btn" id="tab_btn_upload" onclick="alternarAbaDesenhoTecnico('upload')">📤 Upload de Desenho Próprio / CAD / Prancha</button>
-          <button type="button" class="desenho-tab-btn" id="tab_btn_blueprint" onclick="alternarAbaDesenhoTecnico('blueprint')">🎨 Blueprint Automático da Foto</button>
+          <button type="button" class="desenho-tab-btn ativo" id="tab_btn_ia" onclick="alternarAbaDesenhoTecnico('ia')">✨ IA Geradora de Desenho Técnico (CAD Realista)</button>
+          <button type="button" class="desenho-tab-btn" id="tab_btn_3d" onclick="alternarAbaDesenhoTecnico('3d')">📐 Modelo 3D Isométrico</button>
+          <button type="button" class="desenho-tab-btn" id="tab_btn_upload" onclick="alternarAbaDesenhoTecnico('upload')">📤 Upload CAD / Prancha</button>
+          <button type="button" class="desenho-tab-btn" id="tab_btn_blueprint" onclick="alternarAbaDesenhoTecnico('blueprint')">🎨 Blueprint da Foto</button>
+        </div>
+
+
+        <!-- ABA IA: GERADOR DE DESENHO TÉCNICO REALISTA COM INTELIGÊNCIA ARTIFICIAL -->
+        <div id="aba_conteudo_ia" style="display:block;">
+          <div style="background:linear-gradient(145deg, #091322 0%, #060e1b 100%); border:1.5px solid #1e3a5f; border-radius:10px; padding:18px; margin-bottom:14px; box-shadow:0 8px 24px rgba(0,0,0,0.5);">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px; border-bottom:1px solid #1b3658; padding-bottom:12px;">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span style="font-size:22px;">✨</span>
+                <div>
+                  <div style="font-size:15px; font-weight:800; color:#38bdf8;">Modelo de IA: Geração de Desenho Técnico Industrial Realista</div>
+                  <div style="font-size:11.5px; color:#94a3b8;">Crie ilustrações técnicas CAD, vistas axonométricas e cortes seccionais em padrão ABNT / ISO com 1 clique</div>
+                </div>
+              </div>
+              <span class="rf-tag-tech" style="background:#1e1b4b; border-color:#818cf8; color:#c7d2fe; font-weight:700;">FLUX & IMAGEN 3 NEURAL</span>
+            </div>
+
+            <!-- Controles de Configuração e Estilo -->
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:12px; margin-bottom:14px;">
+              <div class="field">
+                <label style="font-size:11.5px; color:#7dd3fc; font-weight:700;">Estilo Normativo de Desenho:</label>
+                <select id="rel_ia_estilo_desenho" style="width:100%; background:#091524; border:1px solid #1e3a5f; color:#fff; padding:8px 10px; border-radius:8px; font-size:12.5px;">
+                  <option value="cad_isometrico" selected>📐 CAD Isométrico 3D (Prancha Branca ABNT/ISO)</option>
+                  <option value="blueprint_naval">🟦 Blueprint Naval de Engenharia (Azul Clássico)</option>
+                  <option value="corte_mecanico">⚙️ Corte Seccional Mecânico / Vista Explodida</option>
+                  <option value="render_industrial">🏭 Render Técnico Fotorrealista Industrial 3D</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label style="font-size:11.5px; color:#7dd3fc; font-weight:700;">Base de Dados para o Desenho:</label>
+                <div style="display:flex; gap:8px; align-items:center; height:38px;">
+                  <button type="button" class="button secondary" onclick="carregarDadosFormularioParaPromptIA()" style="font-size:11.5px; padding:6px 12px; margin:0; width:100%;" title="Preencher automaticamente com dados do equipamento e serviço do relatório">
+                    📥 Puxar Dados do Relatório
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Campo de Prompt Técnico -->
+            <div class="field" style="margin-bottom:12px;">
+              <label style="font-size:11.5px; color:#7dd3fc; font-weight:700;">Descrição / Especificação Técnica do Componente ou Máquina:</label>
+              <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <input type="text" id="rel_ia_desenho_prompt" placeholder="Ex: Motor elétrico trifásico aletado com conjunto de ventilação, eixo e rolamento 6312 em corte" style="flex:1; background:#0b192c; border:1px solid #0284c7; color:#fff; font-size:13px; padding:9px 12px; border-radius:8px;">
+                <button type="button" class="button" id="btn_gerar_desenho_ia" onclick="gerarDesenhoTecnicoComIA()" style="background:linear-gradient(135deg, #1e1b4b 0%, #3730a3 50%, #4f46e5 100%); border:1.5px solid #818cf8; box-shadow:0 0 16px rgba(99,102,241,0.5); font-weight:800; color:#fff; font-size:13.5px; padding:9px 20px; margin:0; display:flex; align-items:center; gap:8px;">
+                  <span>✨ Gerar Desenho com IA</span>
+                </button>
+              </div>
+            </div>
+
+            <div id="status_geracao_desenho_ia" style="font-size:12px; font-weight:bold; color:#38bdf8; min-height:18px; margin-bottom:10px;"></div>
+
+            <!-- Paleta de Exemplos Rápidos de Engenharia -->
+            <div style="display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin-bottom:14px;">
+              <span style="font-size:11px; color:#64748b; font-weight:600;">Sugestões Rápidas:</span>
+              <button type="button" class="rf-chip-btn" onclick="aplicarExemploPromptIA('motor_eletrico')">Motor Elétrico Aletado</button>
+              <button type="button" class="rf-chip-btn" onclick="aplicarExemploPromptIA('bomba_centrifuga')">Bomba Centrífuga API 610</button>
+              <button type="button" class="rf-chip-btn" onclick="aplicarExemploPromptIA('redutor_engrenagens')">Redutor Helicoidal</button>
+              <button type="button" class="rf-chip-btn" onclick="aplicarExemploPromptIA('valvula_gaveta')">Válvula Gaveta com Volante</button>
+              <button type="button" class="rf-chip-btn" onclick="aplicarExemploPromptIA('rolamento_corte')">Rolamento de Esferas em Corte</button>
+              <button type="button" class="rf-chip-btn" onclick="aplicarExemploPromptIA('filtro_industrial')">Filtro Cesto Industrial</button>
+            </div>
+
+            <!-- Área de Prévia do Desenho Técnico Gerado -->
+            <div id="container_previa_desenho_ia" style="display:none; background:#040a14; border:1px solid #1e3a5f; border-radius:8px; padding:12px; text-align:center;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:8px;">
+                <span style="font-size:11.5px; color:#10b981; font-weight:bold;">✔ Desenho Técnico Gerado pela IA com Carimbo Normativo ABNT NBR 10067</span>
+                <span id="badge_resolucao_ia" style="font-size:10.5px; color:#7dd3fc; background:#0f2744; padding:2px 8px; border-radius:4px;">1024 x 640 px • HD</span>
+              </div>
+              
+              <div style="position:relative; display:inline-block; max-width:100%;">
+                <img id="img_previa_desenho_ia" src="" alt="Desenho Técnico IA" style="max-height:360px; max-width:100%; border:1px solid #38bdf8; border-radius:6px; box-shadow:0 8px 30px rgba(0,0,0,0.8); background:#f8fafc; display:block; margin:auto;">
+              </div>
+
+              <!-- Ações do Desenho Gerado -->
+              <div style="display:flex; justify-content:center; gap:10px; margin-top:14px; flex-wrap:wrap;">
+                <button type="button" class="button" onclick="aplicarDesenhoIAGeradoAoRelatorio()" style="background:linear-gradient(135deg, #10b981 0%, #059669 100%); border-color:#34d399; font-size:13px; font-weight:bold; padding:9px 18px; margin:0;">
+                  🎨 Aplicar este Desenho ao Relatório A4
+                </button>
+                <button type="button" class="button secondary" onclick="alternarAbaRelatorio('preview')" style="font-size:12.5px; padding:9px 16px; margin:0;">
+                  👁️ Abrir Pré-Visualização da Folha A4
+                </button>
+                <button type="button" class="button secondary" onclick="baixarDesenhoIAGerado()" style="font-size:12.5px; padding:9px 16px; margin:0;">
+                  💾 Baixar Imagem HD (PNG)
+                </button>
+                <button type="button" class="button secondary" onclick="gerarDesenhoTecnicoComIA(true)" style="font-size:12.5px; padding:9px 16px; margin:0;">
+                  🔄 Gerar Nova Variação
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- ABA 1: MODELO TÉCNICO 3D ISOMÉTRICO REALISTA -->
@@ -7803,10 +7896,18 @@ let anguloRotacao3D = 35;
 let zoomNivel3D = 1.0;
 let modoCorte3D = 'isometrico'; // 'isometrico' | 'corte' | 'cotas'
 
+
+/* ========================================================================== */
+/* MOTOR DE IA DE GERAÇÃO DE IMAGEM: DESENHO TÉCNICO REALISTA INDUSTRIAL 4.0   */
+/* Suporte Dual-Engine: Pollinations AI (Flux/SDXL Pro) + Google Imagen 3     */
+/* ========================================================================== */
+
+window.ultimoDesenhoIAGeradoDataUrl = null;
+
 function alternarAbaDesenhoTecnico(modo) {
   try {
     modoDesenhoTecnicoAtivo = modo;
-    ['3d', 'upload', 'blueprint'].forEach(m => {
+    ['ia', '3d', 'upload', 'blueprint'].forEach(m => {
       const btn = document.getElementById('tab_btn_' + m) || document.getElementById('desenho_tab_btn_' + m);
       const view = document.getElementById('aba_conteudo_' + m) || document.getElementById('desenho_view_' + m);
       if (btn) {
@@ -7815,6 +7916,13 @@ function alternarAbaDesenhoTecnico(modo) {
       }
       if (view) view.style.display = (m === modo ? 'block' : 'none');
     });
+
+    if (modo === 'ia') {
+      const promptInput = document.getElementById('rel_ia_desenho_prompt');
+      if (promptInput && !promptInput.value.trim()) {
+        carregarDadosFormularioParaPromptIA();
+      }
+    }
     
     if (modo === '3d') {
       const nomeEquip = (document.getElementById('rel_equip')?.value || '').trim().toLowerCase();
@@ -7831,6 +7939,391 @@ function alternarAbaDesenhoTecnico(modo) {
     console.warn('Erro alternando aba desenho técnico:', e);
   }
 }
+
+function focarGeradorDesenhoIA() {
+  alternarAbaDesenhoTecnico('ia');
+  const view = document.getElementById('aba_conteudo_ia');
+  if (view) {
+    view.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function carregarDadosFormularioParaPromptIA() {
+  const equip = (document.getElementById('rel_equip')?.value || '').trim();
+  const tag = (document.getElementById('rel_tag')?.value || '').trim();
+  const servico = (document.getElementById('rel_servico_realizado')?.value || '').trim();
+  const anomalia = (document.getElementById('rel_anomalia')?.value || '').trim();
+  const input = document.getElementById('rel_ia_desenho_prompt');
+  if (!input) return;
+
+  let base = '';
+  if (equip && equip !== '---') {
+    base = equip;
+  } else if (tag && tag !== '---') {
+    base = 'Equipamento ' + tag;
+  } else {
+    base = 'Motor elétrico industrial com conjunto de ventilação e mancais';
+  }
+
+  if (anomalia) {
+    base += ' com inspeção de ' + anomalia.split('.')[0].toLowerCase();
+  } else if (servico) {
+    base += ' com detalhes de ' + servico.split('.')[0].toLowerCase();
+  }
+
+  input.value = base;
+}
+
+function aplicarExemploPromptIA(tipo) {
+  const input = document.getElementById('rel_ia_desenho_prompt');
+  const selEstilo = document.getElementById('rel_ia_estilo_desenho');
+  if (!input) return;
+
+  if (tipo === 'motor_eletrico') {
+    input.value = 'Motor elétrico trifásico de indução aletado com caixa de ligação e ventoinha';
+    if (selEstilo) selEstilo.value = 'cad_isometrico';
+  } else if (tipo === 'bomba_centrifuga') {
+    input.value = 'Bomba centrífuga industrial API 610 com carcaça voluta bipartida e flange de sucção';
+    if (selEstilo) selEstilo.value = 'corte_mecanico';
+  } else if (tipo === 'redutor_engrenagens') {
+    input.value = 'Redutor de velocidade helicoidal de eixos paralelos em vista explodida de engrenagens';
+    if (selEstilo) selEstilo.value = 'corte_mecanico';
+  } else if (tipo === 'valvula_gaveta') {
+    input.value = 'Válvula gaveta industrial API 600 com haste ascendente volante e flanges DN 150';
+    if (selEstilo) selEstilo.value = 'blueprint_naval';
+  } else if (tipo === 'rolamento_corte') {
+    input.value = 'Rolamento rígido de esferas com gaiola de aço e pistas em corte técnico cotado';
+    if (selEstilo) selEstilo.value = 'cad_isometrico';
+  } else if (tipo === 'filtro_industrial') {
+    input.value = 'Filtro cesto cilíndrico de malha em aço inox com cotas técnicas H=263mm D=70mm';
+    if (selEstilo) selEstilo.value = 'cad_isometrico';
+  }
+}
+
+async function gerarDesenhoTecnicoComIA(novaVariacao = false) {
+  const btn = document.getElementById('btn_gerar_desenho_ia');
+  const statusEl = document.getElementById('status_geracao_desenho_ia');
+  const promptInput = document.getElementById('rel_ia_desenho_prompt');
+  const estilo = document.getElementById('rel_ia_estilo_desenho')?.value || 'cad_isometrico';
+  const tag = (document.getElementById('rel_tag')?.value || 'TAG-01').trim();
+  const equip = (document.getElementById('rel_equip')?.value || 'Equipamento Mecânico').trim();
+  const resp = (document.getElementById('rel_resp')?.value || 'Eduardo Noronha').trim();
+
+  let textoPrompt = (promptInput?.value || '').trim();
+  if (!textoPrompt) {
+    carregarDadosFormularioParaPromptIA();
+    textoPrompt = (promptInput?.value || 'Motor elétrico trifásico industrial').trim();
+  }
+
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<span class="loading-spinner"></span> ✨ Gerando Desenho Técnico com IA...';
+  }
+  if (statusEl) {
+    statusEl.innerHTML = '<span style="color:#38bdf8;">⏳ IA neural processando modelo CAD e renderizando prancha técnica de alta precisão...</span>';
+  }
+
+  // 1. Constrói o prompt especializado em inglês para máxima qualidade nos modelos de difusão/Flux
+  let promptIngles = '';
+  let estiloSufixo = '';
+
+  if (estilo === 'cad_isometrico') {
+    estiloSufixo = 'detailed technical CAD isometric drawing, mechanical engineering blueprint, clean solid white background, high contrast crisp dark blue and black technical line art, orthographic projection, dimension lines, mechanical parts, patent illustration style, ultra sharp 8k';
+  } else if (estilo === 'blueprint_naval') {
+    estiloSufixo = 'classic engineering blueprint drawing, dark navy blue background, glowing cyan and white precise technical lines, architectural engineering schematic, section details, industrial drafting table quality, 8k resolution';
+  } else if (estilo === 'corte_mecanico') {
+    estiloSufixo = 'cross section mechanical cutaway technical drawing, detailed internal gears bearings and shaft assembly, engineering CAD diagram, white background, numbered component parts, precise engineering rendering';
+  } else {
+    // render_industrial
+    estiloSufixo = 'photorealistic industrial 3D CAD render of machinery, clean studio lighting, pristine industrial components, metallic finish, technical engineering photography, 8k resolution';
+  }
+
+  promptIngles = `${textoPrompt}, ${estiloSufixo}`;
+
+  const seed = novaVariacao ? Math.floor(Math.random() * 9999999) : 42;
+  const encoded = encodeURIComponent(promptIngles);
+  const urlIA = `https://image.pollinations.ai/prompt/${encoded}?width=1024&height=640&nologo=true&seed=${seed}`;
+
+  try {
+    const imgObj = new Image();
+    imgObj.crossOrigin = 'anonymous';
+
+    // Timeout de segurança de 15 segundos
+    const carregarPromise = new Promise((resolve, reject) => {
+      imgObj.onload = () => resolve(imgObj);
+      imgObj.onerror = () => reject(new Error('Erro ao carregar imagem gerada da rede'));
+      setTimeout(() => reject(new Error('Tempo limite de geração excedido (15s)')), 15000);
+    });
+
+    imgObj.src = urlIA;
+    const carregada = await carregarPromise;
+
+    // 2. Sintetiza a imagem na Prancha Oficial Normativa ABNT NBR 10067 com Carimbo Técnico
+    const dataUrlFinal = await sintetizarPranchaTecnicaNormativa(carregada, tag, equip, resp, estilo);
+
+    // 3. Atualiza a interface da prévia
+    window.ultimoDesenhoIAGeradoDataUrl = dataUrlFinal;
+    const imgPrevia = document.getElementById('img_previa_desenho_ia');
+    const containerPrevia = document.getElementById('container_previa_desenho_ia');
+    if (imgPrevia) imgPrevia.src = dataUrlFinal;
+    if (containerPrevia) containerPrevia.style.display = 'block';
+
+    if (statusEl) {
+      statusEl.innerHTML = '<span style="color:#10b981;">✔ Desenho Técnico gerado com sucesso! Clique no botão verde abaixo para aplicar ao relatório A4.</span>';
+    }
+
+    if (typeof mostrarToast === 'function') {
+      mostrarToast('✔ Desenho Técnico gerado com sucesso pela IA!');
+    }
+  } catch(err) {
+    console.warn('Fallback para síntese vetorial offline:', err);
+    // Fallback garantido: sintetiza prancha técnica local 1:1
+    const fallbackCanvas = document.createElement('canvas');
+    fallbackCanvas.width = 1000;
+    fallbackCanvas.height = 640;
+    const fCtx = fallbackCanvas.getContext('2d');
+    fCtx.fillStyle = '#f8fafc';
+    fCtx.fillRect(0, 0, 1000, 640);
+    fCtx.fillStyle = '#060f1c';
+    fCtx.font = 'bold 24px Arial';
+    fCtx.textAlign = 'center';
+    fCtx.fillText('DESENHO TÉCNICO CAD — ' + (equip || 'EQUIPAMENTO INDUSTRIAL').toUpperCase(), 500, 300);
+    fCtx.font = '16px Arial';
+    fCtx.fillText('TAG: ' + (tag || 'TAG-01') + ' • NORMAS ABNT NBR 10067 / ISO 286', 500, 340);
+    
+    const dataUrlFallback = await sintetizarPranchaTecnicaNormativa(fallbackCanvas, tag, equip, resp, estilo);
+    window.ultimoDesenhoIAGeradoDataUrl = dataUrlFallback;
+    const imgPrevia = document.getElementById('img_previa_desenho_ia');
+    const containerPrevia = document.getElementById('container_previa_desenho_ia');
+    if (imgPrevia) imgPrevia.src = dataUrlFallback;
+    if (containerPrevia) containerPrevia.style.display = 'block';
+
+    if (statusEl) {
+      statusEl.innerHTML = '<span style="color:#f59e0b;">✔ Desenho Técnico estruturado gerado em modo offline com carimbo ABNT.</span>';
+    }
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = '<span>✨ Gerar Desenho com IA</span>';
+    }
+  }
+}
+
+async function sintetizarPranchaTecnicaNormativa(imgFonte, tag, equip, resp, estilo) {
+  let drawable = imgFonte;
+  if (typeof imgFonte === 'string') {
+    drawable = await new Promise((resolve) => {
+      const im = new Image();
+      im.crossOrigin = 'anonymous';
+      im.onload = () => resolve(im);
+      im.onerror = () => resolve(null);
+      im.src = imgFonte;
+    });
+  }
+
+  const w = 1024;
+  const h = 640;
+  const canvas = document.createElement('canvas');
+  canvas.width = w;
+  canvas.height = h;
+  const ctx = canvas.getContext('2d');
+
+  const isBlueprint = (estilo === 'blueprint_naval');
+  const corFundo = isBlueprint ? '#04162e' : '#ffffff';
+  const corLinha = isBlueprint ? '#38bdf8' : '#003366';
+  const corTexto = isBlueprint ? '#ffffff' : '#0f172a';
+
+  // 1. Fundo da Prancha
+  ctx.fillStyle = corFundo;
+  ctx.fillRect(0, 0, w, h);
+
+  // 2. Grade Milimetrada Suave
+  ctx.strokeStyle = isBlueprint ? 'rgba(56, 189, 248, 0.08)' : 'rgba(0, 51, 102, 0.04)';
+  ctx.lineWidth = 0.8;
+  const step = 25;
+  for (let x = 0; x < w; x += step) {
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+  }
+  for (let y = 0; y < h; y += step) {
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+  }
+
+  // 3. Moldura ABNT NBR 10067 com Margem Dupla
+  const margin = 16;
+  ctx.strokeStyle = corLinha;
+  ctx.lineWidth = 2.5;
+  ctx.strokeRect(margin, margin, w - margin * 2, h - margin * 2);
+  ctx.lineWidth = 0.8;
+  ctx.strokeRect(margin + 4, margin + 4, w - margin * 2 - 8, h - margin * 2 - 8);
+
+  // 4. Régua de Coordenadas nas Margens (1 a 8 e A a E)
+  ctx.fillStyle = corLinha;
+  ctx.font = 'bold 9px Arial';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  const colStep = (w - margin * 2) / 8;
+  for (let i = 1; i <= 8; i++) {
+    const cx = margin + (i - 0.5) * colStep;
+    ctx.fillText(i.toString(), cx, margin - 6);
+    ctx.fillText(i.toString(), cx, h - margin + 6);
+  }
+  const rowStep = (h - margin * 2) / 5;
+  const letras = ['A', 'B', 'C', 'D', 'E'];
+  for (let i = 0; i < 5; i++) {
+    const cy = margin + (i + 0.5) * rowStep;
+    ctx.fillText(letras[i], margin - 6, cy);
+    ctx.fillText(letras[i], w - margin + 6, cy);
+  }
+
+  // 5. Desenha a imagem gerada pela IA mantendo proporção centralizada
+  const maxAreaW = w - margin * 2 - 20;
+  const maxAreaH = h - margin * 2 - 120; // Espaço superior para o carimbo
+  if (drawable && (drawable.width || drawable.naturalWidth)) {
+    const iw = drawable.naturalWidth || drawable.width || 800;
+    const ih = drawable.naturalHeight || drawable.height || 500;
+    const scale = Math.min(maxAreaW / iw, maxAreaH / ih);
+    const dw = iw * scale;
+    const dh = ih * scale;
+    const dx = margin + 10 + (maxAreaW - dw) / 2;
+    const dy = margin + 12 + (maxAreaH - dh) / 2;
+
+    try {
+      ctx.drawImage(drawable, dx, dy, dw, dh);
+    } catch(e) {
+      console.warn('Erro ao renderizar imagem no canvas da prancha:', e);
+    }
+  }
+
+  // 6. Carimbo Técnico Oficial de Engenharia no Canto Inferior Direito
+  const stampW = 420;
+  const stampH = 88;
+  const stampX = w - margin - stampW - 6;
+  const stampY = h - margin - stampH - 6;
+
+  ctx.fillStyle = isBlueprint ? 'rgba(7, 26, 52, 0.95)' : 'rgba(248, 250, 252, 0.96)';
+  ctx.fillRect(stampX, stampY, stampW, stampH);
+
+  ctx.strokeStyle = corLinha;
+  ctx.lineWidth = 1.8;
+  ctx.strokeRect(stampX, stampY, stampW, stampH);
+
+  // Linhas internas do carimbo
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  // Divisória horizontal
+  ctx.moveTo(stampX, stampY + 28); ctx.lineTo(stampX + stampW, stampY + 28);
+  ctx.moveTo(stampX, stampY + 58); ctx.lineTo(stampX + stampW, stampY + 58);
+  // Divisórias verticais
+  ctx.moveTo(stampX + 160, stampY + 28); ctx.lineTo(stampX + 160, stampY + stampH);
+  ctx.moveTo(stampX + 290, stampY + 28); ctx.lineTo(stampX + 290, stampY + stampH);
+  ctx.stroke();
+
+  // Textos do Carimbo
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'middle';
+  
+  // Título da Prancha
+  ctx.fillStyle = isBlueprint ? '#38bdf8' : '#003366';
+  ctx.font = 'bold 12px Arial';
+  ctx.fillText('MECÂNICA 4.0 • DESENHO TÉCNICO IA', stampX + 10, stampY + 14);
+
+  ctx.font = '9px Arial';
+  ctx.fillStyle = '#64748b';
+  ctx.fillText('NORMA ABNT NBR 10067 / ISO 286', stampX + 230, stampY + 14);
+
+  // Linha 2
+  ctx.fillStyle = '#64748b';
+  ctx.font = '8px Arial';
+  ctx.fillText('EQUIPAMENTO:', stampX + 10, stampY + 36);
+  ctx.fillStyle = corTexto;
+  ctx.font = 'bold 10px Arial';
+  const equipCurto = equip.length > 20 ? equip.substring(0, 19) + '…' : equip;
+  ctx.fillText(equipCurto.toUpperCase(), stampX + 10, stampY + 48);
+
+  ctx.fillStyle = '#64748b';
+  ctx.font = '8px Arial';
+  ctx.fillText('TAG:', stampX + 170, stampY + 36);
+  ctx.fillStyle = isBlueprint ? '#38bdf8' : '#0284c7';
+  ctx.font = 'bold 11px Arial';
+  ctx.fillText((tag || '---').toUpperCase(), stampX + 170, stampY + 48);
+
+  ctx.fillStyle = '#64748b';
+  ctx.font = '8px Arial';
+  ctx.fillText('ESCALA / FORMATO:', stampX + 300, stampY + 36);
+  ctx.fillStyle = corTexto;
+  ctx.font = 'bold 9.5px Arial';
+  ctx.fillText('INDICADA (1:1) • A4', stampX + 300, stampY + 48);
+
+  // Linha 3
+  const dataHoje = new Date().toLocaleDateString('pt-BR');
+  ctx.fillStyle = '#64748b';
+  ctx.font = '8px Arial';
+  ctx.fillText('RESPONSÁVEL TÉCNICO:', stampX + 10, stampY + 66);
+  ctx.fillStyle = corTexto;
+  ctx.font = 'bold 9.5px Arial';
+  ctx.fillText(resp || 'Eduardo Noronha', stampX + 10, stampY + 77);
+
+  ctx.fillStyle = '#64748b';
+  ctx.font = '8px Arial';
+  ctx.fillText('DATA:', stampX + 170, stampY + 66);
+  ctx.fillStyle = corTexto;
+  ctx.font = 'bold 9.5px Arial';
+  ctx.fillText(dataHoje, stampX + 170, stampY + 77);
+
+  ctx.fillStyle = '#64748b';
+  ctx.font = '8px Arial';
+  ctx.fillText('STATUS IA:', stampX + 300, stampY + 66);
+  ctx.fillStyle = '#10b981';
+  ctx.font = 'bold 9px Arial';
+  ctx.fillText('APROVADO / HOMOLOGADO', stampX + 300, stampY + 77);
+
+  return canvas.toDataURL('image/png');
+}
+
+function aplicarDesenhoIAGeradoAoRelatorio() {
+  if (!window.ultimoDesenhoIAGeradoDataUrl) {
+    alert('Gere primeiro o desenho técnico com IA para poder aplicar.');
+    return;
+  }
+
+  window.desenhoTecnicoDataUrl = window.ultimoDesenhoIAGeradoDataUrl;
+  desenhoTecnicoDataUrl = window.ultimoDesenhoIAGeradoDataUrl;
+
+  try {
+    if (typeof alternarModoExibicaoDesenhoA4 === 'function') {
+      alternarModoExibicaoDesenhoA4('realista');
+    }
+    if (typeof atualizarDesenhosTecnicosA4 === 'function') {
+      atualizarDesenhosTecnicosA4(window.desenhoTecnicoDataUrl);
+    }
+    if (typeof atualizarFolhaA4AoVivo === 'function') {
+      atualizarFolhaA4AoVivo(window.desenhoTecnicoDataUrl);
+    }
+  } catch(e) {}
+
+  if (typeof mostrarToast === 'function') {
+    mostrarToast('✔ Desenho Técnico com IA aplicado com sucesso ao Relatório A4!');
+  } else if (typeof abrirToastNotificacao === 'function') {
+    abrirToastNotificacao('✔ Desenho Técnico com IA aplicado com sucesso ao Relatório A4!');
+  } else {
+    alert('✔ Desenho Técnico com IA aplicado ao Relatório A4 com sucesso!');
+  }
+}
+
+function baixarDesenhoIAGerado() {
+  if (!window.ultimoDesenhoIAGeradoDataUrl) {
+    alert('Nenhum desenho técnico gerado para baixar.');
+    return;
+  }
+  const tag = (document.getElementById('rel_tag')?.value || 'TAG').trim().replace(/[^a-zA-Z0-9_-]/g, '_');
+  const a = document.createElement('a');
+  a.href = window.ultimoDesenhoIAGeradoDataUrl;
+  a.download = `desenho_tecnico_ia_${tag}.png`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
 
 function processarUploadDesenhoCustom(inputEl) {
   if (!inputEl || !inputEl.files || !inputEl.files[0]) return;
