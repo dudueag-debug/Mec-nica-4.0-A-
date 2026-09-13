@@ -1650,13 +1650,13 @@
   }
 
   
-  /* ================= ROBÔ MECÂNICO 4.0 INDUSTRIAL QUE ANDA PELO APP ================= */
+  /* ================= ROBÔ MECÂNICO 4.0 INDUSTRIAL ROBUSTO HUMANOIDE ================= */
   #btn-flutuante-robo {
     position: fixed;
-    bottom: 12px;
+    bottom: 14px;
     right: 24px;
-    width: 104px;
-    height: 142px;
+    width: 110px;
+    height: 146px;
     cursor: pointer;
     z-index: 99999;
     display: flex;
@@ -1665,17 +1665,17 @@
     justify-content: flex-end;
     user-select: none;
     touch-action: none;
-    filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.85));
+    filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.85));
     transition: filter 0.25s, transform 0.2s;
   }
 
   #btn-flutuante-robo:hover {
-    filter: drop-shadow(0 8px 24px rgba(0, 242, 254, 0.65));
+    filter: drop-shadow(0 8px 28px rgba(0, 242, 254, 0.7));
   }
 
   .robo-status-tag {
     position: absolute;
-    top: -12px;
+    top: -14px;
     background: rgba(4, 13, 26, 0.95);
     border: 1px solid #00f2fe;
     color: #38bdf8;
@@ -1690,295 +1690,162 @@
     z-index: 10;
   }
 
-  /* Wrapper do Personagem (Permite virar para a esquerda e direita com scaleX) */
+  /* Wrapper do Personagem com Suporte a Virar de Direção (scaleX) */
   .robo-walker-wrapper {
     position: relative;
-    width: 100px;
-    height: 138px;
+    width: 108px;
+    height: 144px;
     display: flex;
     align-items: flex-end;
     justify-content: center;
     transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
-  .robo-walker-svg {
-    width: 100px;
-    height: 138px;
+  .robo-human-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
     display: block;
-    overflow: visible;
+    pointer-events: none;
+    transform-origin: 50% 90%;
   }
 
-  /* ================= ANIMAÇÕES DE CAMINHADA DO ROBÔ ================= */
-  
-  /* 1. Ciclo de Passadas das Pernas quando ANDANDO */
-  .rw-andando .rw-leg-left {
-    animation: animPernaEsqPasso 0.65s ease-in-out infinite alternate !important;
-  }
-  .rw-andando .rw-leg-right {
-    animation: animPernaDirPasso 0.65s ease-in-out infinite alternate !important;
+  /* ================= CICLO DE CAMINHADA HUMANOIDE ROBUSTO ================= */
+  .rw-andando .robo-human-img {
+    animation: humanGaitWalk 0.68s ease-in-out infinite;
   }
 
-  @keyframes animPernaEsqPasso {
-    0% { transform: rotate(-24deg); }
-    100% { transform: rotate(22deg); }
+  @keyframes humanGaitWalk {
+    0% {
+      transform: translateY(0px) rotate(0deg) scaleX(1);
+    }
+    25% {
+      transform: translateY(-8px) rotate(-2.2deg) scaleX(0.975);
+    }
+    50% {
+      transform: translateY(0px) rotate(0deg) scaleX(1);
+    }
+    75% {
+      transform: translateY(-8px) rotate(2.2deg) scaleX(0.975);
+    }
+    100% {
+      transform: translateY(0px) rotate(0deg) scaleX(1);
+    }
   }
 
-  @keyframes animPernaDirPasso {
-    0% { transform: rotate(22deg); }
-    100% { transform: rotate(-24deg); }
+  /* ================= POSTURA PARADO / IDLE (RESPIRAÇÃO & PRESENÇA) ================= */
+  .rw-parado .robo-human-img {
+    animation: humanIdleBreathing 3.2s ease-in-out infinite alternate;
   }
 
-  /* Flexão dos Joelhos no Passo Mecânico */
-  .rw-andando .rw-leg-left .rw-knee-flex {
-    animation: animJoelhoEsq 0.65s ease-in-out infinite alternate;
-  }
-  .rw-andando .rw-leg-right .rw-knee-flex {
-    animation: animJoelhoDir 0.65s ease-in-out infinite alternate;
-  }
-
-  @keyframes animJoelhoEsq {
-    0% { transform: rotate(0deg); }
-    50% { transform: rotate(18deg); }
-    100% { transform: rotate(2deg); }
+  @keyframes humanIdleBreathing {
+    0% {
+      transform: translateY(0px) scale(1);
+    }
+    100% {
+      transform: translateY(-4px) scale(1.018);
+    }
   }
 
-  @keyframes animJoelhoDir {
-    0% { transform: rotate(2deg); }
-    50% { transform: rotate(18deg); }
-    100% { transform: rotate(0deg); }
+  /* ================= EFEITOS TECNOLÓGICOS SOBRE O CORPO DO ROBÔ ================= */
+
+  /* Laser Ciano no Visor do Capacete */
+  .robo-visor-laser-fx {
+    position: absolute;
+    top: 13.5%;
+    left: 45%;
+    width: 22px;
+    height: 3.5px;
+    background: linear-gradient(90deg, transparent, #00f2fe, #ffffff, #00f2fe, transparent);
+    border-radius: 2px;
+    box-shadow: 0 0 8px #00f2fe, 0 0 14px #38bdf8;
+    opacity: 0.85;
+    animation: animLaserVisorHumano 2.6s ease-in-out infinite alternate;
+    pointer-events: none;
   }
 
-  /* 2. Oscilação Vertical do Tronco / Corpo durante o Passo */
-  .rw-andando .rw-torso-group {
-    animation: animTroncoPasso 0.325s ease-in-out infinite alternate;
+  @keyframes animLaserVisorHumano {
+    0% { transform: translateX(-6px) scaleX(0.8); opacity: 0.4; }
+    50% { transform: translateX(0px) scaleX(1.1); opacity: 1; }
+    100% { transform: translateX(6px) scaleX(0.8); opacity: 0.4; }
   }
 
-  @keyframes animTroncoPasso {
-    0% { transform: translateY(0px); }
-    100% { transform: translateY(-4.5px); }
+  /* Brilho Especular Passando na Chave Combinada */
+  .robo-chave-gleam-fx {
+    position: absolute;
+    bottom: 27%;
+    left: 14%;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(56,189,248,0.6) 40%, transparent 70%);
+    filter: blur(2px);
+    opacity: 0;
+    pointer-events: none;
+    animation: animChaveGleamHumano 4.5s ease-in-out infinite;
   }
 
-  /* 3. Balanço dos Braços em Sincronia de Marcha */
-  .rw-andando .rw-arm-left {
-    animation: animBracoEsqPasso 0.65s ease-in-out infinite alternate;
-  }
-  .rw-andando .rw-arm-right {
-    animation: animBracoDirPasso 0.65s ease-in-out infinite alternate;
-  }
-
-  @keyframes animBracoEsqPasso {
-    0% { transform: rotate(20deg); }
-    100% { transform: rotate(-16deg); }
+  @keyframes animChaveGleamHumano {
+    0%, 75% { opacity: 0; transform: scale(0.5); }
+    82% { opacity: 1; transform: scale(1.2); }
+    90% { opacity: 0; transform: scale(0.8); }
+    100% { opacity: 0; }
   }
 
-  @keyframes animBracoDirPasso {
-    0% { transform: rotate(-18deg); }
-    100% { transform: rotate(16deg); }
+  /* Propulsor de Plasma sob as Botas (ativo ao flutuar/arrastar) */
+  .robo-plasma-thruster-fx {
+    position: absolute;
+    bottom: -5px;
+    left: 20%;
+    width: 60%;
+    height: 14px;
+    background: radial-gradient(ellipse at center, rgba(0,242,254,0.95) 0%, rgba(2,132,199,0.7) 50%, transparent 75%);
+    filter: blur(3px);
+    border-radius: 50%;
+    display: none;
+    pointer-events: none;
   }
 
-  /* 4. Pulso da Sombra no Chão com o Pisar dos Pés */
-  .rw-andando .rw-ground-shadow {
-    animation: animSombraPasso 0.325s ease-in-out infinite alternate;
-    transform-origin: 52px 142px;
-  }
-
-  @keyframes animSombraPasso {
-    0% { transform: scaleX(1.05) scaleY(1.05); opacity: 0.75; }
-    100% { transform: scaleX(0.85) scaleY(0.8); opacity: 0.45; }
-  }
-
-  /* ================= ESTADO PARADO / IDLE (RESPIRAÇÃO MECÂNICA & SCAN) ================= */
-  .rw-parado .rw-torso-group {
-    animation: animTroncoIdle 2.8s ease-in-out infinite alternate;
-  }
-
-  @keyframes animTroncoIdle {
-    0% { transform: translateY(0px); }
-    100% { transform: translateY(-3px); }
-  }
-
-  .rw-parado .rw-arm-right {
-    animation: animBracoIdle 3.2s ease-in-out infinite alternate;
-  }
-
-  @keyframes animBracoIdle {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(-4deg); }
-  }
-
-  .rw-parado .rw-head {
-    animation: animCabecaIdle 5.4s ease-in-out infinite;
-  }
-
-  @keyframes animCabecaIdle {
-    0%, 100% { transform: rotate(0deg); }
-    30% { transform: rotate(4deg); }
-    70% { transform: rotate(-4deg); }
-  }
-
-  /* ================= EFEITOS CONTÍNUOS REALISTAS ================= */
-  
-  /* Scanner Laser Ativo no Visor */
-  .rw-laser-sweep {
-    animation: animLaserVisor 2.4s ease-in-out infinite alternate;
-  }
-
-  @keyframes animLaserVisor {
-    0% { transform: translateX(-4px); opacity: 0.3; }
-    50% { opacity: 1; stroke: #ffffff; }
-    100% { transform: translateX(22px); opacity: 0.3; }
-  }
-
-  /* Pulso do Reator Arc Core no Peito */
-  .rw-arc-core {
-    animation: animReatorArc 1.8s ease-in-out infinite alternate;
-    transform-origin: 52px 69px;
-  }
-
-  @keyframes animReatorArc {
-    0% { transform: scale(0.92); opacity: 0.8; }
-    100% { transform: scale(1.18); opacity: 1; filter: drop-shadow(0 0 6px #00f2fe); }
-  }
-
-  /* LED de Telemetria na Antena */
-  .rw-antenna-led {
-    animation: animAntenaLed 1.4s ease-in-out infinite alternate;
-  }
-
-  @keyframes animAntenaLed {
-    0% { opacity: 0.5; }
-    100% { opacity: 1; filter: drop-shadow(0 0 5px #22c55e); }
-  }
-
-  /* Reflexo Metálico na Chave Combinada 22mm */
-  .rw-wrench-tool {
-    animation: animBrilhoChaveTool 4.5s ease-in-out infinite;
-  }
-
-  @keyframes animBrilhoChaveTool {
-    0%, 75% { filter: drop-shadow(0 0 0px #fff); }
-    85% { filter: drop-shadow(0 0 7px #ffffff) drop-shadow(0 0 12px #38bdf8); }
-    100% { filter: drop-shadow(0 0 0px #fff); }
-  }
-
-  /* ================= ESTADO ARRASTANDO / FLUTUAÇÃO MANUAL ================= */
+  /* ================= ESTADO ARRASTANDO / FLUTUANDO ================= */
   .rw-arrastando {
     cursor: grabbing !important;
   }
-  .rw-arrastando .rw-leg-left {
-    transform: rotate(-18deg) translateY(-5px) !important;
+  .rw-arrastando .robo-human-img {
     animation: none !important;
+    transform: translateY(-8px) scale(1.03) !important;
   }
-  .rw-arrastando .rw-leg-right {
-    transform: rotate(18deg) translateY(-5px) !important;
-    animation: none !important;
-  }
-  .rw-arrastando .rw-boot-flame {
+  .rw-arrastando .robo-plasma-thruster-fx {
     display: block !important;
-    animation: animChamaPe 0.35s ease-in-out infinite alternate;
-  }
-  .rw-arrastando .rw-ground-shadow {
-    opacity: 0.18 !important;
-    transform: scale(0.6) !important;
+    animation: animPlasmaFlutuando 0.4s ease-in-out infinite alternate;
   }
 
-  @keyframes animChamaPe {
-    0% { opacity: 0.7; transform: scaleY(0.8); }
-    100% { opacity: 1; transform: scaleY(1.4); filter: drop-shadow(0 0 8px #00f2fe); }
+  @keyframes animPlasmaFlutuando {
+    0% { transform: scaleX(0.85) scaleY(0.9); opacity: 0.7; }
+    100% { transform: scaleX(1.15) scaleY(1.3); opacity: 1; filter: blur(5px) drop-shadow(0 0 10px #00f2fe); }
   }
 
   /* ================= SAUDAÇÃO COM A CHAVE QUANDO CLICADO ================= */
-  .rw-saudacao .rw-arm-right {
-    animation: animSaudacaoChave 0.9s ease-out forwards !important;
+  .rw-saudacao .robo-human-img {
+    animation: animSaudacaoHumanoide 0.9s ease-out forwards !important;
   }
 
-  @keyframes animSaudacaoChave {
-    0% { transform: rotate(0deg); }
-    40% { transform: rotate(-38deg) translateY(-3px); }
-    70% { transform: rotate(-30deg) translateY(-2px); }
-    100% { transform: rotate(0deg); }
+  @keyframes animSaudacaoHumanoide {
+    0% { transform: scale(1) rotate(0deg); }
+    30% { transform: scale(1.08) rotate(-4deg) translateY(-6px); }
+    60% { transform: scale(1.05) rotate(2deg) translateY(-3px); }
+    100% { transform: scale(1) rotate(0deg); }
   }
 
-/* Robô andante styles ativos */
-
-  .robo-pulse-ring {
-    animation: pulseAnelRobo 2.6s ease-in-out infinite alternate;
-  }
-
-  @keyframes pulseAnelRobo {
-    0% { transform: scale(1); opacity: 0.7; }
-    100% { transform: scale(1.08); opacity: 1; box-shadow: 0 0 24px rgba(56,189,248,0.9), inset 0 0 16px rgba(2,132,199,0.7); }
-  }
-  
-  #btn-flutuante-robo:hover {
-    filter: drop-shadow(0 14px 30px rgba(0, 242, 254, 0.5));
-  }
-
-  @keyframes roboLevitacaoCenario {
-    0% { transform: translateY(0px) rotate(0deg); }
-    25% { transform: translateY(-7px) rotate(-1.5deg); }
-    50% { transform: translateY(-13px) rotate(0deg); }
-    75% { transform: translateY(-6px) rotate(1.5deg); }
-    100% { transform: translateY(0px) rotate(0deg); }
-  }
-
-  .robo-char-svg {
-    width: 86px;
-    height: 112px;
-    display: block;
-    pointer-events: none;
-  }
-
-  .robo-plasma-thruster .plasma-flame {
-    animation: plasmaFlamePulse 1.2s ease-in-out infinite alternate;
-    transform-origin: 50px 106px;
-  }
-
-  @keyframes plasmaFlamePulse {
-    0% { opacity: 0.65; transform: scaleY(0.8) scaleX(0.9); }
-    100% { opacity: 1; transform: scaleY(1.35) scaleX(1.1); filter: drop-shadow(0 0 10px #00f2fe); }
-  }
-
-  .arc-core-pulse {
-    animation: arcCorePulseAnim 1.6s ease-in-out infinite alternate;
-  }
-
-  @keyframes arcCorePulseAnim {
-    0% { opacity: 0.7; transform: scale(0.9); }
-    100% { opacity: 1; transform: scale(1.2); }
-  }
-
-  .robo-status-tag {
-    position: absolute;
-    top: -6px;
-    background: rgba(8, 18, 36, 0.95);
-    border: 1px solid #00f2fe;
-    color: #38bdf8;
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: 0.5px;
-    padding: 2px 7px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
-    white-space: nowrap;
-    pointer-events: none;
-  }
-
-  .robo-status-tag.offline {
-    border-color: #f59e0b;
-    color: #f59e0b;
-    box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
-  }
-
+  /* Balão de Diálogo Acima da Cabeça */
   .robo-balao-cenario {
     position: absolute;
-    bottom: calc(100% + 12px);
+    bottom: calc(100% + 14px);
     left: 50%;
     transform: translateX(-50%) scale(0.9);
     background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(4, 13, 26, 0.98) 100%);
     border: 1.5px solid #38bdf8;
     color: #f8fafc;
-    padding: 6px 13px;
+    padding: 7px 14px;
     border-radius: 12px;
     font-size: 11.5px;
     font-weight: 700;
@@ -21902,227 +21769,25 @@ window.addEventListener('DOMContentLoaded', () => {
   <div id="btn-flutuante-robo" title="Robô Mecânico 4.0 IA - Assistente Industrial de Campo (Toque para interagir)" style="display:none;">
     <div class="robo-status-tag" id="tagStatusRedeRobo">🟢 IA ONLINE</div>
     
-    <!-- Robô Humanoide Completo que Anda pelo App com Uniforme Azul Escuro e Chave Combinada 22mm -->
+    <!-- Robô Humanoide Completo e Robusto com Macacão Azul Escuro e Chave Combinada 22mm -->
     <div class="robo-walker-wrapper rw-parado" id="roboWalkerChar">
-      <svg class="robo-walker-svg" viewBox="0 0 110 148" width="102" height="138" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <!-- Gradiente Armadura Azul Escuro Industrial Oficial -->
-          <linearGradient id="rw_armadura_azul" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#143a6d"/>
-            <stop offset="40%" stop-color="#091f3d"/>
-            <stop offset="85%" stop-color="#051224"/>
-            <stop offset="100%" stop-color="#020812"/>
-          </linearGradient>
+      <!-- Imagem Ultra-Realista do Robô Humanoide com Fundo Transparente -->
+      <img src="assets/mecanico_robo_humanoide.png?v=4.2" id="imgRoboHumanoide" alt="Robô Mecânico 4.0 IA" class="robo-human-img" onerror="this.src='assets/mecanico_robo_ia.png'">
 
-          <!-- Gradiente Titânio / Articulações -->
-          <linearGradient id="rw_titanio" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#cbd5e1"/>
-            <stop offset="40%" stop-color="#64748b"/>
-            <stop offset="85%" stop-color="#334155"/>
-            <stop offset="100%" stop-color="#1e293b"/>
-          </linearGradient>
+      <!-- Feixe Laser de Varredura no Visor do Capacete -->
+      <div class="robo-visor-laser-fx"></div>
 
-          <!-- Gradiente Chave Cromada Espelhada 22mm -->
-          <linearGradient id="rw_chave_cromada" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#ffffff"/>
-            <stop offset="25%" stop-color="#e2e8f0"/>
-            <stop offset="50%" stop-color="#94a3b8"/>
-            <stop offset="75%" stop-color="#475569"/>
-            <stop offset="100%" stop-color="#cbd5e1"/>
-          </linearGradient>
+      <!-- Brilho Especular Dinâmico Passando na Chave Combinada -->
+      <div class="robo-chave-gleam-fx"></div>
 
-          <!-- Gradiente Visor Laser Ciano Neon -->
-          <linearGradient id="rw_visor_neon" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#00f2fe"/>
-            <stop offset="35%" stop-color="#38bdf8"/>
-            <stop offset="50%" stop-color="#ffffff"/>
-            <stop offset="65%" stop-color="#38bdf8"/>
-            <stop offset="100%" stop-color="#0284c7"/>
-          </linearGradient>
-
-          <!-- Gradiente Reator Arc Core -->
-          <radialGradient id="rw_reator_glow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#ffffff"/>
-            <stop offset="40%" stop-color="#00f2fe"/>
-            <stop offset="80%" stop-color="#0284c7"/>
-            <stop offset="100%" stop-color="transparent"/>
-          </radialGradient>
-
-          <!-- Gradiente Sombra de Contato com o Chão -->
-          <radialGradient id="rw_sombra_chao" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="rgba(0, 0, 0, 0.75)"/>
-            <stop offset="60%" stop-color="rgba(0, 0, 0, 0.35)"/>
-            <stop offset="100%" stop-color="transparent"/>
-          </radialGradient>
-
-          <!-- Gradiente Propulsor de Plasma dos Pés -->
-          <radialGradient id="rw_plasma_pe" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#ffffff"/>
-            <stop offset="35%" stop-color="#00f2fe"/>
-            <stop offset="70%" stop-color="#0284c7"/>
-            <stop offset="100%" stop-color="transparent"/>
-          </radialGradient>
-
-          <!-- Filtro de Brilho Neon -->
-          <filter id="rw_glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="2" result="blur"/>
-            <feMerge>
-              <feMergeNode in="blur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-        </defs>
-
-        <!-- 1. SOMBRA DE CONTATO DINÂMICA NO CHÃO -->
-        <ellipse class="rw-ground-shadow" cx="52" cy="142" rx="30" ry="5.5" fill="url(#rw_sombra_chao)"/>
-
-        <!-- 2. PERNA ESQUERDA (AO FUNDO) -->
-        <g class="rw-leg rw-leg-left" transform-origin="43px 88px">
-          <rect x="37" y="86" width="11" height="22" rx="4" fill="url(#rw_armadura_azul)" stroke="#020812" stroke-width="0.8"/>
-          <rect x="44" y="89" width="3" height="16" rx="1.5" fill="url(#rw_titanio)"/>
-          <circle cx="42.5" cy="108" r="5" fill="url(#rw_titanio)" stroke="#0c2340" stroke-width="0.8"/>
-          <circle cx="42.5" cy="108" r="2" fill="#00f2fe" opacity="0.8"/>
-          <g class="rw-knee-flex" transform-origin="42.5px 108px">
-            <path d="M38 109 L47 109 L46 128 L37 128 Z" fill="url(#rw_armadura_azul)" stroke="#020812" stroke-width="0.8"/>
-            <line x1="44" y1="110" x2="44" y2="126" stroke="#94a3b8" stroke-width="1.8"/>
-            <circle cx="41.5" cy="128" r="3.5" fill="url(#rw_titanio)"/>
-            <path d="M33 131 L48 131 L50 138 L31 138 Z" fill="#0c192c" stroke="#38bdf8" stroke-width="0.7"/>
-            <rect x="31" y="137" width="19" height="3" rx="1" fill="#0284c7"/>
-            <rect x="34" y="138" width="3" height="1.5" fill="#00f2fe"/>
-            <rect x="42" y="138" width="3" height="1.5" fill="#00f2fe"/>
-            <ellipse class="rw-boot-flame" cx="41" cy="142" rx="7" ry="3" fill="url(#rw_plasma_pe)" style="display:none;"/>
-          </g>
-        </g>
-
-        <!-- 3. PERNA DIREITA (À FRENTE) -->
-        <g class="rw-leg rw-leg-right" transform-origin="61px 88px">
-          <rect x="55" y="86" width="11" height="22" rx="4" fill="url(#rw_armadura_azul)" stroke="#020812" stroke-width="0.8"/>
-          <rect x="62" y="89" width="3" height="16" rx="1.5" fill="url(#rw_titanio)"/>
-          <circle cx="60.5" cy="108" r="5" fill="url(#rw_titanio)" stroke="#0c2340" stroke-width="0.8"/>
-          <circle cx="60.5" cy="108" r="2" fill="#00f2fe" opacity="0.8"/>
-          <g class="rw-knee-flex" transform-origin="60.5px 108px">
-            <path d="M56 109 L65 109 L64 128 L55 128 Z" fill="url(#rw_armadura_azul)" stroke="#020812" stroke-width="0.8"/>
-            <line x1="62" y1="110" x2="62" y2="126" stroke="#94a3b8" stroke-width="1.8"/>
-            <circle cx="59.5" cy="128" r="3.5" fill="url(#rw_titanio)"/>
-            <path d="M51 131 L66 131 L68 138 L49 138 Z" fill="#0c192c" stroke="#38bdf8" stroke-width="0.7"/>
-            <rect x="49" y="137" width="19" height="3" rx="1" fill="#0284c7"/>
-            <rect x="52" y="138" width="3" height="1.5" fill="#00f2fe"/>
-            <rect x="60" y="138" width="3" height="1.5" fill="#00f2fe"/>
-            <ellipse class="rw-boot-flame" cx="59" cy="142" rx="7" ry="3" fill="url(#rw_plasma_pe)" style="display:none;"/>
-          </g>
-        </g>
-
-        <!-- 4. TRONCO, CABEÇA E BRAÇOS -->
-        <g class="rw-torso-group">
-          <!-- Pelve e Abdômen -->
-          <path d="M36 80 L68 80 L64 90 L40 90 Z" fill="#071529" stroke="#1e293b" stroke-width="0.8"/>
-          <rect x="47" y="81" width="10" height="7" rx="1.5" fill="#f59e0b" stroke="#000" stroke-width="0.5"/>
-          <circle cx="52" cy="84.5" r="2" fill="#091b36"/>
-
-          <path d="M42 74 Q40 79 44 83" fill="none" stroke="#38bdf8" stroke-width="1.2"/>
-          <path d="M62 74 Q64 79 60 83" fill="none" stroke="#38bdf8" stroke-width="1.2"/>
-          <rect x="44" y="73" width="16" height="9" rx="2" fill="#1e293b"/>
-          <circle cx="47" cy="77.5" r="1.5" fill="#94a3b8"/>
-          <circle cx="52" cy="77.5" r="1.5" fill="#94a3b8"/>
-          <circle cx="57" cy="77.5" r="1.5" fill="#94a3b8"/>
-
-          <!-- BRAÇO ESQUERDO -->
-          <g class="rw-arm rw-arm-left" transform-origin="34px 54px">
-            <path d="M26 48 C26 44 38 44 38 48 L37 57 L26 57 Z" fill="url(#rw_armadura_azul)" stroke="#020812" stroke-width="0.8"/>
-            <rect x="27" y="56" width="8" height="15" rx="3" fill="url(#rw_titanio)"/>
-            <circle cx="31" cy="71" r="3.5" fill="#091b36" stroke="#38bdf8" stroke-width="0.5"/>
-            <path d="M27 71 L35 71 L34 85 L28 85 Z" fill="url(#rw_armadura_azul)" stroke="#020812" stroke-width="0.7"/>
-            <path d="M27 85 C25 87 25 91 29 93 L33 93 C36 91 36 87 34 85 Z" fill="#0c192c" stroke="#f59e0b" stroke-width="0.8"/>
-          </g>
-
-          <!-- PEITORAL MECÂNICA 4.0 IA & REATOR ARC -->
-          <g class="rw-chest">
-            <path d="M30 50 L74 50 L70 76 L34 76 Z" fill="url(#rw_armadura_azul)" stroke="#020812" stroke-width="1"/>
-            
-            <!-- Listras Industriais Douradas nos Ombros -->
-            <polygon points="32,50 36,50 34,55 30,55" fill="#f59e0b"/>
-            <polygon points="38,50 42,50 40,55 36,55" fill="#f59e0b"/>
-            <polygon points="66,50 70,50 68,55 64,55" fill="#f59e0b"/>
-            <polygon points="72,50 74,50 72,55 70,55" fill="#f59e0b"/>
-
-            <!-- Placa Oficial "MECÂNICA 4.0 IA" -->
-            <rect x="36" y="55" width="32" height="6.5" rx="1.5" fill="#040d1a" stroke="#00f2fe" stroke-width="0.5"/>
-            <text x="52" y="60" font-family="'Segoe UI', Roboto, sans-serif" font-size="3.8" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="0.3">MECÂNICA 4.0 IA</text>
-
-            <!-- Reator Arc Core Central -->
-            <circle cx="52" cy="69" r="6" fill="#040d1a" stroke="#0284c7" stroke-width="0.8"/>
-            <circle class="rw-arc-core" cx="52" cy="69" r="4.2" fill="url(#rw_reator_glow)" filter="url(#rw_glow)"/>
-            <circle cx="52" cy="69" r="1.8" fill="#ffffff"/>
-            <ellipse cx="52" cy="69" rx="7.5" ry="3" fill="none" stroke="#00f2fe" stroke-width="0.5" stroke-dasharray="2 1.5" opacity="0.85"/>
-
-            <circle cx="33" cy="53" r="1" fill="#94a3b8"/>
-            <circle cx="71" cy="53" r="1" fill="#94a3b8"/>
-            <circle cx="36" cy="73" r="1" fill="#94a3b8"/>
-            <circle cx="68" cy="73" r="1" fill="#94a3b8"/>
-          </g>
-
-          <!-- CABEÇA & CAPACETE DE ENGENHARIA -->
-          <g class="rw-head" transform-origin="52px 48px">
-            <rect x="48" y="44" width="8" height="7" rx="1" fill="url(#rw_titanio)"/>
-            <path d="M36 26 C36 17 68 17 68 26 L70 42 C70 45 66 47 52 47 C38 47 34 45 34 42 Z" fill="url(#rw_armadura_azul)" stroke="#020812" stroke-width="1"/>
-            
-            <!-- Crista Superior com LED -->
-            <rect x="49" y="16" width="6" height="8" rx="2" fill="url(#rw_titanio)"/>
-            <circle class="rw-antenna-led" cx="52" cy="15" r="2.2" fill="#22c55e" filter="url(#rw_glow)"/>
-
-            <rect x="32" y="29" width="4" height="12" rx="1.5" fill="#1e293b" stroke="#38bdf8" stroke-width="0.5"/>
-            <circle cx="34" cy="35" r="1.2" fill="#94a3b8"/>
-            <rect x="68" y="29" width="4" height="12" rx="1.5" fill="#1e293b" stroke="#38bdf8" stroke-width="0.5"/>
-            <circle cx="70" cy="35" r="1.2" fill="#94a3b8"/>
-
-            <!-- Visor Laser Panorâmico -->
-            <rect x="37" y="27" width="30" height="11" rx="3.5" fill="#040b14" stroke="#38bdf8" stroke-width="1.2"/>
-            <g class="rw-visor-laser-group" clip-path="url(#rw_clip_visor)">
-              <clipPath id="rw_clip_visor">
-                <rect x="38" y="28" width="28" height="9" rx="2.5"/>
-              </clipPath>
-              <rect x="38" y="28" width="28" height="9" fill="url(#rw_visor_neon)" opacity="0.4"/>
-              <line class="rw-laser-sweep" x1="42" y1="28" x2="42" y2="37" stroke="#ffffff" stroke-width="2.2" filter="url(#rw_glow)"/>
-              <circle cx="45" cy="32.5" r="2" fill="#00f2fe"/>
-              <circle cx="45" cy="32.5" r="0.8" fill="#ffffff"/>
-              <circle cx="59" cy="32.5" r="2" fill="#00f2fe"/>
-              <circle cx="59" cy="32.5" r="0.8" fill="#ffffff"/>
-            </g>
-
-            <path d="M44 41 L60 41 L57 45 L47 45 Z" fill="#091b36" stroke="#1e293b" stroke-width="0.6"/>
-            <line x1="47" y1="43" x2="57" y2="43" stroke="#94a3b8" stroke-width="0.6"/>
-          </g>
-
-          <!-- BRAÇO DIREITO COM CHAVE COMBINADA CROMADA 22MM -->
-          <g class="rw-arm rw-arm-right" transform-origin="70px 54px">
-            <path d="M66 48 C66 44 78 44 78 48 L77 57 L66 57 Z" fill="url(#rw_armadura_azul)" stroke="#020812" stroke-width="0.8"/>
-            <rect x="69" y="56" width="8" height="14" rx="3" fill="url(#rw_titanio)"/>
-            <circle cx="73" cy="70" r="3.5" fill="#091b36" stroke="#38bdf8" stroke-width="0.5"/>
-            <path d="M69 70 L77 70 L80 82 L72 82 Z" fill="url(#rw_armadura_azul)" stroke="#020812" stroke-width="0.7"/>
-            <circle cx="76" cy="83" r="4.5" fill="#0c192c" stroke="#f59e0b" stroke-width="0.8"/>
-
-            <!-- CHAVE COMBINADA 22MM -->
-            <g class="rw-wrench-tool" transform="translate(76, 83) rotate(-35)">
-              <rect x="-3" y="-36" width="6" height="60" rx="2" fill="url(#rw_chave_cromada)" stroke="#091b36" stroke-width="0.6"/>
-              <line x1="-1" y1="-32" x2="-1" y2="20" stroke="#ffffff" stroke-width="0.8" opacity="0.9"/>
-              <line x1="1" y1="-32" x2="1" y2="20" stroke="#334155" stroke-width="0.8" opacity="0.7"/>
-              <text x="0" y="-8" font-family="'Segoe UI', Roboto, sans-serif" font-size="3.2" font-weight="900" fill="#091b36" text-anchor="middle" transform="rotate(90 0 -8)" letter-spacing="0.4">22mm • 4.0 IA</text>
-
-              <path d="M-6 -36 C-8 -40 -6 -47 0 -48 C6 -47 8 -40 6 -36 L2 -36 L0 -39 L-2 -36 Z" fill="url(#rw_chave_cromada)" stroke="#091b36" stroke-width="0.7"/>
-              <polygon points="0,-45 4,-38 2,-36 -2,-36 -4,-38" fill="#06101d"/>
-
-              <circle cx="0" cy="28" r="7.5" fill="url(#rw_chave_cromada)" stroke="#091b36" stroke-width="0.7"/>
-              <circle cx="0" cy="28" r="4.5" fill="#06101d"/>
-              <polygon points="0,24 1,26.5 3.5,26 2,28 3.5,30 1,29.5 0,32 -1,29.5 -3.5,30 -2,28 -3.5,26 -1,26.5" fill="#f59e0b" opacity="0.85"/>
-            </g>
-          </g>
-        </g>
-      </svg>
+      <!-- Propulsor de Plasma sob as Botas (ativo ao flutuar/arrastar) -->
+      <div class="robo-plasma-thruster-fx"></div>
     </div>
 
     <!-- Balão de Diálogo Dinâmico do Robô Mecânico -->
     <div class="robo-balao-cenario" id="balaoFalaRoboCenario">💬 Olá! Toque em mim para conversarmos!</div>
   </div>
+
   <!-- ================= JANELA FLUTUANTE DO ROBÔ IA (100% FUNCIONAL COM 5 ABAS) ================= -->
   <div id="modal-robo-flutuante-ia" class="robo-modal-overlay" style="display:none;">
     <div class="robo-modal-window">
