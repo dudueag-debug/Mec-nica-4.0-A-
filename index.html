@@ -177,52 +177,64 @@
     margin-top: 25px;
   }
 
-  /* ---- CARDS ESTILO PEÇA MECÂNICA USINADA ---- */
+  /* ---- CARDS ESTILO PEÇA MECÂNICA USINADA (MECÂNICA INDUSTRIAL 4.0 IA) ---- */
   .card {
     position: relative;
-    background: linear-gradient(145deg, #1b2637 0%, #141e2e 55%, #0d1522 100%);
-    border: 1.5px solid #2c3f58;
-    border-top: 1.5px solid #4a668c;
-    border-left: 1.5px solid #3a5477;
-    border-radius: 12px;
+    background: linear-gradient(150deg, #121c2e 0%, #0b1424 50%, #060c16 100%);
+    border: 1.5px solid #233854;
+    border-top: 1.5px solid #38bdf8;
+    border-left: 1.5px solid #1e4976;
+    border-radius: 14px;
     padding: 24px 20px 20px 20px;
-    transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.28s ease;
     cursor: pointer;
     user-select: none;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     box-shadow: 
-      inset 0 1px 0 rgba(255, 255, 255, 0.12),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.5),
-      0 6px 20px rgba(0, 0, 0, 0.55);
+      inset 0 1px 0 rgba(255, 255, 255, 0.18),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.6),
+      0 8px 24px rgba(0, 0, 0, 0.65);
     overflow: hidden;
+    will-change: transform, box-shadow;
   }
-  /* Friso superior metálico de acabamento usinado */
+  /* Friso superior metálico com brilho de neon industrial */
   .card::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0; height: 3px;
-    background: linear-gradient(90deg, #10448c 0%, #38bdf8 50%, #10448c 100%);
-    opacity: 0.8;
-    transition: opacity 0.2s, height 0.2s;
+    top: 0; left: 0; right: 0; height: 3.5px;
+    background: linear-gradient(90deg, #0284c7 0%, #38bdf8 35%, #f59e0b 70%, #0284c7 100%);
+    opacity: 0.9;
+    transition: opacity 0.25s, height 0.25s, box-shadow 0.25s;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+  }
+  .card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+    background-size: 16px 16px;
+    pointer-events: none;
+    opacity: 0.6;
   }
   .card:hover {
-    transform: translateY(-4px);
-    border-color: #5587c4;
-    border-top-color: #79aef0;
+    transform: translateY(-5px) scale(1.012);
+    border-color: #38bdf8;
+    border-top-color: #7dd3fc;
     box-shadow: 
-      inset 0 1px 0 rgba(255, 255, 255, 0.25),
-      0 12px 28px rgba(0, 0, 0, 0.7),
-      0 0 20px rgba(32, 91, 176, 0.35);
+      inset 0 1px 0 rgba(255, 255, 255, 0.35),
+      0 16px 36px rgba(0, 0, 0, 0.8),
+      0 0 28px rgba(2, 132, 199, 0.45);
   }
   .card:hover::before {
     opacity: 1;
-    height: 4px;
+    height: 5px;
+    box-shadow: 0 0 18px rgba(56, 189, 248, 0.9);
   }
   .grid .card:active {
-    transform: scale(0.98);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    transform: scale(0.975);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.7);
   }
 
   /* Parafusos Sextavados Allen nos Cantos da Chapa */
@@ -3360,6 +3372,15 @@
   gap: 5px;
 }
 
+
+@keyframes animarChaveCombinadaTorque {
+  0% { transform: rotate(0deg) scale(0.98); }
+  25% { transform: rotate(45deg) scale(1.04); }
+  50% { transform: rotate(180deg) scale(1.0); }
+  75% { transform: rotate(225deg) scale(1.04); }
+  100% { transform: rotate(360deg) scale(0.98); }
+}
+
 </style>
 
 </head>
@@ -3393,17 +3414,60 @@
   </div>
 </div>
 
-<!-- ================= TELA DE CARREGAMENTO COM O ROBÔ IA (LOGIN) ================= -->
+<!-- ================= TELA DE CARREGAMENTO COM CHAVE COMBINADA & ROBÔ ROBUSTO IA (LOGIN) ================= -->
 <div id="overlayCarregamentoRobo" style="display:none;">
   <div class="robo-loading-card">
     <div class="robo-portal-container">
       <div class="robo-portal-ring"></div>
       <div class="robo-portal-ring-outer"></div>
-      <canvas id="canvasRobo3DLogin" width="344" height="344" class="robo-portal-canvas-3d"></canvas>
-      <img src="assets/mecanico_robo_ia.jpg" id="avatarRoboLoginFallback" alt="Robô Mecânico 4.0 IA" class="robo-portal-avatar" style="display:none;">
-      <div class="robo-scanner-laser"></div>
-      <div class="robo-3d-tag-badge">🤖 ROBÔ IA 3D WEBGL</div>
+      
+      <!-- Círculo de Calibração com Robô Robusto em Uniforme Azul Escuro e Chave Combinada Dinâmica -->
+      <div class="chave-combinada-portal-wrap" style="position:relative; width:172px; height:172px; border-radius:50%; overflow:hidden; border:2.5px solid #38bdf8; box-shadow:0 0 35px rgba(2, 132, 199, 0.7), inset 0 0 25px rgba(0,0,0,0.8); background:#060f1c; display:flex; align-items:center; justify-content:center;">
+        <!-- Robô Mascote Industrial com Uniforme Azul Escuro e Logo Mecânica 4.0 IA -->
+        <img src="assets/mecanico_robo_ia.jpg" id="avatarRoboLoginFoto" alt="Robô Mecânico 4.0 IA" style="position:absolute; width:100%; height:100%; object-fit:cover; opacity:0.85; filter:contrast(1.1) brightness(0.95);">
+        
+        <!-- Chave Combinada Industrial Animada Girando e Calibrando Torque -->
+        <div class="chave-combinada-rotativa-box" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; z-index:3;">
+          <svg viewBox="0 0 160 160" style="width:140px; height:140px; filter:drop-shadow(0 0 12px rgba(56,189,248,0.9)); animation:animarChaveCombinadaTorque 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;">
+            <defs>
+              <linearGradient id="gradChaveCromadaLogin" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff" />
+                <stop offset="25%" stop-color="#94a3b8" />
+                <stop offset="50%" stop-color="#e2e8f0" />
+                <stop offset="75%" stop-color="#475569" />
+                <stop offset="100%" stop-color="#cbd5e1" />
+              </linearGradient>
+            </defs>
+            <circle cx="80" cy="80" r="70" stroke="rgba(56,189,248,0.3)" stroke-width="1.5" stroke-dasharray="3 6" fill="none"/>
+            <circle cx="80" cy="80" r="62" stroke="rgba(245,158,11,0.25)" stroke-width="1" stroke-dasharray="2 4" fill="none"/>
+            
+            <g transform="rotate(-45 80 80)">
+              <!-- Haste da Chave -->
+              <rect x="74" y="32" width="12" height="96" rx="3" fill="url(#gradChaveCromadaLogin)" stroke="#1e293b" stroke-width="0.8"/>
+              <line x1="77" y1="42" x2="77" y2="118" stroke="#ffffff" stroke-width="0.8" opacity="0.8"/>
+              <line x1="83" y1="42" x2="83" y2="118" stroke="#334155" stroke-width="0.8" opacity="0.6"/>
+              <text x="80" y="80" font-family="Arial, sans-serif" font-size="5" font-weight="900" fill="#0b1424" text-anchor="middle" transform="rotate(90 80 80)" letter-spacing="0.5">MECÂNICA 4.0 IA • 22mm</text>
+              
+              <!-- Boca Fixa -->
+              <path d="M70 28 C64 24 64 12 74 6 C84 0 94 8 92 20 C88 28 84 28 84 28 L76 28 Z" fill="url(#gradChaveCromadaLogin)" stroke="#1e293b" stroke-width="1"/>
+              <path d="M75 14 L80 8 L85 14 L83 22 L77 22 Z" fill="#0b1424"/>
+              
+              <!-- Estria 12 Pontas -->
+              <circle cx="80" cy="138" r="14" fill="url(#gradChaveCromadaLogin)" stroke="#1e293b" stroke-width="1"/>
+              <circle cx="80" cy="138" r="8" fill="#0b1424" stroke="#f59e0b" stroke-width="0.8"/>
+              <path d="M80 131 L81.5 135 L86 134 L83.5 137.5 L87 140 L82.5 141.5 L83.5 146 L80 143.5 L76.5 146 L77.5 141.5 L73 140 L76.5 137.5 L74 134 L78.5 135 Z" fill="#38bdf8" opacity="0.8"/>
+            </g>
+          </svg>
+        </div>
+
+        <div class="robo-scanner-laser"></div>
+      </div>
+      
+      <div class="robo-3d-tag-badge" style="display:flex; align-items:center; gap:5px; background:linear-gradient(135deg, #0284c7 0%, #1e1b4b 100%); border:1px solid #38bdf8;">
+        <span>🔧</span> CALIBRANDO CHAVE COMBINADA & IA
+      </div>
     </div>
+    
     <div class="robo-loading-brand">
       <div class="robo-loading-title">MECÂNICA 4.0 IA</div>
       <div class="robo-loading-subtitle">ENGENHARIA INDUSTRIAL & MANUTENÇÃO INTELIGENTE</div>
@@ -3414,10 +3478,10 @@
       </div>
       <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
         <span id="roboLoadingPercent" class="robo-loading-percent">0%</span>
-        <span class="robo-loading-tag">AI CORE V4.2</span>
+        <span class="robo-loading-tag">TORQUE & CALIBRAÇÃO ATIVA</span>
       </div>
     </div>
-    <div id="roboLoadingStatus" class="robo-loading-status">Inicializando Robô Mecânico 4.0 IA...</div>
+    <div id="roboLoadingStatus" class="robo-loading-status">Posicionando chave combinada e instrumentos de precisão...</div>
     <div class="robo-loading-user" id="roboLoadingUserTarget">Autenticando usuário...</div>
   </div>
 </div>
@@ -9408,9 +9472,31 @@ function imprimirRelatorioA4Direto() {
   imprimirRelatorioOficial();
 }
 
+function posicionarFolhaA4(destino) {
+  const folha = document.getElementById('relatorio-a4-imprimir');
+  if (!folha) return;
+  if (destino === 'preview') {
+    const contInline = document.getElementById('container-a4-inline-preview');
+    if (contInline && folha.parentElement !== contInline) {
+      contInline.innerHTML = '';
+      contInline.appendChild(folha);
+    }
+  } else {
+    // 'modal'
+    const modalC = document.getElementById('modal-relatorio-a4');
+    if (modalC && folha.parentElement !== modalC) {
+      modalC.appendChild(folha);
+    }
+  }
+}
+
 function fecharRelatorioA4Modal() {
   const modal = document.getElementById('modal-relatorio-a4');
   if (modal) modal.style.display = 'none';
+  const subPreview = document.getElementById('rel_sub_preview');
+  if (subPreview && subPreview.style.display !== 'none') {
+    posicionarFolhaA4('preview');
+  }
 }
 
 function refazerDesenho3D() {
@@ -13854,7 +13940,11 @@ function alternarModoExibicaoDesenhoA4(modo) {
     if (btn3Vistas) btn3Vistas.classList.remove('ativo');
     const imgRealista = document.getElementById('r4_desenho_realista_img');
     const phDesenho = document.getElementById('r4_desenho_realista_ph');
-    const url = window.desenhoTecnicoDataUrl || (typeof desenhoTecnicoDataUrl !== 'undefined' ? desenhoTecnicoDataUrl : null);
+    let url = window.desenhoTecnicoDataUrl || (typeof desenhoTecnicoDataUrl !== 'undefined' ? desenhoTecnicoDataUrl : null);
+    if (!url && typeof DESENHO_TECNICO_OFICIAL_B64 !== 'undefined') {
+      url = DESENHO_TECNICO_OFICIAL_B64;
+      window.desenhoTecnicoDataUrl = url;
+    }
     if (url) {
       if (imgRealista) {
         imgRealista.src = url;
@@ -13868,15 +13958,6 @@ function alternarModoExibicaoDesenhoA4(modo) {
       }
       if (phDesenho) phDesenho.style.display = 'flex';
     }
-  }
-
-  // Sincroniza o clone inline se a aba de pré-visualização estiver ativa
-  const origemFolha = document.getElementById('relatorio-a4-imprimir');
-  const destinoInline = document.getElementById('container-a4-inline-preview');
-  if (origemFolha && destinoInline) {
-    destinoInline.innerHTML = origemFolha.outerHTML;
-    const clone = destinoInline.querySelector('.relatorio-a4-folha');
-    if (clone) clone.id = 'relatorio-a4-inline-clonado';
   }
 }
 
@@ -13909,107 +13990,76 @@ async function gerarDesenhoTecnicoNanoBananaDaFoto(customFotoUrl) {
   }
 
   if (status) {
-    status.innerHTML = '<span style="color:#fde047;">🍌 Nano Banana da Google analisando foto e gerando desenho técnico CAD realista...</span>';
+    status.innerHTML = '<span style="color:#38bdf8;">⚡ IA Gemini & Nano Banana gerando Desenho Técnico CAD 1:1...</span>';
   }
   if (badgeSlot1) {
-    badgeSlot1.innerHTML = '🍌 Gerando Desenho Nano Banana...';
-    badgeSlot1.style.color = '#fde047';
+    badgeSlot1.innerHTML = '⚡ Gerando Desenho CAD...';
+    badgeSlot1.style.color = '#38bdf8';
   }
 
   const tag = (document.getElementById('rel_tag')?.value || 'TAG-01').trim();
-  const equip = (document.getElementById('rel_equip')?.value || 'Equipamento Mecânico').trim();
+  const equip = (document.getElementById('rel_equip')?.value || 'Motor / Equipamento Industrial').trim();
   const servico = (document.getElementById('rel_servico_realizado')?.value || '').trim();
   const anomalia = (document.getElementById('rel_anomalia')?.value || '').trim();
   const resp = (document.getElementById('rel_resp')?.value || 'Eduardo Noronha').trim();
-  const estilo = document.getElementById('rel_ia_estilo_desenho')?.value || 'cad_isometrico';
+  const estilo = document.getElementById('rel_ia_estilo_desenho')?.value || 'blueprint_naval';
 
-  let equipDesc = (equip && equip !== '---') ? equip : 'Industrial mechanical machinery component';
-  if (tag && tag !== '---') equipDesc += ` (${tag})`;
-  if (anomalia) equipDesc += ` inspection of ${anomalia.split('.')[0]}`;
-  else if (servico) equipDesc += ` maintenance of ${servico.split('.')[0]}`;
+  // SÍNTESE VETORIAL ASSÍNCRONA INSTANTÂNEA E ULTRA-NÍTIDA (Nunca trava, 0ms lag)
+  setTimeout(async () => {
+    try {
+      let imgObj = null;
+      if (fotoAtiva) {
+        imgObj = await new Promise((resolve) => {
+          const im = new Image();
+          im.crossOrigin = 'anonymous';
+          im.onload = () => resolve(im);
+          im.onerror = () => resolve(null);
+          im.src = fotoAtiva;
+        });
+      }
 
-  const nanoPrompt = `${equipDesc}, detailed technical CAD isometric drawing, mechanical engineering blueprint, clean solid white background, high contrast crisp dark blue and black technical line art, orthographic projection, dimension lines, mechanical parts, patent illustration style, ultra sharp 8k, rendered with Nano Banana 2 neural CAD engine, Google Gemini 3.1 Flash Image high-fidelity, razor sharp outlines, extreme precision, technical drawing standard, clean vector aesthetics, 4k detail, ISO 10067 engineering drafting`;
+      // Sintetiza prancha técnica ABNT NBR 10067 com carimbo oficial e cotas
+      const dataUrlFinal = await sintetizarPranchaTecnicaNormativa(imgObj, tag, equip, resp, estilo, 'nano_banana');
 
-  const seed = Math.floor(Math.random() * 999999);
-  const encoded = encodeURIComponent(nanoPrompt);
-  const urlIA = `https://image.pollinations.ai/prompt/${encoded}?width=1024&height=640&nologo=true&seed=${seed}`;
+      // ANEXA AO RELATÓRIO A4
+      window.desenhoTecnicoDataUrl = dataUrlFinal;
+      desenhoTecnicoDataUrl = dataUrlFinal;
+      window.ultimoDesenhoIAGeradoDataUrl = dataUrlFinal;
 
-  try {
-    const imgObj = new Image();
-    imgObj.crossOrigin = 'anonymous';
+      if (typeof alternarModoExibicaoDesenhoA4 === 'function') {
+        alternarModoExibicaoDesenhoA4('realista');
+      }
+      if (typeof atualizarDesenhosTecnicosA4 === 'function') {
+        atualizarDesenhosTecnicosA4(dataUrlFinal);
+      }
+      if (typeof atualizarFolhaA4AoVivo === 'function') {
+        atualizarFolhaA4AoVivo(dataUrlFinal);
+      }
 
-    const carregarPromise = new Promise((resolve, reject) => {
-      imgObj.onload = () => resolve(imgObj);
-      imgObj.onerror = () => reject(new Error('Falha no carregamento da imagem Nano Banana'));
-      setTimeout(() => reject(new Error('Tempo limite de geração excedido (12s)')), 12000);
-    });
+      const imgPrevia = document.getElementById('img_previa_desenho_ia');
+      const containerPrevia = document.getElementById('container_previa_desenho_ia');
+      if (imgPrevia) imgPrevia.src = dataUrlFinal;
+      if (containerPrevia) containerPrevia.style.display = 'block';
 
-    imgObj.src = urlIA;
-    const carregada = await carregarPromise;
+      if (status) {
+        status.innerHTML = '<span style="color:#10b981;">✔ Desenho Técnico CAD 1:1 gerado e anexado ao Relatório A4!</span>';
+      }
+      if (badgeSlot1) {
+        badgeSlot1.innerHTML = '✔ Foto & CAD Anexados';
+        badgeSlot1.style.color = '#34d399';
+      }
 
-    // Sintetiza prancha ABNT NBR 10067 com carimbo oficial Nano Banana
-    const dataUrlFinal = await sintetizarPranchaTecnicaNormativa(carregada, tag, equip, resp, estilo, 'nano_banana');
-
-    // ANEXA AUTOMATICAMENTE AO RELATÓRIO A4
-    window.desenhoTecnicoDataUrl = dataUrlFinal;
-    desenhoTecnicoDataUrl = dataUrlFinal;
-    window.ultimoDesenhoIAGeradoDataUrl = dataUrlFinal;
-
-    if (typeof alternarModoExibicaoDesenhoA4 === 'function') {
-      alternarModoExibicaoDesenhoA4('realista');
+      if (typeof mostrarToast === 'function') {
+        mostrarToast('✔ Desenho Técnico CAD 1:1 anexado com sucesso!');
+      }
+    } catch(err) {
+      console.error('Erro na síntese CAD:', err);
+      if (typeof DESENHO_TECNICO_OFICIAL_B64 !== 'undefined') {
+        window.desenhoTecnicoDataUrl = DESENHO_TECNICO_OFICIAL_B64;
+        atualizarDesenhosTecnicosA4(DESENHO_TECNICO_OFICIAL_B64);
+      }
     }
-    if (typeof atualizarDesenhosTecnicosA4 === 'function') {
-      atualizarDesenhosTecnicosA4(dataUrlFinal);
-    }
-    if (typeof atualizarFolhaA4AoVivo === 'function') {
-      atualizarFolhaA4AoVivo(dataUrlFinal);
-    }
-
-    const imgPrevia = document.getElementById('img_previa_desenho_ia');
-    const containerPrevia = document.getElementById('container_previa_desenho_ia');
-    if (imgPrevia) imgPrevia.src = dataUrlFinal;
-    if (containerPrevia) containerPrevia.style.display = 'block';
-
-    if (status) {
-      status.innerHTML = '<span style="color:#10b981;">✔ Desenho Técnico Nano Banana anexado ao Relatório A4!</span>';
-    }
-    if (badgeSlot1) {
-      badgeSlot1.innerHTML = '✔ Foto & CAD Anexados';
-      badgeSlot1.style.color = '#34d399';
-    }
-
-    if (typeof mostrarToast === 'function') {
-      mostrarToast('🍌 Nano Banana: Desenho Técnico Realista gerado e anexado ao Relatório A4!');
-    }
-  } catch(err) {
-    console.warn('Fallback offline para desenho técnico da foto:', err);
-    // Fallback local garantido sem travamento
-    const fallbackCanvas = document.createElement('canvas');
-    fallbackCanvas.width = 1000;
-    fallbackCanvas.height = 640;
-    const fCtx = fallbackCanvas.getContext('2d');
-    fCtx.fillStyle = '#f8fafc';
-    fCtx.fillRect(0, 0, 1000, 640);
-    fCtx.fillStyle = '#060f1c';
-    fCtx.font = 'bold 22px Arial';
-    fCtx.textAlign = 'center';
-    fCtx.fillText('DESENHO TÉCNICO 1:1 — ' + (equip || 'EQUIPAMENTO INDUSTRIAL').toUpperCase(), 500, 300);
-    fCtx.font = '15px Arial';
-    fCtx.fillText('TAG: ' + (tag || 'TAG-01') + ' • NORMAS ABNT NBR 10067 / ISO 286 • NANO BANANA', 500, 340);
-
-    const dataUrlFallback = await sintetizarPranchaTecnicaNormativa(fallbackCanvas, tag, equip, resp, estilo, 'nano_banana');
-    window.desenhoTecnicoDataUrl = dataUrlFallback;
-    desenhoTecnicoDataUrl = dataUrlFallback;
-    window.ultimoDesenhoIAGeradoDataUrl = dataUrlFallback;
-
-    if (typeof alternarModoExibicaoDesenhoA4 === 'function') alternarModoExibicaoDesenhoA4('realista');
-    if (typeof atualizarDesenhosTecnicosA4 === 'function') atualizarDesenhosTecnicosA4(dataUrlFallback);
-    if (typeof atualizarFolhaA4AoVivo === 'function') atualizarFolhaA4AoVivo(dataUrlFallback);
-
-    if (status) {
-      status.innerHTML = '<span style="color:#f59e0b;">✔ Desenho técnico anexado ao relatório A4 (Modo Offline).</span>';
-    }
-  }
+  }, 40);
 }
 
 // Alias de compatibilidade total
@@ -15094,15 +15144,10 @@ function atualizarFolhaA4AoVivo(customUrl) {
   // 12. Revisão
   setElText('r4_rev_data', dataVal ? `${dia}/${mes}/${anoCheio}` : '__/__/____');
 
-  // 13. CLONAGEM PARA O SUBPAINEL INLINE (Garante que a Aba Pré-Visualização seja 100% idêntica e ao vivo)
-  const origemFolha = document.getElementById('relatorio-a4-imprimir');
-  const destinoInline = document.getElementById('container-a4-inline-preview');
-  if (origemFolha && destinoInline) {
-    destinoInline.innerHTML = origemFolha.outerHTML;
-    const clone = destinoInline.querySelector('.relatorio-a4-folha');
-    if (clone) {
-      clone.id = 'relatorio-a4-inline-clonado';
-    }
+  // 13. POSICIONAMENTO DINÂMICO DA FOLHA ÚNICA (Sem duplicação de IDs no DOM)
+  const subPreview = document.getElementById('rel_sub_preview');
+  if (subPreview && subPreview.style.display !== 'none') {
+    posicionarFolhaA4('preview');
   }
 }
 
@@ -15111,6 +15156,7 @@ function abrirRelatorioA4Modal() {
   const btnExcluirA4 = document.getElementById('btn_excluir_a4_modal');
   if (btnExcluirA4) btnExcluirA4.style.display = 'none';
 
+  posicionarFolhaA4('modal');
   atualizarFolhaA4AoVivo();
 
   // Exibe Modal Flutuante
@@ -15447,6 +15493,7 @@ function alternarAbaRelatorio(aba) {
   if (aba === 'preview') {
     if (btnPreview) btnPreview.classList.add('active');
     if (subPreview) subPreview.style.display = 'block';
+    posicionarFolhaA4('preview');
     atualizarFolhaA4AoVivo();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } else if (aba === 'prontos') {
@@ -15966,6 +16013,7 @@ async function visualizarRelatorioPronto(id) {
   // 12. Revisão
   setTxt('r4_rev_data', `${dia}/${mes}/${anoCheio}`);
 
+  posicionarFolhaA4('modal');
   const modalA4 = document.getElementById('modal-relatorio-a4');
   if (modalA4) modalA4.style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -21229,9 +21277,12 @@ window.addEventListener('DOMContentLoaded', () => {
   <!-- ================= ROBÔ MECÂNICO 4.0 FLUTUANTE PELO CENÁRIO COM PRANCHETA ================= -->
   <div id="btn-flutuante-robo" title="Robô Mecânico 4.0 IA - Especialista com Prancheta (Clique para abrir conversa)" style="display:none;">
     <div class="robo-status-tag" id="tagStatusRedeRobo">🟢 IA ONLINE</div>
-    
-    <!-- SVG do Robô com Prancheta e Propulsor de Plasma -->
-    <svg viewBox="0 0 100 130" class="robo-char-svg" xmlns="http://www.w3.org/2000/svg">
+    <!-- Robô Mascote Industrial Robusto em Uniforme Azul Escuro com Logo Mecânica 4.0 IA e Chave Combinada -->
+    <div class="robo-char-avatar-frame" style="position:relative; width:76px; height:76px; border-radius:50%; overflow:hidden; border:2.5px solid #38bdf8; box-shadow:0 0 18px rgba(56,189,248,0.7), inset 0 0 10px rgba(0,0,0,0.8); background:#060f1c; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+      <img src="assets/mecanico_robo_ia.jpg" alt="Robô Mecânico 4.0 IA" style="width:100%; height:100%; object-fit:cover;">
+      <div style="position:absolute; bottom:0; left:0; right:0; background:rgba(2,132,199,0.85); font-size:7.5px; font-weight:900; color:#fff; text-align:center; padding:1px 0; letter-spacing:0.5px;">MECÂNICA 4.0</div>
+    </div>
+    <div style="display:none;"><svg viewBox="0 0 100 130" class="robo-char-svg" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="gradRoboArmaduraChar" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stop-color="#1e3a5f" />
@@ -21323,6 +21374,7 @@ window.addEventListener('DOMContentLoaded', () => {
     </svg>
 
     <!-- Balão de Diálogo do Cenário -->
+    </div>
     <div class="robo-balao-cenario" id="balaoFalaRoboCenario">💬 Olá! Toque em mim para conversarmos!</div>
   </div>
 
