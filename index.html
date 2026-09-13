@@ -1650,13 +1650,13 @@
   }
 
   
-  /* ================= ROBÔ MECÂNICO 4.0 INDUSTRIAL ROBUSTO HUMANOIDE ================= */
+  /* ================= ROBÔ MECÂNICO 4.0 INDUSTRIAL ROBUSTO HUMANOIDE ARTICULADO ================= */
   #btn-flutuante-robo {
     position: fixed;
     bottom: 14px;
     right: 24px;
     width: 110px;
-    height: 146px;
+    height: 148px;
     cursor: pointer;
     z-index: 99999;
     display: flex;
@@ -1670,7 +1670,7 @@
   }
 
   #btn-flutuante-robo:hover {
-    filter: drop-shadow(0 8px 28px rgba(0, 242, 254, 0.7));
+    filter: drop-shadow(0 8px 28px rgba(0, 242, 254, 0.75));
   }
 
   .robo-status-tag {
@@ -1694,57 +1694,85 @@
   .robo-walker-wrapper {
     position: relative;
     width: 108px;
-    height: 144px;
+    height: 146px;
     display: flex;
     align-items: flex-end;
     justify-content: center;
     transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
-  .robo-human-img {
+  .robo-frame {
+    position: absolute;
+    bottom: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: contain;
-    display: block;
+    display: none;
     pointer-events: none;
     transform-origin: 50% 90%;
   }
 
-  /* ================= CICLO DE CAMINHADA HUMANOIDE ROBUSTO ================= */
-  .rw-andando .robo-human-img {
-    animation: humanGaitWalk 0.68s ease-in-out infinite;
-  }
-
-  @keyframes humanGaitWalk {
-    0% {
-      transform: translateY(0px) rotate(0deg) scaleX(1);
-    }
-    25% {
-      transform: translateY(-8px) rotate(-2.2deg) scaleX(0.975);
-    }
-    50% {
-      transform: translateY(0px) rotate(0deg) scaleX(1);
-    }
-    75% {
-      transform: translateY(-8px) rotate(2.2deg) scaleX(0.975);
-    }
-    100% {
-      transform: translateY(0px) rotate(0deg) scaleX(1);
-    }
-  }
-
-  /* ================= POSTURA PARADO / IDLE (RESPIRAÇÃO & PRESENÇA) ================= */
-  .rw-parado .robo-human-img {
+  /* ---- ESTADO PARADO / IDLE (POSTURA FIRME & RESPIRAÇÃO) ---- */
+  .rw-parado .robo-frame-idle {
+    display: block !important;
     animation: humanIdleBreathing 3.2s ease-in-out infinite alternate;
+  }
+  .rw-parado .robo-frame-step1,
+  .rw-parado .robo-frame-step2 {
+    display: none !important;
   }
 
   @keyframes humanIdleBreathing {
-    0% {
-      transform: translateY(0px) scale(1);
-    }
-    100% {
-      transform: translateY(-4px) scale(1.018);
-    }
+    0% { transform: translateY(0px) scale(1); }
+    100% { transform: translateY(-4px) scale(1.018); }
+  }
+
+  /* ---- ESTADO ANDANDO (ARTICULAÇÃO DOS BRAÇOS, PASSADAS E BOBBING) ---- */
+  .rw-andando {
+    animation: humanWalkBobCadence 0.38s ease-in-out infinite alternate;
+  }
+
+  @keyframes humanWalkBobCadence {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-5.5px); }
+  }
+
+  .rw-andando .robo-frame-step1 {
+    display: block !important;
+    animation: animCicloPasso1 0.76s steps(1) infinite;
+  }
+
+  .rw-andando .robo-frame-idle {
+    display: block !important;
+    animation: animCicloPassoMeio 0.76s steps(1) infinite;
+  }
+
+  .rw-andando .robo-frame-step2 {
+    display: block !important;
+    animation: animCicloPasso2 0.76s steps(1) infinite;
+  }
+
+  /* Fase 1 da Marcha (0% a 25%): Perna direita avança com pisada firme */
+  @keyframes animCicloPasso1 {
+    0% { opacity: 1; visibility: visible; }
+    24% { opacity: 1; visibility: visible; }
+    25%, 100% { opacity: 0; visibility: hidden; }
+  }
+
+  /* Fase Neutra / Passagem (25% a 50% e 75% a 100%): Transição de marcha */
+  @keyframes animCicloPassoMeio {
+    0%, 24% { opacity: 0; visibility: hidden; }
+    25%, 49% { opacity: 1; visibility: visible; }
+    50%, 74% { opacity: 0; visibility: hidden; }
+    75%, 100% { opacity: 1; visibility: visible; }
+  }
+
+  /* Fase 2 da Marcha (50% a 75%): Braço ergue a chave combinada 22mm e perna esquerda avança */
+  @keyframes animCicloPasso2 {
+    0%, 49% { opacity: 0; visibility: hidden; }
+    50%, 74% { opacity: 1; visibility: visible; }
+    75%, 100% { opacity: 0; visibility: hidden; }
   }
 
   /* ================= EFEITOS TECNOLÓGICOS SOBRE O CORPO DO ROBÔ ================= */
@@ -1762,6 +1790,7 @@
     opacity: 0.85;
     animation: animLaserVisorHumano 2.6s ease-in-out infinite alternate;
     pointer-events: none;
+    z-index: 5;
   }
 
   @keyframes animLaserVisorHumano {
@@ -1783,6 +1812,7 @@
     opacity: 0;
     pointer-events: none;
     animation: animChaveGleamHumano 4.5s ease-in-out infinite;
+    z-index: 5;
   }
 
   @keyframes animChaveGleamHumano {
@@ -1804,15 +1834,21 @@
     border-radius: 50%;
     display: none;
     pointer-events: none;
+    z-index: 2;
   }
 
   /* ================= ESTADO ARRASTANDO / FLUTUANDO ================= */
   .rw-arrastando {
     cursor: grabbing !important;
   }
-  .rw-arrastando .robo-human-img {
+  .rw-arrastando .robo-frame-idle {
+    display: block !important;
     animation: none !important;
     transform: translateY(-8px) scale(1.03) !important;
+  }
+  .rw-arrastando .robo-frame-step1,
+  .rw-arrastando .robo-frame-step2 {
+    display: none !important;
   }
   .rw-arrastando .robo-plasma-thruster-fx {
     display: block !important;
@@ -1825,8 +1861,13 @@
   }
 
   /* ================= SAUDAÇÃO COM A CHAVE QUANDO CLICADO ================= */
-  .rw-saudacao .robo-human-img {
+  .rw-saudacao .robo-frame-step2 {
+    display: block !important;
     animation: animSaudacaoHumanoide 0.9s ease-out forwards !important;
+  }
+  .rw-saudacao .robo-frame-idle,
+  .rw-saudacao .robo-frame-step1 {
+    display: none !important;
   }
 
   @keyframes animSaudacaoHumanoide {
@@ -21769,10 +21810,16 @@ window.addEventListener('DOMContentLoaded', () => {
   <div id="btn-flutuante-robo" title="Robô Mecânico 4.0 IA - Assistente Industrial de Campo (Toque para interagir)" style="display:none;">
     <div class="robo-status-tag" id="tagStatusRedeRobo">🟢 IA ONLINE</div>
     
-    <!-- Robô Humanoide Completo e Robusto com Macacão Azul Escuro e Chave Combinada 22mm -->
+    <!-- Robô Humanoide Completo e Robusto com Articulação de Braços e Passadas Reais -->
     <div class="robo-walker-wrapper rw-parado" id="roboWalkerChar">
-      <!-- Imagem Ultra-Realista do Robô Humanoide com Fundo Transparente -->
-      <img src="assets/mecanico_robo_humanoide.png?v=4.2" id="imgRoboHumanoide" alt="Robô Mecânico 4.0 IA" class="robo-human-img" onerror="this.src='assets/mecanico_robo_ia.png'">
+      <!-- Quadro Neutro / Parado / Respiração -->
+      <img src="assets/mecanico_robo_humanoide.png?v=4.4" class="robo-frame robo-frame-idle" alt="Robô Mecânico 4.0 IA">
+
+      <!-- Quadro Passo 1: Perna Direita avança firme em marcha -->
+      <img src="assets/mecanico_robo_passo1.png?v=4.4" class="robo-frame robo-frame-step1" alt="Passo 1">
+
+      <!-- Quadro Passo 2: Perna Esquerda avança e Braço ergue a Chave Combinada 22mm -->
+      <img src="assets/mecanico_robo_passo2.png?v=4.4" class="robo-frame robo-frame-step2" alt="Passo 2">
 
       <!-- Feixe Laser de Varredura no Visor do Capacete -->
       <div class="robo-visor-laser-fx"></div>
