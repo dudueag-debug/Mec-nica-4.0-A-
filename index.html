@@ -8384,7 +8384,8 @@ async function gerarDesenhoTecnicoComIA(novaVariacao = false, instrucaoEdicaoExt
     motorKeywords = 'Flux.1 Diffusion CAD engine, sharp technical linework, vector mechanical draft';
   }
 
-  promptIngles = `${textoPrompt}, ${estiloSufixo}, ${motorKeywords}`;
+  const promptOficialChatGPT = `Official industrial mechanical engineering technical drawing, blueprint schematic of ${equip} (TAG: ${tag}) on A4 layout. High-detail orthographic views (Front, Top, Side) and isometric 3D CAD projection with dimensional callouts in millimeters, geometric tolerances ISO 1101, surface finish symbols Ra, cross-section hatching, centerlines, bill of materials table and professional engineering title block. Crisp white drafting lineart on dark blue CAD blueprint paper, ISO 10067 standard, razor-sharp technical drafting illustration, photorealistic CAD engineering drawing.`;
+  promptIngles = promptOficialChatGPT;
 
   let renderWidth = 1024, renderHeight = 640;
   if (aspectRatio === '4:3') { renderWidth = 1024; renderHeight = 768; }
@@ -8407,8 +8408,9 @@ async function gerarDesenhoTecnicoComIA(novaVariacao = false, instrucaoEdicaoExt
 
     let carregada = null;
 
-    // Tentativa prioritária com OpenAI DALL-E 3 se o motor for chatgpt_dalle
-    if (motor === 'chatgpt_dalle') {
+    // Conexão direta com ChatGPT / OpenAI DALL-E 3 para Nano Banana e ChatGPT
+    const conectarChatGPT = (motor === 'chatgpt_dalle' || motor.startsWith('nano_banana'));
+    if (conectarChatGPT) {
       const chaveOAI = typeof obterChaveOpenAI === 'function' ? obterChaveOpenAI() : '';
       if (chaveOAI) {
         if (statusEl) statusEl.innerHTML = '<span style="color:#34d399;">🤖 Conectando ao ChatGPT DALL-E 3 para renderização técnica CAD...</span>';
@@ -13275,6 +13277,7 @@ function iniciarRoboFlutuanteCenario() {
   let lastActionTime = Date.now();
   let isWalking = false;
   let currentWalkTimeout = null;
+  let sentidoPatrulha = 1; // 1 = andando para a direita, -1 = andando para a esquerda
 
   // Garante posição inicial no canto inferior direito
   if (!robo.style.left || robo.style.left === 'auto') {
@@ -13295,31 +13298,43 @@ function iniciarRoboFlutuanteCenario() {
     robo.style.transition = 'filter 0.25s, transform 0.2s';
   }
 
+  // Caminha de ponta a ponta da tela com articulação completa dos braços e pernas
   function iniciarPassoAutonomo() {
     const modal = document.getElementById('modal-robo-flutuante-ia');
     if (isDragging || isWalking) return;
     if (modal && modal.style.display !== 'none') return;
     if (robo.style.display === 'none') return;
-    if (Date.now() - lastActionTime < 3200) return;
+    if (Date.now() - lastActionTime < 1800) return;
 
     const rect = robo.getBoundingClientRect();
     const curLeft = rect.left;
-    const maxLeft = window.innerWidth - (robo.offsetWidth || 104) - 25;
+    const maxLeft = window.innerWidth - (robo.offsetWidth || 110) - 20;
     const minLeft = 20;
 
-    // Sorteia nova posição na tela para o robô caminhar
-    let targetLeft = minLeft + Math.random() * (maxLeft - minLeft);
-    const dist = targetLeft - curLeft;
-    if (Math.abs(dist) < 60) return;
+    // Se já estiver na extremidade direita, inverte o sentido para a esquerda
+    if (curLeft >= maxLeft - 30) {
+      sentidoPatrulha = -1;
+    }
+    // Se já estiver na extremidade esquerda, inverte o sentido para a direita
+    else if (curLeft <= minLeft + 30) {
+      sentidoPatrulha = 1;
+    }
 
-    const dir = dist > 0 ? 1 : -1; // 1 = Anda para a Direita, -1 = Anda para a Esquerda
-    
-    // Velocidade de marcha mecânica realista (~48px por segundo)
-    const duracaoSeg = Math.min(6.5, Math.max(2.0, Math.abs(dist) / 48));
+    const targetLeft = sentidoPatrulha === 1 ? maxLeft : minLeft;
+    const dist = Math.abs(targetLeft - curLeft);
 
-    // Vira o personagem fisicamente para o lado da caminhada
+    if (dist < 20) {
+      sentidoPatrulha = -sentidoPatrulha;
+      if (charWrapper) charWrapper.style.transform = `scaleX(${sentidoPatrulha})`;
+      return;
+    }
+
+    // Velocidade de marcha contínua e natural (~48px por segundo)
+    const duracaoSeg = Math.min(25, Math.max(2.5, dist / 48));
+
+    // Vira o personagem fisicamente para a direção em que anda
     if (charWrapper) {
-      charWrapper.style.transform = `scaleX(${dir})`;
+      charWrapper.style.transform = `scaleX(${sentidoPatrulha})`;
       charWrapper.classList.remove('rw-parado');
       charWrapper.classList.add('rw-andando');
     }
@@ -13329,16 +13344,38 @@ function iniciarRoboFlutuanteCenario() {
     robo.style.right = 'auto';
     robo.style.top = `${rect.top}px`;
     robo.style.left = `${curLeft}px`;
-    
-    // Força reflow para transição suave
+
+    // Força reflow para iniciar transição linear suave
     void robo.offsetWidth;
-    
+
     robo.style.transition = `left ${duracaoSeg.toFixed(2)}s linear`;
     robo.style.left = `${targetLeft}px`;
 
     currentWalkTimeout = setTimeout(() => {
       pararCaminhada();
       lastActionTime = Date.now();
+
+      // Ao chegar no final da tela: vira e se prepara para patrulhar até a outra ponta
+      sentidoPatrulha = -sentidoPatrulha;
+      if (charWrapper) {
+        charWrapper.style.transform = `scaleX(${sentidoPatrulha})`;
+      }
+
+      // Mensagem no balão ao chegar no final da tela
+      if (balao) {
+        balao.textContent = sentidoPatrulha === 1 
+          ? '📍 Cheguei à ponta esquerda! Virando para inspecionar até a outra ponta...' 
+          : '📍 Cheguei ao final da tela! Virando para inspecionar até a outra ponta...';
+        balao.classList.add('mostrar-aviso');
+        setTimeout(() => { if (balao) balao.classList.remove('mostrar-aviso'); }, 3500);
+      }
+
+      // Breve pausa natural de 2.5s na ponta antes de caminhar até a outra ponta
+      setTimeout(() => {
+        if (!isDragging && !isWalking) {
+          iniciarPassoAutonomo();
+        }
+      }, 2500);
     }, duracaoSeg * 1000);
   }
 
@@ -13422,6 +13459,13 @@ function iniciarRoboFlutuanteCenario() {
       if (typeof alternarModalRoboFlutuante === 'function') {
         alternarModalRoboFlutuante();
       }
+    } else {
+      // Após arrastar e soltar, retoma patrulha de ponta a ponta
+      setTimeout(() => {
+        if (!isDragging && !isWalking) {
+          iniciarPassoAutonomo();
+        }
+      }, 1500);
     }
   }
 
@@ -13433,9 +13477,12 @@ function iniciarRoboFlutuanteCenario() {
   window.addEventListener('touchmove', onPointerMove, { passive: false });
   window.addEventListener('touchend', onPointerUp);
 
-  // Ciclo Contínuo de Caminhada Autônoma pelo App
-  if (roboRoamingInterval) clearInterval(roboRoamingInterval);
-  roboRoamingInterval = setInterval(iniciarPassoAutonomo, 5500);
+  // Inicia a primeira patrulha autônoma
+  setTimeout(() => {
+    if (!isDragging && !isWalking) {
+      iniciarPassoAutonomo();
+    }
+  }, 2000);
 }
 
 function iniciarRobo3DBtn() {
@@ -14442,7 +14489,7 @@ async function gerarDesenhoTecnicoNanoBananaDaFoto(customFotoUrl) {
           },
           body: JSON.stringify({
             model: 'dall-e-3',
-            prompt: `Official industrial mechanical engineering technical drawing, blueprint schematic of ${equip} (TAG: ${tag}) on A4 layout. High-detail orthographic views and isometric 3D CAD projection with dimensional callouts, tolerances H7/k6, cross-section hatching, centerlines and professional engineering title block. Crisp white drafting lineart on dark blue CAD blueprint paper, ISO 10067 standard, high resolution technical illustration.`,
+            prompt: `Official industrial mechanical engineering technical drawing, blueprint schematic of ${equip} (TAG: ${tag}) on A4 layout. High-detail orthographic views (Front, Top, Side) and isometric 3D CAD projection with dimensional callouts in millimeters, geometric tolerances ISO 1101, surface finish symbols Ra, cross-section hatching, centerlines, bill of materials table and professional engineering title block. Crisp white drafting lineart on dark blue CAD blueprint paper, ISO 10067 standard, razor-sharp technical drafting illustration, photorealistic CAD engineering drawing.`,
             n: 1,
             size: '1024x1024',
             response_format: 'b64_json'
