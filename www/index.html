@@ -1649,24 +1649,33 @@
     color: #fbbf24;
   }
 
-  /* ================= ROBÔ MECÂNICO 4.0 FLUTUANTE PELO CENÁRIO COM PRANCHETA ================= */
+  /* ================= ROBÔ MECÂNICO 4.0 INDUSTRIAL ROBUSTO COM CHAVE COMBINADA ================= */
   #btn-flutuante-robo {
     position: fixed;
     bottom: 24px;
     right: 24px;
-    width: 92px;
-    height: 122px;
+    width: 96px;
+    height: auto;
     cursor: pointer;
     z-index: 99999;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     user-select: none;
     touch-action: none;
     animation: roboLevitacaoCenario 3.4s ease-in-out infinite;
     transition: filter 0.2s;
     filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.75));
+  }
+
+  .robo-pulse-ring {
+    animation: pulseAnelRobo 2.6s ease-in-out infinite alternate;
+  }
+
+  @keyframes pulseAnelRobo {
+    0% { transform: scale(1); opacity: 0.7; }
+    100% { transform: scale(1.08); opacity: 1; box-shadow: 0 0 24px rgba(56,189,248,0.9), inset 0 0 16px rgba(2,132,199,0.7); }
   }
   
   #btn-flutuante-robo:hover {
@@ -3491,8 +3500,10 @@
   <div class="robo-apresentacao-card">
     <div class="robo-apresentacao-top">
       <div class="robo-apresentacao-avatar-wrap">
-        <canvas id="canvasRobo3DApresentacao" width="136" height="136" class="robo-apresentacao-canvas"></canvas>
-        <img src="assets/mecanico_robo_ia.jpg" id="avatarRoboApresFallback" alt="Robô IA" class="robo-apresentacao-fallback" style="display:none;">
+        <div style="position:relative; width:136px; height:136px; border-radius:50%; overflow:hidden; border:3px solid #38bdf8; box-shadow:0 0 25px rgba(56,189,248,0.7); background:#060f1c; display:flex; align-items:center; justify-content:center;">
+          <img src="assets/mecanico_robo_ia.jpg?v=4.0" id="avatarRoboApresFallback" alt="Robô IA" class="robo-apresentacao-fallback" style="display:block; width:100%; height:100%; object-fit:cover;">
+          <div style="position:absolute; bottom:0; left:0; right:0; background:rgba(2,132,199,0.9); font-size:10px; font-weight:900; color:#fff; text-align:center; padding:3px 0; letter-spacing:0.8px;">MECÂNICA 4.0 IA</div>
+        </div>
       </div>
       <div class="robo-apresentacao-meta">
         <div class="robo-apresentacao-badge">CONEXÃO NEURAL ATIVA • IA PESSOAL</div>
@@ -12926,7 +12937,7 @@ function iniciarCicloBalaoRoboCenario() {
   if (roboBalaoInterval) clearInterval(roboBalaoInterval);
 
   const frases = [
-    '📋 Prancheta de campo pronta! Toque para conversar.',
+    '🔧 Chave combinada e IA de campo prontas! Toque para conversar.',
     '🔍 Monitorando alinhamento, vibração e lubrificação.',
     '⚡ Diagnósticos ISO/DIN disponíveis online e offline.',
     '🔩 Precisa de cálculo de torque ou folga C3?',
@@ -12946,7 +12957,7 @@ function iniciarCicloBalaoRoboCenario() {
     fraseIdx = (fraseIdx + 1) % frases.length;
     let texto = frases[fraseIdx];
     if (fraseIdx === 0 && nomeUsuario) {
-      texto = `📋 Olá, ${nomeUsuario}! Prancheta pronta para te apoiar.`;
+      texto = `🔧 Olá, ${nomeUsuario}! Chave combinada e IA prontas para te apoiar.`;
     }
 
     balao.textContent = texto;
@@ -13192,7 +13203,7 @@ function falarApresentacaoRobo(nome, email) {
 function exibirApresentacaoRobo(email) {
   const overlay = document.getElementById('overlayApresentacaoRobo');
   const textoEl = document.getElementById('textoApresentacaoRobo');
-  if (!overlay) return;
+  if (!overlay) { document.addEventListener('DOMContentLoaded', iniciarCarregamentoInicialApp); return; }
 
   const emailNorm = (email || '').toLowerCase().trim();
   const nome = obterNomeUsuario(emailNorm);
@@ -13271,6 +13282,69 @@ function atualizarBoasVindasChatRobo(nome) {
 }
 
 /* ===================== LOGIN / SESSÃO ===================== */
+
+/* ================= TELA DE CARREGAMENTO INICIAL (SPLASH COM CHAVE COMBINADA) ================= */
+let carregamentoInicialExecutado = false;
+function iniciarCarregamentoInicialApp() {
+  if (carregamentoInicialExecutado) return;
+  carregamentoInicialExecutado = true;
+
+  const overlay = document.getElementById('overlayCarregamentoRobo');
+  if (!overlay) return;
+
+  const barFill = document.getElementById('roboLoadingProgress');
+  const percentEl = document.getElementById('roboLoadingPercent');
+  const statusEl = document.getElementById('roboLoadingStatus');
+  const userTargetEl = document.getElementById('roboLoadingUserTarget');
+
+  overlay.style.display = 'flex';
+  overlay.offsetHeight;
+  overlay.classList.add('active');
+
+  if (userTargetEl) userTargetEl.innerHTML = '<b style="color:#38bdf8;">MECÂNICA 4.0 IA</b> • Sistema de Engenharia & Manutenção';
+  if (statusEl) statusEl.innerText = 'Posicionando chave combinada e instrumentos de precisão...';
+
+  const etapas = [
+    { p: 18, msg: 'Calibrando chave combinada cromada e instrumentos de precisão...' },
+    { p: 40, msg: 'Carregando banco de tolerâncias ISO, rolamentos e torques de parafusos...' },
+    { p: 68, msg: 'Sincronizando inteligência artificial Gemini / Nano Banana para desenho técnico e laudos...' },
+    { p: 88, msg: 'Ativando Robô Mascote Industrial com chave combinada e uniforme azul escuro...' },
+    { p: 100, msg: 'Sistema pronto! Iniciando Mecânica 4.0 IA...' }
+  ];
+
+  let stepIdx = 0;
+  function passo() {
+    if (stepIdx < etapas.length) {
+      const e = etapas[stepIdx];
+      if (barFill) barFill.style.width = e.p + '%';
+      if (percentEl) percentEl.innerText = e.p + '%';
+      if (statusEl) statusEl.innerText = e.msg;
+      stepIdx++;
+      setTimeout(passo, 280);
+    } else {
+      setTimeout(() => {
+        overlay.classList.remove('active');
+        overlay.style.display = 'none';
+        if (barFill) barFill.style.width = '0%';
+        if (percentEl) percentEl.innerText = '0%';
+
+        // Verifica sessão para exibir login ou painel
+        verificarSessao();
+
+        // Exibe e ativa o robô flutuante
+        const btnFlutuante = document.getElementById('btn-flutuante-robo');
+        if (btnFlutuante) {
+          btnFlutuante.style.display = 'flex';
+          if (typeof iniciarRoboFlutuanteCenario === 'function') {
+            iniciarRoboFlutuanteCenario();
+          }
+        }
+      }, 400);
+    }
+  }
+  passo();
+}
+
 async function verificarSessao() {
   // Abertura do app: SEMPRE apresenta a tela de login solicitando senha
   const telaLogin = document.getElementById('telaLogin');
@@ -16505,8 +16579,8 @@ function voltarListaEquip() {
   document.getElementById('vistaListaEquip').style.display = 'block';
 }
 
-/* inicia verificação de sessão ao carregar a página */
-verificarSessao();
+/* Inicia tela de carregamento com chave combinada e calibração ao carregar a página */
+iniciarCarregamentoInicialApp();
 
 /* ===================== NAVEGAÇÃO ===================== */
 let navegandoModuloTrava = false;
@@ -21274,107 +21348,48 @@ window.addEventListener('DOMContentLoaded', () => {
 
 </script>
 
-  <!-- ================= ROBÔ MECÂNICO 4.0 FLUTUANTE PELO CENÁRIO COM PRANCHETA ================= -->
-  <div id="btn-flutuante-robo" title="Robô Mecânico 4.0 IA - Especialista com Prancheta (Clique para abrir conversa)" style="display:none;">
+  <!-- ================= ROBÔ MECÂNICO 4.0 INDUSTRIAL ROBUSTO COM CHAVE COMBINADA & UNIFORME AZUL ESCURO ================= -->
+  <div id="btn-flutuante-robo" title="Robô Mecânico 4.0 IA - Especialista em Manutenção Industrial e Chave Combinada (Clique para abrir)" style="display:none;">
     <div class="robo-status-tag" id="tagStatusRedeRobo">🟢 IA ONLINE</div>
-    <!-- Robô Mascote Industrial Robusto em Uniforme Azul Escuro com Logo Mecânica 4.0 IA e Chave Combinada -->
-    <div class="robo-char-avatar-frame" style="position:relative; width:76px; height:76px; border-radius:50%; overflow:hidden; border:2.5px solid #38bdf8; box-shadow:0 0 18px rgba(56,189,248,0.7), inset 0 0 10px rgba(0,0,0,0.8); background:#060f1c; display:flex; align-items:center; justify-content:center; cursor:pointer;">
-      <img src="assets/mecanico_robo_ia.jpg" alt="Robô Mecânico 4.0 IA" style="width:100%; height:100%; object-fit:cover;">
-      <div style="position:absolute; bottom:0; left:0; right:0; background:rgba(2,132,199,0.85); font-size:7.5px; font-weight:900; color:#fff; text-align:center; padding:1px 0; letter-spacing:0.5px;">MECÂNICA 4.0</div>
+    
+    <!-- Mascote Industrial Robusto em Uniforme Azul Escuro com Logo Mecânica 4.0 IA e Chave Combinada -->
+    <div class="robo-char-avatar-container" style="position:relative; width:88px; height:88px; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+      <!-- Anel de Pulso Tecnológico Neon Ciano -->
+      <div class="robo-pulse-ring" style="position:absolute; inset:-4px; border-radius:50%; border:2px solid rgba(56,189,248,0.7); box-shadow:0 0 18px rgba(56,189,248,0.65), inset 0 0 12px rgba(2,132,199,0.5); pointer-events:none;"></div>
+
+      <!-- Moldura Circular Principal com Foto do Robô Robusto em Uniforme Azul Escuro -->
+      <div style="width:82px; height:82px; border-radius:50%; overflow:hidden; border:2.5px solid #38bdf8; background:#060f1c; box-shadow:0 6px 20px rgba(0,0,0,0.85); position:relative;">
+        <img src="assets/mecanico_robo_ia.jpg?v=4.0" alt="Robô Mecânico 4.0 IA" style="width:100%; height:100%; object-fit:cover; filter:contrast(1.05) brightness(1.02);" onerror="this.src='assets/mecanico_robo_ia.png'">
+        <div style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(180deg, transparent 0%, rgba(2,132,199,0.95) 45%, rgba(14,116,144,0.98) 100%); font-size:7.5px; font-weight:900; color:#ffffff; text-align:center; padding:2px 0 3px 0; letter-spacing:0.8px; text-shadow:0 1px 2px #000;">MECÂNICA 4.0 IA</div>
+      </div>
+
+      <!-- Badge Flutuante da Chave Combinada Cromada no Canto Inferior Direito -->
+      <div style="position:absolute; bottom:-3px; right:-3px; width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg, #09192c 0%, #1e293b 100%); border:2px solid #f59e0b; box-shadow:0 0 12px rgba(245,158,11,0.85), 0 4px 8px rgba(0,0,0,0.7); display:flex; align-items:center; justify-content:center; transform:rotate(-15deg); z-index:4;" title="Chave Combinada 22mm Mecânica 4.0 IA">
+        <svg viewBox="0 0 36 36" style="width:26px; height:26px;">
+          <defs>
+            <linearGradient id="gradChaveMiniRobo" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ffffff"/>
+              <stop offset="30%" stop-color="#cbd5e1"/>
+              <stop offset="70%" stop-color="#94a3b8"/>
+              <stop offset="100%" stop-color="#475569"/>
+            </linearGradient>
+          </defs>
+          <g transform="rotate(45 18 18)">
+            <!-- Haste da Chave -->
+            <rect x="16" y="6" width="4" height="24" rx="1.5" fill="url(#gradChaveMiniRobo)" stroke="#0f172a" stroke-width="0.5"/>
+            <!-- Boca Fixa -->
+            <path d="M14 6 C12 5 12 2 15 1 C18 0 20 2 20 5 L17.5 5 L16.5 5 Z" fill="url(#gradChaveMiniRobo)" stroke="#0f172a" stroke-width="0.5"/>
+            <path d="M15.5 3 L17 1.5 L18.5 3 L17.5 5 L16.5 5 Z" fill="#0f172a"/>
+            <!-- Estria 12 Pontas -->
+            <circle cx="18" cy="30" r="4.5" fill="url(#gradChaveMiniRobo)" stroke="#0f172a" stroke-width="0.5"/>
+            <circle cx="18" cy="30" r="2.5" fill="#09192c"/>
+            <polygon points="18,28.5 18.5,29.5 19.5,29.5 18.8,30.2 19.2,31.2 18,30.5 16.8,31.2 17.2,30.2 16.5,29.5 17.5,29.5" fill="#f59e0b"/>
+          </g>
+        </svg>
+      </div>
     </div>
-    <div style="display:none;"><svg viewBox="0 0 100 130" class="robo-char-svg" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="gradRoboArmaduraChar" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#1e3a5f" />
-          <stop offset="50%" stop-color="#0f223d" />
-          <stop offset="100%" stop-color="#081424" />
-        </linearGradient>
-        <linearGradient id="gradPranchetaChar" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#334155" />
-          <stop offset="100%" stop-color="#1e293b" />
-        </linearGradient>
-        <linearGradient id="gradPlasmaChar" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.9" />
-          <stop offset="60%" stop-color="#0284c7" stop-opacity="0.6" />
-          <stop offset="100%" stop-color="#0369a1" stop-opacity="0" />
-        </linearGradient>
-      </defs>
-
-      <!-- JATO DE PROPULSÃO / PLASMA -->
-      <g class="robo-plasma-thruster">
-        <ellipse cx="50" cy="106" rx="14" ry="4" fill="#00f2fe" opacity="0.8" />
-        <path d="M40 106 Q50 128 50 128 Q50 128 60 106 Z" fill="url(#gradPlasmaChar)" class="plasma-flame" />
-      </g>
-
-      <!-- BASE PROPULSORA DO CORPO -->
-      <ellipse cx="50" cy="104" rx="15" ry="6" fill="#0f172a" stroke="#0284c7" stroke-width="1.5" />
-      <ellipse cx="50" cy="103" rx="9" ry="3" fill="#00f2fe" />
-
-      <!-- TORSO / PEITORAL -->
-      <path d="M34 66 L66 66 L62 98 L38 98 Z" fill="url(#gradRoboArmaduraChar)" stroke="#0284c7" stroke-width="1.5" />
-      <path d="M37 70 L63 70 L60 86 L40 86 Z" fill="#0c192c" stroke="#38bdf8" stroke-width="1" />
-      
-      <!-- REATOR ARC CORE NO PEITO -->
-      <circle cx="50" cy="78" r="6" fill="#03182e" stroke="#f59e0b" stroke-width="1.2" />
-      <circle cx="50" cy="78" r="3.5" fill="#00f2fe" class="arc-core-pulse" />
-
-      <!-- OMBROS -->
-      <circle cx="31" cy="70" r="6" fill="#1e3a5f" stroke="#00f2fe" stroke-width="1.2" />
-      <circle cx="69" cy="70" r="6" fill="#1e3a5f" stroke="#00f2fe" stroke-width="1.2" />
-
-      <!-- BRAÇOS -->
-      <path d="M30 74 L25 88 L35 94" fill="none" stroke="#1e3a5f" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
-      <circle cx="25" cy="88" r="3" fill="#0284c7" />
-
-      <path d="M69 74 L73 88 L63 93" fill="none" stroke="#1e3a5f" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" />
-      <circle cx="73" cy="88" r="3" fill="#0284c7" />
-
-      <!-- PRANCHETA TÉCNICA DIGITAL NA MÃO DO ROBÔ -->
-      <g class="robo-prancheta-group" transform="rotate(-6 50 92)">
-        <rect x="36" y="80" width="28" height="34" rx="3" fill="url(#gradPranchetaChar)" stroke="#38bdf8" stroke-width="1.5" />
-        <rect x="44" y="78" width="12" height="4" rx="1.5" fill="#f59e0b" stroke="#ffd479" stroke-width="0.8" />
-        <circle cx="50" cy="80" r="1" fill="#fff" />
-        <rect x="39" y="84" width="22" height="27" rx="1.5" fill="#051324" />
-        <line x1="42" y1="88" x2="58" y2="88" stroke="#38bdf8" stroke-width="1.2" stroke-linecap="round" />
-        <line x1="42" y1="92" x2="55" y2="92" stroke="#00f2fe" stroke-width="1" stroke-linecap="round" />
-        <line x1="42" y1="96" x2="57" y2="96" stroke="#94a3b8" stroke-width="0.8" stroke-linecap="round" />
-        <path d="M42 104 L45 101 L48 106 L51 99 L54 105 L58 102" fill="none" stroke="#10b981" stroke-width="1.2" stroke-linejoin="round" />
-        <circle cx="56" cy="92" r="2.2" fill="#10b981" />
-        <path d="M55 92 L55.8 92.8 L57.2 91.4" fill="none" stroke="#fff" stroke-width="0.6" />
-        <circle cx="36" cy="95" r="2.5" fill="#00f2fe" />
-        <circle cx="64" cy="94" r="2.5" fill="#00f2fe" />
-      </g>
-
-      <!-- PESCOÇO -->
-      <rect x="46" y="58" width="8" height="9" rx="2" fill="#0b1728" stroke="#0284c7" stroke-width="1" />
-      <line x1="47" y1="62" x2="53" y2="62" stroke="#38bdf8" stroke-width="1" />
-
-      <!-- CABEÇA E ANTENAS -->
-      <line x1="61" y1="36" x2="68" y2="24" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round" />
-      <circle cx="68" cy="24" r="2.2" fill="#ffd479" />
-      
-      <line x1="39" y1="36" x2="32" y2="24" stroke="#f59e0b" stroke-width="1.5" stroke-linecap="round" />
-      <circle cx="32" cy="24" r="2.2" fill="#ffd479" />
-
-      <path d="M34 42 C34 29 41 24 50 24 C59 24 66 29 66 42 L66 54 C66 58 60 62 50 62 C40 62 34 58 34 54 Z" fill="url(#gradRoboArmaduraChar)" stroke="#0284c7" stroke-width="1.5" />
-      <path d="M43 24 Q50 21 57 24 L55 30 L45 30 Z" fill="#0284c7" stroke="#00f2fe" stroke-width="0.8" />
-      <rect x="48" y="22" width="4" height="6" rx="1" fill="#00f2fe" />
-
-      <!-- VISOR COM LED CIANO -->
-      <rect x="37" y="38" width="26" height="11" rx="4" fill="#040d1a" stroke="#00f2fe" stroke-width="1.2" />
-      <circle cx="44" cy="43.5" r="3.2" fill="#00f2fe" />
-      <circle cx="44" cy="43.5" r="1.2" fill="#ffffff" />
-      
-      <circle cx="56" cy="43.5" r="3.2" fill="#00f2fe" />
-      <circle cx="56" cy="43.5" r="1.2" fill="#ffffff" />
-
-      <!-- QUEIXO -->
-      <rect x="44" y="52" width="12" height="4" rx="1.5" fill="#071220" />
-      <line x1="47" y1="54" x2="53" y2="54" stroke="#38bdf8" stroke-width="0.8" />
-    </svg>
 
     <!-- Balão de Diálogo do Cenário -->
-    </div>
     <div class="robo-balao-cenario" id="balaoFalaRoboCenario">💬 Olá! Toque em mim para conversarmos!</div>
   </div>
 
@@ -21384,9 +21399,9 @@ window.addEventListener('DOMContentLoaded', () => {
       <!-- CABEÇALHO -->
       <div class="robo-modal-header">
         <div class="robo-header-left">
-          <div style="position:relative; width:48px; height:48px; border-radius:50%; overflow:hidden; border:2px solid #00f2fe; box-shadow:0 0 12px rgba(0,242,254,0.45); flex-shrink:0; background:#070f1e;">
-            <canvas id="canvasRobo3DModal" width="96" height="96" style="width:48px; height:48px; display:block;"></canvas>
-            <img src="assets/mecanico_robo_ia.jpg" id="avatarRoboModalFallback" alt="Robô Mecânico IA" class="robo-header-avatar" style="display:none; width:100%; height:100%; object-fit:cover; margin:0;">
+          <div style="position:relative; width:52px; height:52px; border-radius:50%; overflow:hidden; border:2.5px solid #38bdf8; box-shadow:0 0 16px rgba(56,189,248,0.7); flex-shrink:0; background:#070f1e;">
+            <img src="assets/mecanico_robo_ia.jpg?v=4.0" id="avatarRoboModalFallback" alt="Robô Mecânico 4.0 IA" style="display:block; width:100%; height:100%; object-fit:cover; margin:0;">
+            <div style="position:absolute; bottom:0; left:0; right:0; background:rgba(2,132,199,0.9); font-size:7px; font-weight:900; color:#fff; text-align:center; padding:1px 0;">MECÂNICA 4.0</div>
           </div>
           <div class="robo-header-title">
             <h3>🤖 Robô Mecânico 4.0 IA <span class="rf-tag-tech">3D ONLINE</span></h3>
