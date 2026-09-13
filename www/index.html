@@ -9829,11 +9829,14 @@ function selecionarModoGemini(modo) {
 
 
 /* ================= INTEGRAÇÃO OPENAI / CHATGPT & DALL-E 3 ================= */
-const OPENAI_API_KEY_PADRAO = typeof atob === 'function' ? atob('c2stcHJvai1Malkza3lfZ0o4Z2ZndWdha0JYejNpLTRUclhZNHQwdU11UWVYSG9nTElGUlY1X1E5ZENJWjQzZXA0di1vN3ZlUWVodmZYWXEyYlQzQmxia0ZKaGlheUF5bklKckFQXy1pbDg4MzhMUkg5bWdpaklSNDd6VHlMYURuTnJDbnBXOUZrME5COE9RNFlPTlRuc25aU1dNOGdybU5od0E=') : '';
+const OPENAI_API_KEY_PADRAO = typeof atob === 'function' ? atob('c2stcHJvai04ZkhaUUtMaWY5NmNWcDBjcG1lWk1qQW5kLTNXby1fSWZWQk1Ea1hjZ09nSEMydDVFZll6cWFJVGlKZlZmcGhwbTkydC1sUHExeFQzQmxia0ZKX0otMWlONGZZakhYMFpDcTczN3pJV0tvUFZEcXNnOThiQlhkUWZXLVJ4b2hFZlJWTExxME14OThhNjNST1otV3M2cDdIandXY0E=') : '';
 
 function obterChaveOpenAI() {
   const salva = localStorage.getItem('openai_api_key');
-  return (salva || OPENAI_API_KEY_PADRAO).trim();
+  if (salva && salva.startsWith('sk-') && !salva.includes('LjY3ky')) {
+    return salva.trim();
+  }
+  return OPENAI_API_KEY_PADRAO.trim();
 }
 
 function salvarChaveApiOpenAI(chave) {
