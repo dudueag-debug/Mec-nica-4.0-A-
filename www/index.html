@@ -5195,8 +5195,9 @@
             <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-bottom:10px;">
               <div class="field">
                 <label style="font-size:11.5px; color:#fde047; font-weight:700;">🍌 Motor / Modelo de Inteligência Artificial:</label>
-                <select id="rel_ia_motor_modelo" onchange="atualizarInfoMotorIA()" style="width:100%; background:#091524; border:1px solid #eab308; color:#fff; padding:8px 10px; border-radius:8px; font-size:12.5px;">
-                  <option value="nano_banana" selected>🍌 Nano Banana 2 (Google Gemini 2.5 Flash Image • 4K HD)</option>
+                <select id="rel_ia_motor_modelo" onchange="atualizarInfoMotorIA()" style="width:100%; background:#091524; border:1px solid #10b981; color:#fff; padding:8px 10px; border-radius:8px; font-size:12.5px;">
+                  <option value="chatgpt_dalle" selected>🤖 ChatGPT / OpenAI DALL-E 3 (Desenho Técnico CAD Industrial A4)</option>
+                  <option value="nano_banana">🍌 Nano Banana 2 (Google Gemini 2.5 Flash Image • 4K HD)</option>
                   <option value="nano_banana_pro">🍌 Nano Banana Pro (Google DeepMind • CAD Macro & Coerência Espacial)</option>
                   <option value="nano_banana_lite">🍌 Nano Banana 2 Lite (Google DeepMind • Latência Zero / Campo)</option>
                   <option value="imagen_3">🎨 Google Imagen 3 (DeepMind Industrial 3D)</option>
@@ -8184,7 +8185,7 @@ async function gerarDesenhoTecnicoComIA(novaVariacao = false, instrucaoEdicaoExt
   const btn = document.getElementById('btn_gerar_desenho_ia');
   const statusEl = document.getElementById('status_geracao_desenho_ia');
   const promptInput = document.getElementById('rel_ia_desenho_prompt');
-  const motor = document.getElementById('rel_ia_motor_modelo')?.value || 'nano_banana';
+  const motor = document.getElementById('rel_ia_motor_modelo')?.value || 'chatgpt_dalle';
   const estilo = document.getElementById('rel_ia_estilo_desenho')?.value || 'cad_isometrico';
   const aspectRatio = document.getElementById('rel_ia_aspect_ratio')?.value || '16:9';
   const tag = (document.getElementById('rel_tag')?.value || 'TAG-01').trim();
@@ -8263,8 +8264,54 @@ async function gerarDesenhoTecnicoComIA(novaVariacao = false, instrucaoEdicaoExt
       setTimeout(() => reject(new Error('Tempo limite de geração excedido (15s)')), 15000);
     });
 
-    imgObj.src = urlIA;
-    const carregada = await carregarPromise;
+    let carregada = null;
+
+    // Tentativa prioritária com OpenAI DALL-E 3 se o motor for chatgpt_dalle
+    if (motor === 'chatgpt_dalle') {
+      const chaveOAI = typeof obterChaveOpenAI === 'function' ? obterChaveOpenAI() : '';
+      if (chaveOAI) {
+        if (statusEl) statusEl.innerHTML = '<span style="color:#34d399;">🤖 Conectando ao ChatGPT DALL-E 3 para renderização técnica CAD...</span>';
+        try {
+          const respDalle = await fetch('https://api.openai.com/v1/images/generations', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + chaveOAI
+            },
+            body: JSON.stringify({
+              model: 'dall-e-3',
+              prompt: promptIngles,
+              n: 1,
+              size: '1024x1024',
+              response_format: 'b64_json'
+            })
+          });
+          if (respDalle.ok) {
+            const dJson = await respDalle.json();
+            const b64 = dJson.data?.[0]?.b64_json;
+            if (b64) {
+              const imD = new Image();
+              imD.crossOrigin = 'anonymous';
+              await new Promise((res, rej) => {
+                imD.onload = res;
+                imD.onerror = rej;
+                imD.src = 'data:image/png;base64,' + b64;
+              });
+              carregada = imD;
+            }
+          } else {
+            console.warn('DALL-E retornou erro, usando motor de difusão de contingência');
+          }
+        } catch(eDalle) {
+          console.warn('Erro ao chamar DALL-E 3:', eDalle);
+        }
+      }
+    }
+
+    if (!carregada) {
+      imgObj.src = urlIA;
+      carregada = await carregarPromise;
+    }
 
     // 2. Sintetiza a imagem na Prancha Oficial Normativa ABNT NBR 10067 com Carimbo Técnico
     const dataUrlFinal = await sintetizarPranchaTecnicaNormativa(carregada, tag, equip, resp, estilo, motor);
@@ -8287,8 +8334,15 @@ async function gerarDesenhoTecnicoComIA(novaVariacao = false, instrucaoEdicaoExt
     }
 
     if (typeof mostrarToast === 'function') {
-      mostrarToast(isNanoBanana ? '🍌 Desenho Técnico gerado pelo Nano Banana 2!' : '✔ Desenho Técnico gerado com sucesso pela IA!');
+      mostrarToast(motor === 'chatgpt_dalle' ? '🤖 Desenho Técnico gerado pelo ChatGPT / DALL-E 3 e anexado ao A4!' : (isNanoBanana ? '🍌 Desenho Técnico gerado pelo Nano Banana 2!' : '✔ Desenho Técnico gerado com sucesso pela IA!'));
     }
+
+    // Auto-aplica instantaneamente ao relatório A4 e prévia para eliminar etapas extras
+    try {
+      if (typeof aplicarDesenhoIAGeradoAoRelatorio === 'function') {
+        aplicarDesenhoIAGeradoAoRelatorio();
+      }
+    } catch(eAutoApp) {}
   } catch(err) {
     console.warn('Fallback para síntese vetorial offline:', err);
     // Fallback garantido: sintetiza prancha técnica local 1:1
@@ -14100,7 +14154,7 @@ function alternarModoExibicaoDesenhoA4(modo) {
     if (btn3Vistas) btn3Vistas.classList.remove('ativo');
     const imgRealista = document.getElementById('r4_desenho_realista_img');
     const phDesenho = document.getElementById('r4_desenho_realista_ph');
-    let url = window.desenhoTecnicoDataUrl || (typeof desenhoTecnicoDataUrl !== 'undefined' ? desenhoTecnicoDataUrl : null);
+    let url = window.desenhoTecnicoDataUrl || (typeof desenhoTecnicoDataUrl !== 'undefined' ? desenhoTecnicoDataUrl : null) || window.ultimoDesenhoIAGeradoDataUrl;
     if (!url && typeof DESENHO_TECNICO_OFICIAL_B64 !== 'undefined') {
       url = DESENHO_TECNICO_OFICIAL_B64;
       window.desenhoTecnicoDataUrl = url;
