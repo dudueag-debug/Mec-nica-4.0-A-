@@ -5121,10 +5121,11 @@
               <div class="field">
                 <label style="font-size:11.5px; color:#fde047; font-weight:700;">🍌 Motor / Modelo de Inteligência Artificial:</label>
                 <select id="rel_ia_motor_modelo" onchange="atualizarInfoMotorIA()" style="width:100%; background:#091524; border:1px solid #eab308; color:#fff; padding:8px 10px; border-radius:8px; font-size:12.5px;">
-                  <option value="nano_banana" selected>🍌 Nano Banana 2 (Google Gemini Flash Image • 4K HD)</option>
-                  <option value="nano_banana_pro">🍌 Nano Banana Pro (Consistência Dimensional & CAD Macro)</option>
-                  <option value="flux_pro">⚡ Flux.1 Neural CAD (Alta Fidelidade Vetorial)</option>
+                  <option value="nano_banana" selected>🍌 Nano Banana 2 (Google Gemini 2.5 Flash Image • 4K HD)</option>
+                  <option value="nano_banana_pro">🍌 Nano Banana Pro (Google DeepMind • CAD Macro & Coerência Espacial)</option>
+                  <option value="nano_banana_lite">🍌 Nano Banana 2 Lite (Google DeepMind • Latência Zero / Campo)</option>
                   <option value="imagen_3">🎨 Google Imagen 3 (DeepMind Industrial 3D)</option>
+                  <option value="flux_pro">⚡ Flux.1 Neural CAD (Alta Fidelidade Vetorial)</option>
                 </select>
               </div>
 
@@ -5139,6 +5140,15 @@
               </div>
 
               <div class="field">
+                <label style="font-size:11.5px; color:#7dd3fc; font-weight:700;">Proporção & Formato:</label>
+                <select id="rel_ia_aspect_ratio" style="width:100%; background:#091524; border:1px solid #1e3a5f; color:#fff; padding:8px 10px; border-radius:8px; font-size:12.5px;">
+                  <option value="16:9" selected>📐 16:9 • Prancha Horizontal A4 (1024x640)</option>
+                  <option value="4:3">📏 4:3 • Cotas Técnicas (1024x768)</option>
+                  <option value="1:1">🔍 1:1 • Detalhe Macro (800x800)</option>
+                </select>
+              </div>
+
+              <div class="field">
                 <label style="font-size:11.5px; color:#7dd3fc; font-weight:700;">Base de Dados para o Desenho:</label>
                 <div style="display:flex; gap:8px; align-items:center; height:38px;">
                   <button type="button" class="button secondary" onclick="carregarDadosFormularioParaPromptIA()" style="font-size:11.5px; padding:6px 12px; margin:0; width:100%;" title="Preencher automaticamente com dados do equipamento e serviço do relatório">
@@ -5148,7 +5158,6 @@
               </div>
             </div>
 
-            
             <!-- Banner Informativo do Motor Nano Banana / Gemini -->
             <div id="info_motor_ia_desc" style="font-size:11.5px; color:#fef08a; background:rgba(234, 179, 8, 0.12); border:1px solid rgba(234, 179, 8, 0.35); border-radius:8px; padding:8px 12px; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
               <span style="font-size:16px;">🍌</span>
@@ -5182,12 +5191,34 @@
             <!-- Área de Prévia do Desenho Técnico Gerado -->
             <div id="container_previa_desenho_ia" style="display:none; background:#040a14; border:1px solid #1e3a5f; border-radius:8px; padding:12px; text-align:center;">
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:8px;">
-                <span style="font-size:11.5px; color:#10b981; font-weight:bold;">✔ Desenho Técnico Gerado pela IA com Carimbo Normativo ABNT NBR 10067</span>
+                <span style="font-size:11.5px; color:#10b981; font-weight:bold;">✔ Desenho Técnico Gerado pelo Nano Banana 2 • Normas ABNT NBR 10067</span>
                 <span id="badge_resolucao_ia" style="font-size:10.5px; color:#7dd3fc; background:#0f2744; padding:2px 8px; border-radius:4px;">1024 x 640 px • HD</span>
               </div>
               
               <div style="position:relative; display:inline-block; max-width:100%;">
                 <img id="img_previa_desenho_ia" src="" alt="Desenho Técnico IA" style="max-height:360px; max-width:100%; border:1px solid #38bdf8; border-radius:6px; box-shadow:0 8px 30px rgba(0,0,0,0.8); background:#f8fafc; display:block; margin:auto;">
+              </div>
+
+              <!-- Estúdio Nano Banana: Edição Conversacional e Refinamento por IA -->
+              <div style="margin-top:14px; background:#071224; border:1px solid #0284c7; border-radius:8px; padding:12px; text-align:left;">
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+                  <span style="font-size:16px;">🍌</span>
+                  <span style="font-size:12px; font-weight:800; color:#fde047;">Estúdio Nano Banana: Edição Conversacional e Refinamento por IA</span>
+                </div>
+                <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px;">
+                  <button type="button" class="rf-chip-btn" onclick="aplicarInstrucaoRapidaNanoBanana('adicionar cotas dimensionais em mm e tolerancias ABNT')">📐 + Cotas ABNT (mm)</button>
+                  <button type="button" class="rf-chip-btn" onclick="aplicarInstrucaoRapidaNanoBanana('vista em corte seccional transversal mostrando componentes internos')">✂️ Corte Seccional</button>
+                  <button type="button" class="rf-chip-btn" onclick="aplicarInstrucaoRapidaNanoBanana('vista explodida isometrica com linhas de chamada numeradas')">🔍 Vista Explodida</button>
+                  <button type="button" class="rf-chip-btn" onclick="aplicarInstrucaoRapidaNanoBanana('render 3d fotorrealista com textura de aco usinado e iluminacao de estudio')">🎨 Render Fotorrealista</button>
+                  <button type="button" class="rf-chip-btn" onclick="aplicarInstrucaoRapidaNanoBanana('baloes circulares numerados de 1 a 8 identificando componentes')">🏷️ Balões 1 a 8</button>
+                  <button type="button" class="rf-chip-btn" onclick="aplicarInstrucaoRapidaNanoBanana('remover sombras e sujeira de fundo, manter fundo branco ABNT puro')">🧼 Fundo Branco Puro</button>
+                </div>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                  <input type="text" id="rel_ia_instrucao_edicao" placeholder="Instrução para o Nano Banana: ex. Destacar o rolamento em vermelho, remover tampa..." style="flex:1; min-width:220px; background:#0b192c; border:1px solid #38bdf8; color:#fff; font-size:12px; padding:7px 10px; border-radius:6px;">
+                  <button type="button" class="button" onclick="executarInstrucaoEdicaoNanoBanana()" style="background:#ca8a04; border-color:#facc15; font-size:12px; font-weight:bold; padding:7px 14px; margin:0; display:flex; align-items:center; gap:6px;">
+                    <span>🍌 Aplicar Edição</span>
+                  </button>
+                </div>
               </div>
 
               <!-- Ações do Desenho Gerado -->
@@ -5199,7 +5230,7 @@
                   👁️ Abrir Pré-Visualização da Folha A4
                 </button>
                 <button type="button" class="button secondary" onclick="baixarDesenhoIAGerado()" style="font-size:12.5px; padding:9px 16px; margin:0;">
-                  💾 Baixar Imagem HD (PNG)
+                  💾 Baixar Imagem 4K (PNG)
                 </button>
                 <button type="button" class="button secondary" onclick="gerarDesenhoTecnicoComIA(true)" style="font-size:12.5px; padding:9px 16px; margin:0;">
                   🔄 Gerar Nova Variação
@@ -5405,7 +5436,7 @@
 
         <div class="r-a4-num-box">
           <span class="r-a4-num-label">Nº</span>
-          <span class="r-a4-num-val" id="r4_header_no">2214/2026</span>
+          <span class="r-a4-num-val" id="r4_header_no">---/2026</span>
         </div>
       </div>
 
@@ -5435,7 +5466,7 @@
 
       <!-- 3. Seção Principal: Desenho Técnico - Equipamento / Conjunto -->
       <div class="r-a4-section-header" style="display:flex; justify-content:space-between; align-items:center; padding:3px 8px;">
-        <span id="r4_cad_titulo_banner">DESENHO TÉCNICO – MOTOR / CONJUNTO DE VENTILAÇÃO</span>
+        <span id="r4_cad_titulo_banner">DESENHO TÉCNICO DO EQUIPAMENTO</span>
         <div class="no-print" style="display:inline-flex; gap:4px;">
           <button type="button" class="btn-toggle-desenho ativo" id="btn_toggle_desenho_realista" onclick="alternarModoExibicaoDesenhoA4('realista')" style="font-size:8.5px; font-weight:bold; padding:2px 7px; background:#0284c7; color:#fff; border:1px solid #38bdf8; border-radius:3px; cursor:pointer;">📐 Desenho Realista (IA/Foto/3D)</button>
           <button type="button" class="btn-toggle-desenho" id="btn_toggle_desenho_3vistas" onclick="alternarModoExibicaoDesenhoA4('3vistas')" style="font-size:8.5px; font-weight:bold; padding:2px 7px; background:#1b365d; color:#94a3b8; border:1px solid #29415f; border-radius:3px; cursor:pointer;">🏛️ 3 Vistas Ortogonais</button>
@@ -5480,6 +5511,8 @@
               <span class="r-a4-vista-tag">VISTA SUPERIOR</span>
               <div id="r4_vista_superior_svg" style="width:100%; height:100%; display:flex; align-items:center; justify-content:center;">
                 <!-- SVG da Vista Superior gerado dinamicamente -->
+              </div>
+            </div>
           </div>
         </div>
 
@@ -5487,33 +5520,27 @@
         <div class="r-a4-cad-info-col">
           <div class="r-a4-sub-header">PRINCIPAIS COMPONENTES</div>
           <div class="r-a4-componentes-list" id="r4_lista_componentes">
-            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">1</span><span class="r-a4-comp-txt" id="r4_comp_1">Tampa de proteção da ventoinha</span></div>
-            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">2</span><span class="r-a4-comp-txt" id="r4_comp_2">Motor elétrico trifásico</span></div>
-            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">3</span><span class="r-a4-comp-txt" id="r4_comp_3">Olhal de içamento forjado</span></div>
-            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">4</span><span class="r-a4-comp-txt" id="r4_comp_4">Eixo do motor (acoplamento direto)</span></div>
-            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">5</span><span class="r-a4-comp-txt" id="r4_comp_5">Hélice / Impelidor axial (8 pás)</span></div>
-            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">6</span><span class="r-a4-comp-txt" id="r4_comp_6">Base de fixação / Calços</span></div>
-            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">7</span><span class="r-a4-comp-txt" id="r4_comp_7">Caixa de ligação / Bornes</span></div>
-            <div class="r-a4-comp-item"><span class="r-a4-comp-circle">8</span><span class="r-a4-comp-txt" id="r4_comp_8">Chaveta de travamento do eixo</span></div>
+            <div class="r-a4-comp-item" style="display:none;"><span class="r-a4-comp-circle">1</span><span class="r-a4-comp-txt" id="r4_comp_1">---</span></div>
+            <div class="r-a4-comp-item" style="display:none;"><span class="r-a4-comp-circle">2</span><span class="r-a4-comp-txt" id="r4_comp_2">---</span></div>
+            <div class="r-a4-comp-item" style="display:none;"><span class="r-a4-comp-circle">3</span><span class="r-a4-comp-txt" id="r4_comp_3">---</span></div>
+            <div class="r-a4-comp-item" style="display:none;"><span class="r-a4-comp-circle">4</span><span class="r-a4-comp-txt" id="r4_comp_4">---</span></div>
+            <div class="r-a4-comp-item" style="display:none;"><span class="r-a4-comp-circle">5</span><span class="r-a4-comp-txt" id="r4_comp_5">---</span></div>
+            <div class="r-a4-comp-item" style="display:none;"><span class="r-a4-comp-circle">6</span><span class="r-a4-comp-txt" id="r4_comp_6">---</span></div>
+            <div class="r-a4-comp-item" style="display:none;"><span class="r-a4-comp-circle">7</span><span class="r-a4-comp-txt" id="r4_comp_7">---</span></div>
+            <div class="r-a4-comp-item" style="display:none;"><span class="r-a4-comp-circle">8</span><span class="r-a4-comp-txt" id="r4_comp_8">---</span></div>
           </div>
 
           <div class="r-a4-aplicacao-box">
             <div class="r-a4-sub-header">APLICAÇÃO</div>
             <div class="r-a4-aplicacao-content" id="r4_aplicacao">
-              Ventilação / Resfriamento de equipamentos e processos industriais.
+              ---
             </div>
           </div>
 
           <div class="r-a4-obs-tecnicas-box">
             <div class="r-a4-sub-header">OBSERVAÇÕES TÉCNICAS</div>
             <div class="r-a4-obs-tecnicas-content" id="r4_obs_tecnicas">
-              <ul>
-                <li>Desenho ilustrativo, baseado no equipamento da imagem.</li>
-                <li>Dimensões podem variar conforme fabricante e modelo.</li>
-                <li>Verificar alinhamento, fixações e condições da hélice.</li>
-                <li>Realizar inspeções periódicas na tampa de proteção, hélice e mancais.</li>
-                <li>Manter o equipamento limpo e em boas condições de pintura.</li>
-              </ul>
+              <div style="color:#94a3b8; font-style:italic; font-size:10px; padding:3px 0;">Sem observações técnicas registradas.</div>
             </div>
           </div>
         </div>
@@ -5571,28 +5598,24 @@
         <div class="r-a4-desc-col">
           <div class="r-a4-section-header" style="font-size:9.5px; text-align:left; padding-left:10px;">DESCRIÇÃO DO SERVIÇO</div>
           <div class="r-a4-pautada-box" id="r4_servico_linhas_container">
-            <div class="r-a4-pautada-linha" id="r4_pautada_1">Foi realizada intervenção no conjunto motorizado, com apoio da equipe de elétrica,</div>
-            <div class="r-a4-pautada-linha" id="r4_pautada_2">para avaliação da integridade dos componentes elétricos do motor.</div>
-            <div class="r-a4-pautada-linha" id="r4_pautada_3">Com auxílio do equipamento PDMA, foram realizadas medições no motor com o</div>
-            <div class="r-a4-pautada-linha" id="r4_pautada_4">objetivo de verificar suas condições de integridade elétrica.</div>
-            <div class="r-a4-pautada-linha" id="r4_pautada_5">Para viabilizar a execução do serviço, foi realizada a movimentação do motor com empilhadeira.</div>
-            <div class="r-a4-pautada-linha" id="r4_pautada_6">Remoção da tampa de proteção da ventoinha para acesso e inspeção. Serviço em andamento.</div>
+            <div class="r-a4-pautada-linha" id="r4_pautada_1">...................................................................................................................................................</div>
+            <div class="r-a4-pautada-linha" id="r4_pautada_2">...................................................................................................................................................</div>
+            <div class="r-a4-pautada-linha" id="r4_pautada_3">...................................................................................................................................................</div>
+            <div class="r-a4-pautada-linha" id="r4_pautada_4">...................................................................................................................................................</div>
+            <div class="r-a4-pautada-linha" id="r4_pautada_5">...................................................................................................................................................</div>
+            <div class="r-a4-pautada-linha" id="r4_pautada_6">...................................................................................................................................................</div>
           </div>
         </div>
 
         <div class="r-a4-ferr-equipe-col">
           <div class="r-a4-section-header" style="font-size:9.5px; text-align:left; padding-left:8px;">FERRAMENTAS UTILIZADAS</div>
           <div class="r-a4-ferr-body" id="r4_ferramentas_linhas">
-            <ul>
-              <li>PDMA (Megar)</li>
-              <li>Empilhadeira industrial</li>
-              <li>Ferramentas manuais (chaves, soquetes, etc.)</li>
-            </ul>
+            <div style="color:#94a3b8; font-style:italic; font-size:10px; padding:3px 0;">Nenhuma ferramenta informada.</div>
           </div>
 
           <div class="r-a4-section-header" style="font-size:9.5px; text-align:left; padding-left:8px; border-top:1.5px solid #003b71;">EQUIPE</div>
           <div class="r-a4-equipe-body" id="r4_equipe_linhas">
-            Reinaldo / Nathan / Eduardo
+            ---
           </div>
         </div>
       </div>
@@ -5609,18 +5632,18 @@
         <div class="r-a4-rodape-col">
           <div class="r-a4-section-header" style="font-size:9px;">OBSERVAÇÕES</div>
           <div class="r-a4-rodape-body" id="r4_observacoes_linhas">
-            Status: Serviço em andamento.
+            <div style="color:#94a3b8; font-style:italic; font-size:10px; padding:3px 0;">Sem observações registradas.</div>
           </div>
         </div>
 
         <div class="r-a4-rodape-col">
           <div class="r-a4-section-header" style="font-size:9px;">RESPONSÁVEL TÉCNICO / EXECUÇÃO</div>
           <div class="r-a4-resp-content">
-            <div class="r-a4-resp-campo">NOME: <span id="r4_resp_nome">EDUARDO NORONHA</span></div>
-            <div class="r-a4-resp-campo">MATRÍCULA: <span id="r4_resp_matr">48380712</span></div>
+            <div class="r-a4-resp-campo">NOME: <span id="r4_resp_nome">---</span></div>
+            <div class="r-a4-resp-campo">MATRÍCULA: <span id="r4_resp_matr">---</span></div>
             <div class="r-a4-resp-assinatura-wrap">
               <img id="r4_img_assinatura" src="" alt="Assinatura" style="display:none;">
-              <div id="r4_texto_assinatura_cursiva" class="texto-cursiva">Eduardo Noronha</div>
+              <div id="r4_texto_assinatura_cursiva" class="texto-cursiva" style="display:none;"></div>
             </div>
           </div>
         </div>
@@ -7997,11 +8020,14 @@ function atualizarInfoMotorIA() {
   if (!infoEl) return;
   
   if (motor === 'nano_banana') {
-    infoEl.innerHTML = '🍌 <b>Nano Banana 2 (Gemini Flash Image):</b> Renderização ultra-nítida de geometrias mecânicas, cotas ABNT/ISO sem ruído e alta velocidade.';
+    infoEl.innerHTML = '🍌 <b>Nano Banana 2 (Google Gemini 2.5 Flash Image):</b> Renderização ultra-nítida 4K de superfícies mecânicas, cotas ABNT/ISO sem ruído e alta velocidade.';
     if (btnGerar) btnGerar.innerHTML = '<span>🍌 Gerar Desenho com Nano Banana 2</span>';
   } else if (motor === 'nano_banana_pro') {
-    infoEl.innerHTML = '🍌 <b>Nano Banana Pro:</b> Consistência extrema em vistas explodidas, eixos ranhurados, engrenagens helicoidais e componentes complexos.';
+    infoEl.innerHTML = '🍌 <b>Nano Banana Pro (Google DeepMind):</b> Consistência extrema em vistas explodidas, eixos ranhurados, engrenagens helicoidais e componentes complexos.';
     if (btnGerar) btnGerar.innerHTML = '<span>🍌 Gerar Desenho com Nano Banana Pro</span>';
+  } else if (motor === 'nano_banana_lite') {
+    infoEl.innerHTML = '🍌 <b>Nano Banana 2 Lite:</b> Modelo Google DeepMind com latência ultrabaixa para dispositivos móveis e inspeções em campo.';
+    if (btnGerar) btnGerar.innerHTML = '<span>🍌 Gerar Desenho com Nano Banana Lite</span>';
   } else if (motor === 'flux_pro') {
     infoEl.innerHTML = '⚡ <b>Flux.1 Neural CAD:</b> Modelo de difusão clássico de alta fidelidade para pranchas e diagramas conceituais.';
     if (btnGerar) btnGerar.innerHTML = '<span>✨ Gerar Desenho com Flux.1</span>';
@@ -8033,7 +8059,7 @@ function carregarDadosFormularioParaPromptIA() {
   } else if (tag && tag !== '---') {
     base = 'Equipamento ' + tag;
   } else {
-    base = 'Motor elétrico industrial com conjunto de ventilação e mancais';
+    base = 'Equipamento mecânico industrial';
   }
 
   if (anomalia) {
@@ -8071,12 +8097,13 @@ function aplicarExemploPromptIA(tipo) {
   }
 }
 
-async function gerarDesenhoTecnicoComIA(novaVariacao = false) {
+async function gerarDesenhoTecnicoComIA(novaVariacao = false, instrucaoEdicaoExtra = '') {
   const btn = document.getElementById('btn_gerar_desenho_ia');
   const statusEl = document.getElementById('status_geracao_desenho_ia');
   const promptInput = document.getElementById('rel_ia_desenho_prompt');
   const motor = document.getElementById('rel_ia_motor_modelo')?.value || 'nano_banana';
   const estilo = document.getElementById('rel_ia_estilo_desenho')?.value || 'cad_isometrico';
+  const aspectRatio = document.getElementById('rel_ia_aspect_ratio')?.value || '16:9';
   const tag = (document.getElementById('rel_tag')?.value || 'TAG-01').trim();
   const equip = (document.getElementById('rel_equip')?.value || 'Equipamento Mecânico').trim();
   const resp = (document.getElementById('rel_resp')?.value || 'Eduardo Noronha').trim();
@@ -8084,7 +8111,11 @@ async function gerarDesenhoTecnicoComIA(novaVariacao = false) {
   let textoPrompt = (promptInput?.value || '').trim();
   if (!textoPrompt) {
     carregarDadosFormularioParaPromptIA();
-    textoPrompt = (promptInput?.value || 'Motor elétrico trifásico industrial').trim();
+    textoPrompt = (promptInput?.value || 'Equipamento mecânico industrial').trim();
+  }
+
+  if (instrucaoEdicaoExtra) {
+    textoPrompt += `, refined with modification: ${instrucaoEdicaoExtra}`;
   }
 
   const isNanoBanana = motor.startsWith('nano_banana');
@@ -8097,7 +8128,7 @@ async function gerarDesenhoTecnicoComIA(novaVariacao = false) {
   }
   if (statusEl) {
     statusEl.innerHTML = isNanoBanana
-      ? '<span style="color:#fde047;">🍌 Nano Banana 2 & Gemini processando geometria neural CAD com precisão 4K...</span>'
+      ? '<span style="color:#fde047;">🍌 Google Nano Banana 2 & Gemini processando geometria neural CAD com precisão 4K...</span>'
       : '<span style="color:#38bdf8;">⏳ IA neural processando modelo CAD e renderizando prancha técnica de alta precisão...</span>';
   }
 
@@ -8112,15 +8143,16 @@ async function gerarDesenhoTecnicoComIA(novaVariacao = false) {
   } else if (estilo === 'corte_mecanico') {
     estiloSufixo = 'cross section mechanical cutaway technical drawing, detailed internal gears bearings and shaft assembly, engineering CAD diagram, white background, numbered component parts, precise engineering rendering';
   } else {
-    // render_industrial
     estiloSufixo = 'photorealistic industrial 3D CAD render of machinery, clean studio lighting, pristine industrial components, metallic finish, technical engineering photography, 8k resolution';
   }
 
   let motorKeywords = '';
   if (motor === 'nano_banana') {
-    motorKeywords = 'rendered with Nano Banana 2 neural CAD engine, Google Gemini 3.1 Flash Image high-fidelity, razor sharp outlines, extreme precision, technical drawing standard, clean vector aesthetics, 4k detail, ISO 10067 engineering drafting';
+    motorKeywords = 'rendered with Nano Banana 2 neural CAD engine, Google Gemini 2.5 Flash Image high-fidelity, razor sharp outlines, extreme precision, technical drawing standard, clean vector aesthetics, 4k detail, ISO 10067 engineering drafting';
   } else if (motor === 'nano_banana_pro') {
-    motorKeywords = 'rendered with Nano Banana Pro, Gemini advanced spatial coherence, ultra-precise mechanical CAD drafting, exploded isometric assembly, micro-machined parts, high dimensional consistency, 4k';
+    motorKeywords = 'rendered with Nano Banana Pro, Google DeepMind advanced spatial coherence, ultra-precise mechanical CAD drafting, exploded isometric assembly, micro-machined parts, high dimensional consistency, 4k';
+  } else if (motor === 'nano_banana_lite') {
+    motorKeywords = 'rendered with Nano Banana 2 Lite ultra-fast neural CAD engine, Google Gemini 2.5 Flash Image high-velocity, razor sharp technical outlines, clean CAD vector standard';
   } else if (motor === 'imagen_3') {
     motorKeywords = 'Google Imagen 3 industrial photorealism, DeepMind engineering CAD precision, volumetric studio lighting, high contrast metallic finish';
   } else {
@@ -8129,9 +8161,13 @@ async function gerarDesenhoTecnicoComIA(novaVariacao = false) {
 
   promptIngles = `${textoPrompt}, ${estiloSufixo}, ${motorKeywords}`;
 
+  let renderWidth = 1024, renderHeight = 640;
+  if (aspectRatio === '4:3') { renderWidth = 1024; renderHeight = 768; }
+  else if (aspectRatio === '1:1') { renderWidth = 800; renderHeight = 800; }
+
   const seed = novaVariacao ? Math.floor(Math.random() * 9999999) : 42;
   const encoded = encodeURIComponent(promptIngles);
-  const urlIA = `https://image.pollinations.ai/prompt/${encoded}?width=1024&height=640&nologo=true&seed=${seed}`;
+  const urlIA = `https://image.pollinations.ai/prompt/${encoded}?width=${renderWidth}&height=${renderHeight}&nologo=true&seed=${seed}`;
 
   try {
     const imgObj = new Image();
@@ -8158,7 +8194,7 @@ async function gerarDesenhoTecnicoComIA(novaVariacao = false) {
     if (imgPrevia) imgPrevia.src = dataUrlFinal;
     if (containerPrevia) containerPrevia.style.display = 'block';
     if (badgeRes) {
-      badgeRes.innerText = isNanoBanana ? '🍌 Nano Banana 2 • 4K Ultra-Sharp • ABNT' : '1024 x 640 px • HD';
+      badgeRes.innerText = isNanoBanana ? '🍌 Nano Banana 2 • 4K Ultra-Sharp • ABNT' : `${renderWidth} x ${renderHeight} px • HD`;
     }
 
     if (statusEl) {
@@ -8204,6 +8240,22 @@ async function gerarDesenhoTecnicoComIA(novaVariacao = false) {
         : '<span>✨ Gerar Desenho com IA</span>';
     }
   }
+}
+
+function executarInstrucaoEdicaoNanoBanana() {
+  const inputEdicao = document.getElementById('rel_ia_instrucao_edicao');
+  const instrucao = (inputEdicao?.value || '').trim();
+  if (!instrucao) {
+    alert('Por favor, digite uma instrução de edição para o Nano Banana (ex: Adicionar cotas em mm, destacar componentes em corte...).');
+    return;
+  }
+  gerarDesenhoTecnicoComIA(true, instrucao);
+}
+
+function aplicarInstrucaoRapidaNanoBanana(instrucao) {
+  const inputEdicao = document.getElementById('rel_ia_instrucao_edicao');
+  if (inputEdicao) inputEdicao.value = instrucao;
+  gerarDesenhoTecnicoComIA(true, instrucao);
 }
 
 async function sintetizarPranchaTecnicaNormativa(imgFonte, tag, equip, resp, estilo, motor = 'nano_banana') {
@@ -14248,6 +14300,29 @@ function gerarSvg3VistasTecnicas(tipo = 'motor_ventilador', params = {}) {
       </linearGradient>
     </defs>`;
 
+  if (tipo === 'vazio') {
+    const emptySvg = `<svg viewBox="0 0 440 220" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:Arial,Helvetica,sans-serif; display:block; margin:auto;">
+      <rect x="10" y="10" width="420" height="200" fill="none" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="6,4"/>
+      <text x="220" y="115" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="bold">Aguardando Especificação de Equipamento</text>
+    </svg>`;
+    return {
+      tituloBanner: 'DESENHO TÉCNICO DO EQUIPAMENTO',
+      lateral: emptySvg,
+      frontal: emptySvg,
+      superior: emptySvg,
+      componentes: [],
+      aplicacao: '---',
+      obsTecnicas: [],
+      legendasFotos: {
+        principal: 'FOTO PRINCIPAL',
+        detalhe1: 'DETALHE 1',
+        detalhe2: 'DETALHE 2',
+        detalhe3: 'DETALHE 3',
+        detalhe4: 'DETALHE 4'
+      }
+    };
+  }
+
   if (tipo.includes('motor') || tipo.includes('ventil') || tipo.includes('helice') || tipo.includes('impelidor')) {
     // =========================================================================
     // 1. MOTOR ELÉTRICO COM CONJUNTO DE VENTILAÇÃO AXIAL (PADRÃO 1:1 REALISTA)
@@ -14685,9 +14760,57 @@ function atualizarDesenhosTecnicosA4(customUrl) {
     else btn.classList.remove('ativo');
   });
 
-  const nomeEquip = (document.getElementById('rel_equip')?.value || 'Motor / Conjunto de Ventilação').toLowerCase();
-  const tag = (document.getElementById('rel_tag')?.value || '').toLowerCase();
-  const servico = (document.getElementById('rel_servico_realizado')?.value || '').toLowerCase();
+  const userEquip = (document.getElementById('rel_equip')?.value || '').trim();
+  const nomeEquip = userEquip.toLowerCase();
+  const tag = (document.getElementById('rel_tag')?.value || '').trim().toLowerCase();
+  const servico = (document.getElementById('rel_servico_realizado')?.value || '').trim().toLowerCase();
+
+  const isVazio = (!userEquip && !tag && !servico && !urlDesenho);
+
+  if (isVazio) {
+    // 100% ZERADO: Sem equipamento informado, a folha permanece virgem sem resíduos
+    document.querySelectorAll('#r4_cad_titulo_banner').forEach(el => {
+      el.innerText = 'DESENHO TÉCNICO DO EQUIPAMENTO';
+    });
+
+    for (let idx = 0; idx < 8; idx++) {
+      document.querySelectorAll(`#r4_comp_${idx + 1}`).forEach(elComp => {
+        elComp.innerText = '---';
+        const elItem = elComp.closest('.r-a4-comp-item');
+        if (elItem) elItem.style.display = 'none';
+      });
+    }
+
+    const userApl = (document.getElementById('rel_aplicacao')?.value || '').trim();
+    document.querySelectorAll('#r4_aplicacao').forEach(elApl => {
+      elApl.innerText = userApl || '---';
+    });
+
+    const userObsTec = (document.getElementById('rel_obs_tecnicas')?.value || '').trim();
+    document.querySelectorAll('#r4_obs_tecnicas').forEach(elObsTec => {
+      if (userObsTec) {
+        const linhas = userObsTec.split('\n').filter(l => l.trim().length > 0);
+        elObsTec.innerHTML = '<ul>' + linhas.map(l => `<li>${l.replace(/^[•\-\*]\s*/, '')}</li>`).join('') + '</ul>';
+      } else {
+        elObsTec.innerHTML = '<div style="color:#94a3b8; font-style:italic; font-size:10px; padding:3px 0;">Sem observações técnicas registradas.</div>';
+      }
+    });
+
+    const vVazio = gerarSvg3VistasTecnicas('vazio');
+    const elLat = document.getElementById('r4_vista_lateral_svg');
+    const elFront = document.getElementById('r4_vista_frontal_svg');
+    const elSup = document.getElementById('r4_vista_superior_svg');
+    if (elLat) elLat.innerHTML = vVazio.lateral;
+    if (elFront) elFront.innerHTML = vVazio.frontal;
+    if (elSup) elSup.innerHTML = vVazio.superior;
+
+    const elStatusBadge = document.getElementById('r4_status_badge');
+    if (elStatusBadge) {
+      elStatusBadge.className = 'r-a4-status-badge em-andamento';
+      elStatusBadge.innerText = '/// ⚙️ SERVIÇO EM ANDAMENTO ///';
+    }
+    return;
+  }
 
   let tipoCad = 'motor_ventilador';
   let params = {};
@@ -14701,18 +14824,18 @@ function atualizarDesenhosTecnicosA4(customUrl) {
   } else if (nomeEquip.includes('filtro') || tag.includes('flt') || tag.includes('atemp')) {
     tipoCad = 'filtro_cesto';
     params = { altura: '263 mm', diametro: 'Ø 70 mm' };
+  } else if (nomeEquip.includes('motor') || nomeEquip.includes('ventil') || nomeEquip.includes('helice')) {
+    tipoCad = 'motor_ventilador';
   } else {
-    // Default Padrão Mecânica 4.0 IA: Motor com Hélice Axial / Conjunto de Ventilação
     tipoCad = 'motor_ventilador';
   }
 
   const v3 = gerarSvg3VistasTecnicas(tipoCad, params);
 
   // 1. Atualiza Banner do Desenho Técnico
-  const elBanner = document.getElementById('r4_cad_titulo_banner');
-  if (elBanner && v3.tituloBanner) {
-    elBanner.innerText = v3.tituloBanner;
-  }
+  document.querySelectorAll('#r4_cad_titulo_banner').forEach(elBanner => {
+    if (v3.tituloBanner) elBanner.innerText = v3.tituloBanner;
+  });
 
   // 2. Atualiza as 3 Vistas Técnicas CAD
   const elLat = document.getElementById('r4_vista_lateral_svg');
@@ -14726,12 +14849,8 @@ function atualizarDesenhosTecnicosA4(customUrl) {
   // 3. Atualiza Status Badge do Cabeçalho
   const elStatusBadge = document.getElementById('r4_status_badge');
   if (elStatusBadge) {
-    const urg = (document.getElementById('rel_urgencia')?.value || '').toLowerCase();
-    const serv = (document.getElementById('rel_servico_realizado')?.value || '').toLowerCase();
-    const obs = (document.getElementById('rel_observacao')?.value || '').toLowerCase();
-    const isConcluido = (serv.includes('concluído') || serv.includes('concluido') || obs.includes('concluído') || obs.includes('concluido') || obs.includes('liberado')) &&
-                        !serv.includes('serviço em andamento') && !obs.includes('serviço em andamento');
-
+    const isConcluido = (servico.includes('concluído') || servico.includes('concluido')) &&
+                        !servico.includes('serviço em andamento');
     if (isConcluido) {
       elStatusBadge.className = 'r-a4-status-badge concluido';
       elStatusBadge.innerText = '/// ✔️ CONCLUÍDO ///';
@@ -14743,36 +14862,38 @@ function atualizarDesenhosTecnicosA4(customUrl) {
 
   // 4. Preenche Componentes ❶ a ❽
   v3.componentes.forEach((comp, idx) => {
-    const elComp = document.getElementById(`r4_comp_${idx + 1}`);
-    const elItem = elComp?.closest('.r-a4-comp-item');
-    if (elComp) elComp.innerText = comp;
-    if (elItem) elItem.style.display = comp ? 'flex' : 'none';
+    document.querySelectorAll(`#r4_comp_${idx + 1}`).forEach(elComp => {
+      const elItem = elComp.closest('.r-a4-comp-item');
+      elComp.innerText = comp || '---';
+      if (elItem) elItem.style.display = comp ? 'flex' : 'none';
+    });
   });
 
   // 5. Preenche Aplicação
-  const elApl = document.getElementById('r4_aplicacao');
-  if (elApl) {
+  document.querySelectorAll('#r4_aplicacao').forEach(elApl => {
     const userApl = document.getElementById('rel_aplicacao')?.value?.trim();
-    elApl.innerText = userApl || v3.aplicacao;
-  }
+    elApl.innerText = userApl || v3.aplicacao || '---';
+  });
 
   // 6. Preenche Observações Técnicas
-  const elObsTec = document.getElementById('r4_obs_tecnicas');
-  if (elObsTec) {
+  document.querySelectorAll('#r4_obs_tecnicas').forEach(elObsTec => {
     const userObsTec = document.getElementById('rel_obs_tecnicas')?.value?.trim();
     if (userObsTec) {
       const linhas = userObsTec.split('\n').filter(l => l.trim().length > 0);
       elObsTec.innerHTML = '<ul>' + linhas.map(l => `<li>${l.replace(/^[•\-\*]\s*/, '')}</li>`).join('') + '</ul>';
-    } else {
+    } else if (v3.obsTecnicas && v3.obsTecnicas.length > 0) {
       elObsTec.innerHTML = '<ul>' + v3.obsTecnicas.map(l => `<li>${l}</li>`).join('') + '</ul>';
+    } else {
+      elObsTec.innerHTML = '<div style="color:#94a3b8; font-style:italic; font-size:10px; padding:3px 0;">Sem observações técnicas registradas.</div>';
     }
-  }
+  });
 
   // 7. Atualiza Legendas Periciais das Fotos
   if (v3.legendasFotos) {
     const setLbl = (id, txt) => {
-      const el = document.getElementById(id);
-      if (el && txt) el.innerText = txt;
+      document.querySelectorAll('#' + id).forEach(el => {
+        if (el && txt) el.innerText = txt;
+      });
     };
     setLbl('r4_foto_principal_lbl', v3.legendasFotos.principal);
     setLbl('r4_detalhe_1_lbl', v3.legendasFotos.detalhe1);
@@ -14904,11 +15025,12 @@ function atualizarFolhaA4AoVivo(customUrl) {
   });
 
   // 8. Equipe
-  const respNome = (document.getElementById('rel_resp')?.value || 'EDUARDO NORONHA').trim();
+  const userResp = (document.getElementById('rel_resp')?.value || '').trim();
+  const respNome = userResp || (typeof getUsuarioAtualNome === 'function' && getUsuarioAtualNome() ? getUsuarioAtualNome() : '---');
   const equipeTexto = (document.getElementById('rel_equipe_matr')?.value || '').trim();
   const eqTextoFinal = equipeTexto 
     ? `${equipeTexto} • Mecânica Industrial 4.0 IA`
-    : `${respNome.toUpperCase()} • Mecânica Industrial 4.0 IA`;
+    : (userResp ? `${userResp.toUpperCase()} • Mecânica Industrial 4.0 IA` : '---');
   document.querySelectorAll('#r4_equipe_linhas').forEach(eqContainer => {
     eqContainer.innerText = eqTextoFinal;
   });
@@ -14920,7 +15042,7 @@ function atualizarFolhaA4AoVivo(customUrl) {
       const linhasM = matTexto.split('\n').filter(l => l.trim().length > 0);
       matContainer.innerHTML = '<ul>' + linhasM.map(m => `<li>${m.replace(/^[•\-\*]\s*/, '')}</li>`).join('') + '</ul>';
     } else {
-      matContainer.innerHTML = '<div style="color:#94a3b8; font-style:italic; font-size:10px; padding:3px 0;">Nenhum material adicional registrado.</div>';
+      matContainer.innerHTML = '<div style="color:#94a3b8; font-style:italic; font-size:10px; padding:3px 0;">---</div>';
     }
   });
 
@@ -14936,15 +15058,15 @@ function atualizarFolhaA4AoVivo(customUrl) {
   });
 
   // 11. Responsável Técnico, Matrícula e Assinatura
-  let matr = '48380712';
-  const userMatr = document.getElementById('rel_matricula')?.value?.trim();
+  let matr = '---';
+  const userMatr = (document.getElementById('rel_matricula')?.value || '').trim();
   if (userMatr) {
     matr = userMatr;
   } else if (equipeTexto.includes('/')) {
     matr = equipeTexto.split('/')[1].trim();
   }
 
-  setElText('r4_resp_nome', respNome.toUpperCase());
+  setElText('r4_resp_nome', respNome ? respNome.toUpperCase() : '---');
   setElText('r4_resp_matr', matr);
 
   const assUrl = window.assinaturaDataUrl || (typeof assinaturaDataUrl !== 'undefined' ? assinaturaDataUrl : null);
@@ -14960,9 +15082,12 @@ function atualizarFolhaA4AoVivo(customUrl) {
   document.querySelectorAll('#r4_texto_assinatura_cursiva').forEach(textoCursiva => {
     if (assUrl) {
       textoCursiva.style.display = 'none';
-    } else {
+    } else if (respNome && respNome !== '---') {
       textoCursiva.innerText = respNome;
       textoCursiva.style.display = 'block';
+    } else {
+      textoCursiva.innerText = '';
+      textoCursiva.style.display = 'none';
     }
   });
 
