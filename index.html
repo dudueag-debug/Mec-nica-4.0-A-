@@ -293,6 +293,28 @@
     flex-grow: 1;
   }
 
+  /* ---- CARD ESPECIAL: CENTRAL DE LAUDOS UNIFICADA ---- */
+  .card-central-laudos {
+    background: linear-gradient(150deg, #09172a 0%, #0e1e35 50%, #06111f 100%) !important;
+    border: 1.5px solid #0284c7 !important;
+    border-top: 2.5px solid #38bdf8 !important;
+    border-left: 2px solid #0284c7 !important;
+    box-shadow: inset 0 1px 0 rgba(56, 189, 248, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.6), 0 8px 26px rgba(0, 0, 0, 0.75) !important;
+  }
+  .card-central-laudos::before {
+    background: linear-gradient(90deg, #0369a1 0%, #38bdf8 40%, #0ea5e9 70%, #0284c7 100%) !important;
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.6) !important;
+  }
+  .card-central-laudos:hover {
+    border-color: #38bdf8 !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 16px 36px rgba(0, 0, 0, 0.8), 0 0 30px rgba(2, 132, 199, 0.5) !important;
+  }
+  @media (min-width: 680px) {
+    .card-central-laudos {
+      grid-column: span 2;
+    }
+  }
+
   /* ---- BOTOEIRAS E BOTÕES INDUSTRIAIS ---- */
   .button {
     display: inline-flex;
@@ -3924,23 +3946,50 @@
         <button  class="button" onclick="event.stopPropagation(); abrirModulo('metrologia')">Acessar</button>
       </div>
 
-      <div class="card" onclick="abrirModulo('relatorio')" style="border-color: #6366f1; background: linear-gradient(145deg, #0b1528 0%, #131b38 100%); box-shadow: 0 4px 20px rgba(99, 102, 241, 0.15);">
+      <!-- CARD UNIFICADO: CENTRAL DE LAUDOS -->
+      <div id="cardCentralLaudos" class="card card-central-laudos" onclick="abrirModulo('relatorio')">
         <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
-        <div style="display:inline-flex; align-items:center; gap:6px; background:linear-gradient(135deg, rgba(79,70,229,0.35) 0%, rgba(56,189,248,0.25) 100%); border:1px solid #818cf8; color:#c7d2fe; font-size:10px; font-weight:800; padding:3px 10px; border-radius:12px; margin-bottom:8px; box-shadow:0 0 12px rgba(99,102,241,0.25);">
-          <span style="color:#38bdf8;">✨</span> IA GEMINI INTEGRADA
+        
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:6px;">
+          <div style="display:inline-flex; align-items:center; gap:6px; background:linear-gradient(135deg, rgba(2,132,199,0.3) 0%, rgba(56,189,248,0.2) 100%); border:1px solid #38bdf8; color:#7dd3fc; font-size:10px; font-weight:800; padding:3px 10px; border-radius:12px; box-shadow:0 0 10px rgba(56,189,248,0.25);">
+            <span>✨</span> IA GEMINI • LAUDOS OFICIAIS A4
+          </div>
+          <span style="font-size:10.5px; color:#38bdf8; font-weight:700; background:rgba(15,23,42,0.7); border:1px solid #1e3a5f; padding:2px 8px; border-radius:6px; font-family:monospace;">ABNT / NR-12</span>
         </div>
-        <div class="icon" style="background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%); border-color: #818cf8;">✨📝</div>
-        <h3>Relatório Técnico <span style="font-size:12.5px; color:#818cf8; font-weight:700;">(Gemini IA)</span></h3>
-        <p>Elabore relatórios técnicos com IA Gemini: redação normativa automática, análise de falhas, desenho técnico 3D e folha A4 oficial.</p>
-        <button  class="button" style="background:linear-gradient(135deg, #3730a3 0%, #4f46e5 100%); border-color:#818cf8;" onclick="event.stopPropagation(); abrirModulo('relatorio')">Acessar com Gemini</button>
-      </div>
 
-      <div class="card" style="border-color: #2b6cb0; background: linear-gradient(145deg, #142238 0%, #0e2242 100%);" onclick="abrirModulo('relatorios-prontos')">
-        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
-        <div class="icon">📑</div>
-        <h3>Relatórios Prontos & Impressão</h3>
-        <p>Acesse todos os relatórios finalizados e anexados, visualize no modelo oficial A4 e envie direto para imprimir ou PDF.</p>
-        <button  class="button" style="background:#10448c; border-color:#2a6ab8;" onclick="event.stopPropagation(); abrirModulo('relatorios-prontos')">Ver Relatórios</button>
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+          <div class="icon" style="background:linear-gradient(135deg, #0c2340 0%, #13335a 50%, #1e4976 100%); border-color:#38bdf8; color:#38bdf8; box-shadow:0 0 14px rgba(56,189,248,0.3); margin-bottom:0;">
+            📋
+          </div>
+          <div>
+            <h3 style="margin:0; font-size:18px; color:#f8fafc; letter-spacing:0.4px; font-weight:800; text-transform:uppercase;">Central de Laudos</h3>
+            <div style="color:#38bdf8; font-size:12.5px; font-weight:700; margin-top:2px;">Do campo ao laudo oficial em um só lugar.</div>
+          </div>
+        </div>
+
+        <!-- Fluxo Sequencial em Destaque Industrial -->
+        <div style="background:linear-gradient(90deg, rgba(14,165,233,0.12) 0%, rgba(30,58,95,0.22) 100%); border:1px solid rgba(56,189,248,0.35); border-left:3px solid #38bdf8; border-radius:6px; padding:8px 12px; margin:8px 0 10px 0;">
+          <div style="font-family:'Courier New', monospace; font-size:11.5px; font-weight:700; color:#e0f2fe; letter-spacing:0.3px; white-space:nowrap; overflow-x:auto;">
+            Identifique → Meça → Fotografe → Desenho → Laudo A4
+          </div>
+          <div style="font-size:11px; color:#7dd3fc; margin-top:3px; font-weight:600;">
+            Para técnicos, inspetores e engenheiros.
+          </div>
+        </div>
+
+        <p style="margin-bottom:12px; font-size:12.5px; color:#94a3b8; line-height:1.45;">
+          Identifique o equipamento, registre medições e diagnóstico, anexe fotos, gere desenho técnico CAD e emita o laudo oficial A4 com IA Gemini integrada.
+        </p>
+
+        <!-- Botoeiras Industriais Duplas -->
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:auto;">
+          <button class="button" style="flex:1; min-width:130px; margin-top:0; padding:10px 14px; background:linear-gradient(180deg, #0284c7 0%, #0369a1 100%); border:1px solid #38bdf8; border-top:1px solid #7dd3fc; font-size:13px; font-weight:700; box-shadow:0 0 12px rgba(2,132,199,0.35);" onclick="event.stopPropagation(); abrirModulo('relatorio'); alternarAbaRelatorio('novo');">
+            <span>➕ Novo laudo</span>
+          </button>
+          <button class="button secondary" style="flex:1; min-width:130px; margin-top:0; padding:10px 14px; background:linear-gradient(180deg, #132238 0%, #0c1828 100%); border:1px solid #234268; border-top:1px solid #38bdf8; color:#93c5fd; font-size:13px; font-weight:700; box-shadow:inset 0 1px 0 rgba(255,255,255,0.1);" onclick="event.stopPropagation(); abrirModulo('relatorios-prontos');">
+            <span>📂 Meus laudos (<span id="home_count_laudos">0</span>)</span>
+          </button>
+        </div>
       </div>
 
       <div class="card" onclick="abrirModulo('assistente')">
@@ -14199,6 +14248,13 @@ function mostrarApp(email) {
     localStorage.removeItem('mecanica_modo_admin_ativo');
   }
 
+  // Sincroniza contador de laudos da Central de Laudos na Home
+  try {
+    if (typeof atualizarContadorLaudosUI === 'function') {
+      atualizarContadorLaudosUI();
+    }
+  } catch (e) {}
+
   // 4. Inicia ciclo de presença (heartbeat) a cada 35 segundos
   if (window.intervaloPresencaAdmin) clearInterval(window.intervaloPresencaAdmin);
   window.intervaloPresencaAdmin = setInterval(() => {
@@ -16756,8 +16812,40 @@ async function carregarRelatoriosProntos() {
   if (countEl) countEl.innerText = relatoriosProntosCache.length;
   const countTop = document.getElementById('rel_contador_prontos_tab');
   if (countTop) countTop.innerText = relatoriosProntosCache.length;
+  atualizarContadorLaudosUI(relatoriosProntosCache.length);
 
   renderizarRelatoriosProntos(relatoriosProntosCache);
+}
+
+function atualizarContadorLaudosUI(qtd) {
+  try {
+    const n = (typeof qtd === 'number') 
+      ? qtd 
+      : ((typeof relatoriosProntosCache !== 'undefined' && Array.isArray(relatoriosProntosCache) && relatoriosProntosCache.length > 0)
+        ? relatoriosProntosCache.length 
+        : obterQtdLaudosLocaisRapida());
+        
+    const homeEl = document.getElementById('home_count_laudos');
+    if (homeEl) homeEl.innerText = n;
+    const tabEl = document.getElementById('rel_tab_count_prontos');
+    if (tabEl) tabEl.innerText = n;
+    const topEl = document.getElementById('rel_contador_prontos_tab');
+    if (topEl) topEl.innerText = n;
+  } catch (e) {
+    console.warn('Erro ao atualizar contador de laudos:', e);
+  }
+}
+
+function obterQtdLaudosLocaisRapida() {
+  try {
+    const userRelKey = (typeof getChaveUsuario === 'function') ? getChaveUsuario('relatorios_salvos') : 'relatorios_salvos';
+    const userExcluidosKey = (typeof getChaveUsuario === 'function') ? getChaveUsuario('relatorios_excluidos') : 'relatorios_excluidos';
+    const salvos = JSON.parse(localStorage.getItem(userRelKey) || '[]');
+    const excluidos = JSON.parse(localStorage.getItem(userExcluidosKey) || '[]');
+    return salvos.filter(s => s && s.id && !excluidos.includes(s.id)).length;
+  } catch(e) {
+    return 0;
+  }
 }
 
 function filtrarRelatoriosProntos(valorDireto) {
@@ -17181,6 +17269,7 @@ async function excluirRelatorioPronto(id) {
     relatoriosProntosCache = relatoriosProntosCache.filter(item => item.id !== id);
     const countEl = document.getElementById('rel_tab_count_prontos');
     if (countEl) countEl.innerText = relatoriosProntosCache.length;
+    atualizarContadorLaudosUI(relatoriosProntosCache.length);
     renderizarRelatoriosProntos(relatoriosProntosCache);
 
     if (relatorioVisualizandoAtualId === id) {
@@ -17333,6 +17422,7 @@ async function salvarIntervencao() {
       relatoriosProntosCache.unshift(dadosRelatorioLocal);
       const countEl = document.getElementById('rel_tab_count_prontos');
       if (countEl) countEl.innerText = relatoriosProntosCache.length;
+      atualizarContadorLaudosUI(relatoriosProntosCache.length);
       renderizarRelatoriosProntos(relatoriosProntosCache);
     }
 
@@ -17550,6 +17640,7 @@ function voltarListaEquip() {
 
 /* Inicia tela de carregamento com chave combinada e calibração ao carregar a página */
 iniciarCarregamentoInicialApp();
+try { atualizarContadorLaudosUI(); } catch(e) {}
 
 /* ===================== NAVEGAÇÃO ===================== */
 var navegandoModuloTrava = false;
@@ -17640,6 +17731,13 @@ function voltarGrid() {
   document.getElementById('vistaGrid').classList.remove('hidden');
   equipamentoSelecionadoId = null;
   window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Sincroniza contador de laudos da Central de Laudos na Home
+  try {
+    if (typeof atualizarContadorLaudosUI === 'function') {
+      atualizarContadorLaudosUI();
+    }
+  } catch(e) {}
 
   // Garante que o card de administrador obedeça estritamente ao usuário logado
   const emailAtual = (document.getElementById('usuarioLogadoEmail')?.innerText || '').trim();
