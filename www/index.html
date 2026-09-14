@@ -1437,6 +1437,107 @@
     gap: 8px;
   }
 
+  /* ---- ESTILOS DO FLUXO NORMATIVO DAS 6 ETAPAS DO LAUDO TÉCNICO ---- */
+  .stepper-laudo-container {
+    background: linear-gradient(135deg, #071322 0%, #0d1e34 100%);
+    border: 1.5px solid #1e3a5f;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  }
+  .stepper-laudo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #172a45;
+    padding-bottom: 8px;
+  }
+  .stepper-laudo-sub {
+    font-size: 11px;
+    color: #94a3b8;
+    background: #06111e;
+    padding: 3px 9px;
+    border-radius: 12px;
+    border: 1px solid #1e3a5f;
+  }
+  .stepper-laudo-passos {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: thin;
+  }
+  .stepper-step {
+    background: #091729;
+    border: 1px solid #1b3658;
+    border-radius: 8px;
+    padding: 8px 10px;
+    color: #cbd5e1;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+  }
+  .stepper-step:hover {
+    border-color: #38bdf8;
+    background: #0e2440;
+    color: #ffffff;
+    transform: translateY(-1px);
+  }
+  .stepper-step.active {
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+    border-color: #7dd3fc;
+    color: #ffffff;
+    box-shadow: 0 0 14px rgba(56, 189, 248, 0.4);
+  }
+  .stepper-step .step-badge {
+    font-size: 14px;
+    font-weight: 800;
+    color: #38bdf8;
+  }
+  .stepper-step.active .step-badge {
+    color: #ffffff;
+  }
+  .step-sep {
+    color: #334e68;
+    font-size: 12px;
+    user-select: none;
+  }
+  .etapa-laudo-card {
+    position: relative;
+    border-left: 4px solid #0284c7 !important;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    scroll-margin-top: 80px;
+  }
+  .etapa-laudo-card.etapa-highlight {
+    border-left-color: #38bdf8 !important;
+    box-shadow: 0 0 24px rgba(56, 189, 248, 0.5) !important;
+  }
+  .etapa-header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10.5px;
+    font-weight: 800;
+    background: #0a1f38;
+    color: #38bdf8;
+    border: 1px solid #1e4976;
+    border-radius: 6px;
+    padding: 3px 8px;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+  }
+
   /* REGRAS DE IMPRESSÃO (PDF / A4 - 100% FIDELIDADE À FOLHA OFICIAL MECÂNICA 4.0 IA) */
   @media print {
     *, *::before, *::after {
@@ -3967,10 +4068,10 @@
           </div>
         </div>
 
-        <!-- Fluxo Sequencial em Destaque Industrial -->
+        <!-- Fluxo Sequencial em Destaque Industrial (6 Etapas Normativas) -->
         <div style="background:linear-gradient(90deg, rgba(14,165,233,0.12) 0%, rgba(30,58,95,0.22) 100%); border:1px solid rgba(56,189,248,0.35); border-left:3px solid #38bdf8; border-radius:6px; padding:8px 12px; margin:8px 0 10px 0;">
-          <div style="font-family:'Courier New', monospace; font-size:11.5px; font-weight:700; color:#e0f2fe; letter-spacing:0.3px; white-space:nowrap; overflow-x:auto;">
-            Identifique → Meça → Fotografe → Desenho → Laudo A4
+          <div style="font-family:'Courier New', monospace; font-size:11px; font-weight:700; color:#e0f2fe; letter-spacing:0.2px; white-space:nowrap; overflow-x:auto;">
+            ① Identificação → ② Placa e medições → ③ Diagnóstico e LOTO → ④ Fotos e desenho → ⑤ Serviço e materiais → ⑥ Assinatura
           </div>
           <div style="font-size:11px; color:#7dd3fc; margin-top:3px; font-weight:600;">
             Para técnicos, inspetores e engenheiros.
@@ -5101,9 +5202,53 @@
       <button type="button" class="button" style="padding:6px 14px; font-size:12px; background:#1b3c66;" onclick="corrigirOrtografiaRelatorio()">✨ Corrigir Ortografia</button>
     </div>
 
-    <!-- Identificação da Ordem e Equipamento -->
-    <div class="content-block">
-      <h4>Identificação da Ordem e Equipamento</h4>
+    <!-- STEPPER INTERATIVO DO FLUXO NORMATIVO DE 6 ETAPAS -->
+    <div class="stepper-laudo-container" id="stepper_fluxo_laudo">
+      <div class="stepper-laudo-header">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:18px;">📋</span>
+          <span style="font-weight:800; color:#38bdf8; font-size:13px; letter-spacing:0.5px;">FLUXO NORMATIVO DO LAUDO TÉCNICO • 6 ETAPAS</span>
+        </div>
+        <span class="stepper-laudo-sub">Padrão Oficial Mecânica 4.0 IA & NBR</span>
+      </div>
+      <div class="stepper-laudo-passos">
+        <button type="button" class="stepper-step active" onclick="navegarEtapaLaudo(1)" id="step_btn_1">
+          <span class="step-badge">①</span>
+          <span class="step-text">Identificação</span>
+        </button>
+        <span class="step-sep">→</span>
+        <button type="button" class="stepper-step" onclick="navegarEtapaLaudo(2)" id="step_btn_2">
+          <span class="step-badge">②</span>
+          <span class="step-text">Placa & Medições</span>
+        </button>
+        <span class="step-sep">→</span>
+        <button type="button" class="stepper-step" onclick="navegarEtapaLaudo(3)" id="step_btn_3">
+          <span class="step-badge">③</span>
+          <span class="step-text">Diagnóstico & LOTO</span>
+        </button>
+        <span class="step-sep">→</span>
+        <button type="button" class="stepper-step" onclick="navegarEtapaLaudo(4)" id="step_btn_4">
+          <span class="step-badge">④</span>
+          <span class="step-text">Fotos & Desenho</span>
+        </button>
+        <span class="step-sep">→</span>
+        <button type="button" class="stepper-step" onclick="navegarEtapaLaudo(5)" id="step_btn_5">
+          <span class="step-badge">⑤</span>
+          <span class="step-text">Serviço & Materiais</span>
+        </button>
+        <span class="step-sep">→</span>
+        <button type="button" class="stepper-step" onclick="navegarEtapaLaudo(6)" id="step_btn_6">
+          <span class="step-badge">⑥</span>
+          <span class="step-text">Assinatura</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ================= ETAPA ①: IDENTIFICAÇÃO ================= -->
+    <div class="content-block etapa-laudo-card" id="etapa_rel_1">
+      <div class="etapa-header-badge"><span>PASSO 1 DE 6</span> <span>•</span> <span>NORMA NBR / PETROBRAS</span></div>
+      <h4 style="margin-top:0;">① Identificação da Ordem e Equipamento</h4>
+      <p style="font-size:12px; color:#8190a7; margin-top:-4px; margin-bottom:12px;">Dados cadastrais, ordem de serviço, TAG, executante e localização geográfica</p>
       <div class="field-row">
         <div class="field"><label>Data da intervenção</label><input type="date" id="rel_data"></div>
         <div class="field">
@@ -5138,9 +5283,13 @@
         <div class="field"><label>Equipe / Turno</label><input type="text" id="rel_equipe_matr" placeholder="Equipe / turno / participantes"></div>
       </div>
       <div class="field-row">
-        <div class="field" style="min-width:100%;">
+        <div class="field" style="flex:1.5;">
           <label>Local da instalação</label>
           <input type="text" id="rel_local_texto" placeholder="Local / setor / planta">
+        </div>
+        <div class="field" style="flex:1.5;">
+          <label>Aplicação do Equipamento (Folha A4)</label>
+          <input type="text" id="rel_aplicacao" placeholder="ex: Sistema de Atemperação de Vapor / Ciclo Água-Vapor">
         </div>
       </div>
       <div class="field-row">
@@ -5149,30 +5298,58 @@
         <div class="field"><label>Longitude</label><input type="text" id="rel_lng" readonly placeholder="—"></div>
       </div>
       <div id="loc_status" style="font-size:12px; color:#8190a7; margin-top:6px;"></div>
+
+      <div style="display:flex; justify-content:flex-end; margin-top:14px;">
+        <button type="button" class="button" style="background:#1b365d; border-color:#29415f; font-size:12px;" onclick="navegarEtapaLaudo(2)">Avançar para ② Placa e medições →</button>
+      </div>
     </div>
 
-    <!-- Serviço Realizado e Classificação -->
-    <div class="content-block">
-      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-        <h4 style="margin:0;">Serviço Realizado & Narrativa Técnica</h4>
+    <!-- ================= ETAPA ②: PLACA E MEDIÇÕES ================= -->
+    <div class="content-block etapa-laudo-card" id="etapa_rel_2">
+      <div class="etapa-header-badge"><span>PASSO 2 DE 6</span> <span>•</span> <span>ESPECIFICAÇÃO DE PLACA & METROLOGIA</span></div>
+      <h4 style="margin-top:0;">② Placa e medições</h4>
+      <p style="font-size:12px; color:#8190a7; margin-top:-4px; margin-bottom:12px;">Especificações de placa do fabricante, grandezas de campo e medições metrológicas</p>
+
+      <div class="field-row">
+        <div class="field" style="flex:1;">
+          <label>Dados de Placa: Fabricante / Potência / RPM</label>
+          <input type="text" id="rel_placa_potencia" placeholder="ex: WEG W22 Premium • 75 kW (100 CV) • 1780 RPM">
+        </div>
+        <div class="field" style="flex:1;">
+          <label>Dados de Placa: Tensão / Regime / Grau Proteção</label>
+          <input type="text" id="rel_placa_tensao" placeholder="ex: 380/660V • FS 1.15 • IPW66 • Isolamento Classe H">
+        </div>
       </div>
 
-      <!-- Barra de Ferramentas de IA Técnica e Voz -->
-      <div class="ai-toolbar-box" style="margin-top:10px;">
-        <div class="ai-toolbar-title">
-          <span>🤖 Assistente de IA Técnica & Confiabilidade</span>
-          <span style="font-size:11px; color:#94a3b8; font-weight:normal;">(Otimiza redação, sugere causas e termos normatizados)</span>
-        </div>
-        <div class="ai-toolbar-buttons">
-          <button type="button" class="button" style="margin:0; padding:6px 14px; font-size:12px; background:linear-gradient(135deg, #1e1b4b 0%, #3730a3 50%, #4f46e5 100%); border:1.5px solid #818cf8; box-shadow:0 0 14px rgba(99,102,241,0.5); font-weight:800; color:#fff;" onclick="abrirModalGeminiRelatorio()"><span style="color:#38bdf8;">✨</span> IA Gemini Relatório</button>
-          <button type="button" class="button" style="margin:0; padding:6px 12px; font-size:11.5px; background:#003366; border-color:#38bdf8;" onclick="carregarExemploOficialMecanica40A4()" title="Carregar modelo oficial 1:1 Padrão Mecânica 4.0 IA">📋 Padrão Oficial Mecânica 4.0 IA</button>
-          <button type="button" class="button" style="margin:0; padding:6px 12px; font-size:11.5px; background:linear-gradient(135deg, #dc2626 0%, #991b1b 100%); border-color:#f87171;" onclick="abrirModalMecanicoIA()">🔴 Mecânico IA</button>
-          <button type="button" class="button" style="margin:0; padding:6px 12px; font-size:11.5px; background:#0284c7; border-color:#38bdf8;" onclick="abrirModalRevisaoIA()">✨ Aprimorar com IA Técnica</button>
-          <button type="button" class="button secondary" style="margin:0; padding:6px 12px; font-size:11.5px;" onclick="sugerirCausaEAcaoIA()">🧠 Sugerir Causa & Ação</button>
-          <button type="button" class="button secondary" style="margin:0; padding:6px 12px; font-size:11.5px;" onclick="sugerirFerramentasIA()">🔧 Sugerir Ferramentas</button>
-          <button type="button" class="voice-mic-btn" id="btn_mic_rel_servico_realizado" onclick="iniciarDitadoVoz('rel_servico_realizado')" title="Falar pelo microfone">🎙️ Ditado por Voz</button>
+      <div class="field-row">
+        <div class="field"><label>Temperatura de Operação (°C)</label><input type="text" id="rel_medicao_temp" placeholder="ex: 68.5 °C (Termografia)"></div>
+        <div class="field"><label>Vibração Global (mm/s RMS)</label><input type="text" id="rel_medicao_vibracao" placeholder="ex: 1.8 mm/s (ISO 10816-3)"></div>
+        <div class="field"><label>Folga Mecânica (mm)</label><input type="text" id="rel_medicao_folga" placeholder="ex: 0.05 mm radial / 0.08 axial"></div>
+        <div class="field"><label>Pressão Operacional</label><input type="text" id="rel_medicao_pressao" placeholder="ex: 6.2 bar / 90 PSI"></div>
+      </div>
+
+      <div class="field-row">
+        <div class="field" style="min-width:100%;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; flex-wrap:wrap; gap:6px;">
+            <label style="margin:0;">Observações Técnicas / Metrologia & Cotas (Folha A4)</label>
+            <button type="button" class="button secondary" style="font-size:11px; padding:3px 8px; margin:0;" onclick="sincronizarMedicoesParaObsTecnicas()" title="Compilar medições e dados de placa no quadro de observações da prancha A4">📥 Compilar Medições no A4</button>
+          </div>
+          <textarea id="rel_obs_tecnicas" rows="3" spellcheck="true" placeholder="• Fabricado em Aço Inox AISI 316L&#10;• Tolerâncias ISO 2768-m&#10;• Cotas: H=263 mm, Ø 70 mm&#10;• Ensaio de estanqueidade aprovado"></textarea>
         </div>
       </div>
+
+      <div style="display:flex; justify-content:space-between; margin-top:14px; flex-wrap:wrap; gap:8px;">
+        <button type="button" class="button secondary" style="font-size:12px;" onclick="navegarEtapaLaudo(1)">← Voltar para ① Identificação</button>
+        <button type="button" class="button" style="background:#1b365d; border-color:#29415f; font-size:12px;" onclick="navegarEtapaLaudo(3)">Avançar para ③ Diagnóstico e LOTO →</button>
+      </div>
+    </div>
+
+    <!-- ================= ETAPA ③: DIAGNÓSTICO E LOTO ================= -->
+    <div class="content-block etapa-laudo-card" id="etapa_rel_3">
+      <div class="etapa-header-badge"><span>PASSO 3 DE 6</span> <span>•</span> <span>ANÁLISE DE FALHA & SEGURANÇA NR-10 / NR-12</span></div>
+      <h4 style="margin-top:0;">③ Diagnóstico e LOTO</h4>
+      <p style="font-size:12px; color:#8190a7; margin-top:-4px; margin-bottom:12px;">Classificação da intervenção, causa raiz, anomalia e bloqueio de energias perigosas (LOTO)</p>
+
       <div class="field-row">
         <div class="field">
           <label>Tipo de manutenção</label>
@@ -5191,13 +5368,45 @@
             <option>Alta — risco à segurança/produção</option>
           </select>
         </div>
-      </div>
-      <div class="field-row">
-        <div class="field" style="min-width:100%;">
-          <label>Descrição do Serviço Realizado (Narrativa técnica oficial)</label>
-          <textarea id="rel_servico_realizado" rows="4" spellcheck="true" placeholder="ex: Realizada limpeza do filtro do sistema de atemperação, com remoção de resíduos e impurezas acumuladas, visando manter a adequada passagem do fluido e o correto funcionamento do sistema."></textarea>
+        <div class="field">
+          <label>Status de Bloqueio LOTO (NR-10 / NR-12)</label>
+          <select id="rel_loto_status">
+            <option value="bloqueado" selected>🔒 Bloqueio LOTO Efetuado com Cadeado e Etiqueta</option>
+            <option value="despressurizado">⚠️ Linha Despressurizada e Drenada</option>
+            <option value="nao_aplicavel">⚪ Não Aplicável (Equipamento Desconectado)</option>
+            <option value="sem_bloqueio">🔴 Intervenção a Quente / Ajuste Monitorado</option>
+          </select>
         </div>
       </div>
+
+      <!-- Checklist Rápido de Segurança LOTO -->
+      <div style="background:#091524; border:1px solid #1e3a5f; border-radius:8px; padding:10px 14px; margin-bottom:12px;">
+        <div style="font-size:11.5px; font-weight:700; color:#f59e0b; margin-bottom:6px; display:flex; align-items:center; gap:6px;">
+          <span>🔒 Protocolo de Segurança LOTO (Lockout / Tagout)</span>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:8px; font-size:12px; color:#cbd5e1;">
+          <label style="cursor:pointer; display:flex; align-items:center; gap:6px; margin:0;">
+            <input type="checkbox" id="chk_loto_eletrico" checked>
+            <span>Energia Elétrica Desligada / Travada</span>
+          </label>
+          <label style="cursor:pointer; display:flex; align-items:center; gap:6px; margin:0;">
+            <input type="checkbox" id="chk_loto_etiqueta" checked>
+            <span>Etiqueta de Advertência Afixada</span>
+          </label>
+          <label style="cursor:pointer; display:flex; align-items:center; gap:6px; margin:0;">
+            <input type="checkbox" id="chk_loto_pressao" checked>
+            <span>Despressurizado & Drenado</span>
+          </label>
+          <label style="cursor:pointer; display:flex; align-items:center; gap:6px; margin:0;">
+            <input type="checkbox" id="chk_loto_zero" checked>
+            <span>Teste de Energia Residual Zero</span>
+          </label>
+        </div>
+        <div class="field" style="margin-top:8px;">
+          <input type="text" id="rel_loto_obs" placeholder="Nº do Cartão LOTO / Cadeado / Ponto de Bloqueio (ex: Tag LOTO-4838, Disjuntor QGBT-03)" style="font-size:12px; padding:6px 10px;">
+        </div>
+      </div>
+
       <div class="field-row">
         <div class="field" style="min-width:100%;">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
@@ -5211,81 +5420,23 @@
         <div class="field"><label>Causa provável</label><input type="text" id="rel_causa" spellcheck="true" placeholder="ex: Arraste natural de particulado pelo fluxo de vapor/água"></div>
         <div class="field"><label>Ação recomendada</label><input type="text" id="rel_acao" spellcheck="true" placeholder="ex: Monitorar diferencial de pressão após reinício de operação"></div>
       </div>
-    </div>
-
-    <!-- Ferramentas e Observações com Busca Especialista -->
-    <div class="content-block">
-      <h4>Ferramentas Utilizadas e Observações</h4>
-      <div class="field-row">
-        <div class="field" style="min-width:100%;">
-          <label>🔍 Buscar & Selecionar Ferramentas Especializadas</label>
-          <div style="display:flex; gap:8px; margin-bottom:8px;">
-            <input type="text" id="busca_ferramentas_input" placeholder="Digite para filtrar (ex: torquímetro, chave 22, laser, micrômetro, sacador...)" oninput="filtrarFerramentasInput(this.value)" style="flex:1;">
-            <button type="button" class="button secondary" style="font-size:12px; padding:6px 12px;" onclick="filtrarFerramentasInput(''); document.getElementById('busca_ferramentas_input').value='';">Limpar Busca</button>
-          </div>
-          
-          <div style="font-size:11.5px; color:#94a3b8; margin-bottom:5px;">Catálogo rápido (clique para adicionar ao relatório):</div>
-          <div id="ferramentas_chips_rapidos" style="display:flex; gap:6px; flex-wrap:wrap; max-height:130px; overflow-y:auto; padding:6px; background:#060e1a; border-radius:8px; border:1px solid #1a304d; margin-bottom:8px;">
-            <!-- Preenchido dinamicamente via JS -->
-          </div>
-
-          <div style="font-size:11.5px; color:#94a3b8; margin-bottom:5px;">Ferramentas selecionadas no relatório:</div>
-          <div id="ferramentas_tags_container" style="display:flex; gap:6px; flex-wrap:wrap; min-height:36px; padding:6px 10px; background:#0a1727; border-radius:8px; border:1px solid #203e64; margin-bottom:8px;">
-            <span style="font-size:12px; color:#64748b;">Nenhuma ferramenta selecionada ainda. Clique nos atalhos acima ou digite no campo.</span>
-          </div>
-
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; flex-wrap:wrap; gap:8px;">
-            <label style="margin:0;">Lista Completa de Ferramentas no Relatório (uma por linha)</label>
-            <div style="display:flex; align-items:center; gap:12px; font-size:12px; background:#0c192c; padding:4px 10px; border-radius:6px; border:1px solid #1e3a5f;">
-              <span style="color:#38bdf8; font-weight:bold;">Visualização no A4:</span>
-              <label style="cursor:pointer; display:inline-flex; align-items:center; gap:4px; margin:0; color:#e2e8f0;">
-                <input type="radio" name="rel_ferramentas_modo" id="rel_ferramentas_modo_3d" value="ilustrado" checked onchange="atualizarModoExibicaoFerramentas()">
-                <span>🖼️ Render 2D/3D Realista</span>
-              </label>
-              <label style="cursor:pointer; display:inline-flex; align-items:center; gap:4px; margin:0; color:#e2e8f0;">
-                <input type="radio" name="rel_ferramentas_modo" id="rel_ferramentas_modo_texto" value="texto" onchange="atualizarModoExibicaoFerramentas()">
-                <span>📝 Apenas Texto Técnico</span>
-              </label>
-            </div>
-          </div>
-          <textarea id="rel_ferramentas" rows="3" spellcheck="true" placeholder="• Chave combinada 22 mm&#10;• Torquímetro de estalo calibrado&#10;• Escova de latão para limpeza" oninput="sincronizarTextareaFerramentas(this.value)"></textarea>
-        </div>
+      <div style="display:flex; gap:8px; margin-top:4px;">
+        <button type="button" class="button secondary" style="margin:0; padding:6px 12px; font-size:11.5px;" onclick="sugerirCausaEAcaoIA()">🧠 Sugerir Causa & Ação com IA</button>
       </div>
-      <div class="field-row">
-        <div class="field" style="min-width:100%;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-            <label style="margin:0;">Observação Final (Parecer de entrega do equipamento)</label>
-            <button type="button" class="voice-mic-btn" id="btn_mic_rel_observacao" onclick="iniciarDitadoVoz('rel_observacao')">🎙️ Falar Parecer</button>
-          </div>
-          <textarea id="rel_observacao" rows="3" spellcheck="true" placeholder="ex: Após a limpeza, o filtro foi deixado em condições adequadas para operação, contribuindo para a manutenção do fluxo e desempenho do sistema de atemperação."></textarea>
-        </div>
-      </div>
-      <div class="field-row">
-        <div class="field" style="min-width:100%;">
-          <label>Registro do Serviço (Linhas pautadas de campo / checklist)</label>
-          <textarea id="rel_registro_servico" rows="3" spellcheck="true" placeholder="ex: 1. Bloqueio e despressurização da linha concluídos com sucesso.&#10;2. Remoção da tampa sem deformações no alojamento.&#10;3. Junta de vedação inspecionada e aprovada."></textarea>
-        </div>
-      </div>
-      <div class="field-row">
-        <div class="field" style="flex:1;">
-          <label>Materiais Utilizados (Folha A4)</label>
-          <textarea id="rel_materiais" rows="2" spellcheck="true" placeholder="• Junta grafitada DN 80&#10;• Desengraxante técnico&#10;• Solução antioxidante"></textarea>
-        </div>
-        <div class="field" style="flex:1;">
-          <label>Aplicação do Equipamento (Folha A4)</label>
-          <input type="text" id="rel_aplicacao" placeholder="ex: Sistema de Atemperação de Vapor / Ciclo Água-Vapor">
-          <label style="margin-top:6px;">Observações Técnicas / Metrologia (Folha A4)</label>
-          <textarea id="rel_obs_tecnicas" rows="2" spellcheck="true" placeholder="• Fabricado em Aço Inox AISI 316L&#10;• Tolerâncias ISO 2768-m&#10;• Cotas: H=263 mm, Ø 70 mm&#10;• Ensaio de estanqueidade aprovado"></textarea>
-        </div>
+
+      <div style="display:flex; justify-content:space-between; margin-top:14px; flex-wrap:wrap; gap:8px;">
+        <button type="button" class="button secondary" style="font-size:12px;" onclick="navegarEtapaLaudo(2)">← Voltar para ② Placa e medições</button>
+        <button type="button" class="button" style="background:#1b365d; border-color:#29415f; font-size:12px;" onclick="navegarEtapaLaudo(4)">Avançar para ④ Fotos e desenho →</button>
       </div>
     </div>
 
-    <!-- Fotos do Serviço e Galeria Especialista -->
-    <div class="content-block">
+    <!-- ================= ETAPA ④: FOTOS E DESENHO ================= -->
+    <div class="content-block etapa-laudo-card" id="etapa_rel_4">
+      <div class="etapa-header-badge"><span>PASSO 4 DE 6</span> <span>•</span> <span>GALERIA DE INSPEÇÃO & DESENHO DE CATÁLOGO</span></div>
       <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
         <div>
-          <h4 style="margin:0;">📷 Galeria de Fotos da Intervenção</h4>
-          <span style="font-size:11.5px; color:#7dd3fc;">Adicione, confira a prévia, troque ou retire fotos individualmente a qualquer momento</span>
+          <h4 style="margin:0;">④ Fotos e desenho</h4>
+          <span style="font-size:11.5px; color:#7dd3fc;">Galeria dos 5 slots de inspeção pericial e síntese de desenho técnico 1:1 estilo catálogo de fabricante com fundo branco puro</span>
         </div>
         <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
           <button type="button" class="button" onclick="focarGeradorDesenhoIA()" style="background:linear-gradient(135deg, #713f12 0%, #854d0e 40%, #ca8a04 100%); border:1.5px solid #facc15; box-shadow:0 0 14px rgba(234,179,8,0.35); color:#ffffff; font-size:12px; font-weight:bold; margin:0; padding:6px 14px;"><span style="color:#fde047;">🍌</span> Nano Banana: Gerar Desenho Técnico</button>
@@ -5519,10 +5670,11 @@
               <div class="field">
                 <label style="font-size:11.5px; color:#7dd3fc; font-weight:700;">Estilo Normativo de Desenho:</label>
                 <select id="rel_ia_estilo_desenho" style="width:100%; background:#091524; border:1px solid #1e3a5f; color:#fff; padding:8px 10px; border-radius:8px; font-size:12.5px;">
-                  <option value="cad_isometrico" selected>📐 CAD Isométrico 3D (Prancha Branca ABNT/ISO)</option>
-                  <option value="blueprint_naval">🟦 Blueprint Naval de Engenharia (Azul Clássico)</option>
+                  <option value="catalogo_fabricante" selected>🏭 Catálogo de Fabricante (Fundo Branco Puro • 3 Vistas Ortográficas)</option>
+                  <option value="cad_isometrico">📐 CAD Isométrico 3D (Prancha Branca ABNT/ISO)</option>
+                  <option value="render_industrial">🎨 Render Técnico Realista de Estúdio (Fundo Branco)</option>
                   <option value="corte_mecanico">⚙️ Corte Seccional Mecânico / Vista Explodida</option>
-                  <option value="render_industrial">🏭 Render Técnico Fotorrealista Industrial 3D</option>
+                  <option value="blueprint_naval">🟦 Blueprint Naval de Engenharia (Azul Clássico)</option>
                 </select>
               </div>
 
@@ -5699,12 +5851,114 @@
           </div>
         </div>
       </div>
+
+      <div style="display:flex; justify-content:space-between; margin-top:14px; flex-wrap:wrap; gap:8px;">
+        <button type="button" class="button secondary" style="font-size:12px;" onclick="navegarEtapaLaudo(3)">← Voltar para ③ Diagnóstico e LOTO</button>
+        <button type="button" class="button" style="background:#1b365d; border-color:#29415f; font-size:12px;" onclick="navegarEtapaLaudo(5)">Avançar para ⑤ Serviço e materiais →</button>
+      </div>
     </div>
 
-    <!-- Assinatura Digital do Responsável -->
-    <div class="content-block">
-      <h4>Assinatura do Colaborador Responsável</h4>
-      <p style="font-size:12px; color:#8190a7;">Assine no quadro abaixo com o dedo (touch no celular) ou mouse, adote a assinatura cursiva com seu nome ou envie o arquivo da sua rubrica:</p>
+    <!-- ================= ETAPA ⑤: SERVIÇO E MATERIAIS ================= -->
+    <div class="content-block etapa-laudo-card" id="etapa_rel_5">
+      <div class="etapa-header-badge"><span>PASSO 5 DE 6</span> <span>•</span> <span>NARRATIVA TÉCNICA, FERRAMENTAS & INSUMOS</span></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <h4 style="margin:0;">⑤ Serviço e materiais</h4>
+      </div>
+      <p style="font-size:12px; color:#8190a7; margin-top:2px; margin-bottom:10px;">Descrição do serviço realizado, ferramentas de intervenção, insumos aplicados e parecer de entrega</p>
+
+      <!-- Barra de Ferramentas de IA Técnica e Voz -->
+      <div class="ai-toolbar-box" style="margin-top:10px;">
+        <div class="ai-toolbar-title">
+          <span>🤖 Assistente de IA Técnica & Confiabilidade</span>
+          <span style="font-size:11px; color:#94a3b8; font-weight:normal;">(Otimiza redação, sugere causas e termos normatizados)</span>
+        </div>
+        <div class="ai-toolbar-buttons">
+          <button type="button" class="button" style="margin:0; padding:6px 14px; font-size:12px; background:linear-gradient(135deg, #1e1b4b 0%, #3730a3 50%, #4f46e5 100%); border:1.5px solid #818cf8; box-shadow:0 0 14px rgba(99,102,241,0.5); font-weight:800; color:#fff;" onclick="abrirModalGeminiRelatorio()"><span style="color:#38bdf8;">✨</span> IA Gemini Relatório</button>
+          <button type="button" class="button" style="margin:0; padding:6px 12px; font-size:11.5px; background:#003366; border-color:#38bdf8;" onclick="carregarExemploOficialMecanica40A4()" title="Carregar modelo oficial 1:1 Padrão Mecânica 4.0 IA">📋 Padrão Oficial Mecânica 4.0 IA</button>
+          <button type="button" class="button" style="margin:0; padding:6px 12px; font-size:11.5px; background:linear-gradient(135deg, #dc2626 0%, #991b1b 100%); border-color:#f87171;" onclick="abrirModalMecanicoIA()">🔴 Mecânico IA</button>
+          <button type="button" class="button" style="margin:0; padding:6px 12px; font-size:11.5px; background:#0284c7; border-color:#38bdf8;" onclick="abrirModalRevisaoIA()">✨ Aprimorar com IA Técnica</button>
+          <button type="button" class="button secondary" style="margin:0; padding:6px 12px; font-size:11.5px;" onclick="sugerirFerramentasIA()">🔧 Sugerir Ferramentas</button>
+          <button type="button" class="voice-mic-btn" id="btn_mic_rel_servico_realizado" onclick="iniciarDitadoVoz('rel_servico_realizado')" title="Falar pelo microfone">🎙️ Ditado por Voz</button>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field" style="min-width:100%;">
+          <label>Descrição do Serviço Realizado (Narrativa técnica oficial)</label>
+          <textarea id="rel_servico_realizado" rows="4" spellcheck="true" placeholder="ex: Realizada limpeza do filtro do sistema de atemperação, com remoção de resíduos e impurezas acumuladas, visando manter a adequada passagem do fluido e o correto funcionamento do sistema."></textarea>
+        </div>
+      </div>
+
+      <!-- Ferramentas Utilizadas com Busca Especialista -->
+      <div class="field-row">
+        <div class="field" style="min-width:100%;">
+          <label>🔍 Buscar & Selecionar Ferramentas Especializadas</label>
+          <div style="display:flex; gap:8px; margin-bottom:8px;">
+            <input type="text" id="busca_ferramentas_input" placeholder="Digite para filtrar (ex: torquímetro, chave 22, laser, micrômetro, sacador...)" oninput="filtrarFerramentasInput(this.value)" style="flex:1;">
+            <button type="button" class="button secondary" style="font-size:12px; padding:6px 12px;" onclick="filtrarFerramentasInput(''); document.getElementById('busca_ferramentas_input').value='';">Limpar Busca</button>
+          </div>
+          
+          <div style="font-size:11.5px; color:#94a3b8; margin-bottom:5px;">Catálogo rápido (clique para adicionar ao relatório):</div>
+          <div id="ferramentas_chips_rapidos" style="display:flex; gap:6px; flex-wrap:wrap; max-height:130px; overflow-y:auto; padding:6px; background:#060e1a; border-radius:8px; border:1px solid #1a304d; margin-bottom:8px;">
+            <!-- Preenchido dinamicamente via JS -->
+          </div>
+
+          <div style="font-size:11.5px; color:#94a3b8; margin-bottom:5px;">Ferramentas selecionadas no relatório:</div>
+          <div id="ferramentas_tags_container" style="display:flex; gap:6px; flex-wrap:wrap; min-height:36px; padding:6px 10px; background:#0a1727; border-radius:8px; border:1px solid #203e64; margin-bottom:8px;">
+            <span style="font-size:12px; color:#64748b;">Nenhuma ferramenta selecionada ainda. Clique nos atalhos acima ou digite no campo.</span>
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; flex-wrap:wrap; gap:8px;">
+            <label style="margin:0;">Lista Completa de Ferramentas no Relatório (uma por linha)</label>
+            <div style="display:flex; align-items:center; gap:12px; font-size:12px; background:#0c192c; padding:4px 10px; border-radius:6px; border:1px solid #1e3a5f;">
+              <span style="color:#38bdf8; font-weight:bold;">Visualização no A4:</span>
+              <label style="cursor:pointer; display:inline-flex; align-items:center; gap:4px; margin:0; color:#e2e8f0;">
+                <input type="radio" name="rel_ferramentas_modo" id="rel_ferramentas_modo_3d" value="ilustrado" checked onchange="atualizarModoExibicaoFerramentas()">
+                <span>🖼️ Render 2D/3D Realista</span>
+              </label>
+              <label style="cursor:pointer; display:inline-flex; align-items:center; gap:4px; margin:0; color:#e2e8f0;">
+                <input type="radio" name="rel_ferramentas_modo" id="rel_ferramentas_modo_texto" value="texto" onchange="atualizarModoExibicaoFerramentas()">
+                <span>📝 Apenas Texto Técnico</span>
+              </label>
+            </div>
+          </div>
+          <textarea id="rel_ferramentas" rows="3" spellcheck="true" placeholder="• Chave combinada 22 mm&#10;• Torquímetro de estalo calibrado&#10;• Escova de latão para limpeza" oninput="sincronizarTextareaFerramentas(this.value)"></textarea>
+        </div>
+      </div>
+
+      <!-- Materiais Utilizados & Registro do Serviço -->
+      <div class="field-row">
+        <div class="field" style="flex:1;">
+          <label>Materiais Utilizados (Folha A4)</label>
+          <textarea id="rel_materiais" rows="3" spellcheck="true" placeholder="• Junta grafitada DN 80&#10;• Desengraxante técnico&#10;• Solução antioxidante"></textarea>
+        </div>
+        <div class="field" style="flex:1;">
+          <label>Registro do Serviço (Linhas pautadas de campo / checklist)</label>
+          <textarea id="rel_registro_servico" rows="3" spellcheck="true" placeholder="ex: 1. Bloqueio e despressurização da linha concluídos com sucesso.&#10;2. Remoção da tampa sem deformações no alojamento.&#10;3. Junta de vedação inspecionada e aprovada."></textarea>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field" style="min-width:100%;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <label style="margin:0;">Observação Final (Parecer de entrega do equipamento)</label>
+            <button type="button" class="voice-mic-btn" id="btn_mic_rel_observacao" onclick="iniciarDitadoVoz('rel_observacao')">🎙️ Falar Parecer</button>
+          </div>
+          <textarea id="rel_observacao" rows="3" spellcheck="true" placeholder="ex: Após a limpeza, o filtro foi deixado em condições adequadas para operação, contribuindo para a manutenção do fluxo e desempenho do sistema de atemperação."></textarea>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; margin-top:14px; flex-wrap:wrap; gap:8px;">
+        <button type="button" class="button secondary" style="font-size:12px;" onclick="navegarEtapaLaudo(4)">← Voltar para ④ Fotos e desenho</button>
+        <button type="button" class="button" style="background:#1b365d; border-color:#29415f; font-size:12px;" onclick="navegarEtapaLaudo(6)">Avançar para ⑥ Assinatura →</button>
+      </div>
+    </div>
+
+    <!-- ================= ETAPA ⑥: ASSINATURA ================= -->
+    <div class="content-block etapa-laudo-card" id="etapa_rel_6">
+      <div class="etapa-header-badge"><span>PASSO 6 DE 6</span> <span>•</span> <span>HOMOLOGAÇÃO & EMISSÃO DO LAUDO</span></div>
+      <h4 style="margin-top:0;">⑥ Assinatura</h4>
+      <p style="font-size:12px; color:#8190a7; margin-top:-4px; margin-bottom:12px;">Assine no quadro abaixo com o dedo (touch no celular) ou mouse, adote a assinatura cursiva com seu nome ou envie o arquivo da sua rubrica:</p>
       <div class="signature-pad-box">
         <canvas id="canvasAssinatura" width="380" height="110"></canvas>
         <div class="signature-actions">
@@ -5715,20 +5969,24 @@
         </div>
         <div id="status_assinatura_pad" style="font-size:11.5px; color:#7dd3fc; text-align:center; margin-top:6px;">Status: Assinatura padrão do colaborador pronta para a prancha</div>
       </div>
-    </div>
 
-    <!-- Botões de Ação do Relatório -->
-    <div class="content-block" style="text-align:center;">
-      <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:12px;">
-        <button type="button" class="button" style="background:linear-gradient(135deg, #1e1b4b 0%, #312e81 40%, #4338ca 100%); border:1.5px solid #818cf8; font-size:15px; font-weight:bold; padding:12px 22px; box-shadow:0 0 16px rgba(99,102,241,0.45); color:#ffffff;" onclick="abrirModalGeminiRelatorio()"><span style="color:#38bdf8;">✨</span> Elaborar com IA Gemini</button>
-        <button class="button" style="background:linear-gradient(135deg, #0284c7 0%, #0369a1 100%); border-color:#38bdf8; font-size:15px; font-weight:bold; padding:12px 22px;" onclick="abrirModalRevisaoIA()">🤖 Revisar & Aprimorar com IA do Robô</button>
-        <button class="button" style="background:#10448c; border-color:#205bb0; font-size:15px; font-weight:bold; padding:12px 22px;" onclick="abrirRelatorioA4Modal()">📄 Visualizar Relatório Técnico A4</button>
-        <button class="button" style="background:#198754; border-color:#20a768; font-size:15px; font-weight:bold; padding:12px 22px;" onclick="imprimirRelatorioA4Direto()">🖨️ Imprimir / Salvar PDF (A4)</button>
-        <button class="button secondary" onclick="salvarIntervencao()">💾 Salvar Intervenção (Nuvem & Local)</button>
-        <button class="button secondary" onclick="gerarRelatorio()">Gerar Texto Resumo</button>
-        <button class="button secondary" onclick="copiarRelatorio()">Copiar Texto</button>
+      <!-- Botões de Ação do Relatório -->
+      <div style="margin-top:20px; border-top:1px solid #1a304d; padding-top:16px; text-align:center;">
+        <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:12px;">
+          <button type="button" class="button" style="background:linear-gradient(135deg, #1e1b4b 0%, #312e81 40%, #4338ca 100%); border:1.5px solid #818cf8; font-size:15px; font-weight:bold; padding:12px 22px; box-shadow:0 0 16px rgba(99,102,241,0.45); color:#ffffff;" onclick="abrirModalGeminiRelatorio()"><span style="color:#38bdf8;">✨</span> Elaborar com IA Gemini</button>
+          <button class="button" style="background:linear-gradient(135deg, #0284c7 0%, #0369a1 100%); border-color:#38bdf8; font-size:15px; font-weight:bold; padding:12px 22px;" onclick="abrirModalRevisaoIA()">🤖 Revisar & Aprimorar com IA do Robô</button>
+          <button class="button" style="background:#10448c; border-color:#205bb0; font-size:15px; font-weight:bold; padding:12px 22px;" onclick="abrirRelatorioA4Modal()">📄 Visualizar Relatório Técnico A4</button>
+          <button class="button" style="background:#198754; border-color:#20a768; font-size:15px; font-weight:bold; padding:12px 22px;" onclick="imprimirRelatorioA4Direto()">🖨️ Imprimir / Salvar PDF (A4)</button>
+          <button class="button secondary" onclick="salvarIntervencao()">💾 Salvar Intervenção (Nuvem & Local)</button>
+          <button class="button secondary" onclick="gerarRelatorio()">Gerar Texto Resumo</button>
+          <button class="button secondary" onclick="copiarRelatorio()">Copiar Texto</button>
+        </div>
+        <div class="resultado" id="rel_resultado" style="margin-top:16px;"></div>
       </div>
-      <div class="resultado" id="rel_resultado" style="margin-top:16px;"></div>
+
+      <div style="display:flex; justify-content:flex-start; margin-top:14px;">
+        <button type="button" class="button secondary" style="font-size:12px;" onclick="navegarEtapaLaudo(5)">← Voltar para ⑤ Serviço e materiais</button>
+      </div>
     </div>
     </div> <!-- Fim de rel_sub_novo -->
 
@@ -8531,8 +8789,8 @@ async function gerarDesenhoTecnicoComIA(novaVariacao = false, instrucaoEdicaoExt
   let promptIngles = '';
   let estiloSufixo = '';
 
-  if (estilo === 'cad_isometrico') {
-    estiloSufixo = 'detailed technical CAD isometric drawing, mechanical engineering blueprint, clean solid white background, high contrast crisp dark blue and black technical line art, orthographic projection, dimension lines, mechanical parts, patent illustration style, ultra sharp 8k';
+  if (estilo === 'catalogo_fabricante' || estilo === 'cad_isometrico' || !estilo) {
+    estiloSufixo = 'professional industrial mechanical engineering technical drawing, manufacturer catalog style, pure white background, high contrast crisp dark steel and black technical line art, 3 orthographic views layout (Side, Front, Top) with dimension callouts, realistic engineering metal and painted finish, soft studio lighting, ultra sharp 8k';
   } else if (estilo === 'blueprint_naval') {
     estiloSufixo = 'classic engineering blueprint drawing, dark navy blue background, glowing cyan and white precise technical lines, architectural engineering schematic, section details, industrial drafting table quality, 8k resolution';
   } else if (estilo === 'corte_mecanico') {
@@ -8727,19 +8985,20 @@ async function sintetizarPranchaTecnicaNormativa(imgFonte, tag, equip, resp, est
   canvas.height = h;
   const ctx = canvas.getContext('2d');
 
-  const isBlueprint = (estilo === 'blueprint_naval' || estilo === 'cad_isometrico' || !estilo);
-  const corFundo = isBlueprint ? '#04162e' : '#f8fafc';
-  const corLinha = isBlueprint ? '#38bdf8' : '#003366';
-  const corLinhaFina = isBlueprint ? 'rgba(56, 189, 248, 0.45)' : 'rgba(0, 51, 102, 0.35)';
+  const isBlueprint = (estilo === 'blueprint_naval');
+  // Padrão obrigatório: Fundo branco puro de catálogo de fabricante industrial (sem blueprint escuro)
+  const corFundo = isBlueprint ? '#04162e' : '#ffffff';
+  const corLinha = isBlueprint ? '#38bdf8' : '#0f172a';
+  const corLinhaFina = isBlueprint ? 'rgba(56, 189, 248, 0.45)' : 'rgba(15, 23, 42, 0.35)';
   const corTexto = isBlueprint ? '#ffffff' : '#0f172a';
-  const corDestaque = isBlueprint ? '#facc15' : '#e11d48';
+  const corDestaque = isBlueprint ? '#facc15' : '#0284c7';
 
   // 1. Fundo da Prancha
   ctx.fillStyle = corFundo;
   ctx.fillRect(0, 0, w, h);
 
   // 2. Grade Milimetrada Suave
-  ctx.strokeStyle = isBlueprint ? 'rgba(56, 189, 248, 0.07)' : 'rgba(0, 51, 102, 0.04)';
+  ctx.strokeStyle = isBlueprint ? 'rgba(56, 189, 248, 0.07)' : 'rgba(15, 23, 42, 0.04)';
   ctx.lineWidth = 0.8;
   const step = 20;
   for (let x = 0; x < w; x += step) {
@@ -15016,9 +15275,19 @@ async function executarPipelineCompletoVisaoParaCAD(customFotoUrl) {
   // =========================================================================
   // ETAPA 4: PROMPT MESTRE
   // =========================================================================
-  atualizarPassoPipeline(4, '✍️ <b>[Passo 4/7 - PROMPT MESTRE]</b> Compilando especificações geométricas e tolerâncias ISO 1101...');
+  atualizarPassoPipeline(4, '✍️ <b>[Passo 4/7 - PROMPT MESTRE]</b> Compilando especificações geométricas estilo catálogo de fabricante...');
 
-  const promptMestre = `Official industrial mechanical engineering technical drawing, blueprint schematic of ${analiseEstruturada.equipamento} (TAG: ${analiseEstruturada.tag}) on A4 layout. High-detail orthographic views (Front, Top, Side) and isometric 3D CAD projection with dimensional callouts in millimeters, geometric tolerances ISO 1101, surface finish symbols Ra. Authentic physical geometry from equipment photo: ${analiseEstruturada.geometria_aletas}, ${analiseEstruturada.geometria_eixo}, ${analiseEstruturada.tipo_montagem}, ${analiseEstruturada.caixa_ligacao}. Cross-section hatching, centerlines, bill of materials table and professional engineering title block. Crisp white drafting lineart on dark blue CAD blueprint paper, ISO 10067 standard, razor-sharp technical drafting illustration, photorealistic CAD engineering drawing.`;
+  const promptMestre = `Desenho técnico industrial profissional estilo catálogo de fabricante, fundo branco puro.
+Referência obrigatória: a fotografia real do equipamento fornecida (não inventar peças).
+Equipamento: ${analiseEstruturada.equipamento} (TAG: ${analiseEstruturada.tag}).
+Reproduzir com fidelidade extrema a geometria, cores e componentes VISÍVEIS na foto.
+Layout em 3 vistas ortográficas:
+1) VISTA LATERAL – callouts em português apenas para componentes visíveis na foto
+2) VISTA FRONTAL
+3) VISTA SUPERIOR – cotas aproximadas (LARGURA, COMPRIMENTO, DIÂMETRO) só se inferíveis; senão "APROX." ou não cotar
+Estilo: render técnico realista (metal, pintura como na foto), iluminação de estúdio suave, linhas de chamada pretas finas, texto em português.
+Proibido: blueprint azul, fundo escuro, componentes inventados, logotipos inventados, deformações, cartoon.
+Alta nitidez, proporções fiéis à foto de referência.`;
 
   const inputPrompt = document.getElementById('rel_ia_desenho_prompt');
   if (inputPrompt) inputPrompt.value = promptMestre;
@@ -15082,7 +15351,7 @@ async function executarPipelineCompletoVisaoParaCAD(customFotoUrl) {
   const tagFinal = analiseEstruturada.tag;
   const equipFinal = analiseEstruturada.equipamento;
   const respFinal = (document.getElementById('rel_resp')?.value || 'Eduardo Noronha').trim();
-  const estiloFinal = document.getElementById('rel_ia_estilo_desenho')?.value || 'blueprint_naval';
+  const estiloFinal = document.getElementById('rel_ia_estilo_desenho')?.value || 'catalogo_fabricante';
 
   const dataUrlFinal = await sintetizarPranchaTecnicaNormativa(imgObj, tagFinal, equipFinal, respFinal, estiloFinal, 'nano_banana');
 
@@ -16619,6 +16888,69 @@ function alternarAbaRelatorio(aba) {
   }
 }
 
+/* ===================== CONTROLE DO FLUXO NORMATIVO DAS 6 ETAPAS ===================== */
+function navegarEtapaLaudo(passo, scroll = true) {
+  for (let i = 1; i <= 6; i++) {
+    const btn = document.getElementById('step_btn_' + i);
+    if (btn) {
+      if (i === passo) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    }
+  }
+  const alvo = document.getElementById('etapa_rel_' + passo);
+  if (alvo) {
+    if (scroll) {
+      try {
+        alvo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } catch (e) {
+        alvo.scrollIntoView();
+      }
+    }
+    alvo.classList.add('etapa-highlight');
+    setTimeout(() => alvo.classList.remove('etapa-highlight'), 1800);
+  }
+}
+
+function sincronizarMedicoesParaObsTecnicas() {
+  const potencia = document.getElementById('rel_placa_potencia')?.value?.trim();
+  const tensao = document.getElementById('rel_placa_tensao')?.value?.trim();
+  const temp = document.getElementById('rel_medicao_temp')?.value?.trim();
+  const vib = document.getElementById('rel_medicao_vibracao')?.value?.trim();
+  const folga = document.getElementById('rel_medicao_folga')?.value?.trim();
+  const pressao = document.getElementById('rel_medicao_pressao')?.value?.trim();
+
+  const linhas = [];
+  if (potencia) linhas.push(`• Placa: ${potencia}`);
+  if (tensao) linhas.push(`• Especificação: ${tensao}`);
+  if (temp) linhas.push(`• Medição Térmica: ${temp}`);
+  if (vib) linhas.push(`• Medição Vibração: ${vib}`);
+  if (folga) linhas.push(`• Folga Mecânica: ${folga}`);
+  if (pressao) linhas.push(`• Pressão Operação: ${pressao}`);
+
+  if (linhas.length === 0) {
+    alert('Preencha ao menos um dos campos de Placa ou Medições Técnicas acima.');
+    return;
+  }
+
+  const campoObs = document.getElementById('rel_obs_tecnicas');
+  if (campoObs) {
+    const atual = campoObs.value.trim();
+    if (atual) {
+      campoObs.value = atual + '\n' + linhas.join('\n');
+    } else {
+      campoObs.value = linhas.join('\n');
+    }
+  }
+  if (typeof mostrarNotificacaoFlutuante === 'function') {
+    mostrarNotificacaoFlutuante('✔ Dados de placa e medições compilados nas Observações Técnicas A4!');
+  } else {
+    alert('✔ Dados de placa e medições compilados no quadro de Observações Técnicas da folha A4!');
+  }
+}
+
 function limparFormularioRelatorio(confirmar = false) {
   if (confirmar) {
     const temDados = (document.getElementById('rel_tag')?.value || document.getElementById('rel_om')?.value || document.getElementById('rel_servico_realizado')?.value);
@@ -16634,6 +16966,8 @@ function limparFormularioRelatorio(confirmar = false) {
     'rel_lat', 'rel_lng', 'rel_servico_realizado', 'rel_anomalia',
     'rel_causa', 'rel_acao', 'rel_ferramentas', 'rel_observacao',
     'rel_registro_servico', 'rel_materiais', 'rel_aplicacao', 'rel_obs_tecnicas',
+    'rel_placa_potencia', 'rel_placa_tensao', 'rel_medicao_temp', 'rel_medicao_vibracao',
+    'rel_medicao_folga', 'rel_medicao_pressao', 'rel_loto_obs',
     'busca_ferramentas_input', 'rel_ia_desenho_prompt'
   ];
 
@@ -16646,8 +16980,11 @@ function limparFormularioRelatorio(confirmar = false) {
   if (selTipo) selTipo.selectedIndex = 0;
   const selUrg = document.getElementById('rel_urgencia');
   if (selUrg) selUrg.selectedIndex = 0;
+  const selLoto = document.getElementById('rel_loto_status');
+  if (selLoto) selLoto.selectedIndex = 0;
 
   if (document.getElementById('loc_status')) document.getElementById('loc_status').innerText = '';
+  if (typeof navegarEtapaLaudo === 'function') navegarEtapaLaudo(1, false);
 
   // Limpa ferramentas selecionadas e tags visuais
   if (typeof ferramentasSelecionadasRelatorio !== 'undefined') {
@@ -17193,6 +17530,15 @@ async function editarRelatorioPronto(id) {
   if (document.getElementById('rel_obs_tecnicas')) document.getElementById('rel_obs_tecnicas').value = r.obsTecnicas || '';
   if (document.getElementById('rel_tipo')) document.getElementById('rel_tipo').value = r.tipo || 'Preventiva';
   if (document.getElementById('rel_urgencia')) document.getElementById('rel_urgencia').value = r.urgencia || 'Baixa';
+  if (document.getElementById('rel_placa_potencia')) document.getElementById('rel_placa_potencia').value = r.placaPotencia || '';
+  if (document.getElementById('rel_placa_tensao')) document.getElementById('rel_placa_tensao').value = r.placaTensao || '';
+  if (document.getElementById('rel_medicao_temp')) document.getElementById('rel_medicao_temp').value = r.medicaoTemp || '';
+  if (document.getElementById('rel_medicao_vibracao')) document.getElementById('rel_medicao_vibracao').value = r.medicaoVibracao || '';
+  if (document.getElementById('rel_medicao_folga')) document.getElementById('rel_medicao_folga').value = r.medicaoFolga || '';
+  if (document.getElementById('rel_medicao_pressao')) document.getElementById('rel_medicao_pressao').value = r.medicaoPressao || '';
+  if (document.getElementById('rel_loto_obs')) document.getElementById('rel_loto_obs').value = r.lotoObs || '';
+  if (document.getElementById('rel_loto_status') && r.lotoStatus) document.getElementById('rel_loto_status').value = r.lotoStatus;
+  if (typeof navegarEtapaLaudo === 'function') navegarEtapaLaudo(1, false);
 
   // Restaura fotos nos slots se existirem
   if (typeof estadoFotosRelatorio !== 'undefined') {
@@ -17329,6 +17675,14 @@ async function salvarIntervencao() {
     const anomalia = document.getElementById('rel_anomalia')?.value?.trim() || servicoRealizado || 'Manutenção técnica realizada';
     const causa = document.getElementById('rel_causa')?.value?.trim() || '';
     const acao = document.getElementById('rel_acao')?.value?.trim() || '';
+    const placaPotencia = document.getElementById('rel_placa_potencia')?.value?.trim() || '';
+    const placaTensao = document.getElementById('rel_placa_tensao')?.value?.trim() || '';
+    const medicaoTemp = document.getElementById('rel_medicao_temp')?.value?.trim() || '';
+    const medicaoVibracao = document.getElementById('rel_medicao_vibracao')?.value?.trim() || '';
+    const medicaoFolga = document.getElementById('rel_medicao_folga')?.value?.trim() || '';
+    const medicaoPressao = document.getElementById('rel_medicao_pressao')?.value?.trim() || '';
+    const lotoStatus = document.getElementById('rel_loto_status')?.value || 'bloqueado';
+    const lotoObs = document.getElementById('rel_loto_obs')?.value?.trim() || '';
 
     // Processamento paralelo e protegido de fotos dos slots estruturados
     if (el) el.innerText = 'Processando imagens e fotos em alta definição...';
@@ -17396,6 +17750,8 @@ async function salvarIntervencao() {
       servicoRealizado, ferramentas, observacao, registroServico,
       aplicacao, obsTecnicas, materiais, matricula,
       tipo, urgencia, anomalia, causa, acao,
+      placaPotencia, placaTensao, medicaoTemp, medicaoVibracao,
+      medicaoFolga, medicaoPressao, lotoStatus, lotoObs,
       fotoAntesUrl, fotoDepoisUrl, foto3DUrl,
       fotoSlot3Url, fotoSlot5Url,
       desenhoTecnicoUrl: desenhoFinal,
