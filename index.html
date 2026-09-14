@@ -6033,6 +6033,53 @@
         </div>
       </div>
 
+      <!-- Lubrificação Industrial -->
+      <div class="field-row" style="margin-top:10px; margin-bottom:12px;">
+        <div class="field" style="min-width:100%; background:linear-gradient(135deg, rgba(15,23,42,0.85) 0%, rgba(30,41,59,0.7) 100%); border:1px solid #1e3a5f; border-left:3px solid #38bdf8; border-radius:8px; padding:12px 14px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:6px;">
+            <label style="font-weight:700; color:#38bdf8; margin:0; display:flex; align-items:center; gap:6px;">
+              <span>🛢️</span> Envolveu lubrificação?
+            </label>
+            <select id="rel_lub_sim" style="max-width:140px; font-weight:700;" onchange="alternarBlocoLubrificacao(this.value)">
+              <option value="nao">Não</option>
+              <option value="sim">Sim</option>
+            </select>
+          </div>
+
+          <!-- mostrar o bloco abaixo só se rel_lub_sim === 'sim' -->
+          <div id="rel_lub_bloco" style="display:none; margin-top:10px; padding-top:10px; border-top:1px dashed #224263;">
+            <div class="field-row">
+              <div class="field" style="flex:1; min-width:140px;">
+                <label>Tipo</label>
+                <select id="rel_lub_tipo">
+                  <option value="oleo">Óleo</option>
+                  <option value="graxa">Graxa</option>
+                </select>
+              </div>
+              <div class="field" style="flex:2; min-width:180px;">
+                <label>Especificação (ISO VG / produto)</label>
+                <input type="text" id="rel_lub_spec" placeholder="Ex: ISO VG 320 / Graxa lítio EP2">
+              </div>
+              <div class="field" style="flex:1; min-width:120px;">
+                <label>Quantidade</label>
+                <input type="text" id="rel_lub_qtd" placeholder="Ex: 2 L ou 50 g">
+              </div>
+            </div>
+
+            <div class="field-row" style="margin-top:6px;">
+              <div class="field" style="flex:1; min-width:160px;">
+                <label>Próxima troca em (dias)</label>
+                <input type="number" id="rel_lub_prox_dias" min="1" placeholder="Ex: 90" oninput="sincronizarDiasParaData('rel_lub_prox_dias', 'rel_lub_prox_data')">
+              </div>
+              <div class="field" style="flex:1; min-width:160px;">
+                <label>Ou data da próxima troca</label>
+                <input type="date" id="rel_lub_prox_data" onchange="sincronizarDataParaDias('rel_lub_prox_data', 'rel_lub_prox_dias')">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="field-row">
         <div class="field" style="min-width:100%;">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
@@ -6040,6 +6087,36 @@
             <button type="button" class="voice-mic-btn" id="btn_mic_rel_observacao" onclick="iniciarDitadoVoz('rel_observacao')">🎙️ Falar Parecer</button>
           </div>
           <textarea id="rel_observacao" rows="3" spellcheck="true" placeholder="ex: Após a limpeza, o filtro foi deixado em condições adequadas para operação, contribuindo para a manutenção do fluxo e desempenho do sistema de atemperação."></textarea>
+        </div>
+      </div>
+
+      <!-- Próxima Inspeção / Intervenção -->
+      <div class="field-row" style="margin-top:10px; margin-bottom:12px;">
+        <div class="field" style="min-width:100%; background:linear-gradient(135deg, rgba(15,23,42,0.85) 0%, rgba(30,41,59,0.7) 100%); border:1px solid #1e3a5f; border-left:3px solid #38bdf8; border-radius:8px; padding:12px 14px;">
+          <div style="font-weight:700; color:#38bdf8; margin-bottom:8px; display:flex; align-items:center; gap:6px;">
+            <span>📅</span> Planejamento da Próxima Intervenção
+          </div>
+          <div class="field-row">
+            <div class="field" style="flex:1; min-width:160px;">
+              <label>Próxima inspeção em (dias)</label>
+              <input type="number" id="rel_prox_insp_dias" min="1" placeholder="Ex: 30" oninput="sincronizarDiasParaData('rel_prox_insp_dias', 'rel_prox_insp_data')">
+            </div>
+            <div class="field" style="flex:1; min-width:160px;">
+              <label>Ou data da próxima inspeção</label>
+              <input type="date" id="rel_prox_insp_data" onchange="sincronizarDataParaDias('rel_prox_insp_data', 'rel_prox_insp_dias')">
+            </div>
+            <div class="field" style="flex:1; min-width:180px;">
+              <label>Tipo da próxima intervenção</label>
+              <select id="rel_prox_insp_tipo">
+                <option value="">Selecionar</option>
+                <option value="inspecao_visual">Inspeção visual</option>
+                <option value="preditiva">Preditiva</option>
+                <option value="preventiva">Preventiva</option>
+                <option value="lubrificacao">Lubrificação</option>
+                <option value="eletrica">Elétrica</option>
+              </select>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -17118,6 +17195,43 @@ function sincronizarMedicoesParaObsTecnicas() {
   }
 }
 
+/* ===================== CONTROLE DE LUBRIFICAÇÃO & PRÓXIMA INSPEÇÃO ===================== */
+function alternarBlocoLubrificacao(valor) {
+  const bloco = document.getElementById('rel_lub_bloco');
+  if (!bloco) return;
+  bloco.style.display = valor === 'sim' ? 'block' : 'none';
+}
+
+function sincronizarDiasParaData(diasInputId, dataInputId) {
+  const diasEl = document.getElementById(diasInputId);
+  const dataEl = document.getElementById(dataInputId);
+  if (!diasEl || !dataEl) return;
+  const dias = parseInt(diasEl.value, 10);
+  if (!isNaN(dias) && dias > 0) {
+    const d = new Date();
+    d.setDate(d.getDate() + dias);
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const dd = String(d.getDate()).padStart(2, '0');
+    dataEl.value = `${yyyy}-${mm}-${dd}`;
+  }
+}
+
+function sincronizarDataParaDias(dataInputId, diasInputId) {
+  const dataEl = document.getElementById(dataInputId);
+  const diasEl = document.getElementById(diasInputId);
+  if (!dataEl || !diasEl) return;
+  if (!dataEl.value) return;
+  const targetDate = new Date(dataEl.value + 'T00:00:00');
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const diffTime = targetDate.getTime() - today.getTime();
+  const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+  if (diffDays >= 0) {
+    diasEl.value = diffDays;
+  }
+}
+
 function limparFormularioRelatorio(confirmar = false) {
   if (confirmar) {
     const temDados = (document.getElementById('rel_tag')?.value || document.getElementById('rel_om')?.value || document.getElementById('rel_servico_realizado')?.value);
@@ -17139,6 +17253,8 @@ function limparFormularioRelatorio(confirmar = false) {
     'rel_medicao_temp', 'rel_medicao_vibracao', 'rel_medicao_torque',
     'rel_medicao_folga', 'rel_medicao_alinhamento', 'rel_medicao_corrente',
     'rel_medicao_pressao', 'rel_loto_obs',
+    'rel_prox_insp_dias', 'rel_prox_insp_data',
+    'rel_lub_spec', 'rel_lub_qtd', 'rel_lub_prox_dias', 'rel_lub_prox_data',
     'busca_ferramentas_input', 'rel_ia_desenho_prompt'
   ];
 
@@ -17153,6 +17269,13 @@ function limparFormularioRelatorio(confirmar = false) {
   if (selUrg) selUrg.selectedIndex = 0;
   const selLoto = document.getElementById('rel_loto_status');
   if (selLoto) selLoto.selectedIndex = 0;
+  const selProxTipo = document.getElementById('rel_prox_insp_tipo');
+  if (selProxTipo) selProxTipo.selectedIndex = 0;
+  const selLubSim = document.getElementById('rel_lub_sim');
+  if (selLubSim) selLubSim.value = 'nao';
+  const selLubTipo = document.getElementById('rel_lub_tipo');
+  if (selLubTipo) selLubTipo.selectedIndex = 0;
+  alternarBlocoLubrificacao('nao');
 
   if (document.getElementById('loc_status')) document.getElementById('loc_status').innerText = '';
   if (typeof navegarEtapaLaudo === 'function') navegarEtapaLaudo(1, false);
@@ -17678,17 +17801,47 @@ async function visualizarRelatorioPronto(id) {
   const eqContainer = document.getElementById('r4_equipe_linhas');
   if (eqContainer) eqContainer.innerText = equipeTexto + ' • Mecânica Industrial 4.0 IA';
 
-  // 9. Materiais Utilizados
+  // 9. Materiais Utilizados & Lubrificação
   const matTexto = (r.materiais || '').trim() || '• Junta grafitada DN 80\n• Desengraxante técnico\n• Solução antioxidante';
   const linhasM = matTexto.split('\n').filter(l => l.trim().length > 0);
+  if (r.lubSim === 'sim' && (r.lubSpec || r.lubQtd)) {
+    let lubLinha = `Lubrificação (${r.lubTipo === 'graxa' ? 'Graxa' : 'Óleo'}): ${r.lubSpec || 'Especial'}`;
+    if (r.lubQtd) lubLinha += ` • Qtd: ${r.lubQtd}`;
+    if (r.lubProxData) {
+      const p = r.lubProxData.split('-');
+      if (p.length === 3) lubLinha += ` • Próx. troca: ${p[2]}/${p[1]}/${p[0]}`;
+    } else if (r.lubProxDias) {
+      lubLinha += ` • Próx. troca: ${r.lubProxDias} dias`;
+    }
+    linhasM.push(lubLinha);
+  }
   const matContainer = document.getElementById('r4_materiais_linhas');
   if (matContainer) {
     matContainer.innerHTML = '<ul>' + linhasM.map(m => `<li>${m.replace(/^[•\-\*]\s*/, '')}</li>`).join('') + '</ul>';
   }
 
-  // 10. Observações
+  // 10. Observações & Próxima Inspeção
   const obsTexto = (r.observacao || '').trim() || '• Equipamento operando com fluxo nominal e estabilidade térmica.\n• Manutenção realizada em estrita conformidade com as normas de segurança.';
   const linhasO = obsTexto.split('\n').filter(l => l.trim().length > 0);
+  if (r.proxInspDias || r.proxInspData || r.proxInspTipo) {
+    const tipoMap = {
+      inspecao_visual: 'Inspeção visual',
+      preditiva: 'Preditiva',
+      preventiva: 'Preventiva',
+      lubrificacao: 'Lubrificação',
+      eletrica: 'Elétrica'
+    };
+    const tNome = tipoMap[r.proxInspTipo] || (r.proxInspTipo ? r.proxInspTipo : 'Intervenção técnica');
+    let proxLinha = `Próxima intervenção: ${tNome}`;
+    if (r.proxInspData) {
+      const p = r.proxInspData.split('-');
+      if (p.length === 3) proxLinha += ` em ${p[2]}/${p[1]}/${p[0]}`;
+    }
+    if (r.proxInspDias) {
+      proxLinha += ` (${r.proxInspDias} dias)`;
+    }
+    linhasO.push(proxLinha);
+  }
   const obsContainer = document.getElementById('r4_observacoes_linhas');
   if (obsContainer) {
     obsContainer.innerHTML = '<ul>' + linhasO.map(o => `<li>${o.replace(/^[•\-\*]\s*/, '')}</li>`).join('') + '</ul>';
@@ -17776,6 +17929,16 @@ async function editarRelatorioPronto(id) {
   if (document.getElementById('rel_medicao_pressao')) document.getElementById('rel_medicao_pressao').value = r.medicaoPressao || '';
   if (document.getElementById('rel_loto_obs')) document.getElementById('rel_loto_obs').value = r.lotoObs || '';
   if (document.getElementById('rel_loto_status') && r.lotoStatus) document.getElementById('rel_loto_status').value = r.lotoStatus;
+  if (document.getElementById('rel_prox_insp_dias')) document.getElementById('rel_prox_insp_dias').value = r.proxInspDias || '';
+  if (document.getElementById('rel_prox_insp_data')) document.getElementById('rel_prox_insp_data').value = r.proxInspData || '';
+  if (document.getElementById('rel_prox_insp_tipo')) document.getElementById('rel_prox_insp_tipo').value = r.proxInspTipo || '';
+  if (document.getElementById('rel_lub_sim')) document.getElementById('rel_lub_sim').value = r.lubSim || 'nao';
+  if (document.getElementById('rel_lub_tipo')) document.getElementById('rel_lub_tipo').value = r.lubTipo || 'oleo';
+  if (document.getElementById('rel_lub_spec')) document.getElementById('rel_lub_spec').value = r.lubSpec || '';
+  if (document.getElementById('rel_lub_qtd')) document.getElementById('rel_lub_qtd').value = r.lubQtd || '';
+  if (document.getElementById('rel_lub_prox_dias')) document.getElementById('rel_lub_prox_dias').value = r.lubProxDias || '';
+  if (document.getElementById('rel_lub_prox_data')) document.getElementById('rel_lub_prox_data').value = r.lubProxData || '';
+  if (typeof alternarBlocoLubrificacao === 'function') alternarBlocoLubrificacao(r.lubSim || 'nao');
   if (typeof navegarEtapaLaudo === 'function') navegarEtapaLaudo(1, false);
 
   // Restaura fotos nos slots se existirem
@@ -17938,6 +18101,15 @@ async function salvarIntervencao() {
     const medicaoPressao = document.getElementById('rel_medicao_pressao')?.value?.trim() || '';
     const lotoStatus = document.getElementById('rel_loto_status')?.value || 'bloqueado';
     const lotoObs = document.getElementById('rel_loto_obs')?.value?.trim() || '';
+    const proxInspDias = document.getElementById('rel_prox_insp_dias')?.value?.trim() || '';
+    const proxInspData = document.getElementById('rel_prox_insp_data')?.value || '';
+    const proxInspTipo = document.getElementById('rel_prox_insp_tipo')?.value || '';
+    const lubSim = document.getElementById('rel_lub_sim')?.value || 'nao';
+    const lubTipo = document.getElementById('rel_lub_tipo')?.value || 'oleo';
+    const lubSpec = document.getElementById('rel_lub_spec')?.value?.trim() || '';
+    const lubQtd = document.getElementById('rel_lub_qtd')?.value?.trim() || '';
+    const lubProxDias = document.getElementById('rel_lub_prox_dias')?.value?.trim() || '';
+    const lubProxData = document.getElementById('rel_lub_prox_data')?.value || '';
 
     // Processamento paralelo e protegido de fotos dos slots estruturados
     if (el) el.innerText = 'Processando imagens e fotos em alta definição...';
@@ -18009,6 +18181,8 @@ async function salvarIntervencao() {
       placaPotencia, placaTensao, placaCorrente, placaRpm, placaRolamentos, placaIp,
       medicaoTemp, medicaoVibracao, medicaoTorque, medicaoFolga, medicaoAlinhamento, medicaoCorrente, medicaoPressao,
       lotoStatus, lotoObs,
+      proxInspDias, proxInspData, proxInspTipo,
+      lubSim, lubTipo, lubSpec, lubQtd, lubProxDias, lubProxData,
       fotoAntesUrl, fotoDepoisUrl, foto3DUrl,
       fotoSlot3Url, fotoSlot5Url,
       desenhoTecnicoUrl: desenhoFinal,
