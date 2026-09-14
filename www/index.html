@@ -315,6 +315,52 @@
     }
   }
 
+  /* ---- DIVISORES INDUSTRIAIS DE SEÇÃO DA HOME ---- */
+  .home-section-divider {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 24px 0 6px 0;
+    padding: 6px 0;
+    user-select: none;
+  }
+  .home-section-divider:first-of-type {
+    margin-top: 2px;
+  }
+  .home-section-line {
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(56, 189, 248, 0.45) 0%, rgba(30, 64, 175, 0.2) 60%, transparent 100%);
+    position: relative;
+  }
+  .home-section-line.right {
+    background: linear-gradient(90deg, transparent 0%, rgba(30, 64, 175, 0.2) 40%, rgba(56, 189, 248, 0.45) 100%);
+  }
+  .home-section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #091728 0%, #0d1e34 100%);
+    border: 1px solid #1e3a5f;
+    border-top: 1px solid #38bdf8;
+    padding: 6px 16px;
+    border-radius: 20px;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 3px 10px rgba(0, 0, 0, 0.5);
+    font-size: 11.5px;
+    font-weight: 800;
+    color: #7dd3fc;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+  }
+  .home-section-badge .sec-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #38bdf8;
+    box-shadow: 0 0 8px #38bdf8;
+  }
+
   /* ---- BOTOEIRAS E BOTÕES INDUSTRIAIS ---- */
   .button {
     display: inline-flex;
@@ -3976,78 +4022,17 @@
     </div>
 
     <section class="grid">
-      <!-- CARD: PAINEL DO SUPERVISOR -->
-      <div id="cardSupervisorModulo" class="card card-supervisor" style="border: 2px solid #f59e0b; background: linear-gradient(145deg, #241604 0%, #0e1726 100%); box-shadow: 0 4px 18px rgba(245,158,11,0.25);" onclick="abrirModulo('supervisor')">
-        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <div class="icon" style="background:#451a03; border-color:#d97706; color:#f59e0b;">👨‍🔧</div>
-          <span style="font-size:10px; background:#b45309; color:#fff; font-weight:800; padding:2px 8px; border-radius:10px;">NÍVEL SUPERVISOR</span>
+      <!-- ══════════════════ 1. USO EM CAMPO ══════════════════ -->
+      <div class="home-section-divider">
+        <div class="home-section-line"></div>
+        <div class="home-section-badge">
+          <span class="sec-dot"></span>
+          <span>USO EM CAMPO</span>
         </div>
-        <h3 style="color:#fcd34d;">Painel do Supervisor</h3>
-        <p>Aprovação e homologação de laudos com carimbo digital, acompanhamento da equipe em campo e indicadores (MTBF/MTTR).</p>
-        <button class="button" style="background:#b45309; border-color:#f59e0b; font-size:11.5px; padding:6px 12px; margin-top:8px;" onclick="event.stopPropagation(); abrirModulo('supervisor')">Acessar Painel Tático</button>
+        <div class="home-section-line right"></div>
       </div>
 
-      <!-- CARD: CENTRAL DA EMPRESA & GESTÃO DE ATIVOS -->
-      <div id="cardEmpresaModulo" class="card card-empresa" style="border: 2px solid #10b981; background: linear-gradient(145deg, #042416 0%, #0c1825 100%); box-shadow: 0 4px 18px rgba(16,185,129,0.25);" onclick="abrirModulo('empresa')">
-        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <div class="icon" style="background:#064e3b; border-color:#059669; color:#34d399;">🏭</div>
-          <span style="font-size:10px; background:#047857; color:#fff; font-weight:800; padding:2px 8px; border-radius:10px;">NÍVEL EMPRESA</span>
-        </div>
-        <h3 style="color:#6ee7b7;">Central da Empresa & Ativos</h3>
-        <p>Árvore hierárquica de ativos industriais, gráficos executivos de Pareto 80/20, custos de paradas e governança ISO 55000.</p>
-        <button class="button" style="background:#047857; border-color:#10b981; font-size:11.5px; padding:6px 12px; margin-top:8px;" onclick="event.stopPropagation(); abrirModulo('empresa')">Acessar Visão Corporativa</button>
-      </div>
-      <div class="card" onclick="abrirModulo('manutencao')">
-        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
-        <div class="icon">⚙️</div>
-        <h3>Manutenção Mecânica</h3>
-        <p>Tipos de manutenção, indicadores (MTBF/MTTR) e planos de lubrificação.</p>
-        <button  class="button" onclick="event.stopPropagation(); abrirModulo('manutencao')">Acessar</button>
-      </div>
-
-      <div class="card" onclick="abrirModulo('bombas')">
-        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
-        <div class="icon">💧</div>
-        <h3>Bombas</h3>
-        <p>Bombas centrífugas, NPSH, cavitação, recirculação e diagnóstico de falhas.</p>
-        <button  class="button" onclick="event.stopPropagation(); abrirModulo('bombas')">Acessar</button>
-      </div>
-
-      <div class="card" onclick="abrirModulo('motores')">
-        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
-        <div class="icon">⚡</div>
-        <h3>Motores Elétricos</h3>
-        <p>Ligações estrela/triângulo, dados de placa e calculadora de corrente nominal.</p>
-        <button  class="button" onclick="event.stopPropagation(); abrirModulo('motores')">Acessar</button>
-      </div>
-
-      <div class="card" onclick="abrirModulo('redutores')">
-        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
-        <div class="icon">🔩</div>
-        <h3>Redutores e Engrenagens</h3>
-        <p>Relação de transmissão, calculadora de RPM/torque e análise de falhas.</p>
-        <button  class="button" onclick="event.stopPropagation(); abrirModulo('redutores')">Acessar</button>
-      </div>
-
-      <div class="card" onclick="abrirModulo('valvulas')">
-        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
-        <div class="icon">🔧</div>
-        <h3>Válvulas</h3>
-        <p>Globo, gaveta, esfera, PSV/PRV e critérios de seleção.</p>
-        <button  class="button" onclick="event.stopPropagation(); abrirModulo('valvulas')">Acessar</button>
-      </div>
-
-      <div class="card" onclick="abrirModulo('metrologia')">
-        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
-        <div class="icon">📏</div>
-        <h3>Metrologia</h3>
-        <p>Conversor mm ↔ polegada e verificador de tolerância dimensional.</p>
-        <button  class="button" onclick="event.stopPropagation(); abrirModulo('metrologia')">Acessar</button>
-      </div>
-
-      <!-- CARD UNIFICADO: CENTRAL DE LAUDOS -->
+      <!-- CARD UNIFICADO EM DESTAQUE: CENTRAL DE LAUDOS -->
       <div id="cardCentralLaudos" class="card card-central-laudos" onclick="abrirModulo('relatorio')">
         <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
         
@@ -4070,11 +4055,8 @@
 
         <!-- Fluxo Sequencial em Destaque Industrial (6 Etapas Normativas) -->
         <div style="background:linear-gradient(90deg, rgba(14,165,233,0.12) 0%, rgba(30,58,95,0.22) 100%); border:1px solid rgba(56,189,248,0.35); border-left:3px solid #38bdf8; border-radius:6px; padding:8px 12px; margin:8px 0 10px 0;">
-          <div style="font-family:'Courier New', monospace; font-size:11px; font-weight:700; color:#e0f2fe; letter-spacing:0.2px; white-space:nowrap; overflow-x:auto;">
-            ① Identificação → ② Placa e medições → ③ Diagnóstico e LOTO → ④ Fotos e desenho → ⑤ Serviço e materiais → ⑥ Assinatura
-          </div>
-          <div style="font-size:11px; color:#7dd3fc; margin-top:3px; font-weight:600;">
-            Para técnicos, inspetores e engenheiros.
+          <div style="font-family:'Courier New', monospace; font-size:11.5px; font-weight:700; color:#e0f2fe; letter-spacing:0.2px; white-space:nowrap; overflow-x:auto;">
+            Identifique → Meça → Fotografe → Desenho técnico → Laudo A4.
           </div>
         </div>
 
@@ -4084,77 +4066,199 @@
 
         <!-- Botoeiras Industriais Duplas -->
         <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:auto;">
-          <button class="button" style="flex:1; min-width:130px; margin-top:0; padding:10px 14px; background:linear-gradient(180deg, #0284c7 0%, #0369a1 100%); border:1px solid #38bdf8; border-top:1px solid #7dd3fc; font-size:13px; font-weight:700; box-shadow:0 0 12px rgba(2,132,199,0.35);" onclick="event.stopPropagation(); abrirModulo('relatorio'); alternarAbaRelatorio('novo');">
+          <button type="button" class="button" style="flex:1; min-width:130px; margin-top:0; padding:10px 14px; background:linear-gradient(180deg, #0284c7 0%, #0369a1 100%); border:1px solid #38bdf8; border-top:1px solid #7dd3fc; font-size:13px; font-weight:700; box-shadow:0 0 12px rgba(2,132,199,0.35);" onclick="event.stopPropagation(); abrirModulo('relatorio'); alternarAbaRelatorio('novo'); limparFormularioRelatorio();">
             <span>➕ Novo laudo</span>
           </button>
-          <button class="button secondary" style="flex:1; min-width:130px; margin-top:0; padding:10px 14px; background:linear-gradient(180deg, #132238 0%, #0c1828 100%); border:1px solid #234268; border-top:1px solid #38bdf8; color:#93c5fd; font-size:13px; font-weight:700; box-shadow:inset 0 1px 0 rgba(255,255,255,0.1);" onclick="event.stopPropagation(); abrirModulo('relatorios-prontos');">
+          <button type="button" class="button secondary" style="flex:1; min-width:130px; margin-top:0; padding:10px 14px; background:linear-gradient(180deg, #132238 0%, #0c1828 100%); border:1px solid #234268; border-top:1px solid #38bdf8; color:#93c5fd; font-size:13px; font-weight:700; box-shadow:inset 0 1px 0 rgba(255,255,255,0.1);" onclick="event.stopPropagation(); abrirModulo('relatorio'); alternarAbaRelatorio('prontos');">
             <span>📂 Meus laudos (<span id="home_count_laudos">0</span>)</span>
           </button>
         </div>
       </div>
 
-      <div class="card" onclick="abrirModulo('assistente')">
+      <!-- CARD: MECÂNICO IA -->
+      <div class="card" style="border-color:#ef4444; background:linear-gradient(150deg, #240c0c 0%, #150909 50%, #0c0505 100%);" onclick="abrirModalMecanicoIA()">
         <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
-        <div class="icon">🤖</div>
-        <h3>Assistente Técnico</h3>
-        <p>Busca inteligente na base de conhecimento do app.</p>
-        <button  class="button" onclick="event.stopPropagation(); abrirModulo('assistente')">Acessar</button>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <div class="icon" style="background:#450a0a; border-color:#ef4444; color:#f87171;">🔴</div>
+          <span style="font-size:10px; background:#b91c1c; color:#fff; font-weight:800; padding:2px 8px; border-radius:10px;">IA INVESTIGATIVA</span>
+        </div>
+        <h3 style="color:#fca5a5;">Mecânico IA</h3>
+        <p>Formula as 6 perguntas investigativas essenciais, calcula causas prováveis e lista evidências técnicas de campo.</p>
+        <button type="button" class="button" style="background:linear-gradient(180deg, #dc2626 0%, #991b1b 100%); border-color:#f87171;" onclick="event.stopPropagation(); abrirModalMecanicoIA()">Consultar Mecânico IA</button>
       </div>
 
+      <!-- CARD: INSPEÇÃO POR TAG -->
       <div class="card" onclick="abrirModulo('intervencoes')">
         <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
-        <div class="icon">📋</div>
-        <h3>Intervenções de Equipamentos</h3>
-        <p>Histórico de manutenções por equipamento, com fotos e localização.</p>
-        <button  class="button" onclick="event.stopPropagation(); abrirModulo('intervencoes')">Acessar</button>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <div class="icon" style="background:#0c2340; border-color:#0284c7; color:#38bdf8;">🏭</div>
+          <span style="font-size:10px; background:#0369a1; color:#fff; font-weight:800; padding:2px 8px; border-radius:10px;">RASTREABILIDADE</span>
+        </div>
+        <h3>Inspeção por TAG</h3>
+        <p>Histórico completo de intervenções, manutenções anteriores, localização GPS e fotos por TAG de equipamento.</p>
+        <button type="button" class="button secondary" onclick="event.stopPropagation(); abrirModulo('intervencoes')">Acessar TAGs</button>
       </div>
 
-      <div class="card" onclick="abrirModulo('lubrificacao')">
+      <!-- ══════════════════ 2. FERRAMENTAS DE CAMPO ══════════════════ -->
+      <div class="home-section-divider">
+        <div class="home-section-line"></div>
+        <div class="home-section-badge">
+          <span class="sec-dot" style="background:#a78bfa; box-shadow:0 0 8px #a78bfa;"></span>
+          <span>FERRAMENTAS DE CAMPO</span>
+        </div>
+        <div class="home-section-line right"></div>
+      </div>
+
+      <!-- CARD: ANÁLISE DE VIBRAÇÃO -->
+      <div class="card" style="border-color:#7c3aed;" onclick="abrirModulo('vibracao')">
         <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
-        <div class="icon">🛢️</div>
-        <h3>Lubrificação</h3>
-        <p>Sistemas de lubrificação em redutores, bombas e motores, e tipos de rolamento.</p>
-        <button  class="button" onclick="event.stopPropagation(); abrirModulo('lubrificacao')">Acessar</button>
+        <div class="icon" style="background:linear-gradient(135deg, #4c1d95 0%, #2e1065 100%); border-color:#a78bfa;">📈</div>
+        <h3 style="color:#c4b5fd;">Análise de Vibração</h3>
+        <p>Severidade ISO 10816-3, decodificador de espectros FFT (1X, 2X, harmônicos, rolamentos) e acelerômetros.</p>
+        <button type="button" class="button" style="background:#6d28d9; border-color:#a78bfa;" onclick="event.stopPropagation(); abrirModulo('vibracao')">Acessar Vibração</button>
       </div>
 
-      <div class="card" onclick="abrirModulo('chaves')">
+      <!-- CARD: ALINHAMENTO DE EIXOS -->
+      <div class="card" style="border-color:#0284c7;" onclick="abrirModulo('alinhamento')">
         <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
-        <div class="icon">🔑</div>
-        <h3>Chaves e Porcas</h3>
-        <p>Tabela de chaves combinadas por tamanho de rosca métrica e polegada.</p>
-        <button  class="button" onclick="event.stopPropagation(); abrirModulo('chaves')">Acessar</button>
+        <div class="icon" style="background:linear-gradient(135deg, #0369a1 0%, #0c284e 100%); border-color:#38bdf8;">📐</div>
+        <h3 style="color:#7dd3fc;">Alinhamento de Eixos</h3>
+        <p>Desalinhamento paralelo, angular, pé manco, método reverso com relógios e tolerâncias por RPM.</p>
+        <button type="button" class="button" style="background:#0284c7; border-color:#38bdf8;" onclick="event.stopPropagation(); abrirModulo('alinhamento')">Acessar Alinhamento</button>
       </div>
 
+      <!-- CARD: TORQUE CONTROLADO -->
       <div class="card" onclick="abrirModulo('torque')">
         <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
         <div class="icon">🎯</div>
         <h3>Torque Controlado</h3>
-        <p>Torque controlado por equipamento, cálculo anti-erro (DIN/ISO/SAE), foto de porca/parafuso e aperto em cruz.</p>
-        <button  class="button" onclick="event.stopPropagation(); abrirModulo('torque')">Acessar</button>
+        <p>Cálculo anti-erro (DIN/ISO/SAE), torque por equipamento, foto de porca/parafuso e aperto em cruz.</p>
+        <button type="button" class="button secondary" onclick="event.stopPropagation(); abrirModulo('torque')">Acessar Torque</button>
       </div>
 
-      <div class="card" style="border-color: #0284c7;" onclick="abrirModulo('alinhamento')">
+      <!-- CARD: METROLOGIA -->
+      <div class="card" onclick="abrirModulo('metrologia')">
         <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
-        <div class="icon" style="background: linear-gradient(135deg, #0369a1 0%, #0c284e 100%); border-color: #38bdf8;">📐</div>
-        <h3>Alinhamento de Eixos & Laser</h3>
-        <p>Desalinhamento paralelo, angular, pé manco, método reverso e tolerâncias por RPM.</p>
-        <button  class="button" style="background:#0284c7; border-color:#38bdf8;" onclick="event.stopPropagation(); abrirModulo('alinhamento')">Acessar</button>
+        <div class="icon">📏</div>
+        <h3>Metrologia Industrial</h3>
+        <p>Conversor mm ↔ polegada fracionária, verificador de tolerâncias dimensionais ISO e micrômetro.</p>
+        <button type="button" class="button secondary" onclick="event.stopPropagation(); abrirModulo('metrologia')">Acessar Metrologia</button>
       </div>
 
-      <div class="card" style="border-color: #8b5cf6;" onclick="abrirModulo('vibracao')">
+      <!-- CARD: CHAVES E PORCAS -->
+      <div class="card" onclick="abrirModulo('chaves')">
         <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
-        <div class="icon" style="background: linear-gradient(135deg, #6d28d9 0%, #2e1065 100%); border-color: #a78bfa;">📈</div>
-        <h3>Análise de Vibração & Preditiva</h3>
-        <p>Severidade ISO 10816-3, decodificador de espectros FFT (1X, 2X, harmônicos, rolamentos) e acelerômetros.</p>
-        <button  class="button" style="background:#7c3aed; border-color:#a78bfa;" onclick="event.stopPropagation(); abrirModulo('vibracao')">Acessar</button>
+        <div class="icon">🔑</div>
+        <h3>Chaves e Porcas</h3>
+        <p>Tabela de chaves combinadas e soquetes por diâmetro de rosca métrica (MA/MB) e polegada (UNC/UNF).</p>
+        <button type="button" class="button secondary" onclick="event.stopPropagation(); abrirModulo('chaves')">Acessar Chaves</button>
       </div>
 
-      <div class="card" onclick="abrirModulo('sobre')">
+      <!-- ══════════════════ 3. CONSULTA TÉCNICA ══════════════════ -->
+      <div class="home-section-divider">
+        <div class="home-section-line"></div>
+        <div class="home-section-badge">
+          <span class="sec-dot" style="background:#10b981; box-shadow:0 0 8px #10b981;"></span>
+          <span>CONSULTA TÉCNICA</span>
+        </div>
+        <div class="home-section-line right"></div>
+      </div>
+
+      <!-- CARD: BOMBAS -->
+      <div class="card" onclick="abrirModulo('bombas')">
         <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
-        <div class="icon">ℹ️</div>
-        <h3>Sobre o App</h3>
-        <p>Painel com todos os módulos, tecnologia usada e progresso do projeto.</p>
-        <button  class="button" onclick="event.stopPropagation(); abrirModulo('sobre')">Acessar</button>
+        <div class="icon">💧</div>
+        <h3>Bombas Industriais</h3>
+        <p>Bombas centrífugas, NPSH disponível/requerido, cavitação, recirculação e diagnóstico de falhas.</p>
+        <button type="button" class="button secondary" onclick="event.stopPropagation(); abrirModulo('bombas')">Consultar Bombas</button>
+      </div>
+
+      <!-- CARD: MOTORES ELÉTRICOS -->
+      <div class="card" onclick="abrirModulo('motores')">
+        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
+        <div class="icon">⚡</div>
+        <h3>Motores Elétricos</h3>
+        <p>Ligações estrela/triângulo, dados de placa, rendimento e calculadora de corrente nominal.</p>
+        <button type="button" class="button secondary" onclick="event.stopPropagation(); abrirModulo('motores')">Consultar Motores</button>
+      </div>
+
+      <!-- CARD: REDUTORES -->
+      <div class="card" onclick="abrirModulo('redutores')">
+        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
+        <div class="icon">🔩</div>
+        <h3>Redutores & Engrenagens</h3>
+        <p>Relação de transmissão, calculadora de RPM/torque e análise de modos de falha em engrenagens.</p>
+        <button type="button" class="button secondary" onclick="event.stopPropagation(); abrirModulo('redutores')">Consultar Redutores</button>
+      </div>
+
+      <!-- CARD: VÁLVULAS -->
+      <div class="card" onclick="abrirModulo('valvulas')">
+        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
+        <div class="icon">🔧</div>
+        <h3>Válvulas Industriais</h3>
+        <p>Válvulas globo, gaveta, esfera, borboleta, retenção, PSV/PRV e critérios normativos de seleção.</p>
+        <button type="button" class="button secondary" onclick="event.stopPropagation(); abrirModulo('valvulas')">Consultar Válvulas</button>
+      </div>
+
+      <!-- CARD: LUBRIFICAÇÃO -->
+      <div class="card" onclick="abrirModulo('lubrificacao')">
+        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
+        <div class="icon">🛢️</div>
+        <h3>Lubrificação</h3>
+        <p>Sistemas de lubrificação em redutores, bombas e mancais, viscosidade ISO VG e tipos de graxa.</p>
+        <button type="button" class="button secondary" onclick="event.stopPropagation(); abrirModulo('lubrificacao')">Consultar Lubrificação</button>
+      </div>
+
+      <!-- CARD: MANUTENÇÃO MECÂNICA -->
+      <div class="card" onclick="abrirModulo('manutencao')">
+        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
+        <div class="icon">⚙️</div>
+        <h3>Manutenção Mecânica</h3>
+        <p>Tipos de manutenção (preditiva, preventiva, corretiva), indicadores (MTBF/MTTR) e planos de ação.</p>
+        <button type="button" class="button secondary" onclick="event.stopPropagation(); abrirModulo('manutencao')">Acessar Manutenção</button>
+      </div>
+
+      <!-- CARD: ASSISTENTE TÉCNICO -->
+      <div class="card" onclick="abrirModulo('assistente')">
+        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
+        <div class="icon">🤖</div>
+        <h3>Assistente Técnico IA</h3>
+        <p>Busca inteligente com respostas técnicas normatizadas na base de conhecimento do app.</p>
+        <button type="button" class="button secondary" onclick="event.stopPropagation(); abrirModulo('assistente')">Acessar Assistente</button>
+      </div>
+
+      <!-- ══════════════════ 4. GESTÃO ══════════════════ -->
+      <div class="home-section-divider">
+        <div class="home-section-line"></div>
+        <div class="home-section-badge">
+          <span class="sec-dot" style="background:#f59e0b; box-shadow:0 0 8px #f59e0b;"></span>
+          <span>GESTÃO</span>
+        </div>
+        <div class="home-section-line right"></div>
+      </div>
+
+      <!-- CARD: PAINEL DO SUPERVISOR -->
+      <div id="cardSupervisorModulo" class="card card-supervisor" style="border: 2px solid #f59e0b; background: linear-gradient(145deg, #241604 0%, #0e1726 100%); box-shadow: 0 4px 18px rgba(245,158,11,0.25);" onclick="abrirModulo('supervisor')">
+        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <div class="icon" style="background:#451a03; border-color:#d97706; color:#f59e0b;">👨‍🔧</div>
+          <span style="font-size:10px; background:#b45309; color:#fff; font-weight:800; padding:2px 8px; border-radius:10px;">NÍVEL SUPERVISOR</span>
+        </div>
+        <h3 style="color:#fcd34d;">Painel do Supervisor</h3>
+        <p>Aprovação e homologação de laudos com carimbo digital, acompanhamento da equipe em campo e indicadores (MTBF/MTTR).</p>
+        <button type="button" class="button" style="background:#b45309; border-color:#f59e0b; font-size:11.5px; padding:6px 12px; margin-top:8px;" onclick="event.stopPropagation(); abrirModulo('supervisor')">Acessar Painel Tático</button>
+      </div>
+
+      <!-- CARD: CENTRAL DA EMPRESA & GESTÃO DE ATIVOS -->
+      <div id="cardEmpresaModulo" class="card card-empresa" style="border: 2px solid #10b981; background: linear-gradient(145deg, #042416 0%, #0c1825 100%); box-shadow: 0 4px 18px rgba(16,185,129,0.25);" onclick="abrirModulo('empresa')">
+        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <div class="icon" style="background:#064e3b; border-color:#059669; color:#34d399;">🏭</div>
+          <span style="font-size:10px; background:#047857; color:#fff; font-weight:800; padding:2px 8px; border-radius:10px;">NÍVEL EMPRESA</span>
+        </div>
+        <h3 style="color:#6ee7b7;">Central da Empresa & Ativos</h3>
+        <p>Árvore hierárquica de ativos industriais, gráficos executivos de Pareto 80/20, custos de paradas e governança ISO 55000.</p>
+        <button type="button" class="button" style="background:#047857; border-color:#10b981; font-size:11.5px; padding:6px 12px; margin-top:8px;" onclick="event.stopPropagation(); abrirModulo('empresa')">Acessar Visão Corporativa</button>
       </div>
 
       <!-- CARD EXCLUSIVO DO ADMINISTRADOR -->
@@ -4165,10 +4269,18 @@
           <span>Painel do Administrador</span>
           <span style="font-size:10px; background:#b45309; color:#fff; padding:2px 8px; border-radius:10px; font-weight:800; letter-spacing:0.5px;">EXCLUSIVO • ADMIN</span>
         </h3>
-        <p style="color:#cbd5e1;">Área restrita de controle geral: monitore mecânicos online no momento, novos cadastros em tempo real, histórico de logins e exclua contas imediatamente.</p>
-        <button  class="button" style="background:#b45309; border-color:#f59e0b;" onclick="event.stopPropagation(); abrirModulo('admin')">👑 Gerenciar Acessos & Usuários</button>
+        <p style="color:#cbd5e1;">Área restrita de controle geral: monitore mecânicos online no momento, novos cadastros em tempo real, histórico de logins e auditoria.</p>
+        <button type="button" class="button" style="background:#b45309; border-color:#f59e0b;" onclick="event.stopPropagation(); abrirModulo('admin')">👑 Gerenciar Acessos & Usuários</button>
       </div>
 
+      <!-- CARD: SOBRE O APP -->
+      <div class="card" onclick="abrirModulo('sobre')">
+        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
+        <div class="icon">ℹ️</div>
+        <h3>Sobre a Plataforma</h3>
+        <p>Painel com todos os módulos, tecnologia usada, normas atendidas e progresso do projeto Mecânica 4.0 IA.</p>
+        <button type="button" class="button secondary" onclick="event.stopPropagation(); abrirModulo('sobre')">Acessar Sobre</button>
+      </div>
     </section>
 
     <section class="status">
@@ -5143,55 +5255,22 @@
       <h2>📝 Relatório Técnico de Manutenção</h2>
       <div style="display:flex; gap:8px; flex-wrap:wrap;">
         <button class="button" style="background:linear-gradient(135deg, #1e1b4b 0%, #4338ca 100%); border-color:#818cf8; font-size:12px; margin-top:0;" onclick="abrirModalGeminiRelatorio()"><span style="color:#38bdf8;">✨</span> IA Gemini</button>
-        <button class="button" style="background:#0284c7; border-color:#38bdf8; font-size:12px; margin-top:0;" onclick="alternarAbaRelatorio('preview')">👁️ Pré-Visualizar A4</button>
+        <button class="button" style="background:#0284c7; border-color:#38bdf8; font-size:12px; margin-top:0;" onclick="alternarAbaRelatorio('preview')">👁️ Prévia A4</button>
         <button class="button" style="background:#198754; border-color:#20a768; font-size:12px; margin-top:0;" onclick="imprimirRelatorioA4Direto()">🖨️ Imprimir A4</button>
-        <button class="button secondary" style="background:#1b365d; font-size:12px; margin-top:0;" onclick="alternarAbaRelatorio('prontos')">📑 Relatórios Prontos</button>
+        <button class="button secondary" style="background:#1b365d; font-size:12px; margin-top:0;" onclick="alternarAbaRelatorio('prontos')">📊 Meus Laudos</button>
         <button class="button secondary" onclick="voltarGrid()" style="margin-top:0;">← Voltar</button>
       </div>
     </div>
 
-    <!-- ABAS DO RELATÓRIO (NOVO RELATÓRIO VS RELATÓRIOS PRONTOS) -->
+    <!-- ABAS DO RELATÓRIO EM 3 ÁREAS NORMATIVAS -->
     <div class="torque-tabs" style="margin-bottom:18px;">
-      <button class="torque-tab-btn active" id="rel_tab_btn_novo" onclick="alternarAbaRelatorio('novo')">📝 Aba: Formulário Técnico</button>
-      <button class="torque-tab-btn" id="rel_tab_btn_preview" onclick="alternarAbaRelatorio('preview')">👁️ Aba: Pré-Visualização da Folha A4</button>
-      <button class="torque-tab-btn" id="rel_tab_btn_prontos" onclick="alternarAbaRelatorio('prontos')">📑 Aba: Relatórios Prontos (<span id="rel_tab_count_prontos">0</span>)</button>
+      <button class="torque-tab-btn active" id="rel_tab_btn_novo" onclick="alternarAbaRelatorio('novo')">A) 📝 Novo laudo (6 passos)</button>
+      <button class="torque-tab-btn" id="rel_tab_btn_preview" onclick="alternarAbaRelatorio('preview')">B) 👁️ Prévia da Folha A4</button>
+      <button class="torque-tab-btn" id="rel_tab_btn_prontos" onclick="alternarAbaRelatorio('prontos')">C) 📊 Meus laudos (<span id="rel_tab_count_prontos">0</span>)</button>
     </div>
 
     <!-- SUBPAINEL 1: NOVO RELATÓRIO (FORMULÁRIO TÉCNICO) -->
     <div id="rel_sub_novo" class="rel-subpanel active">
-
-    <div class="content-block">
-      <h4>📊 Dashboard de Manutenções</h4>
-      <div id="dash_carregando" style="color:#8190a7; font-size:13px;">Carregando dados...</div>
-      <div id="dash_conteudo" style="display:none;">
-        <div class="kpi-grid">
-          <div class="kpi-card"><div class="valor" id="kpi_equip">0</div><div class="label">Equipamentos cadastrados</div></div>
-          <div class="kpi-card"><div class="valor" id="kpi_total">0</div><div class="label">Intervenções totais</div></div>
-          <div class="kpi-card"><div class="valor" id="kpi_mes">0</div><div class="label">Intervenções este mês</div></div>
-          <div class="kpi-card"><div class="valor" id="kpi_urgente">0</div><div class="label">Urgência alta (recentes)</div></div>
-        </div>
-
-        <div style="margin-top:18px;">
-          <h4 style="color:#75b7ff; font-size:14px; margin-bottom:10px;">Por tipo de manutenção</h4>
-          <div id="dash_por_tipo"></div>
-        </div>
-
-        <div style="margin-top:10px;">
-          <h4 style="color:#75b7ff; font-size:14px; margin-bottom:10px;">Por urgência</h4>
-          <div id="dash_por_urgencia"></div>
-        </div>
-
-        <div style="margin-top:10px;">
-          <h4 style="color:#75b7ff; font-size:14px; margin-bottom:10px;">Equipamentos com mais intervenções</h4>
-          <div id="dash_top_equip" style="color:#cdd7e6; font-size:13px;"></div>
-        </div>
-
-        <div style="margin-top:10px;">
-          <h4 style="color:#75b7ff; font-size:14px; margin-bottom:10px;">Últimas intervenções</h4>
-          <div id="dash_recentes"></div>
-        </div>
-      </div>
-    </div>
 
     <!-- Assistente de Ortografia e Padronização -->
     <div class="spellcheck-banner">
@@ -5248,7 +5327,7 @@
     <div class="content-block etapa-laudo-card" id="etapa_rel_1">
       <div class="etapa-header-badge"><span>PASSO 1 DE 6</span> <span>•</span> <span>NORMA NBR / PETROBRAS</span></div>
       <h4 style="margin-top:0;">① Identificação da Ordem e Equipamento</h4>
-      <p style="font-size:12px; color:#8190a7; margin-top:-4px; margin-bottom:12px;">Dados cadastrais, ordem de serviço, TAG, executante e localização geográfica</p>
+      <p style="font-size:12px; color:#8190a7; margin-top:-4px; margin-bottom:12px;">Dados cadastrais, ordem de serviço, TAG, executante, tipo de intervenção e localização geográfica</p>
       <div class="field-row">
         <div class="field"><label>Data da intervenção</label><input type="date" id="rel_data"></div>
         <div class="field">
@@ -5278,6 +5357,15 @@
         <div class="field" style="flex:1.4;"><label>Nome do equipamento</label><input type="text" id="rel_equip" placeholder="Nome do equipamento" oninput="if(typeof atualizarModelo3DAutomatico==='function') atualizarModelo3DAutomatico()"></div>
       </div>
       <div class="field-row">
+        <div class="field">
+          <label>Tipo de manutenção</label>
+          <select id="rel_tipo">
+            <option selected>Preventiva</option>
+            <option>Corretiva</option>
+            <option>Preditiva</option>
+            <option>Inspeção de rotina</option>
+          </select>
+        </div>
         <div class="field"><label>ASS (Colaborador / Executante)</label><input type="text" id="rel_resp" placeholder="Responsável técnico"></div>
         <div class="field"><label>Matrícula do Responsável</label><input type="text" id="rel_matricula" placeholder="Matrícula do responsável"></div>
         <div class="field"><label>Equipe / Turno</label><input type="text" id="rel_equipe_matr" placeholder="Equipe / turno / participantes"></div>
@@ -5310,21 +5398,30 @@
       <h4 style="margin-top:0;">② Placa e medições</h4>
       <p style="font-size:12px; color:#8190a7; margin-top:-4px; margin-bottom:12px;">Especificações de placa do fabricante, grandezas de campo e medições metrológicas</p>
 
+      <!-- Dados de Placa do Fabricante -->
+      <div style="font-size:12px; font-weight:700; color:#38bdf8; margin-bottom:6px; display:flex; align-items:center; gap:6px;">
+        <span>🏷️ Dados Nominais de Placa (Fabricante)</span>
+      </div>
       <div class="field-row">
-        <div class="field" style="flex:1;">
-          <label>Dados de Placa: Fabricante / Potência / RPM</label>
-          <input type="text" id="rel_placa_potencia" placeholder="ex: WEG W22 Premium • 75 kW (100 CV) • 1780 RPM">
-        </div>
-        <div class="field" style="flex:1;">
-          <label>Dados de Placa: Tensão / Regime / Grau Proteção</label>
-          <input type="text" id="rel_placa_tensao" placeholder="ex: 380/660V • FS 1.15 • IPW66 • Isolamento Classe H">
-        </div>
+        <div class="field"><label>Potência (kW / CV)</label><input type="text" id="rel_placa_potencia" placeholder="ex: 75 kW (100 CV)"></div>
+        <div class="field"><label>Tensão Nominal (V)</label><input type="text" id="rel_placa_tensao" placeholder="ex: 380 / 660 V"></div>
+        <div class="field"><label>Corrente Nominal (A)</label><input type="text" id="rel_placa_corrente" placeholder="ex: 138 A"></div>
+        <div class="field"><label>Rotação (RPM)</label><input type="text" id="rel_placa_rpm" placeholder="ex: 1780 RPM"></div>
+        <div class="field"><label>Rolamentos (D / T)</label><input type="text" id="rel_placa_rolamentos" placeholder="ex: 6314-C3 / 6214-C3"></div>
+        <div class="field"><label>Grau Proteção (IP)</label><input type="text" id="rel_placa_ip" placeholder="ex: IPW66 / Classe H"></div>
       </div>
 
+      <!-- Medições de Campo & Metrologia -->
+      <div style="font-size:12px; font-weight:700; color:#10b981; margin-top:10px; margin-bottom:6px; display:flex; align-items:center; gap:6px;">
+        <span>📏 Medições de Campo & Grandezas Físicas</span>
+      </div>
       <div class="field-row">
-        <div class="field"><label>Temperatura de Operação (°C)</label><input type="text" id="rel_medicao_temp" placeholder="ex: 68.5 °C (Termografia)"></div>
         <div class="field"><label>Vibração Global (mm/s RMS)</label><input type="text" id="rel_medicao_vibracao" placeholder="ex: 1.8 mm/s (ISO 10816-3)"></div>
+        <div class="field"><label>Temperatura (°C)</label><input type="text" id="rel_medicao_temp" placeholder="ex: 68.5 °C (Termografia)"></div>
+        <div class="field"><label>Torque Aplicado (N·m)</label><input type="text" id="rel_medicao_torque" placeholder="ex: 185 N·m (Torquímetro)"></div>
         <div class="field"><label>Folga Mecânica (mm)</label><input type="text" id="rel_medicao_folga" placeholder="ex: 0.05 mm radial / 0.08 axial"></div>
+        <div class="field"><label>Alinhamento de Eixos</label><input type="text" id="rel_medicao_alinhamento" placeholder="ex: 0.03 mm paral. / 0.02 ang."></div>
+        <div class="field"><label>Corrente em Carga (A)</label><input type="text" id="rel_medicao_corrente" placeholder="ex: 122 A (Alicate Amp.)"></div>
         <div class="field"><label>Pressão Operacional</label><input type="text" id="rel_medicao_pressao" placeholder="ex: 6.2 bar / 90 PSI"></div>
       </div>
 
@@ -5352,15 +5449,6 @@
 
       <div class="field-row">
         <div class="field">
-          <label>Tipo de manutenção</label>
-          <select id="rel_tipo">
-            <option selected>Preventiva</option>
-            <option>Corretiva</option>
-            <option>Preditiva</option>
-            <option>Inspeção de rotina</option>
-          </select>
-        </div>
-        <div class="field">
           <label>Urgência</label>
           <select id="rel_urgencia">
             <option selected>Baixa</option>
@@ -5368,7 +5456,7 @@
             <option>Alta — risco à segurança/produção</option>
           </select>
         </div>
-        <div class="field">
+        <div class="field" style="flex:2;">
           <label>Status de Bloqueio LOTO (NR-10 / NR-12)</label>
           <select id="rel_loto_status">
             <option value="bloqueado" selected>🔒 Bloqueio LOTO Efetuado com Cadeado e Etiqueta</option>
@@ -5410,15 +5498,22 @@
       <div class="field-row">
         <div class="field" style="min-width:100%;">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
-            <label style="margin:0;">Descrição de anomalia ou diagnóstico inicial</label>
+            <label style="margin:0;">Sintoma / Descrição de anomalia ou diagnóstico inicial</label>
             <button type="button" class="voice-mic-btn" id="btn_mic_rel_anomalia" onclick="iniciarDitadoVoz('rel_anomalia')">🎙️ Falar Anomalia</button>
           </div>
           <textarea id="rel_anomalia" rows="2" spellcheck="true" placeholder="ex: Acúmulo de partículas e incrustações na malha do elemento filtrante."></textarea>
         </div>
       </div>
       <div class="field-row">
-        <div class="field"><label>Causa provável</label><input type="text" id="rel_causa" spellcheck="true" placeholder="ex: Arraste natural de particulado pelo fluxo de vapor/água"></div>
-        <div class="field"><label>Ação recomendada</label><input type="text" id="rel_acao" spellcheck="true" placeholder="ex: Monitorar diferencial de pressão após reinício de operação"></div>
+        <div class="field"><label>Causa raiz / provável</label><input type="text" id="rel_causa" spellcheck="true" placeholder="ex: Arraste natural de particulado pelo fluxo de vapor/água"></div>
+        <div class="field"><label>Evidências técnicas de campo</label><input type="text" id="rel_evidencias" spellcheck="true" placeholder="ex: Pressão diferencial subiu para 1.8 bar, ruído de cavitação e saturação visual"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>EPIs obrigatórios & medidas preventivas</label><input type="text" id="rel_epis" spellcheck="true" placeholder="ex: Óculos de proteção, luva de vaqueta/nitrílica, protetor auricular, calçado de segurança"></div>
+        <div class="field"><label>Risco residual operacional</label><input type="text" id="rel_risco_residual" spellcheck="true" placeholder="ex: Resíduo de fluido sob baixa pressão na tubulação / piso escorregadio isolado"></div>
+      </div>
+      <div class="field-row">
+        <div class="field" style="min-width:100%;"><label>Ação recomendada</label><input type="text" id="rel_acao" spellcheck="true" placeholder="ex: Monitorar diferencial de pressão após reinício de operação e reaperto após 24h"></div>
       </div>
       <div style="display:flex; gap:8px; margin-top:4px;">
         <button type="button" class="button secondary" style="margin:0; padding:6px 12px; font-size:11.5px;" onclick="sugerirCausaEAcaoIA()">🧠 Sugerir Causa & Ação com IA</button>
@@ -5973,13 +6068,14 @@
       <!-- Botões de Ação do Relatório -->
       <div style="margin-top:20px; border-top:1px solid #1a304d; padding-top:16px; text-align:center;">
         <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:12px;">
-          <button type="button" class="button" style="background:linear-gradient(135deg, #1e1b4b 0%, #312e81 40%, #4338ca 100%); border:1.5px solid #818cf8; font-size:15px; font-weight:bold; padding:12px 22px; box-shadow:0 0 16px rgba(99,102,241,0.45); color:#ffffff;" onclick="abrirModalGeminiRelatorio()"><span style="color:#38bdf8;">✨</span> Elaborar com IA Gemini</button>
-          <button class="button" style="background:linear-gradient(135deg, #0284c7 0%, #0369a1 100%); border-color:#38bdf8; font-size:15px; font-weight:bold; padding:12px 22px;" onclick="abrirModalRevisaoIA()">🤖 Revisar & Aprimorar com IA do Robô</button>
-          <button class="button" style="background:#10448c; border-color:#205bb0; font-size:15px; font-weight:bold; padding:12px 22px;" onclick="abrirRelatorioA4Modal()">📄 Visualizar Relatório Técnico A4</button>
-          <button class="button" style="background:#198754; border-color:#20a768; font-size:15px; font-weight:bold; padding:12px 22px;" onclick="imprimirRelatorioA4Direto()">🖨️ Imprimir / Salvar PDF (A4)</button>
-          <button class="button secondary" onclick="salvarIntervencao()">💾 Salvar Intervenção (Nuvem & Local)</button>
-          <button class="button secondary" onclick="gerarRelatorio()">Gerar Texto Resumo</button>
-          <button class="button secondary" onclick="copiarRelatorio()">Copiar Texto</button>
+          <button type="button" class="button" style="background:#0284c7; border-color:#38bdf8; font-size:15px; font-weight:800; padding:12px 24px; box-shadow:0 0 16px rgba(2,132,199,0.45); color:#ffffff;" onclick="alternarAbaRelatorio('preview')">👁️ Prévia da Folha A4</button>
+          <button type="button" class="button" style="background:linear-gradient(135deg, #10b981 0%, #059669 100%); border-color:#34d399; font-size:15px; font-weight:800; padding:12px 24px; box-shadow:0 0 16px rgba(16,185,129,0.45); color:#ffffff;" onclick="salvarIntervencaoEMeusalvar()">💾 Salvar → Meus laudos</button>
+          <button type="button" class="button" style="background:#198754; border-color:#20a768; font-size:14px; font-weight:bold; padding:12px 20px;" onclick="imprimirRelatorioA4Direto()">🖨️ Imprimir / Salvar PDF (A4)</button>
+          <button type="button" class="button" style="background:linear-gradient(135deg, #1e1b4b 0%, #312e81 40%, #4338ca 100%); border:1.5px solid #818cf8; font-size:14px; font-weight:bold; padding:12px 20px; box-shadow:0 0 14px rgba(99,102,241,0.4); color:#ffffff;" onclick="abrirModalGeminiRelatorio()"><span style="color:#38bdf8;">✨</span> Elaborar com IA Gemini</button>
+          <button type="button" class="button" style="background:linear-gradient(135deg, #0284c7 0%, #0369a1 100%); border-color:#38bdf8; font-size:14px; font-weight:bold; padding:12px 20px;" onclick="abrirModalRevisaoIA()">🤖 Revisar & Aprimorar com IA</button>
+          <button type="button" class="button secondary" onclick="salvarIntervencao()" style="font-size:13px; padding:10px 16px;">💾 Apenas Salvar</button>
+          <button type="button" class="button secondary" onclick="gerarRelatorio()" style="font-size:13px; padding:10px 16px;">Gerar Texto Resumo</button>
+          <button type="button" class="button secondary" onclick="copiarRelatorio()" style="font-size:13px; padding:10px 16px;">Copiar Texto</button>
         </div>
         <div class="resultado" id="rel_resultado" style="margin-top:16px;"></div>
       </div>
@@ -6011,23 +6107,65 @@
       </div>
     </div>
 
-    <!-- SUBPAINEL 2: RELATÓRIOS PRONTOS & IMPRESSÃO INTEGRADO -->
+    <!-- SUBPAINEL 2: RELATÓRIOS PRONTOS & DASHBOARD MEUS LAUDOS -->
     <div id="rel_sub_prontos" class="rel-subpanel" style="display:none;">
-      <div class="content-block">
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">
+      <div class="content-block" style="margin-bottom:18px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px;">
           <div>
-            <h4 style="margin:0; color:#38bdf8; font-size:16px;">📑 Relatórios Emitidos & Concluídos</h4>
-            <p style="color:#b7c3d6; font-size:12.5px; margin:4px 0 0 0;">
-              Seus relatórios técnicos salvos com total sigilo neste login. Visualize em folha oficial A4, confira fotos anexadas e envie diretamente para impressão ou geração de PDF.
+            <h4 style="margin:0; color:#38bdf8; font-size:16px;">📊 Dashboard de Meus Laudos</h4>
+            <p style="color:#94a3b8; font-size:12.5px; margin:4px 0 0 0;">
+              Visão consolidada de indicadores de manutenção, status de conclusão e laudos emitidos com sigilo técnico neste login.
             </p>
           </div>
-          <button class="button" style="background:#0284c7; border-color:#38bdf8; font-size:12.5px; margin-top:0; padding:8px 16px;" onclick="alternarAbaRelatorio('novo'); limparFormularioRelatorio();">➕ Criar Novo Relatório</button>
+          <button type="button" class="button" style="background:#0284c7; border-color:#38bdf8; font-size:12.5px; margin-top:0; padding:8px 16px;" onclick="alternarAbaRelatorio('novo'); limparFormularioRelatorio();">➕ Criar Novo Laudo</button>
         </div>
 
-        <div class="field-row">
-          <div class="field" style="min-width:100%;">
-            <label>🔍 Buscar por TAG, OM, Colaborador, Local ou Equipamento</label>
-            <input type="text" id="busca_relatorios_prontos" placeholder="ex: 28LCE10, 2032113859, Eduardo, Vapor ou Filtro..." oninput="filtrarRelatoriosProntos()">
+        <!-- 4 KPIs do Dashboard de Meus Laudos -->
+        <div class="kpi-grid" style="margin-bottom:16px;">
+          <div class="kpi-card" style="border-top:3px solid #0284c7;">
+            <div class="valor" id="kpi_meus_total" style="color:#38bdf8;">0</div>
+            <div class="label">Total de Laudos</div>
+          </div>
+          <div class="kpi-card" style="border-top:3px solid #10b981;">
+            <div class="valor" id="kpi_meus_concluidos" style="color:#34d399;">0</div>
+            <div class="label">Laudos Concluídos</div>
+          </div>
+          <div class="kpi-card" style="border-top:3px solid #f59e0b;">
+            <div class="valor" id="kpi_meus_aguardando" style="color:#fbbf24;">0</div>
+            <div class="label">Aguardando / Em Aberto</div>
+          </div>
+          <div class="kpi-card" style="border-top:3px solid #8b5cf6;">
+            <div class="valor" id="kpi_meus_mes" style="color:#c084fc;">0</div>
+            <div class="label">Emitidos Este Mês</div>
+          </div>
+        </div>
+
+        <!-- Barra de Busca & Filtros Rápidos (Tipo e Urgência) -->
+        <div style="background:#0b1626; border:1px solid #1b3658; border-radius:10px; padding:12px 14px;">
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px; align-items:flex-end;">
+            <div class="field" style="margin:0;">
+              <label style="font-size:11.5px; color:#7dd3fc; margin-bottom:4px;">🔍 Buscar Laudo Técnico:</label>
+              <input type="text" id="busca_relatorios_prontos" placeholder="Buscar por TAG, OM, OP, Equipamento ou Colaborador..." oninput="filtrarRelatoriosProntos()" style="background:#060f1c; border-color:#20436d; padding:8px 10px; font-size:12.5px;">
+            </div>
+            <div class="field" style="margin:0;">
+              <label style="font-size:11.5px; color:#7dd3fc; margin-bottom:4px;">Tipo de Manutenção:</label>
+              <select id="filtro_meus_tipo" onchange="filtrarRelatoriosProntos()" style="background:#060f1c; border:1px solid #20436d; color:#fff; padding:8px 10px; border-radius:8px; font-size:12.5px;">
+                <option value="todos" selected>Todos os tipos</option>
+                <option value="Preventiva">Preventiva</option>
+                <option value="Corretiva">Corretiva</option>
+                <option value="Preditiva">Preditiva</option>
+                <option value="Inspeção de rotina">Inspeção de rotina</option>
+              </select>
+            </div>
+            <div class="field" style="margin:0;">
+              <label style="font-size:11.5px; color:#7dd3fc; margin-bottom:4px;">Grau de Urgência:</label>
+              <select id="filtro_meus_urgencia" onchange="filtrarRelatoriosProntos()" style="background:#060f1c; border:1px solid #20436d; color:#fff; padding:8px 10px; border-radius:8px; font-size:12.5px;">
+                <option value="todos" selected>Todas as urgências</option>
+                <option value="Baixa">Baixa</option>
+                <option value="Média">Média</option>
+                <option value="Alta">Alta (Risco à operação)</option>
+              </select>
+            </div>
           </div>
         </div>
       </div>
@@ -8812,8 +8950,8 @@ async function gerarDesenhoTecnicoComIA(novaVariacao = false, instrucaoEdicaoExt
     motorKeywords = 'Flux.1 Diffusion CAD engine, sharp technical linework, vector mechanical draft';
   }
 
-  const promptOficialChatGPT = `Official industrial mechanical engineering technical drawing, blueprint schematic of ${equip} (TAG: ${tag}) on A4 layout. High-detail orthographic views (Front, Top, Side) and isometric 3D CAD projection with dimensional callouts in millimeters, geometric tolerances ISO 1101, surface finish symbols Ra, cross-section hatching, centerlines, bill of materials table and professional engineering title block. Crisp white drafting lineart on dark blue CAD blueprint paper, ISO 10067 standard, razor-sharp technical drafting illustration, photorealistic CAD engineering drawing.`;
-  promptIngles = promptOficialChatGPT;
+  const promptOficialCatalogo = `Official industrial mechanical engineering technical drawing and manufacturer catalog illustration of ${equip} (TAG: ${tag}) on A4 layout. Solid pure white background, crisp fine black technical drafting lines, 3 orthographic views layout (Front, Side, Top) with dimensional callouts in millimeters, geometric tolerances ISO 1101, surface finish symbols Ra, cross-section hatching, centerlines, bill of materials table and professional title block. ISO 10067 engineering standard, publication catalog quality, realistic mechanical engineering, no blue blueprint, no dark background, pure white background. ${motorKeywords}`;
+  promptIngles = promptOficialCatalogo;
 
   let renderWidth = 1024, renderHeight = 640;
   if (aspectRatio === '4:3') { renderWidth = 1024; renderHeight = 768; }
@@ -16125,7 +16263,21 @@ function gerarSvgCadTecnico(tipo = 'filtro_cesto', params = {}) {
 
 /* ATUALIZADOR DAS 3 VISTAS TÉCNICAS NO RELATÓRIO A4 (PADRÃO MECÂNICA 4.0 IA) */
 function atualizarDesenhosTecnicosA4(customUrl) {
-  const urlDesenho = customUrl || window.desenhoTecnicoDataUrl || (typeof desenhoTecnicoDataUrl !== 'undefined' ? desenhoTecnicoDataUrl : null);
+  let urlDesenho = customUrl || window.desenhoTecnicoDataUrl || (typeof desenhoTecnicoDataUrl !== 'undefined' ? desenhoTecnicoDataUrl : null);
+
+  // Fallback imediato: se não houver desenho técnico gerado/definido, busca a foto real do Slot 1 (Antes) para nunca deixar o bloco A4 vazio
+  if (!urlDesenho) {
+    if (typeof estadoFotosRelatorio !== 'undefined' && estadoFotosRelatorio.slot1?.dataUrl) {
+      urlDesenho = estadoFotosRelatorio.slot1.dataUrl;
+    } else if (typeof estadoFotosRelatorio !== 'undefined' && typeof estadoFotosRelatorio.slot1 === 'string') {
+      urlDesenho = estadoFotosRelatorio.slot1;
+    } else {
+      const slot1Img = document.getElementById('slot_preview_slot1');
+      if (slot1Img && slot1Img.src && !slot1Img.src.endsWith('#') && !slot1Img.src.endsWith('/') && slot1Img.style.display !== 'none') {
+        urlDesenho = slot1Img.src;
+      }
+    }
+  }
 
   // Atualiza em todas as instâncias (no modelo de impressão e na prévia inline)
   document.querySelectorAll('#r4_desenho_realista_img').forEach(img => {
@@ -16917,18 +17069,33 @@ function navegarEtapaLaudo(passo, scroll = true) {
 function sincronizarMedicoesParaObsTecnicas() {
   const potencia = document.getElementById('rel_placa_potencia')?.value?.trim();
   const tensao = document.getElementById('rel_placa_tensao')?.value?.trim();
+  const corrente = document.getElementById('rel_placa_corrente')?.value?.trim();
+  const rpm = document.getElementById('rel_placa_rpm')?.value?.trim();
+  const rolamentos = document.getElementById('rel_placa_rolamentos')?.value?.trim();
+  const ip = document.getElementById('rel_placa_ip')?.value?.trim();
+
   const temp = document.getElementById('rel_medicao_temp')?.value?.trim();
   const vib = document.getElementById('rel_medicao_vibracao')?.value?.trim();
+  const torque = document.getElementById('rel_medicao_torque')?.value?.trim();
   const folga = document.getElementById('rel_medicao_folga')?.value?.trim();
+  const alinhamento = document.getElementById('rel_medicao_alinhamento')?.value?.trim();
+  const correnteMed = document.getElementById('rel_medicao_corrente')?.value?.trim();
   const pressao = document.getElementById('rel_medicao_pressao')?.value?.trim();
 
   const linhas = [];
-  if (potencia) linhas.push(`• Placa: ${potencia}`);
-  if (tensao) linhas.push(`• Especificação: ${tensao}`);
-  if (temp) linhas.push(`• Medição Térmica: ${temp}`);
-  if (vib) linhas.push(`• Medição Vibração: ${vib}`);
+  if (potencia) linhas.push(`• Potência / Placa: ${potencia}`);
+  if (tensao) linhas.push(`• Tensão Nominal: ${tensao}`);
+  if (corrente) linhas.push(`• Corrente Nominal: ${corrente}`);
+  if (rpm) linhas.push(`• Rotação: ${rpm}`);
+  if (rolamentos) linhas.push(`• Rolamentos: ${rolamentos}`);
+  if (ip) linhas.push(`• Grau de Proteção: ${ip}`);
+  if (vib) linhas.push(`• Vibração Global: ${vib}`);
+  if (temp) linhas.push(`• Temperatura: ${temp}`);
+  if (torque) linhas.push(`• Torque Aplicado: ${torque}`);
   if (folga) linhas.push(`• Folga Mecânica: ${folga}`);
-  if (pressao) linhas.push(`• Pressão Operação: ${pressao}`);
+  if (alinhamento) linhas.push(`• Alinhamento: ${alinhamento}`);
+  if (correnteMed) linhas.push(`• Corrente Medida: ${correnteMed}`);
+  if (pressao) linhas.push(`• Pressão Operacional: ${pressao}`);
 
   if (linhas.length === 0) {
     alert('Preencha ao menos um dos campos de Placa ou Medições Técnicas acima.');
@@ -16964,10 +17131,14 @@ function limparFormularioRelatorio(confirmar = false) {
     'rel_data', 'rel_num_doc', 'rel_tag', 'rel_om', 'rel_op', 'rel_equip',
     'rel_resp', 'rel_matricula', 'rel_equipe_matr', 'rel_local_texto',
     'rel_lat', 'rel_lng', 'rel_servico_realizado', 'rel_anomalia',
-    'rel_causa', 'rel_acao', 'rel_ferramentas', 'rel_observacao',
+    'rel_causa', 'rel_acao', 'rel_evidencias', 'rel_epis', 'rel_risco_residual',
+    'rel_ferramentas', 'rel_observacao',
     'rel_registro_servico', 'rel_materiais', 'rel_aplicacao', 'rel_obs_tecnicas',
-    'rel_placa_potencia', 'rel_placa_tensao', 'rel_medicao_temp', 'rel_medicao_vibracao',
-    'rel_medicao_folga', 'rel_medicao_pressao', 'rel_loto_obs',
+    'rel_placa_potencia', 'rel_placa_tensao', 'rel_placa_corrente', 'rel_placa_rpm',
+    'rel_placa_rolamentos', 'rel_placa_ip',
+    'rel_medicao_temp', 'rel_medicao_vibracao', 'rel_medicao_torque',
+    'rel_medicao_folga', 'rel_medicao_alinhamento', 'rel_medicao_corrente',
+    'rel_medicao_pressao', 'rel_loto_obs',
     'busca_ferramentas_input', 'rel_ia_desenho_prompt'
   ];
 
@@ -17185,18 +17356,77 @@ function obterQtdLaudosLocaisRapida() {
   }
 }
 
+function atualizarKpisMeusLaudos(baseLista) {
+  const lista = Array.isArray(baseLista) ? baseLista : (Array.isArray(relatoriosProntosCache) ? relatoriosProntosCache : []);
+  const total = lista.length;
+
+  const agora = new Date();
+  const mesAtual = agora.getMonth();
+  const anoAtual = agora.getFullYear();
+
+  let concluidos = 0;
+  let aguardando = 0;
+  let esteMes = 0;
+
+  lista.forEach(r => {
+    if (!r) return;
+    if (r.criado_em) {
+      const d = new Date(r.criado_em);
+      if (!isNaN(d.getTime()) && d.getMonth() === mesAtual && d.getFullYear() === anoAtual) {
+        esteMes++;
+      }
+    } else if (r.data) {
+      const p = r.data.split('-');
+      if (p.length === 3 && parseInt(p[0]) === anoAtual && (parseInt(p[1]) - 1) === mesAtual) {
+        esteMes++;
+      }
+    }
+
+    const isAlta = (r.urgencia && r.urgencia.toLowerCase().includes('alta'));
+    const isAguardando = (r.status === 'aguardando' || r.status === 'aberto' || isAlta);
+    if (isAguardando) {
+      aguardando++;
+    } else {
+      concluidos++;
+    }
+  });
+
+  const elTotal = document.getElementById('kpi_meus_total');
+  const elConcl = document.getElementById('kpi_meus_concluidos');
+  const elAguar = document.getElementById('kpi_meus_aguardando');
+  const elMes = document.getElementById('kpi_meus_mes');
+
+  if (elTotal) elTotal.innerText = total;
+  if (elConcl) elConcl.innerText = concluidos;
+  if (elAguar) elAguar.innerText = aguardando;
+  if (elMes) elMes.innerText = esteMes;
+}
+
 function filtrarRelatoriosProntos(valorDireto) {
   const b1 = document.getElementById('busca_relatorios_prontos')?.value || '';
   const b2 = document.getElementById('busca_relatorios_prontos_central')?.value || '';
   const busca = (typeof valorDireto === 'string' ? valorDireto : (b1 || b2)).toLowerCase().trim();
-  if (!busca) {
-    renderizarRelatoriosProntos(relatoriosProntosCache);
-    return;
+  const filtroTipo = document.getElementById('filtro_meus_tipo')?.value || 'todos';
+  const filtroUrg = document.getElementById('filtro_meus_urgencia')?.value || 'todos';
+
+  let filtrados = Array.isArray(relatoriosProntosCache) ? [...relatoriosProntosCache] : [];
+
+  if (busca) {
+    filtrados = filtrados.filter(r => {
+      if (!r) return false;
+      const texto = `${r.tag || ''} ${r.nomeEquip || ''} ${r.om || ''} ${r.op || ''} ${r.numDoc || ''} ${r.ass || ''} ${r.equipe || ''} ${r.localTexto || ''} ${r.servicoRealizado || ''}`.toLowerCase();
+      return texto.includes(busca);
+    });
   }
-  const filtrados = relatoriosProntosCache.filter(r => {
-    const texto = `${r.tag} ${r.nomeEquip} ${r.om} ${r.numDoc} ${r.ass} ${r.equipe} ${r.localTexto} ${r.servicoRealizado}`.toLowerCase();
-    return texto.includes(busca);
-  });
+
+  if (filtroTipo && filtroTipo !== 'todos') {
+    filtrados = filtrados.filter(r => (r && r.tipo && r.tipo.toLowerCase().includes(filtroTipo.toLowerCase())));
+  }
+
+  if (filtroUrg && filtroUrg !== 'todos') {
+    filtrados = filtrados.filter(r => (r && r.urgencia && r.urgencia.toLowerCase().includes(filtroUrg.toLowerCase())));
+  }
+
   renderizarRelatoriosProntos(filtrados);
 }
 
@@ -17206,11 +17436,13 @@ function renderizarRelatoriosProntos(lista) {
   const containers = [container1, container2].filter(Boolean);
   if (!containers.length) return;
 
+  atualizarKpisMeusLaudos(relatoriosProntosCache);
+
   if (!lista || lista.length === 0) {
     const emptyHtml = `
       <div style="color:#8190a7; text-align:center; padding:30px; background:#111c30; border-radius:10px;">
-        <p style="font-size:15px; margin-bottom:8px;">Nenhum relatório encontrado na sua lista pessoal.</p>
-        <button class="button" style="background:#0284c7;" onclick="alternarAbaRelatorio('novo'); limparFormularioRelatorio();">➕ Criar Novo Relatório Técnico</button>
+        <p style="font-size:15px; margin-bottom:8px;">Nenhum relatório encontrado nos critérios de busca.</p>
+        <button class="button" style="background:#0284c7;" onclick="alternarAbaRelatorio('novo'); limparFormularioRelatorio();">➕ Criar Novo Laudo Técnico</button>
       </div>
     `;
     containers.forEach(c => { c.innerHTML = emptyHtml; });
@@ -17218,14 +17450,20 @@ function renderizarRelatoriosProntos(lista) {
   }
 
   const cardsHtml = lista.map(r => {
+    if (!r) return '';
     const dataFormatada = r.criado_em ? new Date(r.criado_em).toLocaleDateString('pt-BR') : (r.data || '04/09/2026');
+    const isAlta = (r.urgencia && r.urgencia.toLowerCase().includes('alta'));
     return `
-      <div class="card" style="margin-bottom:14px; background:#142238; border-left:4px solid #10448c; padding:18px;">
+      <div class="card" style="margin-bottom:14px; background:#142238; border-left:4px solid #0284c7; padding:18px;">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px;">
           <div>
-            <h3 style="margin:0; font-size:17px; color:#ffffff;">
-              <span style="color:#75b7ff; font-weight:800;">${r.tag}</span> — ${r.nomeEquip || 'Filtro / Equipamento'}
-            </h3>
+            <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:4px;">
+              <h3 style="margin:0; font-size:17px; color:#ffffff;">
+                <span style="color:#38bdf8; font-weight:800;">${r.tag || 'TAG'}</span> — ${r.nomeEquip || 'Filtro / Equipamento'}
+              </h3>
+              <span style="font-size:10.5px; font-weight:700; background:rgba(2,132,199,0.25); color:#7dd3fc; border:1px solid #0284c7; padding:2px 8px; border-radius:10px;">${r.tipo || 'Preventiva'}</span>
+              <span style="font-size:10.5px; font-weight:700; background:${isAlta ? 'rgba(239,68,68,0.25)' : 'rgba(16,185,129,0.2)'}; color:${isAlta ? '#fca5a5' : '#86efac'}; border:1px solid ${isAlta ? '#ef4444' : '#10b981'}; padding:2px 8px; border-radius:10px;">${r.urgencia || 'Baixa'}</span>
+            </div>
             <div style="font-size:12.5px; color:#aebbd0; margin-top:4px;">
               <b>OM:</b> <span style="color:#ffd479;">${r.om || 'N/A'}</span> &nbsp;|&nbsp;
               <b>OP:</b> ${r.op || '10'} &nbsp;|&nbsp;
@@ -17238,14 +17476,14 @@ function renderizarRelatoriosProntos(lista) {
             </div>
           </div>
           <div style="display:flex; gap:8px; flex-wrap:wrap;">
-            <button class="button" style="background:#10448c; border-color:#2a6ab8; font-size:13px; font-weight:bold; padding:8px 14px;" onclick="visualizarRelatorioPronto('${r.id}')">👁️ Visualizar A4</button>
+            <button class="button" style="background:#10448c; border-color:#2a6ab8; font-size:13px; font-weight:bold; padding:8px 14px;" onclick="visualizarRelatorioPronto('${r.id}')">👁️ Ver A4</button>
             <button class="button" style="background:#0284c7; border-color:#38bdf8; font-size:13px; font-weight:bold; padding:8px 14px;" onclick="editarRelatorioPronto('${r.id}')">✏️ Editar</button>
-            <button class="button" style="background:#198754; border-color:#20a768; font-size:13px; font-weight:bold; padding:8px 14px;" onclick="imprimirRelatorioPronto('${r.id}')">🖨️ Imprimir / PDF</button>
+            <button class="button" style="background:#198754; border-color:#20a768; font-size:13px; font-weight:bold; padding:8px 14px;" onclick="imprimirRelatorioPronto('${r.id}')">🖨️ PDF / Imprimir</button>
             <button class="button" style="background:#842029; border-color:#b02a37; font-size:13px; font-weight:bold; padding:8px 14px;" title="Excluir relatório da lista" onclick="excluirRelatorioPronto('${r.id}')">🗑️ Excluir</button>
           </div>
         </div>
 
-        <div style="font-size:12.5px; color:#e2e8f0; line-height:1.45; background:#0b1424; padding:10px 12px; border-radius:6px; margin-top:10px; border-left:3px solid #205bb0;">
+        <div style="font-size:12.5px; color:#e2e8f0; line-height:1.45; background:#0b1424; padding:10px 12px; border-radius:6px; margin-top:10px; border-left:3px solid #0284c7;">
           <b>Serviço Realizado:</b> ${r.servicoRealizado || 'Limpeza e manutenção técnica realizada.'}
         </div>
       </div>
@@ -17635,6 +17873,13 @@ function excluirRelatorioVisualizandoAtual() {
 }
 
 /* ===================== SALVAR INTERVENÇÃO (LOCAL & NUVEM RESILIENTE) ===================== */
+async function salvarIntervencaoEMeusalvar() {
+  await salvarIntervencao();
+  if (typeof alternarAbaRelatorio === 'function') {
+    alternarAbaRelatorio('prontos');
+  }
+}
+
 async function salvarIntervencao() {
   const el = document.getElementById('rel_resultado');
   if (el) {
@@ -17675,11 +17920,21 @@ async function salvarIntervencao() {
     const anomalia = document.getElementById('rel_anomalia')?.value?.trim() || servicoRealizado || 'Manutenção técnica realizada';
     const causa = document.getElementById('rel_causa')?.value?.trim() || '';
     const acao = document.getElementById('rel_acao')?.value?.trim() || '';
+    const evidencias = document.getElementById('rel_evidencias')?.value?.trim() || '';
+    const epis = document.getElementById('rel_epis')?.value?.trim() || '';
+    const riscoResidual = document.getElementById('rel_risco_residual')?.value?.trim() || '';
     const placaPotencia = document.getElementById('rel_placa_potencia')?.value?.trim() || '';
     const placaTensao = document.getElementById('rel_placa_tensao')?.value?.trim() || '';
+    const placaCorrente = document.getElementById('rel_placa_corrente')?.value?.trim() || '';
+    const placaRpm = document.getElementById('rel_placa_rpm')?.value?.trim() || '';
+    const placaRolamentos = document.getElementById('rel_placa_rolamentos')?.value?.trim() || '';
+    const placaIp = document.getElementById('rel_placa_ip')?.value?.trim() || '';
     const medicaoTemp = document.getElementById('rel_medicao_temp')?.value?.trim() || '';
     const medicaoVibracao = document.getElementById('rel_medicao_vibracao')?.value?.trim() || '';
+    const medicaoTorque = document.getElementById('rel_medicao_torque')?.value?.trim() || '';
     const medicaoFolga = document.getElementById('rel_medicao_folga')?.value?.trim() || '';
+    const medicaoAlinhamento = document.getElementById('rel_medicao_alinhamento')?.value?.trim() || '';
+    const medicaoCorrente = document.getElementById('rel_medicao_corrente')?.value?.trim() || '';
     const medicaoPressao = document.getElementById('rel_medicao_pressao')?.value?.trim() || '';
     const lotoStatus = document.getElementById('rel_loto_status')?.value || 'bloqueado';
     const lotoObs = document.getElementById('rel_loto_obs')?.value?.trim() || '';
@@ -17750,8 +18005,10 @@ async function salvarIntervencao() {
       servicoRealizado, ferramentas, observacao, registroServico,
       aplicacao, obsTecnicas, materiais, matricula,
       tipo, urgencia, anomalia, causa, acao,
-      placaPotencia, placaTensao, medicaoTemp, medicaoVibracao,
-      medicaoFolga, medicaoPressao, lotoStatus, lotoObs,
+      evidencias, epis, riscoResidual,
+      placaPotencia, placaTensao, placaCorrente, placaRpm, placaRolamentos, placaIp,
+      medicaoTemp, medicaoVibracao, medicaoTorque, medicaoFolga, medicaoAlinhamento, medicaoCorrente, medicaoPressao,
+      lotoStatus, lotoObs,
       fotoAntesUrl, fotoDepoisUrl, foto3DUrl,
       fotoSlot3Url, fotoSlot5Url,
       desenhoTecnicoUrl: desenhoFinal,
@@ -18015,7 +18272,11 @@ function abrirModulo(id) {
   // Redirecionamentos de compatibilidade
   if (id === 'dashboard') id = 'relatorio';
   if (id === 'equipamentos') id = 'intervencoes';
-  if (id === 'relatorios') id = 'relatorios-prontos';
+  let abaAlvoAposAbrir = null;
+  if (id === 'relatorios' || id === 'relatorios-prontos') {
+    id = 'relatorio';
+    abaAlvoAposAbrir = 'prontos';
+  }
 
   const painel = document.getElementById('painel-' + id);
   if (painel) {
@@ -18034,17 +18295,17 @@ function abrirModulo(id) {
     }
 
     if (id === 'relatorio') {
-      alternarAbaRelatorio('novo');
-      if (!relatorioVisualizandoAtualId) {
-        limparFormularioRelatorio();
+      if (abaAlvoAposAbrir) {
+        alternarAbaRelatorio(abaAlvoAposAbrir);
+      } else {
+        alternarAbaRelatorio('novo');
+        if (!relatorioVisualizandoAtualId) {
+          limparFormularioRelatorio();
+        }
       }
       setTimeout(() => {
         try { iniciarSignaturePad(); } catch(e) {}
       }, 100);
-    }
-
-    if (id === 'relatorios-prontos') {
-      carregarRelatoriosProntos();
     }
 
     if (id === 'admin') {
