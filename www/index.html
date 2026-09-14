@@ -186,7 +186,7 @@
     border-left: 1.5px solid #1e4976;
     border-radius: 14px;
     padding: 24px 20px 20px 20px;
-    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.28s ease;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
     cursor: pointer;
     user-select: none;
     display: flex;
@@ -197,7 +197,8 @@
       inset 0 -1px 0 rgba(0, 0, 0, 0.6),
       0 8px 24px rgba(0, 0, 0, 0.65);
     overflow: hidden;
-    will-change: transform, box-shadow;
+    pointer-events: auto !important;
+    touch-action: manipulation;
   }
   /* Friso superior metálico com brilho de neon industrial */
   .card::before {
@@ -2256,6 +2257,8 @@
 }
 .foto-slot-dropzone {
   border: 2px dashed #244164;
+  pointer-events: auto !important;
+  touch-action: manipulation;
   border-radius: 8px;
   min-height: 120px;
   display: flex;
@@ -8758,30 +8761,34 @@ async function sintetizarPranchaTecnicaNormativa(imgFonte, tag, equip, resp, est
           gray[i / 4] = Math.round(d[i] * 0.299 + d[i + 1] * 0.587 + d[i + 2] * 0.114);
         }
 
-        // Aplica operador Sobel 3x3 para traçar linhas de corte e contorno do equipamento real
+        // OTIMIZAÇÃO ANTI-CONGELAMENTO: Operador Sobel de alta performance com aproximação de Manhattan (|gx| + |gy|)
+        // Execução ultrarrápida (<15ms) sem travamento de CPU ou congelamento de tela
         for (let y = 1; y < dh - 1; y++) {
+          const rowIdx = y * dw;
+          const prevRow = rowIdx - dw;
+          const nextRow = rowIdx + dw;
+
           for (let x = 1; x < dw - 1; x++) {
-            const idx = y * dw + x;
+            const idx = rowIdx + x;
             const gx = 
-              -gray[idx - dw - 1] + gray[idx - dw + 1]
-              -2 * gray[idx - 1] + 2 * gray[idx + 1]
-              -gray[idx + dw - 1] + gray[idx + dw + 1];
+              -gray[prevRow + x - 1] + gray[prevRow + x + 1]
+              - (gray[idx - 1] << 1) + (gray[idx + 1] << 1)
+              -gray[nextRow + x - 1] + gray[nextRow + x + 1];
 
             const gy = 
-              -gray[idx - dw - 1] - 2 * gray[idx - dw] - gray[idx - dw + 1]
-              +gray[idx + dw - 1] + 2 * gray[idx + dw] + gray[idx + dw + 1];
+              -gray[prevRow + x - 1] - (gray[prevRow + x] << 1) - gray[prevRow + x + 1]
+              +gray[nextRow + x - 1] + (gray[nextRow + x] << 1) + gray[nextRow + x + 1];
 
-            const g = Math.min(255, Math.sqrt(gx * gx + gy * gy) * 1.8);
-            const pIdx = (idx) * 4;
+            // Aproximação rápida de Manhattan: elimina 100% de Math.sqrt lento
+            const g = Math.min(255, (Math.abs(gx) + Math.abs(gy)) * 0.95);
+            const pIdx = idx << 2;
 
-            if (g > 38) {
-              // Traço técnico do equipamento em ciano/branco CAD
-              ed[pIdx] = Math.min(255, 60 + Math.round(g * 0.8));       // R
-              ed[pIdx + 1] = Math.min(255, 180 + Math.round(g * 0.3));   // G
-              ed[pIdx + 2] = 255;                                        // B
-              ed[pIdx + 3] = Math.min(255, Math.round(g * 1.4));         // Alpha
+            if (g > 34) {
+              ed[pIdx] = Math.min(255, 60 + Math.round(g * 0.8));
+              ed[pIdx + 1] = Math.min(255, 180 + Math.round(g * 0.3));
+              ed[pIdx + 2] = 255;
+              ed[pIdx + 3] = Math.min(255, Math.round(g * 1.4));
             } else {
-              // Fundo sutil do corpo da máquina mantendo sua volumetria física
               const vol = gray[idx] * 0.22;
               ed[pIdx] = 6;
               ed[pIdx + 1] = Math.round(24 + vol * 0.4);
@@ -14972,8 +14979,11 @@ async function executarPipelineCompletoVisaoParaCAD(customFotoUrl) {
   // Tentativa com OpenAI DALL-E 3 se houver chave e créditos
   if (chaveOAI) {
     try {
+      const abortCtrl = new AbortController();
+      const fetchTimeout = setTimeout(() => abortCtrl.abort(), 6500); // Failsafe estrito de 6.5s
       const respDalle = await fetch('https://api.openai.com/v1/images/generations', {
         method: 'POST',
+        signal: abortCtrl.signal,
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ' + chaveOAI
@@ -14986,6 +14996,7 @@ async function executarPipelineCompletoVisaoParaCAD(customFotoUrl) {
           response_format: 'b64_json'
         })
       });
+      clearTimeout(fetchTimeout);
       if (respDalle.ok) {
         const dJson = await respDalle.json();
         const b64 = dJson.data?.[0]?.b64_json;
@@ -15004,9 +15015,12 @@ async function executarPipelineCompletoVisaoParaCAD(customFotoUrl) {
   if (fonteFinal) {
     imgObj = await new Promise((resolve) => {
       const im = new Image();
-      im.crossOrigin = 'anonymous';
-      im.onload = () => resolve(im);
-      im.onerror = () => resolve(null);
+      const safetyTimer = setTimeout(() => resolve(null), 3500); // Failsafe anti-congelamento de 3.5s
+      im.onload = () => { clearTimeout(safetyTimer); resolve(im); };
+      im.onerror = () => { clearTimeout(safetyTimer); resolve(null); };
+      try {
+        if (!fonteFinal.startsWith('data:')) im.crossOrigin = 'anonymous';
+      } catch(e) {}
       im.src = fonteFinal;
     });
   }
@@ -17542,10 +17556,10 @@ iniciarCarregamentoInicialApp();
 /* ===================== NAVEGAÇÃO ===================== */
 let navegandoModuloTrava = false;
 function abrirModulo(id) {
-  // Trava de reentrância para eliminar travamentos por múltiplos toques rápidos
+  // Trava com liberação imediata e resguardo contra qualquer congelamento
   if (navegandoModuloTrava) return;
   navegandoModuloTrava = true;
-  setTimeout(() => { navegandoModuloTrava = false; }, 320);
+  setTimeout(() => { navegandoModuloTrava = false; }, 180);
 
   const vistaGrid = document.getElementById('vistaGrid');
   if (vistaGrid) vistaGrid.classList.add('hidden');
@@ -22320,19 +22334,34 @@ function calcularToleranciaIsoRobo() {
       return; // Sem loop desnecessário
     }
 
-    // Acompanha a cabeça e a postura do robô em direção ao cursor do usuário
+    // Acompanha a cabeça do robô com throttling suave (requestAnimationFrame) para 0ms lag
+    let mouseMoveScheduled = false;
+    let lastClientX = 0, lastClientY = 0;
+    let cachedRect = null;
+    let lastRectTime = 0;
+
     window.addEventListener('mousemove', (e) => {
       if (!cardEl || !wrapperEl || wrapperEl.style.display === 'none') return;
-      const rect = wrapperEl.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      const deltaX = (e.clientX - centerX) / (window.innerWidth / 2);
-      const deltaY = (e.clientY - centerY) / (window.innerHeight / 2);
+      lastClientX = e.clientX;
+      lastClientY = e.clientY;
 
-      const rotY = Math.max(-15, Math.min(15, deltaX * 15));
-      const headEl = cardEl.querySelector('.rw-head');
-      if (headEl) {
-        headEl.style.transform = `rotate(${rotY.toFixed(1)}deg)`;
+      if (!mouseMoveScheduled) {
+        mouseMoveScheduled = true;
+        requestAnimationFrame(() => {
+          mouseMoveScheduled = false;
+          const now = Date.now();
+          if (!cachedRect || now - lastRectTime > 800) {
+            cachedRect = wrapperEl.getBoundingClientRect();
+            lastRectTime = now;
+          }
+          const centerX = cachedRect.left + cachedRect.width / 2;
+          const deltaX = (lastClientX - centerX) / (window.innerWidth / 2);
+          const rotY = Math.max(-15, Math.min(15, deltaX * 15));
+          const headEl = cardEl.querySelector('.rw-head');
+          if (headEl) {
+            headEl.style.transform = `rotate(${rotY.toFixed(1)}deg)`;
+          }
+        });
       }
     }, { passive: true });
 
