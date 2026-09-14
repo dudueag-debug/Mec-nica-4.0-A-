@@ -14751,8 +14751,6 @@ function atualizarOpcaoDesenhoTecnico() {
 /* MOTOR NANO BANANA DA GOOGLE: GERAÇÃO AUTOMÁTICA DE DESENHO TÉCNICO POR FOTO */
 /* Anexa automaticamente o desenho gerado em prancha ABNT ao Relatório A4     */
 /* ========================================================================== */
-async 
-/* ========================================================================== */
 /* PIPELINE MESTRE: FOTO ➔ VISÃO ➔ ANÁLISE ➔ PROMPT ➔ IMAGEM ➔ CAD ➔ RELATÓRIO */
 /* ========================================================================== */
 
@@ -17554,12 +17552,14 @@ function voltarListaEquip() {
 iniciarCarregamentoInicialApp();
 
 /* ===================== NAVEGAÇÃO ===================== */
-let navegandoModuloTrava = false;
+var navegandoModuloTrava = false;
+window.navegandoModuloTrava = false;
+
 function abrirModulo(id) {
-  // Trava com liberação imediata e resguardo contra qualquer congelamento
-  if (navegandoModuloTrava) return;
-  navegandoModuloTrava = true;
-  setTimeout(() => { navegandoModuloTrava = false; }, 180);
+  // Failsafe de reentrância com liberação imediata (120ms)
+  if (window.navegandoModuloTrava) return;
+  window.navegandoModuloTrava = true;
+  setTimeout(() => { window.navegandoModuloTrava = false; navegandoModuloTrava = false; }, 120);
 
   const vistaGrid = document.getElementById('vistaGrid');
   if (vistaGrid) vistaGrid.classList.add('hidden');
