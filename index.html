@@ -5370,6 +5370,33 @@
         <div class="field"><label>Matrícula do Responsável</label><input type="text" id="rel_matricula" placeholder="Matrícula do responsável"></div>
         <div class="field"><label>Equipe / Turno</label><input type="text" id="rel_equipe_matr" placeholder="Equipe / turno / participantes"></div>
       </div>
+
+      <!-- Disciplinas desta Intervenção -->
+      <div class="field-row" style="margin-top:6px; margin-bottom:10px;">
+        <div class="field" style="min-width:100%; background:linear-gradient(135deg, rgba(15,23,42,0.85) 0%, rgba(30,41,59,0.7) 100%); border:1px solid #1e3a5f; border-left:3px solid #38bdf8; border-radius:8px; padding:10px 14px;">
+          <label style="font-weight:700; color:#38bdf8; margin-bottom:6px; display:flex; align-items:center; gap:6px;">
+            <span>🛠️</span> Disciplinas desta intervenção
+          </label>
+          <div style="display:flex; flex-wrap:wrap; gap:14px;">
+            <label style="cursor:pointer; display:inline-flex; align-items:center; gap:6px; margin:0; color:#e2e8f0; font-size:12.5px;">
+              <input type="checkbox" id="rel_disc_mecanica" value="mecanica" checked> Mecânica
+            </label>
+            <label style="cursor:pointer; display:inline-flex; align-items:center; gap:6px; margin:0; color:#e2e8f0; font-size:12.5px;">
+              <input type="checkbox" id="rel_disc_lubrificacao" value="lubrificacao"> Lubrificação
+            </label>
+            <label style="cursor:pointer; display:inline-flex; align-items:center; gap:6px; margin:0; color:#e2e8f0; font-size:12.5px;">
+              <input type="checkbox" id="rel_disc_eletrica" value="eletrica"> Elétrica
+            </label>
+            <label style="cursor:pointer; display:inline-flex; align-items:center; gap:6px; margin:0; color:#e2e8f0; font-size:12.5px;">
+              <input type="checkbox" id="rel_disc_inspecao" value="inspecao"> Inspeção
+            </label>
+            <label style="cursor:pointer; display:inline-flex; align-items:center; gap:6px; margin:0; color:#e2e8f0; font-size:12.5px;">
+              <input type="checkbox" id="rel_disc_preditiva" value="preditiva"> Preditiva
+            </label>
+          </div>
+        </div>
+      </div>
+
       <div class="field-row">
         <div class="field" style="flex:1.5;">
           <label>Local da instalação</label>
@@ -5448,6 +5475,14 @@
       <p style="font-size:12px; color:#8190a7; margin-top:-4px; margin-bottom:12px;">Classificação da intervenção, causa raiz, anomalia e bloqueio de energias perigosas (LOTO)</p>
 
       <div class="field-row">
+        <div class="field">
+          <label>Criticidade</label>
+          <select id="rel_criticidade">
+            <option value="A">Grau A (Crítica)</option>
+            <option value="B" selected>Grau B (Média)</option>
+            <option value="C">Grau C (Baixa)</option>
+          </select>
+        </div>
         <div class="field">
           <label>Urgência</label>
           <select id="rel_urgencia">
@@ -6075,6 +6110,29 @@
                 <label>Ou data da próxima troca</label>
                 <input type="date" id="rel_lub_prox_data" onchange="sincronizarDataParaDias('rel_lub_prox_data', 'rel_lub_prox_dias')">
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Intervenção Elétrica -->
+      <div class="field-row" style="margin-top:10px; margin-bottom:12px;">
+        <div class="field" style="min-width:100%; background:linear-gradient(135deg, rgba(15,23,42,0.85) 0%, rgba(30,41,59,0.7) 100%); border:1px solid #1e3a5f; border-left:3px solid #38bdf8; border-radius:8px; padding:12px 14px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:6px;">
+            <label style="font-weight:700; color:#38bdf8; margin:0; display:flex; align-items:center; gap:6px;">
+              <span>⚡</span> Envolveu intervenção elétrica?
+            </label>
+            <select id="rel_elet_sim" style="max-width:140px; font-weight:700;" onchange="alternarBlocoEletrica(this.value)">
+              <option value="nao">Não</option>
+              <option value="sim">Sim</option>
+            </select>
+          </div>
+
+          <!-- mostrar o bloco abaixo só se rel_elet_sim === 'sim' -->
+          <div id="rel_elet_bloco" style="display:none; margin-top:10px; padding-top:10px; border-top:1px dashed #224263;">
+            <div class="field">
+              <label>Resumo elétrico (se sim)</label>
+              <input type="text" id="rel_elet_resumo" placeholder="Ex: Reaperto bornes, medição de isolamento">
             </div>
           </div>
         </div>
@@ -17198,8 +17256,16 @@ function sincronizarMedicoesParaObsTecnicas() {
 /* ===================== CONTROLE DE LUBRIFICAÇÃO & PRÓXIMA INSPEÇÃO ===================== */
 function alternarBlocoLubrificacao(valor) {
   const bloco = document.getElementById('rel_lub_bloco');
-  if (!bloco) return;
-  bloco.style.display = valor === 'sim' ? 'block' : 'none';
+  if (bloco) bloco.style.display = valor === 'sim' ? 'block' : 'none';
+  const chkLub = document.getElementById('rel_disc_lubrificacao');
+  if (chkLub && valor === 'sim') chkLub.checked = true;
+}
+
+function alternarBlocoEletrica(valor) {
+  const bloco = document.getElementById('rel_elet_bloco');
+  if (bloco) bloco.style.display = valor === 'sim' ? 'block' : 'none';
+  const chkElet = document.getElementById('rel_disc_eletrica');
+  if (chkElet && valor === 'sim') chkElet.checked = true;
 }
 
 function sincronizarDiasParaData(diasInputId, dataInputId) {
@@ -17255,6 +17321,7 @@ function limparFormularioRelatorio(confirmar = false) {
     'rel_medicao_pressao', 'rel_loto_obs',
     'rel_prox_insp_dias', 'rel_prox_insp_data',
     'rel_lub_spec', 'rel_lub_qtd', 'rel_lub_prox_dias', 'rel_lub_prox_data',
+    'rel_elet_resumo',
     'busca_ferramentas_input', 'rel_ia_desenho_prompt'
   ];
 
@@ -17265,6 +17332,8 @@ function limparFormularioRelatorio(confirmar = false) {
 
   const selTipo = document.getElementById('rel_tipo');
   if (selTipo) selTipo.selectedIndex = 0;
+  const selCrit = document.getElementById('rel_criticidade');
+  if (selCrit) selCrit.value = 'B';
   const selUrg = document.getElementById('rel_urgencia');
   if (selUrg) selUrg.selectedIndex = 0;
   const selLoto = document.getElementById('rel_loto_status');
@@ -17276,6 +17345,16 @@ function limparFormularioRelatorio(confirmar = false) {
   const selLubTipo = document.getElementById('rel_lub_tipo');
   if (selLubTipo) selLubTipo.selectedIndex = 0;
   alternarBlocoLubrificacao('nao');
+
+  const selEletSim = document.getElementById('rel_elet_sim');
+  if (selEletSim) selEletSim.value = 'nao';
+  alternarBlocoEletrica('nao');
+
+  if (document.getElementById('rel_disc_mecanica')) document.getElementById('rel_disc_mecanica').checked = true;
+  if (document.getElementById('rel_disc_lubrificacao')) document.getElementById('rel_disc_lubrificacao').checked = false;
+  if (document.getElementById('rel_disc_eletrica')) document.getElementById('rel_disc_eletrica').checked = false;
+  if (document.getElementById('rel_disc_inspecao')) document.getElementById('rel_disc_inspecao').checked = false;
+  if (document.getElementById('rel_disc_preditiva')) document.getElementById('rel_disc_preditiva').checked = false;
 
   if (document.getElementById('loc_status')) document.getElementById('loc_status').innerText = '';
   if (typeof navegarEtapaLaudo === 'function') navegarEtapaLaudo(1, false);
@@ -17576,6 +17655,11 @@ function renderizarRelatoriosProntos(lista) {
     if (!r) return '';
     const dataFormatada = r.criado_em ? new Date(r.criado_em).toLocaleDateString('pt-BR') : (r.data || '04/09/2026');
     const isAlta = (r.urgencia && r.urgencia.toLowerCase().includes('alta'));
+    const crit = r.criticidade || 'B';
+    const critBg = crit === 'A' ? 'rgba(239,68,68,0.25)' : (crit === 'C' ? 'rgba(16,185,129,0.2)' : 'rgba(245,158,11,0.25)');
+    const critColor = crit === 'A' ? '#fca5a5' : (crit === 'C' ? '#86efac' : '#fcd34d');
+    const critBorder = crit === 'A' ? '#ef4444' : (crit === 'C' ? '#10b981' : '#f59e0b');
+    const teveElet = (r.eletrica?.sim === 'sim' || r.eletSim === 'sim');
     return `
       <div class="card" style="margin-bottom:14px; background:#142238; border-left:4px solid #0284c7; padding:18px;">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px;">
@@ -17586,6 +17670,8 @@ function renderizarRelatoriosProntos(lista) {
               </h3>
               <span style="font-size:10.5px; font-weight:700; background:rgba(2,132,199,0.25); color:#7dd3fc; border:1px solid #0284c7; padding:2px 8px; border-radius:10px;">${r.tipo || 'Preventiva'}</span>
               <span style="font-size:10.5px; font-weight:700; background:${isAlta ? 'rgba(239,68,68,0.25)' : 'rgba(16,185,129,0.2)'}; color:${isAlta ? '#fca5a5' : '#86efac'}; border:1px solid ${isAlta ? '#ef4444' : '#10b981'}; padding:2px 8px; border-radius:10px;">${r.urgencia || 'Baixa'}</span>
+              <span style="font-size:10.5px; font-weight:700; background:${critBg}; color:${critColor}; border:1px solid ${critBorder}; padding:2px 8px; border-radius:10px;">Grau ${crit}</span>
+              ${teveElet ? '<span style="font-size:10.5px; font-weight:700; background:rgba(234,179,8,0.25); color:#fde047; border:1px solid #eab308; padding:2px 8px; border-radius:10px;">⚡ Elétrica</span>' : ''}
             </div>
             <div style="font-size:12.5px; color:#aebbd0; margin-top:4px;">
               <b>OM:</b> <span style="color:#ffd479;">${r.om || 'N/A'}</span> &nbsp;|&nbsp;
@@ -17804,14 +17890,20 @@ async function visualizarRelatorioPronto(id) {
   // 9. Materiais Utilizados & Lubrificação
   const matTexto = (r.materiais || '').trim() || '• Junta grafitada DN 80\n• Desengraxante técnico\n• Solução antioxidante';
   const linhasM = matTexto.split('\n').filter(l => l.trim().length > 0);
-  if (r.lubSim === 'sim' && (r.lubSpec || r.lubQtd)) {
-    let lubLinha = `Lubrificação (${r.lubTipo === 'graxa' ? 'Graxa' : 'Óleo'}): ${r.lubSpec || 'Especial'}`;
-    if (r.lubQtd) lubLinha += ` • Qtd: ${r.lubQtd}`;
-    if (r.lubProxData) {
-      const p = r.lubProxData.split('-');
+  const vLubSim = r.lub ? r.lub.sim : r.lubSim;
+  const vLubTipo = r.lub ? r.lub.tipo : r.lubTipo;
+  const vLubSpec = r.lub ? r.lub.spec : r.lubSpec;
+  const vLubQtd = r.lub ? r.lub.qtd : r.lubQtd;
+  const vLubProxDias = r.lub ? r.lub.prox_dias : r.lubProxDias;
+  const vLubProxData = r.lub ? r.lub.prox_data : r.lubProxData;
+  if (vLubSim === 'sim' && (vLubSpec || vLubQtd)) {
+    let lubLinha = `Lubrificação (${vLubTipo === 'graxa' ? 'Graxa' : 'Óleo'}): ${vLubSpec || 'Especial'}`;
+    if (vLubQtd) lubLinha += ` • Qtd: ${vLubQtd}`;
+    if (vLubProxData) {
+      const p = vLubProxData.split('-');
       if (p.length === 3) lubLinha += ` • Próx. troca: ${p[2]}/${p[1]}/${p[0]}`;
-    } else if (r.lubProxDias) {
-      lubLinha += ` • Próx. troca: ${r.lubProxDias} dias`;
+    } else if (vLubProxDias) {
+      lubLinha += ` • Próx. troca: ${vLubProxDias} dias`;
     }
     linhasM.push(lubLinha);
   }
@@ -17823,7 +17915,10 @@ async function visualizarRelatorioPronto(id) {
   // 10. Observações & Próxima Inspeção
   const obsTexto = (r.observacao || '').trim() || '• Equipamento operando com fluxo nominal e estabilidade térmica.\n• Manutenção realizada em estrita conformidade com as normas de segurança.';
   const linhasO = obsTexto.split('\n').filter(l => l.trim().length > 0);
-  if (r.proxInspDias || r.proxInspData || r.proxInspTipo) {
+  const vProxInspDias = r.prox_insp_dias || r.proxInspDias;
+  const vProxInspData = r.prox_insp_data || r.proxInspData;
+  const vProxInspTipo = r.prox_insp_tipo || r.proxInspTipo;
+  if (vProxInspDias || vProxInspData || vProxInspTipo) {
     const tipoMap = {
       inspecao_visual: 'Inspeção visual',
       preditiva: 'Preditiva',
@@ -17831,17 +17926,43 @@ async function visualizarRelatorioPronto(id) {
       lubrificacao: 'Lubrificação',
       eletrica: 'Elétrica'
     };
-    const tNome = tipoMap[r.proxInspTipo] || (r.proxInspTipo ? r.proxInspTipo : 'Intervenção técnica');
+    const tNome = tipoMap[vProxInspTipo] || (vProxInspTipo ? vProxInspTipo : 'Intervenção técnica');
     let proxLinha = `Próxima intervenção: ${tNome}`;
-    if (r.proxInspData) {
-      const p = r.proxInspData.split('-');
+    if (vProxInspData) {
+      const p = vProxInspData.split('-');
       if (p.length === 3) proxLinha += ` em ${p[2]}/${p[1]}/${p[0]}`;
     }
-    if (r.proxInspDias) {
-      proxLinha += ` (${r.proxInspDias} dias)`;
+    if (vProxInspDias) {
+      proxLinha += ` (${vProxInspDias} dias)`;
     }
     linhasO.push(proxLinha);
   }
+
+  // Intervenção Elétrica
+  if ((r.eletrica?.sim === 'sim' || r.eletSim === 'sim') && (r.eletrica?.resumo || r.eletResumo)) {
+    linhasO.push(`Intervenção Elétrica: ${r.eletrica?.resumo || r.eletResumo}`);
+  }
+
+  // Disciplinas Envolvidas
+  const discs = [];
+  const dM = r.disciplinas ? r.disciplinas.mecanica : (r.discMecanica !== undefined ? r.discMecanica : true);
+  const dL = r.disciplinas ? r.disciplinas.lubrificacao : !!r.discLubrificacao;
+  const dE = r.disciplinas ? r.disciplinas.eletrica : !!r.discEletrica;
+  const dI = r.disciplinas ? r.disciplinas.inspecao : !!r.discInspecao;
+  const dP = r.disciplinas ? r.disciplinas.preditiva : !!r.discPreditiva;
+  if (dM) discs.push('Mecânica');
+  if (dL) discs.push('Lubrificação');
+  if (dE) discs.push('Elétrica');
+  if (dI) discs.push('Inspeção');
+  if (dP) discs.push('Preditiva');
+  if (discs.length > 0) {
+    linhasO.push(`Disciplinas: ${discs.join(' • ')}`);
+  }
+
+  if (r.criticidade) {
+    linhasO.push(`Criticidade Operacional: Grau ${r.criticidade}`);
+  }
+
   const obsContainer = document.getElementById('r4_observacoes_linhas');
   if (obsContainer) {
     obsContainer.innerHTML = '<ul>' + linhasO.map(o => `<li>${o.replace(/^[•\-\*]\s*/, '')}</li>`).join('') + '</ul>';
@@ -17929,16 +18050,43 @@ async function editarRelatorioPronto(id) {
   if (document.getElementById('rel_medicao_pressao')) document.getElementById('rel_medicao_pressao').value = r.medicaoPressao || '';
   if (document.getElementById('rel_loto_obs')) document.getElementById('rel_loto_obs').value = r.lotoObs || '';
   if (document.getElementById('rel_loto_status') && r.lotoStatus) document.getElementById('rel_loto_status').value = r.lotoStatus;
-  if (document.getElementById('rel_prox_insp_dias')) document.getElementById('rel_prox_insp_dias').value = r.proxInspDias || '';
-  if (document.getElementById('rel_prox_insp_data')) document.getElementById('rel_prox_insp_data').value = r.proxInspData || '';
-  if (document.getElementById('rel_prox_insp_tipo')) document.getElementById('rel_prox_insp_tipo').value = r.proxInspTipo || '';
-  if (document.getElementById('rel_lub_sim')) document.getElementById('rel_lub_sim').value = r.lubSim || 'nao';
-  if (document.getElementById('rel_lub_tipo')) document.getElementById('rel_lub_tipo').value = r.lubTipo || 'oleo';
-  if (document.getElementById('rel_lub_spec')) document.getElementById('rel_lub_spec').value = r.lubSpec || '';
-  if (document.getElementById('rel_lub_qtd')) document.getElementById('rel_lub_qtd').value = r.lubQtd || '';
-  if (document.getElementById('rel_lub_prox_dias')) document.getElementById('rel_lub_prox_dias').value = r.lubProxDias || '';
-  if (document.getElementById('rel_lub_prox_data')) document.getElementById('rel_lub_prox_data').value = r.lubProxData || '';
-  if (typeof alternarBlocoLubrificacao === 'function') alternarBlocoLubrificacao(r.lubSim || 'nao');
+  const pDias = r.prox_insp_dias || r.proxInspDias || '';
+  const pData = r.prox_insp_data || r.proxInspData || '';
+  const pTipo = r.prox_insp_tipo || r.proxInspTipo || '';
+  if (document.getElementById('rel_prox_insp_dias')) document.getElementById('rel_prox_insp_dias').value = pDias;
+  if (document.getElementById('rel_prox_insp_data')) document.getElementById('rel_prox_insp_data').value = pData;
+  if (document.getElementById('rel_prox_insp_tipo')) document.getElementById('rel_prox_insp_tipo').value = pTipo;
+  const lSim = r.lub ? (r.lub.sim || 'nao') : (r.lubSim || 'nao');
+  const lTipo = r.lub ? (r.lub.tipo || 'oleo') : (r.lubTipo || 'oleo');
+  const lSpec = r.lub ? (r.lub.spec || '') : (r.lubSpec || '');
+  const lQtd = r.lub ? (r.lub.qtd || '') : (r.lubQtd || '');
+  const lProxDias = r.lub ? (r.lub.prox_dias || '') : (r.lubProxDias || '');
+  const lProxData = r.lub ? (r.lub.prox_data || '') : (r.lubProxData || '');
+  if (document.getElementById('rel_lub_sim')) document.getElementById('rel_lub_sim').value = lSim;
+  if (document.getElementById('rel_lub_tipo')) document.getElementById('rel_lub_tipo').value = lTipo;
+  if (document.getElementById('rel_lub_spec')) document.getElementById('rel_lub_spec').value = lSpec;
+  if (document.getElementById('rel_lub_qtd')) document.getElementById('rel_lub_qtd').value = lQtd;
+  if (document.getElementById('rel_lub_prox_dias')) document.getElementById('rel_lub_prox_dias').value = lProxDias;
+  if (document.getElementById('rel_lub_prox_data')) document.getElementById('rel_lub_prox_data').value = lProxData;
+  if (typeof alternarBlocoLubrificacao === 'function') alternarBlocoLubrificacao(lSim);
+
+  if (document.getElementById('rel_criticidade')) document.getElementById('rel_criticidade').value = r.criticidade || 'B';
+  const eletVal = r.eletrica?.sim || r.eletSim || 'nao';
+  if (document.getElementById('rel_elet_sim')) document.getElementById('rel_elet_sim').value = eletVal;
+  if (document.getElementById('rel_elet_resumo')) document.getElementById('rel_elet_resumo').value = r.eletrica?.resumo || r.eletResumo || '';
+  if (typeof alternarBlocoEletrica === 'function') alternarBlocoEletrica(eletVal);
+
+  const dM = r.disciplinas ? r.disciplinas.mecanica : (r.discMecanica !== undefined ? r.discMecanica : true);
+  const dL = r.disciplinas ? r.disciplinas.lubrificacao : !!r.discLubrificacao;
+  const dE = r.disciplinas ? r.disciplinas.eletrica : !!r.discEletrica;
+  const dI = r.disciplinas ? r.disciplinas.inspecao : !!r.discInspecao;
+  const dP = r.disciplinas ? r.disciplinas.preditiva : !!r.discPreditiva;
+  if (document.getElementById('rel_disc_mecanica')) document.getElementById('rel_disc_mecanica').checked = !!dM;
+  if (document.getElementById('rel_disc_lubrificacao')) document.getElementById('rel_disc_lubrificacao').checked = !!dL;
+  if (document.getElementById('rel_disc_eletrica')) document.getElementById('rel_disc_eletrica').checked = !!dE;
+  if (document.getElementById('rel_disc_inspecao')) document.getElementById('rel_disc_inspecao').checked = !!dI;
+  if (document.getElementById('rel_disc_preditiva')) document.getElementById('rel_disc_preditiva').checked = !!dP;
+
   if (typeof navegarEtapaLaudo === 'function') navegarEtapaLaudo(1, false);
 
   // Restaura fotos nos slots se existirem
@@ -18110,6 +18258,14 @@ async function salvarIntervencao() {
     const lubQtd = document.getElementById('rel_lub_qtd')?.value?.trim() || '';
     const lubProxDias = document.getElementById('rel_lub_prox_dias')?.value?.trim() || '';
     const lubProxData = document.getElementById('rel_lub_prox_data')?.value || '';
+    const criticidade = document.getElementById('rel_criticidade')?.value || 'B';
+    const eletSim = document.getElementById('rel_elet_sim')?.value || 'nao';
+    const eletResumo = document.getElementById('rel_elet_resumo')?.value?.trim() || '';
+    const discMecanica = !!document.getElementById('rel_disc_mecanica')?.checked;
+    const discLubrificacao = !!document.getElementById('rel_disc_lubrificacao')?.checked;
+    const discEletrica = !!document.getElementById('rel_disc_eletrica')?.checked;
+    const discInspecao = !!document.getElementById('rel_disc_inspecao')?.checked;
+    const discPreditiva = !!document.getElementById('rel_disc_preditiva')?.checked;
 
     // Processamento paralelo e protegido de fotos dos slots estruturados
     if (el) el.innerText = 'Processando imagens e fotos em alta definição...';
@@ -18181,8 +18337,33 @@ async function salvarIntervencao() {
       placaPotencia, placaTensao, placaCorrente, placaRpm, placaRolamentos, placaIp,
       medicaoTemp, medicaoVibracao, medicaoTorque, medicaoFolga, medicaoAlinhamento, medicaoCorrente, medicaoPressao,
       lotoStatus, lotoObs,
+      criticidade,
+      prox_insp_dias: proxInspDias,
+      prox_insp_data: proxInspData,
+      prox_insp_tipo: proxInspTipo,
+      lub: {
+        sim: lubSim,
+        tipo: lubTipo,
+        spec: lubSpec,
+        qtd: lubQtd,
+        prox_dias: lubProxDias,
+        prox_data: lubProxData
+      },
+      eletrica: {
+        sim: eletSim,
+        resumo: eletResumo
+      },
+      disciplinas: {
+        mecanica: discMecanica,
+        lubrificacao: discLubrificacao,
+        eletrica: discEletrica,
+        inspecao: discInspecao,
+        preditiva: discPreditiva
+      },
       proxInspDias, proxInspData, proxInspTipo,
       lubSim, lubTipo, lubSpec, lubQtd, lubProxDias, lubProxData,
+      eletSim, eletResumo,
+      discMecanica, discLubrificacao, discEletrica, discInspecao, discPreditiva,
       fotoAntesUrl, fotoDepoisUrl, foto3DUrl,
       fotoSlot3Url, fotoSlot5Url,
       desenhoTecnicoUrl: desenhoFinal,
@@ -18260,7 +18441,7 @@ async function salvarIntervencao() {
 
             if (equipamentoId) {
               const metaCabecalho = `[OM: ${om || 'N/A'} | OP: ${op || 'N/A'} | DOC: ${numDoc || 'N/A'} | EQUIPE: ${equipe || 'N/A'}]`;
-              const corpoNarrativa = `SERVIÇO: ${servicoRealizado || 'N/A'}\nFERRAMENTAS: ${ferramentas || 'N/A'}\nOBS: ${observacao || 'N/A'}\n${acao ? 'AÇÃO: ' + acao : ''}`;
+              const corpoNarrativa = `SERVIÇO: ${servicoRealizado || 'N/A'}\nFERRAMENTAS: ${ferramentas || 'N/A'}\nCRITICIDADE: Grau ${criticidade}\n${eletSim === 'sim' ? 'INTERVENÇÃO ELÉTRICA: ' + eletResumo + '\n' : ''}OBS: ${observacao || 'N/A'}\n${acao ? 'AÇÃO: ' + acao : ''}`;
               const acaoCompleta = `${metaCabecalho}\n${corpoNarrativa}`;
 
               const fAntesEnvio = (fotoAntesUrl && fotoAntesUrl.length < 150000) ? fotoAntesUrl : null;
