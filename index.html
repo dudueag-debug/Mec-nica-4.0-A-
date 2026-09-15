@@ -311,7 +311,8 @@
   }
   @media (min-width: 680px) {
     .card-central-laudos {
-      grid-column: span 2;
+      grid-column: 1 / -1;
+      padding: 26px 24px 22px 24px !important;
     }
   }
 
@@ -4001,38 +4002,18 @@
       </p>
     </section>
 
-    <!-- BANNER DE DESTAQUE: MECÂNICO IA INVESTIGATIVO -->
-    <div style="background:linear-gradient(135deg, rgba(185, 28, 28, 0.28) 0%, rgba(15, 23, 42, 0.95) 100%); border:2px solid #ef4444; border-radius:14px; padding:18px 22px; margin-bottom:20px; box-shadow:0 8px 30px rgba(239, 68, 68, 0.25); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
-      <div style="max-width:640px;">
-        <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
-          <span style="font-size:24px;">🔴</span>
-          <h3 style="margin:0; font-size:18px; color:#fca5a5; font-weight:800; text-transform:uppercase; letter-spacing:0.5px;">Mecânico IA • Investigação Diagnóstica de Campo</h3>
-          <span style="font-size:10.5px; background:#ef4444; color:#fff; font-weight:800; padding:2px 8px; border-radius:6px;">IA ATIVA</span>
-        </div>
-        <p style="margin:0; font-size:13px; color:#cbd5e1; line-height:1.5;">
-          Não entregamos apenas respostas prontas genéricas: o <b>Mecânico IA</b> formula as 6 perguntas investigativas essenciais (temperatura, ruído, vibração, óleo e carga), calcula causas prováveis e lista as <b>evidências técnicas necessárias</b> para confirmar o diagnóstico antes de abrir a máquina.
-        </p>
-      </div>
-      <div>
-        <button type="button" class="button" style="background:linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); border-color:#f87171; color:#fff; font-size:14px; font-weight:800; padding:12px 22px; border-radius:8px; box-shadow:0 0 20px rgba(220, 38, 38, 0.6); cursor:pointer; display:inline-flex; align-items:center; gap:8px;" onclick="abrirModalMecanicoIA()">
-          <span>🔴</span>
-          <span>CONSULTAR MECÂNICO IA</span>
-        </button>
-      </div>
-    </div>
-
     <section class="grid">
-      <!-- ══════════════════ 1. USO EM CAMPO ══════════════════ -->
+      <!-- ══════════════════ 1. TURNO / CAMPO ══════════════════ -->
       <div class="home-section-divider">
         <div class="home-section-line"></div>
         <div class="home-section-badge">
-          <span class="sec-dot"></span>
-          <span>USO EM CAMPO</span>
+          <span class="sec-dot" style="background:#38bdf8; box-shadow:0 0 8px #38bdf8;"></span>
+          <span>TURNO / CAMPO</span>
         </div>
         <div class="home-section-line right"></div>
       </div>
 
-      <!-- CARD UNIFICADO EM DESTAQUE: CENTRAL DE LAUDOS -->
+      <!-- CARD 1: CENTRAL DE LAUDOS (GRANDE) -->
       <div id="cardCentralLaudos" class="card card-central-laudos" onclick="abrirModulo('relatorio')">
         <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
         
@@ -4075,8 +4056,20 @@
         </div>
       </div>
 
-      <!-- CARD: MECÂNICO IA -->
-      <div class="card" style="border-color:#ef4444; background:linear-gradient(150deg, #240c0c 0%, #150909 50%, #0c0505 100%);" onclick="abrirModalMecanicoIA()">
+      <!-- CARD 2: PCM – PROGRAMA (MÉDIO) -->
+      <div id="cardPcmPrograma" class="card" style="border-color:#0284c7; background:linear-gradient(150deg, #0d1e34 0%, #091526 50%, #050d18 100%);" onclick="abrirModulo('intervencoes')">
+        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <div class="icon" style="background:#0c2340; border-color:#38bdf8; color:#38bdf8;">📅</div>
+          <span style="font-size:10px; background:#0369a1; color:#fff; font-weight:800; padding:2px 8px; border-radius:10px;">PCM • TURNO</span>
+        </div>
+        <h3 style="color:#7dd3fc;">PCM – Programa</h3>
+        <p>Programação diária do turno e semanal: ordens de serviço por TAG, rotas de lubrificação, preventivas sistemáticas e histórico de intervenções.</p>
+        <button type="button" class="button secondary" style="border-color:#38bdf8; color:#93c5fd; font-weight:700;" onclick="event.stopPropagation(); abrirModulo('intervencoes')">📅 Acessar Programa & Ordens</button>
+      </div>
+
+      <!-- CARD 3: MECÂNICO IA (MÉDIO) -->
+      <div id="cardMecanicoIA" class="card" style="border-color:#ef4444; background:linear-gradient(150deg, #240c0c 0%, #150909 50%, #0c0505 100%);" onclick="abrirModalMecanicoIA()">
         <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
           <div class="icon" style="background:#450a0a; border-color:#ef4444; color:#f87171;">🔴</div>
@@ -4085,18 +4078,6 @@
         <h3 style="color:#fca5a5;">Mecânico IA</h3>
         <p>Formula as 6 perguntas investigativas essenciais, calcula causas prováveis e lista evidências técnicas de campo.</p>
         <button type="button" class="button" style="background:linear-gradient(180deg, #dc2626 0%, #991b1b 100%); border-color:#f87171;" onclick="event.stopPropagation(); abrirModalMecanicoIA()">Consultar Mecânico IA</button>
-      </div>
-
-      <!-- CARD: INSPEÇÃO POR TAG -->
-      <div class="card" onclick="abrirModulo('intervencoes')">
-        <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-          <div class="icon" style="background:#0c2340; border-color:#0284c7; color:#38bdf8;">🏭</div>
-          <span style="font-size:10px; background:#0369a1; color:#fff; font-weight:800; padding:2px 8px; border-radius:10px;">RASTREABILIDADE</span>
-        </div>
-        <h3>Inspeção por TAG</h3>
-        <p>Histórico completo de intervenções, manutenções anteriores, localização GPS e fotos por TAG de equipamento.</p>
-        <button type="button" class="button secondary" onclick="event.stopPropagation(); abrirModulo('intervencoes')">Acessar TAGs</button>
       </div>
 
       <!-- ══════════════════ 2. FERRAMENTAS DE CAMPO ══════════════════ -->
@@ -4154,12 +4135,12 @@
         <button type="button" class="button secondary" onclick="event.stopPropagation(); abrirModulo('chaves')">Acessar Chaves</button>
       </div>
 
-      <!-- ══════════════════ 3. CONSULTA TÉCNICA ══════════════════ -->
+      <!-- ══════════════════ 3. CONSULTA ══════════════════ -->
       <div class="home-section-divider">
         <div class="home-section-line"></div>
         <div class="home-section-badge">
           <span class="sec-dot" style="background:#10b981; box-shadow:0 0 8px #10b981;"></span>
-          <span>CONSULTA TÉCNICA</span>
+          <span>CONSULTA</span>
         </div>
         <div class="home-section-line right"></div>
       </div>
@@ -6917,10 +6898,10 @@
     </div>
   </section>
 
-  <!-- ================= INTERVENÇÕES ================= -->
+  <!-- ================= PCM / INTERVENÇÕES ================= -->
   <section id="painel-intervencoes" class="panel">
     <div class="panel-header">
-      <h2>📋 Intervenções de Equipamentos</h2>
+      <h2>📅 PCM – Programa & Intervenções por TAG</h2>
       <button class="button secondary" onclick="voltarGrid()">← Voltar</button>
     </div>
 
@@ -18626,7 +18607,7 @@ function abrirModulo(id) {
 
   // Redirecionamentos de compatibilidade
   if (id === 'dashboard') id = 'relatorio';
-  if (id === 'equipamentos') id = 'intervencoes';
+  if (id === 'equipamentos' || id === 'pcm' || id === 'programa') id = 'intervencoes';
   let abaAlvoAposAbrir = null;
   if (id === 'relatorios' || id === 'relatorios-prontos') {
     id = 'relatorio';
