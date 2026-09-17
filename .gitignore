@@ -1,4 +1,6 @@
 node_modules/
-index.html.bak
+index.html.bak*
+*.bak
+*.bak*
 *.log
 .DS_Store

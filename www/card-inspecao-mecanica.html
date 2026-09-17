@@ -1,0 +1,1715 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Card de Inspeção Mecânica Industrial • A4</title>
+<style>
+  /* ==================== ESTILOS BASE E TIPOGRAFIA TÉCNICA ==================== */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, Helvetica, sans-serif;
+  }
+
+  body {
+    background-color: #1e293b;
+    color: #0f172a;
+    font-size: 11px;
+    line-height: 1.3;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* BARRA DE FERRAMENTAS SUPERIOR (APENAS NA TELA) */
+  .top-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #0f172a;
+    color: #f8fafc;
+    padding: 10px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #00f2fe;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+  }
+
+  .top-toolbar h1 {
+    font-size: 15px;
+    font-weight: 800;
+    color: #f8fafc;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .toolbar-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .btn-tool {
+    padding: 7px 14px;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s;
+  }
+
+  .btn-print {
+    background: #0284c7;
+    color: #ffffff;
+    border: 1px solid #38bdf8;
+  }
+  .btn-print:hover { background: #0369a1; }
+
+  .btn-demo {
+    background: #0f766e;
+    color: #ffffff;
+    border: 1px solid #14b8a6;
+  }
+  .btn-demo:hover { background: #115e59; }
+
+  .btn-clear {
+    background: #334155;
+    color: #cbd5e1;
+    border: 1px solid #475569;
+  }
+  .btn-clear:hover { background: #475569; }
+
+  .btn-back {
+    background: #1e1b4b;
+    color: #c7d2fe;
+    border: 1px solid #6366f1;
+    text-decoration: none;
+  }
+  .btn-back:hover { background: #312e81; }
+
+  /* ==================== PÁGINA A4 EM ESCALA REAL ==================== */
+  .a4-container {
+    padding: 20px 0 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+  }
+
+  .a4-page {
+    width: 210mm;
+    height: 297mm;
+    min-height: 297mm;
+    max-height: 297mm;
+    padding: 8mm 9mm 6mm 9mm;
+    background: #ffffff;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+
+  /* ==================== COMPONENTES TÉCNICOS INDUSTRIAIS ==================== */
+  .card-header {
+    border-bottom: 2px solid #1a365d;
+    padding-bottom: 5px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header-titles {
+    text-align: center;
+    flex: 1;
+  }
+
+  .header-titles h1 {
+    font-size: 16px;
+    font-weight: 900;
+    color: #1a365d;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+
+  .header-titles p {
+    font-size: 9.5px;
+    color: #475569;
+    font-weight: 500;
+  }
+
+  .header-badge {
+    background: #1a365d;
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: 800;
+    padding: 3px 7px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+    text-align: right;
+  }
+
+  /* CABEÇALHO REPETIDO COMPACTO (PÁGINAS 2 E 3) */
+  .header-repeat {
+    border-bottom: 1.5px solid #1a365d;
+    padding-bottom: 4px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f8fafc;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+
+  .header-repeat .title-left {
+    font-size: 11px;
+    font-weight: 800;
+    color: #1a365d;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .header-repeat .meta-right {
+    font-size: 9.5px;
+    color: #334155;
+    font-weight: 600;
+    display: flex;
+    gap: 14px;
+  }
+
+  /* SEÇÕES TÉCNICAS */
+  .section-box {
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    margin-bottom: 6px;
+    background: #ffffff;
+    overflow: hidden;
+  }
+
+  .section-header {
+    background: #1a365d;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 3px 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .section-header .sub-badge {
+    font-size: 8.5px;
+    background: rgba(255,255,255,0.18);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+
+  /* GRADES E FORMULÁRIOS DE IDENTIFICAÇÃO */
+  .id-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .id-cell {
+    border-right: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 3px 6px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .id-cell:last-child {
+    border-right: none;
+  }
+
+  .id-lbl {
+    font-size: 8px;
+    font-weight: 700;
+    color: #475569;
+    text-transform: uppercase;
+    margin-bottom: 1px;
+  }
+
+  .id-val {
+    font-size: 10px;
+    font-weight: 600;
+    color: #0f172a;
+    border: none;
+    outline: none;
+    width: 100%;
+    background: transparent;
+  }
+
+  .id-checkboxes-bar {
+    display: flex;
+    align-items: center;
+    padding: 3px 8px;
+    background: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 9px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .id-checkboxes-bar b {
+    color: #1a365d;
+    font-size: 8.5px;
+    text-transform: uppercase;
+  }
+
+  .chk-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    cursor: pointer;
+    font-size: 9px;
+    color: #1e293b;
+  }
+
+  .chk-label input[type="checkbox"] {
+    width: 11px;
+    height: 11px;
+    cursor: pointer;
+    accent-color: #1a365d;
+  }
+
+  /* DICA DE SEGURANÇA */
+  .dica-seguranca {
+    background: #eff6ff;
+    border-left: 3px solid #1a365d;
+    padding: 3px 8px;
+    font-size: 9px;
+    color: #1e3a8a;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* TABELAS DE ITENS DE INSPEÇÃO COM CHECKBOXES */
+  .step-header {
+    background: #204574;
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: 800;
+    padding: 2.5px 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .step-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9px;
+  }
+
+  .step-table th {
+    background: #f1f5f9;
+    color: #334155;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 8px;
+    padding: 2px 5px;
+    border-bottom: 1px solid #cbd5e1;
+    text-align: center;
+  }
+
+  .step-table th.th-desc {
+    text-align: left;
+    padding-left: 8px;
+  }
+
+  .step-table td {
+    padding: 2.2px 5px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #1e293b;
+    vertical-align: middle;
+  }
+
+  .step-table tr:nth-child(even) {
+    background-color: #f8fafc;
+  }
+
+  .step-table tr:hover {
+    background-color: #f1f5f9;
+  }
+
+  .step-table td.td-chk {
+    text-align: center;
+    width: 48px;
+  }
+
+  .step-table td.td-num {
+    width: 18px;
+    text-align: center;
+    font-weight: 700;
+    color: #64748b;
+    font-size: 8px;
+  }
+
+  .step-table td.td-desc {
+    font-weight: 600;
+    padding-left: 6px;
+  }
+
+  .opt-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .opt-box input {
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+    accent-color: #1a365d;
+  }
+
+  /* TABELA DE MEDIÇÕES E PARÂMETROS */
+  .medicoes-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9px;
+  }
+
+  .medicoes-table th {
+    background: #1a365d;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 8.5px;
+    padding: 3px 6px;
+    text-align: left;
+    border: 1px solid #1a365d;
+  }
+
+  .medicoes-table td {
+    padding: 2px 6px;
+    border: 1px solid #cbd5e1;
+    font-size: 9px;
+  }
+
+  .medicoes-table input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 9px;
+    font-weight: 600;
+    color: #0f172a;
+    background: transparent;
+  }
+
+  /* CAIXAS DE AVALIAÇÃO FINAL (VERDE, LARANJA, VERMELHO) */
+  .status-cards-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+
+  .status-card {
+    border-radius: 4px;
+    padding: 6px 8px;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    font-size: 9px;
+    font-weight: 700;
+  }
+
+  .status-card input {
+    width: 14px;
+    height: 14px;
+    margin-top: 1px;
+    cursor: pointer;
+  }
+
+  .card-aprovado {
+    background: #f0fdf4;
+    border: 1.5px solid #16a34a;
+    color: #14532d;
+  }
+
+  .card-ressalvas {
+    background: #fffbeb;
+    border: 1.5px solid #d97706;
+    color: #78350f;
+  }
+
+  .card-reprovado {
+    background: #fef2f2;
+    border: 1.5px solid #dc2626;
+    color: #7f1d1d;
+  }
+
+  /* ASSINATURAS */
+  .sign-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1.5fr 1fr;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    background: #ffffff;
+  }
+
+  .sign-col {
+    padding: 6px 8px;
+    border-right: 1px solid #cbd5e1;
+  }
+
+  .sign-col:last-child {
+    border-right: none;
+  }
+
+  .sign-lbl {
+    font-size: 8px;
+    font-weight: 700;
+    color: #475569;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .sign-line {
+    border-top: 1px solid #0f172a;
+    margin-top: 14px;
+    padding-top: 2px;
+    font-size: 8.5px;
+    color: #334155;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  /* RODAPÉ DISCRETO */
+  .card-footer {
+    border-top: 1px solid #cbd5e1;
+    padding-top: 3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 7.8px;
+    color: #64748b;
+    line-height: 1.2;
+  }
+
+  .footer-notice {
+    max-width: 78%;
+  }
+
+  .footer-pg {
+    font-weight: 800;
+    color: #1a365d;
+    background: #f1f5f9;
+    padding: 1px 6px;
+    border-radius: 3px;
+    border: 1px solid #cbd5e1;
+  }
+
+  /* ==================== REGRAS DE IMPRESSÃO A4 (EXATAS) ==================== */
+  @media print {
+    @page {
+      size: A4 portrait;
+      margin: 6mm 6mm 6mm 6mm;
+    }
+
+    body {
+      background: #ffffff !important;
+      color: #000000 !important;
+    }
+
+    .top-toolbar {
+      display: none !important;
+    }
+
+    .a4-container {
+      padding: 0 !important;
+      gap: 0 !important;
+    }
+
+    .a4-page {
+      box-shadow: none !important;
+      margin: 0 !important;
+      padding: 4mm 5mm !important;
+      width: 100% !important;
+      height: 285mm !important;
+      min-height: 285mm !important;
+      max-height: 285mm !important;
+      page-break-after: always !important;
+      break-after: page !important;
+      border: none !important;
+    }
+
+    .a4-page:last-child {
+      page-break-after: avoid !important;
+      break-after: avoid !important;
+    }
+
+    /* Otimização de contraste para impressão P&B / laser */
+    .section-header, .step-header, .medicoes-table th {
+      background: #1a365d !important;
+      color: #ffffff !important;
+      -webkit-print-color-adjust: exact !important;
+    }
+
+    .step-table tr:nth-child(even) {
+      background-color: #f8fafc !important;
+    }
+
+    .card-aprovado, .card-ressalvas, .card-reprovado {
+      -webkit-print-color-adjust: exact !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- BARRA DE FERRAMENTAS SUPERIOR (VISÍVEL APENAS NA TELA) -->
+<div class="top-toolbar no-print">
+  <h1>⚙️ CARD DE INSPEÇÃO MECÂNICA INDUSTRIAL • 3 PÁGINAS A4</h1>
+  <div class="toolbar-actions">
+    <button type="button" class="btn-tool btn-demo" onclick="preencherExemploCampo()" title="Preencher com exemplo de bomba industrial">📋 Preencher Exemplo de Campo</button>
+    <button type="button" class="btn-tool btn-clear" onclick="limparFormulario()" title="Limpar todos os campos para preenchimento">🗑️ Limpar Formulário</button>
+    <button type="button" class="btn-tool btn-print" onclick="window.print()" title="Imprimir em folha A4 ou gerar PDF oficial">🖨️ Imprimir / Salvar PDF (A4)</button>
+    <a href="index.html" class="btn-tool btn-back" title="Voltar ao App Mecânica 4.0 IA">📱 Voltar ao App</a>
+  </div>
+</div>
+
+<div class="a4-container">
+
+  <!-- ========================================================================================= -->
+  <!-- ==================================== PÁGINA 1 DE 3 ===================================== -->
+  <!-- ========================================================================================= -->
+  <div class="a4-page" id="page-1">
+    <div>
+      <!-- TOPO PRINCIPAL -->
+      <div class="card-header">
+        <div style="font-size:24px; color:#1a365d; font-weight:900;">⚙️</div>
+        <div class="header-titles">
+          <h1>⚙️ CARD DE INSPEÇÃO MECÂNICA INDUSTRIAL</h1>
+          <p>Ficha completa e prática para inspeção de máquinas e equipamentos industriais — passo a passo para inspetores e mecânicos</p>
+        </div>
+        <div class="header-badge">
+          NORMA ABNT / NR-12<br>ISO 10816 • API 610
+        </div>
+      </div>
+
+      <!-- 1. IDENTIFICAÇÃO DO EQUIPAMENTO E DA INSPEÇÃO -->
+      <div class="section-box">
+        <div class="section-header">
+          <span>1. IDENTIFICAÇÃO DO EQUIPAMENTO E DA INSPEÇÃO</span>
+          <span class="sub-badge">DADOS DA ORDEM & ATIVO</span>
+        </div>
+
+        <div class="id-grid">
+          <div class="id-cell">
+            <span class="id-lbl">TAG / Código do Ativo:</span>
+            <input type="text" class="id-val" id="f_tag" placeholder="ex: P-101A / MOT-02" style="font-weight:800; color:#1a365d;">
+          </div>
+          <div class="id-cell" style="grid-column: span 2;">
+            <span class="id-lbl">Descrição do Equipamento:</span>
+            <input type="text" class="id-val" id="f_desc" placeholder="ex: Bomba Centrífuga de Alimentação de Caldeira">
+          </div>
+          <div class="id-cell">
+            <span class="id-lbl">Área / Setor:</span>
+            <input type="text" class="id-val" id="f_area" placeholder="ex: Caldeiraria / Utilidades">
+          </div>
+        </div>
+
+        <div class="id-grid">
+          <div class="id-cell">
+            <span class="id-lbl">Linha / Processo:</span>
+            <input type="text" class="id-val" id="f_linha" placeholder="ex: Ciclo Água-Vapor">
+          </div>
+          <div class="id-cell">
+            <span class="id-lbl">Fabricante:</span>
+            <input type="text" class="id-val" id="f_fabr" placeholder="ex: KSB / WEG / Falk">
+          </div>
+          <div class="id-cell">
+            <span class="id-lbl">Modelo / Nº de Série:</span>
+            <input type="text" class="id-val" id="f_modelo" placeholder="ex: Megachem 125-250 • S/N 847291">
+          </div>
+          <div class="id-cell">
+            <span class="id-lbl">Potência / Capacidade:</span>
+            <input type="text" class="id-val" id="f_potencia" placeholder="ex: 75 kW • 120 m³/h">
+          </div>
+        </div>
+
+        <div class="id-grid" style="border-bottom:none;">
+          <div class="id-cell">
+            <span class="id-lbl">Ano de Fabricação:</span>
+            <input type="text" class="id-val" id="f_ano" placeholder="ex: 2021">
+          </div>
+          <div class="id-cell">
+            <span class="id-lbl">Inspetor / Mecânico:</span>
+            <input type="text" class="id-val" id="f_inspetor" placeholder="ex: Eduardo Noronha (Matr. 48380712)">
+          </div>
+          <div class="id-cell">
+            <span class="id-lbl">Data da Inspeção:</span>
+            <input type="text" class="id-val" id="f_data" placeholder="ex: 16/09/2026">
+          </div>
+          <div class="id-cell">
+            <span class="id-lbl">Turno / Nº da OS:</span>
+            <input type="text" class="id-val" id="f_turno_os" placeholder="ex: Turno A • OS 20321136862">
+          </div>
+        </div>
+
+        <!-- TIPO DE INSPEÇÃO -->
+        <div class="id-checkboxes-bar">
+          <b>Tipo de Inspeção:</b>
+          <label class="chk-label"><input type="checkbox" name="f_tipo" checked> Preventiva</label>
+          <label class="chk-label"><input type="checkbox" name="f_tipo"> Preditiva</label>
+          <label class="chk-label"><input type="checkbox" name="f_tipo"> Corretiva</label>
+          <label class="chk-label"><input type="checkbox" name="f_tipo"> Rota de Inspeção</label>
+          <label class="chk-label"><input type="checkbox" name="f_tipo"> Pós-Manutenção</label>
+          <label class="chk-label"><input type="checkbox" name="f_tipo"> Comissionamento / Aceite</label>
+          <label class="chk-label"><input type="checkbox" name="f_tipo"> Outro</label>
+        </div>
+
+        <!-- CONDIÇÃO DE OPERAÇÃO -->
+        <div class="id-checkboxes-bar" style="border-bottom:none; background:#ffffff;">
+          <b>Condição de Operação:</b>
+          <label class="chk-label"><input type="checkbox" name="f_cond"> 🔒 Parado (LOTO Aplicado)</label>
+          <label class="chk-label"><input type="checkbox" name="f_cond" checked> ⚡ Em Operação Nominal</label>
+          <label class="chk-label"><input type="checkbox" name="f_cond"> 🧪 Em Teste / Comissionamento</label>
+          <label class="chk-label"><input type="checkbox" name="f_cond"> 🛠️ Em Manutenção</label>
+        </div>
+      </div>
+
+      <!-- DICA DE SEGURANÇA NO TOPO DO PASSO A PASSO -->
+      <div class="dica-seguranca">
+        <span style="font-size:12px;">🛡️</span>
+        <span><b>Dica de Segurança e Procedimento:</b> Siga a sequência. Priorize segurança (LOTO quando necessário). Anote medições quando houver instrumentos.</span>
+      </div>
+
+      <!-- 2. PASSO A PASSO DA INSPEÇÃO MECÂNICA INDUSTRIAL (PARTE 1) -->
+
+      <!-- Passo 1 — SEGURANÇA E PROTEÇÕES -->
+      <div class="section-box" style="margin-bottom:5px;">
+        <div class="step-header">
+          <span>Passo 1 — SEGURANÇA E PROTEÇÕES (NR-12 & NR-10)</span>
+          <span style="font-size:8px; font-weight:600;">ITENS 1.1 A 1.7</span>
+        </div>
+        <table class="step-table">
+          <thead>
+            <tr>
+              <th class="th-desc">Item de Verificação de Segurança</th>
+              <th style="width:48px; color:#16a34a;">OK</th>
+              <th style="width:48px; color:#d97706;">Atenção</th>
+              <th style="width:52px; color:#dc2626;">Reprov.</th>
+              <th style="width:42px; color:#64748b;">N/A</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-desc">1.1 Guarda de proteção / carenagens fixas e sem deformações</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_1" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_1"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_1"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_1"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">1.2 Botões de emergência (E-stop) desobstruídos e operacionais</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_2" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_2"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_2"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_2"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">1.3 Dispositivos de intertravamento e sensores de segurança</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_3" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_3"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_3"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_3"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">1.4 Sinalização de perigo, sentido de rotação e etiquetas de advertência</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_4" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_4"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_4"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_4"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">1.5 Acesso seguro (plataformas, escadas, corrimãos e piso sem óleo)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_5" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_5"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_5"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_5"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">1.6 Procedimento LOTO aplicado quando necessária intervenção</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_6" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_6"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_6"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_6"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">1.7 EPIs adequados utilizados (óculos, protetor auricular, luvas, botina)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_7" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_7"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_7"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_7"></label></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Passo 2 — ESTRUTURA, BASE E FIXAÇÃO -->
+      <div class="section-box" style="margin-bottom:5px;">
+        <div class="step-header">
+          <span>Passo 2 — ESTRUTURA, BASE E FIXAÇÃO</span>
+          <span style="font-size:8px; font-weight:600;">ITENS 2.1 A 2.5</span>
+        </div>
+        <table class="step-table">
+          <thead>
+            <tr>
+              <th class="th-desc">Item de Verificação Estrutural</th>
+              <th style="width:48px; color:#16a34a;">OK</th>
+              <th style="width:48px; color:#d97706;">Atenção</th>
+              <th style="width:52px; color:#dc2626;">Reprov.</th>
+              <th style="width:42px; color:#64748b;">N/A</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-desc">2.1 Base de concreto / fundação (ausência de trincas, quebras e corrosão)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_2_1" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_2_1"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_2_1"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_2_1"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">2.2 Chumbadores e parafusos de fixação (aperto, integridade e arruelas)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_2_2" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_2_2"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_2_2"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_2_2"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">2.3 Estrutura metálica de suporte (ausência de corrosão severa e soldas íntegras)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_2_3" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_2_3"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_2_3"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_2_3"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">2.4 Nivelamento e estabilidade do conjunto em operação</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_2_4" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_2_4"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_2_4"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_2_4"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">2.5 Amortecedores / isoladores de vibração (coxins e molas íntegros)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_2_5" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_2_5"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_2_5"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_2_5"></label></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Passo 3 — SISTEMA DE LUBRIFICAÇÃO -->
+      <div class="section-box" style="margin-bottom:5px;">
+        <div class="step-header">
+          <span>Passo 3 — SISTEMA DE LUBRIFICAÇÃO</span>
+          <span style="font-size:8px; font-weight:600;">ITENS 3.1 A 3.7</span>
+        </div>
+        <table class="step-table">
+          <thead>
+            <tr>
+              <th class="th-desc">Item de Verificação de Lubrificação</th>
+              <th style="width:48px; color:#16a34a;">OK</th>
+              <th style="width:48px; color:#d97706;">Atenção</th>
+              <th style="width:52px; color:#dc2626;">Reprov.</th>
+              <th style="width:42px; color:#64748b;">N/A</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-desc">3.1 Nível de óleo/lubrificante (visor de nível, vareta ou copo nivelador)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_3_1" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_3_1"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_3_1"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_3_1"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">3.2 Condição visual do óleo (cor límpida, ausência de água, espuma ou borra)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_3_2" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_3_2"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_3_2"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_3_2"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">3.3 Pontos de graxa (graxeiras limpas, desobstruídas e com graxa nova)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_3_3" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_3_3"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_3_3"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_3_3"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">3.4 Sistema de lubrificação automática / dosadores centralizados operantes</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_3_4" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_3_4"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_3_4"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_3_4"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">3.5 Ausência de vazamentos em carcaças, tampas, bujões e tubulações</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_3_5" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_3_5"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_3_5"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_3_5"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">3.6 Filtros de óleo e respiros desobstruídos (diferencial de pressão normal)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_3_6" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_3_6"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_3_6"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_3_6"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">3.7 Temperatura do óleo / reservatório dentro da faixa admissível (&lt; 65°C)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_3_7" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_3_7"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_3_7"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_3_7"></label></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Passo 4 — ROLAMENTOS, EIXOS E PARTES GIRANTES -->
+      <div class="section-box" style="margin-bottom:0;">
+        <div class="step-header">
+          <span>Passo 4 — ROLAMENTOS, EIXOS E PARTES GIRANTES</span>
+          <span style="font-size:8px; font-weight:600;">ITENS 4.1 A 4.6</span>
+        </div>
+        <table class="step-table">
+          <thead>
+            <tr>
+              <th class="th-desc">Item de Verificação de Mancais & Eixos</th>
+              <th style="width:48px; color:#16a34a;">OK</th>
+              <th style="width:48px; color:#d97706;">Atenção</th>
+              <th style="width:52px; color:#dc2626;">Reprov.</th>
+              <th style="width:42px; color:#64748b;">N/A</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-desc">4.1 Ruído anormal de rolamentos (ronco, estalos metálicos ou chiado seco)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_4_1" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_4_1"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_4_1"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_4_1"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">4.2 Temperatura nos mancais (medir com pirômetro/termômetro &lt; 75°C)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_4_2" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_4_2"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_4_2"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_4_2"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">4.3 Folga axial e radial dos mancais dentro dos limites de projeto</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_4_3" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_4_3"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_4_3"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_4_3"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">4.4 Vazamento de lubrificante por retentores, labirintos ou tampas</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_4_4" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_4_4"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_4_4"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_4_4"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">4.5 Estado físico das vedações (lábios íntegros, sem ressecamento ou danos)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_4_5" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_4_5"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_4_5"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_4_5"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">4.6 Vibração excessiva perceptível ao tato ou caneta de vibração</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_4_6" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_4_6"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_4_6"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_4_6"></label></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+        <!-- RODAPÉ DA PÁGINA 1 -->
+    <div class="card-footer">
+      <div class="footer-notice">
+        <div>Documento de apoio à inspeção mecânica industrial. Não substitui procedimentos de segurança (NR-12, LOTO, etc.). Sempre aplique bloqueio e etiquetagem antes de intervir. Use EPIs adequados.</div>
+        <div style="font-weight:700; color:#1a365d; margin-top:2px;">Card de Inspeção Mecânica Industrial • Versão prática para rotas de inspeção e manutenção</div>
+      </div>
+      <div class="footer-pg">PÁGINA 1 / 3</div>
+    </div>
+  </div>
+  </div>
+
+  <!-- ========================================================================================= -->
+  <!-- ==================================== PÁGINA 2 DE 3 ===================================== -->
+  <!-- ========================================================================================= -->
+  <div class="a4-page" id="page-2">
+    <div>
+      <!-- CABEÇALHO REPETIDO COMPACTO -->
+      <div class="header-repeat">
+        <div class="title-left">
+          <span>⚙️ CARD DE INSPEÇÃO MECÂNICA INDUSTRIAL</span>
+          <span style="color:#64748b; font-weight:normal;">|</span>
+          <span style="color:#0284c7;">PÁGINA 2 / 3</span>
+        </div>
+        <div class="meta-right">
+          <span><b>TAG:</b> <span id="p2_tag">P-101A</span></span>
+          <span><b>Data:</b> <span id="p2_data">16/09/2026</span></span>
+          <span><b>Inspetor:</b> <span id="p2_inspetor">Eduardo Noronha</span></span>
+        </div>
+      </div>
+
+      <!-- Passo 5 — TRANSMISSÃO DE POTÊNCIA -->
+      <div class="section-box" style="margin-bottom:5px;">
+        <div class="step-header">
+          <span>Passo 5 — TRANSMISSÃO DE POTÊNCIA</span>
+          <span style="font-size:8px; font-weight:600;">ITENS 5.1 A 5.6</span>
+        </div>
+        <table class="step-table">
+          <thead>
+            <tr>
+              <th class="th-desc">Item de Verificação da Transmissão</th>
+              <th style="width:48px; color:#16a34a;">OK</th>
+              <th style="width:48px; color:#d97706;">Atenção</th>
+              <th style="width:52px; color:#dc2626;">Reprov.</th>
+              <th style="width:42px; color:#64748b;">N/A</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-desc">5.1 Correias (tensão adequada com frequencímetro/deflexão, desgaste e trincas)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_5_1" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_5_1"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_5_1"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_5_1"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">5.2 Polias (desgaste dos canais em V, espelhamento, trincas e alinhamento)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_5_2" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_5_2"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_5_2"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_5_2"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">5.3 Correntes (tensão, lubrificação, alongamento por passo e desgaste de dentes)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_5_3" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_5_3"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_5_3"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_5_3"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">5.4 Acoplamentos (desgaste dos insertos elastoméricos, grade, lâminas ou pinos)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_5_4" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_5_4"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_5_4"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_5_4"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">5.5 Chavetas, parafusos prisioneiros e fixações axiais sem folgas ou deslocamento</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_5_5" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_5_5"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_5_5"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_5_5"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">5.6 Protetores de acoplamentos e correias fixos, rígidos e íntegros (NR-12)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_5_6" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_5_6"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_5_6"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_5_6"></label></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Passo 6 — ALINHAMENTO, VIBRAÇÃO E BALANCEAMENTO -->
+      <div class="section-box" style="margin-bottom:5px;">
+        <div class="step-header">
+          <span>Passo 6 — ALINHAMENTO, VIBRAÇÃO E BALANCEAMENTO</span>
+          <span style="font-size:8px; font-weight:600;">ITENS 6.1 A 6.5</span>
+        </div>
+        <table class="step-table">
+          <thead>
+            <tr>
+              <th class="th-desc">Item de Verificação Dinâmica</th>
+              <th style="width:48px; color:#16a34a;">OK</th>
+              <th style="width:48px; color:#d97706;">Atenção</th>
+              <th style="width:52px; color:#dc2626;">Reprov.</th>
+              <th style="width:42px; color:#64748b;">N/A</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-desc">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span>6.1 Medição de vibração global (ISO 10816-3):</span>
+                  <span style="font-weight:normal; font-size:8.5px;">Valor: <input type="text" id="m_vib_input" placeholder="____ mm/s RMS" style="width:80px; border:1px solid #94a3b8; border-radius:3px; padding:1px 4px; font-weight:bold; font-size:8.5px;"></span>
+                </div>
+              </td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_6_1" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_6_1"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_6_1"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_6_1"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">6.2 Alinhamento de eixos (desalinhamento angular e paralelo dentro de 0,05 mm)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_6_2" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_6_2"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_6_2"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_6_2"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">6.3 Desbalanceamento dinâmico (vibração predominante em 1X rotação)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_6_3" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_6_3"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_6_3"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_6_3"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">6.4 Folgas mecânicas excessivas (mancais, pedestais ou parafusos frouxos)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_6_4" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_6_4"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_6_4"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_6_4"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">6.5 Apoios, calços calibrados e verificação de pé manco (&lt; 0,05 mm)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_6_5" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_6_5"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_6_5"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_6_5"></label></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Passo 7 — MOTORES ELÉTRICOS E ACIONAMENTOS -->
+      <div class="section-box" style="margin-bottom:5px;">
+        <div class="step-header">
+          <span>Passo 7 — MOTORES ELÉTRICOS E ACIONAMENTOS</span>
+          <span style="font-size:8px; font-weight:600;">ITENS 7.1 A 7.7</span>
+        </div>
+        <table class="step-table">
+          <thead>
+            <tr>
+              <th class="th-desc">Item de Verificação do Acionamento</th>
+              <th style="width:48px; color:#16a34a;">OK</th>
+              <th style="width:48px; color:#d97706;">Atenção</th>
+              <th style="width:52px; color:#dc2626;">Reprov.</th>
+              <th style="width:42px; color:#64748b;">N/A</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-desc">7.1 Fixação do motor (torque dos parafusos dos pés e chapa base)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_7_1" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_7_1"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_7_1"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_7_1"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">7.2 Ruído magnético e vibração mecânica do motor estáveis</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_7_2" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_7_2"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_7_2"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_7_2"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">7.3 Temperatura da carcaça e tampas do motor (&lt; 85°C em regime pleno)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_7_3" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_7_3"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_7_3"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_7_3"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">7.4 Ventilação: hélice de resfriamento íntegra e aletas desobstruídas de pó</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_7_4" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_7_4"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_7_4"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_7_4"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">7.5 Caixa de ligação elétrica fechada, vedada, aterrada e prensa-cabo firme</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_7_5" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_7_5"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_7_5"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_7_5"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">7.6 Redutores de velocidade: folga entre dentes, ruído de engrenamento e óleo</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_7_6" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_7_6"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_7_6"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_7_6"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">7.7 Inversores de frequência / soft-starters (painel ventilado, sem alarmes)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_7_7" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_7_7"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_7_7"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_7_7"></label></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Passo 8 — BOMBAS, COMPRESSORES, VENTILADORES E SOPRADORES -->
+      <div class="section-box" style="margin-bottom:5px;">
+        <div class="step-header">
+          <span>Passo 8 — BOMBAS, COMPRESSORES, VENTILADORES E SOPRADORES</span>
+          <span style="font-size:8px; font-weight:600;">ITENS 8.1 A 8.7</span>
+        </div>
+        <table class="step-table">
+          <thead>
+            <tr>
+              <th class="th-desc">Item de Verificação de Máquinas de Fluxo</th>
+              <th style="width:48px; color:#16a34a;">OK</th>
+              <th style="width:48px; color:#d97706;">Atenção</th>
+              <th style="width:52px; color:#dc2626;">Reprov.</th>
+              <th style="width:42px; color:#64748b;">N/A</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-desc">8.1 Selo mecânico ou gaxeta: sem vazamentos anormais (gaxeta: gotejamento padrão)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_8_1" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_8_1"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_8_1"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_8_1"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">8.2 Ausência de ruído de cavitação (barulho característico de 'pedregulhos/brita')</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_8_2" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_8_2"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_8_2"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_8_2"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">8.3 Pressão de sucção e recalque/descarga estáveis conforme projeto (bar)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_8_3" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_8_3"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_8_3"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_8_3"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">8.4 Temperatura da carcaça do equipamento e mancais dentro da faixa de projeto</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_8_4" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_8_4"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_8_4"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_8_4"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">8.5 Filtros de sucção limpos e válvulas de retenção / alívio operando livres</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_8_5" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_8_5"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_8_5"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_8_5"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">8.6 Vibração global e fixação de flanges de sucção e descarga sem tensão mecânica</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_8_6" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_8_6"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_8_6"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_8_6"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">8.7 Nível e condição do óleo do cárter / suporte de mancal (constanter level oiler)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_8_7" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_8_7"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_8_7"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_8_7"></label></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Passo 9 — SISTEMAS HIDRÁULICOS E PNEUMÁTICOS -->
+      <div class="section-box" style="margin-bottom:0;">
+        <div class="step-header">
+          <span>Passo 9 — SISTEMAS HIDRÁULICOS E PNEUMÁTICOS</span>
+          <span style="font-size:8px; font-weight:600;">ITENS 9.1 A 9.8</span>
+        </div>
+        <table class="step-table">
+          <thead>
+            <tr>
+              <th class="th-desc">Item de Verificação de Fluídos & Potência Fluida</th>
+              <th style="width:48px; color:#16a34a;">OK</th>
+              <th style="width:48px; color:#d97706;">Atenção</th>
+              <th style="width:52px; color:#dc2626;">Reprov.</th>
+              <th style="width:42px; color:#64748b;">N/A</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-desc">9.1 Nível, aspecto e condição do fluido hidráulico no reservatório</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_1" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_1"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_1"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_1"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">9.2 Ausência de vazamentos em mangueiras, conexões, niples e tubulações</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_2" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_2"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_2"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_2"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">9.3 Pressão de trabalho nominal estável nos manômetros de linha</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_3" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_3"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_3"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_3"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">9.4 Filtros hidráulicos (indicadores de saturação em verde) e respiro do tanque</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_4" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_4"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_4"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_4"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">9.5 Acumuladores de pressão hidráulica (carga de nitrogênio e fixação)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_5" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_5"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_5"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_5"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">9.6 Cilindros e atuadores (haste sem riscos, sem vazamentos e amortecimento)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_6" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_6"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_6"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_6"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">9.7 Válvulas direcionais, de alívio e blocos manifold sem travamentos térmicos</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_7" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_7"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_7"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_7"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">9.8 Unidade de conservação pneumática FRL (dreno automático, regulador, lubrificador)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_8" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_8"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_8"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_9_8"></label></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+        <!-- RODAPÉ DA PÁGINA 2 -->
+    <div class="card-footer">
+      <div class="footer-notice">
+        <div>Documento de apoio à inspeção mecânica industrial. Não substitui procedimentos de segurança (NR-12, LOTO, etc.). Sempre aplique bloqueio e etiquetagem antes de intervir. Use EPIs adequados.</div>
+        <div style="font-weight:700; color:#1a365d; margin-top:2px;">Card de Inspeção Mecânica Industrial • Versão prática para rotas de inspeção e manutenção</div>
+      </div>
+      <div class="footer-pg">PÁGINA 2 / 3</div>
+    </div>
+  </div>
+  </div>
+
+  <!-- ========================================================================================= -->
+  <!-- ==================================== PÁGINA 3 DE 3 ===================================== -->
+  <!-- ========================================================================================= -->
+  <div class="a4-page" id="page-3">
+    <div>
+      <!-- CABEÇALHO REPETIDO COMPACTO -->
+      <div class="header-repeat">
+        <div class="title-left">
+          <span>⚙️ CARD DE INSPEÇÃO MECÂNICA INDUSTRIAL</span>
+          <span style="color:#64748b; font-weight:normal;">|</span>
+          <span style="color:#0284c7;">PÁGINA 3 / 3</span>
+        </div>
+        <div class="meta-right">
+          <span><b>TAG:</b> <span id="p3_tag">P-101A</span></span>
+          <span><b>Data:</b> <span id="p3_data">16/09/2026</span></span>
+          <span><b>Inspetor:</b> <span id="p3_inspetor">Eduardo Noronha</span></span>
+        </div>
+      </div>
+
+      <!-- Passo 10 — INSTRUMENTAÇÃO, SENSORES E CONTROLES -->
+      <div class="section-box" style="margin-bottom:5px;">
+        <div class="step-header">
+          <span>Passo 10 — INSTRUMENTAÇÃO, SENSORES E CONTROLES</span>
+          <span style="font-size:8px; font-weight:600;">ITENS 10.1 A 10.4</span>
+        </div>
+        <table class="step-table">
+          <thead>
+            <tr>
+              <th class="th-desc">Item de Verificação de Instrumentação</th>
+              <th style="width:48px; color:#16a34a;">OK</th>
+              <th style="width:48px; color:#d97706;">Atenção</th>
+              <th style="width:52px; color:#dc2626;">Reprov.</th>
+              <th style="width:42px; color:#64748b;">N/A</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-desc">10.1 Sensores de temperatura (PT-100), pressão, nível e acelerômetros de vibração</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_10_1" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_10_1"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_10_1"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_10_1"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">10.2 Indicadores locais (manômetros com ponteiro estável, termômetros legíveis)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_10_2" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_10_2"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_10_2"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_10_2"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">10.3 Alarmes audiovisuais, trip de proteção e intertravamentos operacionais</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_10_3" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_10_3"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_10_3"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_10_3"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">10.4 Painéis locais, caixas de passagem e botoeiras com portas travadas e sem pó</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_10_4" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_10_4"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_10_4"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_10_4"></label></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Passo 11 — CONDIÇÃO GERAL E LIMPEZA -->
+      <div class="section-box" style="margin-bottom:5px;">
+        <div class="step-header">
+          <span>Passo 11 — CONDIÇÃO GERAL E LIMPEZA</span>
+          <span style="font-size:8px; font-weight:600;">ITENS 11.1 A 11.5</span>
+        </div>
+        <table class="step-table">
+          <thead>
+            <tr>
+              <th class="th-desc">Item de Verificação de Casa de Máquinas / Housekeeping</th>
+              <th style="width:48px; color:#16a34a;">OK</th>
+              <th style="width:48px; color:#d97706;">Atenção</th>
+              <th style="width:52px; color:#dc2626;">Reprov.</th>
+              <th style="width:42px; color:#64748b;">N/A</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-desc">11.1 Limpeza geral do equipamento (sem crostas de sujeira, borras ou resíduos)</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_11_1" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_11_1"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_11_1"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_11_1"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">11.2 Pintura de proteção íntegra e ausência de pontos severos de corrosão</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_11_2" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_11_2"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_11_2"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_11_2"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">11.3 Identificação visual: TAG do ativo e plaqueta do fabricante legíveis</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_11_3" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_11_3"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_11_3"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_11_3"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">11.4 Ausência de ferramentas, panos, peças ou objetos soltos sobre a máquina</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_11_4" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_11_4"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_11_4"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_11_4"></label></td>
+            </tr>
+            <tr>
+              <td class="td-desc">11.5 Área ao redor livre de obstáculos, drenos limpos e piso desobstruído</td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_11_5" checked></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_11_5"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_11_5"></label></td>
+              <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_11_5"></label></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 3. MEDIÇÕES REALIZADAS E OBSERVAÇÕES TÉCNICAS -->
+      <div class="section-box" style="margin-bottom:5px;">
+        <div class="section-header">
+          <span>3. MEDIÇÕES REALIZADAS E OBSERVAÇÕES TÉCNICAS</span>
+          <span class="sub-badge">DADOS QUANTITATIVOS DE CAMPO</span>
+        </div>
+
+        <!-- TABELA DE 6 LINHAS DE MEDIÇÃO -->
+        <table class="medicoes-table">
+          <thead>
+            <tr>
+              <th style="width:28%;">Parâmetro de Medição</th>
+              <th style="width:16%;">Valor Medido</th>
+              <th style="width:12%;">Unidade</th>
+              <th style="width:22%;">Referência / Limite</th>
+              <th style="width:22%;">Observações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="text" id="m_p_1" value="Temperatura Mancal Lado Acoplado (LA)"></td>
+              <td><input type="text" id="m_v_1" value="64.5"></td>
+              <td><input type="text" id="m_u_1" value="°C"></td>
+              <td><input type="text" id="m_r_1" value="Máx. 75 °C"></td>
+              <td><input type="text" id="m_o_1" value="Normal / Operação estável"></td>
+            </tr>
+            <tr>
+              <td><input type="text" id="m_p_2" value="Temperatura Mancal Lado Oposto (LOA)"></td>
+              <td><input type="text" id="m_v_2" value="58.2"></td>
+              <td><input type="text" id="m_u_2" value="°C"></td>
+              <td><input type="text" id="m_r_2" value="Máx. 75 °C"></td>
+              <td><input type="text" id="m_o_2" value="Conforme"></td>
+            </tr>
+            <tr>
+              <td><input type="text" id="m_p_3" value="Vibração Global Mancal Radial (Horizontal)"></td>
+              <td><input type="text" id="m_v_3" value="2.1"></td>
+              <td><input type="text" id="m_u_3" value="mm/s RMS"></td>
+              <td><input type="text" id="m_r_3" value="ISO 10816-3 (Alarme: 4.5)"></td>
+              <td><input type="text" id="m_o_3" value="Zona B • Aceitável"></td>
+            </tr>
+            <tr>
+              <td><input type="text" id="m_p_4" value="Vibração Global Mancal Axial"></td>
+              <td><input type="text" id="m_v_4" value="1.4"></td>
+              <td><input type="text" id="m_u_4" value="mm/s RMS"></td>
+              <td><input type="text" id="m_r_4" value="ISO 10816-3 (Alarme: 4.5)"></td>
+              <td><input type="text" id="m_o_4" value="Zona A • Excelente"></td>
+            </tr>
+            <tr>
+              <td><input type="text" id="m_p_5" value="Pressão de Descarga / Recalque da Linha"></td>
+              <td><input type="text" id="m_v_5" value="4.8"></td>
+              <td><input type="text" id="m_u_5" value="bar"></td>
+              <td><input type="text" id="m_r_5" value="Faixa: 4.5 a 5.2 bar"></td>
+              <td><input type="text" id="m_o_5" value="Pressão nominal estável"></td>
+            </tr>
+            <tr>
+              <td><input type="text" id="m_p_6" value="Corrente Elétrica do Motor (Fase média)"></td>
+              <td><input type="text" id="m_v_6" value="128.0"></td>
+              <td><input type="text" id="m_u_6" value="A"></td>
+              <td><input type="text" id="m_r_6" value="Nominal: 135 A"></td>
+              <td><input type="text" id="m_o_6" value="Carga de 94% • Sem sobrecarga"></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- CAMPO GRANDE DE OBSERVAÇÕES E ANOMALIAS (6 LINHAS) -->
+        <div style="padding:4px 6px; background:#f8fafc; border-top:1px solid #cbd5e1;">
+          <div style="font-size:8px; font-weight:700; color:#1a365d; text-transform:uppercase; margin-bottom:2px;">
+            Observações Gerais, Anomalias Identificadas e Detalhes Técnicos (6 linhas):
+          </div>
+          <textarea id="f_obs_anomalias" rows="5" style="width:100%; border:1px solid #cbd5e1; border-radius:3px; padding:4px; font-size:8.5px; line-height:1.4; color:#0f172a; resize:none; outline:none; background:#ffffff;">1. Equipamento inspecionado em regime contínuo de rotação nominal (1780 rpm).
+2. Conjunto de mancais com graxa limpa, sem contaminação por umidade ou particulado no visor.
+3. Selo mecânico sem indício de gotejamento ou névoa na carcaça de vedação.
+4. Identificado leve ressecamento no elemento elastomérico do acoplamento flexível — sem folga crítica.
+5. Fixações da base conferidas com torquímetro (torque médio 180 N.m em parafusos M20 8.8).
+6. Equipamento liberado para operação sem impedimento de segurança ou processo.</textarea>
+        </div>
+      </div>
+
+      <!-- 4. RESULTADO E RECOMENDAÇÕES -->
+      <div class="section-box" style="margin-bottom:5px;">
+        <div class="section-header">
+          <span>4. RESULTADO DA INSPEÇÃO & RECOMENDAÇÕES</span>
+          <span class="sub-badge">PARECER TÉCNICO OFICIAL</span>
+        </div>
+
+        <!-- 3 CAIXAS COLORIDAS LADO A LADO -->
+        <div style="padding:6px 8px;">
+          <div class="status-cards-row">
+            <div class="status-card card-aprovado">
+              <input type="checkbox" id="res_aprovado" checked onclick="selecionarUnicoResultado('res_aprovado')">
+              <label for="res_aprovado" style="cursor:pointer;">
+                <span style="font-size:9.5px; font-weight:800; display:block;">✔ APROVADO</span>
+                <span style="font-size:8px; font-weight:normal; color:#15803d;">Condição adequada para operação contínua</span>
+              </label>
+            </div>
+
+            <div class="status-card card-ressalvas">
+              <input type="checkbox" id="res_ressalvas" onclick="selecionarUnicoResultado('res_ressalvas')">
+              <label for="res_ressalvas" style="cursor:pointer;">
+                <span style="font-size:9.5px; font-weight:800; display:block;">⚠️ APROV. C/ RESSALVAS</span>
+                <span style="font-size:8px; font-weight:normal; color:#b45309;">Requer monitoramento ou manutenção programada</span>
+              </label>
+            </div>
+
+            <div class="status-card card-reprovado">
+              <input type="checkbox" id="res_reprovado" onclick="selecionarUnicoResultado('res_reprovado')">
+              <label for="res_reprovado" style="cursor:pointer;">
+                <span style="font-size:9.5px; font-weight:800; display:block;">⛔ REPROVADO</span>
+                <span style="font-size:8px; font-weight:normal; color:#b91c1c;">Risco operacional severo — intervenção necessária</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- PRIORIDADE DE AÇÃO -->
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:4px; font-size:8.5px; background:#f1f5f9; padding:3px 8px; border-radius:3px;">
+            <b style="color:#1a365d; text-transform:uppercase;">Prioridade de Ação:</b>
+            <label class="chk-label"><input type="checkbox" name="prio_acao"> 🔴 Imediata (Segurança / Parada)</label>
+            <label class="chk-label"><input type="checkbox" name="prio_acao"> 🟡 Curto Prazo (até 7 dias)</label>
+            <label class="chk-label"><input type="checkbox" name="prio_acao" checked> 🔵 Programada (Próxima Parada)</label>
+            <label class="chk-label"><input type="checkbox" name="prio_acao"> 🟢 Monitorar na Próxima Rota</label>
+          </div>
+
+          <!-- RECOMENDAÇÕES E PRÓXIMOS PASSOS -->
+          <div style="font-size:8px; font-weight:700; color:#1a365d; text-transform:uppercase; margin-bottom:2px;">
+            Recomendações e Próximos Passos:
+          </div>
+          <input type="text" id="f_recomendacoes" value="Substituir inserto elastomérico do acoplamento na próxima parada preventiva programada (código sobressalente: ELS-AC-120). Manter rota semanal de análise de vibração." style="width:100%; border:1px solid #cbd5e1; border-radius:3px; padding:3px 6px; font-size:8.5px; color:#0f172a; font-weight:600; outline:none;">
+        </div>
+      </div>
+
+      <!-- 5. ASSINATURAS E RESPONSABILIDADE -->
+      <div class="section-box" style="margin-bottom:0;">
+        <div class="section-header">
+          <span>5. ASSINATURAS E RESPONSABILIDADE TÉCNICA</span>
+          <span class="sub-badge">LIBERAÇÃO OPERACIONAL</span>
+        </div>
+
+        <div class="sign-grid">
+          <div class="sign-col">
+            <div class="sign-lbl">Inspetor / Mecânico Responsável</div>
+            <div class="sign-line">
+              <span id="txt_sign_insp">EDUARDO NORONHA (Matr. 48380712)</span><br>
+              <span style="font-size:7.5px; color:#64748b; font-weight:normal;">Mecânico de Manutenção Industrial / Inspetor</span>
+            </div>
+          </div>
+
+          <div class="sign-col">
+            <div class="sign-lbl">Supervisor / Coordenador de Manutenção</div>
+            <div class="sign-line">
+              <span id="txt_sign_sup">CARLOS ANDRADE (CREA 2019482)</span><br>
+              <span style="font-size:7.5px; color:#64748b; font-weight:normal;">Engenheiro / Coordenador PCM & Confiabilidade</span>
+            </div>
+          </div>
+
+          <div class="sign-col" style="display:flex; flex-direction:column; justify-content:space-between;">
+            <div class="sign-lbl">Data & Liberação</div>
+            <div style="text-align:center; padding-top:4px;">
+              <span style="font-size:12px; font-weight:800; color:#1a365d;" id="txt_sign_data">16 / 09 / 2026</span><br>
+              <span style="font-size:8px; color:#16a34a; font-weight:bold;">✔ ATIVO LIBERADO</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+        <!-- RODAPÉ DA PÁGINA 3 -->
+    <div class="card-footer">
+      <div class="footer-notice">
+        <div>Documento de apoio à inspeção mecânica industrial. Não substitui procedimentos de segurança (NR-12, LOTO, etc.). Sempre aplique bloqueio e etiquetagem antes de intervir. Use EPIs adequados.</div>
+        <div style="font-weight:700; color:#1a365d; margin-top:2px;">Card de Inspeção Mecânica Industrial • Versão prática para rotas de inspeção e manutenção</div>
+      </div>
+      <div class="footer-pg">PÁGINA 3 / 3</div>
+    </div>
+  </div>
+  </div>
+
+</div>
+
+<!-- SCRIPT INTERATIVO PARA PREENCHIMENTO E SINCRONIZAÇÃO -->
+<script>
+  // Sincroniza campos de cabeçalho das páginas 2 e 3 em tempo real
+  function sincronizarMetadados() {
+    const tag = document.getElementById('f_tag').value.trim() || '---';
+    const data = document.getElementById('f_data').value.trim() || '---';
+    const insp = document.getElementById('f_inspetor').value.trim() || '---';
+
+    document.getElementById('p2_tag').innerText = tag;
+    document.getElementById('p3_tag').innerText = tag;
+    document.getElementById('p2_data').innerText = data;
+    document.getElementById('p3_data').innerText = data;
+    document.getElementById('p2_inspetor').innerText = insp;
+    document.getElementById('p3_inspetor').innerText = insp;
+    document.getElementById('txt_sign_insp').innerText = insp.toUpperCase();
+    document.getElementById('txt_sign_data').innerText = data;
+  }
+
+  document.getElementById('f_tag').addEventListener('input', sincronizarMetadados);
+  document.getElementById('f_data').addEventListener('input', sincronizarMetadados);
+  document.getElementById('f_inspetor').addEventListener('input', sincronizarMetadados);
+
+  // Garante seleção única entre Aprovado, Aprovado c/ ressalvas e Reprovado
+  function selecionarUnicoResultado(idAtivo) {
+    const ids = ['res_aprovado', 'res_ressalvas', 'res_reprovado'];
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && id !== idAtivo) el.checked = false;
+    });
+  }
+
+  // Preenche dados de exemplo real de campo (Bomba KSB Megachem)
+  function preencherExemploCampo() {
+    document.getElementById('f_tag').value = 'P-101A';
+    document.getElementById('f_desc').value = 'Bomba Centrífuga de Alimentação de Caldeira';
+    document.getElementById('f_area').value = 'Caldeiraria / Utilidades';
+    document.getElementById('f_linha').value = 'Ciclo Água-Vapor';
+    document.getElementById('f_fabr').value = 'KSB / WEG';
+    document.getElementById('f_modelo').value = 'Megachem 125-250 • S/N 847291';
+    document.getElementById('f_potencia').value = '75 kW • 120 m³/h • 1780 rpm';
+    document.getElementById('f_ano').value = '2021';
+    document.getElementById('f_inspetor').value = 'Eduardo Noronha (Matr. 48380712)';
+    document.getElementById('f_data').value = '16/09/2026';
+    document.getElementById('f_turno_os').value = 'Turno A • OS 20321136862';
+    document.getElementById('m_vib_input').value = '2.1 mm/s';
+
+    sincronizarMetadados();
+    alert('✔ Exemplo prático de inspeção de campo carregado com sucesso!');
+  }
+
+  // Limpa o formulário para uso em branco
+  function limparFormulario() {
+    if (!confirm('Deseja limpar todos os campos do Card de Inspeção?')) return;
+    const inputs = document.querySelectorAll('.a4-container input[type="text"], .a4-container textarea');
+    inputs.forEach(i => i.value = '');
+    const checks = document.querySelectorAll('.a4-container input[type="checkbox"]');
+    checks.forEach(c => c.checked = false);
+
+    document.getElementById('res_aprovado').checked = true;
+    sincronizarMetadados();
+  }
+
+  // Inicializa sincronização
+  sincronizarMetadados();
+</script>
+
+</body>
+</html>
