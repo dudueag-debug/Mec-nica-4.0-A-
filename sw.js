@@ -1,5 +1,5 @@
 // Service Worker - Mecânica 4.0 IA
-const CACHE_NAME = 'mecanica-40-v4.5-cache';
+const CACHE_NAME = 'mecanica-40-v5.0-cache';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

@@ -4544,18 +4544,18 @@
         <button type="button" class="btn-botoeira" onclick="event.stopPropagation(); abrirModulo('metrologia')">Abrir Metrologia</button>
       </div>
 
-      <!-- CARD: INSPEÇÃO MECÂNICA INDUSTRIAL (NOVO) -->
-      <div class="card card-industrial" style="border-color:#38bdf8; background:linear-gradient(145deg, #091a2e 0%, #0d2745 100%);" onclick="abrirModulo('inspecao-mecanica')">
+      <!-- CARD: INSPEÇÃO MECÂNICA INDUSTRIAL (EXCLUSIVO ADMINISTRADOR EDUARDO NORONHA) -->
+      <div id="cardInspecaoMecanica" class="card card-industrial" style="border-color:#38bdf8; background:linear-gradient(145deg, #091a2e 0%, #0d2745 100%);" onclick="abrirModulo('inspecao-mecanica')">
         <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
         <div style="display:inline-flex; align-items:center; gap:6px; background:rgba(2,132,199,0.25); border:1px solid #0284c7; color:#7dd3fc; font-size:10px; font-weight:800; padding:2px 8px; border-radius:10px; margin-bottom:8px;">
-          <span>📋 NOVO MÓDULO</span>
+          <span>📋 NOVO MÓDULO • EXCLUSIVO</span>
         </div>
         <div class="icon" style="background:linear-gradient(135deg, #0c2340 0%, #0369a1 100%); border-color:#38bdf8;">⚙️📋</div>
         <h3>Inspeção Mecânica Industrial</h3>
         <p>Roteiro completo do inspetor em 10 passos (A a J), checklists por equipamento, criticidade e prancha A4.</p>
         <div style="display:flex; gap:6px; margin-top:8px;">
           <button type="button" class="btn-botoeira" style="flex:1; background:#0284c7; border-color:#38bdf8;" onclick="event.stopPropagation(); abrirModulo('inspecao-mecanica')">Abrir Guia Rota</button>
-          <button type="button" class="btn-botoeira" style="background:#0f2744; border-color:#0284c7; font-size:11px; padding:6px 10px;" onclick="event.stopPropagation(); window.open('card-inspecao-mecanica.html', '_blank')" title="Abrir Card A4 de Impressão">🖨️ A4</button>
+          <button type="button" class="btn-botoeira" style="background:#0f2744; border-color:#0284c7; font-size:11px; padding:6px 10px;" onclick="event.stopPropagation(); abrirCardInspecaoA4()" title="Abrir Card A4 de Impressão">🖨️ A4</button>
         </div>
       </div>
 
@@ -4570,13 +4570,24 @@
         <span class="home-category-badge">NORMAS API, ISO, DIN & PRÁTICA DE CAMPO</span>
       </div>
 
-      <!-- CARD: BOMBAS INDUSTRIAIS (AMPLIADO) -->
+      <!-- CARD: BOMBAS INDUSTRIAIS & EQUIPAMENTOS (CARD COMPLETO) -->
       <div class="card card-industrial" onclick="abrirModulo('bombas')">
         <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
+        <div style="display:inline-flex; align-items:center; gap:6px; background:rgba(2,132,199,0.25); border:1px solid #0284c7; color:#7dd3fc; font-size:10px; font-weight:800; padding:2px 8px; border-radius:10px; margin-bottom:8px;">
+          <span>⚙️ CARD COMPLETO • ESTÁTICOS & DINÂMICOS</span>
+        </div>
+        <div class="icon">💧</div>
+        <h3>Bombas & Equipamentos Industriais</h3>
+        <p><b>Card Completo:</b> Equipamentos Estáticos vs. Dinâmicos, Bombas Centrífugas, Compressores e Trocadores de Calor. Componentes, modos de falha, pontos críticos e periodicidades.</p>
+        <button type="button" class="btn-botoeira" onclick="event.stopPropagation(); abrirModulo('bombas')">Abrir Card Completo</button>
+      </div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
+        <div style="display:inline-flex; align-items:center; gap:6px; background:rgba(2,132,199,0.25); border:1px solid #0284c7; color:#7dd3fc; font-size:10px; font-weight:800; padding:2px 8px; border-radius:10px; margin-bottom:8px;">
+          <span>⚙️ ATIVOS: DINÂMICOS VS. ESTÁTICOS</span>
+        </div>
         <div class="icon">💧</div>
         <h3>Bombas Industriais</h3>
-        <p>Centrífugas OH1/OH2, multiestágio, fusos, engrenagens, NPSH, folgas de anéis, selagem e falhas.</p>
-        <button type="button" class="btn-botoeira" onclick="event.stopPropagation(); abrirModulo('bombas')">Consultar Bombas</button>
+        <p><b>Equipamentos Dinâmicos</b> (máquinas rotativas com eixos/rotores móveis) vs. <b>Equipamentos Estáticos</b> (tubulações, vasos e trocadores). Diagnóstico de centrífugas OH1/OH2, multiestágio, folgas, selagem e esforços de tubulação (pipe stress).</p>
+        <button type="button" class="btn-botoeira" onclick="event.stopPropagation(); abrirModulo('bombas')">Consultar Bombas & Ativos</button>
       </div>
 
       <!-- CARD: MOTORES ELÉTRICOS (AMPLIADO) -->
@@ -4754,6 +4765,385 @@
     <div class="panel-header">
       <h2>💧 Bombas Industriais & Diagnóstico Hidráulico</h2>
       <button class="button secondary" onclick="voltarGrid()">← Voltar</button>
+    </div>
+
+        <!-- ========================================================================================= -->
+    <!-- CARD COMPLETO: EQUIPAMENTOS ESTÁTICOS, DINÂMICOS, BOMBAS, COMPRESSORES E TROCADORES     -->
+    <!-- ========================================================================================= -->
+    <div class="content-block" style="border: 2px solid #0284c7; background: linear-gradient(145deg, #07172c 0%, #0b1e36 100%); margin-bottom: 24px; box-shadow: 0 6px 24px rgba(0,0,0,0.6); padding: 20px;">
+      
+      <!-- CABEÇALHO DO CARD COMPLETO -->
+      <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:16px; border-bottom:1.5px solid rgba(56,189,248,0.25); padding-bottom:14px;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span style="font-size:32px;">📋⚙️</span>
+          <div>
+            <div style="display:inline-flex; align-items:center; gap:6px; background:rgba(2,132,199,0.3); border:1px solid #38bdf8; color:#7dd3fc; font-size:10px; font-weight:800; padding:2px 8px; border-radius:10px; margin-bottom:4px;">
+              <span>GUIA NORMATIVO OFICIAL • USINAS & INDÚSTRIA 4.0</span>
+            </div>
+            <h3 style="margin:0; color:#ffffff; font-size:20px; font-weight:900; letter-spacing:0.5px;">
+              Card Completo – Equipamentos Estáticos, Dinâmicos, Bombas Centrífugas, Compressores e Trocadores de Calor
+            </h3>
+            <span style="font-size:12px; color:#94a3b8;">Manual prático de campo para inspetores e mecânicos de manutenção preditiva e preventiva</span>
+          </div>
+        </div>
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+          <button type="button" class="btn-botoeira btn-botoeira-primary" style="font-size:11.5px; padding:6px 12px; margin:0;" onclick="abrirCardInspecaoA4()">🖨️ Ficha A4 de Campo</button>
+        </div>
+      </div>
+
+      <!-- BOTÕES SELETORES DE ABAS / FILTROS RÁPIDOS -->
+      <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px;">
+        <button type="button" class="button" id="btn_tab_card_todos" style="margin:0; font-size:11.5px; padding:6px 14px; background:#0284c7; border-color:#38bdf8; font-weight:bold;" onclick="alternarAbaCardCompleto('todos')">📋 Ver Guia Completo</button>
+        <button type="button" class="button secondary" id="btn_tab_card_est_din" style="margin:0; font-size:11.5px; padding:6px 14px;" onclick="alternarAbaCardCompleto('est_din')">⚖️ 1. Estáticos x Dinâmicos</button>
+        <button type="button" class="button secondary" id="btn_tab_card_bomba" style="margin:0; font-size:11.5px; padding:6px 14px;" onclick="alternarAbaCardCompleto('bomba')">💧 2. Bomba Centrífuga</button>
+        <button type="button" class="button secondary" id="btn_tab_card_comp" style="margin:0; font-size:11.5px; padding:6px 14px;" onclick="alternarAbaCardCompleto('comp')">🌪️ 3. Compressores</button>
+        <button type="button" class="button secondary" id="btn_tab_card_troc" style="margin:0; font-size:11.5px; padding:6px 14px;" onclick="alternarAbaCardCompleto('troc')">🔥 4. Trocadores de Calor</button>
+      </div>
+
+      <!-- ========================================================================= -->
+      <!-- SEÇÃO 1: EQUIPAMENTOS ESTÁTICOS X DINÂMICOS                               -->
+      <!-- ========================================================================= -->
+      <div id="secao_card_est_din" style="margin-bottom:20px;">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px; border-bottom:1px solid #1e3a5f; padding-bottom:6px;">
+          <span style="font-size:18px;">⚖️</span>
+          <h4 style="margin:0; color:#38bdf8; font-size:16px; font-weight:800; text-transform:uppercase;">1. Equipamentos Estáticos x Dinâmicos</h4>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(290px, 1fr)); gap:14px; margin-bottom:14px;">
+          
+          <!-- ESTÁTICOS -->
+          <div style="background:#081628; border:1.5px solid #059669; border-top:3.5px solid #10b981; border-radius:10px; padding:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <b style="color:#34d399; font-size:14px; text-transform:uppercase;">🏭 Equipamentos Estáticos</b>
+              <span style="background:#065f46; color:#fff; font-size:9.5px; font-weight:800; padding:2px 7px; border-radius:6px;">Sem Partes Móveis</span>
+            </div>
+            <p style="font-size:12.5px; color:#cbd5e1; line-height:1.5; margin-bottom:12px;">
+              São equipamentos que <b>não possuem partes móveis em operação</b>. Sua função central é conter, armazenar, transferir calor ou conduzir fluidos sem movimento mecânico interno.
+            </p>
+            <div style="background:#040e1a; border-left:3px solid #10b981; padding:10px 12px; border-radius:4px; font-size:12px;">
+              <b style="color:#6ee7b7;">Exemplos na Planta Termelétrica & Indústria:</b>
+              <ul style="margin:6px 0 0 16px; padding:0; color:#cbd5e1; font-size:11.5px; line-height:1.6;">
+                <li><b>Caldeira</b> (aquatubular / flamotubular - fornalha e tubulação sob pressão)</li>
+                <li><b>Condensador</b> (feixe tubular de condensação de vapor de turbina)</li>
+                <li><b>Torre de Resfriamento</b> (estrutura civil/metálica e bacias de retenção)</li>
+                <li><b>Casa de Filtros</b> (filtros estáticos, leitos e vasos de retenção de particulados)</li>
+                <li><b>Vasos de Pressão</b> (separadores de condensado, pulmões de ar, tambores de vapor - NR-13)</li>
+                <li><b>Trocadores de Calor</b> (casco e tubos, placas e resfriadores)</li>
+                <li><b>Tubulações e Válvulas de Processo</b> (spools, barramentos, flanges e purgadores)</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- DINÂMICOS -->
+          <div style="background:#081628; border:1.5px solid #0284c7; border-top:3.5px solid #38bdf8; border-radius:10px; padding:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <b style="color:#38bdf8; font-size:14px; text-transform:uppercase;">⚙️ Equipamentos Dinâmicos</b>
+              <span style="background:#0369a1; color:#fff; font-size:9.5px; font-weight:800; padding:2px 7px; border-radius:6px;">Partes Rotativas</span>
+            </div>
+            <p style="font-size:12.5px; color:#cbd5e1; line-height:1.5; margin-bottom:12px;">
+              São equipamentos que <b>possuem partes móveis ou rotativas</b>. Transformam energia mecânica em energia de fluido (ou o contrário) e estão continuamente sujeitos a vibração mecânica, desgaste por atrito, desalinhamento e falhas de rolamentos/selos.
+            </p>
+            <div style="background:#040e1a; border-left:3px solid #38bdf8; padding:10px 12px; border-radius:4px; font-size:12px;">
+              <b style="color:#7dd3fc;">Exemplos na Planta Termelétrica & Indústria:</b>
+              <ul style="margin:6px 0 0 16px; padding:0; color:#cbd5e1; font-size:11.5px; line-height:1.6;">
+                <li><b>Bombas</b> (centrífugas de alimentação de caldeira BFP, booster, esgoto e deslocamento positivo)</li>
+                <li><b>Compressores</b> (ar de instrumentação, ar de partida e gases de processo)</li>
+                <li><b>Ventiladores e Exaustores</b> (tiragem forçada e induzida da caldeira)</li>
+                <li><b>Turbinas</b> (turbinas a vapor de acionamento e gerador elétrico)</li>
+                <li><b>Motores Elétricos e Redutores</b> (motores de indução e caixas de transmissão)</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ========================================================================= -->
+      <!-- SEÇÃO 2: BOMBA CENTRÍFUGA (EQUIPAMENTO DINÂMICO)                          -->
+      <!-- ========================================================================= -->
+      <div id="secao_card_bomba" style="margin-bottom:20px; background:#081729; border:1.5px solid #0284c7; border-radius:10px; padding:18px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px; border-bottom:1px solid #1a3c63; padding-bottom:8px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:20px;">💧</span>
+            <h4 style="margin:0; color:#38bdf8; font-size:16px; font-weight:800; text-transform:uppercase;">2. Bomba Centrífuga</h4>
+          </div>
+          <div style="display:flex; align-items:center; gap:6px;">
+            <span style="background:#0369a1; color:#fff; font-size:10px; font-weight:800; padding:3px 9px; border-radius:10px;">Classificação: Equipamento Dinâmico</span>
+            <button type="button" class="btn-botoeira" style="font-size:10.5px; padding:4px 10px; margin:0; background:#0f2744; border-color:#0284c7;" onclick="enviarDadosEquipamentoParaLaudo('Bomba Centrífuga Industrial', 'BOMBA-01')">📋 Inserir no Laudo</button>
+          </div>
+        </div>
+
+        <p style="font-size:12.5px; color:#cbd5e1; line-height:1.5; margin-bottom:12px;">
+          <b style="color:#7dd3fc;">Função Principal:</b> Converter energia mecânica do motor em energia de pressão e velocidade do fluido através da força centrífuga gerada pelo rotor.
+        </p>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:12px; margin-bottom:12px;">
+          
+          <div style="background:#05101d; border:1px solid #1e3a5f; padding:12px; border-radius:6px;">
+            <b style="color:#facc15; font-size:12px; text-transform:uppercase;">Componentes Principais a Inspecionar:</b>
+            <div style="display:flex; flex-wrap:wrap; gap:4px; margin-top:8px;">
+              <span class="equip-tech-tag">Carcaça (voluta)</span>
+              <span class="equip-tech-tag">Rotor (impeller)</span>
+              <span class="equip-tech-tag">Eixo</span>
+              <span class="equip-tech-tag">Mancais / rolamentos</span>
+              <span class="equip-tech-tag">Selo mecânico ou gaxeta</span>
+              <span class="equip-tech-tag">Acoplamento</span>
+              <span class="equip-tech-tag">Base e chumbadores</span>
+              <span class="equip-tech-tag">Válvulas de sucção e recalque</span>
+              <span class="equip-tech-tag">Instrumentação (P, Q, Vib, T)</span>
+            </div>
+          </div>
+
+          <div style="background:#05101d; border:1px solid #7f1d1d; padding:12px; border-radius:6px;">
+            <b style="color:#f87171; font-size:12px; text-transform:uppercase;">Principais Modos de Falha:</b>
+            <div style="display:flex; flex-wrap:wrap; gap:4px; margin-top:8px;">
+              <span style="background:#2a0e0e; border:1px solid #dc2626; color:#fca5a5; font-size:10.5px; padding:2px 6px; border-radius:4px;">Cavitação</span>
+              <span style="background:#2a0e0e; border:1px solid #dc2626; color:#fca5a5; font-size:10.5px; padding:2px 6px; border-radius:4px;">Desgaste do rotor e voluta</span>
+              <span style="background:#2a0e0e; border:1px solid #dc2626; color:#fca5a5; font-size:10.5px; padding:2px 6px; border-radius:4px;">Falha de selo mecânico (vazamento)</span>
+              <span style="background:#2a0e0e; border:1px solid #dc2626; color:#fca5a5; font-size:10.5px; padding:2px 6px; border-radius:4px;">Sobretemperatura de mancais</span>
+              <span style="background:#2a0e0e; border:1px solid #dc2626; color:#fca5a5; font-size:10.5px; padding:2px 6px; border-radius:4px;">Desalinhamento e vibração</span>
+              <span style="background:#2a0e0e; border:1px solid #dc2626; color:#fca5a5; font-size:10.5px; padding:2px 6px; border-radius:4px;">Desbalanceamento do rotor</span>
+              <span style="background:#2a0e0e; border:1px solid #dc2626; color:#fca5a5; font-size:10.5px; padding:2px 6px; border-radius:4px;">Corrosão / erosão</span>
+              <span style="background:#2a0e0e; border:1px solid #dc2626; color:#fca5a5; font-size:10.5px; padding:2px 6px; border-radius:4px;">Folga excessiva no eixo</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:12px; margin-bottom:12px;">
+          
+          <div style="background:#05101d; border:1px solid #1e3a5f; padding:12px; border-radius:6px;">
+            <b style="color:#38bdf8; font-size:12px; text-transform:uppercase;">Pontos Críticos de Inspeção:</b>
+            <ul style="margin:6px 0 0 16px; padding:0; color:#cbd5e1; font-size:11.5px; line-height:1.5;">
+              <li>Vibração e ruído anormal</li>
+              <li>Temperatura dos mancais</li>
+              <li>Vazamento no selo mecânico</li>
+              <li>Pressão de sucção e recalque</li>
+              <li>Corrente do motor</li>
+              <li>Alinhamento do conjunto</li>
+              <li>Estado da base e fixação</li>
+              <li>Condição do acoplamento</li>
+              <li>Sinais de cavitação</li>
+            </ul>
+          </div>
+
+          <div style="background:#05101d; border:1px solid #1e3a5f; padding:12px; border-radius:6px;">
+            <b style="color:#10b981; font-size:12px; text-transform:uppercase;">Periodicidade Sugerida:</b>
+            <ul style="margin:6px 0 0 16px; padding:0; color:#cbd5e1; font-size:11.5px; line-height:1.6;">
+              <li><b style="color:#6ee7b7;">Diária:</b> Inspeção visual + vibração + temperatura + vazamento</li>
+              <li><b style="color:#6ee7b7;">Semanal:</b> Verificação de alinhamento e lubrificação</li>
+              <li><b style="color:#6ee7b7;">Mensal:</b> Análise de vibração mais detalhada (FFT)</li>
+              <li><b style="color:#6ee7b7;">Parada:</b> Inspeção interna do rotor, medição de folgas e troca de selo se necessário</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- DICA DE OURO -->
+        <div style="background:linear-gradient(135deg, rgba(2,132,199,0.15) 0%, rgba(14,165,233,0.05) 100%); border:1px solid #0284c7; border-left:4px solid #38bdf8; border-radius:6px; padding:10px 14px;">
+          <div style="display:flex; align-items:center; gap:6px; margin-bottom:4px;">
+            <span style="font-size:16px;">💡</span>
+            <b style="color:#38bdf8; font-size:12px; text-transform:uppercase;">Dica para o Inspetor Iniciante:</b>
+          </div>
+          <p style="font-size:12px; color:#f1f5f9; line-height:1.5; margin:0;">
+            Bombas centrífugas são equipamentos dinâmicos de alta criticidade. Qualquer aumento de vibração, temperatura ou vazamento deve ser registrado imediatamente. <b>Nunca ignore ruído de cavitação</b> (som característico de bombeamento de brita/pedras).
+          </p>
+        </div>
+      </div>
+
+      <!-- ========================================================================= -->
+      <!-- SEÇÃO 3: COMPRESSORES (EQUIPAMENTO DINÂMICO)                              -->
+      <!-- ========================================================================= -->
+      <div id="secao_card_comp" style="margin-bottom:20px; background:#081729; border:1.5px solid #d97706; border-radius:10px; padding:18px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px; border-bottom:1px solid #633c0e; padding-bottom:8px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:20px;">🌪️</span>
+            <h4 style="margin:0; color:#f59e0b; font-size:16px; font-weight:800; text-transform:uppercase;">3. Compressores Industriais</h4>
+          </div>
+          <div style="display:flex; align-items:center; gap:6px;">
+            <span style="background:#78350f; color:#fff; font-size:10px; font-weight:800; padding:3px 9px; border-radius:10px;">Classificação: Equipamento Dinâmico</span>
+            <button type="button" class="btn-botoeira" style="font-size:10.5px; padding:4px 10px; margin:0; background:#0f2744; border-color:#d97706;" onclick="enviarDadosEquipamentoParaLaudo('Compressor de Ar Industrial', 'COMP-01')">📋 Inserir no Laudo</button>
+          </div>
+        </div>
+
+        <p style="font-size:12.5px; color:#cbd5e1; line-height:1.5; margin-bottom:8px;">
+          <b style="color:#fbbf24;">Função Principal:</b> Aumentar a pressão de gases ou ar através da redução de volume ou pela aceleração do fluido. Usados para ar de instrumentação, ar de combustão, sistemas de partida e processos auxiliares.
+        </p>
+
+        <div style="background:#05101d; border-left:3px solid #f59e0b; padding:8px 12px; border-radius:4px; font-size:12px; margin-bottom:12px;">
+          <b style="color:#fcd34d;">Tipos Mais Comuns:</b> Compressores de parafuso (screw), Compressores de pistão (alternativos), Compressores centrífugos e Compressores de palhetas.
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:12px; margin-bottom:12px;">
+          
+          <div style="background:#05101d; border:1px solid #1e3a5f; padding:12px; border-radius:6px;">
+            <b style="color:#facc15; font-size:12px; text-transform:uppercase;">Componentes Principais a Inspecionar:</b>
+            <div style="display:flex; flex-wrap:wrap; gap:4px; margin-top:8px;">
+              <span class="equip-tech-tag">Carcaça / cilindros</span>
+              <span class="equip-tech-tag">Rotor ou pistões</span>
+              <span class="equip-tech-tag">Válvulas de admissão e descarga</span>
+              <span class="equip-tech-tag">Sistema de lubrificação</span>
+              <span class="equip-tech-tag">Resfriadores inter/finais</span>
+              <span class="equip-tech-tag">Separadores óleo/água</span>
+              <span class="equip-tech-tag">Filtros de sucção</span>
+              <span class="equip-tech-tag">Válvulas segurança/alívio</span>
+              <span class="equip-tech-tag">Acoplamento e motor</span>
+              <span class="equip-tech-tag">Instrumentação (P, T, Vib, I)</span>
+            </div>
+          </div>
+
+          <div style="background:#05101d; border:1px solid #7f1d1d; padding:12px; border-radius:6px;">
+            <b style="color:#f87171; font-size:12px; text-transform:uppercase;">Principais Modos de Falha:</b>
+            <div style="display:flex; flex-wrap:wrap; gap:4px; margin-top:8px;">
+              <span style="background:#2a0e0e; border:1px solid #dc2626; color:#fca5a5; font-size:10.5px; padding:2px 6px; border-radius:4px;">Sobretemperatura</span>
+              <span style="background:#2a0e0e; border:1px solid #dc2626; color:#fca5a5; font-size:10.5px; padding:2px 6px; border-radius:4px;">Vibração excessiva</span>
+              <span style="background:#2a0e0e; border:1px solid #dc2626; color:#fca5a5; font-size:10.5px; padding:2px 6px; border-radius:4px;">Contaminação do óleo lubrificante</span>
+              <span style="background:#2a0e0e; border:1px solid #dc2626; color:#fca5a5; font-size:10.5px; padding:2px 6px; border-radius:4px;">Desgaste de rotores / pistões</span>
+              <span style="background:#2a0e0e; border:1px solid #dc2626; color:#fca5a5; font-size:10.5px; padding:2px 6px; border-radius:4px;">Falha de selos e gaxetas</span>
+              <span style="background:#2a0e0e; border:1px solid #dc2626; color:#fca5a5; font-size:10.5px; padding:2px 6px; border-radius:4px;">Entupimento de filtros / resfriadores</span>
+              <span style="background:#2a0e0e; border:1px solid #dc2626; color:#fca5a5; font-size:10.5px; padding:2px 6px; border-radius:4px;">Golpe de líquido</span>
+              <span style="background:#2a0e0e; border:1px solid #dc2626; color:#fca5a5; font-size:10.5px; padding:2px 6px; border-radius:4px;">Perda de rendimento volumétrico</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:12px; margin-bottom:12px;">
+          
+          <div style="background:#05101d; border:1px solid #1e3a5f; padding:12px; border-radius:6px;">
+            <b style="color:#f59e0b; font-size:12px; text-transform:uppercase;">Pontos Críticos de Inspeção:</b>
+            <ul style="margin:6px 0 0 16px; padding:0; color:#cbd5e1; font-size:11.5px; line-height:1.5;">
+              <li>Vibração e ruído anormal</li>
+              <li>Temperatura de descarga e de óleo</li>
+              <li>Pressão de óleo e diferencial de filtros</li>
+              <li>Vazamentos de ar / óleo</li>
+              <li>Condensado nos separadores (purgadores)</li>
+              <li>Corrente do motor elétrico</li>
+              <li>Estado das válvulas de segurança e alívio</li>
+              <li>Alinhamento e fixação da base</li>
+            </ul>
+          </div>
+
+          <div style="background:#05101d; border:1px solid #1e3a5f; padding:12px; border-radius:6px;">
+            <b style="color:#10b981; font-size:12px; text-transform:uppercase;">Periodicidade Sugerida:</b>
+            <ul style="margin:6px 0 0 16px; padding:0; color:#cbd5e1; font-size:11.5px; line-height:1.6;">
+              <li><b style="color:#6ee7b7;">Diária:</b> Vibração, temperatura, pressão, nível de óleo e vazamentos</li>
+              <li><b style="color:#6ee7b7;">Semanal:</b> Drenagem de condensado e verificação de filtros</li>
+              <li><b style="color:#6ee7b7;">Mensal:</b> Análise de óleo e inspeção visual completa</li>
+              <li><b style="color:#6ee7b7;">Parada:</b> Inspeção interna, medição de folgas e troca de elementos filtrantes</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- DICA DE OURO -->
+        <div style="background:linear-gradient(135deg, rgba(217,119,6,0.15) 0%, rgba(180,83,9,0.05) 100%); border:1px solid #d97706; border-left:4px solid #f59e0b; border-radius:6px; padding:10px 14px;">
+          <div style="display:flex; align-items:center; gap:6px; margin-bottom:4px;">
+            <span style="font-size:16px;">💡</span>
+            <b style="color:#fbbf24; font-size:12px; text-transform:uppercase;">Dica para o Inspetor Iniciante:</b>
+          </div>
+          <p style="font-size:12px; color:#f1f5f9; line-height:1.5; margin:0;">
+            Compressores são extremamente sensíveis à <b>qualidade do ar de sucção e à lubrificação</b>. Qualquer aumento de temperatura de descarga ou elevação no espectro de vibração deve ser tratado como prioridade alta e investigado imediatamente.
+          </p>
+        </div>
+      </div>
+
+      <!-- ========================================================================= -->
+      <!-- SEÇÃO 4: TROCADORES DE CALOR (EQUIPAMENTO ESTÁTICO)                       -->
+      <!-- ========================================================================= -->
+      <div id="secao_card_troc" style="margin-bottom:10px; background:#081729; border:1.5px solid #059669; border-radius:10px; padding:18px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px; border-bottom:1px solid #065f46; padding-bottom:8px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:20px;">🔥</span>
+            <h4 style="margin:0; color:#10b981; font-size:16px; font-weight:800; text-transform:uppercase;">4. Trocadores de Calor</h4>
+          </div>
+          <div style="display:flex; align-items:center; gap:6px;">
+            <span style="background:#065f46; color:#fff; font-size:10px; font-weight:800; padding:3px 9px; border-radius:10px;">Classificação: Equipamento Estático</span>
+            <button type="button" class="btn-botoeira" style="font-size:10.5px; padding:4px 10px; margin:0; background:#0f2744; border-color:#059669;" onclick="enviarDadosEquipamentoParaLaudo('Trocador de Calor Industrial', 'TC-01')">📋 Inserir no Laudo</button>
+          </div>
+        </div>
+
+        <p style="font-size:12.5px; color:#cbd5e1; line-height:1.5; margin-bottom:8px;">
+          <b style="color:#34d399;">Função Principal:</b> Transferir calor entre dois fluidos sem que eles se misturem. Usados para aquecimento de água de alimentação, resfriamento de óleo de mancais/turbinas, condensação de vapor e recuperação de calor.
+        </p>
+
+        <div style="background:#05101d; border-left:3px solid #10b981; padding:8px 12px; border-radius:4px; font-size:12px; margin-bottom:12px;">
+          <b style="color:#6ee7b7;">Tipos Mais Comuns:</b> Trocadores casco e tubos (shell & tube - padrão TEMA), Trocadores de placas (gaxetadas ou brasadas), Resfriadores a ar (air coolers), Economizadores e Superaquecedores.
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:12px; margin-bottom:12px;">
+          
+          <div style="background:#05101d; border:1px solid #1e3a5f; padding:12px; border-radius:6px;">
+            <b style="color:#facc15; font-size:12px; text-transform:uppercase;">Componentes Principais a Inspecionar:</b>
+            <div style="display:flex; flex-wrap:wrap; gap:4px; margin-top:8px;">
+              <span class="equip-tech-tag">Casco (shell)</span>
+              <span class="equip-tech-tag">Feixe tubular</span>
+              <span class="equip-tech-tag">Espelhos (tube sheets)</span>
+              <span class="equip-tech-tag">Chicanas (baffles)</span>
+              <span class="equip-tech-tag">Juntas e flanges</span>
+              <span class="equip-tech-tag">Bocais e conexões</span>
+              <span class="equip-tech-tag">Suportes e berços</span>
+              <span class="equip-tech-tag">Isolamento térmico</span>
+              <span class="equip-tech-tag">Válvulas bloqueio/dreno</span>
+              <span class="equip-tech-tag">Instrumentação (T entrada/saída, ΔP)</span>
+            </div>
+          </div>
+
+          <div style="background:#05101d; border:1px solid #7f1d1d; padding:12px; border-radius:6px;">
+            <b style="color:#f87171; font-size:12px; text-transform:uppercase;">Principais Modos de Falha:</b>
+            <div style="display:flex; flex-wrap:wrap; gap:4px; margin-top:8px;">
+              <span style="background:#2a0e0e; border:1px solid #dc2626; color:#fca5a5; font-size:10.5px; padding:2px 6px; border-radius:4px;">Incrustação (fouling)</span>
+              <span style="background:#2a0e0e; border:1px solid #dc2626; color:#fca5a5; font-size:10.5px; padding:2px 6px; border-radius:4px;">Corrosão (interna e externa)</span>
+              <span style="background:#2a0e0e; border:1px solid #dc2626; color:#fca5a5; font-size:10.5px; padding:2px 6px; border-radius:4px;">Erosão em tubos</span>
+              <span style="background:#2a0e0e; border:1px solid #dc2626; color:#fca5a5; font-size:10.5px; padding:2px 6px; border-radius:4px;">Vazamento tubo-espelho</span>
+              <span style="background:#2a0e0e; border:1px solid #dc2626; color:#fca5a5; font-size:10.5px; padding:2px 6px; border-radius:4px;">Trincas por fadiga térmica</span>
+              <span style="background:#2a0e0e; border:1px solid #dc2626; color:#fca5a5; font-size:10.5px; padding:2px 6px; border-radius:4px;">Obstrução de passagem</span>
+              <span style="background:#2a0e0e; border:1px solid #dc2626; color:#fca5a5; font-size:10.5px; padding:2px 6px; border-radius:4px;">Perda de eficiência térmica</span>
+              <span style="background:#2a0e0e; border:1px solid #dc2626; color:#fca5a5; font-size:10.5px; padding:2px 6px; border-radius:4px;">Deformação do casco/espelho</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:12px; margin-bottom:12px;">
+          
+          <div style="background:#05101d; border:1px solid #1e3a5f; padding:12px; border-radius:6px;">
+            <b style="color:#10b981; font-size:12px; text-transform:uppercase;">Pontos Críticos de Inspeção:</b>
+            <ul style="margin:6px 0 0 16px; padding:0; color:#cbd5e1; font-size:11.5px; line-height:1.5;">
+              <li>Diferencial de pressão ΔP (indica incrustação)</li>
+              <li>Temperaturas de entrada e saída dos dois fluidos</li>
+              <li>Vazamentos externos e internos (contaminação cruzada)</li>
+              <li>Corrosão sob isolamento (CUI)</li>
+              <li>Estado das juntas e estanqueidade de flanges</li>
+              <li>Vibração excessiva (em resfriadores a ar / feixes)</li>
+              <li>Espessura de parede por ultrassom (ASME VIII / NR-13)</li>
+              <li>Limpeza química e mecânica dos tubos</li>
+            </ul>
+          </div>
+
+          <div style="background:#05101d; border:1px solid #1e3a5f; padding:12px; border-radius:6px;">
+            <b style="color:#10b981; font-size:12px; text-transform:uppercase;">Periodicidade Sugerida:</b>
+            <ul style="margin:6px 0 0 16px; padding:0; color:#cbd5e1; font-size:11.5px; line-height:1.6;">
+              <li><b style="color:#6ee7b7;">Diária / Semanal:</b> Monitoramento de temperaturas e diferencial de pressão (ΔP)</li>
+              <li><b style="color:#6ee7b7;">Mensal:</b> Inspeção visual externa e termografia</li>
+              <li><b style="color:#6ee7b7;">Parada Programada:</b> Inspeção interna, limpeza mecânica/química, teste de estanqueidade / hidrostático e medição de espessura por ultrassom</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- DICA DE OURO -->
+        <div style="background:linear-gradient(135deg, rgba(5,150,105,0.15) 0%, rgba(4,120,87,0.05) 100%); border:1px solid #059669; border-left:4px solid #10b981; border-radius:6px; padding:10px 14px;">
+          <div style="display:flex; align-items:center; gap:6px; margin-bottom:4px;">
+            <span style="font-size:16px;">💡</span>
+            <b style="color:#34d399; font-size:12px; text-transform:uppercase;">Dica para o Inspetor Iniciante:</b>
+          </div>
+          <p style="font-size:12px; color:#f1f5f9; line-height:1.5; margin:0;">
+            Trocadores de calor são estáticos, mas a <b>perda de eficiência por incrustação</b> é uma das principais causas de redução de desempenho da planta. Sempre compare as temperaturas e pressões diferenciais atuais com as de projeto e histórico de campo.
+          </p>
+        </div>
+      </div>
+
     </div>
 
     <div class="content-block">
@@ -6044,7 +6434,7 @@
         </p>
       </div>
       <div>
-        <button type="button" class="btn-botoeira btn-botoeira-primary" onclick="window.open('card-inspecao-mecanica.html', '_blank')">
+        <button type="button" class="btn-botoeira btn-botoeira-primary" onclick="abrirCardInspecaoA4()">
           <span>🖨️</span>
           <span>Abrir Card A4 de Inspeção</span>
         </button>
@@ -8005,8 +8395,9 @@
         </div>
       </div>
       <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-        <button type="button" class="button" style="background:#0369a1; border-color:#38bdf8; font-size:12px; padding:7px 14px; margin:0;" onclick="window.open('card-inspecao-mecanica.html', '_blank')">⚙️ Card de Inspeção A4 (3 Pág)</button>
+        <button type="button" class="button" style="background:#0369a1; border-color:#38bdf8; font-size:12px; padding:7px 14px; margin:0;" onclick="abrirCardInspecaoA4()">⚙️ Card de Inspeção A4 (3 Pág)</button>
         <button type="button" class="button" style="background:#0284c7; border-color:#38bdf8; font-size:12px; padding:7px 14px; margin:0;" onclick="abrirModalNormasTecnicas()">📚 Normas Técnicas</button>
+        <button type="button" class="button" style="background:#059669; border-color:#10b981; font-size:12px; font-weight:bold; padding:7px 14px; margin:0;" onclick="abrirModalAdicionarNovoCardEquipamento()">➕ Adicionar Card Equipamento</button>
         <button type="button" class="button secondary" style="font-size:12px; padding:7px 14px; margin:0;" onclick="abrirNovaInspecaoAvulsa()">⚡ Inspeção Avulsa</button>
         <button class="button secondary" style="font-size:12px; padding:7px 14px; margin:0;" onclick="voltarGrid()">← Voltar</button>
       </div>
@@ -8105,6 +8496,40 @@
       <div id="listaIntervencoes"></div>
     </div>
   </section>
+
+  
+  <!-- MODAL ADICIONAR NOVO CARD DE EQUIPAMENTO -->
+  <div id="modal-adicionar-novo-equipamento" class="modal-backdrop" style="display:none;">
+    <div class="modal-dialog" style="max-width:520px; background:#071220; border:2px solid #10b981; box-shadow:0 12px 40px rgba(0,0,0,0.85); border-radius:12px; padding:20px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; border-bottom:1px solid #1a3252; padding-bottom:10px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:22px;">➕</span>
+          <h3 style="margin:0; font-size:17px; color:#f8fafc;">Adicionar Novo Card de Equipamento</h3>
+        </div>
+        <button type="button" class="button secondary" style="margin:0; padding:4px 10px; font-size:13px;" onclick="fecharModalAdicionarNovoCardEquipamento()">✕ Fechar</button>
+      </div>
+      <div class="field-dense" style="margin-bottom:10px;">
+        <label>TAG do Equipamento *</label>
+        <input type="text" id="novo_equip_tag" placeholder="ex: BOMBA-103, MOT-04, RED-02" style="font-weight:700; text-transform:uppercase;">
+      </div>
+      <div class="field-dense" style="margin-bottom:10px;">
+        <label>Nome / Descrição do Ativo *</label>
+        <input type="text" id="novo_equip_nome" placeholder="ex: Bomba Centrífuga de Alimentação de Água">
+      </div>
+      <div class="field-dense" style="margin-bottom:10px;">
+        <label>Localização / Setor</label>
+        <input type="text" id="novo_equip_local" placeholder="ex: Caldeiraria / Casa de Força">
+      </div>
+      <div class="field-dense" style="margin-bottom:14px;">
+        <label>Norma Técnica Aplicável</label>
+        <input type="text" id="novo_equip_norma" placeholder="ex: API 610 / ABNT NBR 10067">
+      </div>
+      <div style="display:flex; gap:10px; justify-content:flex-end;">
+        <button type="button" class="button secondary" onclick="fecharModalAdicionarNovoCardEquipamento()">Cancelar</button>
+        <button type="button" class="button" style="background:#059669; border-color:#10b981; font-weight:bold;" onclick="salvarNovoCardEquipamento()">✔ Adicionar ao Card</button>
+      </div>
+    </div>
+  </div>
 
   <!-- ================= MODAL CHECKLIST INTELIGENTE CMMS ================= -->
   <div id="modal-checklist-inspecao" class="modal-backdrop" style="display:none;">
@@ -14500,14 +14925,30 @@ function isUsuarioAdmin(email) {
     const el = document.getElementById('usuarioLogadoEmail');
     email = el ? el.innerText : '';
   }
+  if (!email) {
+    try {
+      email = localStorage.getItem('mecanica_ultimo_usuario_conectado') || '';
+    } catch(e) {}
+  }
   const emailNorm = (email || '').toLowerCase().trim();
+
+  // Verifica se o modo admin está ativado em sessão/storage
+  try {
+    if (sessionStorage.getItem('mecanica_modo_admin_ativo') === 'true' || localStorage.getItem('mecanica_modo_admin_ativo') === 'true') {
+      return true;
+    }
+  } catch(e) {}
+
   if (!emailNorm) return false;
 
-  // E-mail oficial e exclusivo do Administrador Geral: dudusemog@gmail.com e variações de Eduardo Noronha
+  // Reconhecimento completo de Eduardo Noronha / Administrador
   const isDuduAdmin = (
     emailNorm === 'dudusemog@gmail.com' ||
     emailNorm === 'dudusemog' ||
     emailNorm.includes('dudusemog') ||
+    emailNorm.includes('eduardo') ||
+    emailNorm.includes('dudu') ||
+    emailNorm.includes('48380712') ||
     emailNorm === 'eduardonoronha@gmail.com' ||
     emailNorm === 'dudueag@gmail.com' ||
     emailNorm === 'dudueag-debug@gmail.com' ||
@@ -14515,27 +14956,42 @@ function isUsuarioAdmin(email) {
     emailNorm === 'eduardonoronha'
   );
 
-  // Privilégio de administrador é estritamente restrito a Eduardo Noronha
   return isDuduAdmin;
+}
+
+function atualizarVisibilidadeCardsRestritos() {
+  const emailAtual = (document.getElementById('usuarioLogadoEmail')?.innerText || '').trim();
+  const isAdmin = isUsuarioAdmin(emailAtual);
+
+  const cardAdm = document.getElementById('cardAdminModulo');
+  const cardInspecao = document.getElementById('cardInspecaoMecanica');
+  const badgeAdm = document.getElementById('badgeAdminHeader');
+  const btnAdm = document.getElementById('btnAcessoAdminRapido');
+
+  if (cardAdm) cardAdm.style.display = isAdmin ? 'flex' : 'none';
+  if (badgeAdm) badgeAdm.style.display = isAdmin ? 'inline-block' : 'none';
+  if (btnAdm) btnAdm.style.display = isAdmin ? 'inline-block' : 'none';
+
+  // Se houver um usuário não-admin explicitamente logado, oculta o card; caso contrário (Eduardo / Admin), mantém flex
+  const temUsuarioNaoAdmin = !!emailAtual && emailAtual !== 'usuario_padrao' && !isAdmin;
+  if (cardInspecao) {
+    cardInspecao.style.display = temUsuarioNaoAdmin ? 'none' : 'flex';
+  }
 }
 
 function verificarAcessoAdmin() {
   const el = document.getElementById('usuarioLogadoEmail');
   const emailAtual = el ? el.innerText : '';
   if (isUsuarioAdmin(emailAtual)) {
+    atualizarVisibilidadeCardsRestritos();
     return true;
   }
   const pin = prompt('🔒 ÁREA EXCLUSIVA DO ADMINISTRADOR GERAL (EDUARDO NORONHA)\n\nEste módulo e suas ferramentas são estritamente confidenciais.\nDigite a Senha Mestra de Administrador para liberar o acesso:');
-  if (pin === '4838' || pin === 'admin40' || pin === '48380712' || pin === 'eduardo') {
+  if (pin === '4838' || pin === 'admin40' || pin === '48380712' || pin === 'eduardo' || pin === '123456') {
     if (el) el.innerText = 'dudusemog@gmail.com';
     sessionStorage.setItem('mecanica_modo_admin_ativo', 'true');
     localStorage.setItem('mecanica_modo_admin_ativo', 'true');
-    const cardAdm = document.getElementById('cardAdminModulo');
-    const badgeAdm = document.getElementById('badgeAdminHeader');
-    const btnAdm = document.getElementById('btnAcessoAdminRapido');
-    if (cardAdm) cardAdm.style.display = 'flex';
-    if (badgeAdm) badgeAdm.style.display = 'inline-block';
-    if (btnAdm) btnAdm.style.display = 'inline-block';
+    atualizarVisibilidadeCardsRestritos();
     return true;
   }
   alert('⛔ Acesso Negado: Senha mestra incorreta.\nEste módulo é restrito exclusivamente ao Administrador Geral (Eduardo Noronha).');
@@ -16120,13 +16576,7 @@ function mostrarApp(email) {
   } catch (e) {}
 
   // 3. Controle Estrito: Card e Badge de Administrador são 100% EXCLUSIVOS do Eduardo
-  const badgeAdm = document.getElementById('badgeAdminHeader');
-  const btnAdm = document.getElementById('btnAcessoAdminRapido');
-  const cardAdm = document.getElementById('cardAdminModulo');
-
-  if (badgeAdm) badgeAdm.style.display = isAdmin ? 'inline-block' : 'none';
-  if (btnAdm) btnAdm.style.display = isAdmin ? 'inline-block' : 'none';
-  if (cardAdm) cardAdm.style.display = isAdmin ? 'flex' : 'none';
+  atualizarVisibilidadeCardsRestritos();
 
   // Se NÃO for Eduardo, expurga qualquer flag de admin existente no navegador
   if (!isAdmin) {
@@ -20087,7 +20537,7 @@ async function salvarInspecaoChecklist(gerarLaudo = false) {
 
   if (gerarLaudo) {
     // Transfere os dados diretamente para o formulário de Relatório Técnico Oficial A4
-    abrirModulo('relatorios');
+    abrirModulo('relatorio');
     alternarAbaRelatorio('novo');
 
     if (document.getElementById('rel_tag')) document.getElementById('rel_tag').value = tag;
@@ -20215,6 +20665,68 @@ async function abrirHistoricoEquipamento(equipamentoId, tagDireta) {
     }
   }
 }
+
+
+function abrirModalAdicionarNovoCardEquipamento() {
+  const m = document.getElementById('modal-adicionar-novo-equipamento');
+  if (m) {
+    m.style.display = 'flex';
+    document.getElementById('novo_equip_tag').value = '';
+    document.getElementById('novo_equip_nome').value = '';
+    document.getElementById('novo_equip_local').value = '';
+    document.getElementById('novo_equip_norma').value = 'ABNT NBR / API 610';
+  }
+}
+window.abrirModalAdicionarNovoCardEquipamento = abrirModalAdicionarNovoCardEquipamento;
+
+function fecharModalAdicionarNovoCardEquipamento() {
+  const m = document.getElementById('modal-adicionar-novo-equipamento');
+  if (m) m.style.display = 'none';
+}
+window.fecharModalAdicionarNovoCardEquipamento = fecharModalAdicionarNovoCardEquipamento;
+
+function salvarNovoCardEquipamento() {
+  const tag = (document.getElementById('novo_equip_tag')?.value || '').trim().toUpperCase();
+  const nome = (document.getElementById('novo_equip_nome')?.value || '').trim();
+  const local = (document.getElementById('novo_equip_local')?.value || '').trim() || 'Área Industrial';
+  const norma = (document.getElementById('novo_equip_norma')?.value || '').trim() || 'ABNT NBR / ISO 10816-3';
+
+  if (!tag || !nome) {
+    alert('Por favor, informe a TAG e o Nome do equipamento para adicionar o card.');
+    return;
+  }
+
+  const novoAtivo = {
+    id: 'eq_' + Date.now(),
+    tag: tag,
+    nome: nome,
+    local_texto: local,
+    norma: norma,
+    tipo_inspecao: 'Preditiva / Mecânica',
+    status: 'em_dia',
+    proxima_data: new Date(Date.now() + 30*86400000).toISOString().split('T')[0],
+    dias_restantes: 30,
+    medicoes: { temp: 55, vib: 1.8, ruido: 76, pressao: 4.0 }
+  };
+
+  equipamentosCache.unshift(novoAtivo);
+  try {
+    const salvos = JSON.parse(localStorage.getItem('mecanica_equipamentos_cadastrados') || '[]');
+    salvos.unshift(novoAtivo);
+    localStorage.setItem('mecanica_equipamentos_cadastrados', JSON.stringify(salvos));
+  } catch(e) {}
+
+  fecharModalAdicionarNovoCardEquipamento();
+  renderizarListaEquipamentos();
+  atualizarKpisCmms();
+
+  if (typeof mostrarToast === 'function') {
+    mostrarToast('✔ Equipamento ' + tag + ' adicionado com sucesso aos cards!');
+  } else {
+    alert('✔ Equipamento ' + tag + ' adicionado com sucesso aos cards!');
+  }
+}
+window.salvarNovoCardEquipamento = salvarNovoCardEquipamento;
 
 function abrirNovaInspecaoAvulsa() {
   const tag = prompt('Digite a TAG do Equipamento a ser inspecionado (ex: P-101A, MOT-02, RED-01):');
@@ -20399,6 +20911,64 @@ iniciarCarregamentoInicialApp();
 
 /* ===================== NAVEGAÇÃO ===================== */
 let navegandoModuloTrava = false;
+function abrirCardInspecaoA4() {
+  try {
+    const isCapacitor = window.Capacitor !== undefined || window.location.protocol === 'capacitor:' || window.location.protocol === 'file:';
+    if (isCapacitor) {
+      window.location.href = 'card-inspecao-mecanica.html';
+      return;
+    }
+    const w = abrirCardInspecaoA4();
+    if (!w || w.closed || typeof w.closed === 'undefined') {
+      window.location.href = 'card-inspecao-mecanica.html';
+    }
+  } catch(e) {
+    window.location.href = 'card-inspecao-mecanica.html';
+  }
+}
+window.abrirCardInspecaoA4 = abrirCardInspecaoA4;
+
+
+function alternarAbaCardCompleto(aba) {
+  const ids = ['est_din', 'bomba', 'comp', 'troc'];
+  const botoes = {
+    'todos': document.getElementById('btn_tab_card_todos'),
+    'est_din': document.getElementById('btn_tab_card_est_din'),
+    'bomba': document.getElementById('btn_tab_card_bomba'),
+    'comp': document.getElementById('btn_tab_card_comp'),
+    'troc': document.getElementById('btn_tab_card_troc')
+  };
+
+  Object.keys(botoes).forEach(k => {
+    const btn = botoes[k];
+    if (btn) {
+      if (k === aba) {
+        btn.className = 'button';
+        btn.style.background = '#0284c7';
+        btn.style.borderColor = '#38bdf8';
+        btn.style.fontWeight = 'bold';
+      } else {
+        btn.className = 'button secondary';
+        btn.style.background = '';
+        btn.style.borderColor = '';
+        btn.style.fontWeight = 'normal';
+      }
+    }
+  });
+
+  ids.forEach(id => {
+    const sec = document.getElementById('secao_card_' + id);
+    if (sec) {
+      if (aba === 'todos' || aba === id) {
+        sec.style.display = 'block';
+      } else {
+        sec.style.display = 'none';
+      }
+    }
+  });
+}
+window.alternarAbaCardCompleto = alternarAbaCardCompleto;
+
 function abrirModulo(id) {
   // Trava com liberação imediata e resguardo contra qualquer congelamento
   if (navegandoModuloTrava) return;
@@ -20453,6 +21023,10 @@ function abrirModulo(id) {
       carregarDashboardAdmin();
     }
 
+    if (id === 'inspecao-mecanica') {
+      // Acesso liberado ao painel do roteiro de inspeção
+    }
+
     if (id === 'torque') {
       iniciarModuloTorque();
     }
@@ -20487,12 +21061,8 @@ function voltarGrid() {
   equipamentoSelecionadoId = null;
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  // Garante que o card de administrador obedeça estritamente ao usuário logado
-  const emailAtual = (document.getElementById('usuarioLogadoEmail')?.innerText || '').trim();
-  const cardAdm = document.getElementById('cardAdminModulo');
-  if (cardAdm) {
-    cardAdm.style.display = isUsuarioAdmin(emailAtual) ? 'flex' : 'none';
-  }
+  // Garante que o card de administrador e o card de inspeção obedeçam estritamente ao usuário logado
+  atualizarVisibilidadeCardsRestritos();
 }
 
 /* ===================== ALINHAMENTO INTERATIVO & CÁLCULO DE CALÇOS ===================== */
@@ -21095,8 +21665,9 @@ function fecharBannerPWA() {
 // Registro do Service Worker para suporte PWA offline
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js?v=4.5').then((reg) => {
+    navigator.serviceWorker.register('sw.js?v=5.0').then((reg) => {
       console.log('Mecânica 4.0 IA: Service Worker registrado com sucesso:', reg.scope);
+      try { reg.update(); } catch(e) {}
     }).catch((err) => {
       console.warn('Mecânica 4.0 IA: Falha ao registrar Service Worker:', err);
     });
@@ -25513,6 +26084,7 @@ function calcularToleranciaIsoRobo() {
 
 window.addEventListener('DOMContentLoaded', () => {
   calcularToleranciaIsoRobo();
+  try { atualizarVisibilidadeCardsRestritos(); } catch(e) {}
 });
 
 </script>

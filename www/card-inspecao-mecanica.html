@@ -584,6 +584,7 @@
 <div class="top-toolbar no-print">
   <h1>⚙️ CARD DE INSPEÇÃO MECÂNICA INDUSTRIAL • 3 PÁGINAS A4</h1>
   <div class="toolbar-actions">
+    <button type="button" class="btn-tool" style="background:#059669; color:#fff; font-weight:bold; border-color:#10b981;" onclick="adicionarItemAoCard()" title="Adicionar nova linha de inspeção personalizada ao card">➕ Adicionar Item ao Card</button>
     <button type="button" class="btn-tool btn-demo" onclick="preencherExemploCampo()" title="Preencher com exemplo de bomba industrial">📋 Preencher Exemplo de Campo</button>
     <button type="button" class="btn-tool btn-clear" onclick="limparFormulario()" title="Limpar todos os campos para preenchimento">🗑️ Limpar Formulário</button>
     <button type="button" class="btn-tool btn-print" onclick="window.print()" title="Imprimir em folha A4 ou gerar PDF oficial">🖨️ Imprimir / Salvar PDF (A4)</button>
@@ -767,6 +768,7 @@
               <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_1_7"></label></td>
             </tr>
           </tbody>
+          <tbody id="tabela_itens_adicionais_card"></tbody>
         </table>
       </div>
 
@@ -1706,6 +1708,34 @@
     document.getElementById('res_aprovado').checked = true;
     sincronizarMetadados();
   }
+
+  
+  let contadorItensAdicionais = 0;
+  function adicionarItemAoCard() {
+    const desc = prompt('Digite o novo item ou ponto de inspeção a ser adicionado no card:');
+    if (!desc || !desc.trim()) return;
+
+    contadorItensAdicionais++;
+    const tbody = document.getElementById('tabela_itens_adicionais_card');
+    if (!tbody) return;
+
+    const tr = document.createElement('tr');
+    tr.id = 'item_add_' + contadorItensAdicionais;
+    tr.style.backgroundColor = '#ecfdf5';
+    tr.innerHTML = `
+      <td class="td-desc" style="color:#065f46; font-weight:700;">
+        ➕ ${contadorItensAdicionais + 7} ${desc.trim()}
+        <button type="button" class="no-print" onclick="document.getElementById('item_add_${contadorItensAdicionais}').remove()" style="margin-left:6px; background:#ef4444; color:#fff; border:none; border-radius:3px; padding:1px 5px; font-size:8px; cursor:pointer;" title="Remover item">✕</button>
+      </td>
+      <td class="td-chk"><label class="opt-box"><input type="checkbox" checked></label></td>
+      <td class="td-chk"><label class="opt-box"><input type="checkbox"></label></td>
+      <td class="td-chk"><label class="opt-box"><input type="checkbox"></label></td>
+      <td class="td-chk"><label class="opt-box"><input type="checkbox"></label></td>
+    `;
+    tbody.appendChild(tr);
+    alert('✔ Item "' + desc.trim() + '" adicionado com sucesso ao Card de Inspeção!');
+  }
+  window.adicionarItemAoCard = adicionarItemAoCard;
 
   // Inicializa sincronização
   sincronizarMetadados();
