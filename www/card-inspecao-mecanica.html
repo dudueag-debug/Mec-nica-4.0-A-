@@ -1469,7 +1469,27 @@
         </table>
       </div>
 
-      <!-- 3. MEDIÇÕES REALIZADAS E OBSERVAÇÕES TÉCNICAS -->
+      <!-- Passo 12 — ITENS ADICIONAIS PERSONALIZADOS ADICIONADOS AO CARD -->
+      <div class="section-box" id="secao_itens_adicionais_card" style="margin-bottom:5px;">
+        <div class="step-header" style="background:#065f46;">
+          <span>Passo 12 — ITENS ADICIONAIS & PONTOS PERSONALIZADOS DO CARD</span>
+          <span style="font-size:8px; font-weight:600;">CUSTOMIZADO PELO INSPETOR</span>
+        </div>
+        <table class="step-table">
+          <thead>
+            <tr>
+              <th class="th-desc">Item Adicional / Ponto Específico de Verificação</th>
+              <th style="width:48px; color:#16a34a;">OK</th>
+              <th style="width:48px; color:#d97706;">Atenção</th>
+              <th style="width:52px; color:#dc2626;">Reprov.</th>
+              <th style="width:42px; color:#64748b;">N/A</th>
+            </tr>
+          </thead>
+          <tbody id="tabela_itens_adicionais_card">
+            <!-- Linhas inseridas dinamicamente via botão ➕ Adicionar Item ao Card -->
+          </tbody>
+        </table>
+      </div>
       <div class="section-box" style="margin-bottom:5px;">
         <div class="section-header">
           <span>3. MEDIÇÕES REALIZADAS E OBSERVAÇÕES TÉCNICAS</span>
@@ -1716,24 +1736,39 @@
     if (!desc || !desc.trim()) return;
 
     contadorItensAdicionais++;
-    const tbody = document.getElementById('tabela_itens_adicionais_card');
-    if (!tbody) return;
+    let tbody = document.getElementById('tabela_itens_adicionais_card');
+    if (!tbody) {
+      const stepTables = document.querySelectorAll('.step-table tbody');
+      if (stepTables.length > 0) {
+        tbody = stepTables[stepTables.length - 1];
+      }
+    }
+    if (!tbody) {
+      alert('Tabela do card não encontrada.');
+      return;
+    }
 
     const tr = document.createElement('tr');
     tr.id = 'item_add_' + contadorItensAdicionais;
     tr.style.backgroundColor = '#ecfdf5';
     tr.innerHTML = `
       <td class="td-desc" style="color:#065f46; font-weight:700;">
-        ➕ ${contadorItensAdicionais + 7} ${desc.trim()}
+        ➕ 12.${contadorItensAdicionais} ${desc.trim()}
         <button type="button" class="no-print" onclick="document.getElementById('item_add_${contadorItensAdicionais}').remove()" style="margin-left:6px; background:#ef4444; color:#fff; border:none; border-radius:3px; padding:1px 5px; font-size:8px; cursor:pointer;" title="Remover item">✕</button>
       </td>
-      <td class="td-chk"><label class="opt-box"><input type="checkbox" checked></label></td>
-      <td class="td-chk"><label class="opt-box"><input type="checkbox"></label></td>
-      <td class="td-chk"><label class="opt-box"><input type="checkbox"></label></td>
-      <td class="td-chk"><label class="opt-box"><input type="checkbox"></label></td>
+      <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_add_${contadorItensAdicionais}" checked></label></td>
+      <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_add_${contadorItensAdicionais}"></label></td>
+      <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_add_${contadorItensAdicionais}"></label></td>
+      <td class="td-chk"><label class="opt-box"><input type="checkbox" name="c_add_${contadorItensAdicionais}"></label></td>
     `;
     tbody.appendChild(tr);
-    alert('✔ Item "' + desc.trim() + '" adicionado com sucesso ao Card de Inspeção!');
+
+    // Rola a tela até o novo item
+    try {
+      tr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } catch(e) {}
+
+    alert('✔ Item "12.' + contadorItensAdicionais + ' ' + desc.trim() + '" adicionado com sucesso ao Card de Inspeção!');
   }
   window.adicionarItemAoCard = adicionarItemAoCard;
 

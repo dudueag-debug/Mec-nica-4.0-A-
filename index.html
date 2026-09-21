@@ -4580,14 +4580,6 @@
         <h3>Bombas & Equipamentos Industriais</h3>
         <p><b>Card Completo:</b> Equipamentos Estáticos vs. Dinâmicos, Bombas Centrífugas, Compressores e Trocadores de Calor. Componentes, modos de falha, pontos críticos e periodicidades.</p>
         <button type="button" class="btn-botoeira" onclick="event.stopPropagation(); abrirModulo('bombas')">Abrir Card Completo</button>
-      </div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
-        <div style="display:inline-flex; align-items:center; gap:6px; background:rgba(2,132,199,0.25); border:1px solid #0284c7; color:#7dd3fc; font-size:10px; font-weight:800; padding:2px 8px; border-radius:10px; margin-bottom:8px;">
-          <span>⚙️ ATIVOS: DINÂMICOS VS. ESTÁTICOS</span>
-        </div>
-        <div class="icon">💧</div>
-        <h3>Bombas Industriais</h3>
-        <p><b>Equipamentos Dinâmicos</b> (máquinas rotativas com eixos/rotores móveis) vs. <b>Equipamentos Estáticos</b> (tubulações, vasos e trocadores). Diagnóstico de centrífugas OH1/OH2, multiestágio, folgas, selagem e esforços de tubulação (pipe stress).</p>
-        <button type="button" class="btn-botoeira" onclick="event.stopPropagation(); abrirModulo('bombas')">Consultar Bombas & Ativos</button>
       </div>
 
       <!-- CARD: MOTORES ELÉTRICOS (AMPLIADO) -->
@@ -21665,7 +21657,7 @@ function fecharBannerPWA() {
 // Registro do Service Worker para suporte PWA offline
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js?v=5.0').then((reg) => {
+    navigator.serviceWorker.register('sw.js?v=5.1').then((reg) => {
       console.log('Mecânica 4.0 IA: Service Worker registrado com sucesso:', reg.scope);
       try { reg.update(); } catch(e) {}
     }).catch((err) => {
