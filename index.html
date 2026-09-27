@@ -4632,16 +4632,17 @@
 
       <!-- CARD: CHAVES E PORCAS -->
       <!-- CARD: CHAVES, PORCAS & ESTOJOS (ASME B16.5) -->
-      <div class="card card-industrial" style="border-color:#38bdf8; background:linear-gradient(145deg, #091a2e 0%, #0d2745 100%); box-shadow:0 4px 18px rgba(56,189,248,0.2);" onclick="abrirModulo('chaves')">
+      <div class="card card-industrial" style="border-color:#38bdf8; background:linear-gradient(145deg, #091a2e 0%, #0d2745 100%); box-shadow:0 4px 18px rgba(56,189,248,0.2);" onclick="abrirModulo('chaves'); alternarAbaPainelChaves('3d');">
         <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
         <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px;">
           <div class="icon" style="margin:0;">🔩</div>
-          <span style="font-size:10px; font-weight:800; background:#0284c7; color:#fff; padding:2px 8px; border-radius:12px; border:1px solid #38bdf8; letter-spacing:0.5px;">ASME B16.5 • UPGRADE</span>
+          <span style="font-size:10px; font-weight:800; background:#0284c7; color:#fff; padding:2px 8px; border-radius:12px; border:1px solid #38bdf8; letter-spacing:0.5px;">ASME B16.5 • 3D NOVO</span>
         </div>
         <h3 style="color:#e0f2fe; margin-top:4px;">Chaves, Porcas & Estojos</h3>
-        <p>Estojos (Stud Bolts) B7/B16 para flanges Cl 150/300/600, chave Heavy Hex, passo UNC, fotos e cálculo de campo.</p>
-        <div style="display:flex; gap:8px; margin-top:8px;">
-          <button type="button" class="btn-botoeira btn-botoeira-primary" style="flex:1; border-color:#38bdf8;" onclick="event.stopPropagation(); abrirModulo('chaves')">Consultar Estojos & Chaves</button>
+        <p>Modelo 3D interativo: onde medir (L, Ø, Chave) e onde contar fios (TPI), cálculo ASME B16.5, Heavy Hex e fotos.</p>
+        <div style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap;">
+          <button type="button" class="btn-botoeira btn-botoeira-primary" style="flex:1; min-width:130px; background:#0284c7; border-color:#38bdf8;" onclick="event.stopPropagation(); abrirModulo('chaves'); alternarAbaPainelChaves('3d');">📐 Ver Estojo 3D</button>
+          <button type="button" class="btn-botoeira btn-botoeira-secondary" style="flex:1; min-width:130px;" onclick="event.stopPropagation(); abrirModulo('chaves'); alternarAbaPainelChaves('calc');">🧮 Calculadora</button>
         </div>
       </div>
 
@@ -8728,8 +8729,199 @@
       </div>
       <button class="button secondary" onclick="voltarGrid()">← Voltar</button>
     </div>
+    <!-- ABAS DE NAVEGAÇÃO PRINCIPAL DO MÓDULO CHAVES, PORCAS & ESTOJOS -->
+    <div style="display:flex; gap:8px; overflow-x:auto; padding-bottom:8px; margin-bottom:18px; border-bottom:1.5px solid #1e3a5f;">
+      <button type="button" id="tab_btn_painel_3d" class="button" style="background:#0284c7; border-color:#38bdf8; font-size:12.5px; padding:9px 18px; white-space:nowrap; font-weight:800; display:flex; align-items:center; gap:6px;" onclick="alternarAbaPainelChaves('3d')">
+        <span>📐</span> Modelo 3D: Onde Medir & Fios
+      </button>
+      <button type="button" id="tab_btn_painel_calc" class="button secondary" style="font-size:12.5px; padding:9px 18px; white-space:nowrap; font-weight:700; display:flex; align-items:center; gap:6px;" onclick="alternarAbaPainelChaves('calc')">
+        <span>🧮</span> Calculadora ASME B16.5
+      </button>
+      <button type="button" id="tab_btn_painel_reversa" class="button secondary" style="font-size:12.5px; padding:9px 18px; white-space:nowrap; font-weight:700; display:flex; align-items:center; gap:6px;" onclick="alternarAbaPainelChaves('reversa')">
+        <span>🔍</span> Busca Reversa por Chave
+      </button>
+      <button type="button" id="tab_btn_painel_guia" class="button secondary" style="font-size:12.5px; padding:9px 18px; white-space:nowrap; font-weight:700; display:flex; align-items:center; gap:6px;" onclick="alternarAbaPainelChaves('guia')">
+        <span>⚖️</span> Estático × Dinâmico & Fotos
+      </button>
+      <button type="button" id="tab_btn_painel_tabelas" class="button secondary" style="font-size:12.5px; padding:9px 18px; white-space:nowrap; font-weight:700; display:flex; align-items:center; gap:6px;" onclick="alternarAbaPainelChaves('tabelas')">
+        <span>📋</span> Tabelas Cl 150/300/600
+      </button>
+    </div>
 
-    <!-- BANNER HERO: ASSISTENTE TÉCNICO DE FIXAÇÃO -->
+
+    <!-- ABA 1: MODELO 3D INTERATIVO (ONDE MEDIR & CONTAR FIOS) -->
+    <div id="aba_painel_3d" style="display:block;">
+      <!-- CABEÇALHO DO ESTÚDIO 3D -->
+      <div style="background:linear-gradient(135deg, #07172c 0%, #0d2847 100%); border:1.5px solid #0284c7; border-radius:12px; padding:16px 20px; margin-bottom:16px; box-shadow:0 4px 20px rgba(2,132,199,0.25);">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+          <div style="flex:1; min-width:280px;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+              <span style="font-size:11px; font-weight:800; color:#38bdf8; text-transform:uppercase; letter-spacing:1px; background:#0c223d; padding:2px 8px; border-radius:6px; border:1px solid #1e3a5f;">VISUALIZADOR TÉCNICO 3D</span>
+              <span style="font-size:11px; font-weight:700; color:#facc15;">ASME B16.5 & ASME B18.2.2</span>
+              <span style="font-size:11px; font-weight:700; color:#4ade80;">INTERATIVO 360°</span>
+            </div>
+            <h4 style="margin:4px 0 6px 0; color:#fff; font-size:18px; font-weight:800;">Modelo 3D do Estojo (Stud Bolt) & Porcas Pesadas</h4>
+            <p style="margin:0; font-size:12.5px; color:#cbd5e1; line-height:1.4;">
+              Aprenda com precisão industrial <b>onde e como medir o estojo</b> (comprimento total com chanfros, diâmetro externo nas cristas e chave entre-faces da porca) e <b>onde contar os fios de rosca (TPI)</b> com régua ou pente de rosca.
+            </p>
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button type="button" class="btn-botoeira btn-botoeira-primary" style="background:#0284c7; border-color:#38bdf8; font-size:12px; padding:8px 14px;" onclick="transferirEstojo3DParaLaudo()">📋 Transferir p/ Laudo A4</button>
+            <button type="button" class="btn-botoeira btn-botoeira-secondary" style="font-size:12px; padding:8px 14px;" onclick="abrirEstojo3DNaCalculadora()">🧮 Abrir na Calculadora</button>
+          </div>
+        </div>
+
+        <!-- SELETOR DE ESTOJO EM CAMPO + BADGES DE ESPECIFICAÇÃO -->
+        <div style="margin-top:14px; padding-top:12px; border-top:1px solid #1e3a5f; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+          <div style="flex:1; min-width:240px;">
+            <label style="font-size:11.5px; font-weight:700; color:#94a3b8; display:block; margin-bottom:4px;">Selecione o Estojo para Inspecionar no 3D:</label>
+            <select id="estojo3d_sel_modelo" onchange="selecionarModeloEstojo3D(this.value)" style="font-size:13px; padding:8px 12px; background:#040d1a; border:1.5px solid #0284c7; color:#fff; border-radius:6px; width:100%; font-weight:600;">
+              <option value="5/8" selected>5/8" × 3-1/2" — UNC 11 fi — Chave 1-1/16" (Flange 2" Cl 150) ★ MAIS COMUM</option>
+              <option value="3/4">3/4" × 4" — UNC 10 fi — Chave 1-1/4" (Flange 3" Cl 150)</option>
+              <option value="1/2">1/2" × 2-1/2" — UNC 13 fi — Chave 7/8" (Flange 1" Cl 150)</option>
+              <option value="7/8">7/8" × 4-1/2" — UNC 9 fi — Chave 1-7/16" (Flange 4" Cl 300)</option>
+              <option value="1">1" × 5-1/4" — UNC 8 fi — Chave 1-5/8" (Flange 6" Cl 300)</option>
+              <option value="1-1/8">1-1/8" × 6" — 8-UN 8 fi — Chave 1-13/16" (Flange 8" Cl 300 - Série 8-UN)</option>
+              <option value="1-1/4">1-1/4" × 7" — 8-UN 8 fi — Chave 2" (Flange 8" Cl 600 - Série 8-UN)</option>
+            </select>
+          </div>
+
+          <!-- MINI PILLS DE STATUS REAL -->
+          <div id="estojo3d_pills_container" style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+            <!-- Preenchido via JS atualizarPillsEstojo3D() -->
+          </div>
+        </div>
+      </div>
+
+      <!-- BARRA DE MODOS DE INSPEÇÃO TÉCNICA (ONDE MEDIR & CONTAR FIOS) -->
+      <div style="background:#091524; border:1.5px solid #1e3a5f; border-radius:10px; padding:12px; margin-bottom:14px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+          <span style="font-size:12px; font-weight:800; color:#7dd3fc; text-transform:uppercase; letter-spacing:0.5px;">
+            🎯 Selecione o Ponto de Foco Técnico:
+          </span>
+          <span style="font-size:11px; color:#94a3b8;">Clique nos botões abaixo para ver as cotas e o método exato de medição</span>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:8px;">
+          <button type="button" id="btn_modo_3d_fios" class="btn-modo-3d active" onclick="selecionarModoEstojo3D('fios')" style="background:#ca8a04; border:1.5px solid #facc15; color:#fff; font-weight:800; padding:10px 8px; border-radius:8px; cursor:pointer; font-size:12px; text-align:center; transition:all 0.2s;">
+            <div style="font-size:16px; margin-bottom:2px;">🔍</div>
+            Onde Contar os Fios (TPI)
+          </button>
+          <button type="button" id="btn_modo_3d_comprimento" class="btn-modo-3d" onclick="selecionarModoEstojo3D('comprimento')" style="background:#071424; border:1.5px solid #1e3a5f; color:#cbd5e1; font-weight:700; padding:10px 8px; border-radius:8px; cursor:pointer; font-size:12px; text-align:center; transition:all 0.2s;">
+            <div style="font-size:16px; margin-bottom:2px;">📏</div>
+            Onde Medir Comprimento
+          </button>
+          <button type="button" id="btn_modo_3d_diametro" class="btn-modo-3d" onclick="selecionarModoEstojo3D('diametro')" style="background:#071424; border:1.5px solid #1e3a5f; color:#cbd5e1; font-weight:700; padding:10px 8px; border-radius:8px; cursor:pointer; font-size:12px; text-align:center; transition:all 0.2s;">
+            <div style="font-size:16px; margin-bottom:2px;">📐</div>
+            Onde Medir Diâmetro (Ø)
+          </button>
+          <button type="button" id="btn_modo_3d_chave" class="btn-modo-3d" onclick="selecionarModoEstojo3D('chave')" style="background:#071424; border:1.5px solid #1e3a5f; color:#cbd5e1; font-weight:700; padding:10px 8px; border-radius:8px; cursor:pointer; font-size:12px; text-align:center; transition:all 0.2s;">
+            <div style="font-size:16px; margin-bottom:2px;">🔑</div>
+            Onde Medir a Chave da Porca
+          </button>
+          <button type="button" id="btn_modo_3d_sobra" class="btn-modo-3d" onclick="selecionarModoEstojo3D('sobra')" style="background:#071424; border:1.5px solid #1e3a5f; color:#cbd5e1; font-weight:700; padding:10px 8px; border-radius:8px; cursor:pointer; font-size:12px; text-align:center; transition:all 0.2s;">
+            <div style="font-size:16px; margin-bottom:2px;">🔩</div>
+            Sobra de Rosca (2-3 fios)
+          </button>
+          <button type="button" id="btn_modo_3d_geral" class="btn-modo-3d" onclick="selecionarModoEstojo3D('geral')" style="background:#071424; border:1.5px solid #1e3a5f; color:#cbd5e1; font-weight:700; padding:10px 8px; border-radius:8px; cursor:pointer; font-size:12px; text-align:center; transition:all 0.2s;">
+            <div style="font-size:16px; margin-bottom:2px;">👁️</div>
+            Vista Geral 3D
+          </button>
+        </div>
+      </div>
+
+      <!-- ÁREA DO PALCO 3D (CANVAS INDUSTRIAL COM GRADIENTE METÁLICO E CONTROLES) -->
+      <div style="position:relative; background:#040914; border:2px solid #0284c7; border-radius:12px; padding:10px; margin-bottom:16px; box-shadow:0 8px 32px rgba(0,0,0,0.6); overflow:hidden;">
+        <!-- BADGE FLUTUANTE DE MODO ATUAL -->
+        <div id="estojo3d_badge_modo" style="position:absolute; top:16px; left:16px; z-index:10; background:rgba(3,15,30,0.88); backdrop-filter:blur(6px); border:1px solid #38bdf8; border-radius:8px; padding:6px 14px; font-size:12px; color:#fff; display:flex; align-items:center; gap:8px; box-shadow:0 4px 12px rgba(0,0,0,0.4);">
+          <span style="font-size:16px;">🔍</span>
+          <div>
+            <b style="color:#fde047; font-size:12px; display:block;">MODO ATIVO: ONDE CONTAR OS FIOS DE ROSCA (TPI)</b>
+            <span style="color:#94a3b8; font-size:10.5px;">Janela de 1 polegada (25,4 mm) com cristas numeradas</span>
+          </div>
+        </div>
+
+        <!-- CONTROLES FLUTUANTES NO TOPO DIREITO -->
+        <div style="position:absolute; top:16px; right:16px; z-index:10; display:flex; gap:6px;">
+          <button type="button" id="btn_auto_girar_estojo" onclick="toggleAutoGirarEstojo3D()" style="background:rgba(7,24,44,0.9); border:1px solid #38bdf8; color:#7dd3fc; border-radius:6px; padding:6px 10px; font-size:11.5px; font-weight:700; cursor:pointer;" title="Alternar Rotação Contínua 3D">
+            🔄 Auto-Girar
+          </button>
+          <button type="button" onclick="ajustarZoomEstojo3D(0.15)" style="background:rgba(7,24,44,0.9); border:1px solid #1e3a5f; color:#fff; border-radius:6px; padding:6px 10px; font-size:12px; font-weight:bold; cursor:pointer;" title="Aproximar Zoom">
+            🔍 +
+          </button>
+          <button type="button" onclick="ajustarZoomEstojo3D(-0.15)" style="background:rgba(7,24,44,0.9); border:1px solid #1e3a5f; color:#fff; border-radius:6px; padding:6px 10px; font-size:12px; font-weight:bold; cursor:pointer;" title="Afastar Zoom">
+            🔍 -
+          </button>
+          <button type="button" onclick="resetarVistaEstojo3D()" style="background:rgba(7,24,44,0.9); border:1px solid #1e3a5f; color:#94a3b8; border-radius:6px; padding:6px 10px; font-size:11.5px; cursor:pointer;" title="Resetar Rotação e Zoom">
+            ⏮️ Reset
+          </button>
+        </div>
+
+        <!-- CANVAS PRINCIPAL COM SUPORTE A TOUCH & MOUSE DRAG -->
+        <canvas id="canvas_estojo_3d" width="760" height="420" style="width:100%; max-width:760px; height:auto; display:block; margin:auto; border-radius:8px; cursor:grab; touch-action:none;"></canvas>
+
+        <!-- RODAPÉ TÉCNICO DO PALCO 3D -->
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-top:8px; padding-top:6px; border-top:1px solid #122842;">
+          <span style="font-size:11px; color:#7dd3fc; display:flex; align-items:center; gap:6px;">
+            <span>🖱️</span> <b>Dica de Navegação:</b> Arraste com o mouse ou deslize o dedo na tela para girar o estojo 360° no espaço.
+          </span>
+          <span style="font-size:11px; color:#94a3b8;">Projeção Isométrica Real • Escala ASME B16.5 / B18.2.2</span>
+        </div>
+      </div>
+
+      <!-- BOX DINÂMICO DE EXPLICAÇÃO TÉCNICA DETALHADA -->
+      <div id="estojo3d_explicacao_box" style="margin-bottom:16px;">
+        <!-- Preenchido dinamicamente via atualizarExplicacaoEstojo3D() -->
+      </div>
+
+      <!-- 4 CARDS VISUAIS DE CONSULTA RÁPIDA DE CAMPO -->
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:12px; margin-bottom:18px;">
+        <div style="background:#071526; border:1px solid #0284c7; border-radius:8px; padding:12px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+            <span style="font-size:18px;">📏</span>
+            <b style="font-size:13px; color:#38bdf8;">1. Comprimento Total (L)</b>
+          </div>
+          <p style="margin:0; font-size:12px; color:#cbd5e1; line-height:1.45;">
+            <b>Onde medir:</b> De <b>ponta a ponta</b>, incluindo os dois chanfros das extremidades (padrão ASME B16.5). Diferente de parafusos sextavados comuns que medem sob a cabeça, estojo é o comprimento total!
+          </p>
+        </div>
+
+        <div style="background:#071526; border:1px solid #38bdf8; border-radius:8px; padding:12px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+            <span style="font-size:18px;">📐</span>
+            <b style="font-size:13px; color:#7dd3fc;">2. Diâmetro Nominal (Ø)</b>
+          </div>
+          <p style="margin:0; font-size:12px; color:#cbd5e1; line-height:1.45;">
+            <b>Onde medir:</b> Com paquímetro apoiado sobre as <b>cristas externas</b> dos filetes (diâmetro maior). <b>Nunca</b> meça no fundo/raiz do filete. Ex: ~15,8 mm no paquímetro = <b>5/8"</b>.
+          </p>
+        </div>
+
+        <div style="background:#071526; border:1px solid #f59e0b; border-radius:8px; padding:12px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+            <span style="font-size:18px;">🔑</span>
+            <b style="font-size:13px; color:#fde047;">3. Chave da Porca (F)</b>
+          </div>
+          <p style="margin:0; font-size:12px; color:#cbd5e1; line-height:1.45;">
+            <b>Onde medir:</b> Entre <b>duas faces planas paralelas</b> opostas. Lembre-se: em flanges a porca é <b>Heavy Hex (ASME B18.2.2)</b>, maior que a automotiva. Ex: Estojo 5/8" usa chave <b>1-1/16"</b> (27 mm).
+          </p>
+        </div>
+
+        <div style="background:#071526; border:1px solid #ca8a04; border-radius:8px; padding:12px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+            <span style="font-size:18px;">🔍</span>
+            <b style="font-size:13px; color:#facc15;">4. Contagem de Fios (TPI)</b>
+          </div>
+          <p style="margin:0; font-size:12px; color:#cbd5e1; line-height:1.45;">
+            <b>Onde contar:</b> Posicione o zero da escala na 1ª crista e conte as cristas dentro de <b>1 Polegada (25,4 mm)</b>. Ex: 11 cristas = <b>UNC 11 fios</b>. Acima de 1" de diâmetro, a ASME adota <b>8-UN</b>!
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ABA 2: CALCULADORA ASME B16.5 -->
+    <div id="aba_painel_calc" style="display:none;">
+      <!-- BANNER HERO: ASSISTENTE TÉCNICO DE FIXAÇÃO -->
     <div style="background:linear-gradient(135deg, #07172c 0%, #0d2847 100%); border:1.5px solid #0284c7; border-radius:12px; padding:16px 20px; margin-bottom:18px; box-shadow:0 4px 20px rgba(2,132,199,0.25);">
       <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
         <div style="flex:1; min-width:280px;">
@@ -8792,7 +8984,12 @@
     </div>
 
     <!-- 2. CALCULADORA REVERSA: QUAL É O ESTOJO PELA CHAVE OU MEDIÇÃO? -->
-    <div class="calc-box" id="box_calc_reversa_chave" style="background:#091524; border:1.5px solid #203e64; border-radius:12px; padding:18px; margin-bottom:20px;">
+    </div>
+
+
+    <!-- ABA 3: BUSCA REVERSA POR CHAVE -->
+    <div id="aba_painel_reversa" style="display:none;">
+      <div class="calc-box" id="box_calc_reversa_chave" style="background:#091524; border:1.5px solid #203e64; border-radius:12px; padding:18px; margin-bottom:20px;">
       <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
         <h5 style="margin:0; font-size:15px; color:#fde047; font-weight:800; display:flex; align-items:center; gap:8px;">
           <span>🔍</span> BUSCA REVERSA: "TENHO A CHAVE NA MÃO — QUAL É O ESTOJO E FLANGE?"
@@ -8828,8 +9025,12 @@
         <!-- Preenchido via calcularEstojoReverso() -->
       </div>
     </div>
+    </div>
 
-    <!-- 3. EQUIPAMENTOS ESTÁTICOS × DINÂMICOS -->
+
+    <!-- ABA 4: ESTÁTICO × DINÂMICO & FOTOS -->
+    <div id="aba_painel_guia" style="display:none;">
+      <!-- 3. EQUIPAMENTOS ESTÁTICOS × DINÂMICOS -->
     <div class="content-block" style="border-left:4px solid #38bdf8;">
       <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
         <span style="font-size:20px;">⚖️</span>
@@ -8992,8 +9193,12 @@
         </div>
       </div>
     </div>
+    </div>
 
-    <!-- 6. TABELAS COMPLETAS ASME B16.5 COM ABAS INTERATIVAS -->
+
+    <!-- ABA 5: TABELAS COMPLETAS ASME B16.5 -->
+    <div id="aba_painel_tabelas" style="display:none;">
+      <!-- 6. TABELAS COMPLETAS ASME B16.5 COM ABAS INTERATIVAS -->
     <div class="content-block" style="border-left:4px solid #8b5cf6;">
       <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
         <div style="display:flex; align-items:center; gap:8px;">
@@ -9132,6 +9337,7 @@
       </div>
       <button class="button" onclick="mostrarChaveRecomendada()">Ver chave recomendada</button>
       <div class="resultado" id="chave_resultado"></div>
+    </div>
     </div>
   </section>
 
@@ -21325,6 +21531,21 @@ function abrirModulo(id) {
       carregarEquipamentos();
     }
 
+        if (id === 'chaves') {
+      setTimeout(() => {
+        try {
+          if (typeof initCanvasEstojo3DInteracao === 'function') {
+            initCanvasEstojo3DInteracao();
+          }
+          if (typeof alternarAbaPainelChaves === 'function') {
+            alternarAbaPainelChaves(abaPainelChavesAtiva || '3d');
+          }
+        } catch(e) {
+          console.warn('Erro ao inicializar 3D chaves:', e);
+        }
+      }, 50);
+    }
+
     if (id === 'relatorio') {
       document.body.classList.add('em-laudo-a4');
       alternarAbaRelatorio('novo');
@@ -22920,6 +23141,1348 @@ function calcularGraxa() {
 
 /* ===================== CHAVES E PORCAS ===================== */
 /* ===================== BANCO DE DADOS DE ESTOJOS ASME B16.5 ===================== */
+// =============================================================================
+// MÓDULO 3D INTERATIVO: ESTOJO INDUSTRIAL (STUD BOLT) & PORCAS HEAVY HEX
+// ASME B16.5 / ASME B18.2.2 / ASTM A193 B7 / ASTM A194 2H
+// =============================================================================
+
+const MODELOS_ESTOJO_3D = {
+  '5/8': {
+    nome: '5/8" × 3-1/2" (Flange 2" Cl 150)',
+    classeNPS: { classe: '150', nps: '2"' },
+    diamPol: '5/8"',
+    diamMm: 15.87,
+    compPol: '3-1/2"',
+    compMm: 88.9,
+    tpi: 11,
+    passo: 'UNC 11 fios/pol',
+    passoMm: 2.31,
+    chave: '1-1/16"',
+    chaveMm: 27.0,
+    nutHeightMm: 15.87,
+    padraoPorca: 'Heavy Hex ASME B18.2.2',
+    materialEstojo: 'ASTM A193 Gr. B7',
+    materialPorca: 'ASTM A194 Gr. 2H',
+    flange: 'Flange ASME B16.5 NPS 2" Classe 150 (4 estojos)',
+    sobraFios: '2 a 3 filetes (~5 a 7 mm)',
+    torqueLub: '160 N.m (118 lb.ft)',
+    qtdFlange: 4
+  },
+  '3/4': {
+    nome: '3/4" × 4" (Flange 3" Cl 150)',
+    classeNPS: { classe: '150', nps: '3"' },
+    diamPol: '3/4"',
+    diamMm: 19.05,
+    compPol: '4"',
+    compMm: 101.6,
+    tpi: 10,
+    passo: 'UNC 10 fios/pol',
+    passoMm: 2.54,
+    chave: '1-1/4"',
+    chaveMm: 31.75,
+    nutHeightMm: 19.05,
+    padraoPorca: 'Heavy Hex ASME B18.2.2',
+    materialEstojo: 'ASTM A193 Gr. B7',
+    materialPorca: 'ASTM A194 Gr. 2H',
+    flange: 'Flange ASME B16.5 NPS 3" Classe 150 (4 estojos)',
+    sobraFios: '2 a 3 filetes (~5 a 8 mm)',
+    torqueLub: '280 N.m (206 lb.ft)',
+    qtdFlange: 4
+  },
+  '1/2': {
+    nome: '1/2" × 2-1/2" (Flange 1" Cl 150)',
+    classeNPS: { classe: '150', nps: '1"' },
+    diamPol: '1/2"',
+    diamMm: 12.7,
+    compPol: '2-1/2"',
+    compMm: 63.5,
+    tpi: 13,
+    passo: 'UNC 13 fios/pol',
+    passoMm: 1.95,
+    chave: '7/8"',
+    chaveMm: 22.2,
+    nutHeightMm: 12.7,
+    padraoPorca: 'Heavy Hex ASME B18.2.2',
+    materialEstojo: 'ASTM A193 Gr. B7',
+    materialPorca: 'ASTM A194 Gr. 2H',
+    flange: 'Flange ASME B16.5 NPS 1" Classe 150 (4 estojos)',
+    sobraFios: '2 a 3 filetes (~4 a 6 mm)',
+    torqueLub: '80 N.m (59 lb.ft)',
+    qtdFlange: 4
+  },
+  '7/8': {
+    nome: '7/8" × 4-1/2" (Flange 4" Cl 300)',
+    classeNPS: { classe: '300', nps: '4"' },
+    diamPol: '7/8"',
+    diamMm: 22.22,
+    compPol: '4-1/2"',
+    compMm: 114.3,
+    tpi: 9,
+    passo: 'UNC 9 fios/pol',
+    passoMm: 2.82,
+    chave: '1-7/16"',
+    chaveMm: 36.5,
+    nutHeightMm: 22.22,
+    padraoPorca: 'Heavy Hex ASME B18.2.2',
+    materialEstojo: 'ASTM A193 Gr. B7',
+    materialPorca: 'ASTM A194 Gr. 2H',
+    flange: 'Flange ASME B16.5 NPS 4" Classe 300 (8 estojos)',
+    sobraFios: '2 a 3 filetes (~6 a 9 mm)',
+    torqueLub: '450 N.m (332 lb.ft)',
+    qtdFlange: 8
+  },
+  '1': {
+    nome: '1" × 5-1/4" (Flange 6" Cl 300)',
+    classeNPS: { classe: '300', nps: '6"' },
+    diamPol: '1"',
+    diamMm: 25.4,
+    compPol: '5-1/4"',
+    compMm: 133.3,
+    tpi: 8,
+    passo: 'UNC 8 fios/pol',
+    passoMm: 3.17,
+    chave: '1-5/8"',
+    chaveMm: 41.3,
+    nutHeightMm: 25.4,
+    padraoPorca: 'Heavy Hex ASME B18.2.2',
+    materialEstojo: 'ASTM A193 Gr. B7',
+    materialPorca: 'ASTM A194 Gr. 2H',
+    flange: 'Flange ASME B16.5 NPS 6" Classe 300 (12 estojos)',
+    sobraFios: '2 a 3 filetes (~7 a 10 mm)',
+    torqueLub: '675 N.m (498 lb.ft)',
+    qtdFlange: 12
+  },
+  '1-1/8': {
+    nome: '1-1/8" × 6" (Flange 8" Cl 300 - 8-UN)',
+    classeNPS: { classe: '300', nps: '8"' },
+    diamPol: '1-1/8"',
+    diamMm: 28.57,
+    compPol: '6"',
+    compMm: 152.4,
+    tpi: 8,
+    passo: '8-UN 8 fios/pol',
+    passoMm: 3.17,
+    chave: '1-13/16"',
+    chaveMm: 46.0,
+    nutHeightMm: 28.57,
+    padraoPorca: 'Heavy Hex ASME B18.2.2',
+    materialEstojo: 'ASTM A193 Gr. B7',
+    materialPorca: 'ASTM A194 Gr. 2H',
+    flange: 'Flange ASME B16.5 NPS 8" Classe 300 (12 estojos)',
+    sobraFios: '2 a 3 filetes (~7 a 10 mm)',
+    torqueLub: '980 N.m (723 lb.ft)',
+    qtdFlange: 12
+  },
+  '1-1/4': {
+    nome: '1-1/4" × 7" (Flange 8" Cl 600 - 8-UN)',
+    classeNPS: { classe: '600', nps: '8"' },
+    diamPol: '1-1/4"',
+    diamMm: 31.75,
+    compPol: '7"',
+    compMm: 177.8,
+    tpi: 8,
+    passo: '8-UN 8 fios/pol',
+    passoMm: 3.17,
+    chave: '2"',
+    chaveMm: 50.8,
+    nutHeightMm: 31.75,
+    padraoPorca: 'Heavy Hex ASME B18.2.2',
+    materialEstojo: 'ASTM A193 Gr. B7',
+    materialPorca: 'ASTM A194 Gr. 2H',
+    flange: 'Flange ASME B16.5 NPS 8" Classe 600 (12 estojos)',
+    sobraFios: '2 a 3 filetes (~7 a 10 mm)',
+    torqueLub: '1380 N.m (1018 lb.ft)',
+    qtdFlange: 12
+  }
+};
+
+let estojo3D_modeloAtual = '5/8';
+let estojo3D_modoAtual = 'fios'; // 'fios', 'comprimento', 'diametro', 'chave', 'sobra', 'geral'
+let estojo3D_rotX = 14;
+let estojo3D_rotY = -22;
+let estojo3D_rotZ = 0;
+let estojo3D_zoom = 1.0;
+let estojo3D_autoGirar = false;
+let estojo3D_animId = null;
+let estojo3D_isDragging = false;
+let estojo3D_lastMouseX = 0;
+let estojo3D_lastMouseY = 0;
+let estojo3D_initialized = false;
+let abaPainelChavesAtiva = '3d';
+
+function alternarAbaPainelChaves(aba) {
+  abaPainelChavesAtiva = aba;
+  const abas = ['3d', 'calc', 'reversa', 'guia', 'tabelas'];
+  abas.forEach(a => {
+    const btn = document.getElementById('tab_btn_painel_' + a);
+    const sec = document.getElementById('aba_painel_' + a);
+    if (btn) {
+      if (a === aba) {
+        btn.className = 'button';
+        btn.style.background = '#0284c7';
+        btn.style.borderColor = '#38bdf8';
+        btn.style.color = '#fff';
+      } else {
+        btn.className = 'button secondary';
+        btn.style.background = '';
+        btn.style.borderColor = '';
+        btn.style.color = '#cbd5e1';
+      }
+    }
+    if (sec) {
+      sec.style.display = (a === aba) ? 'block' : 'none';
+    }
+  });
+
+  if (aba === '3d') {
+    setTimeout(() => {
+      renderizarEstojo3DCanvas();
+      atualizarPillsEstojo3D();
+      atualizarExplicacaoEstojo3D(estojo3D_modoAtual, estojo3D_modeloAtual);
+    }, 30);
+  } else if (aba === 'calc') {
+    calcularEstojoASME();
+  } else if (aba === 'tabelas') {
+    alternarAbaTabelaEstojos('150');
+  }
+}
+
+function selecionarModeloEstojo3D(chave) {
+  if (MODELOS_ESTOJO_3D[chave]) {
+    estojo3D_modeloAtual = chave;
+  }
+  const sel = document.getElementById('estojo3d_sel_modelo');
+  if (sel && sel.value !== chave) sel.value = chave;
+  atualizarPillsEstojo3D();
+  atualizarExplicacaoEstojo3D(estojo3D_modoAtual, estojo3D_modeloAtual);
+  renderizarEstojo3DCanvas();
+}
+
+function selecionarModoEstojo3D(modo) {
+  estojo3D_modoAtual = modo;
+  const modos = ['fios', 'comprimento', 'diametro', 'chave', 'sobra', 'geral'];
+  modos.forEach(m => {
+    const btn = document.getElementById('btn_modo_3d_' + m);
+    if (btn) {
+      if (m === modo) {
+        btn.classList.add('active');
+        btn.style.background = '#ca8a04';
+        btn.style.borderColor = '#facc15';
+        btn.style.color = '#fff';
+      } else {
+        btn.classList.remove('active');
+        btn.style.background = '#071424';
+        btn.style.borderColor = '#1e3a5f';
+        btn.style.color = '#cbd5e1';
+      }
+    }
+  });
+
+  // Atualiza badge no canvas
+  const badge = document.getElementById('estojo3d_badge_modo');
+  if (badge) {
+    const dadosModo = {
+      'fios': { icone: '🔍', titulo: 'ONDE CONTAR OS FIOS DE ROSCA (TPI / PASSO)', sub: 'Janela de 1 polegada (25,4 mm) com cristas numeradas e pente de rosca' },
+      'comprimento': { icone: '📏', titulo: 'ONDE MEDIR COMPRIMENTO TOTAL (L)', sub: 'Ponta a ponta (comprimento totalizador incluindo os dois chanfros ASME B16.5)' },
+      'diametro': { icone: '📐', titulo: 'ONDE MEDIR O DIÂMETRO NOMINAL (Ø)', sub: 'Com paquímetro sobre as cristas externas dos filetes (diâmetro maior)' },
+      'chave': { icone: '🔑', titulo: 'ONDE MEDIR A CHAVE DA PORCA (F)', sub: 'Distância entre duas faces planas paralelas opostas (Heavy Hex ASME B18.2.2)' },
+      'sobra': { icone: '🔩', titulo: 'SOBRA DE ROSCA ALÉM DA PORCA', sub: 'Requisito normativo: 2 a 3 filetes de rosca livres além da face da porca' },
+      'geral': { icone: '👁️', titulo: 'VISTA GERAL TÉCNICA 3D', sub: 'Montagem completa: Estojo B7 + 2 Porcas Pesadas 2H + Chanfros + Cotas' }
+    }[modo] || { icone: '📐', titulo: 'VISUALIZADOR TÉCNICO', sub: 'Estojo Industrial ASME' };
+
+    badge.innerHTML = `
+      <span style="font-size:16px;">${dadosModo.icone}</span>
+      <div>
+        <b style="color:#fde047; font-size:12px; display:block;">${dadosModo.titulo}</b>
+        <span style="color:#94a3b8; font-size:10.5px;">${dadosModo.sub}</span>
+      </div>
+    `;
+  }
+
+  atualizarExplicacaoEstojo3D(modo, estojo3D_modeloAtual);
+  renderizarEstojo3DCanvas();
+}
+
+function atualizarPillsEstojo3D() {
+  const m = MODELOS_ESTOJO_3D[estojo3D_modeloAtual];
+  const container = document.getElementById('estojo3d_pills_container');
+  if (!container || !m) return;
+
+  container.innerHTML = `
+    <div style="background:#051221; border:1px solid #0284c7; border-radius:6px; padding:4px 10px; font-size:11px;">
+      <span style="color:#94a3b8;">Diâmetro Ø:</span> <b style="color:#38bdf8;">${m.diamPol}</b> <span style="color:#64748b;">(${m.diamMm} mm)</span>
+    </div>
+    <div style="background:#051221; border:1px solid #ca8a04; border-radius:6px; padding:4px 10px; font-size:11px;">
+      <span style="color:#94a3b8;">Passo:</span> <b style="color:#facc15;">${m.passo}</b> <span style="color:#64748b;">(TPI ${m.tpi})</span>
+    </div>
+    <div style="background:#051221; border:1px solid #10b981; border-radius:6px; padding:4px 10px; font-size:11px;">
+      <span style="color:#94a3b8;">Comprimento L:</span> <b style="color:#4ade80;">${m.compPol}</b> <span style="color:#64748b;">(${m.compMm} mm)</span>
+    </div>
+    <div style="background:#051221; border:1px solid #f59e0b; border-radius:6px; padding:4px 10px; font-size:11px;">
+      <span style="color:#94a3b8;">Chave da Porca:</span> <b style="color:#fbbf24;">${m.chave}</b> <span style="color:#64748b;">(${m.chaveMm} mm)</span>
+    </div>
+  `;
+}
+
+function toggleAutoGirarEstojo3D() {
+  estojo3D_autoGirar = !estojo3D_autoGirar;
+  const btn = document.getElementById('btn_auto_girar_estojo');
+  if (btn) {
+    btn.innerHTML = estojo3D_autoGirar ? '⏸️ Pausar' : '🔄 Auto-Girar';
+    btn.style.color = estojo3D_autoGirar ? '#facc15' : '#7dd3fc';
+    btn.style.borderColor = estojo3D_autoGirar ? '#facc15' : '#38bdf8';
+  }
+
+  if (estojo3D_autoGirar) {
+    const loop = () => {
+      if (!estojo3D_autoGirar) return;
+      estojo3D_rotY += 0.8;
+      if (estojo3D_rotY >= 360) estojo3D_rotY -= 360;
+      renderizarEstojo3DCanvas();
+      estojo3D_animId = requestAnimationFrame(loop);
+    };
+    estojo3D_animId = requestAnimationFrame(loop);
+  } else if (estojo3D_animId) {
+    cancelAnimationFrame(estojo3D_animId);
+    estojo3D_animId = null;
+  }
+}
+
+function ajustarZoomEstojo3D(delta) {
+  estojo3D_zoom = Math.max(0.65, Math.min(2.2, estojo3D_zoom + delta));
+  renderizarEstojo3DCanvas();
+}
+
+function resetarVistaEstojo3D() {
+  estojo3D_rotX = 14;
+  estojo3D_rotY = -22;
+  estojo3D_rotZ = 0;
+  estojo3D_zoom = 1.0;
+  renderizarEstojo3DCanvas();
+}
+
+function initCanvasEstojo3DInteracao() {
+  const canvas = document.getElementById('canvas_estojo_3d');
+  if (!canvas || estojo3D_initialized) return;
+  estojo3D_initialized = true;
+
+  const onStart = (clientX, clientY) => {
+    estojo3D_isDragging = true;
+    estojo3D_lastMouseX = clientX;
+    estojo3D_lastMouseY = clientY;
+    if (estojo3D_autoGirar) toggleAutoGirarEstojo3D();
+  };
+
+  const onMove = (clientX, clientY) => {
+    if (!estojo3D_isDragging) return;
+    const dx = clientX - estojo3D_lastMouseX;
+    const dy = clientY - estojo3D_lastMouseY;
+    estojo3D_lastMouseX = clientX;
+    estojo3D_lastMouseY = clientY;
+
+    estojo3D_rotY += dx * 0.7;
+    estojo3D_rotX = Math.max(-65, Math.min(65, estojo3D_rotX - dy * 0.6));
+    renderizarEstojo3DCanvas();
+  };
+
+  const onEnd = () => {
+    estojo3D_isDragging = false;
+  };
+
+  // Mouse events
+  canvas.addEventListener('mousedown', e => {
+    onStart(e.clientX, e.clientY);
+  });
+  window.addEventListener('mousemove', e => {
+    if (estojo3D_isDragging) onMove(e.clientX, e.clientY);
+  });
+  window.addEventListener('mouseup', onEnd);
+
+  // Touch events
+  canvas.addEventListener('touchstart', e => {
+    if (e.touches.length === 1) {
+      onStart(e.touches[0].clientX, e.touches[0].clientY);
+    }
+  }, { passive: true });
+  window.addEventListener('touchmove', e => {
+    if (estojo3D_isDragging && e.touches.length === 1) {
+      onMove(e.touches[0].clientX, e.touches[0].clientY);
+    }
+  }, { passive: true });
+  window.addEventListener('touchend', onEnd);
+
+  // Wheel zoom
+  canvas.addEventListener('wheel', e => {
+    e.preventDefault();
+    const delta = e.deltaY < 0 ? 0.1 : -0.1;
+    ajustarZoomEstojo3D(delta);
+  }, { passive: false });
+}
+
+function project3DEstojo(x, y, z, rotX, rotY, rotZ, scale, cx, cy) {
+  const radX = (rotX * Math.PI) / 180;
+  const radY = (rotY * Math.PI) / 180;
+  const radZ = (rotZ * Math.PI) / 180;
+
+  // Rotate Y
+  const x1 = x * Math.cos(radY) + z * Math.sin(radY);
+  const y1 = y;
+  const z1 = -x * Math.sin(radY) + z * Math.cos(radY);
+
+  // Rotate X
+  const x2 = x1;
+  const y2 = y1 * Math.cos(radX) - z1 * Math.sin(radX);
+  const z2 = y1 * Math.sin(radX) + z1 * Math.cos(radX);
+
+  // Rotate Z
+  const x3 = x2 * Math.cos(radZ) - y2 * Math.sin(radZ);
+  const y3 = x2 * Math.sin(radZ) + y2 * Math.cos(radZ);
+  const z3 = z2;
+
+  // Perspective factor
+  const fov = 750;
+  const p = fov / (fov + z3);
+
+  return {
+    x: cx + x3 * scale * p,
+    y: cy + y3 * scale * p,
+    z: z3,
+    p: p
+  };
+}
+
+function renderizarEstojo3DCanvas() {
+  const canvas = document.getElementById('canvas_estojo_3d');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  const w = canvas.width;
+  const h = canvas.height;
+  const cx = w / 2;
+  const cy = h / 2 + 15;
+
+  ctx.clearRect(0, 0, w, h);
+
+  // Fundo técnico milimetrado gradiente escuro
+  const bgGrad = ctx.createLinearGradient(0, 0, 0, h);
+  bgGrad.addColorStop(0, '#040b17');
+  bgGrad.addColorStop(1, '#071629');
+  ctx.fillStyle = bgGrad;
+  ctx.fillRect(0, 0, w, h);
+
+  // Grid milimetrado sutil de engenharia
+  ctx.strokeStyle = 'rgba(30, 58, 95, 0.28)';
+  ctx.lineWidth = 1;
+  const gridStep = 24;
+  for (let x = 0; x < w; x += gridStep) {
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+  }
+  for (let y = 0; y < h; y += gridStep) {
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+  }
+
+  const m = MODELOS_ESTOJO_3D[estojo3D_modeloAtual] || MODELOS_ESTOJO_3D['5/8'];
+  const modo = estojo3D_modoAtual;
+
+  // Fator de escala adaptativo
+  const baseScale = (400 / Math.max(90, m.compMm)) * estojo3D_zoom;
+  const rotX = estojo3D_rotX;
+  const rotY = estojo3D_rotY;
+  const rotZ = estojo3D_rotZ;
+
+  const L = m.compMm;
+  const halfL = L / 2;
+  const D = m.diamMm;
+  const radius = D / 2;
+  const pitch = m.passoMm;
+  const chamfer = Math.min(2.5, radius * 0.35);
+
+  // Dimensões da Porca Heavy Hex
+  const nutWidth = m.nutHeightMm; // Altura da porca Heavy Hex ~= Diâmetro do estojo
+  const nutAcrossFlats = m.chaveMm; // Medida da chave
+  const hexRadius = (nutAcrossFlats / 2) / Math.cos(Math.PI / 6); // Raio do hexágono circunscrito
+
+  // Posicionamento simétrico das duas porcas (deixando 2 a 3 fios de sobra nas pontas)
+  const sobraMm = pitch * 2.8;
+  const nutLeftCenterX = -halfL + sobraMm + nutWidth / 2;
+  const nutRightCenterX = halfL - sobraMm - nutWidth / 2;
+
+  // 1. GIZMO DE COORDENADAS 3D NO CANTO INFERIOR ESQUERDO
+  const gizmoX = 60, gizmoY = h - 50;
+  const p0 = { x: gizmoX, y: gizmoY };
+  const pX = project3DEstojo(35, 0, 0, rotX, rotY, rotZ, 1, gizmoX, gizmoY);
+  const pY = project3DEstojo(0, -35, 0, rotX, rotY, rotZ, 1, gizmoX, gizmoY);
+  const pZ = project3DEstojo(0, 0, 35, rotX, rotY, rotZ, 1, gizmoX, gizmoY);
+
+  ctx.lineWidth = 2;
+  // Eixo X (Comprimento L - Vermelho)
+  ctx.strokeStyle = '#ef4444';
+  ctx.beginPath(); ctx.moveTo(p0.x, p0.y); ctx.lineTo(pX.x, pX.y); ctx.stroke();
+  ctx.fillStyle = '#ef4444'; ctx.font = 'bold 10px sans-serif'; ctx.fillText('X (L)', pX.x + 3, pX.y + 3);
+
+  // Eixo Y (Diâmetro Ø - Verde)
+  ctx.strokeStyle = '#10b981';
+  ctx.beginPath(); ctx.moveTo(p0.x, p0.y); ctx.lineTo(pY.x, pY.y); ctx.stroke();
+  ctx.fillStyle = '#10b981'; ctx.fillText('Y (Ø)', pY.x + 3, pY.y - 3);
+
+  // Eixo Z (Profundidade - Azul)
+  ctx.strokeStyle = '#38bdf8';
+  ctx.beginPath(); ctx.moveTo(p0.x, p0.y); ctx.lineTo(pZ.x, pZ.y); ctx.stroke();
+  ctx.fillStyle = '#38bdf8'; ctx.fillText('Z', pZ.x + 3, pZ.y + 3);
+
+  // 2. DESENHO DO CORPO DO ESTOJO (STUD BOLT CYLINDER COM FILETES)
+  // Dividir ao longo do eixo X em passos de rosca
+  const numPassos = Math.max(12, Math.floor(L / pitch));
+  const stepX = L / numPassos;
+
+  // Centro da janela de 1 polegada (25,4 mm) no corpo livre entre porcas ou centro
+  const winWidth = 25.4;
+  const winStart = -winWidth / 2;
+  const winEnd = winWidth / 2;
+
+  // Renderizar o cilindro e filetes de rosca
+  for (let i = 0; i < numPassos; i++) {
+    const x0 = -halfL + i * stepX;
+    const x1 = x0 + stepX;
+    const xMid = (x0 + x1) / 2;
+
+    // Chanfros nas extremidades
+    let r0 = radius;
+    let r1 = radius;
+    if (x0 < -halfL + chamfer) {
+      r0 = radius * 0.75 + (x0 - (-halfL)) / chamfer * (radius * 0.25);
+    }
+    if (x1 > halfL - chamfer) {
+      r1 = radius - (x1 - (halfL - chamfer)) / chamfer * (radius * 0.25);
+    }
+
+    // Projeta 4 cantos do perfil cilíndrico do filete
+    const ptTop0 = project3DEstojo(x0, -r0, 0, rotX, rotY, rotZ, baseScale, cx, cy);
+    const ptBot0 = project3DEstojo(x0, r0, 0, rotX, rotY, rotZ, baseScale, cx, cy);
+    const ptTop1 = project3DEstojo(x1, -r1, 0, rotX, rotY, rotZ, baseScale, cx, cy);
+    const ptBot1 = project3DEstojo(x1, r1, 0, rotX, rotY, rotZ, baseScale, cx, cy);
+
+    // Crista do filete em V (ligeiramente deslocada para sensação de hélice)
+    const ptCrestTop = project3DEstojo(xMid, -Math.max(r0, r1) * 1.04, 0, rotX, rotY, rotZ, baseScale, cx, cy);
+    const ptCrestBot = project3DEstojo(xMid, Math.max(r0, r1) * 1.04, 0, rotX, rotY, rotZ, baseScale, cx, cy);
+
+    // Cor do segmento dependendo do modo ativo
+    let segColorGrad;
+    const isIn1InchWin = (modo === 'fios' && xMid >= winStart && xMid <= winEnd);
+    const isSobra = (modo === 'sobra' && (xMid < -halfL + sobraMm || xMid > halfL - sobraMm));
+
+    if (isIn1InchWin) {
+      // Destaque de ouro / âmbar neon na janela de 1 polegada
+      segColorGrad = ctx.createLinearGradient(ptTop0.x, ptTop0.y, ptBot0.x, ptBot0.y);
+      segColorGrad.addColorStop(0, '#fef08a');
+      segColorGrad.addColorStop(0.3, '#facc15');
+      segColorGrad.addColorStop(0.7, '#ca8a04');
+      segColorGrad.addColorStop(1, '#713f12');
+    } else if (isSobra) {
+      // Destaque verde neon na sobra de rosca
+      segColorGrad = ctx.createLinearGradient(ptTop0.x, ptTop0.y, ptBot0.x, ptBot0.y);
+      segColorGrad.addColorStop(0, '#86efac');
+      segColorGrad.addColorStop(0.3, '#22c55e');
+      segColorGrad.addColorStop(0.7, '#15803d');
+      segColorGrad.addColorStop(1, '#052e16');
+    } else {
+      // Aço industrial brunido / fosfatizado B7 (cinza escuro com reflexo metálico)
+      segColorGrad = ctx.createLinearGradient(ptTop0.x, ptTop0.y, ptBot0.x, ptBot0.y);
+      segColorGrad.addColorStop(0, '#e2e8f0');
+      segColorGrad.addColorStop(0.2, '#94a3b8');
+      segColorGrad.addColorStop(0.5, '#475569');
+      segColorGrad.addColorStop(0.8, '#1e293b');
+      segColorGrad.addColorStop(1, '#0f172a');
+    }
+
+    // Desenhar corpo do passo de rosca
+    ctx.fillStyle = segColorGrad;
+    ctx.beginPath();
+    ctx.moveTo(ptTop0.x, ptTop0.y);
+    ctx.lineTo(ptCrestTop.x, ptCrestTop.y);
+    ctx.lineTo(ptTop1.x, ptTop1.y);
+    ctx.lineTo(ptBot1.x, ptBot1.y);
+    ctx.lineTo(ptCrestBot.x, ptCrestBot.y);
+    ctx.lineTo(ptBot0.x, ptBot0.y);
+    ctx.closePath();
+    ctx.fill();
+
+    // Linha de crista do filete
+    ctx.strokeStyle = isIn1InchWin ? '#fde047' : (isSobra ? '#4ade80' : 'rgba(255, 255, 255, 0.45)');
+    ctx.lineWidth = isIn1InchWin ? 2 : 1;
+    ctx.beginPath();
+    ctx.moveTo(ptCrestTop.x, ptCrestTop.y);
+    ctx.lineTo(ptCrestBot.x, ptCrestBot.y);
+    ctx.stroke();
+  }
+
+  // Capas das extremidades chanfradas (Left & Right Tip Caps)
+  const tipL = project3DEstojo(-halfL, 0, 0, rotX, rotY, rotZ, baseScale, cx, cy);
+  const tipR = project3DEstojo(halfL, 0, 0, rotX, rotY, rotZ, baseScale, cx, cy);
+
+  // 3. DESENHO DAS 2 PORCAS PESADAS HEAVY HEX (ASTM A194 2H)
+  const desenharPorcaHex = (centerX, isRightNut) => {
+    const halfNutW = nutWidth / 2;
+    const cornerAngles = [0, 60, 120, 180, 240, 300];
+    const corners = cornerAngles.map(deg => {
+      const rad = (deg * Math.PI) / 180;
+      return { y: hexRadius * Math.cos(rad), z: hexRadius * Math.sin(rad) };
+    });
+
+    const faces = [];
+    for (let i = 0; i < 6; i++) {
+      const next = (i + 1) % 6;
+      const p1 = project3DEstojo(centerX - halfNutW, corners[i].y, corners[i].z, rotX, rotY, rotZ, baseScale, cx, cy);
+      const p2 = project3DEstojo(centerX + halfNutW, corners[i].y, corners[i].z, rotX, rotY, rotZ, baseScale, cx, cy);
+      const p3 = project3DEstojo(centerX + halfNutW, corners[next].y, corners[next].z, rotX, rotY, rotZ, baseScale, cx, cy);
+      const p4 = project3DEstojo(centerX - halfNutW, corners[next].y, corners[next].z, rotX, rotY, rotZ, baseScale, cx, cy);
+
+      const avgZ = (p1.z + p2.z + p3.z + p4.z) / 4;
+      const cross = (p2.x - p1.x) * (p3.y - p1.y) - (p2.y - p1.y) * (p3.x - p1.x);
+
+      faces.push({ idx: i, p: [p1, p2, p3, p4], avgZ, visible: cross > 0 });
+    }
+
+    // Ordenar por Z para renderização correta
+    faces.sort((a, b) => b.avgZ - a.avgZ);
+
+    faces.forEach(f => {
+      if (!f.visible) return;
+      const isHighlightedNut = (modo === 'chave');
+
+      let grad = ctx.createLinearGradient(f.p[0].x, f.p[0].y, f.p[3].x, f.p[3].y);
+      if (isHighlightedNut) {
+        grad.addColorStop(0, '#fde68a');
+        grad.addColorStop(0.3, '#f59e0b');
+        grad.addColorStop(0.7, '#d97706');
+        grad.addColorStop(1, '#78350f');
+      } else {
+        // Aço forjado usinado ASTM A194 2H
+        const brightness = 0.5 + 0.5 * Math.cos((f.idx * 60 * Math.PI) / 180 + (rotY * Math.PI) / 180);
+        const colVal = Math.floor(100 + brightness * 90);
+        grad.addColorStop(0, `rgb(${colVal + 30}, ${colVal + 35}, ${colVal + 40})`);
+        grad.addColorStop(0.5, `rgb(${colVal}, ${colVal + 5}, ${colVal + 10})`);
+        grad.addColorStop(1, `rgb(${Math.max(20, colVal - 40)}, ${Math.max(20, colVal - 35)}, ${Math.max(20, colVal - 30)})`);
+      }
+
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.moveTo(f.p[0].x, f.p[0].y);
+      ctx.lineTo(f.p[1].x, f.p[1].y);
+      ctx.lineTo(f.p[2].x, f.p[2].y);
+      ctx.lineTo(f.p[3].x, f.p[3].y);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.strokeStyle = isHighlightedNut ? '#fde047' : 'rgba(255, 255, 255, 0.4)';
+      ctx.lineWidth = isHighlightedNut ? 2 : 1;
+      ctx.stroke();
+    });
+
+    // Face externa plana da porca (Outer Cap Polygon)
+    const capX = isRightNut ? (centerX + halfNutW) : (centerX - halfNutW);
+    const capPoints = corners.map(c => project3DEstojo(capX, c.y, c.z, rotX, rotY, rotZ, baseScale, cx, cy));
+    const capCross = (capPoints[1].x - capPoints[0].x) * (capPoints[2].y - capPoints[1].y) -
+                     (capPoints[1].y - capPoints[0].y) * (capPoints[2].x - capPoints[1].x);
+
+    // Se a face frontal estiver visível
+    const isCapVisible = isRightNut ? (capCross < 0) : (capCross > 0);
+    if (isCapVisible) {
+      let capGrad = ctx.createRadialGradient(
+        capPoints[0].x, capPoints[0].y, 5,
+        capPoints[0].x, capPoints[0].y, hexRadius * baseScale
+      );
+      if (modo === 'chave') {
+        capGrad.addColorStop(0, '#fef08a');
+        capGrad.addColorStop(1, '#b45309');
+      } else {
+        capGrad.addColorStop(0, '#cbd5e1');
+        capGrad.addColorStop(0.7, '#64748b');
+        capGrad.addColorStop(1, '#334155');
+      }
+
+      ctx.fillStyle = capGrad;
+      ctx.beginPath();
+      ctx.moveTo(capPoints[0].x, capPoints[0].y);
+      for (let i = 1; i < capPoints.length; i++) {
+        ctx.lineTo(capPoints[i].x, capPoints[i].y);
+      }
+      ctx.closePath();
+      ctx.fill();
+      ctx.strokeStyle = (modo === 'chave') ? '#fde047' : '#94a3b8';
+      ctx.lineWidth = (modo === 'chave') ? 2 : 1;
+      ctx.stroke();
+
+      // Gravação estampada da norma na face: "2H" e "M40"
+      const centerCapPt = project3DEstojo(capX, 0, 0, rotX, rotY, rotZ, baseScale, cx, cy);
+      ctx.fillStyle = (modo === 'chave') ? '#78350f' : '#0f172a';
+      ctx.font = `bold ${Math.max(10, Math.floor(12 * estojo3D_zoom))}px monospace`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('2H', centerCapPt.x, centerCapPt.y - 10 * estojo3D_zoom);
+      ctx.font = `${Math.max(8, Math.floor(9 * estojo3D_zoom))}px monospace`;
+      ctx.fillText('M4.0', centerCapPt.x, centerCapPt.y + 10 * estojo3D_zoom);
+    }
+  };
+
+  desenharPorcaHex(nutLeftCenterX, false);
+  desenharPorcaHex(nutRightCenterX, true);
+
+  // 4. OVERLAYS DIDÁTICOS DE ACORDO COM O MODO DE MEDIÇÃO
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+
+  if (modo === 'fios') {
+    // =========================================================================
+    // MODO: ONDE CONTAR OS FIOS DE ROSCA (TPI / PASSO)
+    // =========================================================================
+    const pWinStart = project3DEstojo(winStart, -radius * 1.3, 0, rotX, rotY, rotZ, baseScale, cx, cy);
+    const pWinEnd = project3DEstojo(winEnd, -radius * 1.3, 0, rotX, rotY, rotZ, baseScale, cx, cy);
+    const pWinBotStart = project3DEstojo(winStart, radius * 1.3, 0, rotX, rotY, rotZ, baseScale, cx, cy);
+    const pWinBotEnd = project3DEstojo(winEnd, radius * 1.3, 0, rotX, rotY, rotZ, baseScale, cx, cy);
+
+    // Retângulo translúcido destacando a janela de inspeção de 1 polegada (25,4 mm)
+    ctx.fillStyle = 'rgba(250, 204, 21, 0.12)';
+    ctx.strokeStyle = '#facc15';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(pWinStart.x, pWinStart.y - 12);
+    ctx.lineTo(pWinEnd.x, pWinEnd.y - 12);
+    ctx.lineTo(pWinBotEnd.x, pWinBotEnd.y + 12);
+    ctx.lineTo(pWinBotStart.x, pWinBotStart.y + 12);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    // Braçadeira de cota superior: "|<--- 1 POLEGADA (25,4 mm) --->|"
+    const cotaYOffset = 45;
+    const cotaTopStart = { x: pWinStart.x, y: pWinStart.y - cotaYOffset };
+    const cotaTopEnd = { x: pWinEnd.x, y: pWinEnd.y - cotaYOffset };
+
+    ctx.strokeStyle = '#fde047';
+    ctx.lineWidth = 2;
+    // Linhas de extensão
+    ctx.beginPath();
+    ctx.moveTo(pWinStart.x, pWinStart.y - 10); ctx.lineTo(cotaTopStart.x, cotaTopStart.y - 6);
+    ctx.moveTo(pWinEnd.x, pWinEnd.y - 10); ctx.lineTo(cotaTopEnd.x, cotaTopEnd.y - 6);
+    ctx.stroke();
+
+    // Linha de cota com setas
+    ctx.beginPath();
+    ctx.moveTo(cotaTopStart.x, cotaTopStart.y);
+    ctx.lineTo(cotaTopEnd.x, cotaTopEnd.y);
+    ctx.stroke();
+
+    // Setas da cota
+    const desenharSeta = (x, y, dir) => {
+      ctx.fillStyle = '#fde047';
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(x + dir * 10, y - 4);
+      ctx.lineTo(x + dir * 10, y + 4);
+      ctx.closePath();
+      ctx.fill();
+    };
+    desenharSeta(cotaTopStart.x, cotaTopStart.y, 1);
+    desenharSeta(cotaTopEnd.x, cotaTopEnd.y, -1);
+
+    // Texto da cota de 1 polegada
+    const midCotaX = (cotaTopStart.x + cotaTopEnd.x) / 2;
+    const midCotaY = (cotaTopStart.y + cotaTopEnd.y) / 2;
+
+    ctx.fillStyle = '#061325';
+    ctx.fillRect(midCotaX - 85, midCotaY - 12, 170, 24);
+    ctx.strokeStyle = '#facc15';
+    ctx.strokeRect(midCotaX - 85, midCotaY - 12, 170, 24);
+    ctx.fillStyle = '#fef08a';
+    ctx.font = 'bold 12px sans-serif';
+    ctx.fillText('1 POLEGADA (25,4 mm)', midCotaX, midCotaY);
+
+    // NUMERAÇÃO DAS CRISTAS DENTRO DE 1 POLEGADA
+    const numFiosNaPolegada = m.tpi;
+    const passoExato = 25.4 / numFiosNaPolegada;
+
+    for (let f = 0; f < numFiosNaPolegada; f++) {
+      const fioX = winStart + f * passoExato + passoExato / 2;
+      const ptFio = project3DEstojo(fioX, -radius * 1.05, 0, rotX, rotY, rotZ, baseScale, cx, cy);
+
+      // Linha indicadora vertical
+      ctx.strokeStyle = '#facc15';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(ptFio.x, ptFio.y);
+      ctx.lineTo(ptFio.x, ptFio.y - 18);
+      ctx.stroke();
+
+      // Círculo numerado da crista
+      ctx.fillStyle = '#ca8a04';
+      ctx.beginPath();
+      ctx.arc(ptFio.x, ptFio.y - 24, 8, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = '#fde047';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 10px monospace';
+      ctx.fillText((f + 1).toString(), ptFio.x, ptFio.y - 24);
+    }
+
+    // Pente de rosca virtual (lâmina de cálibre ilustrada)
+    ctx.fillStyle = '#031b33';
+    ctx.strokeStyle = '#38bdf8';
+    ctx.lineWidth = 1.5;
+    const penteX = midCotaX;
+    const penteY = h - 60;
+    ctx.fillRect(penteX - 160, penteY - 16, 320, 34);
+    ctx.strokeRect(penteX - 160, penteY - 16, 320, 34);
+
+    ctx.fillStyle = '#38bdf8';
+    ctx.font = 'bold 12px sans-serif';
+    ctx.fillText(`LÂMINA DO PENTE DE ROSCA: ${m.passo.toUpperCase()}`, penteX, penteY);
+    ctx.fillStyle = '#cbd5e1';
+    ctx.font = '11px sans-serif';
+    ctx.fillText(`TPI = ${m.tpi} cristas em 1" (passo = ${m.passoMm} mm) • Encaixe 100% sem fresta`, penteX, penteY + 14);
+
+  } else if (modo === 'comprimento') {
+    // =========================================================================
+    // MODO: ONDE MEDIR O COMPRIMENTO TOTAL (L)
+    // =========================================================================
+    const pPontaEsq = project3DEstojo(-halfL, 0, 0, rotX, rotY, rotZ, baseScale, cx, cy);
+    const pPontaDir = project3DEstojo(halfL, 0, 0, rotX, rotY, rotZ, baseScale, cx, cy);
+
+    const cotaYOffset = 65;
+    const cotaY = Math.min(pPontaEsq.y, pPontaDir.y) - cotaYOffset;
+
+    // Linhas de chamada verticais das extremidades
+    ctx.strokeStyle = '#38bdf8';
+    ctx.lineWidth = 1.5;
+    ctx.setLineDash([4, 3]);
+    ctx.beginPath();
+    ctx.moveTo(pPontaEsq.x, pPontaEsq.y); ctx.lineTo(pPontaEsq.x, cotaY - 8);
+    ctx.moveTo(pPontaDir.x, pPontaDir.y); ctx.lineTo(pPontaDir.x, cotaY - 8);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Linha contínua da cota com setas
+    ctx.strokeStyle = '#38bdf8';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(pPontaEsq.x, cotaY);
+    ctx.lineTo(pPontaDir.x, cotaY);
+    ctx.stroke();
+
+    // Setas nas duas pontas
+    const desenharSeta = (x, y, dir) => {
+      ctx.fillStyle = '#38bdf8';
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(x + dir * 12, y - 5);
+      ctx.lineTo(x + dir * 12, y + 5);
+      ctx.closePath();
+      ctx.fill();
+    };
+    desenharSeta(pPontaEsq.x, cotaY, 1);
+    desenharSeta(pPontaDir.x, cotaY, -1);
+
+    // Marcadores pulsantes nas extremidades chanfradas
+    ctx.fillStyle = 'rgba(56, 189, 248, 0.3)';
+    ctx.beginPath(); ctx.arc(pPontaEsq.x, pPontaEsq.y, 14, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(pPontaDir.x, pPontaDir.y, 14, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = '#38bdf8';
+    ctx.beginPath(); ctx.arc(pPontaEsq.x, pPontaEsq.y, 5, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(pPontaDir.x, pPontaDir.y, 5, 0, Math.PI * 2); ctx.fill();
+
+    // Box central da dimensão
+    const midX = (pPontaEsq.x + pPontaDir.x) / 2;
+    ctx.fillStyle = '#061a33';
+    ctx.fillRect(midX - 150, cotaY - 18, 300, 36);
+    ctx.strokeStyle = '#38bdf8';
+    ctx.strokeRect(midX - 150, cotaY - 18, 300, 36);
+
+    ctx.fillStyle = '#38bdf8';
+    ctx.font = 'bold 14px sans-serif';
+    ctx.fillText(`L = ${m.compPol} (${m.compMm} mm)`, midX, cotaY - 3);
+    ctx.fillStyle = '#cbd5e1';
+    ctx.font = 'bold 10px sans-serif';
+    ctx.fillText('DE PONTA A PONTA (INCLUI OS DOIS CHANFROS)', midX, cotaY + 11);
+
+  } else if (modo === 'diametro') {
+    // =========================================================================
+    // MODO: ONDE MEDIR O DIÂMETRO NOMINAL (Ø)
+    // =========================================================================
+    const pCrestTop = project3DEstojo(0, -radius, 0, rotX, rotY, rotZ, baseScale, cx, cy);
+    const pCrestBot = project3DEstojo(0, radius, 0, rotX, rotY, rotZ, baseScale, cx, cy);
+
+    // Bicos do paquímetro virtual
+    const bicoLargura = 35;
+    const bicoXOffset = 40;
+    const caliperX = pCrestTop.x + bicoXOffset;
+
+    // Bico Superior apoiado na crista
+    ctx.fillStyle = '#475569';
+    ctx.strokeStyle = '#38bdf8';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(pCrestTop.x - 5, pCrestTop.y);
+    ctx.lineTo(caliperX, pCrestTop.y);
+    ctx.lineTo(caliperX + 15, pCrestTop.y - 30);
+    ctx.lineTo(pCrestTop.x - 5, pCrestTop.y - 12);
+    ctx.closePath();
+    ctx.fill(); ctx.stroke();
+
+    // Bico Inferior apoiado na crista
+    ctx.beginPath();
+    ctx.moveTo(pCrestBot.x - 5, pCrestBot.y);
+    ctx.lineTo(caliperX, pCrestBot.y);
+    ctx.lineTo(caliperX + 15, pCrestBot.y + 30);
+    ctx.lineTo(pCrestBot.x - 5, pCrestBot.y + 12);
+    ctx.closePath();
+    ctx.fill(); ctx.stroke();
+
+    // Linha de cota vertical entre cristas
+    ctx.strokeStyle = '#38bdf8';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(caliperX - 10, pCrestTop.y);
+    ctx.lineTo(caliperX - 10, pCrestBot.y);
+    ctx.stroke();
+
+    // Setas para cima e para baixo
+    const desenharSetaV = (x, y, dir) => {
+      ctx.fillStyle = '#38bdf8';
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(x - 4, y + dir * 10);
+      ctx.lineTo(x + 4, y + dir * 10);
+      ctx.closePath();
+      ctx.fill();
+    };
+    desenharSetaV(caliperX - 10, pCrestTop.y, 1);
+    desenharSetaV(caliperX - 10, pCrestBot.y, -1);
+
+    // Display digital do paquímetro
+    const dispX = caliperX + 85;
+    const dispY = (pCrestTop.y + pCrestBot.y) / 2;
+    ctx.fillStyle = '#061324';
+    ctx.fillRect(dispX - 65, dispY - 24, 130, 48);
+    ctx.strokeStyle = '#0284c7';
+    ctx.strokeRect(dispX - 65, dispY - 24, 130, 48);
+
+    ctx.fillStyle = '#38bdf8';
+    ctx.font = 'bold 15px monospace';
+    ctx.fillText(`${m.diamMm.toFixed(2)} mm`, dispX, dispY - 6);
+    ctx.fillStyle = '#fde047';
+    ctx.font = 'bold 12px sans-serif';
+    ctx.fillText(`Ø Nominal: ${m.diamPol}`, dispX, dispY + 12);
+
+    // Callout didático de crista vs fundo
+    ctx.fillStyle = '#022c22';
+    ctx.strokeStyle = '#10b981';
+    ctx.fillRect(cx - 150, h - 55, 300, 32);
+    ctx.strokeRect(cx - 150, h - 55, 300, 32);
+    ctx.fillStyle = '#4ade80';
+    ctx.font = 'bold 11.5px sans-serif';
+    ctx.fillText('✔ APOIAR O PAQUÍMETRO SOBRE AS CRISTAS EXTERNAS', cx, h - 39);
+
+  } else if (modo === 'chave') {
+    // =========================================================================
+    // MODO: ONDE MEDIR A CHAVE DA PORCA (F)
+    // =========================================================================
+    const nutRightPt = project3DEstojo(nutRightCenterX, 0, 0, rotX, rotY, rotZ, baseScale, cx, cy);
+    const topFlatPt = project3DEstojo(nutRightCenterX, -nutAcrossFlats / 2, 0, rotX, rotY, rotZ, baseScale, cx, cy);
+    const botFlatPt = project3DEstojo(nutRightCenterX, nutAcrossFlats / 2, 0, rotX, rotY, rotZ, baseScale, cx, cy);
+
+    // Linha de cota entre as faces paralelas
+    const lineX = nutRightPt.x + 45;
+    ctx.strokeStyle = '#f59e0b';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(topFlatPt.x, topFlatPt.y); ctx.lineTo(lineX + 5, topFlatPt.y);
+    ctx.moveTo(botFlatPt.x, botFlatPt.y); ctx.lineTo(lineX + 5, botFlatPt.y);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(lineX, topFlatPt.y);
+    ctx.lineTo(lineX, botFlatPt.y);
+    ctx.stroke();
+
+    // Box de indicação da chave Heavy Hex
+    const boxX = lineX + 90;
+    const boxY = (topFlatPt.y + botFlatPt.y) / 2;
+    ctx.fillStyle = '#261605';
+    ctx.fillRect(boxX - 75, boxY - 26, 150, 52);
+    ctx.strokeStyle = '#f59e0b';
+    ctx.strokeRect(boxX - 75, boxY - 26, 150, 52);
+
+    ctx.fillStyle = '#fde047';
+    ctx.font = 'bold 14px sans-serif';
+    ctx.fillText(`CHAVE ${m.chave}`, boxX, boxY - 8);
+    ctx.fillStyle = '#fed7aa';
+    ctx.font = 'bold 11px sans-serif';
+    ctx.fillText(`${m.chaveMm.toFixed(1)} mm entre-faces`, boxX, boxY + 8);
+    ctx.fillStyle = '#cbd5e1';
+    ctx.font = '9.5px sans-serif';
+    ctx.fillText('Heavy Hex ASME B18.2.2', boxX, boxY + 19);
+
+  } else if (modo === 'sobra') {
+    // =========================================================================
+    // MODO: SOBRA DE ROSCA (2 A 3 FILETES)
+    // =========================================================================
+    const tipR = project3DEstojo(halfL, 0, 0, rotX, rotY, rotZ, baseScale, cx, cy);
+    const nutEdgeR = project3DEstojo(halfL - sobraMm, 0, 0, rotX, rotY, rotZ, baseScale, cx, cy);
+
+    // Cota da sobra de rosca direita
+    const cotaY = tipR.y - 45;
+    ctx.strokeStyle = '#10b981';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(tipR.x, tipR.y); ctx.lineTo(tipR.x, cotaY - 5);
+    ctx.moveTo(nutEdgeR.x, nutEdgeR.y); ctx.lineTo(nutEdgeR.x, cotaY - 5);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(tipR.x, cotaY);
+    ctx.lineTo(nutEdgeR.x, cotaY);
+    ctx.stroke();
+
+    const midSobraX = (tipR.x + nutEdgeR.x) / 2;
+    ctx.fillStyle = '#062817';
+    ctx.fillRect(midSobraX - 75, cotaY - 14, 150, 28);
+    ctx.strokeStyle = '#10b981';
+    ctx.strokeRect(midSobraX - 75, cotaY - 14, 150, 28);
+
+    ctx.fillStyle = '#4ade80';
+    ctx.font = 'bold 11px sans-serif';
+    ctx.fillText('2 a 3 FILETES LIVRES', midSobraX, cotaY);
+
+    // Banner de aceitação
+    ctx.fillStyle = '#041f14';
+    ctx.strokeStyle = '#10b981';
+    ctx.fillRect(cx - 160, h - 55, 320, 32);
+    ctx.strokeRect(cx - 160, h - 55, 320, 32);
+    ctx.fillStyle = '#86efac';
+    ctx.font = 'bold 11.5px sans-serif';
+    ctx.fillText('✔ CRITÉRIO NORMATIVO ASME & PETROBRAS N-1597', cx, h - 39);
+
+  } else {
+    // =========================================================================
+    // MODO GERAL: ANOTAÇÕES TÉCNICAS COMPLETAS
+    // =========================================================================
+    ctx.fillStyle = 'rgba(7, 24, 44, 0.85)';
+    ctx.strokeStyle = '#0284c7';
+    ctx.lineWidth = 1;
+    ctx.fillRect(16, h - 55, w - 32, 34);
+    ctx.strokeRect(16, h - 55, w - 32, 34);
+
+    ctx.fillStyle = '#f8fafc';
+    ctx.font = 'bold 12px sans-serif';
+    ctx.fillText(`Estojo: ${m.diamPol} × ${m.compPol} (${m.passo}) | 2 Porcas Heavy Hex Chave ${m.chave} | Material: ${m.materialEstojo} / ${m.materialPorca}`, cx, h - 38);
+  }
+}
+
+function atualizarExplicacaoEstojo3D(modo, modeloKey) {
+  const box = document.getElementById('estojo3d_explicacao_box');
+  const m = MODELOS_ESTOJO_3D[modeloKey] || MODELOS_ESTOJO_3D['5/8'];
+  if (!box || !m) return;
+
+  const explicacoes = {
+    'fios': `
+      <div style="background:linear-gradient(135deg, #1f1604 0%, #0d1e33 100%); border:2px solid #facc15; border-radius:10px; padding:16px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px; border-bottom:1px solid #713f12; padding-bottom:8px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:22px;">🔍</span>
+            <div>
+              <h4 style="margin:0; color:#fde047; font-size:16px; font-weight:800;">ONDE E COMO CONTAR OS FIOS DE ROSCA (TPI — THREADS PER INCH)</h4>
+              <span style="font-size:11.5px; color:#cbd5e1;">Passo atual do modelo: <b style="color:#fff;">${m.passo}</b> (Passo métrico equivalente = <b style="color:#38bdf8;">${m.passoMm} mm</b>)</span>
+            </div>
+          </div>
+          <span style="background:#ca8a04; color:#fff; font-size:11px; font-weight:bold; padding:3px 10px; border-radius:12px;">CRÍTICO P/ NÃO ESPANAR</span>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px; margin-bottom:12px;">
+          <div style="background:#071424; border:1px solid #1e3a5f; border-radius:8px; padding:12px;">
+            <b style="color:#7dd3fc; font-size:13px; display:block; margin-bottom:6px;">🛠️ Método 1 — Com Pente/Cálibre de Rosca (O mais confiável):</b>
+            <ol style="margin:0; padding-left:18px; font-size:12px; color:#cbd5e1; line-height:1.5;">
+              <li>Selecione as lâminas de rosca em polegada (UNC/UNF).</li>
+              <li>Apoie os dentes da lâmina sobre os filetes do estojo.</li>
+              <li>A lâmina correta encaixa <b>100% perfeita sem fresta de luz visível</b>.</li>
+              <li>Leia o valor gravado na lâmina: ex: <b style="color:#fde047;">${m.tpi}G</b> ou <b style="color:#fde047;">${m.tpi} UNC</b> = ${m.tpi} fios por polegada.</li>
+            </ol>
+          </div>
+
+          <div style="background:#071424; border:1px solid #1e3a5f; border-radius:8px; padding:12px;">
+            <b style="color:#fde047; font-size:13px; display:block; margin-bottom:6px;">📏 Método 2 — Com Régua ou Paquímetro no Chão de Fábrica:</b>
+            <ol style="margin:0; padding-left:18px; font-size:12px; color:#cbd5e1; line-height:1.5;">
+              <li>Apoie a escala paralelamente ao eixo longitudinal do estojo.</li>
+              <li>Alinhe o traço do <b>ZERO</b> exatamente no ápice da 1ª crista de rosca.</li>
+              <li>Conte quantas cristas existem até a marca de <b>1 POLEGADA (25,4 mm)</b>.</li>
+              <li>Para o estojo ${m.diamPol}, você contará exatamente <b style="color:#fde047;">${m.tpi} cristas</b> na janela de 25,4 mm!</li>
+            </ol>
+          </div>
+        </div>
+
+        <div style="background:#281804; border-left:4px solid #facc15; border-radius:6px; padding:10px; font-size:12px; color:#fde68a;">
+          ⚡ <b>REGRA DE TRANSIÇÃO ASME B16.5:</b> Até 1" de diâmetro a rosca é série grossa UNC (1/2"-13, 5/8"-11, 3/4"-10, 7/8"-9, 1"-8). <b>A partir de 1-1/8" em diante, a norma ASME PADRONIZA para série 8-UN (sempre 8 fios por polegada, independente do diâmetro!).</b>
+        </div>
+      </div>
+    `,
+    'comprimento': `
+      <div style="background:linear-gradient(135deg, #07192c 0%, #0d2745 100%); border:2px solid #38bdf8; border-radius:10px; padding:16px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px; border-bottom:1px solid #1e3a5f; padding-bottom:8px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:22px;">📏</span>
+            <div>
+              <h4 style="margin:0; color:#38bdf8; font-size:16px; font-weight:800;">ONDE MEDIR O COMPRIMENTO TOTAL DO ESTOJO (L)</h4>
+              <span style="font-size:11.5px; color:#cbd5e1;">Norma: <b style="color:#fff;">ASME B16.5 & ASME B18.31.2</b> — Comprimento do modelo: <b style="color:#facc15;">${m.compPol} (${m.compMm} mm)</b></span>
+            </div>
+          </div>
+          <span style="background:#0284c7; color:#fff; font-size:11px; font-weight:bold; padding:3px 10px; border-radius:12px;">REGRA PONTA A PONTA</span>
+        </div>
+
+        <p style="font-size:12.5px; color:#cbd5e1; line-height:1.5; margin:0 0 10px 0;">
+          📌 <b>COMO MEDIR CORRETAMENTE:</b> Em estojos roscados inteiramente (Stud Bolts), o comprimento nominal ($L$) é medido <b>DE PONTA A PONTA</b>, incluindo os dois chanfros das extremidades!
+        </p>
+
+        <div style="background:#040d1a; border:1px solid #1e3a5f; border-radius:8px; padding:12px; margin-bottom:10px;">
+          <b style="color:#f87171; font-size:12.5px;">⚠️ ERRO CLÁSSICO DE CHÃO DE FÁBRICA QUE GERA COMPRA ERRADA:</b>
+          <p style="margin:4px 0 0 0; font-size:12px; color:#cbd5e1; line-height:1.45;">
+            Em parafusos de máquina com cabeça (sextavados normais), o comprimento é medido <i>debaixo da cabeça</i>. No entanto, <b>em ESTOJOS INDUSTRIAIS não se desconta os chanfros!</b> Se você descontar os chanfros de 45°, comprará um estojo mais curto e não haverá sobra de 2 a 3 filetes fora da porca, causando reprovação na inspeção do flange.
+          </p>
+        </div>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; font-size:11.5px; color:#94a3b8;">
+          <span>• Tolerância de corte ASME até 12": ± 1,6 mm (± 1/16")</span>
+          <span>• Acima de 12": ± 3,2 mm (± 1/8")</span>
+          <span>• Extremidades chanfradas a 45° facilitam o início de enroscamento da porca pesada.</span>
+        </div>
+      </div>
+    `,
+    'diametro': `
+      <div style="background:linear-gradient(135deg, #07192c 0%, #0d2745 100%); border:2px solid #0284c7; border-radius:10px; padding:16px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px; border-bottom:1px solid #1e3a5f; padding-bottom:8px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:22px;">📐</span>
+            <div>
+              <h4 style="margin:0; color:#38bdf8; font-size:16px; font-weight:800;">ONDE E COMO MEDIR O DIÂMETRO NOMINAL COM PAQUÍMETRO</h4>
+              <span style="font-size:11.5px; color:#cbd5e1;">Diâmetro nominal: <b style="color:#fff;">${m.diamPol}</b> (~<b style="color:#facc15;">${m.diamMm} mm</b> medidos no paquímetro)</span>
+            </div>
+          </div>
+          <span style="background:#0f2c4e; color:#7dd3fc; border:1px solid #38bdf8; font-size:11px; font-weight:bold; padding:3px 10px; border-radius:12px;">DIÂMETRO MAIOR</span>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px; margin-bottom:12px;">
+          <div style="background:#071424; border:1px solid #10b981; border-radius:8px; padding:12px;">
+            <b style="color:#4ade80; font-size:13px; display:block; margin-bottom:6px;">✔ JEITO CORRETO DE MEDIR:</b>
+            <p style="margin:0; font-size:12px; color:#cbd5e1; line-height:1.5;">
+              Apoie os bicos principais do paquímetro perpendicularmente sobre as <b>CRISTAS EXTERNAS</b> dos filetes de rosca (diâmetro maior). Essa é a dimensão que define o diâmetro nominal do estojo.
+            </p>
+          </div>
+
+          <div style="background:#071424; border:1px solid #ef4444; border-radius:8px; padding:12px;">
+            <b style="color:#f87171; font-size:13px; display:block; margin-bottom:6px;">✖ ERRO GRAVE QUE DEVE SER EVITADO:</b>
+            <p style="margin:0; font-size:12px; color:#cbd5e1; line-height:1.5;">
+              <b>Nunca meça no fundo (raiz) do filete</b> ou com os bicos internos entrando na cavidade. Isso mede o diâmetro menor (raiz), que é cerca de 2 a 3 mm menor, fazendo você pedir um estojo de medida inexistente ou incompatível!
+            </p>
+          </div>
+        </div>
+
+        <div style="background:#091524; border:1px solid #1e3a5f; border-radius:8px; padding:10px;">
+          <b style="color:#7dd3fc; font-size:12px;">Tabela Rápida de Campo — Leitura do Paquímetro (mm) para Polegada:</b>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:6px; font-size:11.5px;">
+            <span style="background:#0f2744; padding:3px 8px; border-radius:4px; border:1px solid #1e3a5f;">~12,7 mm = <b>1/2"</b></span>
+            <span style="background:#0f2744; padding:3px 8px; border-radius:4px; border:1px solid #0284c7; color:#facc15;">~15,8 mm = <b>5/8" ★</b></span>
+            <span style="background:#0f2744; padding:3px 8px; border-radius:4px; border:1px solid #1e3a5f;">~19,0 mm = <b>3/4"</b></span>
+            <span style="background:#0f2744; padding:3px 8px; border-radius:4px; border:1px solid #1e3a5f;">~22,2 mm = <b>7/8"</b></span>
+            <span style="background:#0f2744; padding:3px 8px; border-radius:4px; border:1px solid #1e3a5f;">~25,4 mm = <b>1"</b></span>
+            <span style="background:#0f2744; padding:3px 8px; border-radius:4px; border:1px solid #1e3a5f;">~28,6 mm = <b>1-1/8"</b></span>
+            <span style="background:#0f2744; padding:3px 8px; border-radius:4px; border:1px solid #1e3a5f;">~31,7 mm = <b>1-1/4"</b></span>
+          </div>
+        </div>
+      </div>
+    `,
+    'chave': `
+      <div style="background:linear-gradient(135deg, #1c1304 0%, #0d1e33 100%); border:2px solid #f59e0b; border-radius:10px; padding:16px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px; border-bottom:1px solid #78350f; padding-bottom:8px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:22px;">🔑</span>
+            <div>
+              <h4 style="margin:0; color:#fde047; font-size:16px; font-weight:800;">ONDE MEDIR A CHAVE DA PORCA (MEDIDA ENTRE-FACES)</h4>
+              <span style="font-size:11.5px; color:#cbd5e1;">Padrão: <b style="color:#fff;">Heavy Hex ASME B18.2.2</b> — Chave do modelo: <b style="color:#facc15;">${m.chave}</b> (${m.chaveMm} mm)</span>
+            </div>
+          </div>
+          <span style="background:#d97706; color:#fff; font-size:11px; font-weight:bold; padding:3px 10px; border-radius:12px;">HEAVY HEX OBRIGATÓRIA</span>
+        </div>
+
+        <p style="font-size:12.5px; color:#cbd5e1; line-height:1.5; margin:0 0 10px 0;">
+          📌 <b>ONDE MEDIR:</b> Meça com o paquímetro ou teste com a chave combinada/soquete a distância entre <b>DUAS FACES PLANAS PARALELAS E OPOSTAS</b> do sextavado (dimensão $F$ — <i>Across Flats</i>).
+        </p>
+
+        <div style="background:#051221; border:1.5px solid #ca8a04; border-radius:8px; padding:12px; margin-bottom:10px;">
+          <b style="color:#fde047; font-size:13px;">⚡ POR QUE A CHAVE É DIFERENTE DA PORCA COMUM AUTOMOTIVA?</b>
+          <p style="margin:4px 0 0 0; font-size:12px; color:#cbd5e1; line-height:1.5;">
+            Em tubulações industriais e vasos de pressão, a norma ASME B16.5 exige porcas <b>PESADAS (HEAVY HEX)</b> conforme <b>ASME B18.2.2</b> (grau ASTM A194 2H).
+            <br>• Para estojo de <b>5/8"</b>, a porca pesada usa chave de <b style="color:#fff;">1-1/16" (27 mm)</b>.
+            <br>• Se fosse uma porca comum (não pesada), a chave seria 15/16" (24 mm) — <b>QUE É PROIBIDA PELA ASME B16.5 POR RISCO DE CISALHAMENTO</b> sob as altas cargas de aperto!
+          </p>
+        </div>
+
+        <div style="font-size:12px; color:#94a3b8;">
+          • A altura da porca pesada ($H$) é aproximadamente igual ao diâmetro nominal do estojo (${m.nutHeightMm} mm), garantindo que todos os filetes trabalhem sem perigo de arrancamento de rosca.
+        </div>
+      </div>
+    `,
+    'sobra': `
+      <div style="background:linear-gradient(135deg, #041c10 0%, #0d2238 100%); border:2px solid #10b981; border-radius:10px; padding:16px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px; border-bottom:1px solid #064e3b; padding-bottom:8px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:22px;">🔩</span>
+            <div>
+              <h4 style="margin:0; color:#4ade80; font-size:16px; font-weight:800;">CRITÉRIO DE ACEITAÇÃO: SOBRA DE ROSCA ALÉM DA PORCA</h4>
+              <span style="font-size:11.5px; color:#cbd5e1;">Normas: <b style="color:#fff;">ASME B16.5, ASME PCC-1 & Petrobras N-1597</b></span>
+            </div>
+          </div>
+          <span style="background:#15803d; color:#fff; font-size:11px; font-weight:bold; padding:3px 10px; border-radius:12px;">CRITÉRIO DE INSPEÇÃO</span>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:12px; margin-bottom:12px;">
+          <div style="background:#071424; border:1px solid #10b981; border-radius:8px; padding:12px;">
+            <b style="color:#4ade80; font-size:13px; display:block; margin-bottom:4px;">✔ PADRÃO APROVADO:</b>
+            <p style="margin:0; font-size:12px; color:#cbd5e1; line-height:1.45;">
+              Após o torqueamento final com chave torquímetro ou hidrotorque, devem restar de <b style="color:#4ade80;">2 a 3 filetes de rosca visíveis</b> (${m.sobraFios}) projetando-se além da face externa de cada porca.
+            </p>
+          </div>
+
+          <div style="background:#071424; border:1px solid #ef4444; border-radius:8px; padding:12px;">
+            <b style="color:#f87171; font-size:13px; display:block; margin-bottom:4px;">✖ CAUSA DE REPROVAÇÃO:</b>
+            <p style="margin:0; font-size:12px; color:#cbd5e1; line-height:1.45;">
+              • <b>Menos de 1 filete (rosca embutida/afogada):</b> Não engaja todos os fios da porca, podendo cisalhar.
+              <br>• <b>Mais de 5 filetes:</b> Estojo superdimensionado, desperdiça material e corre risco de interferência.
+            </p>
+          </div>
+        </div>
+      </div>
+    `,
+    'geral': `
+      <div style="background:linear-gradient(135deg, #07172c 0%, #0d2847 100%); border:2px solid #0284c7; border-radius:10px; padding:16px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px; border-bottom:1px solid #1e3a5f; padding-bottom:8px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:22px;">👁️</span>
+            <div>
+              <h4 style="margin:0; color:#38bdf8; font-size:16px; font-weight:800;">ESPECIFICAÇÃO COMPLETA DE ENGENHARIA — ESTOJO & PORCAS</h4>
+              <span style="font-size:11.5px; color:#cbd5e1;">Conjunto montado para: <b style="color:#fff;">${m.flange}</b></span>
+            </div>
+          </div>
+          <button type="button" class="btn-botoeira btn-botoeira-primary" onclick="transferirEstojo3DParaLaudo()" style="font-size:11.5px; padding:6px 14px; background:#0284c7; border-color:#38bdf8;">
+            📋 Transferir p/ Laudo A4
+          </button>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:10px;">
+          <div style="background:#071424; border:1px solid #0284c7; border-radius:6px; padding:10px; text-align:center;">
+            <span style="font-size:11px; color:#94a3b8;">Estojo (Stud Bolt)</span>
+            <div style="font-size:18px; font-weight:900; color:#38bdf8;">${m.diamPol} × ${m.compPol}</div>
+            <span style="font-size:11px; color:#fde047;">${m.passo}</span>
+          </div>
+
+          <div style="background:#071424; border:1px solid #f59e0b; border-radius:6px; padding:10px; text-align:center;">
+            <span style="font-size:11px; color:#94a3b8;">2 Porcas Heavy Hex</span>
+            <div style="font-size:18px; font-weight:900; color:#f59e0b;">Chave ${m.chave}</div>
+            <span style="font-size:11px; color:#cbd5e1;">${m.chaveMm} mm</span>
+          </div>
+
+          <div style="background:#071424; border:1px solid #10b981; border-radius:6px; padding:10px; text-align:center;">
+            <span style="font-size:11px; color:#94a3b8;">Materiais Recomendados</span>
+            <div style="font-size:15px; font-weight:900; color:#10b981;">B7 / 2H</div>
+            <span style="font-size:10.5px; color:#cbd5e1;">ASTM A193 / A194</span>
+          </div>
+
+          <div style="background:#071424; border:1px solid #8b5cf6; border-radius:6px; padding:10px; text-align:center;">
+            <span style="font-size:11px; color:#94a3b8;">Torque Lubrificado</span>
+            <div style="font-size:16px; font-weight:900; color:#c084fc;">${m.torqueLub}</div>
+            <span style="font-size:10.5px; color:#cbd5e1;">Aperto em cruz 3 etapas</span>
+          </div>
+        </div>
+      </div>
+    `
+  };
+
+  box.innerHTML = explicacoes[modo] || explicacoes['fios'];
+}
+
+function transferirEstojo3DParaLaudo() {
+  const m = MODELOS_ESTOJO_3D[estojo3D_modeloAtual] || MODELOS_ESTOJO_3D['5/8'];
+  if (!m) return;
+
+  const txtEstojo = `Estojo ${m.diamPol} × ${m.compPol} (${m.passo}) ASTM A193 B7 com 2 Porcas Heavy Hex Chave ${m.chave} ASTM A194 2H (${m.flange})`;
+
+  // 1. Campo de intervenção / observações técnicas
+  const relObs = document.getElementById('rel_obs') || document.getElementById('rel_intervencao');
+  if (relObs) {
+    if (relObs.value && !relObs.value.includes(m.diamPol)) {
+      relObs.value += `\n• Dimensionamento de Fixação: ${txtEstojo}. Torque recomendado lubrificado: ${m.torqueLub}. Sobra de rosca conforme N-1597: ${m.sobraFios}.`;
+    } else if (!relObs.value) {
+      relObs.value = `• Dimensionamento de Fixação: ${txtEstojo}.\n• Torque recomendado lubrificado: ${m.torqueLub}.\n• Sobra de rosca conforme ASME B16.5 / Petrobras N-1597: ${m.sobraFios}.`;
+    }
+  }
+
+  // 2. Campo de ferramentas
+  const relFerr = document.getElementById('rel_ferramentas');
+  if (relFerr) {
+    const txtChave = `Chave estrela/soquete ${m.chave} Heavy Hex (${m.chaveMm} mm), Torquímetro, Pente de rosca (${m.passo})`;
+    if (!relFerr.value.includes(m.chave)) {
+      relFerr.value = relFerr.value ? (relFerr.value + ', ' + txtChave) : txtChave;
+    }
+  }
+
+  if (typeof exibirToast === 'function') {
+    exibirToast(`✅ Estojo ${m.diamPol} × ${m.compPol} (Chave ${m.chave}) transferido para o Laudo A4!`);
+  } else if (typeof alert === 'function') {
+    alert(`Dados do Estojo ${m.diamPol} transferidos para o Laudo A4 com sucesso!`);
+  } else {
+    console.log(`Dados do Estojo ${m.diamPol} transferidos para o Laudo A4 com sucesso!`);
+  }
+}
+
+function abrirEstojo3DNaCalculadora() {
+  const m = MODELOS_ESTOJO_3D[estojo3D_modeloAtual] || MODELOS_ESTOJO_3D['5/8'];
+  alternarAbaPainelChaves('calc');
+
+  if (m && m.classeNPS) {
+    const selClasse = document.getElementById('estojo_sel_classe');
+    if (selClasse) {
+      selClasse.value = m.classeNPS.classe;
+      if (typeof atualizarOpcoesNPS === 'function') {
+        atualizarOpcoesNPS();
+      }
+    }
+    const selNPS = document.getElementById('estojo_sel_nps');
+    if (selNPS) {
+      selNPS.value = m.classeNPS.nps;
+      if (typeof calcularEstojoASME === 'function') {
+        calcularEstojoASME();
+      }
+    }
+  }
+}
+
+// Exposição explícita para escopo global / window
+try {
+  window.MODELOS_ESTOJO_3D = MODELOS_ESTOJO_3D;
+  window.alternarAbaPainelChaves = alternarAbaPainelChaves;
+  window.selecionarModeloEstojo3D = selecionarModeloEstojo3D;
+  window.selecionarModoEstojo3D = selecionarModoEstojo3D;
+  window.renderizarEstojo3DCanvas = renderizarEstojo3DCanvas;
+  window.transferirEstojo3DParaLaudo = transferirEstojo3DParaLaudo;
+  window.abrirEstojo3DNaCalculadora = abrirEstojo3DNaCalculadora;
+  window.toggleAutoGirarEstojo3D = toggleAutoGirarEstojo3D;
+  window.ajustarZoomEstojo3D = ajustarZoomEstojo3D;
+  window.resetarVistaEstojo3D = resetarVistaEstojo3D;
+  window.getEstojo3DModoAtual = () => estojo3D_modoAtual;
+  window.getEstojo3DModeloAtual = () => estojo3D_modeloAtual;
+} catch(e) {}
+
 const DADOS_ESTOJOS_ASME = {
   '150': {
     classe: 'Classe 150',
@@ -25662,7 +27225,10 @@ function alternarModalRoboFlutuante() {
     // Inicializa desenho técnico e cálculo de tolerância se estiver na aba de desenho
     setTimeout(() => {
       selecionarCroquiTecnicoRobo(croquiAtualRobo || 'eixo');
-      calcularToleranciaIsoRobo();
+      
+  try { if (typeof initCanvasEstojo3DInteracao === 'function') initCanvasEstojo3DInteracao(); } catch(e) {}
+  try { if (typeof alternarAbaPainelChaves === 'function') alternarAbaPainelChaves('3d'); } catch(e) {}
+  calcularToleranciaIsoRobo();
     }, 100);
   }
 }
