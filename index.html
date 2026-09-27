@@ -4631,12 +4631,18 @@
       </div>
 
       <!-- CARD: CHAVES E PORCAS -->
-      <div class="card card-industrial" onclick="abrirModulo('chaves')">
+      <!-- CARD: CHAVES, PORCAS & ESTOJOS (ASME B16.5) -->
+      <div class="card card-industrial" style="border-color:#38bdf8; background:linear-gradient(145deg, #091a2e 0%, #0d2745 100%); box-shadow:0 4px 18px rgba(56,189,248,0.2);" onclick="abrirModulo('chaves')">
         <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
-        <div class="icon">🔑</div>
-        <h3>Chaves e Porcas</h3>
-        <p>Tabela técnica de chaves combinadas, sextavados e soquetes por rosca métrica (DIN) e polegada (SAE).</p>
-        <button type="button" class="btn-botoeira" onclick="event.stopPropagation(); abrirModulo('chaves')">Consultar Chaves</button>
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px;">
+          <div class="icon" style="margin:0;">🔩</div>
+          <span style="font-size:10px; font-weight:800; background:#0284c7; color:#fff; padding:2px 8px; border-radius:12px; border:1px solid #38bdf8; letter-spacing:0.5px;">ASME B16.5 • UPGRADE</span>
+        </div>
+        <h3 style="color:#e0f2fe; margin-top:4px;">Chaves, Porcas & Estojos</h3>
+        <p>Estojos (Stud Bolts) B7/B16 para flanges Cl 150/300/600, chave Heavy Hex, passo UNC, fotos e cálculo de campo.</p>
+        <div style="display:flex; gap:8px; margin-top:8px;">
+          <button type="button" class="btn-botoeira btn-botoeira-primary" style="flex:1; border-color:#38bdf8;" onclick="event.stopPropagation(); abrirModulo('chaves')">Consultar Estojos & Chaves</button>
+        </div>
       </div>
 
       <!-- ==================================================================== -->
@@ -8710,75 +8716,401 @@
     </div>
   </section>
 
-  <!-- ================= CHAVES E PORCAS ================= -->
+  <!-- ================= CHAVES, PORCAS & ESTOJOS ASME B16.5 ================= -->
   <section id="painel-chaves" class="panel">
     <div class="panel-header">
-      <h2>🔑 Chaves e Porcas</h2>
+      <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+        <span style="font-size:30px;">🔩</span>
+        <div>
+          <h2 style="margin:0; font-size:23px; color:#f8fafc; letter-spacing:-0.5px;">Chaves, Porcas & Estojos Industriais</h2>
+          <span style="font-size:12px; color:#7dd3fc; font-weight:600;">Dimensionamento de Estojos (Stud Bolts) ASME B16.5, Chaves Heavy Hex, Passo UNC & Identificação de Campo</span>
+        </div>
+      </div>
       <button class="button secondary" onclick="voltarGrid()">← Voltar</button>
     </div>
 
-    <div class="content-block">
-      <h4>⚠️ Erro mais comum</h4>
-      <p>Chave métrica próxima do tamanho polegada (ex: 13 mm numa porca de 1/2") até "entra", mas fica frouxa — arredonda a cabeça do parafuso/porca com o uso repetido. Sempre confirme se a peça é métrica (M) ou polegada (rosca UNC/UNF) antes de escolher a chave. Na dúvida, meça o diâmetro do parafuso com um paquímetro (módulo Metrologia).</p>
+    <!-- BANNER HERO: ASSISTENTE TÉCNICO DE FIXAÇÃO -->
+    <div style="background:linear-gradient(135deg, #07172c 0%, #0d2847 100%); border:1.5px solid #0284c7; border-radius:12px; padding:16px 20px; margin-bottom:18px; box-shadow:0 4px 20px rgba(2,132,199,0.25);">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+        <div style="flex:1; min-width:280px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+            <span style="font-size:11px; font-weight:800; color:#38bdf8; text-transform:uppercase; letter-spacing:1px; background:#0c223d; padding:2px 8px; border-radius:6px; border:1px solid #1e3a5f;">UPGRADE OFICIAL • ASSISTENTE MECÂNICA 4.0</span>
+            <span style="font-size:11px; font-weight:700; color:#facc15;">ASME B16.5 / B18.2.2</span>
+          </div>
+          <h4 style="margin:4px 0 6px 0; color:#fff; font-size:17px; font-weight:800;">Como descobrir a medida correta do Estojo (Stud Bolt) e o passo de rosca?</h4>
+          <p style="margin:0; font-size:12.5px; color:#cbd5e1; line-height:1.4;">
+            Missão principal: Ajudar o mecânico e inspetor a selecionar instantaneamente o estojo normatizado, passo de rosca UNC, comprimento e a chave pesada da porca para flanges industriais, diferenciando equipamentos estáticos e dinâmicos.
+          </p>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button type="button" class="btn-botoeira btn-botoeira-primary" style="background:#0284c7; border-color:#38bdf8; font-size:12px; padding:8px 16px;" onclick="document.getElementById('box_calc_estojo_asme')?.scrollIntoView({behavior:'smooth'})">🎯 Calculadora de Flange</button>
+          <button type="button" class="btn-botoeira btn-botoeira-secondary" style="font-size:12px; padding:8px 16px;" onclick="document.getElementById('box_calc_reversa_chave')?.scrollIntoView({behavior:'smooth'})">🔍 Busca Reversa por Chave</button>
+        </div>
+      </div>
     </div>
 
-    <div class="content-block">
-      <h4>Rosca métrica (M) → tamanho de chave combinada (mm)</h4>
+    <!-- 1. CALCULADORA INTERATIVA DE ESTOJOS ASME B16.5 -->
+    <div class="calc-box" id="box_calc_estojo_asme" style="background:linear-gradient(145deg, #091a2e 0%, #06111f 100%); border:2px solid #38bdf8; border-radius:12px; padding:20px; margin-bottom:20px; box-shadow:0 6px 24px rgba(0,0,0,0.5);">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px; border-bottom:1px solid #1e3a5f; padding-bottom:10px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:22px;">🧮</span>
+          <h5 style="margin:0; font-size:16px; color:#38bdf8; font-weight:800; letter-spacing:0.5px;">CALCULADORA DE ESTOJO & FLANGE (ASME B16.5)</h5>
+        </div>
+        <span style="font-size:11px; background:#0f2744; color:#7dd3fc; border:1px solid #0284c7; padding:3px 10px; border-radius:20px; font-weight:bold;">Sincronizado com Laudo A4</span>
+      </div>
+
+      <div class="field-row" style="display:flex; gap:12px; flex-wrap:wrap;">
+        <div class="field" style="flex:1; min-width:180px;">
+          <label style="font-size:12px; font-weight:700; color:#94a3b8;">1. Classe de Pressão do Flange:</label>
+          <select id="estojo_sel_classe" onchange="atualizarOpcoesNPS()" style="font-size:13px; padding:8px 12px; background:#071526; border:1px solid #0284c7; color:#fff; border-radius:6px; width:100%;">
+            <option value="150" selected>Classe 150 (Pressão Baixa/Média)</option>
+            <option value="300">Classe 300 (Pressão Intermediária)</option>
+            <option value="600">Classe 600 (Pressão Alta/Severa)</option>
+          </select>
+        </div>
+
+        <div class="field" style="flex:1; min-width:180px;">
+          <label style="font-size:12px; font-weight:700; color:#94a3b8;">2. Diâmetro Nominal da Tubulação (NPS):</label>
+          <select id="estojo_sel_nps" onchange="calcularEstojoASME()" style="font-size:13px; padding:8px 12px; background:#071526; border:1px solid #0284c7; color:#fff; border-radius:6px; width:100%;">
+            <!-- Opções geradas via JS -->
+          </select>
+        </div>
+
+        <div class="field" style="flex:1; min-width:200px;">
+          <label style="font-size:12px; font-weight:700; color:#94a3b8;">3. Tipo de Equipamento:</label>
+          <select id="estojo_sel_tipo_equip" onchange="calcularEstojoASME()" style="font-size:13px; padding:8px 12px; background:#071526; border:1px solid #0284c7; color:#fff; border-radius:6px; width:100%;">
+            <option value="estatico" selected>Equipamento Estático (Vaso, Caldeira, Tanque, Bocal, PSV)</option>
+            <option value="dinamico">Equipamento Dinâmico (Bomba, Turbina, Compressor, Ventilador)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- DISPLAY DO RESULTADO TÉCNICO -->
+      <div id="estojo_resultado_display" style="margin-top:16px; background:#040a14; border:1.5px solid #1e3a5f; border-radius:10px; padding:16px;">
+        <!-- Preenchido via calcularEstojoASME() -->
+      </div>
+    </div>
+
+    <!-- 2. CALCULADORA REVERSA: QUAL É O ESTOJO PELA CHAVE OU MEDIÇÃO? -->
+    <div class="calc-box" id="box_calc_reversa_chave" style="background:#091524; border:1.5px solid #203e64; border-radius:12px; padding:18px; margin-bottom:20px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+        <h5 style="margin:0; font-size:15px; color:#fde047; font-weight:800; display:flex; align-items:center; gap:8px;">
+          <span>🔍</span> BUSCA REVERSA: "TENHO A CHAVE NA MÃO — QUAL É O ESTOJO E FLANGE?"
+        </h5>
+        <span style="font-size:11px; color:#94a3b8;">Identificação rápida de porcas pesadas (Heavy Hex)</span>
+      </div>
+      <p style="font-size:12px; color:#94a3b8; margin:0 0 12px 0;">
+        Se você já mediu o sextavado da porca com o paquímetro ou testou a chave combinada/soquete que encaixa perfeitamente:
+      </p>
+
+      <div class="field-row" style="display:flex; gap:12px; align-items:flex-end; flex-wrap:wrap;">
+        <div class="field" style="flex:1; min-width:240px;">
+          <label style="font-size:12px; color:#cbd5e1; font-weight:700;">Selecione o tamanho da Chave Sextavada Pesada:</label>
+          <select id="chave_reversa_sel" onchange="calcularEstojoReverso()" style="font-size:13px; padding:8px 12px; background:#071526; border:1px solid #eab308; color:#fff; border-radius:6px; width:100%;">
+            <option value="">Selecione a chave em polegadas...</option>
+            <option value="7/8">7/8" (~22,2 mm)</option>
+            <option value="1-1/16" selected>1-1/16" (~27,0 mm) ★ MAIS COMUM DA INDÚSTRIA</option>
+            <option value="1-1/4">1-1/4" (~31,8 mm)</option>
+            <option value="1-7/16">1-7/16" (~36,5 mm)</option>
+            <option value="1-5/8">1-5/8" (~41,3 mm)</option>
+            <option value="1-13/16">1-13/16" (~46,0 mm)</option>
+            <option value="2">2" (~50,8 mm)</option>
+            <option value="2-3/16">2-3/16" (~55,6 mm)</option>
+            <option value="2-3/8">2-3/8" (~60,3 mm)</option>
+            <option value="2-9/16">2-9/16" (~65,1 mm)</option>
+            <option value="2-15/16">2-15/16" (~74,6 mm)</option>
+          </select>
+        </div>
+        <button type="button" class="button" style="background:#ca8a04; border-color:#eab308; font-weight:bold; font-size:12px; padding:8px 18px;" onclick="calcularEstojoReverso()">Descobrir Estojo & Passo</button>
+      </div>
+
+      <div id="chave_reversa_resultado" style="margin-top:12px; background:#050c17; border:1px solid #ca8a04; border-radius:8px; padding:14px;">
+        <!-- Preenchido via calcularEstojoReverso() -->
+      </div>
+    </div>
+
+    <!-- 3. EQUIPAMENTOS ESTÁTICOS × DINÂMICOS -->
+    <div class="content-block" style="border-left:4px solid #38bdf8;">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+        <span style="font-size:20px;">⚖️</span>
+        <h4 style="margin:0; font-size:16px; color:#e0f2fe;">1. Equipamentos Estáticos × Dinâmicos — O que Priorizar?</h4>
+      </div>
+      <p style="font-size:12.5px; color:#94a3b8; margin-bottom:12px;">
+        O comportamento mecânico das juntas flangeadas muda radicalmente se a máquina opera estática ou com rotação e vibração:
+      </p>
+
       <table>
-        <tr><th>Rosca</th><th>Chave (mm)</th></tr>
-        <tr><td>M3</td><td>5,5 mm</td></tr>
-        <tr><td>M4</td><td>7 mm</td></tr>
-        <tr><td>M5</td><td>8 mm</td></tr>
-        <tr><td>M6</td><td>10 mm</td></tr>
-        <tr><td>M7</td><td>11 mm</td></tr>
-        <tr><td>M8</td><td>13 mm</td></tr>
-        <tr><td>M10</td><td>17 mm</td></tr>
-        <tr><td>M12</td><td>19 mm</td></tr>
-        <tr><td>M14</td><td>22 mm</td></tr>
-        <tr><td>M16</td><td>24 mm</td></tr>
-        <tr><td>M18</td><td>27 mm</td></tr>
-        <tr><td>M20</td><td>30 mm</td></tr>
-        <tr><td>M22</td><td>32 mm</td></tr>
-        <tr><td>M24</td><td>36 mm</td></tr>
+        <thead>
+          <tr>
+            <th style="width:25%;">Tipo de Equipamento</th>
+            <th style="width:35%;">Exemplos Típicos na Planta</th>
+            <th style="width:40%;">O que Priorizar no Estojo & Aperto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <b style="color:#38bdf8; font-size:14px;">ESTÁTICO</b><br>
+              <span style="font-size:11px; color:#64748b;">Pressão interna contínua & dilatação</span>
+            </td>
+            <td>
+              Caldeiras, vasos de pressão, tanques de armazenamento, trocadores de calor casco-tubo, bocais de tubulação, válvulas de alívio e segurança (PSV/PRV).
+            </td>
+            <td>
+              <b style="color:#fde047;">Material e Temperatura de Operação:</b><br>
+              • Especificação estrita do aço-liga (<b style="color:#fff;">ASTM A193 B7</b> para até 400°C; <b style="color:#fff;">B16</b> para alta temperatura até 590°C; <b style="color:#fff;">B8M</b> para inox/corrosão).<br>
+              • Porcas pesadas (<b style="color:#fff;">ASTM A194 2H</b>).<br>
+              • Aperto cruzado uniforme em 3 a 4 etapas de torque para garantir estanqueidade da junta.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <b style="color:#f59e0b; font-size:14px;">DINÂMICO</b><br>
+              <span style="font-size:11px; color:#64748b;">Esforços cíclicos, rotação & vibração</span>
+            </td>
+            <td>
+              Bombas centrífugas/deslocamento positivo, compressores alternativos e parafuso, turbinas a vapor, ventiladores e sopradores industriais.
+            </td>
+            <td>
+              <b style="color:#fde047;">Travamento + Reaperto Periódico:</b><br>
+              • <b style="color:#fff;">Travamento seguro:</b> Utilizar arruelas de pressão temperadas, contra-porcas ou trava química anaeróbica de alto torque.<br>
+              • <b style="color:#fff;">Reaperto programado:</b> Plano de reaperto nas primeiras 24–48 horas de marcha pós-partida com torquímetro calibrado para neutralizar afrouxamento por vibração.
+            </td>
+          </tr>
+        </tbody>
       </table>
-      <p style="margin-top:8px; color:#8190a7; font-size:13px;">Atenção: essa é a chave para a CABEÇA do parafuso/porca sextavada — não confunda com o diâmetro da rosca. Um parafuso M8 (rosca de 8 mm) usa chave de 13 mm, não de 8 mm.</p>
+    </div>
+
+    <!-- 4. IDENTIFICAÇÃO POR FOTO (AS 4 FOTOS OBRIGATÓRIAS) -->
+    <div class="content-block" style="border-left:4px solid #10b981;">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:20px;">📸</span>
+          <h4 style="margin:0; font-size:16px; color:#e0f2fe;">2. Identificação de Estojos por Foto — Roteiro de Campo</h4>
+        </div>
+        <span style="font-size:11px; color:#34d399; background:#062d1f; border:1px solid #059669; padding:2px 8px; border-radius:6px; font-weight:bold;">Inspeção Visual Rápida</span>
+      </div>
+      <p style="font-size:12.5px; color:#94a3b8; margin-bottom:14px;">
+        Ao fotografar o estojo para reconhecimento com o Mecânico IA ou anexar ao Laudo A4, solicite ou tire estas <b style="color:#f8fafc;">4 fotos fundamentais</b>:
+      </p>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(230px, 1fr)); gap:12px; margin-bottom:16px;">
+        <div style="background:#071526; border:1px solid #1e3a5f; border-radius:8px; padding:12px;">
+          <div style="display:flex; align-items:center; gap:6px; color:#38bdf8; font-weight:bold; font-size:13px; margin-bottom:4px;">
+            <span>❶</span> Foto da Porca de Frente
+          </div>
+          <p style="font-size:11.5px; color:#cbd5e1; margin:0;">
+            Mostre com clareza as <b style="color:#fff;">6 faces</b> do sextavado para checar se é porca pesada (Heavy Hex) e avaliar se há cantos arredondados por chave errada.
+          </p>
+        </div>
+
+        <div style="background:#071526; border:1px solid #1e3a5f; border-radius:8px; padding:12px;">
+          <div style="display:flex; align-items:center; gap:6px; color:#38bdf8; font-weight:bold; font-size:13px; margin-bottom:4px;">
+            <span>❷</span> Lateral do Estojo
+          </div>
+          <p style="font-size:11.5px; color:#cbd5e1; margin:0;">
+            Mostre o corpo roscado completo para verificação do <b style="color:#fff;">comprimento total de ponta a ponta</b> e estado dos filetes de rosca.
+          </p>
+        </div>
+
+        <div style="background:#071526; border:1px solid #1e3a5f; border-radius:8px; padding:12px;">
+          <div style="display:flex; align-items:center; gap:6px; color:#38bdf8; font-weight:bold; font-size:13px; margin-bottom:4px;">
+            <span>❸</span> Extremidade com Gravação
+          </div>
+          <p style="font-size:11.5px; color:#cbd5e1; margin:0;">
+            Foto em macro da face plana da ponta do estojo e da porca, onde estão gravadas as classes de material: <b style="color:#fde047;">B7, B16, B8M, L7, 2H</b>.
+          </p>
+        </div>
+
+        <div style="background:#071526; border:1px solid #1e3a5f; border-radius:8px; padding:12px;">
+          <div style="display:flex; align-items:center; gap:6px; color:#38bdf8; font-weight:bold; font-size:13px; margin-bottom:4px;">
+            <span>❹</span> Objeto de Referência / Escala
+          </div>
+          <p style="font-size:11.5px; color:#cbd5e1; margin:0;">
+            Se possível, posicione uma <b style="color:#fff;">moeda de R$ 1,00</b> ou <b style="color:#fff;">régua/paquímetro</b> ao lado para calibração visual precisa da IA.
+          </p>
+        </div>
+      </div>
+
+      <!-- REGRAS DE OURO DE IDENTIFICAÇÃO -->
+      <div style="background:#0a1a2f; border:1px dashed #0284c7; border-radius:8px; padding:12px;">
+        <h5 style="margin:0 0 6px 0; color:#38bdf8; font-size:13px; font-weight:800;">⚡ Regras Práticas para Identificação do Estojo em Campo:</h5>
+        <ul style="margin:0; padding-left:18px; font-size:12px; color:#cbd5e1; line-height:1.6;">
+          <li><b style="color:#fde047;">Diâmetro mais comum na indústria:</b> <b style="color:#fff;">5/8"</b> → utiliza chave combinada/soquete de <b style="color:#fff;">1-1/16"</b> (Heavy Hex).</li>
+          <li><b style="color:#fde047;">Passo de rosca mais comum:</b> <b style="color:#fff;">UNC 11 fios por polegada</b>.</li>
+          <li><b style="color:#fde047;">Comprimento nominal:</b> Medir de ponta a ponta (comprimento total com chanfros incluídos).</li>
+          <li><b style="color:#fde047;">Material do estojo:</b> Ler a gravação estampada na ponta (B7 = ASTM A193 B7; B16 = alta temp; 2H na porca = ASTM A194 2H).</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 5. PASSO DE ROSCA PADRÃO (UNC / 8-UN) -->
+    <div class="content-block" style="border-left:4px solid #f59e0b;">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+        <span style="font-size:20px;">📐</span>
+        <h4 style="margin:0; font-size:16px; color:#e0f2fe;">3. Passo de Rosca Padrão em Estojos Industriais (Fios por Polegada - TPI)</h4>
+      </div>
+      <p style="font-size:12.5px; color:#94a3b8; margin-bottom:12px;">
+        Em fixadores ASME B16.5, o padrão é a rosca grossa <b style="color:#fff;">UNC</b> até 1", e a partir de 1-1/8" adota-se predominantemente a série constante <b style="color:#fff;">8-UN</b> (8 fios por polegada):
+      </p>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:8px;">
+        <div style="background:#071424; border:1px solid #1e3a5f; border-radius:6px; padding:10px; text-align:center;">
+          <div style="font-size:12px; color:#94a3b8;">Diâmetro</div>
+          <div style="font-size:16px; font-weight:800; color:#38bdf8;">1/2"</div>
+          <div style="font-size:12px; color:#fde047; font-weight:bold; margin-top:4px;">13 fios (UNC)</div>
+        </div>
+
+        <div style="background:#071424; border:1.5px solid #38bdf8; border-radius:6px; padding:10px; text-align:center; box-shadow:0 0 10px rgba(56,189,248,0.25);">
+          <div style="font-size:12px; color:#7dd3fc; font-weight:bold;">★ Mais Comum</div>
+          <div style="font-size:16px; font-weight:800; color:#fff;">5/8"</div>
+          <div style="font-size:12px; color:#fde047; font-weight:bold; margin-top:4px;">11 fios (UNC)</div>
+        </div>
+
+        <div style="background:#071424; border:1px solid #1e3a5f; border-radius:6px; padding:10px; text-align:center;">
+          <div style="font-size:12px; color:#94a3b8;">Diâmetro</div>
+          <div style="font-size:16px; font-weight:800; color:#38bdf8;">3/4"</div>
+          <div style="font-size:12px; color:#fde047; font-weight:bold; margin-top:4px;">10 fios (UNC)</div>
+        </div>
+
+        <div style="background:#071424; border:1px solid #1e3a5f; border-radius:6px; padding:10px; text-align:center;">
+          <div style="font-size:12px; color:#94a3b8;">Diâmetro</div>
+          <div style="font-size:16px; font-weight:800; color:#38bdf8;">7/8"</div>
+          <div style="font-size:12px; color:#fde047; font-weight:bold; margin-top:4px;">9 fios (UNC)</div>
+        </div>
+
+        <div style="background:#071424; border:1px solid #1e3a5f; border-radius:6px; padding:10px; text-align:center;">
+          <div style="font-size:12px; color:#94a3b8;">Diâmetro</div>
+          <div style="font-size:16px; font-weight:800; color:#38bdf8;">1"</div>
+          <div style="font-size:12px; color:#fde047; font-weight:bold; margin-top:4px;">8 fios (UNC)</div>
+        </div>
+
+        <div style="background:#071424; border:1px solid #1e3a5f; border-radius:6px; padding:10px; text-align:center;">
+          <div style="font-size:12px; color:#94a3b8;">1-1/8" a 2"</div>
+          <div style="font-size:16px; font-weight:800; color:#e2e8f0;">> 1"</div>
+          <div style="font-size:12px; color:#34d399; font-weight:bold; margin-top:4px;">8 fios (8-UN)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. TABELAS COMPLETAS ASME B16.5 COM ABAS INTERATIVAS -->
+    <div class="content-block" style="border-left:4px solid #8b5cf6;">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span style="font-size:20px;">📋</span>
+          <h4 style="margin:0; font-size:16px; color:#e0f2fe;">4. Tabelas Completas de Medidas de Estojos (ASME B16.5)</h4>
+        </div>
+        <!-- Abas de Classe -->
+        <div style="display:flex; gap:6px;">
+          <button type="button" class="button" id="tab_btn_cl150" onclick="alternarAbaTabelaEstojos('150')" style="font-size:12px; padding:5px 12px; background:#0284c7; border-color:#38bdf8; margin:0;">Classe 150</button>
+          <button type="button" class="button secondary" id="tab_btn_cl300" onclick="alternarAbaTabelaEstojos('300')" style="font-size:12px; padding:5px 12px; margin:0;">Classe 300</button>
+          <button type="button" class="button secondary" id="tab_btn_cl600" onclick="alternarAbaTabelaEstojos('600')" style="font-size:12px; padding:5px 12px; margin:0;">Classe 600</button>
+        </div>
+      </div>
+
+      <!-- Container da Tabela Dinâmica -->
+      <div id="tabela_estojos_container" style="overflow-x:auto;">
+        <!-- Preenchido via alternarAbaTabelaEstojos() -->
+      </div>
+    </div>
+
+    <!-- 7. MATERIAIS PADRÃO DE FIXAÇÃO (ASTM) -->
+    <div class="content-block" style="border-left:4px solid #ec4899;">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+        <span style="font-size:20px;">🛡️</span>
+        <h4 style="margin:0; font-size:16px; color:#e0f2fe;">5. Materiais Padronizados de Estojos e Porcas (ASTM A193 / A194)</h4>
+      </div>
+      <p style="font-size:12.5px; color:#94a3b8; margin-bottom:12px;">
+        A integridade de uma junta flangeada sob pressão e temperatura depende da compatibilidade metalúrgica do conjunto:
+      </p>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:12px;">
+        <div style="background:#071424; border:1.5px solid #0284c7; border-radius:8px; padding:12px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <b style="color:#38bdf8; font-size:14px;">ASTM A193 Gr. B7</b>
+            <span style="font-size:10px; background:#0f2744; color:#7dd3fc; padding:1px 6px; border-radius:4px;">USO GERAL</span>
+          </div>
+          <p style="font-size:11.5px; color:#cbd5e1; margin:0 0 6px 0;">
+            Aço-liga Cromo-Molibdênio (AISI 4140) temperado e revenido. Padrão absoluto da indústria química, óleo & gás e vapor até <b style="color:#fff;">400°C</b>.
+          </p>
+          <div style="font-size:11px; color:#fde047;"><b>Porca obrigatória:</b> ASTM A194 Gr. 2H (Heavy Hex)</div>
+        </div>
+
+        <div style="background:#071424; border:1.5px solid #f59e0b; border-radius:8px; padding:12px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <b style="color:#f59e0b; font-size:14px;">ASTM A193 Gr. B16</b>
+            <span style="font-size:10px; background:#2a1905; color:#fde047; padding:1px 6px; border-radius:4px;">ALTA TEMPERATURA</span>
+          </div>
+          <p style="font-size:11.5px; color:#cbd5e1; margin:0 0 6px 0;">
+            Aço-liga Cr-Mo-V com alta resistência à fluência (*creep*) para linhas de vapor superaquecido e turbinas térmicas até <b style="color:#fff;">590°C</b>.
+          </p>
+          <div style="font-size:11px; color:#fde047;"><b>Porca obrigatória:</b> ASTM A194 Gr. 7 ou 2H</div>
+        </div>
+
+        <div style="background:#071424; border:1.5px solid #10b981; border-radius:8px; padding:12px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <b style="color:#10b981; font-size:14px;">ASTM A193 Gr. B8M / B7M</b>
+            <span style="font-size:10px; background:#052419; color:#6ee7b7; padding:1px 6px; border-radius:4px;">CORROSIVO & H₂S</span>
+          </div>
+          <p style="font-size:11.5px; color:#cbd5e1; margin:0 0 6px 0;">
+            <b>B8M:</b> Aço inoxidável austenítico AISI 316 (ambientes marítimos/químicos).<br>
+            <b>B7M:</b> B7 tratado termicamente para resistência à corrosão sob tensão por H₂S (NACE MR0175).
+          </p>
+          <div style="font-size:11px; color:#fde047;"><b>Porca:</b> A194 Gr. 8M (p/ B8M) ou 2HM (p/ B7M)</div>
+        </div>
+
+        <div style="background:#071424; border:1.5px solid #6366f1; border-radius:8px; padding:12px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <b style="color:#818cf8; font-size:14px;">ASTM A320 Gr. L7</b>
+            <span style="font-size:10px; background:#181838; color:#a5b4fc; padding:1px 6px; border-radius:4px;">BAIXA TEMPERATURA</span>
+          </div>
+          <p style="font-size:11.5px; color:#cbd5e1; margin:0 0 6px 0;">
+            Aço-liga com ensaio de impacto Charpy garantido para serviços criogênicos e plantas de gás até <b style="color:#fff;">-101°C</b>.
+          </p>
+          <div style="font-size:11px; color:#fde047;"><b>Porca:</b> ASTM A194 Gr. 4 ou 7</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. CONVERSÃO DE CHAVES MÉTRICA E POLEGADA (ORIGINAL PRESERVADA) -->
+    <div class="content-block">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+        <span style="font-size:20px;">⚠️</span>
+        <h4 style="margin:0; font-size:16px;">Erro Mais Comum em Chão de Fábrica</h4>
+      </div>
+      <p style="font-size:12.5px; color:#cbd5e1;">
+        Chave métrica próxima do tamanho em polegadas (ex: 13 mm numa porca de 1/2" ou 27 mm numa porca de 1-1/16") até "entra", mas fica frouxa ou com folga perigosa — isso arredonda o sextavado da porca sob alto torque. Sempre confirme se a fixação é métrica (M) ou polegada (ASME Heavy Hex / UNC). Na dúvida, use o paquímetro do módulo de Metrologia.
+      </p>
     </div>
 
     <div class="content-block">
-      <h4>Rosca polegada (UNC/UNF) → chave em polegada</h4>
+      <h4>Rosca métrica padrão (M) → Chave combinada (mm)</h4>
       <table>
-        <tr><th>Rosca</th><th>Chave</th></tr>
-        <tr><td>1/4"</td><td>7/16"</td></tr>
-        <tr><td>5/16"</td><td>1/2"</td></tr>
-        <tr><td>3/8"</td><td>9/16"</td></tr>
-        <tr><td>7/16"</td><td>5/8"</td></tr>
-        <tr><td>1/2"</td><td>3/4"</td></tr>
-        <tr><td>9/16"</td><td>13/16"</td></tr>
-        <tr><td>5/8"</td><td>15/16"</td></tr>
-        <tr><td>3/4"</td><td>1.1/8"</td></tr>
+        <thead>
+          <tr><th>Rosca Métrica</th><th>Chave Sextavada Padrão (mm)</th><th>Diâmetro Nominal</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>M3</td><td>5,5 mm</td><td>3 mm</td></tr>
+          <tr><td>M4</td><td>7 mm</td><td>4 mm</td></tr>
+          <tr><td>M5</td><td>8 mm</td><td>5 mm</td></tr>
+          <tr><td>M6</td><td>10 mm</td><td>6 mm</td></tr>
+          <tr><td>M8</td><td>13 mm</td><td>8 mm</td></tr>
+          <tr><td>M10</td><td>17 mm (ou 16 mm ISO)</td><td>10 mm</td></tr>
+          <tr><td>M12</td><td>19 mm (ou 18 mm ISO)</td><td>12 mm</td></tr>
+          <tr><td>M14</td><td>22 mm (ou 21 mm ISO)</td><td>14 mm</td></tr>
+          <tr><td>M16</td><td>24 mm</td><td>16 mm</td></tr>
+          <tr><td>M20</td><td>30 mm</td><td>20 mm</td></tr>
+          <tr><td>M24</td><td>36 mm</td><td>24 mm</td></tr>
+        </tbody>
       </table>
     </div>
 
-    <div class="content-block">
-      <h4>Conversão chave polegada ↔ chave métrica mais próxima</h4>
-      <p style="color:#8190a7; font-size:13px; margin-bottom:8px;">Use apenas como referência de identificação — o ideal é sempre usar o jogo de chaves no mesmo sistema da peça (métrica com métrica, polegada com polegada).</p>
-      <table>
-        <tr><th>Chave polegada</th><th>Equivalente (mm)</th><th>Chave métrica mais próxima</th></tr>
-        <tr><td>7/16"</td><td>11,11 mm</td><td>11 mm (aperto justo)</td></tr>
-        <tr><td>1/2"</td><td>12,70 mm</td><td>13 mm (folga leve — não ideal)</td></tr>
-        <tr><td>9/16"</td><td>14,29 mm</td><td>14 mm (aperto justo)</td></tr>
-        <tr><td>5/8"</td><td>15,88 mm</td><td>16 mm (folga leve — não ideal)</td></tr>
-        <tr><td>3/4"</td><td>19,05 mm</td><td>19 mm (praticamente idêntico)</td></tr>
-        <tr><td>13/16"</td><td>20,64 mm</td><td>21 mm (folga leve — não ideal)</td></tr>
-        <tr><td>15/16"</td><td>23,81 mm</td><td>24 mm (folga leve — não ideal)</td></tr>
-      </table>
-    </div>
-
+    <!-- CALCULADORA RÁPIDA DE ROSCA MÉTRICA -->
     <div class="calc-box">
-      <h5>🧮 Consulta rápida — qual chave usar?</h5>
+      <h5>🧮 Consulta rápida — Rosca Métrica para Chave</h5>
       <div class="field-row">
         <div class="field">
-          <label>Selecione a rosca métrica</label>
+          <label>Selecione a rosca métrica:</label>
           <select id="chave_select">
             <option value="">Selecione...</option>
             <option value="M3|5.5">M3</option>
@@ -9886,6 +10218,7 @@
             <div style="display:flex; gap:6px; flex-wrap:wrap;">
               <button type="button" class="button secondary" style="font-size:11.5px; padding:4px 10px; margin:0;" onclick="selecionarExemploMecanicoIA('Redutor apresentando aumento de temperatura e ruído')">⚙️ Redutor: Alta temperatura e ruído</button>
               <button type="button" class="button secondary" style="font-size:11.5px; padding:4px 10px; margin:0;" onclick="selecionarExemploMecanicoIA('Bomba centrífuga com ruído de pedras e queda de vazão')">💧 Bomba: Cavitação e perda de vazão</button>
+              <button type="button" class="button secondary" style="font-size:11.5px; padding:4px 10px; margin:0; border-color:#38bdf8; color:#7dd3fc;" onclick="selecionarExemploMecanicoIA('Medida do estojo, chave e passo de rosca para flange ASME B16.5')">🔩 Estojo e Chave Flange ASME B16.5</button>
               <button type="button" class="button secondary" style="font-size:11.5px; padding:4px 10px; margin:0;" onclick="selecionarExemploMecanicoIA('Válvula gaveta com vazamento na haste e volante pesado')">🚪 Válvula: Vazamento na haste e haste travando</button>
               <button type="button" class="button secondary" style="font-size:11.5px; padding:4px 10px; margin:0;" onclick="selecionarExemploMecanicoIA('Motor elétrico com aquecimento e desbalanceamento de corrente')">⚡ Motor: Aquecimento e corrente anômala</button>
             </div>
@@ -21023,6 +21356,18 @@ function abrirModulo(id) {
       iniciarModuloTorque();
     }
 
+    if (id === 'chaves') {
+      setTimeout(() => {
+        try {
+          atualizarOpcoesNPS();
+          calcularEstojoReverso();
+          alternarAbaTabelaEstojos('150');
+        } catch(eChaves) {
+          console.warn('Erro ao inicializar chaves e estojos:', eChaves);
+        }
+      }, 50);
+    }
+
     if (id === 'supervisor') {
       abrirModuloSupervisor();
     }
@@ -22574,6 +22919,394 @@ function calcularGraxa() {
 }
 
 /* ===================== CHAVES E PORCAS ===================== */
+/* ===================== BANCO DE DADOS DE ESTOJOS ASME B16.5 ===================== */
+const DADOS_ESTOJOS_ASME = {
+  '150': {
+    classe: 'Classe 150',
+    titulo: 'Classe 150 (Pressão Baixa/Média)',
+    itens: [
+      { nps: '1/2"', qtd: 4, diam: '1/2"', compPol: '2-1/4"', compMm: 57, chave: '7/8"', passo: 'UNC 13 fios' },
+      { nps: '3/4"', qtd: 4, diam: '1/2"', compPol: '2-1/2"', compMm: 64, chave: '7/8"', passo: 'UNC 13 fios' },
+      { nps: '1"', qtd: 4, diam: '1/2"', compPol: '2-1/2"', compMm: 64, chave: '7/8"', passo: 'UNC 13 fios' },
+      { nps: '1-1/4"', qtd: 4, diam: '1/2"', compPol: '2-3/4"', compMm: 70, chave: '7/8"', passo: 'UNC 13 fios' },
+      { nps: '1-1/2"', qtd: 4, diam: '1/2"', compPol: '2-3/4"', compMm: 70, chave: '7/8"', passo: 'UNC 13 fios' },
+      { nps: '2"', qtd: 4, diam: '5/8"', compPol: '3-1/4"', compMm: 83, chave: '1-1/16"', passo: 'UNC 11 fios' },
+      { nps: '2-1/2"', qtd: 4, diam: '5/8"', compPol: '3-1/2"', compMm: 89, chave: '1-1/16"', passo: 'UNC 11 fios' },
+      { nps: '3"', qtd: 4, diam: '5/8"', compPol: '3-1/2"', compMm: 89, chave: '1-1/16"', passo: 'UNC 11 fios' },
+      { nps: '3-1/2"', qtd: 8, diam: '5/8"', compPol: '3-1/2"', compMm: 89, chave: '1-1/16"', passo: 'UNC 11 fios' },
+      { nps: '4"', qtd: 8, diam: '5/8"', compPol: '3-1/2"', compMm: 89, chave: '1-1/16"', passo: 'UNC 11 fios' },
+      { nps: '5"', qtd: 8, diam: '3/4"', compPol: '3-3/4"', compMm: 95, chave: '1-1/4"', passo: 'UNC 10 fios' },
+      { nps: '6"', qtd: 8, diam: '3/4"', compPol: '4"', compMm: 102, chave: '1-1/4"', passo: 'UNC 10 fios' },
+      { nps: '8"', qtd: 8, diam: '3/4"', compPol: '4-1/4"', compMm: 108, chave: '1-1/4"', passo: 'UNC 10 fios' },
+      { nps: '10"', qtd: 12, diam: '7/8"', compPol: '4-1/2"', compMm: 114, chave: '1-7/16"', passo: 'UNC 9 fios' },
+      { nps: '12"', qtd: 12, diam: '7/8"', compPol: '4-3/4"', compMm: 121, chave: '1-7/16"', passo: 'UNC 9 fios' },
+      { nps: '14"', qtd: 12, diam: '1"', compPol: '5-1/4"', compMm: 133, chave: '1-5/8"', passo: 'UNC 8 fios' },
+      { nps: '16"', qtd: 16, diam: '1"', compPol: '5-1/4"', compMm: 133, chave: '1-5/8"', passo: 'UNC 8 fios' },
+      { nps: '18"', qtd: 16, diam: '1-1/8"', compPol: '5-3/4"', compMm: 146, chave: '1-13/16"', passo: '8-UN 8 fios' },
+      { nps: '20"', qtd: 20, diam: '1-1/8"', compPol: '6-1/4"', compMm: 159, chave: '1-13/16"', passo: '8-UN 8 fios' },
+      { nps: '24"', qtd: 20, diam: '1-1/4"', compPol: '6-3/4"', compMm: 171, chave: '2"', passo: '8-UN 8 fios' }
+    ]
+  },
+  '300': {
+    classe: 'Classe 300',
+    titulo: 'Classe 300 (Pressão Intermediária)',
+    itens: [
+      { nps: '1/2"', qtd: 4, diam: '1/2"', compPol: '2-1/2"', compMm: 64, chave: '7/8"', passo: 'UNC 13 fios' },
+      { nps: '3/4"', qtd: 4, diam: '5/8"', compPol: '3"', compMm: 76, chave: '1-1/16"', passo: 'UNC 11 fios' },
+      { nps: '1"', qtd: 4, diam: '5/8"', compPol: '3"', compMm: 76, chave: '1-1/16"', passo: 'UNC 11 fios' },
+      { nps: '1-1/4"', qtd: 4, diam: '5/8"', compPol: '3-1/4"', compMm: 83, chave: '1-1/16"', passo: 'UNC 11 fios' },
+      { nps: '1-1/2"', qtd: 4, diam: '3/4"', compPol: '3-1/2"', compMm: 89, chave: '1-1/4"', passo: 'UNC 10 fios' },
+      { nps: '2"', qtd: 8, diam: '5/8"', compPol: '3-1/2"', compMm: 89, chave: '1-1/16"', passo: 'UNC 11 fios' },
+      { nps: '2-1/2"', qtd: 8, diam: '3/4"', compPol: '4"', compMm: 102, chave: '1-1/4"', passo: 'UNC 10 fios' },
+      { nps: '3"', qtd: 8, diam: '3/4"', compPol: '4-1/4"', compMm: 108, chave: '1-1/4"', passo: 'UNC 10 fios' },
+      { nps: '4"', qtd: 8, diam: '3/4"', compPol: '4-1/2"', compMm: 114, chave: '1-1/4"', passo: 'UNC 10 fios' },
+      { nps: '5"', qtd: 8, diam: '3/4"', compPol: '4-3/4"', compMm: 121, chave: '1-1/4"', passo: 'UNC 10 fios' },
+      { nps: '6"', qtd: 12, diam: '3/4"', compPol: '4-3/4"', compMm: 121, chave: '1-1/4"', passo: 'UNC 10 fios' },
+      { nps: '8"', qtd: 12, diam: '7/8"', compPol: '5-1/2"', compMm: 140, chave: '1-7/16"', passo: 'UNC 9 fios' },
+      { nps: '10"', qtd: 16, diam: '1"', compPol: '6-1/4"', compMm: 159, chave: '1-5/8"', passo: 'UNC 8 fios' },
+      { nps: '12"', qtd: 16, diam: '1-1/8"', compPol: '6-3/4"', compMm: 171, chave: '1-13/16"', passo: '8-UN 8 fios' },
+      { nps: '14"', qtd: 20, diam: '1-1/8"', compPol: '7"', compMm: 178, chave: '1-13/16"', passo: '8-UN 8 fios' },
+      { nps: '16"', qtd: 20, diam: '1-1/4"', compPol: '7-1/2"', compMm: 190, chave: '2"', passo: '8-UN 8 fios' },
+      { nps: '18"', qtd: 24, diam: '1-1/4"', compPol: '7-3/4"', compMm: 197, chave: '2"', passo: '8-UN 8 fios' },
+      { nps: '20"', qtd: 24, diam: '1-1/4"', compPol: '8"', compMm: 203, chave: '2"', passo: '8-UN 8 fios' },
+      { nps: '24"', qtd: 24, diam: '1-1/2"', compPol: '9"', compMm: 229, chave: '2-3/8"', passo: '8-UN 8 fios' }
+    ]
+  },
+  '600': {
+    classe: 'Classe 600',
+    titulo: 'Classe 600 (Pressão Alta/Severa)',
+    itens: [
+      { nps: '1/2"', qtd: 4, diam: '1/2"', compPol: '3"', compMm: 76, chave: '7/8"', passo: 'UNC 13 fios' },
+      { nps: '3/4"', qtd: 4, diam: '5/8"', compPol: '3-1/2"', compMm: 89, chave: '1-1/16"', passo: 'UNC 11 fios' },
+      { nps: '1"', qtd: 4, diam: '5/8"', compPol: '3-1/2"', compMm: 89, chave: '1-1/16"', passo: 'UNC 11 fios' },
+      { nps: '1-1/4"', qtd: 4, diam: '5/8"', compPol: '3-3/4"', compMm: 95, chave: '1-1/16"', passo: 'UNC 11 fios' },
+      { nps: '1-1/2"', qtd: 4, diam: '3/4"', compPol: '4-1/4"', compMm: 108, chave: '1-1/4"', passo: 'UNC 10 fios' },
+      { nps: '2"', qtd: 8, diam: '5/8"', compPol: '4-1/4"', compMm: 108, chave: '1-1/16"', passo: 'UNC 11 fios' },
+      { nps: '2-1/2"', qtd: 8, diam: '3/4"', compPol: '4-3/4"', compMm: 121, chave: '1-1/4"', passo: 'UNC 10 fios' },
+      { nps: '3"', qtd: 8, diam: '3/4"', compPol: '5"', compMm: 127, chave: '1-1/4"', passo: 'UNC 10 fios' },
+      { nps: '4"', qtd: 8, diam: '7/8"', compPol: '5-3/4"', compMm: 146, chave: '1-7/16"', passo: 'UNC 9 fios' },
+      { nps: '5"', qtd: 8, diam: '1"', compPol: '6-1/2"', compMm: 165, chave: '1-5/8"', passo: 'UNC 8 fios' },
+      { nps: '6"', qtd: 12, diam: '1"', compPol: '6-3/4"', compMm: 171, chave: '1-5/8"', passo: 'UNC 8 fios' },
+      { nps: '8"', qtd: 12, diam: '1-1/8"', compPol: '7-1/2"', compMm: 190, chave: '1-13/16"', passo: '8-UN 8 fios' },
+      { nps: '10"', qtd: 16, diam: '1-1/4"', compPol: '8-1/2"', compMm: 216, chave: '2"', passo: '8-UN 8 fios' },
+      { nps: '12"', qtd: 20, diam: '1-1/4"', compPol: '8-3/4"', compMm: 222, chave: '2"', passo: '8-UN 8 fios' },
+      { nps: '14"', qtd: 20, diam: '1-3/8"', compPol: '9-1/4"', compMm: 235, chave: '2-3/16"', passo: '8-UN 8 fios' },
+      { nps: '16"', qtd: 20, diam: '1-1/2"', compPol: '10"', compMm: 254, chave: '2-3/8"', passo: '8-UN 8 fios' },
+      { nps: '18"', qtd: 20, diam: '1-5/8"', compPol: '10-3/4"', compMm: 273, chave: '2-9/16"', passo: '8-UN 8 fios' },
+      { nps: '20"', qtd: 24, diam: '1-5/8"', compPol: '11-1/4"', compMm: 286, chave: '2-9/16"', passo: '8-UN 8 fios' },
+      { nps: '24"', qtd: 24, diam: '1-7/8"', compPol: '13"', compMm: 330, chave: '2-15/16"', passo: '8-UN 8 fios' }
+    ]
+  }
+};
+
+const DADOS_CHAVES_REVERSO = [
+  { chave: '7/8', chaveTexto: '7/8"', diam: '1/2"', passo: 'UNC 13 fios', mmAprox: '22,2 mm', flanges: 'Classe 150 (1/2" a 1-1/2"), Classe 300 (1/2"), Classe 600 (1/2")' },
+  { chave: '1-1/16', chaveTexto: '1-1/16"', diam: '5/8"', passo: 'UNC 11 fios', mmAprox: '27,0 mm', flanges: '★ MAIS COMUM DA INDÚSTRIA: Classe 150 (2" a 4"), Classe 300 (3/4" a 2"), Classe 600 (3/4" a 2")' },
+  { chave: '1-1/4', chaveTexto: '1-1/4"', diam: '3/4"', passo: 'UNC 10 fios', mmAprox: '31,8 mm', flanges: 'Classe 150 (5" a 8"), Classe 300 (1-1/2" a 6"), Classe 600 (1-1/2" a 3")' },
+  { chave: '1-7/16', chaveTexto: '1-7/16"', diam: '7/8"', passo: 'UNC 9 fios', mmAprox: '36,5 mm', flanges: 'Classe 150 (10" a 12"), Classe 300 (8"), Classe 600 (4")' },
+  { chave: '1-5/8', chaveTexto: '1-5/8"', diam: '1"', passo: 'UNC 8 fios', mmAprox: '41,3 mm', flanges: 'Classe 150 (14" a 16"), Classe 300 (10"), Classe 600 (5" a 6")' },
+  { chave: '1-13/16', chaveTexto: '1-13/16"', diam: '1-1/8"', passo: '8-UN 8 fios', mmAprox: '46,0 mm', flanges: 'Classe 150 (18" a 20"), Classe 300 (12" a 14"), Classe 600 (8")' },
+  { chave: '2', chaveTexto: '2"', diam: '1-1/4"', passo: '8-UN 8 fios', mmAprox: '50,8 mm', flanges: 'Classe 150 (24"), Classe 300 (16" a 20"), Classe 600 (10" a 12")' },
+  { chave: '2-3/16', chaveTexto: '2-3/16"', diam: '1-3/8"', passo: '8-UN 8 fios', mmAprox: '55,6 mm', flanges: 'Classe 600 (14")' },
+  { chave: '2-3/8', chaveTexto: '2-3/8"', diam: '1-1/2"', passo: '8-UN 8 fios', mmAprox: '60,3 mm', flanges: 'Classe 300 (24"), Classe 600 (16")' },
+  { chave: '2-9/16', chaveTexto: '2-9/16"', diam: '1-5/8"', passo: '8-UN 8 fios', mmAprox: '65,1 mm', flanges: 'Classe 600 (18" a 20")' },
+  { chave: '2-15/16', chaveTexto: '2-15/16"', diam: '1-7/8"', passo: '8-UN 8 fios', mmAprox: '74,6 mm', flanges: 'Classe 600 (24")' }
+];
+
+let estojoAtualCalculado = null;
+
+function atualizarOpcoesNPS() {
+  const selClasse = document.getElementById('estojo_sel_classe');
+  const selNPS = document.getElementById('estojo_sel_nps');
+  if (!selClasse || !selNPS) return;
+
+  const classeKey = selClasse.value || '150';
+  const dadosClasse = DADOS_ESTOJOS_ASME[classeKey];
+  if (!dadosClasse) return;
+
+  const npsAnterior = selNPS.value;
+  selNPS.innerHTML = '';
+  dadosClasse.itens.forEach(it => {
+    const opt = document.createElement('option');
+    opt.value = it.nps;
+    opt.textContent = `NPS ${it.nps} (${it.qtd} estojos Ø ${it.diam})`;
+    if (it.nps === '2"' || it.nps === '3"') opt.textContent += ' ★ Comum';
+    selNPS.appendChild(opt);
+  });
+
+  // Tenta manter o NPS selecionado ou define 2" por padrão
+  if (npsAnterior && dadosClasse.itens.some(i => i.nps === npsAnterior)) {
+    selNPS.value = npsAnterior;
+  } else {
+    selNPS.value = '2"';
+  }
+  calcularEstojoASME();
+}
+
+function calcularEstojoASME() {
+  const selClasse = document.getElementById('estojo_sel_classe');
+  const selNPS = document.getElementById('estojo_sel_nps');
+  const selTipo = document.getElementById('estojo_sel_tipo_equip');
+  const display = document.getElementById('estojo_resultado_display');
+  if (!selClasse || !selNPS || !display) return;
+
+  const classeKey = selClasse.value || '150';
+  const npsVal = selNPS.value || '2"';
+  const tipoEquip = selTipo ? selTipo.value : 'estatico';
+
+  const dadosClasse = DADOS_ESTOJOS_ASME[classeKey];
+  if (!dadosClasse) return;
+
+  const item = dadosClasse.itens.find(i => i.nps === npsVal);
+  if (!item) return;
+
+  estojoAtualCalculado = {
+    classe: classeKey,
+    nps: npsVal,
+    qtd: item.qtd,
+    diam: item.diam,
+    compPol: item.compPol,
+    compMm: item.compMm,
+    chave: item.chave,
+    passo: item.passo,
+    tipoEquip: tipoEquip
+  };
+
+  const isDinamico = (tipoEquip === 'dinamico');
+
+  display.innerHTML = `
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px; margin-bottom:12px; border-bottom:1px solid #1e3a5f; padding-bottom:10px;">
+      <div>
+        <span style="font-size:11px; font-weight:800; color:#38bdf8; text-transform:uppercase;">ESPECIFICAÇÃO NORMATIVA ASME B16.5</span>
+        <h4 style="margin:2px 0; color:#fff; font-size:17px; font-weight:800;">Flange NPS ${item.nps} — ${dadosClasse.classe}</h4>
+      </div>
+      <button type="button" class="btn-botoeira btn-botoeira-primary" onclick="transferirEstojoParaLaudo()" style="font-size:12px; padding:6px 14px; background:#0284c7; border-color:#38bdf8;">
+        📋 Transferir p/ Laudo A4
+      </button>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:10px; margin-bottom:14px;">
+      <div style="background:#071424; border:1.5px solid #0284c7; border-radius:8px; padding:10px; text-align:center;">
+        <span style="font-size:11px; color:#94a3b8; font-weight:bold;">Diâmetro do Estojo</span>
+        <div style="font-size:20px; font-weight:900; color:#38bdf8; margin:2px 0;">${item.diam}</div>
+        <span style="font-size:11px; color:#fde047; font-weight:700;">${item.passo}</span>
+      </div>
+
+      <div style="background:#071424; border:1.5px solid #f59e0b; border-radius:8px; padding:10px; text-align:center;">
+        <span style="font-size:11px; color:#94a3b8; font-weight:bold;">Chave da Porca (Heavy Hex)</span>
+        <div style="font-size:20px; font-weight:900; color:#f59e0b; margin:2px 0;">${item.chave}</div>
+        <span style="font-size:11px; color:#cbd5e1;">ASME B18.2.2</span>
+      </div>
+
+      <div style="background:#071424; border:1.5px solid #10b981; border-radius:8px; padding:10px; text-align:center;">
+        <span style="font-size:11px; color:#94a3b8; font-weight:bold;">Qtd por Flange</span>
+        <div style="font-size:20px; font-weight:900; color:#10b981; margin:2px 0;">${item.qtd} estojos</div>
+        <span style="font-size:11px; color:#cbd5e1;">${item.qtd * 2} porcas 2H</span>
+      </div>
+
+      <div style="background:#071424; border:1.5px solid #8b5cf6; border-radius:8px; padding:10px; text-align:center;">
+        <span style="font-size:11px; color:#94a3b8; font-weight:bold;">Comprimento Ponta a Ponta</span>
+        <div style="font-size:18px; font-weight:900; color:#c084fc; margin:2px 0;">${item.compPol}</div>
+        <span style="font-size:11.5px; color:#fff; font-weight:bold;">${item.compMm} mm</span>
+      </div>
+    </div>
+
+    <!-- DIRETRIZ DE ENGENHARIA -->
+    <div style="background:#091d33; border:1px solid ${isDinamico ? '#f59e0b' : '#38bdf8'}; border-radius:8px; padding:12px;">
+      <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+        <span style="font-size:16px;">${isDinamico ? '⚡' : '🛡️'}</span>
+        <b style="font-size:12.5px; color:${isDinamico ? '#fde047' : '#7dd3fc'};">
+          Diretriz Técnica para Equipamento ${isDinamico ? 'DINÂMICO (Bomba/Compressor/Turbina)' : 'ESTÁTICO (Vaso/Caldeira/Tanque/PSV)'}:
+        </b>
+      </div>
+      <p style="margin:0; font-size:12px; color:#cbd5e1; line-height:1.5;">
+        ${isDinamico
+          ? '• <b>Priorizar Travamento + Reaperto:</b> Vibração mecânica afrouxa estojos sem travamento positivo. Utilizar trava química anaeróbica ou contra-porcas e programar inspeção de reaperto em 24h a 48h com torquímetro calibrado.'
+          : '• <b>Priorizar Material e Temperatura:</b> Utilizar estojos <b style="color:#fff;">ASTM A193 Gr. B7</b> com porcas pesadas <b style="color:#fff;">ASTM A194 Gr. 2H</b> (ou <b style="color:#fff;">B16</b> para vapor superaquecido acima de 400°C). Fazer aperto cruzado em cruz em 3 etapas (30%, 70%, 100%).'
+        }
+      </p>
+    </div>
+  `;
+}
+
+function calcularEstojoReverso() {
+  const selChave = document.getElementById('chave_reversa_sel');
+  const resEl = document.getElementById('chave_reversa_resultado');
+  if (!selChave || !resEl) return;
+
+  const chaveKey = selChave.value;
+  if (!chaveKey) {
+    resEl.innerHTML = '<span style="color:#f87171; font-size:12px;">Selecione o tamanho da chave sextavada pesada acima.</span>';
+    return;
+  }
+
+  const dado = DADOS_CHAVES_REVERSO.find(d => d.chave === chaveKey);
+  if (!dado) {
+    resEl.innerHTML = '<span style="color:#f87171; font-size:12px;">Chave não localizada na base ASME B18.2.2.</span>';
+    return;
+  }
+
+  resEl.innerHTML = `
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px; border-bottom:1px solid #332007; padding-bottom:6px;">
+      <div>
+        <span style="font-size:11px; font-weight:800; color:#fde047;">RESULTADO DA BUSCA REVERSA</span>
+        <h4 style="margin:2px 0; color:#fff; font-size:16px;">Chave ${dado.chaveTexto} (${dado.mmAprox})</h4>
+      </div>
+      <span style="font-size:11px; font-weight:700; color:#7dd3fc; background:#0c1e33; padding:2px 8px; border-radius:4px; border:1px solid #1e3a5f;">Porca Heavy Hex ASME B18.2.2</span>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:10px; margin-bottom:10px;">
+      <div style="background:#091727; border:1px solid #38bdf8; border-radius:6px; padding:8px 12px;">
+        <span style="font-size:11px; color:#94a3b8;">Diâmetro do Estojo:</span>
+        <div style="font-size:18px; font-weight:900; color:#38bdf8;">${dado.diam}</div>
+      </div>
+      <div style="background:#091727; border:1px solid #eab308; border-radius:6px; padding:8px 12px;">
+        <span style="font-size:11px; color:#94a3b8;">Passo de Rosca Padrão:</span>
+        <div style="font-size:18px; font-weight:900; color:#fde047;">${dado.passo}</div>
+      </div>
+    </div>
+
+    <div style="background:#081320; border:1px solid #1e3a5f; border-radius:6px; padding:10px; font-size:12px; color:#cbd5e1;">
+      <b style="color:#7dd3fc;">Onde este estojo é aplicado (ASME B16.5):</b><br>
+      ${dado.flanges}
+    </div>
+  `;
+}
+
+function alternarAbaTabelaEstojos(classeKey) {
+  ['150', '300', '600'].forEach(c => {
+    const btn = document.getElementById('tab_btn_cl' + c);
+    if (btn) {
+      if (c === classeKey) {
+        btn.className = 'button';
+        btn.style.background = '#0284c7';
+        btn.style.borderColor = '#38bdf8';
+      } else {
+        btn.className = 'button secondary';
+        btn.style.background = '';
+        btn.style.borderColor = '';
+      }
+    }
+  });
+
+  const container = document.getElementById('tabela_estojos_container');
+  if (!container) return;
+
+  const dadosClasse = DADOS_ESTOJOS_ASME[classeKey];
+  if (!dadosClasse) return;
+
+  let htmlTable = `
+    <div style="margin-bottom:8px; font-size:12px; color:#7dd3fc;">
+      <b>${dadosClasse.titulo}</b> — Dimensões de Estojos com 2 Porcas Pesadas (Heavy Hex Nut):
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>NPS Flange</th>
+          <th>Qtd Estojos</th>
+          <th>Diâmetro</th>
+          <th>Passo Rosca</th>
+          <th>Comprimento (pol)</th>
+          <th>Comprimento (mm)</th>
+          <th>Chave da Porca</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+
+  dadosClasse.itens.forEach(it => {
+    const isDestaque = (it.diam === '5/8"' || it.diam === '3/4"');
+    htmlTable += `
+      <tr style="${isDestaque ? 'background:rgba(2, 132, 199, 0.12);' : ''}">
+        <td><b style="color:#fff;">${it.nps}</b> ${it.nps === '2"' || it.nps === '3"' ? '<span style="color:#fde047; font-size:11px;">★</span>' : ''}</td>
+        <td><b style="color:#10b981;">${it.qtd}</b></td>
+        <td><b style="color:#38bdf8;">${it.diam}</b></td>
+        <td>${it.passo}</td>
+        <td>${it.compPol}</td>
+        <td><b>${it.compMm} mm</b></td>
+        <td><b style="color:#f59e0b;">${it.chave}</b></td>
+        <td>
+          <button type="button" class="btn-botoeira" style="font-size:10px; padding:3px 8px; margin:0;" onclick="selecionarEstojoDiretoDaTabela('${classeKey}', '${it.nps}')">
+            Selecionar
+          </button>
+        </td>
+      </tr>
+    `;
+  });
+
+  htmlTable += `
+      </tbody>
+    </table>
+  `;
+
+  container.innerHTML = htmlTable;
+}
+
+function selecionarEstojoDiretoDaTabela(classeKey, npsVal) {
+  const selClasse = document.getElementById('estojo_sel_classe');
+  const selNPS = document.getElementById('estojo_sel_nps');
+  if (selClasse && selNPS) {
+    selClasse.value = classeKey;
+    atualizarOpcoesNPS();
+    selNPS.value = npsVal;
+    calcularEstojoASME();
+    document.getElementById('box_calc_estojo_asme')?.scrollIntoView({ behavior: 'smooth' });
+    abrirToastNotificacao(`✔ Flange NPS ${npsVal} Cl ${classeKey} selecionado!`);
+  }
+}
+
+function transferirEstojoParaLaudo() {
+  if (!estojoAtualCalculado) {
+    calcularEstojoASME();
+  }
+  const est = estojoAtualCalculado;
+  if (!est) return;
+
+  const matRecomendado = (est.tipoEquip === 'dinamico')
+    ? 'ASTM A193 B7 com sistema de travamento positivo contra vibração (arruela/trava química) + porcas ASTM A194 2H'
+    : 'ASTM A193 Gr. B7 + 2 porcas pesadas ASTM A194 Gr. 2H (ou B16 para alta temp > 400°C)';
+
+  const linhaPeca = `• Estojo ${est.diam} × ${est.compPol} (${est.compMm} mm) ${est.passo} — ${est.qtd} un. p/ Flange NPS ${est.nps} Cl ${est.classe} (${matRecomendado})`;
+  const linhaChave = `• Chave / Soquete ${est.chave} (Heavy Hex ASME B18.2.2)`;
+
+  // 1. Abrir módulo de laudo no passo 5 (peças e ferramentas)
+  abrirModulo('relatorio');
+  alternarAbaRelatorio('novo');
+  if (typeof mudarPassoLaudo === 'function') {
+    mudarPassoLaudo(5);
+  }
+
+  // 2. Preencher peças
+  const elPecas = document.getElementById('rel_pecas_utilizadas');
+  if (elPecas) {
+    if (elPecas.value.trim().length > 0 && !elPecas.value.includes(est.diam)) {
+      elPecas.value += '\n' + linhaPeca;
+    } else if (!elPecas.value.trim()) {
+      elPecas.value = linhaPeca;
+    }
+  }
+
+  // 3. Preencher ferramentas
+  const elFerr = document.getElementById('rel_ferramentas');
+  if (elFerr) {
+    if (elFerr.value.trim().length > 0 && !elFerr.value.includes(est.chave)) {
+      elFerr.value += '\n' + linhaChave;
+    } else if (!elFerr.value.trim()) {
+      elFerr.value = linhaChave;
+    }
+  }
+
+  abrirToastNotificacao(`✔ Estojo ${est.diam} e Chave ${est.chave} transferidos para o Laudo A4!`);
+}
+
+function focarCalculadoraEstojo() {
+  const el = document.getElementById('box_calc_estojo_asme');
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+}
+
+/* ================================================================================= */
+
 function mostrarChaveRecomendada() {
   const valor = document.getElementById('chave_select').value;
   const el = document.getElementById('chave_resultado');
