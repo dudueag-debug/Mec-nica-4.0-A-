@@ -23582,6 +23582,19 @@ function renderizarEstojo3DCanvas() {
     ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
   }
 
+  // Sombra de contato no chão de estúdio (Ambient Occlusion idêntica à foto)
+  ctx.save();
+  const groundShadow = ctx.createRadialGradient(cx + 10, cy + 68, 8, cx + 10, cy + 68, 240 * estojo3D_zoom);
+  groundShadow.addColorStop(0, 'rgba(0, 0, 0, 0.7)');
+  groundShadow.addColorStop(0.35, 'rgba(0, 0, 0, 0.35)');
+  groundShadow.addColorStop(0.75, 'rgba(0, 0, 0, 0.1)');
+  groundShadow.addColorStop(1, 'rgba(0, 0, 0, 0)');
+  ctx.fillStyle = groundShadow;
+  ctx.beginPath();
+  ctx.ellipse(cx + 10, cy + 68, 230 * estojo3D_zoom, 35 * estojo3D_zoom, 0, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.restore();
+
   const m = MODELOS_ESTOJO_3D[estojo3D_modeloAtual] || MODELOS_ESTOJO_3D['5/8'];
   const modo = estojo3D_modoAtual;
 
@@ -23758,12 +23771,12 @@ function renderizarEstojo3DCanvas() {
         grad.addColorStop(0.7, '#d97706');
         grad.addColorStop(1, '#78350f');
       } else {
-        // Aço forjado usinado ASTM A194 2H
-        const brightness = 0.5 + 0.5 * Math.cos((f.idx * 60 * Math.PI) / 180 + (rotY * Math.PI) / 180);
-        const colVal = Math.floor(100 + brightness * 90);
-        grad.addColorStop(0, `rgb(${colVal + 30}, ${colVal + 35}, ${colVal + 40})`);
-        grad.addColorStop(0.5, `rgb(${colVal}, ${colVal + 5}, ${colVal + 10})`);
-        grad.addColorStop(1, `rgb(${Math.max(20, colVal - 40)}, ${Math.max(20, colVal - 35)}, ${Math.max(20, colVal - 30)})`);
+        // Aço forjado fosfatizado negro / Black Oxide ASTM A194 2H (acabamento idêntico à foto real)
+        const brightness = 0.3 + 0.7 * Math.cos((f.idx * 60 * Math.PI) / 180 + (rotY * Math.PI) / 180);
+        const baseDark = Math.floor(16 + brightness * 36);
+        grad.addColorStop(0, `rgb(${baseDark + 38}, ${baseDark + 42}, ${baseDark + 48})`);
+        grad.addColorStop(0.4, `rgb(${baseDark + 10}, ${baseDark + 12}, ${baseDark + 16})`);
+        grad.addColorStop(1, `rgb(${Math.max(4, baseDark - 12)}, ${Math.max(4, baseDark - 10)}, ${Math.max(6, baseDark - 6)})`);
       }
 
       ctx.fillStyle = grad;
@@ -23797,9 +23810,9 @@ function renderizarEstojo3DCanvas() {
         capGrad.addColorStop(0, '#fef08a');
         capGrad.addColorStop(1, '#b45309');
       } else {
-        capGrad.addColorStop(0, '#cbd5e1');
-        capGrad.addColorStop(0.7, '#64748b');
-        capGrad.addColorStop(1, '#334155');
+        capGrad.addColorStop(0, '#334155');
+        capGrad.addColorStop(0.5, '#1e293b');
+        capGrad.addColorStop(1, '#0f172a');
       }
 
       ctx.fillStyle = capGrad;
@@ -23810,19 +23823,77 @@ function renderizarEstojo3DCanvas() {
       }
       ctx.closePath();
       ctx.fill();
-      ctx.strokeStyle = (modo === 'chave') ? '#fde047' : '#94a3b8';
+      ctx.strokeStyle = (modo === 'chave') ? '#fde047' : '#475569';
       ctx.lineWidth = (modo === 'chave') ? 2 : 1;
       ctx.stroke();
 
-      // Gravação estampada da norma na face: "2H" e "M40"
+      // Centro da face externa da porca
       const centerCapPt = project3DEstojo(capX, 0, 0, rotX, rotY, rotZ, baseScale, cx, cy);
-      ctx.fillStyle = (modo === 'chave') ? '#78350f' : '#0f172a';
-      ctx.font = `bold ${Math.max(10, Math.floor(12 * estojo3D_zoom))}px monospace`;
+
+      // Marcação 2H estampada na porca
+      ctx.fillStyle = (modo === 'chave') ? '#78350f' : '#64748b';
+      ctx.font = `bold ${Math.max(9, Math.floor(10 * estojo3D_zoom))}px sans-serif`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      ctx.fillText('2H', centerCapPt.x, centerCapPt.y - 10 * estojo3D_zoom);
-      ctx.font = `${Math.max(8, Math.floor(9 * estojo3D_zoom))}px monospace`;
-      ctx.fillText('M4.0', centerCapPt.x, centerCapPt.y + 10 * estojo3D_zoom);
+      ctx.fillText('2H', centerCapPt.x - hexRadius * baseScale * 0.45, centerCapPt.y);
+
+      // PONTA USINADA CIRCULAR DO ESTOJO PROJETANDO-SE ALÉM DA PORCA COM GRAVAÇÃO "A" e "B7" (IDÊNTICO À FOTO REAL)
+      if (isRightNut) {
+        const tipPt = project3DEstojo(halfL, 0, 0, rotX, rotY, rotZ, baseScale, cx, cy);
+        const tipRadiusPx = radius * baseScale * 0.95;
+
+        // Face circular usinada com brilho metálico escovado
+        const tipBrushGrad = ctx.createRadialGradient(tipPt.x - 3, tipPt.y - 3, 2, tipPt.x, tipPt.y, tipRadiusPx);
+        tipBrushGrad.addColorStop(0, '#ffffff');
+        tipBrushGrad.addColorStop(0.35, '#e2e8f0');
+        tipBrushGrad.addColorStop(0.75, '#94a3b8');
+        tipBrushGrad.addColorStop(1, '#475569');
+
+        ctx.fillStyle = tipBrushGrad;
+        ctx.beginPath();
+        ctx.arc(tipPt.x, tipPt.y, tipRadiusPx, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#64748b';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Gravação estampada em relevo: "A" no topo e "B7" embaixo
+        const stampSize = Math.max(9, Math.floor(13 * estojo3D_zoom));
+        const draw3DStamp = (txt, tx, ty) => {
+          ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+          ctx.font = `900 ${stampSize}px sans-serif`;
+          ctx.fillText(txt, tx + 0.8, ty + 1.2);
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+          ctx.fillText(txt, tx - 0.7, ty - 0.7);
+          ctx.fillStyle = '#334155';
+          ctx.fillText(txt, tx, ty);
+        };
+
+        draw3DStamp('A', tipPt.x, tipPt.y - stampSize * 0.55);
+        draw3DStamp('B7', tipPt.x, tipPt.y + stampSize * 0.55);
+
+        // Se o modo for 'ponta', desenha halo de destaque em volta da gravação
+        if (modo === 'ponta') {
+          ctx.strokeStyle = '#38bdf8';
+          ctx.lineWidth = 2.5;
+          ctx.setLineDash([6, 4]);
+          ctx.beginPath();
+          ctx.arc(tipPt.x, tipPt.y, tipRadiusPx + 14, 0, Math.PI * 2);
+          ctx.stroke();
+          ctx.setLineDash([]);
+
+          ctx.fillStyle = '#071e33';
+          ctx.fillRect(tipPt.x + 25, tipPt.y - 30, 220, 50);
+          ctx.strokeStyle = '#38bdf8';
+          ctx.strokeRect(tipPt.x + 25, tipPt.y - 30, 220, 50);
+          ctx.fillStyle = '#38bdf8';
+          ctx.font = 'bold 12px sans-serif';
+          ctx.fillText('GRAVAÇÃO ASTM A193 B7', tipPt.x + 135, tipPt.y - 14);
+          ctx.fillStyle = '#fde047';
+          ctx.font = 'bold 10px sans-serif';
+          ctx.fillText('Marca "A" (Fabricante) + "B7" (Material)', tipPt.x + 135, tipPt.y + 6);
+        }
+      }
     }
   };
 
