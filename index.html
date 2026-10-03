@@ -4630,19 +4630,19 @@
         <button type="button" class="btn-botoeira" onclick="event.stopPropagation(); abrirModulo('lubrificacao')">Consultar Lubrificação</button>
       </div>
 
-      <!-- CARD: CHAVES E PORCAS -->
-      <!-- CARD: CHAVES, PORCAS & ESTOJOS (ASME B16.5) -->
-      <div class="card card-industrial" style="border-color:#38bdf8; background:linear-gradient(145deg, #091a2e 0%, #0d2745 100%); box-shadow:0 4px 18px rgba(56,189,248,0.2);" onclick="abrirModulo('chaves'); alternarAbaPainelChaves('3d');">
+      <!-- CARD: CHAVES, PORCAS, ESTOJOS & TORQUE -->
+      <div class="card card-industrial" style="border-color:#38bdf8; background:linear-gradient(145deg, #091a2e 0%, #0d2745 100%); box-shadow:0 4px 18px rgba(56,189,248,0.25);" onclick="abrirModulo('chaves'); alternarAbaPainelChaves('porcas_chaves');">
         <div class="card-bolt tl"></div><div class="card-bolt tr"></div><div class="card-bolt bl"></div><div class="card-bolt br"></div>
         <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px;">
           <div class="icon" style="margin:0;">🔩</div>
-          <span style="font-size:10px; font-weight:800; background:#0284c7; color:#fff; padding:2px 8px; border-radius:12px; border:1px solid #38bdf8; letter-spacing:0.5px;">ASME B16.5 • 3D NOVO</span>
+          <span style="font-size:10px; font-weight:800; background:#0284c7; color:#fff; padding:2px 8px; border-radius:12px; border:1px solid #38bdf8; letter-spacing:0.5px;">MÉTRICO & POLEGADA • TORQUE</span>
         </div>
-        <h3 style="color:#e0f2fe; margin-top:4px;">Chaves, Porcas & Estojos</h3>
-        <p>Modelo 3D interativo: onde medir (L, Ø, Chave) e onde contar fios (TPI), cálculo ASME B16.5, Heavy Hex e fotos.</p>
+        <h3 style="color:#e0f2fe; margin-top:4px;">Chaves, Porcas, Estojos & Torque</h3>
+        <p>Descubra a porca, chave exata, passo de rosca (mm ou pol), tabelas de oficina com fotos, diâmetros, comprimentos, materiais (B7/B16/8.8) e torque.</p>
         <div style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap;">
-          <button type="button" class="btn-botoeira btn-botoeira-primary" style="flex:1; min-width:130px; background:#0284c7; border-color:#38bdf8;" onclick="event.stopPropagation(); abrirModulo('chaves'); alternarAbaPainelChaves('3d');">📐 Ver Estojo 3D</button>
-          <button type="button" class="btn-botoeira btn-botoeira-secondary" style="flex:1; min-width:130px;" onclick="event.stopPropagation(); abrirModulo('chaves'); alternarAbaPainelChaves('calc');">🧮 Calculadora</button>
+          <button type="button" class="btn-botoeira btn-botoeira-primary" style="flex:1; min-width:130px; background:#0284c7; border-color:#38bdf8;" onclick="event.stopPropagation(); abrirModulo('chaves'); alternarAbaPainelChaves('porcas_chaves');">🔑 Descobrir Porca & Chave</button>
+          <button type="button" class="btn-botoeira btn-botoeira-secondary" style="flex:1; min-width:110px;" onclick="event.stopPropagation(); abrirModulo('chaves'); alternarAbaPainelChaves('3d');">📐 Estojo 3D</button>
+          <button type="button" class="btn-botoeira btn-botoeira-secondary" style="flex:1; min-width:110px;" onclick="event.stopPropagation(); abrirModulo('chaves'); alternarAbaPainelChaves('tabelas_fotos');">📸 Tabelas Fotos</button>
         </div>
       </div>
 
@@ -8731,8 +8731,20 @@
     </div>
     <!-- ABAS DE NAVEGAÇÃO PRINCIPAL DO MÓDULO CHAVES, PORCAS & ESTOJOS -->
     <div style="display:flex; gap:8px; overflow-x:auto; padding-bottom:8px; margin-bottom:18px; border-bottom:1.5px solid #1e3a5f;">
-      <button type="button" id="tab_btn_painel_3d" class="button" style="background:#0284c7; border-color:#38bdf8; font-size:12.5px; padding:9px 18px; white-space:nowrap; font-weight:800; display:flex; align-items:center; gap:6px;" onclick="alternarAbaPainelChaves('3d')">
+      <button type="button" id="tab_btn_painel_porcas_chaves" class="button" style="background:#0284c7; border-color:#38bdf8; font-size:12.5px; padding:9px 18px; white-space:nowrap; font-weight:800; display:flex; align-items:center; gap:6px;" onclick="alternarAbaPainelChaves('porcas_chaves')">
+        <span>🔑</span> Descobrir Porcas & Chaves
+      </button>
+      <button type="button" id="tab_btn_painel_tabelas_fotos" class="button secondary" style="font-size:12.5px; padding:9px 18px; white-space:nowrap; font-weight:700; display:flex; align-items:center; gap:6px;" onclick="alternarAbaPainelChaves('tabelas_fotos')">
+        <span>📸</span> Tabelas das Fotos (Oficina)
+      </button>
+      <button type="button" id="tab_btn_painel_3d" class="button secondary" style="font-size:12.5px; padding:9px 18px; white-space:nowrap; font-weight:700; display:flex; align-items:center; gap:6px;" onclick="alternarAbaPainelChaves('3d')">
         <span>📐</span> Modelo 3D: Onde Medir & Fios
+      </button>
+      <button type="button" id="tab_btn_painel_estojos_materiais" class="button secondary" style="font-size:12.5px; padding:9px 18px; white-space:nowrap; font-weight:700; display:flex; align-items:center; gap:6px;" onclick="alternarAbaPainelChaves('estojos_materiais')">
+        <span>🔩</span> Estojos, Comprimentos & Materiais
+      </button>
+      <button type="button" id="tab_btn_painel_torque_aperto" class="button secondary" style="font-size:12.5px; padding:9px 18px; white-space:nowrap; font-weight:700; display:flex; align-items:center; gap:6px;" onclick="alternarAbaPainelChaves('torque_aperto')">
+        <span>⚡</span> Torque de Aperto & Cruz
       </button>
       <button type="button" id="tab_btn_painel_calc" class="button secondary" style="font-size:12.5px; padding:9px 18px; white-space:nowrap; font-weight:700; display:flex; align-items:center; gap:6px;" onclick="alternarAbaPainelChaves('calc')">
         <span>🧮</span> Calculadora ASME B16.5
@@ -8748,9 +8760,733 @@
       </button>
     </div>
 
+<!-- ABA 1: MODELO 3D INTERATIVO (ONDE MEDIR & CONTAR FIOS) -->
+    
+    <!-- ==================================================================== -->
+    <!-- ABA NOVA 1: DESCOBRIDOR DE PORCAS, CHAVES & ROSCAS (MÉTRICO & POL)   -->
+    <!-- ==================================================================== -->
+    <div id="aba_painel_porcas_chaves" style="display:block;">
+      <!-- BANNER HERO INDUSTRIAL -->
+      <div style="background:linear-gradient(135deg, #07172c 0%, #0d2847 100%); border:1.5px solid #0284c7; border-radius:12px; padding:18px 20px; margin-bottom:18px; box-shadow:0 4px 20px rgba(2,132,199,0.25);">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+          <div style="flex:1; min-width:280px;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+              <span style="font-size:11px; font-weight:800; color:#38bdf8; text-transform:uppercase; letter-spacing:1px; background:#0c223d; padding:2px 8px; border-radius:6px; border:1px solid #1e3a5f;">UPGRADE OFICIAL • CHÃO DE FÁBRICA</span>
+              <span style="font-size:11px; font-weight:700; color:#facc15;">MÉTRICA (M) × POLEGADA (UNC / 8-UN) × HEAVY HEX</span>
+            </div>
+            <h3 style="margin:0 0 6px 0; font-size:20px; color:#f8fafc; font-weight:800; display:flex; align-items:center; gap:8px;">
+              <span>🔑</span> Descobridor de Porcas, Chaves & Roscas
+            </h3>
+            <p style="margin:0; font-size:12.5px; color:#94a3b8; line-height:1.5;">
+              Descubra a <b>medida da porca (entre-faces)</b>, a <b>chave exata a utilizar</b>, o <b>passo da rosca (mm ou pol)</b>, diâmetro nominal, broca para macho e torque recomendado para evitar danos a equipamentos.
+            </p>
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button type="button" class="button" style="background:#ca8a04; border-color:#eab308; font-weight:700; font-size:12px; padding:8px 14px;" onclick="alternarAbaPainelChaves('tabelas_fotos')">
+              <span>📸</span> Ver Tabelas das Fotos
+            </button>
+            <button type="button" class="button secondary" style="font-size:12px; padding:8px 14px;" onclick="alternarAbaPainelChaves('3d')">
+              <span>📐</span> Ver Estojo 3D
+            </button>
+          </div>
+        </div>
+      </div>
 
-    <!-- ABA 1: MODELO 3D INTERATIVO (ONDE MEDIR & CONTAR FIOS) -->
-    <div id="aba_painel_3d" style="display:block;">
+      <!-- SELETOR DE MODO DE CONSULTA: MODO 1 (TENHO O PARAFUSO) vs MODO 2 (TENHO A CHAVE/PORCA) -->
+      <div style="background:#091524; border:1.5px solid #203e64; border-radius:12px; padding:18px; margin-bottom:20px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px; border-bottom:1px solid #1e3a5f; padding-bottom:12px;">
+          <div>
+            <h4 style="margin:0; font-size:15px; color:#fde047; font-weight:800; display:flex; align-items:center; gap:8px;">
+              <span>⚡</span> BUSCA INTELIGENTE BIDIRECIONAL
+            </h4>
+            <span style="font-size:11.5px; color:#94a3b8;">Escolha o ponto de partida que você tem em mãos no campo:</span>
+          </div>
+          <div style="display:flex; gap:6px;">
+            <button type="button" id="btn_modo_busca_parafuso" class="button" style="font-size:11.5px; padding:6px 14px; background:#0284c7; border-color:#38bdf8;" onclick="alternarModoBuscaPorcaChave('parafuso')">
+              🔩 Tenho o Parafuso / Estojo
+            </button>
+            <button type="button" id="btn_modo_busca_chave" class="button secondary" style="font-size:11.5px; padding:6px 14px;" onclick="alternarModoBuscaPorcaChave('chave')">
+              🔑 Tenho a Chave / Medida da Porca
+            </button>
+          </div>
+        </div>
+
+        <!-- MODO 1: TENHO O PARAFUSO / ESTOJO -->
+        <div id="box_busca_modo_parafuso" style="display:block;">
+          <div class="field-row" style="display:flex; gap:12px; align-items:flex-end; flex-wrap:wrap;">
+            <div class="field" style="flex:1; min-width:180px;">
+              <label style="font-size:12px; color:#cbd5e1; font-weight:700;">Filtrar Sistema:</label>
+              <select id="sel_filtro_sistema_fastener" onchange="atualizarListaOpcoesParafuso()" style="font-size:13px; padding:8px 12px; background:#071526; border:1px solid #38bdf8; color:#fff; border-radius:6px; width:100%;">
+                <option value="todos">Todos (Métrico & Polegada)</option>
+                <option value="metrico" selected>Métrico Normal (M4 até M48)</option>
+                <option value="heavy_hex">Polegada Heavy Hex (Flanges ASME 1/2" a 4")</option>
+                <option value="regular_hex">Polegada Regular Hex (SAE 1/4" a 1")</option>
+              </select>
+            </div>
+            <div class="field" style="flex:2; min-width:240px;">
+              <label style="font-size:12px; color:#cbd5e1; font-weight:700;">Selecione o Parafuso / Estojo (Rosca):</label>
+              <select id="sel_parafuso_fastener" onchange="selecionarFastenerPorRosca(this.value)" style="font-size:13px; padding:8px 12px; background:#071526; border:1px solid #eab308; color:#fff; border-radius:6px; width:100%;">
+                <!-- Preenchido via JS -->
+              </select>
+            </div>
+            <div class="field" style="flex:1; min-width:180px;">
+              <label style="font-size:12px; color:#cbd5e1; font-weight:700;">Ou Digite Rápido (ex: M10, 5/8, 17mm):</label>
+              <input type="text" id="input_busca_rapida_fastener" placeholder="Digite busca rápida..." oninput="filtrarFastenerInput(this.value)" style="font-size:13px; padding:8px 12px; background:#071526; border:1px solid #64748b; color:#fff; border-radius:6px; width:100%;">
+            </div>
+          </div>
+        </div>
+
+        <!-- MODO 2: TENHO A CHAVE / MEDI A PORCA COM PAQUÍMETRO -->
+        <div id="box_busca_modo_chave" style="display:none;">
+          <div class="field-row" style="display:flex; gap:12px; align-items:flex-end; flex-wrap:wrap;">
+            <div class="field" style="flex:2; min-width:260px;">
+              <label style="font-size:12px; color:#cbd5e1; font-weight:700;">Selecione a Chave / Medida Entre-Faces da Porca ($s$):</label>
+              <select id="sel_chave_ou_medida_porca" onchange="selecionarFastenerPorChave(this.value)" style="font-size:13px; padding:8px 12px; background:#071526; border:1px solid #eab308; color:#fff; border-radius:6px; width:100%;">
+                <!-- Preenchido via JS -->
+              </select>
+            </div>
+            <div class="field" style="flex:1; min-width:200px;">
+              <label style="font-size:12px; color:#cbd5e1; font-weight:700;">Medida no Paquímetro (mm):</label>
+              <div style="display:flex; gap:6px;">
+                <input type="number" id="input_medida_paquimetro_porca" step="0.1" placeholder="Ex: 27.0" style="font-size:13px; padding:8px 12px; background:#071526; border:1px solid #38bdf8; color:#fff; border-radius:6px; flex:1;">
+                <button type="button" class="button" style="padding:8px 12px; font-size:12px;" onclick="buscarPorMedidaPaquimetro()">Buscar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DISPLAY DIGITAL / COCKPIT INDUSTRIAL DO RESULTADO -->
+        <div id="fastener_display_resultado" style="margin-top:16px;">
+          <!-- Preenchido dinamicamente via renderizarFastenerResultado() -->
+        </div>
+      </div>
+
+      <!-- SUBMÓDULO: IDENTIFICADOR PRÁTICO - COMO SABER SE A ROSCA É MÉTRICA (MM) OU POLEGADA (POL) -->
+      <div style="background:#091524; border:1.5px solid #203e64; border-radius:12px; padding:18px; margin-bottom:20px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+          <h4 style="margin:0; font-size:15px; color:#38bdf8; font-weight:800; display:flex; align-items:center; gap:8px;">
+            <span>🔬</span> COMO SABER SE A ROSCA É MÉTRICA (MM) OU POLEGADA (POL)?
+          </h4>
+          <span style="font-size:11px; background:#0c223d; color:#7dd3fc; padding:2px 8px; border-radius:6px; border:1px solid #1e3a5f;">REGRA DE OURO DE OFICINA</span>
+        </div>
+
+        <p style="font-size:12px; color:#94a3b8; margin:0 0 14px 0;">
+          No chão de fábrica, parafusos métricos e polegadas parecem idênticos a olho nu, mas uma porca M16 x 2.0 em um estojo de 5/8" (15,87 mm) trava na 2ª volta e destrói o filete. Utilize o método de medição abaixo:
+        </p>
+
+        <!-- CARDS DOS DOIS MÉTODOS -->
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:14px; margin-bottom:16px;">
+          <!-- MÉTODO 1: PAQUÍMETRO NO DIÂMETRO EXTERNO -->
+          <div style="background:#071424; border:1px solid #1e3a5f; border-left:4px solid #38bdf8; border-radius:8px; padding:14px;">
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:6px;">
+              <span style="font-size:16px;">📐</span>
+              <b style="color:#e0f2fe; font-size:13px;">1. Teste do Paquímetro (Diâmetro Externo $D$)</b>
+            </div>
+            <p style="font-size:11.5px; color:#cbd5e1; margin:0 0 8px 0; line-height:1.4;">
+              Meça o diâmetro sobre as <b>cristas da rosca</b> (nunca no fundo do filete):
+            </p>
+            <ul style="margin:0 0 8px 0; padding-left:18px; font-size:11px; color:#94a3b8; line-height:1.5;">
+              <li><b style="color:#fde047;">Se der fração exata de polegada:</b> 12,7 mm (1/2"), 15,87 mm (5/8"), 19,05 mm (3/4"), 22,22 mm (7/8"), 25,4 mm (1") → <b style="color:#38bdf8;">É POLEGADA (UNC / 8-UN)</b>.</li>
+              <li><b style="color:#fde047;">Se der número inteiro fechado:</b> 6,0 mm (M6), 8,0 mm (M8), 10,0 mm (M10), 12,0 mm (M12), 16,0 mm (M16), 20,0 mm (M20) → <b style="color:#38bdf8;">É MÉTRICA (M)</b>.</li>
+            </ul>
+            <div style="background:#030a14; border-radius:6px; padding:6px 10px; font-size:10.5px; color:#64748b;">
+              *Nota: Parafusos usinados podem apresentar 0,1 a 0,2 mm de folga negativa (ex: M10 medindo 9,85 mm).
+            </div>
+          </div>
+
+          <!-- MÉTODO 2: PENTE DE ROSCA / CONTAGEM DE FIOS -->
+          <div style="background:#071424; border:1px solid #1e3a5f; border-left:4px solid #f59e0b; border-radius:8px; padding:14px;">
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:6px;">
+              <span style="font-size:16px;">🔍</span>
+              <b style="color:#fde047; font-size:13px;">2. Teste do Pente de Rosca (Passo ou TPI)</b>
+            </div>
+            <p style="font-size:11.5px; color:#cbd5e1; margin:0 0 8px 0; line-height:1.4;">
+              Encaixe a lâmina do cálibre de rosca contra os filetes:
+            </p>
+            <ul style="margin:0 0 8px 0; padding-left:18px; font-size:11px; color:#94a3b8; line-height:1.5;">
+              <li><b style="color:#fde047;">Pente Métrico (60°):</b> A lâmina marca a distância entre cristas em mm (ex: 1.0, 1.25, 1.5, 1.75, 2.0). A lâmina deve assentar sem luz visível.</li>
+              <li><b style="color:#fde047;">Pente Polegada (60° ou 55°):</b> A lâmina marca fios por polegada (TPI). Estojo de 5/8" tem 11 fios/pol; de 3/4" tem 10 fios/pol; de 1" ou mais tem 8 fios/pol.</li>
+            </ul>
+            <div style="background:#030a14; border-radius:6px; padding:6px 10px; font-size:10.5px; color:#64748b;">
+              *Sem pente? Conte quantas cristas existem em 25,4 mm (1") na régua de aço!
+            </div>
+          </div>
+        </div>
+
+        <!-- DIAGNÓSTICO INTERATIVO DE CAMPO -->
+        <div style="background:#050c17; border:1px solid #0284c7; border-radius:8px; padding:14px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+            <b style="color:#fde047; font-size:12.5px;">🧮 CALCULADORA DE IDENTIFICAÇÃO RÁPIDA: DIGITE SUA MEDIÇÃO</b>
+            <span style="font-size:11px; color:#94a3b8;">Cruza tolerâncias de normas ISO e ASME</span>
+          </div>
+          <div class="field-row" style="display:flex; gap:12px; align-items:flex-end; flex-wrap:wrap;">
+            <div class="field" style="flex:1; min-width:180px;">
+              <label style="font-size:11.5px; color:#cbd5e1;">Diâmetro medido no paquímetro ($mm$):</label>
+              <input type="number" id="diag_diametro_input" step="0.01" placeholder="Ex: 15.85 ou 16.0" style="font-size:12.5px; padding:8px 10px; background:#071526; border:1px solid #1e3a5f; color:#fff; border-radius:6px; width:100%;">
+            </div>
+            <div class="field" style="flex:1; min-width:180px;">
+              <label style="font-size:11.5px; color:#cbd5e1;">Passo no pente ($mm$) OU Fios em 1" (TPI):</label>
+              <input type="number" id="diag_passo_input" step="0.01" placeholder="Ex: 2.0 ou 11" style="font-size:12.5px; padding:8px 10px; background:#071526; border:1px solid #1e3a5f; color:#fff; border-radius:6px; width:100%;">
+            </div>
+            <div class="field" style="flex:1; min-width:180px;">
+              <label style="font-size:11.5px; color:#cbd5e1;">O 2º valor digitado é:</label>
+              <select id="diag_tipo_passo_sel" style="font-size:12.5px; padding:8px 10px; background:#071526; border:1px solid #1e3a5f; color:#fff; border-radius:6px; width:100%;">
+                <option value="auto">Detectar Automático</option>
+                <option value="passo_mm">Passo em Milímetros (ex: 1.5, 2.0)</option>
+                <option value="tpi">Fios por Polegada - TPI (ex: 8, 10, 11, 13)</option>
+              </select>
+            </div>
+            <button type="button" class="button" style="background:#0284c7; border-color:#38bdf8; font-size:12px; padding:8px 18px; font-weight:bold;" onclick="diagnosticarRoscaCampo()">
+              Diagnosticar Rosca
+            </button>
+          </div>
+          <div id="diag_resultado_box" style="margin-top:12px; display:none;"></div>
+        </div>
+
+        <!-- TABELA DE ALERTA DE ERROS CRÍTICOS -->
+        <div style="margin-top:16px; background:#1e1405; border:1px solid #f59e0b; border-radius:8px; padding:12px;">
+          <b style="color:#fde047; font-size:12px; display:flex; align-items:center; gap:6px; margin-bottom:6px;">
+            <span>⚠️</span> TABELA DE ERROS GRAVES NO CHÃO DE FÁBRICA (ROSCAS PARECIDAS QUE NUNCA DEVEM SER MISTURADAS)
+          </b>
+          <div style="overflow-x:auto;">
+            <table style="width:100%; font-size:11px; border-collapse:collapse; margin-top:4px;">
+              <thead>
+                <tr style="background:#2a1b07; color:#fde047;">
+                  <th style="padding:6px; text-align:left;">Rosca Métrica (M)</th>
+                  <th style="padding:6px; text-align:left;">Rosca Polegada (UNC)</th>
+                  <th style="padding:6px; text-align:left;">Diferença no Diâmetro</th>
+                  <th style="padding:6px; text-align:left;">Diferença de Passo</th>
+                  <th style="padding:6px; text-align:left;">O que acontece se forçar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom:1px solid #3d2708;">
+                  <td style="padding:6px; color:#fff; font-weight:bold;">M8 × 1.25</td>
+                  <td style="padding:6px; color:#7dd3fc; font-weight:bold;">5/16" - 18 UNC</td>
+                  <td style="padding:6px; color:#cbd5e1;">8,0 mm vs 7,94 mm (0,06 mm)</td>
+                  <td style="padding:6px; color:#cbd5e1;">1,25 mm vs 1,41 mm</td>
+                  <td style="padding:6px; color:#fca5a5;">Trava na 1ª volta; se usar chave espana o macho/porca.</td>
+                </tr>
+                <tr style="border-bottom:1px solid #3d2708;">
+                  <td style="padding:6px; color:#fff; font-weight:bold;">M10 × 1.50</td>
+                  <td style="padding:6px; color:#7dd3fc; font-weight:bold;">3/8" - 16 UNC</td>
+                  <td style="padding:6px; color:#cbd5e1;">10,0 mm vs 9,52 mm (0,48 mm)</td>
+                  <td style="padding:6px; color:#cbd5e1;">1,50 mm vs 1,59 mm</td>
+                  <td style="padding:6px; color:#fca5a5;">Parafuso M10 nem entra na rosca 3/8". 3/8" entra frouxo em M10 e arrebenta no aperto.</td>
+                </tr>
+                <tr style="border-bottom:1px solid #3d2708;">
+                  <td style="padding:6px; color:#fff; font-weight:bold;">M12 × 1.75</td>
+                  <td style="padding:6px; color:#7dd3fc; font-weight:bold;">1/2" - 13 UNC</td>
+                  <td style="padding:6px; color:#cbd5e1;">12,0 mm vs 12,70 mm (0,70 mm)</td>
+                  <td style="padding:6px; color:#cbd5e1;">1,75 mm vs 1,95 mm</td>
+                  <td style="padding:6px; color:#fca5a5;">M12 fica completamente frouxo na porca 1/2"; 1/2" trava imediatamente em furo M12.</td>
+                </tr>
+                <tr>
+                  <td style="padding:6px; color:#fff; font-weight:bold;">M16 × 2.00</td>
+                  <td style="padding:6px; color:#7dd3fc; font-weight:bold;">5/8" - 11 UNC</td>
+                  <td style="padding:6px; color:#cbd5e1;">16,0 mm vs 15,87 mm (0,13 mm)</td>
+                  <td style="padding:6px; color:#cbd5e1;">2,00 mm vs 2,31 mm</td>
+                  <td style="padding:6px; color:#fca5a5;">★ O MAIS PERIGOSO: Roscam 1,5 a 2 voltas na mão e travam! Forçar com chave destrói o estojo de flange.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================================================================== -->
+    <!-- ABA NOVA 2: TABELAS DAS FOTOS DA OFICINA (GALERIA & TABELAS REAIS)   -->
+    <!-- ==================================================================== -->
+    <div id="aba_painel_tabelas_fotos" style="display:none;">
+      <!-- CABEÇALHO -->
+      <div style="background:linear-gradient(135deg, #07172c 0%, #0d2847 100%); border:1.5px solid #0284c7; border-radius:12px; padding:18px 20px; margin-bottom:18px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+              <span style="font-size:11px; font-weight:800; color:#38bdf8; text-transform:uppercase; letter-spacing:1px; background:#0c223d; padding:2px 8px; border-radius:6px; border:1px solid #1e3a5f;">REGISTROS VISUAIS DE CAMPO</span>
+              <span style="font-size:11px; font-weight:700; color:#facc15;">FOTOS ORIGINAIS & TABELAS COTADAS</span>
+            </div>
+            <h3 style="margin:0 0 6px 0; font-size:20px; color:#f8fafc; font-weight:800; display:flex; align-items:center; gap:8px;">
+              <span>📸</span> Tabelas de Chaves de Anel & Porcas Métricas da Oficina
+            </h3>
+            <p style="margin:0; font-size:12.5px; color:#94a3b8;">
+              Consulte as tabelas idênticas às fotos práticas de bancada, com zoom em alta resolução e busca instantânea.
+            </p>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <input type="text" id="filtro_tabelas_fotos_input" placeholder="Filtrar por chave ou parafuso..." oninput="filtrarTabelaFotosOficina(this.value)" style="font-size:12.5px; padding:8px 12px; background:#071526; border:1px solid #38bdf8; color:#fff; border-radius:6px; min-width:240px;">
+          </div>
+        </div>
+      </div>
+
+      <!-- GRID COM AS DUAS TABELAS DAS FOTOS -->
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(420px, 1fr)); gap:20px;">
+        
+        <!-- CARD FOTO 1: QUAL CHAVE DE ANEL SERVE EM QUAL PARAFUSO E PORCA -->
+        <div style="background:#091524; border:1.5px solid #203e64; border-radius:12px; padding:16px; display:flex; flex-direction:column;">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; border-bottom:1px solid #1e3a5f; padding-bottom:10px;">
+            <div>
+              <span style="font-size:10px; font-weight:800; background:#ca8a04; color:#fff; padding:2px 6px; border-radius:4px;">FOTO 1 • REFERÊNCIA</span>
+              <h4 style="margin:4px 0 2px 0; font-size:15px; color:#fde047; font-weight:800;">
+                Qual Chave de Anel Serve em Qual Parafuso e Porca?
+              </h4>
+              <span style="font-size:11px; color:#94a3b8;">Tamanho da chave de anel (mm) → Tamanho do parafuso e porca (Métrica - M)</span>
+            </div>
+            <button type="button" class="button" style="background:#0284c7; border-color:#38bdf8; font-size:11px; padding:6px 10px; white-space:nowrap;" onclick="abrirFotoOficina('chave_anel')">
+              🔍 Ver Imagem HD
+            </button>
+          </div>
+
+          <!-- MINIATURA DA FOTO 1 -->
+          <div style="text-align:center; margin-bottom:12px; background:#040912; border-radius:8px; padding:8px; border:1px solid #1e3a5f; cursor:pointer;" onclick="abrirFotoOficina('chave_anel')">
+            <img src="assets/tabela_chave_anel_metrica.jpg" alt="Qual chave de anel serve em qual parafuso e porca" style="max-height:180px; width:auto; border-radius:4px; object-fit:contain;" onerror="this.style.display='none'; document.getElementById('msg_fallback_img1').style.display='block';">
+            <div id="msg_fallback_img1" style="display:none; color:#94a3b8; font-size:11px; padding:10px;">📸 Imagem da Tabela de Chaves de Anel (Foto 1)</div>
+            <div style="font-size:10.5px; color:#38bdf8; margin-top:4px;">Toque na imagem para ampliar em tela cheia</div>
+          </div>
+
+          <!-- TABELA INTERATIVA FOTO 1 -->
+          <div style="overflow-x:auto; flex:1;">
+            <table id="tabela_foto1_element" style="width:100%; font-size:11.5px; border-collapse:collapse;">
+              <thead>
+                <tr style="background:#0c223d; color:#7dd3fc; border-bottom:1.5px solid #0284c7;">
+                  <th style="padding:7px; text-align:left;">Chave de Anel (mm)</th>
+                  <th style="padding:7px; text-align:left;">Parafuso & Porca (M)</th>
+                  <th style="padding:7px; text-align:left;">Passo Padrão</th>
+                  <th style="padding:7px; text-align:left;">Diâmetro Nominal</th>
+                  <th style="padding:7px; text-align:left;">Observação de Oficina</th>
+                </tr>
+              </thead>
+              <tbody id="tbody_foto1_chaves">
+                <!-- Preenchido via JS com as 20 linhas da imagem -->
+              </tbody>
+            </table>
+          </div>
+          <div style="font-size:10.5px; color:#94a3b8; margin-top:8px; background:#071220; padding:6px 10px; border-radius:6px;">
+            ℹ️ <b>Nota Técnica:</b> A tabela da imagem ilustra chaves de anel/estrela comuns. Porcas DIN 934 utilizam chaves clássicas (ex: M8 = 13 mm, M10 = 17 mm, M12 = 19 mm, M14 = 22 mm, M16 = 24 mm).
+          </div>
+        </div>
+
+        <!-- CARD FOTO 2: TABELA DE TAMANHOS DE PORCAS MÉTRICAS -->
+        <div style="background:#091524; border:1.5px solid #203e64; border-radius:12px; padding:16px; display:flex; flex-direction:column;">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; border-bottom:1px solid #1e3a5f; padding-bottom:10px;">
+            <div>
+              <span style="font-size:10px; font-weight:800; background:#0284c7; color:#fff; padding:2px 6px; border-radius:4px;">FOTO 2 • COTAS ENTRE-FACES</span>
+              <h4 style="margin:4px 0 2px 0; font-size:15px; color:#38bdf8; font-weight:800;">
+                Tabela de Tamanhos de Porcas Métricas
+              </h4>
+              <span style="font-size:11px; color:#94a3b8;">Medidas cotadas entre-faces ($s$) de porcas pretas sextavadas</span>
+            </div>
+            <button type="button" class="button" style="background:#0284c7; border-color:#38bdf8; font-size:11px; padding:6px 10px; white-space:nowrap;" onclick="abrirFotoOficina('porcas_metricas')">
+              🔍 Ver Imagem HD
+            </button>
+          </div>
+
+          <!-- MINIATURA DA FOTO 2 -->
+          <div style="text-align:center; margin-bottom:12px; background:#040912; border-radius:8px; padding:8px; border:1px solid #1e3a5f; cursor:pointer;" onclick="abrirFotoOficina('porcas_metricas')">
+            <img src="assets/tabela_porcas_metricas.jpg" alt="Tabela de Tamanhos de Porcas Métricas" style="max-height:180px; width:auto; border-radius:4px; object-fit:contain;" onerror="this.style.display='none'; document.getElementById('msg_fallback_img2').style.display='block';">
+            <div id="msg_fallback_img2" style="display:none; color:#94a3b8; font-size:11px; padding:10px;">📸 Imagem da Tabela de Porcas Métricas Cotadas (Foto 2)</div>
+            <div style="font-size:10.5px; color:#38bdf8; margin-top:4px;">Toque na imagem para ampliar em tela cheia</div>
+          </div>
+
+          <!-- TABELA INTERATIVA FOTO 2 -->
+          <div style="overflow-x:auto; flex:1;">
+            <table id="tabela_foto2_element" style="width:100%; font-size:11.5px; border-collapse:collapse;">
+              <thead>
+                <tr style="background:#0c223d; color:#7dd3fc; border-bottom:1.5px solid #0284c7;">
+                  <th style="padding:7px; text-align:left;">Rosca Métrica</th>
+                  <th style="padding:7px; text-align:left;">Medida da Porca (Entre-faces)</th>
+                  <th style="padding:7px; text-align:left;">Chave Exata</th>
+                  <th style="padding:7px; text-align:left;">Broca p/ Rosca</th>
+                  <th style="padding:7px; text-align:left;">Torque 8.8 (Lubrif.)</th>
+                </tr>
+              </thead>
+              <tbody id="tbody_foto2_porcas">
+                <!-- Preenchido via JS com as medidas cotadas da foto 2 -->
+              </tbody>
+            </table>
+          </div>
+          <div style="font-size:10.5px; color:#94a3b8; margin-top:8px; background:#071220; padding:6px 10px; border-radius:6px;">
+            ℹ️ <b>Referência Visual:</b> As cotas em mm indicam a distância exata entre as faces paralelas da porca, correspondente ao número marcado na chave combinada ou soquete sextavado.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================================================================== -->
+    <!-- ABA NOVA 3: ESTOJOS, COMPRIMENTOS & MATERIAIS (ONDE UTILIZÁ-LOS)      -->
+    <!-- ==================================================================== -->
+    <div id="aba_painel_estojos_materiais" style="display:none;">
+      <!-- CABEÇALHO -->
+      <div style="background:linear-gradient(135deg, #07172c 0%, #0d2847 100%); border:1.5px solid #0284c7; border-radius:12px; padding:18px 20px; margin-bottom:18px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+              <span style="font-size:11px; font-weight:800; color:#38bdf8; text-transform:uppercase; letter-spacing:1px; background:#0c223d; padding:2px 8px; border-radius:6px; border:1px solid #1e3a5f;">ENGENHARIA DE FIXAÇÃO & MATERIAIS</span>
+              <span style="font-size:11px; font-weight:700; color:#facc15;">ASME B16.5 • ASTM A193 / A194 • DIN ISO 898</span>
+            </div>
+            <h3 style="margin:0 0 6px 0; font-size:20px; color:#f8fafc; font-weight:800; display:flex; align-items:center; gap:8px;">
+              <span>🔩</span> Estojos: Diâmetros, Comprimentos & Materiais (Onde Utilizá-lo)
+            </h3>
+            <p style="margin:0; font-size:12.5px; color:#94a3b8;">
+              Cálculo preciso de comprimento de estojo com sobras de rosca, diâmetros padronizados, especificações de ligas e guia de seleção por equipamento.
+            </p>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button type="button" class="button" style="background:#0284c7; border-color:#38bdf8; font-size:12px; padding:8px 14px;" onclick="alternarAbaPainelChaves('3d')">
+              📐 Ver Estúdio 3D Cotas
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1. CALCULADORA DE COMPRIMENTO TOTAL DO ESTOJO (L) -->
+      <div style="background:#091524; border:1.5px solid #203e64; border-radius:12px; padding:18px; margin-bottom:20px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+          <h4 style="margin:0; font-size:15px; color:#fde047; font-weight:800; display:flex; align-items:center; gap:8px;">
+            <span>📏</span> CALCULADORA DE COMPRIMENTO DO ESTOJO ($L$) COM SOBRA DE ROSCA
+          </h4>
+          <span style="font-size:11px; color:#94a3b8;">Fórmula: $L = 2 \times H_{flange} + E_{junta} + 2 \times H_{porca} + 2 \times \text{Sobra}$</span>
+        </div>
+
+        <p style="font-size:12px; color:#94a3b8; margin:0 0 14px 0;">
+          Insira as dimensões da junta flangeada para calcular o comprimento ideal do estojo comercial sem sobras excessivas ou falta perigosa de rosca:
+        </p>
+
+        <div class="field-row" style="display:flex; gap:12px; align-items:flex-end; flex-wrap:wrap;">
+          <div class="field" style="flex:1; min-width:180px;">
+            <label style="font-size:11.5px; color:#cbd5e1; font-weight:700;">Diâmetro do Estojo:</label>
+            <select id="calc_estojo_diam_sel" onchange="calcularComprimentoEstojoManual()" style="font-size:12.5px; padding:8px 10px; background:#071526; border:1px solid #38bdf8; color:#fff; border-radius:6px; width:100%;">
+              <option value="1/2|12.7|13|12.3">1/2" (13 fios UNC)</option>
+              <option value="5/8|15.875|11|15.5" selected>5/8" (11 fios UNC) ★ Padrão Indústria</option>
+              <option value="3/4|19.05|10|18.7">3/4" (10 fios UNC)</option>
+              <option value="7/8|22.225|9|21.8">7/8" (9 fios UNC)</option>
+              <option value="1|25.4|8|25.0">1" (8 fios 8-UN)</option>
+              <option value="1-1/8|28.575|8|28.2">1-1/8" (8 fios 8-UN)</option>
+              <option value="1-1/4|31.75|8|31.4">1-1/4" (8 fios 8-UN)</option>
+              <option value="1-3/8|34.925|8|34.5">1-3/8" (8 fios 8-UN)</option>
+              <option value="1-1/2|38.1|8|37.7">1-1/2" (8 fios 8-UN)</option>
+            </select>
+          </div>
+          <div class="field" style="flex:1; min-width:140px;">
+            <label style="font-size:11.5px; color:#cbd5e1; font-weight:700;">Espessura Flange 1 ($mm$):</label>
+            <input type="number" id="calc_estojo_flange1_input" value="22" step="1" oninput="calcularComprimentoEstojoManual()" style="font-size:12.5px; padding:8px 10px; background:#071526; border:1px solid #1e3a5f; color:#fff; border-radius:6px; width:100%;">
+          </div>
+          <div class="field" style="flex:1; min-width:140px;">
+            <label style="font-size:11.5px; color:#cbd5e1; font-weight:700;">Espessura Flange 2 ($mm$):</label>
+            <input type="number" id="calc_estojo_flange2_input" value="22" step="1" oninput="calcularComprimentoEstojoManual()" style="font-size:12.5px; padding:8px 10px; background:#071526; border:1px solid #1e3a5f; color:#fff; border-radius:6px; width:100%;">
+          </div>
+          <div class="field" style="flex:1; min-width:160px;">
+            <label style="font-size:11.5px; color:#cbd5e1; font-weight:700;">Espessura Junta ($mm$):</label>
+            <select id="calc_estojo_junta_sel" onchange="calcularComprimentoEstojoManual()" style="font-size:12.5px; padding:8px 10px; background:#071526; border:1px solid #1e3a5f; color:#fff; border-radius:6px; width:100%;">
+              <option value="4.5" selected>Espiral Metálica (4,5 mm)</option>
+              <option value="3.0">Papelão Hidráulico (3,0 mm)</option>
+              <option value="1.5">Guarnição Fina (1,5 mm)</option>
+              <option value="10.0">Junta Anel RTJ (10,0 mm)</option>
+            </select>
+          </div>
+          <button type="button" class="button" style="background:#ca8a04; border-color:#eab308; font-size:12px; padding:8px 16px; font-weight:bold;" onclick="calcularComprimentoEstojoManual()">
+            Calcular Estojo
+          </button>
+        </div>
+
+        <div id="calc_estojo_resultado_box" style="margin-top:14px; background:#050c17; border:1px solid #0284c7; border-radius:8px; padding:14px;">
+          <!-- Preenchido via calcularComprimentoEstojoManual() -->
+        </div>
+      </div>
+
+      <!-- 2. MATERIAIS DE FIXAÇÃO: ESTÁTICO × DINÂMICO E CARACTERÍSTICAS -->
+      <div style="background:#091524; border:1.5px solid #203e64; border-radius:12px; padding:18px; margin-bottom:20px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+          <h4 style="margin:0; font-size:15px; color:#38bdf8; font-weight:800; display:flex; align-items:center; gap:8px;">
+            <span>🛡️</span> MATERIAIS PADRONIZADOS DE FIXAÇÃO: ESTÁTICO × DINÂMICO
+          </h4>
+          <span style="font-size:11px; background:#0c223d; color:#7dd3fc; padding:2px 8px; border-radius:6px; border:1px solid #1e3a5f;">ESPECIFICAÇÕES METALÚRGICAS</span>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:12px; margin-bottom:16px;">
+          <!-- B7 -->
+          <div style="background:#071424; border:1.5px solid #0284c7; border-radius:8px; padding:14px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <b style="color:#38bdf8; font-size:14px;">ASTM A193 Gr. B7</b>
+              <span style="font-size:10px; background:#0f2744; color:#7dd3fc; padding:1px 6px; border-radius:4px; font-weight:bold;">ESTÁTICO / ALTA PRESSÃO</span>
+            </div>
+            <p style="font-size:11.5px; color:#cbd5e1; margin:0 0 6px 0; line-height:1.4;">
+              <b>Composição:</b> Aço-liga Cromo-Molibdênio (AISI 4140) temperado e revenido.<br>
+              <b>Temperatura:</b> -29°C a <b>427°C</b>.<br>
+              <b>Resistência Mecânica:</b> LE ≥ 105 ksi (720 MPa) | LR ≥ 125 ksi (860 MPa).
+            </p>
+            <div style="font-size:11px; color:#fde047; margin-bottom:4px;"><b>Porca correspondente:</b> ASTM A194 Gr. 2H (Heavy Hex)</div>
+            <div style="font-size:11px; color:#94a3b8;"><b>Onde utilizar:</b> Flanges de óleo & gás, vasos de pressão, trocadores de calor, vapor saturado.</div>
+          </div>
+
+          <!-- B16 -->
+          <div style="background:#071424; border:1.5px solid #f59e0b; border-radius:8px; padding:14px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <b style="color:#f59e0b; font-size:14px;">ASTM A193 Gr. B16</b>
+              <span style="font-size:10px; background:#2a1905; color:#fde047; padding:1px 6px; border-radius:4px; font-weight:bold;">ALTA TEMPERATURA</span>
+            </div>
+            <p style="font-size:11.5px; color:#cbd5e1; margin:0 0 6px 0; line-height:1.4;">
+              <b>Composição:</b> Aço-liga Cr-Mo-Vanádio com altíssima resistência à fluência (*creep*).<br>
+              <b>Temperatura:</b> até <b>538°C (1000°F)</b> contínuo.<br>
+              <b>Resistência:</b> Mantém pré-carga sob expansão térmica extrema.
+            </p>
+            <div style="font-size:11px; color:#fde047; margin-bottom:4px;"><b>Porca correspondente:</b> ASTM A194 Gr. 7 ou 2H</div>
+            <div style="font-size:11px; color:#94a3b8;"><b>Onde utilizar:</b> Linhas de vapor superaquecido, caldeiras de força, turbinas a vapor.</div>
+          </div>
+
+          <!-- L7 / B8M -->
+          <div style="background:#071424; border:1.5px solid #10b981; border-radius:8px; padding:14px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <b style="color:#10b981; font-size:14px;">ASTM A320 L7 / A193 B8M</b>
+              <span style="font-size:10px; background:#052419; color:#6ee7b7; padding:1px 6px; border-radius:4px; font-weight:bold;">CRIOGENIA / CORROSÃO</span>
+            </div>
+            <p style="font-size:11.5px; color:#cbd5e1; margin:0 0 6px 0; line-height:1.4;">
+              <b>L7:</b> Aço temperado com ensaio de impacto Charpy até <b>-101°C</b>.<br>
+              <b>B8M:</b> Aço inoxidável austenítico AISI 316 (resistente a cloretos e névoa salina).
+            </p>
+            <div style="font-size:11px; color:#fde047; margin-bottom:4px;"><b>Porcas:</b> A194 Gr. 4 ou 7 (p/ L7) | A194 Gr. 8M (p/ B8M)</div>
+            <div style="font-size:11px; color:#94a3b8;"><b>Onde utilizar:</b> Plantas de GLP/GNL, criogenia, plataformas marítimas offshore.</div>
+          </div>
+
+          <!-- CLASSES MÉTRICAS 8.8 / 10.9 / 12.9 -->
+          <div style="background:#071424; border:1.5px solid #8b5cf6; border-radius:8px; padding:14px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <b style="color:#a78bfa; font-size:14px;">Classes 8.8 / 10.9 / 12.9</b>
+              <span style="font-size:10px; background:#1c1033; color:#c4b5fd; padding:1px 6px; border-radius:4px; font-weight:bold;">DINÂMICO / MÁQUINAS</span>
+            </div>
+            <p style="font-size:11.5px; color:#cbd5e1; margin:0 0 6px 0; line-height:1.4;">
+              <b>Classe 8.8:</b> LR = 800 MPa, LE = 640 MPa (uso geral mecânico).<br>
+              <b>Classe 10.9:</b> LR = 1000 MPa, LE = 900 MPa (alto esforço dinâmico).<br>
+              <b>Classe 12.9:</b> LR = 1200 MPa (parafusos Allen de altíssima tensão).
+            </p>
+            <div style="font-size:11px; color:#fde047; margin-bottom:4px;"><b>Travamento dinâmico:</b> Porcas Parlock DIN 985, arruelas Nord-Lock, Loctite 242/271.</div>
+            <div style="font-size:11px; color:#94a3b8;"><b>Onde utilizar:</b> Bombas, compressores, redutores, mancais e acoplamentos.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. MATRIZ PRÁTICA: ONDE UTILIZAR CADA PARAFUSO/ESTOJO (GUIA POR APLICAÇÃO) -->
+      <div style="background:#091524; border:1.5px solid #203e64; border-radius:12px; padding:18px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+          <h4 style="margin:0; font-size:15px; color:#fde047; font-weight:800; display:flex; align-items:center; gap:8px;">
+            <span>🎯</span> MATRIZ DE DECISÃO: "PARA ONDE UTILIZÁ-LO?"
+          </h4>
+          <span style="font-size:11px; color:#94a3b8;">Selecione o equipamento ou ambiente da sua fábrica</span>
+        </div>
+
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;">
+          <button type="button" class="button" id="btn_matriz_oleo_gas" style="font-size:11.5px; padding:6px 12px; background:#0284c7; border-color:#38bdf8;" onclick="selecionarMatrizAplicacao('oleo_gas')">🛢️ Tubulação Óleo & Gás</button>
+          <button type="button" class="button secondary" id="btn_matriz_caldeira" style="font-size:11.5px; padding:6px 12px;" onclick="selecionarMatrizAplicacao('caldeira')">♨️ Caldeiras & Vapor Superaquecido</button>
+          <button type="button" class="button secondary" id="btn_matriz_bomba" style="font-size:11.5px; padding:6px 12px;" onclick="selecionarMatrizAplicacao('bomba')">🔄 Bombas Centrífugas & Redutores</button>
+          <button type="button" class="button secondary" id="btn_matriz_maritimo" style="font-size:11.5px; padding:6px 12px;" onclick="selecionarMatrizAplicacao('maritimo')">🌊 Offshore & Produtos Químicos</button>
+          <button type="button" class="button secondary" id="btn_matriz_criogenia" style="font-size:11.5px; padding:6px 12px;" onclick="selecionarMatrizAplicacao('criogenia')">❄️ Gás Refrigerado & Criogenia</button>
+          <button type="button" class="button secondary" id="btn_matriz_acoplamento" style="font-size:11.5px; padding:6px 12px;" onclick="selecionarMatrizAplicacao('acoplamento')">⚙️ Acoplamentos & Eixos Dinâmicos</button>
+        </div>
+
+        <div id="matriz_aplicacao_detalhe_box" style="background:#050c17; border:1px solid #1e3a5f; border-radius:8px; padding:16px;">
+          <!-- Preenchido via selecionarMatrizAplicacao() -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================================================================== -->
+    <!-- ABA NOVA 4: TORQUE DE APERTO, COEFICIENTES & SEQUÊNCIA EM CRUZ       -->
+    <!-- ==================================================================== -->
+    <div id="aba_painel_torque_aperto" style="display:none;">
+      <!-- CABEÇALHO -->
+      <div style="background:linear-gradient(135deg, #07172c 0%, #0d2847 100%); border:1.5px solid #0284c7; border-radius:12px; padding:18px 20px; margin-bottom:18px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+              <span style="font-size:11px; font-weight:800; color:#38bdf8; text-transform:uppercase; letter-spacing:1px; background:#0c223d; padding:2px 8px; border-radius:6px; border:1px solid #1e3a5f;">CONTROLE DE TENSÃO E APERTO</span>
+              <span style="font-size:11px; font-weight:700; color:#facc15;">ASME PCC-1 • VDI 2230 • DIN ISO 898</span>
+            </div>
+            <h3 style="margin:0 0 6px 0; font-size:20px; color:#f8fafc; font-weight:800; display:flex; align-items:center; gap:8px;">
+              <span>⚡</span> Torque de Aperto, Coeficientes & Sequência de Cruz
+            </h3>
+            <p style="margin:0; font-size:12.5px; color:#94a3b8;">
+              Tabela de torques recomendados para estojos e parafusos conforme o estado da rosca (lubrificada vs seca) e sequência oficial de aperto cruzado.
+            </p>
+          </div>
+          <button type="button" class="button" style="background:#ca8a04; border-color:#eab308; font-size:12px; padding:8px 14px;" onclick="abrirModulo('torque')">
+            🎯 Ir ao Módulo Torque Completo
+          </button>
+        </div>
+      </div>
+
+      <!-- TABELA DE TORQUES RÁPIDOS MÉTRICO E POLEGADA -->
+      <div style="background:#091524; border:1.5px solid #203e64; border-radius:12px; padding:18px; margin-bottom:20px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+          <h4 style="margin:0; font-size:15px; color:#fde047; font-weight:800;">
+            ⚡ TABELA DE TORQUE DE APERTO (LUBRIFICADO × SECO)
+          </h4>
+          <span style="font-size:11px; color:#94a3b8;">Lubrificante antiengripante ($mu=0.12$) reduz o atrito e garante a pré-carga correta</span>
+        </div>
+
+        <div style="overflow-x:auto;">
+          <table style="width:100%; font-size:11.5px; border-collapse:collapse;">
+            <thead>
+              <tr style="background:#0c223d; color:#7dd3fc; border-bottom:1.5px solid #0284c7;">
+                <th style="padding:8px; text-align:left;">Tipo / Rosca</th>
+                <th style="padding:8px; text-align:left;">Chave Necessária</th>
+                <th style="padding:8px; text-align:left;">Material / Classe</th>
+                <th style="padding:8px; text-align:left;">Torque Lubrificado ($mu=0.12$)</th>
+                <th style="padding:8px; text-align:left;">Torque Óleo Leve ($mu=0.15$)</th>
+                <th style="padding:8px; text-align:left;">Torque Seco ($mu=0.20$)</th>
+                <th style="padding:8px; text-align:left;">Força Tensora ($kN$)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- POLEGADA HEAVY HEX FLANGES -->
+              <tr style="background:#071424; border-bottom:1px solid #1e3a5f;">
+                <td style="padding:7px; color:#38bdf8; font-weight:bold;">5/8" - 11 UNC ★ Mais Comum</td>
+                <td style="padding:7px; color:#fde047; font-weight:bold;">1-1/16" (27,0 mm)</td>
+                <td style="padding:7px; color:#fff;">ASTM A193 B7 / 2H</td>
+                <td style="padding:7px; color:#4ade80; font-weight:bold;">170 N·m (125 lbf·ft)</td>
+                <td style="padding:7px; color:#cbd5e1;">210 N·m (155 lbf·ft)</td>
+                <td style="padding:7px; color:#fca5a5;">280 N·m (205 lbf·ft)</td>
+                <td style="padding:7px; color:#cbd5e1;">~54 kN</td>
+              </tr>
+              <tr style="background:#050c17; border-bottom:1px solid #1e3a5f;">
+                <td style="padding:7px; color:#38bdf8; font-weight:bold;">3/4" - 10 UNC</td>
+                <td style="padding:7px; color:#fde047; font-weight:bold;">1-1/4" (31,8 mm)</td>
+                <td style="padding:7px; color:#fff;">ASTM A193 B7 / 2H</td>
+                <td style="padding:7px; color:#4ade80; font-weight:bold;">300 N·m (220 lbf·ft)</td>
+                <td style="padding:7px; color:#cbd5e1;">370 N·m (275 lbf·ft)</td>
+                <td style="padding:7px; color:#fca5a5;">490 N·m (360 lbf·ft)</td>
+                <td style="padding:7px; color:#cbd5e1;">~80 kN</td>
+              </tr>
+              <tr style="background:#071424; border-bottom:1px solid #1e3a5f;">
+                <td style="padding:7px; color:#38bdf8; font-weight:bold;">7/8" - 9 UNC</td>
+                <td style="padding:7px; color:#fde047; font-weight:bold;">1-7/16" (36,5 mm)</td>
+                <td style="padding:7px; color:#fff;">ASTM A193 B7 / 2H</td>
+                <td style="padding:7px; color:#4ade80; font-weight:bold;">485 N·m (358 lbf·ft)</td>
+                <td style="padding:7px; color:#cbd5e1;">600 N·m (442 lbf·ft)</td>
+                <td style="padding:7px; color:#fca5a5;">800 N·m (590 lbf·ft)</td>
+                <td style="padding:7px; color:#cbd5e1;">~111 kN</td>
+              </tr>
+              <tr style="background:#050c17; border-bottom:1px solid #1e3a5f;">
+                <td style="padding:7px; color:#38bdf8; font-weight:bold;">1" - 8 UN</td>
+                <td style="padding:7px; color:#fde047; font-weight:bold;">1-5/8" (41,3 mm)</td>
+                <td style="padding:7px; color:#fff;">ASTM A193 B7 / 2H</td>
+                <td style="padding:7px; color:#4ade80; font-weight:bold;">730 N·m (538 lbf·ft)</td>
+                <td style="padding:7px; color:#cbd5e1;">910 N·m (670 lbf·ft)</td>
+                <td style="padding:7px; color:#fca5a5;">1200 N·m (885 lbf·ft)</td>
+                <td style="padding:7px; color:#cbd5e1;">~146 kN</td>
+              </tr>
+              <!-- MÉTRICO CLASSE 8.8 -->
+              <tr style="background:#071424; border-bottom:1px solid #1e3a5f;">
+                <td style="padding:7px; color:#e0f2fe; font-weight:bold;">M8 × 1.25</td>
+                <td style="padding:7px; color:#fde047; font-weight:bold;">13 mm (ou 14 mm)</td>
+                <td style="padding:7px; color:#fff;">Aço Classe 8.8</td>
+                <td style="padding:7px; color:#4ade80; font-weight:bold;">21 N·m (15.5 lbf·ft)</td>
+                <td style="padding:7px; color:#cbd5e1;">24 N·m (18 lbf·ft)</td>
+                <td style="padding:7px; color:#fca5a5;">27 N·m (20 lbf·ft)</td>
+                <td style="padding:7px; color:#cbd5e1;">~18 kN</td>
+              </tr>
+              <tr style="background:#050c17; border-bottom:1px solid #1e3a5f;">
+                <td style="padding:7px; color:#e0f2fe; font-weight:bold;">M10 × 1.50</td>
+                <td style="padding:7px; color:#fde047; font-weight:bold;">17 mm (ou 16 mm)</td>
+                <td style="padding:7px; color:#fff;">Aço Classe 8.8</td>
+                <td style="padding:7px; color:#4ade80; font-weight:bold;">42 N·m (31 lbf·ft)</td>
+                <td style="padding:7px; color:#cbd5e1;">48 N·m (35 lbf·ft)</td>
+                <td style="padding:7px; color:#fca5a5;">54 N·m (40 lbf·ft)</td>
+                <td style="padding:7px; color:#cbd5e1;">~29 kN</td>
+              </tr>
+              <tr style="background:#071424; border-bottom:1px solid #1e3a5f;">
+                <td style="padding:7px; color:#e0f2fe; font-weight:bold;">M12 × 1.75</td>
+                <td style="padding:7px; color:#fde047; font-weight:bold;">19 mm (ou 18 mm)</td>
+                <td style="padding:7px; color:#fff;">Aço Classe 8.8</td>
+                <td style="padding:7px; color:#4ade80; font-weight:bold;">73 N·m (54 lbf·ft)</td>
+                <td style="padding:7px; color:#cbd5e1;">83 N·m (61 lbf·ft)</td>
+                <td style="padding:7px; color:#fca5a5;">93 N·m (69 lbf·ft)</td>
+                <td style="padding:7px; color:#cbd5e1;">~42 kN</td>
+              </tr>
+              <tr style="background:#050c17; border-bottom:1px solid #1e3a5f;">
+                <td style="padding:7px; color:#e0f2fe; font-weight:bold;">M16 × 2.00</td>
+                <td style="padding:7px; color:#fde047; font-weight:bold;">24 mm</td>
+                <td style="padding:7px; color:#fff;">Aço Classe 8.8</td>
+                <td style="padding:7px; color:#4ade80; font-weight:bold;">175 N·m (129 lbf·ft)</td>
+                <td style="padding:7px; color:#cbd5e1;">205 N·m (151 lbf·ft)</td>
+                <td style="padding:7px; color:#fca5a5;">230 N·m (170 lbf·ft)</td>
+                <td style="padding:7px; color:#cbd5e1;">~78 kN</td>
+              </tr>
+              <tr style="background:#071424;">
+                <td style="padding:7px; color:#e0f2fe; font-weight:bold;">M20 × 2.50</td>
+                <td style="padding:7px; color:#fde047; font-weight:bold;">30 mm</td>
+                <td style="padding:7px; color:#fff;">Aço Classe 8.8</td>
+                <td style="padding:7px; color:#4ade80; font-weight:bold;">350 N·m (258 lbf·ft)</td>
+                <td style="padding:7px; color:#cbd5e1;">400 N·m (295 lbf·ft)</td>
+                <td style="padding:7px; color:#fca5a5;">460 N·m (339 lbf·ft)</td>
+                <td style="padding:7px; color:#cbd5e1;">~122 kN</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PROCEDIMENTO DE APERTO EM CRUZ / ESTRELA CONFORME ASME PCC-1 -->
+      <div style="background:#091524; border:1.5px solid #203e64; border-radius:12px; padding:18px;">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:10px;">
+          <span style="font-size:20px;">🔄</span>
+          <h4 style="margin:0; font-size:15px; color:#e0f2fe; font-weight:800;">
+            Procedimento Oficial de Aperto em Cruz (ASME PCC-1 & Petrobras N-1597)
+          </h4>
+        </div>
+
+        <p style="font-size:12px; color:#94a3b8; margin:0 0 12px 0;">
+          Apertar os parafusos em sequência circular desestabiliza a junta, esmaga o espiral metálico em um dos lados e causa vazamento na partida. O aperto <b>deve seguir as 4 fases em cruz cruzada</b>:
+        </p>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:12px;">
+          <div style="background:#071424; border:1px solid #1e3a5f; border-radius:8px; padding:12px;">
+            <b style="color:#38bdf8; font-size:12.5px;">FASE 1: Encosto Manual</b>
+            <p style="font-size:11px; color:#cbd5e1; margin:4px 0 0 0;">
+              Aperte todas as porcas na mão até encostar as faces. Verifique se sobraram pelo menos 2 a 3 fios de cada lado.
+            </p>
+          </div>
+          <div style="background:#071424; border:1px solid #1e3a5f; border-radius:8px; padding:12px;">
+            <b style="color:#fde047; font-size:12.5px;">FASE 2: 20% a 30% do Torque</b>
+            <p style="font-size:11px; color:#cbd5e1; margin:4px 0 0 0;">
+              Primeiro passe de torquímetro em sequência de cruz alternada (ex: 1-5-3-7-2-6-4-8).
+            </p>
+          </div>
+          <div style="background:#071424; border:1px solid #1e3a5f; border-radius:8px; padding:12px;">
+            <b style="color:#f59e0b; font-size:12.5px;">FASE 3: 50% a 70% do Torque</b>
+            <p style="font-size:11px; color:#cbd5e1; margin:4px 0 0 0;">
+              Segundo passe de torquímetro na mesma sequência em cruz para acomodação uniforme da junta.
+            </p>
+          </div>
+          <div style="background:#071424; border:1px solid #1e3a5f; border-radius:8px; padding:12px;">
+            <b style="color:#10b981; font-size:12.5px;">FASE 4: 100% + Passe Circular</b>
+            <p style="font-size:11px; color:#cbd5e1; margin:4px 0 0 0;">
+              Aplique 100% em cruz. Em seguida, dê 1 a 2 voltas completas no sentido horário a 100% até nenhuma porca girar mais.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL PARA VISUALIZADOR DE FOTOS EM ALTA DEFINIÇÃO -->
+    <div id="modal_visualizador_fotos_oficina" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.92); z-index:99999; justify-content:center; align-items:center; flex-direction:column; padding:16px; box-sizing:border-box;" onclick="fecharFotoOficina()">
+      <div style="position:relative; max-width:96vw; max-height:92vh; background:#071424; border:1.5px solid #0284c7; border-radius:12px; padding:12px; box-shadow:0 8px 32px rgba(0,0,0,0.8); display:flex; flex-direction:column; align-items:center;" onclick="event.stopPropagation()">
+        <div style="width:100%; display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; border-bottom:1px solid #1e3a5f; padding-bottom:8px;">
+          <b id="modal_foto_titulo" style="color:#fde047; font-size:14px;">Visualizador da Foto da Oficina</b>
+          <button type="button" class="button secondary" style="padding:4px 12px; font-size:12px;" onclick="fecharFotoOficina()">✕ Fechar</button>
+        </div>
+        <div style="overflow:auto; max-height:80vh; text-align:center;">
+          <img id="modal_foto_img_tag" src="" alt="Foto Oficina" style="max-width:100%; height:auto; border-radius:6px; object-fit:contain;">
+        </div>
+        <div style="width:100%; text-align:center; font-size:11px; color:#94a3b8; margin-top:8px;">
+          Toque fora da janela ou no botão Fechar para voltar.
+        </div>
+      </div>
+    </div>
+
+    <!-- ABA 3D: MODELO 3D INTERATIVO (ONDE MEDIR & CONTAR FIOS) -->
+    <div id="aba_painel_3d" style="display:none;">
       <!-- CABEÇALHO DO ESTÚDIO 3D -->
       <div style="background:linear-gradient(135deg, #07172c 0%, #0d2847 100%); border:1.5px solid #0284c7; border-radius:12px; padding:16px 20px; margin-bottom:16px; box-shadow:0 4px 20px rgba(2,132,199,0.25);">
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
@@ -9217,6 +9953,8 @@
       <div id="tabela_estojos_container" style="overflow-x:auto;">
         <!-- Preenchido via alternarAbaTabelaEstojos() -->
       </div>
+      <!-- CARD DE PRÉVIA DO ESTOJO SELECIONADO NA TABELA -->
+      <div id="tabela_estojo_selecionado_card" style="margin-top:14px; display:none;"></div>
     </div>
 
     <!-- 7. MATERIAIS PADRÃO DE FIXAÇÃO (ASTM) -->
@@ -23308,11 +24046,11 @@ let estojo3D_isDragging = false;
 let estojo3D_lastMouseX = 0;
 let estojo3D_lastMouseY = 0;
 let estojo3D_initialized = false;
-let abaPainelChavesAtiva = '3d';
+let abaPainelChavesAtiva = 'porcas_chaves';
 
 function alternarAbaPainelChaves(aba) {
   abaPainelChavesAtiva = aba;
-  const abas = ['3d', 'calc', 'reversa', 'guia', 'tabelas'];
+  const abas = ['porcas_chaves', 'tabelas_fotos', '3d', 'estojos_materiais', 'torque_aperto', 'calc', 'reversa', 'guia', 'tabelas'];
   abas.forEach(a => {
     const btn = document.getElementById('tab_btn_painel_' + a);
     const sec = document.getElementById('aba_painel_' + a);
@@ -23334,7 +24072,16 @@ function alternarAbaPainelChaves(aba) {
     }
   });
 
-  if (aba === '3d') {
+  if (aba === 'porcas_chaves') {
+    setTimeout(() => {
+      inicializarModuloPorcasChaves();
+    }, 30);
+  } else if (aba === 'tabelas_fotos') {
+    setTimeout(() => {
+      renderizarTabelaFoto1(DADOS_FOTO1_CHAVES);
+      renderizarTabelaFoto2(DADOS_FOTO2_PORCAS);
+    }, 30);
+  } else if (aba === '3d') {
     setTimeout(() => {
       renderizarEstojo3DCanvas();
       atualizarPillsEstojo3D();
@@ -23342,10 +24089,725 @@ function alternarAbaPainelChaves(aba) {
     }, 30);
   } else if (aba === 'calc') {
     calcularEstojoASME();
+  } else if (aba === 'estojos_materiais') {
+    setTimeout(() => {
+      calcularComprimentoEstojoManual();
+    }, 30);
   } else if (aba === 'tabelas') {
     alternarAbaTabelaEstojos('150');
   }
 }
+
+
+// ============================================================================
+// BASE DE DADOS COMPLETA & MÓDULO INDUSTRIAL DE PORCAS, CHAVES & ROSCAS
+// ============================================================================
+
+const DADOS_FASTENERS_METRICOS = [
+  { rosca: "M4", passo: 0.70, chave: 7, chaveIso: 7, dNom: 4.0, hPorca: 3.2, broca: 3.3, torqueLub: 2.4, torqueSec: 3.2, sistema: "metrico", tipo: "Métrica Normal", obs: "Foto 1 (Chave 6/7) & Foto 2 (7mm)" },
+  { rosca: "M5", passo: 0.80, chave: 8, chaveIso: 8, dNom: 5.0, hPorca: 4.0, broca: 4.2, torqueLub: 4.8, torqueSec: 6.2, sistema: "metrico", tipo: "Métrica Normal", obs: "Foto 1 (Chave 7/8) & Foto 2 (8mm)" },
+  { rosca: "M6", passo: 1.00, chave: 10, chaveIso: 10, dNom: 6.0, hPorca: 5.0, broca: 5.0, torqueLub: 8.5, torqueSec: 11.0, sistema: "metrico", tipo: "Métrica Normal", obs: "Foto 1 (Chave 8/10) & Foto 2 (10mm)" },
+  { rosca: "M7", passo: 1.00, chave: 11, chaveIso: 11, dNom: 7.0, hPorca: 5.5, broca: 6.0, torqueLub: 14.0, torqueSec: 18.0, sistema: "metrico", tipo: "Métrica Normal", obs: "Foto 1 (Chave 9/11)" },
+  { rosca: "M8", passo: 1.25, chave: 13, chaveIso: 14, dNom: 8.0, hPorca: 6.5, broca: 6.8, torqueLub: 21.0, torqueSec: 27.0, sistema: "metrico", tipo: "Métrica Normal", obs: "Foto 1 (Chave 10/13) & Foto 2 (14mm / DIN 13mm)" },
+  { rosca: "M10", passo: 1.50, chave: 17, chaveIso: 16, dNom: 10.0, hPorca: 8.0, broca: 8.5, torqueLub: 42.0, torqueSec: 54.0, sistema: "metrico", tipo: "Métrica Normal", obs: "Foto 1 (Chave 11/17) & Foto 2 (17mm / ISO 16mm)" },
+  { rosca: "M12", passo: 1.75, chave: 19, chaveIso: 18, dNom: 12.0, hPorca: 10.0, broca: 10.2, torqueLub: 73.0, torqueSec: 93.0, sistema: "metrico", tipo: "Métrica Normal", obs: "Foto 1 (Chave 12/19) & Foto 2 (19mm / ISO 18mm)" },
+  { rosca: "M14", passo: 2.00, chave: 22, chaveIso: 21, dNom: 14.0, hPorca: 11.0, broca: 12.0, torqueLub: 115.0, torqueSec: 150.0, sistema: "metrico", tipo: "Métrica Normal", obs: "Foto 1 (Chave 13/22) & Foto 2 (22mm / ISO 21mm)" },
+  { rosca: "M16", passo: 2.00, chave: 24, chaveIso: 24, dNom: 16.0, hPorca: 13.0, broca: 14.0, torqueLub: 175.0, torqueSec: 230.0, sistema: "metrico", tipo: "Métrica Normal", obs: "Foto 1 (Chave 14/24) & Foto 2 (24mm DIN/ISO)" },
+  { rosca: "M18", passo: 2.50, chave: 27, chaveIso: 27, dNom: 18.0, hPorca: 15.0, broca: 15.5, torqueLub: 245.0, torqueSec: 320.0, sistema: "metrico", tipo: "Métrica Normal", obs: "Foto 1 (Chave 15/27) & Foto 2 (27mm DIN/ISO)" },
+  { rosca: "M20", passo: 2.50, chave: 30, chaveIso: 30, dNom: 20.0, hPorca: 16.0, broca: 17.5, torqueLub: 350.0, torqueSec: 460.0, sistema: "metrico", tipo: "Métrica Normal", obs: "Foto 1 (Chave 16/30) & Foto 2 (30mm DIN/ISO)" },
+  { rosca: "M22", passo: 2.50, chave: 32, chaveIso: 34, dNom: 22.0, hPorca: 18.0, broca: 19.5, torqueLub: 480.0, torqueSec: 620.0, sistema: "metrico", tipo: "Métrica Normal", obs: "Foto 1 (Chave 17/32) & Foto 2 (32mm / ISO 34mm)" },
+  { rosca: "M24", passo: 3.00, chave: 36, chaveIso: 36, dNom: 24.0, hPorca: 19.0, broca: 21.0, torqueLub: 600.0, torqueSec: 790.0, sistema: "metrico", tipo: "Métrica Normal", obs: "Foto 1 (Chave 18/19/36) & Foto 2 (36mm DIN/ISO)" },
+  { rosca: "M27", passo: 3.00, chave: 41, chaveIso: 41, dNom: 27.0, hPorca: 22.0, broca: 24.0, torqueLub: 890.0, torqueSec: 1160.0, sistema: "metrico", tipo: "Métrica Normal", obs: "Foto 1 (Chave 20/41) & Foto 2 (41mm DIN/ISO)" },
+  { rosca: "M30", passo: 3.50, chave: 46, chaveIso: 46, dNom: 30.0, hPorca: 24.0, broca: 26.5, torqueLub: 1200.0, torqueSec: 1580.0, sistema: "metrico", tipo: "Métrica Normal", obs: "Foto 1 (Chave 22/46) & Foto 2 (46mm DIN/ISO)" },
+  { rosca: "M33", passo: 3.50, chave: 50, chaveIso: 50, dNom: 33.0, hPorca: 26.0, broca: 29.5, torqueLub: 1650.0, torqueSec: 2150.0, sistema: "metrico", tipo: "Métrica Normal", obs: "Foto 1 (Chave 24/50)" },
+  { rosca: "M36", passo: 4.00, chave: 55, chaveIso: 55, dNom: 36.0, hPorca: 29.0, broca: 32.0, torqueLub: 2100.0, torqueSec: 2750.0, sistema: "metrico", tipo: "Métrica Normal", obs: "Foto 1 (Chave 27/55)" },
+  { rosca: "M42", passo: 4.50, chave: 65, chaveIso: 65, dNom: 42.0, hPorca: 34.0, broca: 37.5, torqueLub: 3350.0, torqueSec: 4400.0, sistema: "metrico", tipo: "Métrica Normal", obs: "Foto 1 (Chave 30/65)" },
+  { rosca: "M48", passo: 5.00, chave: 75, chaveIso: 75, dNom: 48.0, hPorca: 38.0, broca: 43.0, torqueLub: 5100.0, torqueSec: 6700.0, sistema: "metrico", tipo: "Métrica Normal", obs: "Foto 1 (Chave 32/75)" }
+];
+
+const DADOS_FASTENERS_POLEGADA = [
+  { rosca: "1/2\" - 13 UNC", tpi: 13, chavePol: "7/8\"", chaveMm: 22.2, dNomMm: 12.7, dNomPol: "1/2\"", hPorca: 12.3, broca: 10.8, torqueLub: 85, torqueSec: 120, sistema: "heavy_hex", tipo: "ASME B18.2.2 Heavy Hex", obs: "Flanges ASME B16.5 Cl 150/300 até 1.1/2\"" },
+  { rosca: "5/8\" - 11 UNC", tpi: 11, chavePol: "1-1/16\"", chaveMm: 27.0, dNomMm: 15.875, dNomPol: "5/8\"", hPorca: 15.5, broca: 13.5, torqueLub: 170, torqueSec: 280, sistema: "heavy_hex", tipo: "ASME B18.2.2 Heavy Hex", obs: "★ ESTOJO MAIS COMUM DA INDÚSTRIA (Flanges 2\" a 3.1/2\" Cl 150/300)" },
+  { rosca: "3/4\" - 10 UNC", tpi: 10, chavePol: "1-1/4\"", chaveMm: 31.8, dNomMm: 19.05, dNomPol: "3/4\"", hPorca: 18.7, broca: 16.5, torqueLub: 300, torqueSec: 490, sistema: "heavy_hex", tipo: "ASME B18.2.2 Heavy Hex", obs: "Flanges ASME Cl 150 4\" a 8\" e Cl 300 2.1/2\" a 3\"" },
+  { rosca: "7/8\" - 9 UNC", tpi: 9, chavePol: "1-7/16\"", chaveMm: 36.5, dNomMm: 22.225, dNomPol: "7/8\"", hPorca: 21.8, broca: 19.5, torqueLub: 485, torqueSec: 800, sistema: "heavy_hex", tipo: "ASME B18.2.2 Heavy Hex", obs: "Flanges ASME Cl 150 10\" a 12\" e Cl 300 4\"" },
+  { rosca: "1\" - 8 UN", tpi: 8, chavePol: "1-5/8\"", chaveMm: 41.3, dNomMm: 25.4, dNomPol: "1\"", hPorca: 25.0, broca: 22.2, torqueLub: 730, torqueSec: 1200, sistema: "heavy_hex", tipo: "ASME B18.2.2 Heavy Hex", obs: "Início da série 8-UN constante para alta pressão" },
+  { rosca: "1-1/8\" - 8 UN", tpi: 8, chavePol: "1-13/16\"", chaveMm: 46.0, dNomMm: 28.575, dNomPol: "1-1/8\"", hPorca: 28.2, broca: 25.4, torqueLub: 1060, torqueSec: 1750, sistema: "heavy_hex", tipo: "ASME B18.2.2 Heavy Hex", obs: "Flanges ASME Cl 300 8\" a 10\"" },
+  { rosca: "1-1/4\" - 8 UN", tpi: 8, chavePol: "2\"", chaveMm: 50.8, dNomMm: 31.75, dNomPol: "1-1/4\"", hPorca: 31.4, broca: 28.5, torqueLub: 1500, torqueSec: 2450, sistema: "heavy_hex", tipo: "ASME B18.2.2 Heavy Hex", obs: "Flanges ASME Cl 300 12\" e Cl 600" },
+  { rosca: "1-3/8\" - 8 UN", tpi: 8, chavePol: "2-3/16\"", chaveMm: 55.6, dNomMm: 34.925, dNomPol: "1-3/8\"", hPorca: 34.5, broca: 31.8, torqueLub: 2050, torqueSec: 3350, sistema: "heavy_hex", tipo: "ASME B18.2.2 Heavy Hex", obs: "Flanges ASME Cl 300 14\" a 16\"" },
+  { rosca: "1-1/2\" - 8 UN", tpi: 8, chavePol: "2-3/8\"", chaveMm: 60.3, dNomMm: 38.1, dNomPol: "1-1/2\"", hPorca: 37.7, broca: 35.0, torqueLub: 2750, torqueSec: 4500, sistema: "heavy_hex", tipo: "ASME B18.2.2 Heavy Hex", obs: "Flanges ASME Cl 300 18\" a 20\"" },
+  { rosca: "1-5/8\" - 8 UN", tpi: 8, chavePol: "2-9/16\"", chaveMm: 65.1, dNomMm: 41.275, dNomPol: "1-5/8\"", hPorca: 40.9, broca: 38.1, torqueLub: 3550, torqueSec: 5800, sistema: "heavy_hex", tipo: "ASME B18.2.2 Heavy Hex", obs: "Flanges Cl 300 24\" e vasos de pressão" },
+  { rosca: "1-3/4\" - 8 UN", tpi: 8, chavePol: "2-3/4\"", chaveMm: 69.8, dNomMm: 44.45, dNomPol: "1-3/4\"", hPorca: 44.1, broca: 41.3, torqueLub: 4500, torqueSec: 7400, sistema: "heavy_hex", tipo: "ASME B18.2.2 Heavy Hex", obs: "Flanges de altíssima pressão ASME Cl 600 / 900" },
+  { rosca: "1-7/8\" - 8 UN", tpi: 8, chavePol: "2-15/16\"", chaveMm: 74.6, dNomMm: 47.625, dNomPol: "1-7/8\"", hPorca: 47.2, broca: 44.5, torqueLub: 5600, torqueSec: 9200, sistema: "heavy_hex", tipo: "ASME B18.2.2 Heavy Hex", obs: "Equipamentos submarinos e vasos reatores" },
+  { rosca: "2\" - 8 UN", tpi: 8, chavePol: "3-1/8\"", chaveMm: 79.4, dNomMm: 50.8, dNomPol: "2\"", hPorca: 50.4, broca: 47.6, torqueLub: 6850, torqueSec: 11200, sistema: "heavy_hex", tipo: "ASME B18.2.2 Heavy Hex", obs: "Vasos de alta pressão e grandes bocais" }
+];
+
+const DADOS_FASTENERS_REGULAR_HEX = [
+  { rosca: "1/4\" - 20 UNC", tpi: 20, chavePol: "7/16\"", chaveMm: 11.1, dNomMm: 6.35, dNomPol: "1/4\"", hPorca: 5.6, broca: 5.1, torqueLub: 12, torqueSec: 16, sistema: "regular_hex", tipo: "SAE J429 / ASME B18.2.2 Regular", obs: "Parafusos de máquinas e carcaças leves" },
+  { rosca: "5/16\" - 18 UNC", tpi: 18, chavePol: "1/2\"", chaveMm: 12.7, dNomMm: 7.94, dNomPol: "5/16\"", hPorca: 6.9, broca: 6.6, torqueLub: 24, torqueSec: 32, sistema: "regular_hex", tipo: "SAE J429 / ASME B18.2.2 Regular", obs: "Fixações automotivas e bombas leves" },
+  { rosca: "3/8\" - 16 UNC", tpi: 16, chavePol: "9/16\"", chaveMm: 14.3, dNomMm: 9.525, dNomPol: "3/8\"", hPorca: 8.3, broca: 8.0, torqueLub: 42, torqueSec: 58, sistema: "regular_hex", tipo: "SAE J429 / ASME B18.2.2 Regular", obs: "Suportes de motores e bases de máquinas" },
+  { rosca: "7/16\" - 14 UNC", tpi: 14, chavePol: "5/8\"", chaveMm: 15.9, dNomMm: 11.11, dNomPol: "7/16\"", hPorca: 9.5, broca: 9.4, torqueLub: 68, torqueSec: 92, sistema: "regular_hex", tipo: "SAE J429 / ASME B18.2.2 Regular", obs: "Uso mecânico geral SAE Grau 5 / 8" },
+  { rosca: "1/2\" - 13 UNC Reg", tpi: 13, chavePol: "3/4\"", chaveMm: 19.0, dNomMm: 12.7, dNomPol: "1/2\"", hPorca: 11.1, broca: 10.8, torqueLub: 105, torqueSec: 140, sistema: "regular_hex", tipo: "SAE Regular Hex (Não é Heavy Hex)", obs: "Atenção: Porca normal usa chave 3/4\"; em flange usa 7/8\"" },
+  { rosca: "9/16\" - 12 UNC", tpi: 12, chavePol: "13/16\"", chaveMm: 20.6, dNomMm: 14.29, dNomPol: "9/16\"", hPorca: 12.3, broca: 12.2, torqueLub: 150, torqueSec: 200, sistema: "regular_hex", tipo: "SAE J429 Regular", obs: "Fixação estrutural pesada" },
+  { rosca: "5/8\" - 11 UNC Reg", tpi: 11, chavePol: "15/16\"", chaveMm: 23.8, dNomMm: 15.875, dNomPol: "5/8\"", hPorca: 13.9, broca: 13.5, torqueLub: 210, torqueSec: 280, sistema: "regular_hex", tipo: "SAE Regular Hex (Não é Heavy Hex)", obs: "Atenção: Porca normal usa chave 15/16\"; em flange usa 1-1/16\"" },
+  { rosca: "3/4\" - 10 UNC Reg", tpi: 10, chavePol: "1-1/8\"", chaveMm: 28.6, dNomMm: 19.05, dNomPol: "3/4\"", hPorca: 16.3, broca: 16.5, torqueLub: 360, torqueSec: 490, sistema: "regular_hex", tipo: "SAE Regular Hex", obs: "Bases de compressores e redutores" }
+];
+
+// Dados completos da Foto 1
+const DADOS_FOTO1_CHAVES = [
+  { chave: "6 mm", rosca: "M4", passo: "0,70 mm", dNom: "4,0 mm", obs: "Chave de anel 6 mm em parafuso M4 (conforme imagem)" },
+  { chave: "7 mm", rosca: "M5", passo: "0,80 mm", dNom: "5,0 mm", obs: "Chave de anel 7 mm em parafuso M5 (conforme imagem)" },
+  { chave: "8 mm", rosca: "M6", passo: "1,00 mm", dNom: "6,0 mm", obs: "Chave de anel 8 mm em parafuso M6 (conforme imagem)" },
+  { chave: "9 mm", rosca: "M7", passo: "1,00 mm", dNom: "7,0 mm", obs: "Chave de anel 9 mm em parafuso M7 (conforme imagem)" },
+  { chave: "10 mm", rosca: "M8", passo: "1,25 mm", dNom: "8,0 mm", obs: "Chave de anel 10 mm em parafuso M8 (conforme imagem)" },
+  { chave: "11 mm", rosca: "M10", passo: "1,50 mm", dNom: "10,0 mm", obs: "Chave de anel 11 mm em parafuso M10 (conforme imagem)" },
+  { chave: "12 mm", rosca: "M12", passo: "1,75 mm", dNom: "12,0 mm", obs: "Chave de anel 12 mm em parafuso M12 (conforme imagem)" },
+  { chave: "13 mm", rosca: "M14", passo: "2,00 mm", dNom: "14,0 mm", obs: "Chave de anel 13 mm em parafuso M14 (conforme imagem) / Padrão DIN 934 usa 13mm para M8" },
+  { chave: "14 mm", rosca: "M16", passo: "2,00 mm", dNom: "16,0 mm", obs: "Chave de anel 14 mm em parafuso M16 (conforme imagem) / Padrão ISO usa 14mm para M8" },
+  { chave: "15 mm", rosca: "M18", passo: "2,50 mm", dNom: "18,0 mm", obs: "Chave de anel 15 mm em parafuso M18 (conforme imagem)" },
+  { chave: "16 mm", rosca: "M20", passo: "2,50 mm", dNom: "20,0 mm", obs: "Chave de anel 16 mm em parafuso M20 (conforme imagem) / Padrão ISO usa 16mm para M10" },
+  { chave: "17 mm", rosca: "M22", passo: "2,50 mm", dNom: "22,0 mm", obs: "Chave de anel 17 mm em parafuso M22 (conforme imagem) / Padrão DIN 934 usa 17mm para M10" },
+  { chave: "18 mm", rosca: "M24", passo: "3,00 mm", dNom: "24,0 mm", obs: "Chave de anel 18 mm em parafuso M24 (conforme imagem)" },
+  { chave: "19 mm", rosca: "M24", passo: "3,00 mm", dNom: "24,0 mm", obs: "Chave de anel 19 mm em parafuso M24 (conforme imagem) / Padrão DIN 934 usa 19mm para M12" },
+  { chave: "20 mm", rosca: "M27", passo: "3,00 mm", dNom: "27,0 mm", obs: "Chave de anel 20 mm em parafuso M27 (conforme imagem)" },
+  { chave: "22 mm", rosca: "M30", passo: "3,50 mm", dNom: "30,0 mm", obs: "Chave de anel 22 mm em parafuso M30 (conforme imagem) / Padrão DIN 934 usa 22mm para M14" },
+  { chave: "24 mm", rosca: "M33", passo: "3,50 mm", dNom: "33,0 mm", obs: "Chave de anel 24 mm em parafuso M33 (conforme imagem) / Padrão DIN 934 usa 24mm para M16" },
+  { chave: "27 mm", rosca: "M36", passo: "4,00 mm", dNom: "36,0 mm", obs: "Chave de anel 27 mm em parafuso M36 (conforme imagem) / Padrão DIN 934 usa 27mm para M18" },
+  { chave: "30 mm", rosca: "M42", passo: "4,50 mm", dNom: "42,0 mm", obs: "Chave de anel 30 mm em parafuso M42 (conforme imagem) / Padrão DIN 934 usa 30mm para M20" },
+  { chave: "32 mm", rosca: "M48", passo: "5,00 mm", dNom: "48,0 mm", obs: "Chave de anel 32 mm em parafuso M48 (conforme imagem) / Padrão DIN 934 usa 32mm para M22" }
+];
+
+// Dados completos da Foto 2 (Porcas pretas cotadas)
+const DADOS_FOTO2_PORCAS = [
+  { rosca: "M4", entreFaces: "7 mm", chave: "7 mm", broca: "3,3 mm", torque: "2,4 N·m", obs: "Cota exata Foto 2" },
+  { rosca: "M5", entreFaces: "8 mm", chave: "8 mm", broca: "4,2 mm", torque: "4,8 N·m", obs: "Cota exata Foto 2" },
+  { rosca: "M6", entreFaces: "10 mm", chave: "10 mm", broca: "5,0 mm", torque: "8,5 N·m", obs: "Cota exata Foto 2" },
+  { rosca: "M8", entreFaces: "14 mm", chave: "14 mm (ou 13 mm DIN)", broca: "6,8 mm", torque: "21,0 N·m", obs: "Cota exata Foto 2 (14mm padrão ISO/JIS; 13mm DIN)" },
+  { rosca: "M10", entreFaces: "17 mm", chave: "17 mm (ou 16 mm ISO)", broca: "8,5 mm", torque: "42,0 N·m", obs: "Cota exata Foto 2 (17mm padrão DIN 934)" },
+  { rosca: "M12", entreFaces: "19 mm", chave: "19 mm (ou 18 mm ISO)", broca: "10,2 mm", torque: "73,0 N·m", obs: "Cota exata Foto 2 (19mm padrão DIN 934)" },
+  { rosca: "M14", entreFaces: "22 mm", chave: "22 mm (ou 21 mm ISO)", broca: "12,0 mm", torque: "115,0 N·m", obs: "Cota exata Foto 2 (22mm padrão DIN 934)" },
+  { rosca: "M16", entreFaces: "24 mm", chave: "24 mm", broca: "14,0 mm", torque: "175,0 N·m", obs: "Cota exata Foto 2 (Padrão absoluto DIN/ISO)" },
+  { rosca: "M18", entreFaces: "27 mm", chave: "27 mm", broca: "15,5 mm", torque: "245,0 N·m", obs: "Cota exata Foto 2 (Padrão DIN/ISO)" },
+  { rosca: "M20", entreFaces: "30 mm", chave: "30 mm", broca: "17,5 mm", torque: "350,0 N·m", obs: "Cota exata Foto 2 (Padrão DIN/ISO)" },
+  { rosca: "M22", entreFaces: "32 mm", chave: "32 mm (ou 34 mm ISO)", broca: "19,5 mm", torque: "480,0 N·m", obs: "Cota exata Foto 2 (32mm padrão DIN 934)" },
+  { rosca: "M24", entreFaces: "36 mm", chave: "36 mm", broca: "21,0 mm", torque: "600,0 N·m", obs: "Cota exata Foto 2 (Padrão DIN/ISO)" },
+  { rosca: "M27", entreFaces: "41 mm", chave: "41 mm", broca: "24,0 mm", torque: "890,0 N·m", obs: "Cota exata Foto 2 (Padrão DIN/ISO)" },
+  { rosca: "M30", entreFaces: "46 mm", chave: "46 mm", broca: "26,5 mm", torque: "1200,0 N·m", obs: "Cota exata Foto 2 (Padrão DIN/ISO)" }
+];
+
+let modoBuscaPorcaChaveAtual = 'parafuso';
+let fastenerSelecionadoAtual = null;
+
+function inicializarModuloPorcasChaves() {
+  atualizarListaOpcoesParafuso();
+  atualizarListaOpcoesChave();
+  renderizarTabelaFoto1(DADOS_FOTO1_CHAVES);
+  renderizarTabelaFoto2(DADOS_FOTO2_PORCAS);
+  selecionarMatrizAplicacao('oleo_gas');
+  calcularComprimentoEstojoManual();
+}
+
+function alternarModoBuscaPorcaChave(modo) {
+  modoBuscaPorcaChaveAtual = modo;
+  const btnParafuso = document.getElementById('btn_modo_busca_parafuso');
+  const btnChave = document.getElementById('btn_modo_busca_chave');
+  const boxParafuso = document.getElementById('box_busca_modo_parafuso');
+  const boxChave = document.getElementById('box_busca_modo_chave');
+
+  if (modo === 'parafuso') {
+    if (btnParafuso) { btnParafuso.className = 'button'; btnParafuso.style.background = '#0284c7'; btnParafuso.style.borderColor = '#38bdf8'; }
+    if (btnChave) { btnChave.className = 'button secondary'; btnChave.style.background = ''; btnChave.style.borderColor = ''; }
+    if (boxParafuso) boxParafuso.style.display = 'block';
+    if (boxChave) boxChave.style.display = 'none';
+  } else {
+    if (btnChave) { btnChave.className = 'button'; btnChave.style.background = '#ca8a04'; btnChave.style.borderColor = '#eab308'; }
+    if (btnParafuso) { btnParafuso.className = 'button secondary'; btnParafuso.style.background = ''; btnParafuso.style.borderColor = ''; }
+    if (boxChave) boxChave.style.display = 'block';
+    if (boxParafuso) boxParafuso.style.display = 'none';
+  }
+}
+
+function atualizarListaOpcoesParafuso() {
+  const selSistema = document.getElementById('sel_filtro_sistema_fastener');
+  const selParafuso = document.getElementById('sel_parafuso_fastener');
+  if (!selParafuso) return;
+
+  const sistema = selSistema ? selSistema.value : 'todos';
+  let itens = [];
+
+  if (sistema === 'todos' || sistema === 'metrico') {
+    itens = itens.concat(DADOS_FASTENERS_METRICOS);
+  }
+  if (sistema === 'todos' || sistema === 'heavy_hex') {
+    itens = itens.concat(DADOS_FASTENERS_POLEGADA);
+  }
+  if (sistema === 'todos' || sistema === 'regular_hex') {
+    itens = itens.concat(DADOS_FASTENERS_REGULAR_HEX);
+  }
+
+  let html = '<option value="">Selecione a rosca do parafuso / estojo...</option>';
+  itens.forEach(item => {
+    const chaveTxt = item.chavePol ? (item.chavePol + ' (' + item.chaveMm + ' mm)') : (item.chave + ' mm (ISO: ' + item.chaveIso + ' mm)');
+    html += '<option value="' + item.rosca + '">' + item.rosca + ' ➔ Chave: ' + chaveTxt + ' [' + item.tipo + ']</option>';
+  });
+  selParafuso.innerHTML = html;
+
+  // Seleciona o 5/8" ou M16 por padrão se disponível
+  if (sistema === 'heavy_hex') {
+    selParafuso.value = '5/8" - 11 UNC';
+    selecionarFastenerPorRosca('5/8" - 11 UNC');
+  } else if (sistema === 'metrico') {
+    selParafuso.value = 'M16';
+    selecionarFastenerPorRosca('M16');
+  } else {
+    selParafuso.value = '5/8" - 11 UNC';
+    selecionarFastenerPorRosca('5/8" - 11 UNC');
+  }
+}
+
+function atualizarListaOpcoesChave() {
+  const sel = document.getElementById('sel_chave_ou_medida_porca');
+  if (!sel) return;
+
+  const listaChaves = [
+    { label: "Chave 6 mm (Parafuso M4)", valor: "6" },
+    { label: "Chave 7 mm (Parafuso M4 / M5)", valor: "7" },
+    { label: "Chave 8 mm (Parafuso M5 / M6)", valor: "8" },
+    { label: "Chave 10 mm (Parafuso M6 / M8)", valor: "10" },
+    { label: "Chave 11 mm (Parafuso M7 / M10)", valor: "11" },
+    { label: "Chave 12 mm (Parafuso M12)", valor: "12" },
+    { label: "Chave 13 mm (Parafuso M8 DIN / M14)", valor: "13" },
+    { label: "Chave 14 mm (Parafuso M8 ISO-JIS / M16)", valor: "14" },
+    { label: "Chave 16 mm (Parafuso M10 ISO / M20)", valor: "16" },
+    { label: "Chave 17 mm (Parafuso M10 DIN / M22)", valor: "17" },
+    { label: "Chave 18 mm (Parafuso M12 ISO / M24)", valor: "18" },
+    { label: "Chave 19 mm (Parafuso M12 DIN / M24)", valor: "19" },
+    { label: "Chave 21 mm (Parafuso M14 ISO)", valor: "21" },
+    { label: "Chave 22 mm (Parafuso M14 DIN / M30)", valor: "22" },
+    { label: "Chave 24 mm (Parafuso M16 DIN-ISO / M33)", valor: "24" },
+    { label: "Chave 27 mm (Parafuso M18 DIN-ISO / M36)", valor: "27" },
+    { label: "Chave 30 mm (Parafuso M20 DIN-ISO / M42)", valor: "30" },
+    { label: "Chave 32 mm (Parafuso M22 DIN / M48)", valor: "32" },
+    { label: "Chave 36 mm (Parafuso M24 DIN-ISO)", valor: "36" },
+    { label: "Chave 41 mm (Parafuso M27 DIN-ISO)", valor: "41" },
+    { label: "Chave 46 mm (Parafuso M30 DIN-ISO)", valor: "46" },
+    { label: "Chave 50 mm (Parafuso M33)", valor: "50" },
+    { label: "Chave 55 mm (Parafuso M36)", valor: "55" },
+    { label: "Chave 65 mm (Parafuso M42)", valor: "65" },
+    { label: "Chave 75 mm (Parafuso M48)", valor: "75" },
+    { label: "Chave 7/8\" (~22,2 mm) ➔ Estojo 1/2\" Heavy Hex", valor: "pol_7/8" },
+    { label: "Chave 1-1/16\" (~27,0 mm) ★ Estojo 5/8\" Heavy Hex (Mais Comum)", valor: "pol_1-1/16" },
+    { label: "Chave 1-1/4\" (~31,8 mm) ➔ Estojo 3/4\" Heavy Hex", valor: "pol_1-1/4" },
+    { label: "Chave 1-7/16\" (~36,5 mm) ➔ Estojo 7/8\" Heavy Hex", valor: "pol_1-7/16" },
+    { label: "Chave 1-5/8\" (~41,3 mm) ➔ Estojo 1\" Heavy Hex", valor: "pol_1-5/8" },
+    { label: "Chave 1-13/16\" (~46,0 mm) ➔ Estojo 1-1/8\" Heavy Hex", valor: "pol_1-13/16" },
+    { label: "Chave 2\" (~50,8 mm) ➔ Estojo 1-1/4\" Heavy Hex", valor: "pol_2" },
+    { label: "Chave 2-3/16\" (~55,6 mm) ➔ Estojo 1-3/8\" Heavy Hex", valor: "pol_2-3/16" },
+    { label: "Chave 2-3/8\" (~60,3 mm) ➔ Estojo 1-1/2\" Heavy Hex", valor: "pol_2-3/8" }
+  ];
+
+  let html = '<option value="">Selecione o tamanho da chave ou entre-faces...</option>';
+  listaChaves.forEach(c => {
+    html += '<option value="' + c.valor + '">' + c.label + '</option>';
+  });
+  sel.innerHTML = html;
+  sel.value = 'pol_1-1/16';
+}
+
+function selecionarFastenerPorRosca(rosca) {
+  if (!rosca) return;
+  let encontrado = DADOS_FASTENERS_METRICOS.find(f => f.rosca === rosca);
+  if (!encontrado) encontrado = DADOS_FASTENERS_POLEGADA.find(f => f.rosca === rosca);
+  if (!encontrado) encontrado = DADOS_FASTENERS_REGULAR_HEX.find(f => f.rosca === rosca);
+
+  if (encontrado) {
+    fastenerSelecionadoAtual = encontrado;
+    renderizarFastenerResultado(encontrado);
+  }
+}
+
+function selecionarFastenerPorChave(val) {
+  if (!val) return;
+  const container = document.getElementById('fastener_display_resultado');
+  if (!container) return;
+
+  if (val.startsWith('pol_')) {
+    const chaveLimpa = val.replace('pol_', '');
+    const item = DADOS_FASTENERS_POLEGADA.find(f => f.chavePol.replace(/\\/g, '').replace(/"/g, '') === chaveLimpa || f.chavePol.includes(chaveLimpa));
+    if (item) {
+      renderizarFastenerResultado(item);
+      return;
+    }
+  }
+
+  const mm = parseFloat(val);
+  if (!isNaN(mm)) {
+    // Procura em métricos
+    const matchesMetrico = DADOS_FASTENERS_METRICOS.filter(m => m.chave === mm || m.chaveIso === mm);
+    // Procura na foto 1
+    const matchesFoto1 = DADOS_FOTO1_CHAVES.filter(f => parseFloat(f.chave) === mm);
+
+    let html = '<div style="background:#050c17; border:1.5px solid #ca8a04; border-radius:10px; padding:16px;">';
+    html += '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px; border-bottom:1px solid #1e3a5f; padding-bottom:8px;">';
+    html += '<div><span style="font-size:10px; background:#ca8a04; color:#fff; padding:2px 6px; border-radius:4px; font-weight:bold;">RESULTADO DE BUSCA POR CHAVE</span>';
+    html += '<h4 style="margin:4px 0 0 0; color:#fde047; font-size:16px;">Chave Selecionada: ' + mm + ' mm</h4></div>';
+    html += '<span style="font-size:12px; color:#cbd5e1;">Entre-faces da porca: <b>' + mm + ' mm</b></span></div>';
+
+    html += '<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:12px;">';
+
+    if (matchesMetrico.length > 0) {
+      matchesMetrico.forEach(m => {
+        html += '<div style="background:#071424; border:1px solid #0284c7; border-radius:8px; padding:12px;">';
+        html += '<b style="color:#38bdf8; font-size:14px;">Parafuso / Porca ' + m.rosca + ' (Padrão DIN/ISO)</b><br>';
+        html += '<span style="font-size:11.5px; color:#cbd5e1;">• Passo: <b>' + m.passo + ' mm</b> | Diâm. Nom.: <b>' + m.dNom + ' mm</b></span><br>';
+        html += '<span style="font-size:11.5px; color:#cbd5e1;">• Broca p/ Macho: <b>' + m.broca + ' mm</b> | Altura Porca: <b>' + m.hPorca + ' mm</b></span><br>';
+        html += '<span style="font-size:11.5px; color:#4ade80;">• Torque Recomendado (Classe 8.8): <b>' + m.torqueLub + ' N·m</b> (Lubrif.)</span><br>';
+        html += '<div style="margin-top:6px; font-size:11px; color:#94a3b8;">' + m.obs + '</div>';
+        html += '<button type="button" class="button" style="margin-top:8px; font-size:11px; padding:4px 10px;" onclick="selecionarFastenerPorRosca(\'' + m.rosca + '\')">Ver Ficha Completa</button>';
+        html += '</div>';
+      });
+    }
+
+    if (matchesFoto1.length > 0) {
+      matchesFoto1.forEach(f => {
+        html += '<div style="background:#071424; border:1px solid #eab308; border-radius:8px; padding:12px;">';
+        html += '<b style="color:#fde047; font-size:14px;">Conforme Foto 1 (Chave de Anel da Imagem)</b><br>';
+        html += '<span style="font-size:12px; color:#fff; font-weight:bold;">Parafuso & Porca ' + f.rosca + '</span><br>';
+        html += '<span style="font-size:11.5px; color:#cbd5e1;">• Passo: ' + f.passo + ' | Diâmetro Nominal: ' + f.dNom + '</span><br>';
+        html += '<span style="font-size:11px; color:#94a3b8;">' + f.obs + '</span>';
+        html += '</div>';
+      });
+    }
+
+    html += '</div></div>';
+    container.innerHTML = html;
+  }
+}
+
+function buscarPorMedidaPaquimetro() {
+  const inp = document.getElementById('input_medida_paquimetro_porca');
+  if (!inp || !inp.value) return;
+  const val = parseFloat(inp.value);
+  if (isNaN(val)) return;
+
+  // Encontra chave mais próxima
+  selecionarFastenerPorChave(val.toString());
+}
+
+function filtrarFastenerInput(termo) {
+  if (!termo || termo.trim().length === 0) return;
+  termo = termo.trim().toLowerCase();
+
+  const todos = [...DADOS_FASTENERS_METRICOS, ...DADOS_FASTENERS_POLEGADA, ...DADOS_FASTENERS_REGULAR_HEX];
+  const item = todos.find(f => 
+    f.rosca.toLowerCase().includes(termo) ||
+    (f.chave && f.chave.toString() === termo) ||
+    (f.chavePol && f.chavePol.toLowerCase().includes(termo))
+  );
+
+  if (item) {
+    fastenerSelecionadoAtual = item;
+    renderizarFastenerResultado(item);
+  }
+}
+
+function renderizarFastenerResultado(item) {
+  const container = document.getElementById('fastener_display_resultado');
+  if (!container || !item) return;
+
+  const isPol = item.sistema === 'heavy_hex' || item.sistema === 'regular_hex';
+  const chaveTxt = isPol ? (item.chavePol + ' (' + item.chaveMm + ' mm)') : (item.chave + ' mm' + (item.chaveIso !== item.chave ? ' (ou ' + item.chaveIso + ' mm ISO)' : ''));
+  const passoTxt = isPol ? (item.tpi + ' fios/pol (Passo ' + (25.4 / item.tpi).toFixed(3) + ' mm)') : (item.passo.toFixed(2) + ' mm');
+  const diamTxt = isPol ? (item.dNomPol + ' (' + item.dNomMm.toFixed(2) + ' mm)') : (item.dNom.toFixed(1) + ' mm');
+  const brocaTxt = isPol ? (item.broca.toFixed(1) + ' mm (ou ' + (item.dNomPol === '5/8\"' ? '17/32\"' : item.dNomPol === '1/2\"' ? '27/64\"' : 'broca nominal') + ')') : (item.broca.toFixed(1) + ' mm');
+  const materialTxt = isPol ? 'ASTM A193 Gr. B7 (Porca ASTM A194 2H Heavy Hex)' : 'Aço Classe 8.8 (ou Classe 10.9 de alta resistência)';
+  const torqueLubLbf = Math.round(item.torqueLub * 0.73756);
+  const torqueSecLbf = Math.round(item.torqueSec * 0.73756);
+
+  let html = '';
+  html += '<div style="background:linear-gradient(145deg, #07172c 0%, #0c2039 100%); border:2px solid #0284c7; border-radius:12px; padding:18px; box-shadow:0 6px 24px rgba(2,132,199,0.25);">';
+  
+  // Header do Card
+  html += '<div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px; margin-bottom:14px; border-bottom:1.5px solid #1e3a5f; padding-bottom:12px;">';
+  html += '<div>';
+  html += '<div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">';
+  html += '<span style="font-size:11px; font-weight:800; background:#0284c7; color:#fff; padding:2px 8px; border-radius:4px; text-transform:uppercase;">' + item.tipo + '</span>';
+  html += '<span style="font-size:11px; color:#7dd3fc;">Norma: ' + (isPol ? 'ASME B16.5 / B18.2.2' : 'DIN 934 / ISO 4032') + '</span>';
+  html += '</div>';
+  html += '<h3 style="margin:0; font-size:22px; color:#f8fafc; font-weight:900;">' + item.rosca + '</h3>';
+  html += '</div>';
+  html += '<div style="text-align:right;">';
+  html += '<div style="font-size:11px; color:#94a3b8;">Chave Recomendada</div>';
+  html += '<div style="font-size:20px; font-weight:900; color:#facc15; background:#040e1b; padding:4px 12px; border-radius:6px; border:1px solid #eab308; display:inline-block;">' + chaveTxt + '</div>';
+  html += '</div>';
+  html += '</div>';
+
+  // Grid de Métricas Industriais (HUD)
+  html += '<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:12px; margin-bottom:16px;">';
+  
+  // Box 1: Medida da Porca
+  html += '<div style="background:#050d18; border:1px solid #1e3a5f; border-radius:8px; padding:10px;">';
+  html += '<div style="font-size:11px; color:#94a3b8; margin-bottom:2px;">📏 Entre-Faces Porca ($s$)</div>';
+  html += '<div style="font-size:16px; font-weight:800; color:#38bdf8;">' + (isPol ? (item.chaveMm + ' mm (' + item.chavePol + ')') : (item.chave + ' mm')) + '</div>';
+  html += '<div style="font-size:10px; color:#64748b;">Medida exata no paquímetro</div>';
+  html += '</div>';
+
+  // Box 2: Tipo de Rosca & Passo
+  html += '<div style="background:#050d18; border:1px solid #1e3a5f; border-radius:8px; padding:10px;">';
+  html += '<div style="font-size:11px; color:#94a3b8; margin-bottom:2px;">🧵 Passo da Rosca ($P$)</div>';
+  html += '<div style="font-size:16px; font-weight:800; color:#facc15;">' + passoTxt + '</div>';
+  html += '<div style="font-size:10px; color:#64748b;">Ângulo do filete: 60°</div>';
+  html += '</div>';
+
+  // Box 3: Diâmetro Nominal
+  html += '<div style="background:#050d18; border:1px solid #1e3a5f; border-radius:8px; padding:10px;">';
+  html += '<div style="font-size:11px; color:#94a3b8; margin-bottom:2px;">📐 Diâmetro Nominal ($D$)</div>';
+  html += '<div style="font-size:16px; font-weight:800; color:#e0f2fe;">' + diamTxt + '</div>';
+  html += '<div style="font-size:10px; color:#64748b;">Medir sobre as cristas</div>';
+  html += '</div>';
+
+  // Box 4: Broca p/ Macho
+  html += '<div style="background:#050d18; border:1px solid #1e3a5f; border-radius:8px; padding:10px;">';
+  html += '<div style="font-size:11px; color:#94a3b8; margin-bottom:2px;">🕳️ Broca p/ Roscar</div>';
+  html += '<div style="font-size:16px; font-weight:800; color:#4ade80;">' + brocaTxt + '</div>';
+  html += '<div style="font-size:10px; color:#64748b;">Furação pré-rosqueamento</div>';
+  html += '</div>';
+
+  // Box 5: Altura da Porca
+  html += '<div style="background:#050d18; border:1px solid #1e3a5f; border-radius:8px; padding:10px;">';
+  html += '<div style="font-size:11px; color:#94a3b8; margin-bottom:2px;">🔩 Altura da Porca ($m$)</div>';
+  html += '<div style="font-size:16px; font-weight:800; color:#cbd5e1;">' + item.hPorca + ' mm</div>';
+  html += '<div style="font-size:10px; color:#64748b;">Engazamento seguro</div>';
+  html += '</div>';
+
+  // Box 6: Torque Lubrificado
+  html += '<div style="background:#050d18; border:1.5px solid #10b981; border-radius:8px; padding:10px;">';
+  html += '<div style="font-size:11px; color:#4ade80; margin-bottom:2px; font-weight:bold;">⚡ Torque Lubrificado</div>';
+  html += '<div style="font-size:17px; font-weight:900; color:#4ade80;">' + item.torqueLub + ' N·m</div>';
+  html += '<div style="font-size:10px; color:#cbd5e1;">' + torqueLubLbf + ' lbf·ft ($\\mu=0.12$)</div>';
+  html += '</div>';
+
+  html += '</div>';
+
+  // Linha de Torque Seco e Alerta de Oficina
+  html += '<div style="background:#040913; border:1px solid #1e3a5f; border-radius:8px; padding:12px; margin-bottom:12px;">';
+  html += '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">';
+  html += '<div>';
+  html += '<b style="color:#e0f2fe; font-size:12px;">Torque a Seco (Sem Lubrificante):</b> ';
+  html += '<span style="color:#fca5a5; font-size:13px; font-weight:bold;">' + item.torqueSec + ' N·m (' + torqueSecLbf + ' lbf·ft)</span>';
+  html += '<span style="font-size:11px; color:#64748b; margin-left:8px;">*Atrito $\\mu=0.20$ eleva o esforço sem aumentar a pré-carga</span>';
+  html += '</div>';
+  html += '<div style="font-size:11px; color:#cbd5e1;"><b>Material Padrão:</b> <span style="color:#fde047;">' + materialTxt + '</span></div>';
+  html += '</div>';
+  html += '<div style="margin-top:6px; font-size:11px; color:#94a3b8; border-top:1px dashed #1e3a5f; padding-top:6px;">';
+  html += '💡 <b>Aplicação & Observação:</b> ' + item.obs;
+  html += '</div>';
+  html += '</div>';
+
+  // Botões de Ação Rápida
+  html += '<div style="display:flex; gap:8px; flex-wrap:wrap;">';
+  if (isPol) {
+    html += '<button type="button" class="button" style="background:#0284c7; border-color:#38bdf8; font-size:11.5px; padding:6px 14px;" onclick="alternarAbaPainelChaves(\'3d\'); selecionarModeloEstojo3D(\'' + (item.rosca.includes('5/8') ? '5_8_x_85' : item.rosca.includes('3/4') ? '3_4_x_105' : item.rosca.includes('7/8') ? '7_8_x_125' : '1_x_140') + '\')">📐 Visualizar no Estúdio 3D</button>';
+  }
+  html += '<button type="button" class="button secondary" style="font-size:11.5px; padding:6px 14px;" onclick="alternarAbaPainelChaves(\'torque_aperto\')">⚡ Ver Tabela de Torque Completa</button>';
+  html += '<button type="button" class="button secondary" style="font-size:11.5px; padding:6px 14px;" onclick="transferirFastenerParaLaudo(\'' + item.rosca + '\')">📋 Inserir no Laudo A4</button>';
+  html += '</div>';
+
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+function transferirFastenerParaLaudo(rosca) {
+  if (!fastenerSelecionadoAtual) return;
+  const f = fastenerSelecionadoAtual;
+  const laudoObs = document.getElementById('obs_texto');
+  if (laudoObs) {
+    const isPol = f.sistema === 'heavy_hex' || f.sistema === 'regular_hex';
+    const chaveTxt = isPol ? (f.chavePol + ' / ' + f.chaveMm + ' mm') : (f.chave + ' mm');
+    const nota = "\n[INSPEÇÃO DE FIXADORES]\n• Rosca/Elemento: " + f.rosca + "\n• Chave utilizada: " + chaveTxt + "\n• Tipo: " + f.tipo + "\n• Torque recomendado (lubrificado): " + f.torqueLub + " N·m\n";
+    laudoObs.value += nota;
+  }
+  alert('✅ Informações de ' + f.rosca + ' transferidas para as observações do Laudo Técnico A4!');
+}
+
+function renderizarTabelaFoto1(lista) {
+  const tbody = document.getElementById('tbody_foto1_chaves');
+  if (!tbody) return;
+  let html = '';
+  lista.forEach((f, idx) => {
+    const bg = idx % 2 === 0 ? '#071424' : '#050c17';
+    html += '<tr style="background:' + bg + '; border-bottom:1px solid #142842;">';
+    html += '<td style="padding:6px 8px; color:#fde047; font-weight:bold;">' + f.chave + '</td>';
+    html += '<td style="padding:6px 8px; color:#38bdf8; font-weight:bold;">' + f.rosca + '</td>';
+    html += '<td style="padding:6px 8px; color:#cbd5e1;">' + f.passo + '</td>';
+    html += '<td style="padding:6px 8px; color:#cbd5e1;">' + f.dNom + '</td>';
+    html += '<td style="padding:6px 8px; color:#94a3b8; font-size:11px;">' + f.obs + '</td>';
+    html += '</tr>';
+  });
+  tbody.innerHTML = html;
+}
+
+function renderizarTabelaFoto2(lista) {
+  const tbody = document.getElementById('tbody_foto2_porcas');
+  if (!tbody) return;
+  let html = '';
+  lista.forEach((p, idx) => {
+    const bg = idx % 2 === 0 ? '#071424' : '#050c17';
+    html += '<tr style="background:' + bg + '; border-bottom:1px solid #142842;">';
+    html += '<td style="padding:6px 8px; color:#38bdf8; font-weight:bold;">' + p.rosca + '</td>';
+    html += '<td style="padding:6px 8px; color:#fde047; font-weight:bold;">' + p.entreFaces + '</td>';
+    html += '<td style="padding:6px 8px; color:#fff;">' + p.chave + '</td>';
+    html += '<td style="padding:6px 8px; color:#4ade80;">' + p.broca + '</td>';
+    html += '<td style="padding:6px 8px; color:#cbd5e1;">' + p.torque + '</td>';
+    html += '</tr>';
+  });
+  tbody.innerHTML = html;
+}
+
+function filtrarTabelaFotosOficina(termo) {
+  if (!termo) {
+    renderizarTabelaFoto1(DADOS_FOTO1_CHAVES);
+    renderizarTabelaFoto2(DADOS_FOTO2_PORCAS);
+    return;
+  }
+  termo = termo.toLowerCase().trim();
+  const f1 = DADOS_FOTO1_CHAVES.filter(i => i.chave.toLowerCase().includes(termo) || i.rosca.toLowerCase().includes(termo) || i.obs.toLowerCase().includes(termo));
+  const f2 = DADOS_FOTO2_PORCAS.filter(i => i.rosca.toLowerCase().includes(termo) || i.entreFaces.toLowerCase().includes(termo) || i.chave.toLowerCase().includes(termo));
+  renderizarTabelaFoto1(f1);
+  renderizarTabelaFoto2(f2);
+}
+
+function diagnosticarRoscaCampo() {
+  const diamInp = document.getElementById('diag_diametro_input');
+  const passoInp = document.getElementById('diag_passo_input');
+  const tipoPassoSel = document.getElementById('diag_tipo_passo_sel');
+  const resBox = document.getElementById('diag_resultado_box');
+
+  if (!diamInp || !passoInp || !resBox) return;
+  const d = parseFloat(diamInp.value);
+  const p = parseFloat(passoInp.value);
+
+  if (isNaN(d) || isNaN(p) || d <= 0 || p <= 0) {
+    alert('Por favor, informe valores válidos para o diâmetro e o passo/fios medidos.');
+    return;
+  }
+
+  resBox.style.display = 'block';
+
+  // Verifica candidatos em Polegada e Métrico
+  const todos = [...DADOS_FASTENERS_METRICOS, ...DADOS_FASTENERS_POLEGADA, ...DADOS_FASTENERS_REGULAR_HEX];
+  let melhorMatch = null;
+  let menorErro = 999;
+
+  todos.forEach(item => {
+    const isPol = item.sistema === 'heavy_hex' || item.sistema === 'regular_hex';
+    const dNom = isPol ? item.dNomMm : item.dNom;
+    const passoNom = isPol ? (25.4 / item.tpi) : item.passo;
+    const tpiNom = isPol ? item.tpi : (25.4 / item.passo);
+
+    const erroD = Math.abs(d - dNom);
+    let erroP = 0;
+
+    if (p > 5) {
+      // O usuário provavelmente digitou fios por polegada (TPI)
+      erroP = Math.abs(p - tpiNom) * 0.5;
+    } else {
+      // O usuário digitou passo em mm
+      erroP = Math.abs(p - passoNom);
+    }
+
+    const erroTotal = erroD * 1.5 + erroP * 2.0;
+    if (erroTotal < menorErro) {
+      menorErro = erroTotal;
+      melhorMatch = item;
+    }
+  });
+
+  if (melhorMatch) {
+    const isPol = melhorMatch.sistema === 'heavy_hex' || melhorMatch.sistema === 'regular_hex';
+    const chaveTxt = isPol ? (melhorMatch.chavePol + ' (' + melhorMatch.chaveMm + ' mm)') : (melhorMatch.chave + ' mm');
+    const dNom = isPol ? melhorMatch.dNomMm : melhorMatch.dNom;
+
+    let html = '<div style="background:#071c33; border:2px solid #38bdf8; border-radius:8px; padding:12px;">';
+    html += '<div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">';
+    html += '<span style="font-size:20px;">' + (isPol ? '🔩' : '📐') + '</span>';
+    html += '<b style="color:#fde047; font-size:15px;">DIAGNÓSTICO: ' + melhorMatch.rosca + ' (' + (isPol ? 'POLEGADA' : 'MÉTRICA') + ')</b>';
+    html += '</div>';
+    html += '<p style="margin:0 0 8px 0; font-size:12px; color:#cbd5e1; line-height:1.4;">';
+    html += 'Com diâmetro medido de <b>' + d.toFixed(2) + ' mm</b> e passo/fios <b>' + p + '</b>, a rosca corresponde a <b style="color:#fff;">' + melhorMatch.rosca + '</b> (Nominal ' + dNom.toFixed(2) + ' mm).';
+    html += '</p>';
+    html += '<div style="font-size:11.5px; color:#7dd3fc; margin-bottom:8px;">';
+    html += '🔑 <b>Chave recomendada:</b> ' + chaveTxt + ' | <b>Tipo:</b> ' + melhorMatch.tipo;
+    html += '</div>';
+    html += '<button type="button" class="button" style="font-size:11px; padding:4px 12px;" onclick="selecionarFastenerPorRosca(\'' + melhorMatch.rosca + '\')">Carregar Ficha Técnica Completa</button>';
+    html += '</div>';
+    resBox.innerHTML = html;
+  }
+}
+
+function calcularComprimentoEstojoManual() {
+  const selDiam = document.getElementById('calc_estojo_diam_sel');
+  const inpF1 = document.getElementById('calc_estojo_flange1_input');
+  const inpF2 = document.getElementById('calc_estojo_flange2_input');
+  const selJunta = document.getElementById('calc_estojo_junta_sel');
+  const resBox = document.getElementById('calc_estojo_resultado_box');
+
+  if (!selDiam || !inpF1 || !inpF2 || !selJunta || !resBox) return;
+
+  const partes = selDiam.value.split('|');
+  const diamPol = partes[0];
+  const diamMm = parseFloat(partes[1]);
+  const tpi = parseInt(partes[2], 10);
+  const hPorca = parseFloat(partes[3]);
+
+  const f1 = parseFloat(inpF1.value) || 0;
+  const f2 = parseFloat(inpF2.value) || 0;
+  const junta = parseFloat(selJunta.value) || 0;
+
+  const passo = 25.4 / tpi;
+  const sobraRecomendadaMm = 2.5 * passo; // 2 a 3 fios de rosca livre
+
+  // L = 2 flanges + junta + 2 porcas + 2 sobras
+  const L_teorico = f1 + f2 + junta + (2 * hPorca) + (2 * sobraRecomendadaMm);
+  const L_pol_teorico = L_teorico / 25.4;
+
+  // Arredonda para padrão comercial (múltiplos de 1/2" ou 10 mm)
+  const L_pol_comercial = Math.ceil(L_pol_teorico * 2) / 2; // múltiplos de 0.5"
+  const L_mm_comercial = Math.round(L_pol_comercial * 25.4);
+
+  let html = '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">';
+  html += '<div>';
+  html += '<span style="font-size:11px; color:#7dd3fc; font-weight:bold;">DIMENSIONAMENTO ASME B16.5 / PCC-1:</span>';
+  html += '<div style="font-size:18px; font-weight:900; color:#facc15; margin:4px 0;">';
+  html += 'Comprimento Comercial: ' + L_pol_comercial + '\" (' + L_mm_comercial + ' mm)';
+  html += '</div>';
+  html += '<div style="font-size:11.5px; color:#cbd5e1;">';
+  html += 'Comprimento Teórico Mínimo: <b>' + L_teorico.toFixed(1) + ' mm</b> (' + L_pol_teorico.toFixed(2) + '\")';
+  html += '</div>';
+  html += '</div>';
+  html += '<div style="text-align:right;">';
+  html += '<div style="font-size:11px; color:#94a3b8;">Porca Pesada Requerida:</div>';
+  html += '<div style="font-size:14px; font-weight:bold; color:#38bdf8;">2× Porcas A194 2H (Altura ' + hPorca + ' mm)</div>';
+  html += '<div style="font-size:11px; color:#4ade80;">Sobra de rosca: ' + sobraRecomendadaMm.toFixed(1) + ' mm (~' + (sobraRecomendadaMm / passo).toFixed(1) + ' fios)</div>';
+  html += '</div>';
+  html += '</div>';
+
+  html += '<div style="margin-top:10px; font-size:11px; color:#94a3b8; border-top:1px dashed #1e3a5f; padding-top:6px;">';
+  html += '⚠️ <b>Atenção:</b> O comprimento total $L$ é medido de <b>ponta a ponta usinada</b>, incluindo os chanfros das duas extremidades conforme ASME B16.5.';
+  html += '</div>';
+
+  resBox.innerHTML = html;
+}
+
+function selecionarMatrizAplicacao(appKey) {
+  const chaves = ['oleo_gas', 'caldeira', 'bomba', 'maritimo', 'criogenia', 'acoplamento'];
+  chaves.forEach(k => {
+    const btn = document.getElementById('btn_matriz_' + k);
+    if (btn) {
+      if (k === appKey) {
+        btn.className = 'button';
+        btn.style.background = '#0284c7';
+        btn.style.borderColor = '#38bdf8';
+      } else {
+        btn.className = 'button secondary';
+        btn.style.background = '';
+        btn.style.borderColor = '';
+      }
+    }
+  });
+
+  const box = document.getElementById('matriz_aplicacao_detalhe_box');
+  if (!box) return;
+
+  const dados = {
+    'oleo_gas': {
+      titulo: "🛢️ Flanges de Tubulação de Óleo & Gás (Refinarias, Dutos & Petroquímica)",
+      estojo: "ASTM A193 Gr. B7 (Aço Cromo-Molibdênio AISI 4140 temperado/revenido)",
+      porca: "ASTM A194 Gr. 2H (Heavy Hexagonal Pesada)",
+      chave: "Série Heavy Hex ASME B18.2.2 (Ex: 1-1/16\" para estojo 5/8\"; 1-1/4\" para 3/4\")",
+      torque: "170 N·m (5/8\") e 300 N·m (3/4\") com lubrificante antiengripante à base de molibdênio",
+      alerta: "Nunca use parafusos comuns de cabeça sextavada no lugar de estojos em flanges ASME sob pressão."
+    },
+    'caldeira': {
+      titulo: "♨️ Caldeiras, Linhas de Vapor Superaquecido & Turbinas Térmicas",
+      estojo: "ASTM A193 Gr. B16 (Cr-Mo-Vanádio resistente à fluência até 538°C)",
+      porca: "ASTM A194 Gr. 7 (Cr-Mo temperado) ou Gr. 2H",
+      chave: "Série Heavy Hex ASME B18.2.2 em soquete de impacto",
+      torque: "Aperto cruzado rigoroso em 4 etapas conforme ASME PCC-1",
+      alerta: "Em temperaturas acima de 400°C o aço B7 perde limite de escoamento; B16 é mandatório."
+    },
+    'bomba': {
+      titulo: "🔄 Bombas Centrífugas, Redutores de Engrenagens & Bases Vibratórias",
+      estojo: "Parafusos de Aço Alta Resistência Classe 8.8 ou Classe 10.9 (Métrico) / Grau 5 ou 8 (SAE)",
+      porca: "Porcas autotravantes com anel de nylon (DIN 985 / Parlock) ou metálicas deformadas (DIN 980)",
+      chave: "Chaves métricas DIN 934 (Ex: 13, 17, 19, 24 mm) ou soquetes sextavados",
+      torque: "Torque controlado com reaperto periódico programado nas primeiras 24h de marcha",
+      alerta: "Vibração mecânica contínua afrouxa juntas sem elemento elástico de retenção ou arruela Nord-Lock."
+    },
+    'maritimo': {
+      titulo: "🌊 Plataformas Offshore, Água do Mar & Indústria Química Agressiva",
+      estojo: "ASTM A193 Gr. B8M (Aço Inoxidável Austenítico AISI 316 molibdênio)",
+      porca: "ASTM A194 Gr. 8M (Inox AISI 316)",
+      chave: "Chaves de anel ou combinadas limpas (sem resíduos de aço carbono)",
+      torque: "Torque moderado com graxa marítima ou pasta de montagem para evitar engripamento (*galling*) do inox",
+      alerta: "Inox com inox sem pasta lubrificante solda a frio na rosca sob aperto forte!"
+    },
+    'criogenia': {
+      titulo: "❄️ Tubulações de Gás GLP, GNL, Amônia Refrigerada & Criogenia",
+      estojo: "ASTM A320 Gr. L7 (Aço temperado com ensaio Charpy até -101°C)",
+      porca: "ASTM A194 Gr. 4 ou Gr. 7",
+      chave: "Heavy Hex ASME B18.2.2",
+      torque: "Conforme projeto de baixa temperatura com torquímetro calibrado",
+      alerta: "Aço B7 comum sofre transição dúctil-frágil no frio extremo e trinca como vidro."
+    },
+    'acoplamento': {
+      titulo: "⚙️ Acoplamentos Flexíveis, Lâminas & Eixos de Alta Rotação",
+      estojo: "Parafusos de Cabeça Cilíndrica com Sextavado Interno (Allen) Classe 12.9 (Métrico)",
+      porca: "Porcas Classe 10 ou 12 / Travamento com Loctite 242 (médio torque) ou 271",
+      chave: "Chave Allen (Hexagonal interna) calibrada milimétrica",
+      torque: "Torque máximo de precisão para evitar cisalhamento dos pinos de acoplamento",
+      alerta: "Balancear o conjunto após aperto de parafusos em máquinas de 1800 ou 3600 RPM."
+    }
+  };
+
+  const item = dados[appKey];
+  if (!item) return;
+
+  let html = '<div style="border-left:4px solid #fde047; padding-left:12px;">';
+  html += '<h4 style="margin:0 0 8px 0; color:#fde047; font-size:15px;">' + item.titulo + '</h4>';
+  html += '<div style="font-size:12px; color:#cbd5e1; line-height:1.6;">';
+  html += '• <b>Estojo / Parafuso Recomendado:</b> <span style="color:#38bdf8;">' + item.estojo + '</span><br>';
+  html += '• <b>Porca Recomendada:</b> <span style="color:#fff;">' + item.porca + '</span><br>';
+  html += '• <b>Chave & Ferramenta:</b> <span style="color:#facc15;">' + item.chave + '</span><br>';
+  html += '• <b>Torque & Aperto:</b> <span style="color:#4ade80;">' + item.torque + '</span><br>';
+  html += '• <b>Cuidado Crítico:</b> <span style="color:#fca5a5;">' + item.alerta + '</span>';
+  html += '</div>';
+  html += '</div>';
+
+  box.innerHTML = html;
+}
+
+function abrirFotoOficina(fotoId) {
+  const modal = document.getElementById('modal_visualizador_fotos_oficina');
+  const imgTag = document.getElementById('modal_foto_img_tag');
+  const titulo = document.getElementById('modal_foto_titulo');
+  if (!modal || !imgTag) return;
+
+  if (fotoId === 'chave_anel') {
+    imgTag.src = 'assets/tabela_chave_anel_metrica.jpg';
+    if (titulo) titulo.innerText = 'Foto 1: Qual Chave de Anel serve em qual Parafuso e Porca (M4 a M48)';
+  } else {
+    imgTag.src = 'assets/tabela_porcas_metricas.jpg';
+    if (titulo) titulo.innerText = 'Foto 2: Tabela de Tamanhos de Porcas Métricas (Entre-Faces Cotadas)';
+  }
+
+  modal.style.display = 'flex';
+}
+
+function fecharFotoOficina() {
+  const modal = document.getElementById('modal_visualizador_fotos_oficina');
+  if (modal) modal.style.display = 'none';
+}
+
 
 function selecionarModeloEstojo3D(chave) {
   if (MODELOS_ESTOJO_3D[chave]) {
@@ -24830,8 +26292,9 @@ function alternarAbaTabelaEstojos(classeKey) {
   if (!dadosClasse) return;
 
   let htmlTable = `
-    <div style="margin-bottom:8px; font-size:12px; color:#7dd3fc;">
-      <b>${dadosClasse.titulo}</b> — Dimensões de Estojos com 2 Porcas Pesadas (Heavy Hex Nut):
+    <div style="margin-bottom:8px; font-size:12px; color:#7dd3fc; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;">
+      <div><b>${dadosClasse.titulo}</b> — Toque em qualquer linha da tabela para selecionar:</div>
+      <span style="font-size:11px; color:#fde047;">★ Toque no botão para abrir direto na calculadora</span>
     </div>
     <table>
       <thead>
@@ -24849,10 +26312,10 @@ function alternarAbaTabelaEstojos(classeKey) {
       <tbody>
   `;
 
-  dadosClasse.itens.forEach(it => {
+  dadosClasse.itens.forEach((it, idx) => {
     const isDestaque = (it.diam === '5/8"' || it.diam === '3/4"');
     htmlTable += `
-      <tr style="${isDestaque ? 'background:rgba(2, 132, 199, 0.12);' : ''}">
+      <tr class="linha-estojo-tabela" id="linha_estojo_${classeKey}_${idx}" style="${isDestaque ? 'background:rgba(2, 132, 199, 0.12);' : ''} cursor:pointer; transition:all 0.2s;" onclick="selecionarEstojoDiretoDaTabela('${classeKey}', ${idx}, false)">
         <td><b style="color:#fff;">${it.nps}</b> ${it.nps === '2"' || it.nps === '3"' ? '<span style="color:#fde047; font-size:11px;">★</span>' : ''}</td>
         <td><b style="color:#10b981;">${it.qtd}</b></td>
         <td><b style="color:#38bdf8;">${it.diam}</b></td>
@@ -24860,9 +26323,9 @@ function alternarAbaTabelaEstojos(classeKey) {
         <td>${it.compPol}</td>
         <td><b>${it.compMm} mm</b></td>
         <td><b style="color:#f59e0b;">${it.chave}</b></td>
-        <td>
-          <button type="button" class="btn-botoeira" style="font-size:10px; padding:3px 8px; margin:0;" onclick="selecionarEstojoDiretoDaTabela('${classeKey}', '${it.nps}')">
-            Selecionar
+        <td style="white-space:nowrap;">
+          <button type="button" class="btn-botoeira" style="font-size:10px; padding:4px 8px; margin:0; background:#0284c7; border-color:#38bdf8;" onclick="event.stopPropagation(); selecionarEstojoDiretoDaTabela('${classeKey}', ${idx}, true)">
+            🧮 Selecionar & Calcular
           </button>
         </td>
       </tr>
@@ -24877,16 +26340,114 @@ function alternarAbaTabelaEstojos(classeKey) {
   container.innerHTML = htmlTable;
 }
 
-function selecionarEstojoDiretoDaTabela(classeKey, npsVal) {
+function selecionarEstojoDiretoDaTabela(classeKey, npsOuIdx, irParaCalc = true) {
+  const dadosClasse = DADOS_ESTOJOS_ASME[classeKey];
+  if (!dadosClasse) return;
+
+  let item = null;
+  let idx = 0;
+  if (typeof npsOuIdx === 'number' || (!isNaN(parseInt(npsOuIdx, 10)) && !npsOuIdx.toString().includes('"') && !npsOuIdx.toString().includes('/'))) {
+    idx = parseInt(npsOuIdx, 10);
+    item = dadosClasse.itens[idx];
+  } else {
+    const npsBusca = npsOuIdx.toString().replace(/&quot;/g, '"');
+    idx = dadosClasse.itens.findIndex(i => i.nps === npsBusca);
+    if (idx !== -1) item = dadosClasse.itens[idx];
+  }
+
+  if (!item) return;
+
+  // 1. Atualiza selects na calculadora
   const selClasse = document.getElementById('estojo_sel_classe');
   const selNPS = document.getElementById('estojo_sel_nps');
   if (selClasse && selNPS) {
     selClasse.value = classeKey;
     atualizarOpcoesNPS();
-    selNPS.value = npsVal;
+    selNPS.value = item.nps;
     calcularEstojoASME();
-    document.getElementById('box_calc_estojo_asme')?.scrollIntoView({ behavior: 'smooth' });
-    abrirToastNotificacao(`✔ Flange NPS ${npsVal} Cl ${classeKey} selecionado!`);
+  }
+
+  // 2. Destaca visualmente a linha selecionada na tabela
+  document.querySelectorAll('.linha-estojo-tabela').forEach(r => {
+    r.style.outline = '';
+    r.style.boxShadow = '';
+  });
+  const row = document.getElementById('linha_estojo_' + classeKey + '_' + idx);
+  if (row) {
+    row.style.outline = '2px solid #facc15';
+    row.style.boxShadow = '0 0 14px rgba(250, 204, 21, 0.45)';
+  }
+
+  // 3. Renderiza Card de Prévia Imediata logo abaixo da tabela
+  const previewBox = document.getElementById('tabela_estojo_selecionado_card');
+  if (previewBox) {
+    previewBox.style.display = 'block';
+    previewBox.innerHTML = `
+      <div style="background:linear-gradient(135deg, #07172c 0%, #0c2039 100%); border:2px solid #facc15; border-radius:10px; padding:14px; box-shadow:0 4px 18px rgba(250, 204, 21, 0.25); margin-top:8px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px; border-bottom:1px solid #1e3a5f; padding-bottom:8px;">
+          <div>
+            <span style="font-size:10px; font-weight:800; background:#ca8a04; color:#fff; padding:2px 8px; border-radius:4px;">ESTOJO SELECIONADO NA TABELA</span>
+            <h4 style="margin:4px 0 0 0; color:#fde047; font-size:16px; font-weight:900;">Flange NPS ${item.nps} — ${dadosClasse.classe}</h4>
+          </div>
+          <div style="display:flex; gap:6px;">
+            <button type="button" class="button" style="background:#0284c7; border-color:#38bdf8; font-size:11.5px; padding:6px 12px;" onclick="irParaCalculadoraComEstojo('${classeKey}', '${item.nps.replace(/"/g, '&quot;')}')">
+              🧮 Abrir na Calculadora
+            </button>
+            <button type="button" class="button secondary" style="font-size:11.5px; padding:6px 12px;" onclick="transferirEstojoParaLaudo()">
+              📋 Laudo A4
+            </button>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:8px;">
+          <div style="background:#040e1b; border:1px solid #1e3a5f; border-radius:6px; padding:8px; text-align:center;">
+            <span style="font-size:10px; color:#94a3b8;">Diâmetro do Estojo</span>
+            <div style="font-size:17px; font-weight:bold; color:#38bdf8;">${item.diam}</div>
+            <span style="font-size:10px; color:#facc15;">${item.passo}</span>
+          </div>
+          <div style="background:#040e1b; border:1px solid #1e3a5f; border-radius:6px; padding:8px; text-align:center;">
+            <span style="font-size:10px; color:#94a3b8;">Chave da Porca</span>
+            <div style="font-size:17px; font-weight:bold; color:#facc15;">${item.chave}</div>
+            <span style="font-size:10px; color:#cbd5e1;">Heavy Hex ASME</span>
+          </div>
+          <div style="background:#040e1b; border:1px solid #1e3a5f; border-radius:6px; padding:8px; text-align:center;">
+            <span style="font-size:10px; color:#94a3b8;">Comprimento</span>
+            <div style="font-size:17px; font-weight:bold; color:#fff;">${item.compPol}</div>
+            <span style="font-size:10px; color:#4ade80;">${item.compMm} mm</span>
+          </div>
+          <div style="background:#040e1b; border:1px solid #1e3a5f; border-radius:6px; padding:8px; text-align:center;">
+            <span style="font-size:10px; color:#94a3b8;">Quantidade</span>
+            <div style="font-size:17px; font-weight:bold; color:#10b981;">${item.qtd} estojos</div>
+            <span style="font-size:10px; color:#cbd5e1;">${item.qtd * 2} porcas pesadas</span>
+          </div>
+        </div>
+      </div>
+    `;
+    previewBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  // 4. Se solicitado navegar para a calculadora, alterna e rola até ela
+  if (irParaCalc) {
+    alternarAbaPainelChaves('calc');
+    setTimeout(() => {
+      document.getElementById('box_calc_estojo_asme')?.scrollIntoView({ behavior: 'smooth' });
+    }, 50);
+  }
+
+  abrirToastNotificacao(`✔ Flange NPS ${item.nps} Cl ${classeKey} selecionado!`);
+}
+
+function irParaCalculadoraComEstojo(classeKey, npsVal) {
+  alternarAbaPainelChaves('calc');
+  const selClasse = document.getElementById('estojo_sel_classe');
+  const selNPS = document.getElementById('estojo_sel_nps');
+  if (selClasse && selNPS) {
+    selClasse.value = classeKey;
+    atualizarOpcoesNPS();
+    selNPS.value = npsVal.replace(/&quot;/g, '"');
+    calcularEstojoASME();
+    setTimeout(() => {
+      document.getElementById('box_calc_estojo_asme')?.scrollIntoView({ behavior: 'smooth' });
+    }, 50);
   }
 }
 
